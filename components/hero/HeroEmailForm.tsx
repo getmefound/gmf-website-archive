@@ -291,6 +291,14 @@ function HeroInner() {
             {visualVariant === "ai" ? <HeroVisualAI /> : <HeroVisualReviews />}
           </div>
         </div>
+
+        <a
+          href="#calculator"
+          className="mt-10 mx-auto flex w-fit items-center gap-2 rounded-full border border-[var(--color-hero-border)] bg-white/5 px-5 py-2.5 text-sm text-[var(--color-hero-subtext)] transition hover:bg-white/10 hover:text-[var(--color-hero-text)] md:hidden"
+        >
+          See what you&apos;re losing every month
+          <span aria-hidden="true">↓</span>
+        </a>
       </div>
 
       {submitted && (

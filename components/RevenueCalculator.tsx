@@ -124,14 +124,14 @@ export function RevenueCalculator() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="bg-white border border-[var(--color-border)] rounded-3xl p-8 md:p-12 shadow-sm">
           <div className="text-center mb-10">
-            <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent)] mb-3">
-              Free Estimate
+            <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent)] mb-3">
+              Free Estimate · No email required
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-body)] mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-body)] mb-4 leading-tight">
               See what your reviews are costing you every month
             </h2>
-            <p className="text-[var(--color-text-muted)] text-lg leading-relaxed max-w-2xl mx-auto">
-              Enter your business details below. We'll show you how much revenue your current review count and ranking is leaving on the table.
+            <p className="text-[var(--color-text-muted)] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              Enter your business details below. We&apos;ll show you how much revenue your current review count and ranking is leaving on the table.
             </p>
           </div>
 
