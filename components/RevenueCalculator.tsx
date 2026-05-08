@@ -20,14 +20,14 @@ const industries: Record<
     valueStep: number;
   }
 > = {
-  petgroomer:    { defaultValue: 70,    vol: 180, velocityTarget: 5,  valueLabel: "per groom",      label: "pet groomers",            valueMin: 25,    valueMax: 250,    valueStep: 5 },
-  vet:           { defaultValue: 290,   vol: 220, velocityTarget: 10, valueLabel: "per visit",      label: "vet practices",           valueMin: 50,    valueMax: 800,    valueStep: 10 },
-  autoshop:      { defaultValue: 480,   vol: 160, velocityTarget: 8,  valueLabel: "per service",    label: "auto repair shops",       valueMin: 100,   valueMax: 1500,   valueStep: 25 },
-  funeral:       { defaultValue: 9500,  vol: 12,  velocityTarget: 2,  valueLabel: "per service",    label: "funeral homes",           valueMin: 2000,  valueMax: 25000,  valueStep: 250 },
-  moving:        { defaultValue: 2100,  vol: 35,  velocityTarget: 4,  valueLabel: "per move",       label: "moving companies",        valueMin: 500,   valueMax: 6000,   valueStep: 100 },
-  seniorliving:  { defaultValue: 4800,  vol: 40,  velocityTarget: 3,  valueLabel: "per resident/mo",label: "senior living facilities",valueMin: 1000,  valueMax: 12000,  valueStep: 250 },
-  marketing:     { defaultValue: 3200,  vol: 8,   velocityTarget: 2,  valueLabel: "per engagement", label: "marketing consultants",   valueMin: 500,   valueMax: 10000,  valueStep: 250 },
-  b2b:           { defaultValue: 2400,  vol: 15,  velocityTarget: 2,  valueLabel: "per engagement", label: "B2B service businesses",  valueMin: 500,   valueMax: 10000,  valueStep: 100 },
+  petgroomer:    { defaultValue: 70,    vol: 180, velocityTarget: 12, valueLabel: "per groom",      label: "pet groomers",            valueMin: 25,    valueMax: 250,    valueStep: 5 },
+  vet:           { defaultValue: 290,   vol: 220, velocityTarget: 18, valueLabel: "per visit",      label: "vet practices",           valueMin: 50,    valueMax: 800,    valueStep: 10 },
+  autoshop:      { defaultValue: 480,   vol: 160, velocityTarget: 15, valueLabel: "per service",    label: "auto repair shops",       valueMin: 100,   valueMax: 1500,   valueStep: 25 },
+  funeral:       { defaultValue: 9500,  vol: 12,  velocityTarget: 5,  valueLabel: "per service",    label: "funeral homes",           valueMin: 2000,  valueMax: 25000,  valueStep: 250 },
+  moving:        { defaultValue: 2100,  vol: 35,  velocityTarget: 10, valueLabel: "per move",       label: "moving companies",        valueMin: 500,   valueMax: 6000,   valueStep: 100 },
+  seniorliving:  { defaultValue: 4800,  vol: 40,  velocityTarget: 8,  valueLabel: "per resident/mo",label: "senior living facilities",valueMin: 1000,  valueMax: 12000,  valueStep: 250 },
+  marketing:     { defaultValue: 3200,  vol: 8,   velocityTarget: 5,  valueLabel: "per engagement", label: "marketing consultants",   valueMin: 500,   valueMax: 10000,  valueStep: 250 },
+  b2b:           { defaultValue: 2400,  vol: 15,  velocityTarget: 5,  valueLabel: "per engagement", label: "B2B service businesses",  valueMin: 500,   valueMax: 10000,  valueStep: 100 },
 };
 
 const rankingTraffic: Record<number, number> = {
@@ -272,6 +272,11 @@ export function RevenueCalculator() {
                   <span>0 / month</span>
                   <span>20+ / month</span>
                 </div>
+                {ind && (
+                  <p className="mt-2 text-xs font-semibold text-[var(--color-accent)]">
+                    Top {ind.label} get {ind.velocityTarget}+ new reviews/month.
+                  </p>
+                )}
                 <p className="mt-2 text-xs text-[var(--color-text-muted)]">
                   Velocity matters more than total — Google&apos;s algorithm decays old reviews
                   fast. <strong className="text-[var(--color-text-body)]">Not sure?</strong>{" "}
