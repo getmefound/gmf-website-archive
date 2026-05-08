@@ -93,10 +93,10 @@ export function RevenueCalculator() {
     else if (stars < 4.2) starPenalty = 0.10;
     else if (stars < 4.5) starPenalty = 0.04;
 
-    // Continuous exponential decay (no cap) — every +1 review reduces penalty.
-    // Target = ~75% of max benefit. Past target: diminishing returns but still moves.
-    // pow(0.5, reviews / (target * 0.5)) halves penalty every half-target step.
-    const reviewPenalty = 0.65 * Math.pow(0.5, reviewsPerMonth / (ind.velocityTarget * 0.5));
+    // Continuous exponential decay (no cap, never plateaus) — every +1 review reduces penalty.
+    // pow(0.5, reviews / target) halves penalty every full target step.
+    // Slower decay vs half-target keeps per-step deltas above $100 rounding even at low volumes.
+    const reviewPenalty = 0.65 * Math.pow(0.5, reviewsPerMonth / ind.velocityTarget);
 
     const currentTraffic = rankingTraffic[Math.min(ranking, 20)];
     const trafficLoss = 1 - currentTraffic;
