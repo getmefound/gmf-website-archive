@@ -145,6 +145,9 @@ export function Navbar() {
             <Link href="/about" className="hover:text-[var(--color-hero-text)] transition-colors">
               About
             </Link>
+            <Link href="/contact" className="hover:text-[var(--color-hero-text)] transition-colors">
+              Contact
+            </Link>
           </div>
 
           <Link
