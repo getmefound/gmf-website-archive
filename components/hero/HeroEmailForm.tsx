@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { validateEmail } from "@/lib/email-validation";
-import { Typewriter } from "@/components/ui/Typewriter";
+import { Typewriter, type TypewriterSegment } from "@/components/ui/Typewriter";
 
 const HeroVisualReviews = dynamic(
   () => import("./HeroVisualReviews").then((m) => m.HeroVisualReviews),
@@ -28,7 +28,8 @@ declare global {
 type Variant = "reviews" | "ai" | "default";
 
 type VariantConfig = {
-  headlineLines: ReactNode[];
+  /** Typewriter segments for the hero H1. Each segment can carry its own className + speed override. */
+  headlineSegments: TypewriterSegment[];
   subheadline: string;
   priceLine: string;
   buttonText: string;
@@ -38,11 +39,17 @@ type VariantConfig = {
   };
 };
 
+const ACCENT = "text-[var(--color-accent)]";
+
 const variants: Record<Variant, VariantConfig> = {
   reviews: {
-    headlineLines: ["Your competitor", "just got another", <><span style={{ color: "#2D6A4F" }}>5-star</span> review.</>, "Your turn."],
-    subheadline:
-      "Automated review requests, done for you.",
+    headlineSegments: [
+      { text: "Your competitor just got another ", speed: 60 },
+      { text: "5-star", speed: 130, className: ACCENT },
+      { text: " review. ", speed: 60 },
+      { text: "Your turn.", speed: 110 },
+    ],
+    subheadline: "Automated review requests, done for you.",
     priceLine: "$1/day. No contract.",
     buttonText: "See My Free Review Audit",
     checkbox: {
@@ -53,7 +60,11 @@ const variants: Record<Variant, VariantConfig> = {
     },
   },
   ai: {
-    headlineLines: ["Get named", "by ChatGPT", <>before your <span style={{ color: "#2D6A4F" }}>competitor</span> does.</>],
+    headlineSegments: [
+      { text: "Get named by ChatGPT before your ", speed: 70 },
+      { text: "competitor", speed: 130, className: ACCENT },
+      { text: " does.", speed: 70 },
+    ],
     subheadline:
       "We get your business recommended by ChatGPT and Google AI — before your competitors do.",
     priceLine: "$3/day. No contract.",
@@ -66,7 +77,10 @@ const variants: Record<Variant, VariantConfig> = {
     },
   },
   default: {
-    headlineLines: ["More calls.", "More customers.", <span style={{ color: "#2D6A4F" }}>Done for you.</span>],
+    headlineSegments: [
+      { text: "More calls. More customers. ", speed: 70 },
+      { text: "Done for you.", speed: 130, className: ACCENT },
+    ],
     subheadline:
       "Google, Maps, ChatGPT, Claude — we make sure your business shows up everywhere.",
     priceLine: "Starting at $1/day. No contract.",
@@ -191,32 +205,12 @@ function HeroInner() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 md:items-stretch">
           <div className="md:flex md:flex-col md:justify-center">
             <h1 className="font-semibold leading-[1.05] tracking-tight text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,5vw,4.5rem)]">
-              {variant === "default" ? (
-                <Typewriter
-                  key={variant}
-                  speed={70}
-                  startDelay={300}
-                  segments={[
-                    { text: "More calls. More customers. ", speed: 70 },
-                    {
-                      text: "Done for you.",
-                      speed: 130,
-                      className: "text-[var(--color-accent)]",
-                    },
-                  ]}
-                />
-              ) : (
-                config.headlineLines.map((line, i) => (
-                  <span className="hero-line-mask" key={`${variant}-${i}`}>
-                    <span
-                      className="hero-roll"
-                      style={{ animationDelay: `${i * 100}ms` }}
-                    >
-                      {line}
-                    </span>
-                  </span>
-                ))
-              )}
+              <Typewriter
+                key={variant}
+                speed={70}
+                startDelay={300}
+                segments={config.headlineSegments}
+              />
             </h1>
 
             <p
