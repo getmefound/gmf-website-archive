@@ -1,179 +1,141 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-const STEP_DURATION = 3000;
-const TRANSITION_DURATION = 0.6;
-const TOTAL_STEPS = 3;
-
-const platforms = ["ChatGPT", "Google AI", "Claude"] as const;
 const BUSINESS = "Austin's Best Plumbing";
 
-function Highlight({ children }: { children: React.ReactNode }) {
+type AiBrand = {
+  name: string;
+  color: string;
+  glow: string;
+};
+
+const BRANDS: Record<string, AiBrand> = {
+  chatgpt: { name: "ChatGPT", color: "#10A37F", glow: "rgba(16,163,127,0.18)" },
+  gemini: { name: "Google AI", color: "#4285F4", glow: "rgba(66,133,244,0.18)" },
+  claude: { name: "Claude", color: "#DA7756", glow: "rgba(218,119,86,0.18)" },
+};
+
+type Item = {
+  brand: AiBrand;
+  question: string;
+  answer: React.ReactNode;
+  meta?: string;
+};
+
+function highlight(text: string) {
   return (
     <span
       className="rounded px-1 font-semibold"
       style={{ color: "#2D6A4F", backgroundColor: "rgba(45,106,79,0.18)" }}
     >
-      {children}
+      {text}
     </span>
   );
 }
 
-function PlatformHeader({ label }: { label: string }) {
+const ITEMS: Item[] = [
+  {
+    brand: BRANDS.chatgpt,
+    question: "best plumber near Austin",
+    answer: (
+      <>
+        I recommend {highlight(BUSINESS)} — 47 five-star reviews and same-day
+        service.
+      </>
+    ),
+    meta: "Cited 3 sources",
+  },
+  {
+    brand: BRANDS.gemini,
+    question: "top-rated plumbers Austin TX",
+    answer: (
+      <>
+        Top-rated locally is {highlight(BUSINESS)}, known for fast response and
+        200+ verified reviews.
+      </>
+    ),
+    meta: "AI Overview · Google",
+  },
+  {
+    brand: BRANDS.claude,
+    question: "who should I call for a plumber in Austin?",
+    answer: (
+      <>
+        {highlight(BUSINESS)} comes highly recommended by locals — consistent
+        5-star reviews, same-day availability.
+      </>
+    ),
+    meta: "claude.ai",
+  },
+  {
+    brand: BRANDS.chatgpt,
+    question: "emergency plumber Austin same day",
+    answer: (
+      <>
+        For same-day work, {highlight(BUSINESS)} is consistently top-rated —
+        fast response, strong reviews.
+      </>
+    ),
+    meta: "ChatGPT",
+  },
+  {
+    brand: BRANDS.gemini,
+    question: "trusted plumbing services Austin",
+    answer: (
+      <>
+        Customers rank {highlight(BUSINESS)} at the top — strong reputation,
+        fast scheduling.
+      </>
+    ),
+    meta: "AI Overview · Google",
+  },
+];
+
+function ResponseCard({ item }: { item: Item }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#2D6A4F" }} />
-      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-hero-text)]">
-        {label}
+    <div
+      className="rounded-lg border border-white/10 bg-white/[0.035] px-3 py-2.5 backdrop-blur-sm"
+      style={{ boxShadow: `inset 0 0 0 1px ${item.brand.glow}` }}
+    >
+      <div className="mb-1.5 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5">
+          <span
+            className="h-1.5 w-1.5 rounded-full"
+            style={{ backgroundColor: item.brand.color }}
+          />
+          <p
+            className="font-mono text-[9px] uppercase tracking-[0.18em]"
+            style={{ color: item.brand.color }}
+          >
+            {item.brand.name}
+          </p>
+        </div>
+        {item.meta && (
+          <p className="font-mono text-[8px] text-[var(--color-hero-subtext)]/55">
+            {item.meta}
+          </p>
+        )}
+      </div>
+
+      <p className="mb-1 text-[10px] text-[var(--color-hero-subtext)]/75">
+        <span className="opacity-50">› </span>
+        {item.question}
+      </p>
+
+      <p className="font-mono text-[11.5px] leading-snug text-[var(--color-hero-text)]">
+        {item.answer}
       </p>
     </div>
   );
 }
 
-function TypingLine({ text, speed = 40 }: { text: string; speed?: number }) {
-  const [typed, setTyped] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-    const id = setInterval(() => {
-      i += 1;
-      setTyped(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
-    }, speed);
-    return () => clearInterval(id);
-  }, [text, speed]);
-
-  return (
-    <p className="font-mono text-sm text-[var(--color-hero-text)]">
-      {typed}
-      <span className="inline-block h-3.5 w-[2px] -mb-0.5 ml-0.5 animate-pulse bg-[var(--color-hero-text)] align-middle" />
-    </p>
-  );
-}
-
-function ChatGPTStep() {
-  return (
-    <div className="flex h-full flex-col gap-3">
-      <div className="rounded-xl bg-white/[0.04] border border-white/5 p-3.5">
-        <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-[var(--color-hero-subtext)]/70">
-          You
-        </p>
-        <TypingLine text="best plumber near Austin" />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0, duration: 0.5 }}
-        className="flex-1 rounded-xl border border-white/10 bg-white/[0.03] p-4"
-      >
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[var(--color-hero-subtext)]/70">
-          ChatGPT
-        </p>
-        <p className="font-mono text-sm leading-relaxed text-[var(--color-hero-text)]">
-          I recommend <Highlight>{BUSINESS}</Highlight> — they have 47 five-star
-          reviews and offer same-day service.
-        </p>
-      </motion.div>
-    </div>
-  );
-}
-
-function GoogleAIStep() {
-  return (
-    <div className="flex h-full flex-col gap-3">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="flex-1 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-4"
-      >
-        <div className="mb-2 flex items-center gap-2">
-          <span
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: "#2D6A4F" }}
-          />
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-hero-subtext)]/80">
-            AI Overview
-          </p>
-        </div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="font-mono text-sm leading-relaxed text-[var(--color-hero-text)]"
-        >
-          Top-rated local plumbers in Austin include <Highlight>{BUSINESS}</Highlight>,
-          known for fast response times and over 200 verified reviews.
-        </motion.p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.4 }}
-        className="rounded-lg bg-white/[0.03] border border-white/5 px-3 py-2"
-      >
-        <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-hero-subtext)]/60">
-          Sources
-        </p>
-        <p className="text-[11px] text-[var(--color-hero-subtext)]">
-          {BUSINESS} · Google Reviews · Yelp
-        </p>
-      </motion.div>
-    </div>
-  );
-}
-
-function ClaudeStep() {
-  return (
-    <div className="flex h-full flex-col gap-3">
-      <div className="rounded-xl bg-white/[0.04] border border-white/5 p-3.5">
-        <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-[var(--color-hero-subtext)]/70">
-          You
-        </p>
-        <TypingLine text="who should I call for a plumber in Austin?" speed={32} />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-        className="flex-1 rounded-xl border border-white/10 bg-white/[0.03] p-4"
-      >
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-[var(--color-hero-subtext)]/70">
-          Claude
-        </p>
-        <p className="font-mono text-sm leading-relaxed text-[var(--color-hero-text)]">
-          <Highlight>{BUSINESS}</Highlight> comes highly recommended by locals,
-          with consistent 5-star reviews and same-day availability.
-        </p>
-      </motion.div>
-    </div>
-  );
-}
-
-const stepComponents = [ChatGPTStep, GoogleAIStep, ClaudeStep];
-
 export function HeroVisualAI() {
   const reduce = useReducedMotion();
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => {
-      setStep((s) => (s + 1) % TOTAL_STEPS);
-    }, STEP_DURATION);
-    return () => clearInterval(id);
-  }, [reduce]);
-
-  const StepComponent = stepComponents[step];
 
   return (
     <div
-      className="relative w-full h-[280px] md:h-full md:min-h-[420px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A1628]"
+      className="relative w-full h-[280px] md:h-full md:min-h-[380px] md:max-h-[420px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A1628]"
       aria-label="AI search visibility loop"
     >
       <div
@@ -182,35 +144,53 @@ export function HeroVisualAI() {
       />
       <div className="pointer-events-none absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-white/[0.04] blur-3xl" />
 
-      <div className="relative flex h-full flex-col px-5 pt-3 pb-5 md:px-6 md:pt-4 md:pb-6">
-        <div className="mb-2 flex items-center justify-between">
-          <PlatformHeader label={platforms[step]} />
-          <div className="flex gap-1.5">
-            {platforms.map((_, i) => (
-              <span
-                key={i}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === step ? "w-6" : "w-1.5 bg-white/15"
-                }`}
-                style={i === step ? { backgroundColor: "#2D6A4F" } : undefined}
-              />
-            ))}
+      <div className="relative flex h-full flex-col px-5 pt-3 md:px-6 md:pt-4">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+            </span>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-hero-text)]">
+              Live across AI search
+            </p>
           </div>
+          <p className="font-mono text-[10px] text-[var(--color-hero-subtext)]/60">
+            3 platforms
+          </p>
         </div>
 
-        <div className="relative flex-1">
-          <AnimatePresence mode="wait">
+        <div className="relative flex-1 overflow-hidden">
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-[#0A1628] to-transparent"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-[#0A1628] to-transparent"
+            aria-hidden="true"
+          />
+
+          {reduce ? (
+            <div className="space-y-2 pb-4">
+              {ITEMS.slice(0, 3).map((item, i) => (
+                <ResponseCard key={i} item={item} />
+              ))}
+            </div>
+          ) : (
             <motion.div
-              key={step}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: TRANSITION_DURATION, ease: "easeInOut" }}
-              className="absolute inset-0"
+              className="space-y-2"
+              animate={{ y: ["0%", "-50%"] }}
+              transition={{
+                duration: 36,
+                ease: "linear",
+                repeat: Infinity,
+              }}
             >
-              <StepComponent />
+              {[...ITEMS, ...ITEMS].map((item, i) => (
+                <ResponseCard key={i} item={item} />
+              ))}
             </motion.div>
-          </AnimatePresence>
+          )}
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ const variants: Record<Variant, VariantConfig> = {
   reviews: {
     headlineLines: ["Your competitor", "just got another", <><span style={{ color: "#2D6A4F" }}>5-star</span> review.</>],
     subheadline:
-      "Automated review requests and AI responses, done for you.",
+      "Automated review requests, done for you. AI replies turn on at standard plan.",
     priceLine: "$1/day. No contract.",
     buttonText: "Get Your Free Report",
     checkbox: {
@@ -67,7 +67,7 @@ const variants: Record<Variant, VariantConfig> = {
   default: {
     headlineLines: ["The way customers", "find you", "just changed."],
     subheadline:
-      "Google, Maps, ChatGPT, Perplexity — we make sure your business shows up everywhere.",
+      "Google, Maps, ChatGPT, Claude — we make sure your business shows up everywhere.",
     priceLine: "Starting at $1/day. No contract.",
     buttonText: "Get Your Free Reports",
   },

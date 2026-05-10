@@ -203,24 +203,24 @@ function RevenueCalculatorInner() {
   return (
     <section
       id="calculator"
-      className="py-20 md:py-28 bg-[var(--color-bg-page)] scroll-mt-24"
+      className="py-16 md:py-24 bg-[var(--color-bg-page)] scroll-mt-24"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="bg-white border border-[var(--color-border)] rounded-3xl p-8 md:p-12 shadow-sm">
-          <div className="text-center mb-10">
-            <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent)] mb-3">
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="bg-white border border-[var(--color-border)] rounded-2xl md:rounded-3xl p-5 md:p-10 shadow-sm">
+          <div className="text-center mb-8 md:mb-10">
+            <p className="text-xs md:text-sm font-bold uppercase tracking-wider text-[var(--color-accent)] mb-2 md:mb-3">
               Free Estimate · No email required
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-body)] mb-4 leading-tight">
+            <h2 className="text-2xl md:text-4xl font-bold text-[var(--color-text-body)] mb-3 md:mb-4 leading-tight">
               See what your reviews are costing you every month
             </h2>
-            <p className="text-[var(--color-text-muted)] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[var(--color-text-muted)] text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Enter your business details. We&apos;ll show you the customers and revenue your
               current visibility is leaving on the table.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
             <div>
               {/* Industry */}
               <div className="mb-8">

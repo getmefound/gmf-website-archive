@@ -7,9 +7,9 @@ Clients outsource the operation of AI to AOH — they never have to learn the to
 
 ### Reviews
 Automated review request campaigns sent via SMS and email to customers after service.
-AI-written responses to every review, posted in the business owner's voice within minutes.
-Google Business Profile optimization for local search rankings.
-Starting at $1/day, no contract.
+AI-drafted replies in the business owner's voice — included with the standard plan, not the 30-day intro.
+Google Business Profile audit and fix during the 30-day intro; deeper optimization at standard plan.
+Starting at $1/day for first 30 days, then $99/month + $99 setup at renewal.
 
 ### AI Visibility
 Gets local businesses recommended by name when customers ask ChatGPT, Google AI, or Perplexity

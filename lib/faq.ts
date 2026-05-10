@@ -6,8 +6,8 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: "No contract, cancel anytime. We give you a free report before you pay a single dollar. We have to earn your trust before we ask for anything.",
   },
   {
-    q: "Will AI responses sound fake and hurt me with Google?",
-    a: "Generic AI responses do hurt rankings. Ours are different — every response is written in your specific business voice using your tone profile. Personalized and indistinguishable from something your best employee would write.",
+    q: "Will AI replies sound fake and hurt me with Google?",
+    a: "Generic AI responses do hurt rankings. Ours are different — once your standard plan begins, every reply is written in your specific business voice using your tone profile. Personalized and indistinguishable from something your best employee would write. During the 30-day intro, you reply manually.",
   },
   {
     q: "How much of my time does this take?",
@@ -27,7 +27,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "What if I get a bad review?",
-    a: "A professional, calm response in your voice does more for your reputation than ignoring it. We respond to every review, positive or negative, and we do it well.",
+    a: "A professional, calm reply in your voice does more for your reputation than ignoring it. Once your standard plan begins, we draft a reply to every review, positive or negative — you approve before it posts. During the 30-day intro, you handle replies yourself.",
   },
   {
     q: "You're a new company — why should I trust you?",

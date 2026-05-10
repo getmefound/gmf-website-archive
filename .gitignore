@@ -41,3 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# lighthouse audits (local artifacts, do not commit)
+lighthouse-*.report.html
+lighthouse-*.report.json
+lighthouse-local-*/
+

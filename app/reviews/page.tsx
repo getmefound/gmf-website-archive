@@ -7,7 +7,7 @@ import { pageBreadcrumbs } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Review Automation",
   description:
-    "Automated review request campaigns via SMS and email. AI-written responses posted in your business voice within minutes. Starting at $1/day, no contract.",
+    "Automated review request campaigns via SMS and email. AI-drafted replies in your voice unlock at standard plan. Starting at $1/day.",
   alternates: { canonical: "/reviews" },
 };
 
@@ -18,7 +18,7 @@ const reviewsService = {
   provider: { "@type": "Organization", name: "AI Outsource Hub", url: "https://aioutsourcehub.com" },
   areaServed: "United States",
   description:
-    "Automated review request campaigns via SMS and email. AI-written responses posted in the business owner's voice within minutes of every review. Google Business Profile optimization included.",
+    "Automated review request campaigns via SMS and email. AI-drafted replies in the business owner's voice unlock at standard plan. Google Business Profile audit and fix included during intro.",
   offers: {
     "@type": "Offer",
     price: "1.00",
@@ -40,16 +40,16 @@ const features = [
     body: "We send review requests to your customers via SMS and email after every service. Your customers tap a link and leave a review. You don't lift a finger.",
   },
   {
-    title: "AI responses in your voice",
-    body: "Every review gets a response within minutes — written in your specific business voice using your tone profile. Personalized, specific, and indistinguishable from something your best employee would write.",
+    title: "AI replies in your voice (standard plan)",
+    body: "Once your standard plan begins, every review gets a reply within minutes — written in your specific business voice using your tone profile. Personalized and indistinguishable from something your best employee would write. During the 30-day intro, you reply manually.",
   },
   {
-    title: "Google Business Profile optimization",
-    body: "We tune your profile so the reviews you collect actually move you up in local search rankings.",
+    title: "Google Business Profile audit + fix",
+    body: "Most owners already have a Google Business Profile — but with errors. We audit yours and fix the gaps so the reviews you collect actually move you up in local search rankings.",
   },
   {
     title: "Bad reviews handled professionally",
-    body: "Bad reviews happen. A calm, professional response in your voice does more for your reputation than ignoring it. We respond to every review, positive or negative.",
+    body: "Bad reviews happen. A calm, professional reply in your voice does more for your reputation than ignoring it. Once your standard plan begins, we draft a reply to every review, positive or negative — you approve before it posts.",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function ReviewsPage() {
       <PageHeader
         eyebrow="Review Automation"
         title="Your competitor just got another 5-star review."
-        subtitle="Automated review requests and AI responses, done for you. You never touch it. Starting at $1/day, no contract."
+        subtitle="Automated review requests, done for you. AI replies unlock at standard plan. Starting at $1/day."
       />
       <PageBody>
         <PageSection>
