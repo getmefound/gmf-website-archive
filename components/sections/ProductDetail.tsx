@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AnimatedIcon } from "@/components/ui/AnimatedIcon";
-import { Spotlight } from "@/components/ui/Spotlight";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 
 export type ProductDetailData = {
@@ -54,12 +53,7 @@ export function ProductDetail({
       id={data.slug}
       className={`relative scroll-mt-32 overflow-hidden py-14 md:py-16 ${sectionBg}`}
     >
-      {dark && (
-        <>
-          <Spotlight className="absolute inset-0" />
-          <BackgroundBeams />
-        </>
-      )}
+      {dark && <BackgroundBeams />}
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         {/* Watermark numeral */}
@@ -169,9 +163,6 @@ export function ProductDetail({
           <div className={`space-y-6 lg:sticky lg:top-32 ${dark ? "lg:order-1" : ""}`}>
             {/* Visual panel */}
             <div className="relative rounded-2xl bg-[var(--color-bg-dark-card)] p-6 ring-1 ring-[var(--color-hero-border)] overflow-hidden">
-              <div className="absolute inset-0 opacity-30">
-                <Spotlight className="h-full w-full" />
-              </div>
               <div className="relative z-10">{data.mock}</div>
             </div>
 
