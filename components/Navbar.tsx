@@ -140,14 +140,11 @@ export function Navbar() {
             <Link href="/pricing" className="hover:text-[var(--color-hero-text)] transition-colors">
               Pricing
             </Link>
-            <Link href="/resources" className="hover:text-[var(--color-hero-text)] transition-colors">
-              Resources
+            <Link href="/blog" className="hover:text-[var(--color-hero-text)] transition-colors">
+              Blog
             </Link>
             <Link href="/about" className="hover:text-[var(--color-hero-text)] transition-colors">
               About
-            </Link>
-            <Link href="/contact" className="hover:text-[var(--color-hero-text)] transition-colors">
-              Contact
             </Link>
           </div>
 
@@ -225,11 +222,11 @@ export function Navbar() {
                   Pricing
                 </Link>
                 <Link
-                  href="/resources"
+                  href="/blog"
                   onClick={() => setMobileOpen(false)}
                   className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                 >
-                  Resources
+                  Blog
                 </Link>
                 <Link
                   href="/about"
@@ -237,13 +234,6 @@ export function Navbar() {
                   className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                 >
                   About
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
-                >
-                  Contact
                 </Link>
                 <Link
                   href="/#calculator"
