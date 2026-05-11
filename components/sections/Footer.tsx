@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 const services = [
-  { href: "/reviews", label: "Review Automation" },
-  { href: "/rankings", label: "Google Rankings" },
-  { href: "/ai-visibility", label: "AI Visibility" },
-  { href: "/relay", label: "Relay" },
-  { href: "/studio", label: "Studio" },
+  { href: "/pricing#review-automation", label: "Review Automation" },
+  { href: "/pricing#ai-visibility", label: "AI Visibility" },
+  { href: "/pricing#reach", label: "Reach" },
+  { href: "/pricing#studio", label: "Studio" },
+  { href: "/pricing#relay", label: "Relay" },
+  { href: "/pricing#whole-stack", label: "The Whole Stack" },
 ];
 
 const company = [
@@ -17,19 +19,76 @@ const company = [
   { href: "/contact", label: "Contact" },
 ];
 
-const legal = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/terms", label: "Terms" },
+// TODO: replace `#` w/ real social URLs when accounts are live
+const socials = [
+  {
+    label: "LinkedIn",
+    href: "#",
+    Icon: (props: { className?: string }) => (
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className={props.className}
+        aria-hidden="true"
+      >
+        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 11-.01-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Facebook",
+    href: "#",
+    Icon: (props: { className?: string }) => (
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className={props.className}
+        aria-hidden="true"
+      >
+        <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Email",
+    href: "mailto:support@aioutsourcehub.com",
+    Icon: (props: { className?: string }) => (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={props.className}
+        aria-hidden="true"
+      >
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-10 5L2 7" />
+      </svg>
+    ),
+  },
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--color-hero-bg)] text-[var(--color-hero-subtext)] border-t border-[var(--color-hero-border)]">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
-          <div className="col-span-2">
+    <footer className="relative overflow-hidden bg-[var(--color-hero-bg)] text-[var(--color-hero-subtext)] border-t border-[var(--color-hero-border)]">
+      {/* Decorative blur orbs */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-0 h-96 w-96 -mr-32 -mt-32 rounded-full bg-[var(--color-accent)]/10 blur-[120px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 -ml-24 -mb-24 rounded-full bg-[var(--color-accent)]/5 blur-[100px]"
+      />
+
+      <div className="relative mx-auto max-w-6xl px-6 py-12">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-12">
+          {/* Brand block — 4 cols on md+ */}
+          <div className="col-span-2 md:col-span-4">
             <Link href="/" className="inline-block">
               <Image
                 src="/AOH-logo-dark-bg.svg"
@@ -39,10 +98,10 @@ export function Footer() {
                 className="h-9 w-auto"
               />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed">
-              You run your business. We run the AI.
+            <p className="mt-3 max-w-xs text-sm leading-relaxed">
+              You run the business. We run the rest.
             </p>
-            <p className="mt-4 text-sm">
+            <p className="mt-3 text-sm">
               <a
                 href="mailto:support@aioutsourcehub.com"
                 className="hover:text-[var(--color-hero-text)] transition-colors"
@@ -50,13 +109,30 @@ export function Footer() {
                 support@aioutsourcehub.com
               </a>
             </p>
+
+            {/* Social icons w/ accent glow on hover */}
+            <div className="mt-5 flex items-center gap-2.5">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.04] border border-white/10 text-[var(--color-hero-subtext)] shadow-[0_0_0_0_rgba(45,106,79,0)] transition-all duration-300 hover:bg-[var(--color-accent)]/15 hover:border-[var(--color-accent)]/40 hover:text-[var(--color-hero-text)] hover:shadow-[0_0_24px_2px_rgba(45,106,79,0.45)]"
+                >
+                  <s.Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-hero-text)]">
+          {/* Services — 2 cols */}
+          <div className="md:col-span-2">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--color-hero-text)]">
               Services
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-1.5 text-sm">
               {services.map((s) => (
                 <li key={s.href}>
                   <Link
@@ -70,11 +146,12 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-hero-text)]">
+          {/* Company — 2 cols */}
+          <div className="md:col-span-2">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--color-hero-text)]">
               Company
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-1.5 text-sm">
               {company.map((c) => (
                 <li key={c.href}>
                   <Link
@@ -88,28 +165,34 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-hero-text)]">
-              Legal
-            </h3>
-            <ul className="space-y-2 text-sm">
-              {legal.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="hover:text-[var(--color-hero-text)] transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Newsletter — 4 cols */}
+          <div className="col-span-2 md:col-span-4">
+            <NewsletterForm />
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-[var(--color-hero-border)] pt-8 text-xs md:flex-row md:items-center">
-          <p>&copy; {year} AI Outsource Hub. All rights reserved.</p>
-          <p>Built for local businesses.</p>
+        {/* Bottom row — pulled up, single line w/ legal + Hub360ai credit */}
+        <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-[var(--color-hero-border)] pt-5 text-xs md:flex-row md:items-center">
+          <div className="flex items-center gap-4">
+            <p>&copy; {year} AI Outsource Hub.</p>
+            <Link href="/privacy" className="hover:text-[var(--color-hero-text)] transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-[var(--color-hero-text)] transition-colors">
+              Terms
+            </Link>
+          </div>
+          <div className="flex items-center gap-2 text-[var(--color-hero-subtext)]/70">
+            <span>Runs on</span>
+            <Image
+              src="/hub360ai/hub360ai-icon-mono.svg"
+              alt="Hub360ai"
+              width={18}
+              height={18}
+              className="h-4 w-4 opacity-80"
+            />
+            <span className="font-mono text-[var(--color-hero-text)]">Hub360ai</span>
+          </div>
         </div>
       </div>
     </footer>

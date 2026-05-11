@@ -1,91 +1,48 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ContactForm } from "@/components/ContactForm";
 import { pageBreadcrumbs } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "AI Outsource Hub runs the AI for local businesses. Built by people who've spent 15+ years explaining technology to non-technical buyers. No contracts. Free reports.",
+    "AI Outsource Hub runs the AI for local businesses on Hub360ai, our white-labeled ops platform. Built by people who've spent 15+ years explaining technology to non-technical buyers.",
   alternates: { canonical: "/about" },
 };
 
 const breadcrumb = pageBreadcrumbs("About", "/about");
 
-type Tile = { eyebrow: string; title: string; body: string; note?: string };
+// Fraunces serif applied only to display headlines + signature pieces
+const serif = "[font-family:var(--font-fraunces)]";
 
-const patternTiles: Tile[] = [
-  {
-    eyebrow: "Pattern",
-    title: "Same job, new stack.",
-    body: "For fifteen years we sold and ran technology for schools that didn't have an IT team. Translate, install, operate. The buyers weren't engineers — they were people trying to do their jobs.",
-    note: "// EdTech business, built and sold.",
-  },
-  {
-    eyebrow: "Recognition",
-    title: "AI hit the same gap.",
-    body: "Local businesses are now being told they need to \"use AI.\" Most don't have time to learn another platform or hire someone to run it. The tools are getting more useful. The gap is widening.",
-    note: "// Same shape. Different decade.",
-  },
-  {
-    eyebrow: "Approach",
-    title: "We operate. You don't.",
-    body: "AOH is the layer between local businesses and the AI tools reshaping how customers find them. Reviews, AI visibility, voice, content, leads. You get the outcome. We do the work.",
-    note: "// Service business, not SaaS.",
-  },
-];
-
-const principles = [
-  {
-    title: "Free report first",
-    body: "Every client gets a free audit before paying a dollar. Trust comes before invoices.",
-  },
-  {
-    title: "No contracts",
-    body: "Cancel anytime. We keep you by doing good work or not at all.",
-  },
-  {
-    title: "Honest timelines",
-    body: "Reviews in 48 hours. Rankings move in 60–90 days. No inflated promises.",
-  },
-  {
-    title: "Less than 10 min of your time",
-    body: "Setup once. After that, hands-off. You run your business.",
-  },
+const companyFields: { k: string; v: string }[] = [
+  { k: "what", v: "AOH operates AI on behalf of local businesses" },
+  { k: "tools", v: "Automation for the busywork — runs while your team stays small" },
+  { k: "for", v: "Local SMB owners running their business" },
+  { k: "model", v: "Done-for-you · monthly · cancel anytime" },
+  { k: "platform", v: "Hub360ai — our white-labeled AI ops stack" },
+  { k: "won't", v: "Teach you to use the tools yourself" },
 ];
 
 type TeamMember = {
   name: string;
   role: string;
-  niches: string;
-  photo?: string;
+  focus: string;
   initials: string;
-  size: "large" | "small";
 };
 
-const team: TeamMember[] = [
-  {
-    name: "Mike Egidio",
-    role: "Founder",
-    niches: "Pet groomers · funeral homes · movers · marketing consultants",
-    photo: "/team/mike.jpg",
-    initials: "ME",
-    size: "large",
-  },
+const teamRest: TeamMember[] = [
   {
     name: "Kip Leathers",
-    role: "Co-founder · Business Development",
-    niches: "Vets · senior living · auto repair · B2B",
+    role: "Business Development Specialist",
+    focus: "Owns outbound. Finds the right prospects, opens the conversations.",
     initials: "KL",
-    size: "small",
   },
   {
     name: "Teri Egidio",
-    role: "Outreach",
-    niches: "Nursing homes",
+    role: "Sales Manager",
+    focus: "Manages the inbound pipeline and client onboarding.",
     initials: "TE",
-    size: "small",
   },
 ];
 
@@ -117,111 +74,179 @@ export default function AboutPage() {
         className="flex flex-1 flex-col bg-[var(--color-bg-page)] text-[var(--color-text-body)] focus:outline-none"
       >
         {/* ═══════════════════════════════════════════════════════
-            HERO — bold sans display, doc header, no portrait
+            HERO — distilled mission. No status pills. Research-led.
+            Pattern: Anthropic / OpenAI / Linear About headers.
+            Mission line + one supporting sentence. Nothing else.
             ═══════════════════════════════════════════════════════ */}
-        <section aria-label="About AI Outsource Hub" className="bg-gray-950 text-white">
-          <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <div className="mb-10 flex items-center gap-3">
-              <span className="font-mono text-[11px] font-bold text-green-400 tracking-wider">
-                §00
-              </span>
+        <section aria-label="About AI Outsource Hub" className="bg-[var(--color-hero-bg)] text-white">
+          <div className="mx-auto max-w-6xl px-6 py-10 md:py-14">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="font-mono text-[11px] font-bold text-green-400 tracking-wider">§00</span>
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/50">
                 about — aioutsourcehub.com
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold leading-[0.95] tracking-tight mb-8 max-w-5xl">
-              We run the AI.
-              <br />
-              <span className="text-green-400">You run your business.</span>
+            <h1
+              className={`${serif} text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight mb-5 max-w-5xl`}
+              style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+            >
+              Meet the <span className="text-green-400">team</span>.
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-end">
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl">
-                A done-for-you AI services hub for local businesses. Built by people who&apos;ve been
-                explaining technology to non-technical buyers for fifteen years.
-              </p>
+            <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl">
+              We stay ahead of the technology so you don&apos;t have to.
+            </p>
+          </div>
+        </section>
 
-              <div className="flex flex-wrap gap-2 text-[10px] font-mono uppercase tracking-wider">
-                <span className="rounded-full border border-green-400/40 bg-green-400/10 px-2.5 py-1 text-green-400">
-                  Founded 2026
-                </span>
-                <span className="rounded-full border border-white/20 px-2.5 py-1 text-white/70">
-                  3 operators
-                </span>
-                <span className="rounded-full border border-white/20 px-2.5 py-1 text-white/70">
-                  8 niches
-                </span>
+        {/* ═══════════════════════════════════════════════════════
+            §01 — THE FOUNDER (small photo LEFT, condensed bio RIGHT)
+            Photo modest size. Bio not a long letter — 3 lines.
+            ═══════════════════════════════════════════════════════ */}
+        <section className="border-b border-[var(--color-border)]">
+          <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+            <SectionMarker num="01" label="The founder" />
+
+            <div className="grid grid-cols-1 md:grid-cols-[14rem_1fr] gap-8 md:gap-14 items-start">
+              {/* Modest photo, square, slight rounded */}
+              <div className="w-40 md:w-56">
+                <div className="relative aspect-square rounded-xl overflow-hidden">
+                  <Image
+                    src="/team/mike.jpg"
+                    alt="Mike Egidio, founder of AI Outsource Hub"
+                    fill
+                    sizes="(min-width: 768px) 14rem, 10rem"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
+                  Founder · Mike Egidio
+                </p>
+              </div>
+
+              {/* Condensed serif intro beside the image — not a paragraph block in mid-page */}
+              <div>
+                <h2
+                  className={`${serif} text-3xl md:text-5xl leading-[1.05] tracking-tight mb-6 max-w-2xl`}
+                  style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+                >
+                  He&apos;s been on your side of the desk for 15 years.
+                </h2>
+                <p className="text-base md:text-lg text-[var(--color-text-muted)] leading-relaxed max-w-2xl">
+                  Mike is a serial entrepreneur who&apos;s built and sold companies — including
+                  an EdTech company that helped schools without in-house tech teams. He&apos;s run
+                  every part of the work himself: sales, marketing, support, IT. Every pain point
+                  owners run into — missed leads, busywork, lost hours — he&apos;s solved himself.
+                  AOH is the same playbook, packaged to help SMBs like yours.
+                </p>
+
+                {/* 3 founder stats — replaces the niche chip strip */}
+                <div className="mt-6 grid grid-cols-3 gap-3 max-w-2xl">
+                  {[
+                    { value: "15+", unit: "years", label: "running businesses" },
+                    { value: "1", unit: "sold", label: "EdTech company, schools without IT" },
+                    { value: "4", unit: "hats", label: "sales · marketing · IT · support" },
+                  ].map((s) => (
+                    <div
+                      key={s.label}
+                      className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-3 py-3"
+                    >
+                      <p className="font-mono text-2xl md:text-3xl font-bold text-[var(--color-text-body)] leading-none">
+                        {s.value}{" "}
+                        <span className="text-xs font-medium text-[var(--color-text-muted)] tracking-wider uppercase">
+                          {s.unit}
+                        </span>
+                      </p>
+                      <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] leading-snug">
+                        {s.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            §01 — THE PATTERN (3 tiles, side-by-side, no prose-column)
+            §02 — WHAT AOH IS (data-fields only, no market claims)
             ═══════════════════════════════════════════════════════ */}
-        <section className="border-b border-[var(--color-border)]">
-          <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-            <SectionMarker num="01" label="Why AOH exists" />
+        <section className="border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
+          <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+            <SectionMarker num="02" label="The company" />
 
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12 max-w-3xl">
-              We&apos;ve seen this movie before.
+            <h2
+              className={`${serif} text-3xl md:text-5xl tracking-tight mb-6 max-w-3xl`}
+              style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+            >
+              What AOH is.
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {patternTiles.map((t, i) => (
-                <div
-                  key={t.title}
-                  className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-xl p-6 md:p-7"
-                >
-                  <div className="mb-4 flex items-center gap-2">
-                    <span className="font-mono text-[10px] font-bold text-[var(--color-accent)] tracking-wider">
-                      0{i + 1}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-                      {t.eyebrow}
-                    </span>
+            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-stretch">
+              <dl className="divide-y divide-[var(--color-border)] rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] overflow-hidden">
+                {companyFields.map((row) => (
+                  <div
+                    key={row.k}
+                    className="grid grid-cols-[6rem_1fr] md:grid-cols-[8rem_1fr] gap-3 md:gap-6 px-4 md:px-6 py-3.5"
+                  >
+                    <dt className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-accent)] pt-0.5">
+                      {row.k}
+                    </dt>
+                    <dd className="text-sm md:text-base text-[var(--color-text-body)] leading-snug">
+                      {row.v}
+                    </dd>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold mb-3 text-[var(--color-text-body)] leading-tight">
-                    {t.title}
-                  </h3>
-                  <p className="text-sm md:text-base text-[var(--color-text-muted)] leading-relaxed mb-4">
-                    {t.body}
-                  </p>
-                  {t.note && (
-                    <p className="font-mono text-[11px] text-[var(--color-text-muted)]/60 border-t border-[var(--color-border)] pt-3">
-                      {t.note}
-                    </p>
-                  )}
-                </div>
-              ))}
+                ))}
+              </dl>
+
+              {/* Hub360ai callout — logo prominent, matches left dl height */}
+              <aside className="h-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] p-7 md:p-8 flex flex-col">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-text-muted)] mb-6">
+                  Our platform
+                </p>
+                <Image
+                  src="/hub360ai/hub360ai-horizontal-light.svg"
+                  alt="Hub360ai"
+                  width={320}
+                  height={80}
+                  className="h-16 md:h-20 w-auto mb-6"
+                />
+                <p className="text-sm md:text-base text-[var(--color-text-muted)] leading-relaxed">
+                  Hub360ai is our private platform for running every AOH service in one place.
+                  You almost never log in — results show up on your phone, in your inbox, on your
+                  calendar.
+                </p>
+              </aside>
             </div>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            §02 — STATEMENT BAND (oversized callout, no centered prose)
+            §03 — WHY NOW (market-shift line lives here, NOT in §02)
             ═══════════════════════════════════════════════════════ */}
-        <section className="bg-gray-950 text-white">
-          <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <div className="mb-8 flex items-center gap-3">
-              <span className="font-mono text-[11px] font-bold text-green-400 tracking-wider">
-                §02
-              </span>
+        <section className="bg-[var(--color-hero-bg)] text-white">
+          <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="font-mono text-[11px] font-bold text-green-400 tracking-wider">§03</span>
               <span className="h-px flex-1 bg-white/10" />
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/50">
-                The shift
+                Why now
               </span>
             </div>
 
-            <p className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] max-w-5xl">
+            <p
+              className={`${serif} text-2xl md:text-4xl lg:text-5xl tracking-tight leading-[1.15] max-w-5xl`}
+              style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+            >
               The way customers find local businesses just{" "}
               <span className="text-green-400">changed</span>. Most are{" "}
               <span className="text-amber-300">completely invisible</span> across the new channels.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-wider">
-              {["Google", "Maps", "ChatGPT", "Perplexity", "Google AI Overviews"].map((c) => (
+            <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-wider">
+              {["Google", "Maps", "ChatGPT", "Perplexity", "AI Overviews", "Claude"].map((c) => (
                 <span
                   key={c}
                   className="rounded-md bg-white/[0.04] border border-white/10 px-2.5 py-1 text-white/70"
@@ -234,102 +259,43 @@ export default function AboutPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            §03 — PRINCIPLES (left-rail big numerals, right body)
-            ═══════════════════════════════════════════════════════ */}
-        <section className="border-b border-[var(--color-border)]">
-          <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-            <SectionMarker num="03" label="How we work" />
-
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12 max-w-3xl">
-              Four rules. No exceptions.
-            </h2>
-
-            <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-              {principles.map((p, i) => (
-                <li key={p.title} className="grid grid-cols-[auto_1fr] gap-5 items-start">
-                  <span className="font-mono text-4xl md:text-5xl font-bold text-[var(--color-accent)]/30 leading-none tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold mb-2 text-[var(--color-text-body)]">
-                      {p.title}
-                    </h3>
-                    <p className="text-sm md:text-base text-[var(--color-text-muted)] leading-relaxed">
-                      {p.body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════
-            §04 — TEAM (asymmetric: Mike 1.3fr, Kip 1fr, Teri 1fr)
+            §04 — TEAM (Kip + Teri only; Mike is §01)
+            (Principles section removed per spec)
             ═══════════════════════════════════════════════════════ */}
         <section className="border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
-          <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-            <SectionMarker num="04" label="Who runs it" />
+          <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+            <SectionMarker num="04" label="The rest of the team" />
 
-            <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Three operators. Eight niches.
-              </h2>
-              <p className="font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
-                Headcount · 3
-              </p>
-            </div>
+            <h2
+              className={`${serif} text-3xl md:text-5xl tracking-tight mb-6`}
+              style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+            >
+              Who else runs it.
+            </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr] gap-6">
-              {team.map((m) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {teamRest.map((m) => (
                 <article
                   key={m.name}
-                  className="rounded-xl bg-[var(--color-bg-page)] border border-[var(--color-border)] overflow-hidden"
+                  className="grid grid-cols-[8rem_1fr] gap-5 rounded-xl bg-[var(--color-bg-page)] border border-[var(--color-border)] p-5 md:p-6"
                 >
-                  <div
-                    className={`relative ${
-                      m.size === "large" ? "aspect-square" : "aspect-square"
-                    } bg-[var(--color-bg-elevated)] flex items-center justify-center overflow-hidden`}
-                  >
-                    {m.photo ? (
-                      <Image
-                        src={m.photo}
-                        alt={`${m.name}, ${m.role}`}
-                        fill
-                        sizes={m.size === "large" ? "(min-width: 768px) 26rem, 100vw" : "(min-width: 768px) 18rem, 100vw"}
-                        className="object-cover"
-                        priority={m.size === "large"}
-                        quality={92}
-                      />
-                    ) : (
-                      <span
-                        aria-hidden="true"
-                        className="text-5xl font-bold text-[var(--color-text-muted)]/40"
-                      >
-                        {m.initials}
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-5 md:p-6">
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                        {m.role}
-                      </span>
-                    </div>
-                    <h3
-                      className={`font-bold text-[var(--color-text-body)] ${
-                        m.size === "large" ? "text-2xl md:text-3xl" : "text-xl"
-                      }`}
+                  <div className="aspect-square w-32 rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border)] flex items-center justify-center">
+                    <span
+                      aria-hidden="true"
+                      className="text-3xl font-bold text-[var(--color-text-muted)]/40"
                     >
+                      {m.initials}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] mb-2">
+                      {m.role}
+                    </p>
+                    <h3 className="text-xl font-bold text-[var(--color-text-body)] mb-3">
                       {m.name}
                     </h3>
-                    {m.size === "large" && (
-                      <p className="mt-3 text-sm md:text-base text-[var(--color-text-muted)] leading-relaxed">
-                        Spent 15 years explaining technology to schools without in-house tech teams. Built and sold the EdTech company that came out of it. Now does the same job for local businesses — operating the AI so owners don&apos;t have to learn it.
-                      </p>
-                    )}
-                    <p className="mt-4 font-mono text-[10px] text-[var(--color-text-muted)]/70 leading-relaxed">
-                      // covers · {m.niches}
+                    <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                      {m.focus}
                     </p>
                   </div>
                 </article>
@@ -339,41 +305,33 @@ export default function AboutPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════
-            §05 — CONTACT
+            §05 — CONTACT CTA (linked out to /contact, no embedded form)
             ═══════════════════════════════════════════════════════ */}
         <section className="border-b border-[var(--color-border)]">
-          <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-            <SectionMarker num="05" label="Get in touch" />
+          <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+            <SectionMarker num="05" label="Got a question" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
-              <div>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-                  Easiest way to reach us is to just write.
-                </h2>
-
-                <a
-                  href="mailto:support@aioutsourcehub.com"
-                  className="block text-xl md:text-2xl font-bold text-[var(--color-accent)] hover:underline underline-offset-4 break-all"
-                >
-                  support@aioutsourcehub.com
-                </a>
-
-                <div className="mt-5 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--color-text-muted)]">
-                  <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
-                  Response · usually within a few hours
-                </div>
-              </div>
-
-              <ContactForm />
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <h2
+                className={`${serif} text-3xl md:text-5xl tracking-tight max-w-2xl`}
+                style={{ fontWeight: 600, fontVariationSettings: '"opsz" 144' }}
+              >
+                Easiest way to reach us is to just write.
+              </h2>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-6 py-3 text-sm font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-[var(--color-accent)]/30"
+              >
+                Contact us
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════
-            FOOTER OUTRO — quiet link, no big CTA block
-            ═══════════════════════════════════════════════════════ */}
+        {/* OUTRO */}
         <section>
-          <div className="mx-auto max-w-3xl px-6 py-16 md:py-20 text-center">
+          <div className="mx-auto max-w-3xl px-6 py-10 md:py-14 text-center">
             <p className="text-base text-[var(--color-text-muted)] mb-4">
               Or skip the email and run the free audit.
             </p>

@@ -78,11 +78,12 @@ const variants: Record<Variant, VariantConfig> = {
   },
   default: {
     headlineSegments: [
-      { text: "More calls. More customers. ", speed: 70 },
-      { text: "Done for you.", speed: 130, className: ACCENT },
+      { text: "The ", speed: 70 },
+      { text: "AI", speed: 130, className: ACCENT },
+      { text: " hub for local businesses.", speed: 70 },
     ],
     subheadline:
-      "Google, Maps, ChatGPT, Claude — we make sure your business shows up everywhere.",
+      "We find the tools that fit your business — and run them so you don't have to.",
     priceLine: "Starting at $1/day. No contract.",
     buttonText: "See My Free Visibility Check",
   },

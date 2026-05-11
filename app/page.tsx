@@ -45,8 +45,8 @@ const teaserCards: TeaserCard[] = [
       "Google Business Profile audit",
       "Cancel anytime · no setup fee",
     ],
-    href: "/checkout/review-automation",
-    cta: "Start at $49/mo",
+    href: "/pricing#review-automation",
+    cta: "See plan details",
     iconPaths: ICON_PATHS.star,
   },
   {

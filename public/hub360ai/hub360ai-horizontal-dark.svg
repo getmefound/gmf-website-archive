@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120">
+  <rect x="8" y="28" width="64" height="64" rx="14" fill="#6366F1"/>
+  <rect x="24" y="44" width="5.8" height="32" rx="1" fill="#FFFFFF"/>
+  <rect x="50.2" y="44" width="5.8" height="32" rx="1" fill="#FFFFFF"/>
+  <rect x="24" y="57.1" width="32" height="5.8" fill="#FFFFFF"/>
+  <circle cx="56" cy="44" r="5.5" fill="#FBBF24"/>
+  <text x="92" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="44" font-weight="600" fill="#F1F5F9" letter-spacing="-1">Hub<tspan fill="#A5B4FC">360</tspan><tspan fill="#F1F5F9">ai</tspan></text>
+</svg>
