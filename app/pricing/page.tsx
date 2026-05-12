@@ -99,7 +99,7 @@ const products: ProductDetailData[] = [
     price: "$179",
     cadenceLabel: "/mo",
     setup: "$199 setup",
-    ctaLabel: "Talk to us about AI Visibility",
+    ctaLabel: "Start AI Visibility",
     ctaHref: "/checkout/ai-visibility",
     iconPaths: ICON_PATHS.search,
     mock: <MockAIVisibilityPanel />,
@@ -140,7 +140,7 @@ const products: ProductDetailData[] = [
     price: "$249",
     cadenceLabel: "/mo",
     setup: "$199 setup",
-    ctaLabel: "Book a Reach demo",
+    ctaLabel: "Start Reach",
     ctaHref: "/checkout/reach",
     iconPaths: ICON_PATHS.target,
     mock: <MockReachPanel />,
@@ -180,7 +180,7 @@ const products: ProductDetailData[] = [
     price: "$349",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    ctaLabel: "Book a Studio demo",
+    ctaLabel: "Start Studio",
     ctaHref: "/checkout/studio",
     iconPaths: ICON_PATHS.studio,
     mock: <MockStudioPanel />,
@@ -221,7 +221,7 @@ const products: ProductDetailData[] = [
     price: "$499",
     cadenceLabel: "/mo",
     setup: "$499 setup",
-    ctaLabel: "Book a Relay demo",
+    ctaLabel: "Start Relay",
     ctaHref: "/checkout/relay",
     iconPaths: ICON_PATHS.phone,
     mock: <MockRelayPanel />,
@@ -261,7 +261,7 @@ const products: ProductDetailData[] = [
     price: "$999",
     cadenceLabel: "/mo",
     setup: "$999 setup",
-    ctaLabel: "Book a Whole Stack call",
+    ctaLabel: "Start Whole Stack",
     ctaHref: "/checkout/whole-stack",
     iconPaths: ICON_PATHS.dashboard,
     mock: <MockWholeStackPanel />,
@@ -442,5 +442,6 @@ export default function PricingPage() {
     </>
   );
 }
+
 
 

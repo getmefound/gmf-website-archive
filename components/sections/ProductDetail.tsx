@@ -20,6 +20,8 @@ export type ProductDetailData = {
   setup: string;
   ctaLabel: string;
   ctaHref: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
   iconPaths: readonly string[];
   mock: ReactNode;
   variant?: "light" | "dark";
@@ -229,17 +231,29 @@ export function ProductDetail({
                   {data.setup}
                 </span>
               </div>
-              <Link
-                href={data.ctaHref}
-                className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold transition-all hover:gap-3 ${
-                  dark
-                    ? "bg-[var(--color-accent-text)] text-[var(--color-accent)] hover:bg-white"
-                    : "bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] hover:shadow-lg hover:shadow-[var(--color-accent)]/30"
-                }`}
-              >
-                {data.ctaLabel}
-                <span aria-hidden="true">→</span>
-              </Link>
+              <div className="space-y-2">
+                <Link
+                  href={data.ctaHref}
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold transition-all hover:gap-3 ${
+                    dark
+                      ? "bg-[var(--color-accent-text)] text-[var(--color-accent)] hover:bg-white"
+                      : "bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] hover:shadow-lg hover:shadow-[var(--color-accent)]/30"
+                  }`}
+                >
+                  {data.ctaLabel}
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link
+                  href={data.secondaryCtaHref ?? "/contact"}
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border px-5 py-3 text-sm font-semibold transition-colors ${
+                    dark
+                      ? "border-[var(--color-accent-text)]/35 text-[var(--color-accent-text)] hover:bg-white/10"
+                      : "border-[var(--color-hero-border)] text-[var(--color-hero-subtext)] hover:bg-white/5"
+                  }`}
+                >
+                  {data.secondaryCtaLabel ?? "Book a Call"}
+                </Link>
+              </div>
               {data.crossSell && (
                 <p
                   className={`mt-3 text-xs ${
@@ -293,3 +307,4 @@ export function ProductDetail({
     </section>
   );
 }
+
