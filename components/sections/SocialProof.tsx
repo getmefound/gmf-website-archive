@@ -44,7 +44,7 @@ export function SocialProof() {
   return (
     <section
       aria-label="Key stats"
-      className="relative overflow-hidden bg-[var(--color-bg-dark-card)] py-20 md:py-24 text-[var(--color-hero-text)]"
+      className="relative overflow-hidden bg-[var(--color-bg-dark-card)] py-20 md:py-28 text-[var(--color-hero-text)]"
     >
       {/* Subtle grid pattern */}
       <div
