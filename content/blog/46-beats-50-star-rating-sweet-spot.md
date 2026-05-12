@@ -3,7 +3,7 @@ title: "Why a 4.6 beats a 5.0 — the star rating sweet spot nobody talks about"
 description: "A perfect rating sounds great until you realize most customers don't trust it. Here's where your rating actually wants to live, and why."
 date: "2026-05-10"
 category: "Reviews"
-coverImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80&auto=format&fit=crop"
+coverImage: "https://images.unsplash.com/photo-1633613286991-611fe299c4be?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
   role: "Founder, AI Outsource Hub"
