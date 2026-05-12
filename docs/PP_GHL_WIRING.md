@@ -31,7 +31,7 @@ Use your existing "Generate Marketing Audit Report" workflow action and map outp
 
 ```json
 {
-  "runId": "{{custom.run_id}}",
+  "runId": "{{customField.runId}}",
   "event": "report_ready",
   "auditUrl": "{{workflow.generate_marketing_audit_report.generated_report_url}}"
 }
@@ -47,7 +47,7 @@ Use your existing "Generate Marketing Audit Report" workflow action and map outp
 
 ```json
 {
-  "runId": "{{custom.run_id}}",
+  "runId": "{{customField.runId}}",
   "event": "heatmap_ready",
   "heatmapUrl": "{{custom.heatmap_url}}"
 }
@@ -65,8 +65,12 @@ If your workflow does not expose heatmap URL/timestamp yet, keep Action A only.
 ## Operational checklist
 
 1. Ensure workflow writes/stores `run_id` and `audit_url` custom fields.
+   - Site already sends both in webhook payload as:
+     - `runId`
+     - `auditUrl`
+     - `customField.runId`
+     - `customField.auditUrl`
 2. Trigger report generation action.
 3. Send callback Action A.
 4. (Optional) Send callback Action B when heatmap finishes.
 5. Confirm `/api/report/status?runId=...` transitions correctly.
-

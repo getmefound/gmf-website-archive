@@ -88,19 +88,6 @@ export async function POST(req: NextRequest) {
       ? visualVariant
       : undefined;
 
-  await forwardToGHL({
-    email: (email as string).trim().toLowerCase(),
-    timestamp: new Date().toISOString(),
-    campaign: normalizedCampaign,
-    visualVariant: normalizedVisual,
-    source: "aioutsourcehub.com",
-    customField: {
-      campaign: normalizedCampaign,
-      visualVariant: normalizedVisual ?? "",
-      source: "aioutsourcehub.com",
-    },
-  });
-
   const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "aioutsourcehub.com";
   const proto = req.headers.get("x-forwarded-proto") ?? "https";
   const reportUrl = new URL("/report/ai-visibility", `${proto}://${host}`);
@@ -112,6 +99,23 @@ export async function POST(req: NextRequest) {
   });
   reportUrl.searchParams.set("runId", runId);
 
+  await forwardToGHL({
+    email: (email as string).trim().toLowerCase(),
+    timestamp: new Date().toISOString(),
+    campaign: normalizedCampaign,
+    visualVariant: normalizedVisual,
+    runId,
+    source: "aioutsourcehub.com",
+    auditUrl: reportUrl.toString(),
+    customField: {
+      campaign: normalizedCampaign,
+      visualVariant: normalizedVisual ?? "",
+      source: "aioutsourcehub.com",
+      runId,
+      auditUrl: reportUrl.toString(),
+    },
+  });
+
   void secondaryReport;
 
   return NextResponse.json({ ok: true, auditUrl: reportUrl.toString(), runId });
@@ -122,11 +126,15 @@ type GHLPayload = {
   timestamp: string;
   campaign: "reviews" | "ai" | "organic";
   visualVariant?: "reviews" | "ai";
+  runId: string;
   source: string;
+  auditUrl: string;
   customField: {
     campaign: "reviews" | "ai" | "organic";
     visualVariant: "reviews" | "ai" | "";
     source: string;
+    runId: string;
+    auditUrl: string;
   };
 };
 
