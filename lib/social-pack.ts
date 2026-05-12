@@ -260,9 +260,10 @@ Software gives you a tool. Done-for-you gives you the result.`,
     title: "After-hours calls — 30-day payback",
     blogPath: "/blog/after-hours-calls-ai-receptionist",
     images: [
+      { label: "Photo + overlay", path: "/api/social-photo/after-hours-payback" },
       { label: "Big stat", path: "/api/social-card/after-hours-payback" },
       { label: "Week comparison", path: "/api/social-card-compare/after-hours-payback" },
-      { label: "11:42pm story", path: "/api/social-card-story/after-hours-payback" },
+      { label: "7:15pm story", path: "/api/social-card-story/after-hours-payback" },
     ],
     posts: {
       "linkedin-company": `9 of 10 after-hours calls go to your competitor.
