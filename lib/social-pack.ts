@@ -269,88 +269,112 @@ Software gives you a tool. Done-for-you gives you the result.`,
 
 Not because your service is worse. Because nobody picked up.
 
-Here's what last Tuesday looked like for one of our HVAC clients:
+Tuesday 7:15pm in Southington, CT. A homeowner just got home from work. Her lawn is overgrown. She's hosting her daughter's graduation party Saturday. She calls 3 lawn services. First two ring through to voicemail. Third one picks up.
 
-11:42pm — phone rings. AC quit. Family of four sweating through a heat wave.
+Third one wins the cut, the cleanup, AND the recurring seasonal contract.
 
-Without Relay (last summer): voicemail. They call the next plumber. Sale lost — $2,400 emergency install, gone, before the owner even knew his phone rang.
+That's the math local service businesses lose every week:
 
-With Relay (this week): "I can book you in at 10am. Can I get your name and address?" Booked. Address captured. Owner gets a text with the details before he's even unlocked his phone. $2,400 sleeping.
+• 15-30 after-hours calls is a normal week
+• Most go to voicemail
+• Most callers won't leave one
+• You catch about 1 in 10
 
-The math behind why this works:
+For a shop like Bill at Southington Lawn Service, one missed Saturday-rush call is $200 in mowing plus a $1,800 annual contract walking next door.
 
-— 15–30 after-hours calls a week (typical local service business)
-— 60–70% go to voicemail
-— Of voicemails, maybe 20% leave a message
-— Of messages, maybe half still need what they called about by morning
+Relay is our AI receptionist. Answers, qualifies the lead, books into your calendar. Introduces itself as an AI assistant; transfers to a human if the caller asks. $499/mo + $499 setup. Most clients break even in month one.
 
-You catch about 1 in 10. Nine in ten go somewhere else.
+→ Run your missed-call math: aioutsourcehub.com/#calculator
 
-If one job is worth $300–$2,000, three missed jobs a month = $7K walking out the door. Most of our clients see Relay pay for itself inside 30 days.
-
-Relay is $499/mo + $499 setup. 750 minutes included. 27 languages.
-
-→ Run your missed-call math (free, 30 sec): aioutsourcehub.com/#calculator
-→ Full breakdown with industry numbers: aioutsourcehub.com/blog/after-hours-calls-ai-receptionist
-→ See Relay: aioutsourcehub.com/pricing#relay
-
-Comment "MATH" if after-hours calls are bleeding revenue and I'll DM the breakdown for your category.`,
-      "linkedin-personal": `9 out of 10 after-hours calls go to your competitor.
+(Industry breakdown linked in the first comment.)`,
+      "linkedin-personal": `9 of 10 after-hours calls go to your competitor.
 
 Not because your service is worse. Because nobody picked up.
 
-Last Tuesday one of our HVAC clients got a call at 11:42pm — AC quit, family of four sweating. A year ago that call went to voicemail and the $2,400 emergency install went to the next plumber on the list. This week Relay picked up, booked it for 10am, captured the address, and texted the owner before he'd unlocked his phone.
+Tuesday 7:15pm in Southington, CT. A homeowner just got home from work, lawn's overgrown, hosting a graduation party Saturday. She calls 3 lawn services. First two: voicemail. Third one picks up.
 
-The math is brutal:
-— 15–30 after-hours calls/week
-— 60–70% go to voicemail
-— You catch 1 in 10
-— Three missed jobs/month at $500-$2,000 each = real revenue
+Third one wins the $200 cut, the cleanup, and the $1,800 recurring contract. The first two never knew she called.
 
-Relay catches them at $499/mo. Most clients see payback inside 30 days.
+I built Relay because I watched too many local-business owners lose to *availability*, not skill. Operators like Bill at Southington Lawn Service. Phones are still the buy button for lawn care, trades, vets, med spas. The buyer doesn't wait.
 
-I built this because I watched too many local-business owners lose to *availability*, not skill. Phones are still the buy button for trades, med spas, salons, vets — and the buyer doesn't wait.
+One question that comes up in every demo: "won't customers hate that it's a bot?" Relay introduces itself as an AI assistant. If they want a human, it transfers. About 80% don't ask — they just want their question answered.
 
-Run your numbers: aioutsourcehub.com/#calculator
-Or see Relay direct: aioutsourcehub.com/pricing#relay
+$499/mo, $499 setup. Most clients break even the first month.
 
-If you run a local service business — what does your after-hours call volume actually look like?`,
-      facebook: `9 of 10 after-hours calls go to your competitor.
+Calculator if you want to run yours: aioutsourcehub.com/#calculator
 
-Last Tuesday one of our HVAC clients got a call at 11:42pm. AC quit, family sweating, $2,400 emergency install on the line. A year ago that call went to voicemail. This week Relay (our AI receptionist) booked it for 10am, captured the address, and texted the owner before he'd unlocked his phone.
+If you run a local service business, what does your after-hours call volume actually look like?`,
+      facebook: `Tuesday 7:15pm. A homeowner in Southington, CT just got home from work. Lawn's overgrown. Daughter's graduation party Saturday. She calls 3 lawn services.
 
-15–30 after-hours calls a week is normal. 60-70% go to voicemail. You catch 1 in 10. Three missed jobs/month at $500–$2,000 each is real money walking out.
+First two: voicemail.
+Third one picks up.
 
-Relay is $499/mo. Most clients see payback in the first 30 days.
+Third one wins $200 in mowing plus an $1,800 annual contract.
 
-→ Run your numbers (free, 30 sec): aioutsourcehub.com/#calculator
-→ Read the full math: aioutsourcehub.com/blog/after-hours-calls-ai-receptionist
+9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
 
-Comment "MATH" if this hits home and I'll DM you the breakdown for your category.`,
-      instagram: `9 of 10 after-hours calls go to your competitor 📞
+This is why we built Relay. AI receptionist that catches every call, qualifies the lead, books into your calendar. Introduces itself as AI. Transfers to a human if asked. $499/mo, payback in 30 days for most.
 
-Not because your service is worse. Because nobody picked up.
+Run your missed-call math: aioutsourcehub.com/#calculator`,
+      instagram: `Tuesday 7:15pm. She calls 3 lawn services. First two: voicemail. Third one picks up — and wins $200 + an $1,800 contract.
 
-Relay catches them. $499/mo. Most clients pay it off in 30 days.
+9 of 10 after-hours calls go to your competitor.
 
-→ Link in bio: revenue calculator
-→ DM "MATH" for your industry's breakdown
+Relay catches them. $499/mo. Link in bio.
 
-#LocalBusiness #HVAC #Plumbing #PetGrooming #MedSpa #SmallBusinessOwner #AIReceptionist #SmallBiz #LocalSEO`,
-      x: `9 of 10 after-hours calls go to your competitor.
+#LocalBusiness #LawnCare #SmallBusinessOwner #LocalServices`,
+      x: `🧵 9 of 10 after-hours calls go to your competitor.
 
-Not because your service is worse. Because nobody picked up.
+Not because your service is worse.
 
-Relay catches them. $499/mo. Most pay back in 30 days.
+Because nobody picked up.
 
-aioutsourcehub.com/pricing#relay`,
-      google: `9 of 10 after-hours calls go to your competitor — not because your service is worse, because nobody picked up.
+[1/5]
 
-Most local businesses get 15–30 after-hours calls a week. You catch about 1 in 10. Three missed jobs a month at $500–$2,000 each is real revenue walking out.
+---
 
-Relay — our AI receptionist — catches every call, qualifies the lead, books it into your calendar. $499/mo + $499 setup. 750 minutes included. Most clients see payback inside 30 days.
+Tuesday 7:15pm in Southington, CT.
 
-Run your missed-call math at aioutsourcehub.com/#calculator
+Homeowner just got home from work. Lawn's overgrown. Graduation party Saturday.
+
+She calls 3 lawn services. Two: voicemail. Third one: picks up.
+
+[2/5]
+
+---
+
+Third one wins the $200 cut, the cleanup, AND an $1,800 seasonal contract.
+
+The first two never knew she called.
+
+This happens 15-30 times a week at every local service business.
+
+[3/5]
+
+---
+
+Our AI receptionist (Relay) catches every call. Qualifies the lead. Books it into your calendar.
+
+Introduces itself as AI. Transfers to a human if asked.
+
+$499/mo. Most clients break even in month 1.
+
+[4/5]
+
+---
+
+Run your missed-call math (free, 30 sec):
+
+aioutsourcehub.com/#calculator
+
+[5/5]`,
+      google: `Tuesday 7:15pm. A homeowner just got home from work. Lawn is overgrown, hosting a party Saturday. She calls 3 lawn services. First two: voicemail. Third one picks up — and wins the cut, the cleanup, and the $1,800 contract.
+
+9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
+
+Relay is our AI receptionist. Catches every call, qualifies the lead, books into your calendar. Introduces itself as AI; transfers to a human if asked. $499/mo + $499 setup, 750 minutes included. Most clients break even in month one.
+
+Run your missed-call math: aioutsourcehub.com/#calculator
 See Relay: aioutsourcehub.com/pricing#relay`,
     },
   },

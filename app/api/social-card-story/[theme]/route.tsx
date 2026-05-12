@@ -21,20 +21,20 @@ type StoryData = {
 
 const STORIES: Record<string, StoryData> = {
   "after-hours-payback": {
-    eyebrow: "TUESDAY · 11:42 PM",
-    scene: "Phone rings. The owner is asleep. Relay picks up.",
+    eyebrow: "TUESDAY · 7:15 PM",
+    scene: "Phone rings. The owner is at dinner. Relay picks up.",
     messages: [
-      { who: "caller", text: "Hi, I need a plumber for tomorrow morning if possible." },
+      { who: "caller", text: "My lawn is a mess and I'm hosting Saturday. Can you fit me in this week?" },
       {
         who: "ai",
-        text: "I can book you in at 10am. Can I get your name and address?",
+        text: "I can book you Friday at 8am. Can I get your name and address?",
       },
-      { who: "caller", text: "It's Sarah, 412 Oak Street." },
-      { who: "ai", text: "Booked for 10am. You'll get a confirmation text shortly." },
+      { who: "caller", text: "Sarah, 412 Oak Street." },
+      { who: "ai", text: "Booked Friday at 8am. You'll get a confirmation text shortly." },
     ],
-    punchline: "$2,400 emergency install. Booked while the owner slept.",
+    punchline: "$200 cut + $1,800 seasonal contract. Booked over dinner.",
     ctaLine1: "9 of 10 after-hours calls go to your competitor",
-    ctaLine2: "Relay catches them — $499/mo · aioutsourcehub.com/pricing#relay",
+    ctaLine2: "Relay catches them. $499/mo. aioutsourcehub.com/pricing#relay",
   },
 };
 
