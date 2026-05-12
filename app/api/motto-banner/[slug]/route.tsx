@@ -1,0 +1,192 @@
+import { ImageResponse } from "next/og";
+
+export const dynamic = "force-static";
+export const revalidate = false;
+
+const SIZE = { width: 1584, height: 396 } as const;
+
+const NAVY = "#0A1628";
+const NAVY_2 = "#142a44";
+const CREAM = "#F8F6F1";
+const GREEN = "#7CE7B7";
+const GREEN_DEEP = "#2D6A4F";
+
+type Motto = {
+  slug: string;
+  lines: string[]; // each rendered on its own line
+  tone: string; // shown in preview for context, not on banner
+};
+
+export const MOTTOS: Motto[] = [
+  {
+    slug: "we-run",
+    lines: ["We run the AI.", "You run the business."],
+    tone: "Founder signature line — already on the site",
+  },
+  {
+    slug: "dfy",
+    lines: ["Done-for-you AI."],
+    tone: "Minimal · 4 words",
+  },
+  {
+    slug: "outcome",
+    lines: ["The AI does the work.", "You keep the customer."],
+    tone: "Outcome-first · plain",
+  },
+  {
+    slug: "ai-run",
+    lines: ["AI, run."],
+    tone: "Two-word minimalism · tagline pun (AI runs / AI we run)",
+  },
+  {
+    slug: "no-dashboards",
+    lines: ["No dashboards.", "No retainers.", "Just AI that does the work."],
+    tone: "Anti-positioning · three-beat",
+  },
+  {
+    slug: "we-pick-up",
+    lines: ["We pick up the phones.", "You pick up the work."],
+    tone: "Operator-coded · parallel structure",
+  },
+  {
+    slug: "phones-answered",
+    lines: ["Phones answered.", "Reviews chased.", "Leads followed up."],
+    tone: "Outcome stack · three specifics",
+  },
+];
+
+const SERVICES = "Review Automation · AI Visibility · Reach · Studio · Relay · Whole Stack";
+
+export function generateStaticParams() {
+  return MOTTOS.map((m) => ({ slug: m.slug }));
+}
+
+export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const motto = MOTTOS.find((m) => m.slug === slug);
+  if (!motto) return new Response("Not found", { status: 404 });
+
+  // Scale headline based on line count
+  const lineCount = motto.lines.length;
+  const headlineSize = lineCount === 1 ? 110 : lineCount === 2 ? 76 : 60;
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          background: `linear-gradient(135deg, ${NAVY} 0%, ${NAVY_2} 100%)`,
+          color: CREAM,
+          padding: 64,
+          fontFamily: "sans-serif",
+          justifyContent: "space-between",
+          position: "relative",
+        }}
+      >
+        {/* Top — wordmark */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 52,
+              height: 52,
+              borderRadius: 12,
+              background: GREEN_DEEP,
+              color: CREAM,
+              fontSize: 26,
+              fontWeight: 800,
+              marginRight: 14,
+            }}
+          >
+            A
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 20,
+              fontWeight: 700,
+              letterSpacing: 2.5,
+              color: CREAM,
+            }}
+          >
+            AI OUTSOURCE HUB
+          </div>
+        </div>
+
+        {/* Middle — motto */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {motto.lines.map((line, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                fontSize: headlineSize,
+                fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: -2,
+                color: i === motto.lines.length - 1 && motto.lines.length > 1 ? GREEN : CREAM,
+              }}
+            >
+              {line}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom — services + URL */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            paddingTop: 18,
+            borderTop: "1px solid rgba(255,255,255,0.18)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              fontSize: 19,
+              color: GREEN,
+              fontWeight: 600,
+              letterSpacing: 0.5,
+              fontFamily: "monospace",
+            }}
+          >
+            {SERVICES}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              fontSize: 16,
+              color: "#A8B3C4",
+              fontWeight: 600,
+              letterSpacing: 0.5,
+            }}
+          >
+            <div style={{ display: "flex" }}>aioutsourcehub.com</div>
+            <div
+              style={{
+                display: "flex",
+                color: GREEN,
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                fontSize: 13,
+              }}
+            >
+              From $49/mo · No contract
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    { ...SIZE }
+  );
+}
