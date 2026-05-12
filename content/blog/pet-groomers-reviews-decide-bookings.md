@@ -59,8 +59,8 @@ The good news is that moat can be closed fast. A shop going from 12 reviews to 6
 
 ## What this looks like with us doing it
 
-If you want the boring, mechanical part of this handled — the post-appointment text, the link to your review page, the gentle nudge for the ones who didn't open the first one — that's exactly what our [Review Automation](/reviews) service does for groomers.
+If you want the boring, mechanical part of this handled — the post-appointment text, the link to your review page, the gentle nudge for the ones who didn't open the first one — that's exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service does for groomers.
 
 You don't change anything about how you actually groom. Review Automation makes sure the happy customers leave the review they meant to leave, every time, while it's fresh. Replies on every review — good and bad — handled in your voice.
 
-[See how Review Automation works](/reviews). Or [get a free check](/#calculator) on what your current review pace is costing you in missed bookings.
+<a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">See how Review Automation works</a>. Or [get a free check](/#calculator) on what your current review pace is costing you in missed bookings.

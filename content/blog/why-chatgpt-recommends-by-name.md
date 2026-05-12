@@ -107,4 +107,4 @@ If you're a local service business and you've never had your site audited for:
 
 That's not a problem you fix with more Google ads. That's a problem you fix by getting your structured data right.
 
-If that's where you are, our [AI Visibility](/ai-visibility) service handles all of it — the schema, the entity linking, the AI-crawler files, the ongoing tuning. We'll show you exactly what's missing in a free audit first. No credit card. No contract. We earn the work, or we don't keep you. [Run the audit.](/ai-visibility)
+If that's where you are, our <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> service handles all of it — the schema, the entity linking, the AI-crawler files, the ongoing tuning. We'll show you exactly what's missing in a free audit first. No credit card. No contract. We earn the work, or we don't keep you. <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">Run the audit.</a>

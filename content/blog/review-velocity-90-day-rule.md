@@ -73,7 +73,7 @@ The "right after the service" part is the biggest lever. A customer who just had
 
 This is the boring, mechanical part of reviews that everybody knows they should do and nobody actually does. Send a text. Right after the appointment. With one tap that opens the review form. That's the whole thing.
 
-That's the entire promise of our [Review Automation](/reviews) service. The post-appointment text, the smart timing, the follow-up for non-openers, the reply to every review in your voice — we run all of it. You don't change anything about how you do your work.
+That's the entire promise of our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service. The post-appointment text, the smart timing, the follow-up for non-openers, the reply to every review in your voice — we run all of it. You don't change anything about how you do your work.
 
 If you do it consistently, your profile gets back to looking alive in about 90 days. Map rankings start moving in 60. Phone starts ringing differently in 90 to 120.
 

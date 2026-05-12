@@ -58,7 +58,7 @@ The best med spa owners I know have stopped asking entirely. They have a system 
 
 If your med spa has decent reviews but they've gone quiet, the path back is fast.
 
-In a typical pattern we see with our [Review Automation](/reviews) service:
+In a typical pattern we see with our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service:
 
 - **Month 1**: 4 to 8 new reviews come in from the existing patient flow
 - **Month 2**: Map ranking starts shifting. Profile views go up
@@ -66,4 +66,4 @@ In a typical pattern we see with our [Review Automation](/reviews) service:
 
 You're not paying for more ads. You're not training your front desk. Review Automation makes sure the patients you already have go from "thought about leaving a review" to "actually left one." It runs in the background while you work.
 
-[See how Review Automation works for med spas](/reviews) — or [get a free check](/#calculator) on what your current profile is leaving on the table.
+<a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">See how Review Automation works for med spas</a> — or [get a free check](/#calculator) on what your current profile is leaving on the table.

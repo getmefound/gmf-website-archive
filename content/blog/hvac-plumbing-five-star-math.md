@@ -70,12 +70,12 @@ Most owners forget to ask in the moment. The truck pulls away, the customer goes
 
 Send the customer a text within 30 minutes of leaving the job. One sentence: "Thanks for trusting us with that call today. If you have 30 seconds, here's the review link." One tap, review form opens, they write a sentence, done.
 
-That's it. That's the entire system. And that's exactly what our [Review Automation](/reviews) service runs for HVAC, plumbing, roofing, and other trades.
+That's it. That's the entire system. And that's exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service runs for HVAC, plumbing, roofing, and other trades.
 
 If you have 8 service calls a week and you ask after each one, with a 30 to 40% conversion rate on the ask, you'll add 12 to 16 new reviews a month. Steady. In 6 to 9 months your profile looks completely different. The map ranking moves. The phone rings differently.
 
 You don't need Yelp ads. You don't need to pay for leads. You don't need to learn marketing. You need the ask to actually happen, every job, automatically.
 
-And while you're at it — those emergency calls that come in after hours when you're already on another job? Our [Relay](/relay) AI voice agent catches those too, so they don't bleed to the next plumber on the list.
+And while you're at it — those emergency calls that come in after hours when you're already on another job? Our <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> AI voice agent catches those too, so they don't bleed to the next plumber on the list.
 
-[See how Review Automation works for trades](/reviews). Or [check what your current pace is leaving on the table](/#calculator).
+<a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">See how Review Automation works for trades</a>. Or [check what your current pace is leaving on the table](/#calculator).

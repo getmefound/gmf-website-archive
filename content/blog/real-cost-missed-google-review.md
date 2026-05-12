@@ -90,4 +90,4 @@ The gap doesn't close. It widens.
 
 That's the structural cost of inaction: not the missing review you didn't get last week, but the cumulative absence of every review you didn't collect over a multi-year window while a competitor did.
 
-If your review flow is "I'll get to it later" or "I sometimes ask," there's a math problem here that's worth a free audit. That's exactly what our [Review Automation](/reviews) service handles — every customer, every job, the right ask at the right moment, with replies handled in your voice. [Get a free audit.](/reviews)
+If your review flow is "I'll get to it later" or "I sometimes ask," there's a math problem here that's worth a free audit. That's exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service handles — every customer, every job, the right ask at the right moment, with replies handled in your voice. <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Get a free audit.</a>
