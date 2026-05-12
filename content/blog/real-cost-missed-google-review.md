@@ -3,7 +3,7 @@ title: "The real cost of a missed Google review"
 description: "Harvard Business School ran the math. A 1-star rating bump correlates with 5–9% revenue. Here's what one missed review actually costs your business."
 date: "2026-05-07"
 category: "Reviews"
-coverImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80&auto=format&fit=crop"
+coverImage: "https://images.unsplash.com/photo-1642043175009-5997b3a078d8?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
   role: "Founder, AI Outsource Hub"
@@ -40,6 +40,8 @@ If the business has been stable at a 4.6-star rating with 142 reviews, and a com
 8% of $480K = $38,400 per year.
 
 That's not a hypothetical. That's the cost of letting your review velocity drift while a competitor stays disciplined.
+
+Want this run on *your* numbers — your revenue, your average ticket, your current review pace? Drop your business into our [revenue calculator on the home page](/#calculator). Takes 30 seconds. No signup. It tells you what you're leaving on the table in dollars per month.
 
 ## Why most local businesses don't ask for reviews
 
@@ -90,4 +92,4 @@ The gap doesn't close. It widens.
 
 That's the structural cost of inaction: not the missing review you didn't get last week, but the cumulative absence of every review you didn't collect over a multi-year window while a competitor did.
 
-If your review flow is "I'll get to it later" or "I sometimes ask," there's a math problem here that's worth a free audit. That's exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> service handles — every customer, every job, the right ask at the right moment, with replies handled in your voice. <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Get a free audit.</a>
+If your review flow is "I'll get to it later" or "I sometimes ask," there's a math problem here worth running on your real numbers. Start with the [revenue calculator on the home page](/#calculator) — 30 seconds, no signup — to see what your current pace is costing you. Then if you want it run for you start to finish, our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> handles every customer, every job, the right ask at the right moment, with replies in your voice. $49/mo, no setup fee, cancel anytime. <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Get a free audit.</a>

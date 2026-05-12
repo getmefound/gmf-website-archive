@@ -82,4 +82,6 @@ You don't need to take my word for it. Look at your missed-call list on your bus
 
 If that number is bigger than $500, the phone is already paying for itself. You just haven't picked it up yet.
 
+Want this run on *your* numbers — your average job size, your missed-call rate? Drop your business into our [revenue calculator on the home page](/#calculator). Takes 30 seconds, no signup. It tells you in dollars what after-hours calls are costing you each month.
+
 If you want to see what <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> would look like for your business — what it would say, how it would handle your calls — we'll set up a free walkthrough. $499/mo, $499 one-time setup, no contract. [Contact us](/contact).
