@@ -3,7 +3,7 @@ title: "AI Visibility vs SEO — they're not the same thing"
 description: "SEO gets you a slot in a list of links. AI Visibility gets you recommended by name. Different mechanism, different work, different outcome."
 date: "2026-05-08"
 category: "AI & Search"
-coverImage: "https://images.unsplash.com/photo-1562746075-3901c010c09d?w=1600&q=80&auto=format&fit=crop"
+coverImage: "/api/blog-cover/ai-visibility-vs-seo"
 author:
   name: "Mike Egidio"
   role: "Founder, AI Outsource Hub"
