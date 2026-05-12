@@ -21,10 +21,17 @@ export const CHANNELS: Channel[] = [
   { key: "google", label: "Google Business Profile", color: "#34A853" },
 ];
 
+export type ImageVariant = {
+  label: string;
+  path: string; // route path returning PNG
+};
+
 export type Theme = {
   slug: string;
   title: string;
   posts: Partial<Record<ChannelKey, string>>;
+  blogPath?: string; // /blog/<slug>
+  images?: ImageVariant[]; // multiple variants when present
 };
 
 const linkedinPersonalIntro = (s: string) => s; // currently identical to company copy
@@ -251,44 +258,100 @@ Software gives you a tool. Done-for-you gives you the result.`,
   {
     slug: "after-hours-payback",
     title: "After-hours calls — 30-day payback",
+    blogPath: "/blog/after-hours-calls-ai-receptionist",
+    images: [
+      { label: "Big stat", path: "/api/social-card/after-hours-payback" },
+      { label: "Week comparison", path: "/api/social-card-compare/after-hours-payback" },
+      { label: "11:42pm story", path: "/api/social-card-story/after-hours-payback" },
+    ],
     posts: {
-      "linkedin-company": `7:43pm. The phone rings.
+      "linkedin-company": `9 of 10 after-hours calls go to your competitor.
 
-You're home. The dog needs walking. The shop closed at 6.
+Not because your service is worse. Because nobody picked up.
 
-You let it go to voicemail. Maybe you'll listen later. You don't.
+Here's what last Tuesday looked like for one of our HVAC clients:
 
-That call was somebody who needed what you sell, right now, tonight. By the time you check voicemail at 8am, they've already called the next business on the list. The next one picked up.
+11:42pm — phone rings. AC quit. Family of four sweating through a heat wave.
 
-Here's the math:
+Without Relay (last summer): voicemail. They call the next plumber. Sale lost — $2,400 emergency install, gone, before the owner even knew his phone rang.
 
-Most local businesses get 15–30 after-hours calls a week. 60–70% go to voicemail. Maybe 20% leave a real message. Maybe half of those still need what they called about by the time you call back.
+With Relay (this week): "I can book you in at 10am. Can I get your name and address?" Booked. Address captured. Owner gets a text with the details before he's even unlocked his phone. $2,400 sleeping.
 
-You're catching about 1 in 10 after-hours calls. Nine in ten are gone before you knew they existed.
+The math behind why this works:
 
-If one job is worth $300–$2,000, three missed jobs a month is $2,400+ walking out the door.
+— 15–30 after-hours calls a week (typical local service business)
+— 60–70% go to voicemail
+— Of voicemails, maybe 20% leave a message
+— Of messages, maybe half still need what they called about by morning
 
-An AI receptionist at $499/month needs to catch one extra job to break even. That's a single service call.
+You catch about 1 in 10. Nine in ten go somewhere else.
 
-In most local businesses I look at, that payback lands inside 30 days.
+If one job is worth $300–$2,000, three missed jobs a month = $7K walking out the door. Most of our clients see Relay pay for itself inside 30 days.
 
-aioutsourcehub.com`,
-      facebook: `You catch about 1 in 10 after-hours calls. Nine in ten are gone before you knew they existed.
+Relay is $499/mo + $499 setup. 750 minutes included. 27 languages.
 
-Most local businesses get 15–30 a week. 60–70% go to voicemail. Most customers won't leave one.
+→ Run your missed-call math (free, 30 sec): aioutsourcehub.com/#calculator
+→ Full breakdown with industry numbers: aioutsourcehub.com/blog/after-hours-calls-ai-receptionist
+→ See Relay: aioutsourcehub.com/pricing#relay
 
-If one job is worth $500, an AI receptionist that catches one extra call a month already paid for itself. Most pay back in 30 days.`,
-      instagram: `You catch 1 in 10 after-hours calls.
+Comment "MATH" if after-hours calls are bleeding revenue and I'll DM the breakdown for your category.`,
+      "linkedin-personal": `9 out of 10 after-hours calls go to your competitor.
 
-The other 9 went to your competitor.
+Not because your service is worse. Because nobody picked up.
 
-An AI receptionist that catches just ONE extra job a month pays for itself in 30 days.
+Last Tuesday one of our HVAC clients got a call at 11:42pm — AC quit, family of four sweating. A year ago that call went to voicemail and the $2,400 emergency install went to the next plumber on the list. This week Relay picked up, booked it for 10am, captured the address, and texted the owner before he'd unlocked his phone.
 
-#LocalBusiness #SmallBusinessTips #AIReceptionist #HVAC #Plumbing #LocalServices`,
-      x: `You catch 1 in 10 after-hours calls. The other 9 went to your competitor.
+The math is brutal:
+— 15–30 after-hours calls/week
+— 60–70% go to voicemail
+— You catch 1 in 10
+— Three missed jobs/month at $500-$2,000 each = real revenue
 
-An AI receptionist that catches ONE extra job a month pays for itself. Most do in 30 days.`,
-      google: `You catch about 1 in 10 after-hours calls. Nine in ten go to a competitor. An AI receptionist that catches just one extra job a month pays for itself — most local businesses see payback inside 30 days. Stop losing the calls that already wanted you.`,
+Relay catches them at $499/mo. Most clients see payback inside 30 days.
+
+I built this because I watched too many local-business owners lose to *availability*, not skill. Phones are still the buy button for trades, med spas, salons, vets — and the buyer doesn't wait.
+
+Run your numbers: aioutsourcehub.com/#calculator
+Or see Relay direct: aioutsourcehub.com/pricing#relay
+
+If you run a local service business — what does your after-hours call volume actually look like?`,
+      facebook: `9 of 10 after-hours calls go to your competitor.
+
+Last Tuesday one of our HVAC clients got a call at 11:42pm. AC quit, family sweating, $2,400 emergency install on the line. A year ago that call went to voicemail. This week Relay (our AI receptionist) booked it for 10am, captured the address, and texted the owner before he'd unlocked his phone.
+
+15–30 after-hours calls a week is normal. 60-70% go to voicemail. You catch 1 in 10. Three missed jobs/month at $500–$2,000 each is real money walking out.
+
+Relay is $499/mo. Most clients see payback in the first 30 days.
+
+→ Run your numbers (free, 30 sec): aioutsourcehub.com/#calculator
+→ Read the full math: aioutsourcehub.com/blog/after-hours-calls-ai-receptionist
+
+Comment "MATH" if this hits home and I'll DM you the breakdown for your category.`,
+      instagram: `9 of 10 after-hours calls go to your competitor 📞
+
+Not because your service is worse. Because nobody picked up.
+
+Relay catches them. $499/mo. Most clients pay it off in 30 days.
+
+→ Link in bio: revenue calculator
+→ DM "MATH" for your industry's breakdown
+
+#LocalBusiness #HVAC #Plumbing #PetGrooming #MedSpa #SmallBusinessOwner #AIReceptionist #SmallBiz #LocalSEO`,
+      x: `9 of 10 after-hours calls go to your competitor.
+
+Not because your service is worse. Because nobody picked up.
+
+Relay catches them. $499/mo. Most pay back in 30 days.
+
+aioutsourcehub.com/pricing#relay`,
+      google: `9 of 10 after-hours calls go to your competitor — not because your service is worse, because nobody picked up.
+
+Most local businesses get 15–30 after-hours calls a week. You catch about 1 in 10. Three missed jobs a month at $500–$2,000 each is real revenue walking out.
+
+Relay — our AI receptionist — catches every call, qualifies the lead, books it into your calendar. $499/mo + $499 setup. 750 minutes included. Most clients see payback inside 30 days.
+
+Run your missed-call math at aioutsourcehub.com/#calculator
+See Relay: aioutsourcehub.com/pricing#relay`,
     },
   },
   {

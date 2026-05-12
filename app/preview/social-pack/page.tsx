@@ -122,13 +122,24 @@ export default function SocialPackPreview() {
         {THEMES.map((theme, weekIdx) => {
           const date = scheduledDateFor(weekIdx);
           const scheduled = formatSchedule(date);
-          const cardUrl = cardUrlFor(theme.slug, "");
+          const images = theme.images ?? [{ label: "Card", path: `/api/social-card/${theme.slug}` }];
+          const isShowcase = !!theme.images && theme.images.length > 1;
 
           return (
             <section
               key={theme.slug}
-              className="mb-12 rounded-2xl border border-white/10 bg-white/[0.02] p-6"
+              className={`mb-12 rounded-2xl border p-6 ${
+                isShowcase
+                  ? "border-emerald-400/40 bg-emerald-400/[0.04]"
+                  : "border-white/10 bg-white/[0.02]"
+              }`}
             >
+              {isShowcase && (
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-emerald-200">
+                  Showcase · new style
+                </div>
+              )}
+
               <div className="flex items-baseline justify-between gap-4 mb-4 flex-wrap">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-1">
@@ -137,23 +148,47 @@ export default function SocialPackPreview() {
                   <h2 className="text-2xl font-bold tracking-tight">{theme.title}</h2>
                   <code className="text-xs text-white/40">{theme.slug}</code>
                 </div>
-                <a
-                  href={cardUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-emerald-300 hover:text-emerald-200 underline"
-                >
-                  Open image in new tab →
-                </a>
+                {theme.blogPath && (
+                  <a
+                    href={theme.blogPath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-emerald-300 hover:text-emerald-200 underline"
+                  >
+                    Matching blog post →
+                  </a>
+                )}
               </div>
 
-              {/* Image preview */}
-              <div className="mb-4 rounded-xl overflow-hidden border border-white/10 bg-black/30">
-                <img
-                  src={cardUrl}
-                  alt={`${theme.title} card`}
-                  className="w-full max-w-[640px] mx-auto block"
-                />
+              {/* Image gallery */}
+              <div
+                className={`mb-4 grid gap-3 ${
+                  images.length > 1 ? "md:grid-cols-3" : "md:grid-cols-1"
+                }`}
+              >
+                {images.map((img) => (
+                  <div
+                    key={img.path}
+                    className="rounded-xl overflow-hidden border border-white/10 bg-black/30"
+                  >
+                    <div className="bg-black/40 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white/60 flex items-center justify-between">
+                      <span>{img.label}</span>
+                      <a
+                        href={img.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-300 hover:text-emerald-200"
+                      >
+                        Open →
+                      </a>
+                    </div>
+                    <img
+                      src={img.path}
+                      alt={`${theme.title} — ${img.label}`}
+                      className="w-full block"
+                    />
+                  </div>
+                ))}
               </div>
 
               {/* Per-channel copy */}
