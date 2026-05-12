@@ -1,5 +1,5 @@
 # Obsidian Sync Manifest
-Synced: 2026-05-11 21:24:13
+Synced: 2026-05-12 23:59:00
 VaultRoot: C:\Users\micha\Obsidian\Oracle\04 AI Outsource Hub
 
 ## Copied
@@ -11,6 +11,7 @@ VaultRoot: C:\Users\micha\Obsidian\Oracle\04 AI Outsource Hub
 - content\coach\obsidian-sync\02 Training_product-knowledge_Reviews + AI Visibility Bundle.md
 - content\coach\obsidian-sync\00 Core_2026-04-28 - Claude - AOH Company Overview.md
 - content\coach\obsidian-sync\00 Core_2026-04-29 - Claude - AOH Website Copy.md
+- content\coach\obsidian-sync\00 Core_2026-05-12 - Codex - Website Implementation Log.md
 
 ## Missing
 - None
