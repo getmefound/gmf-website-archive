@@ -20,6 +20,11 @@ type SurfaceConfig = {
   density: "standard" | "tight" | "tall";
 };
 
+// Render at 2x the platform-display dimensions so the downscale stays crisp
+// on Retina + 4K screens. Platforms accept larger-than-spec uploads and
+// downscale them with proper resampling.
+const SCALE = 2;
+
 // All surfaces use the same banner template — wordmark + motto + services + URL.
 // Personal LinkedIn (mike/kip/teri) keep separate routes for cache/CDN even though
 // they render identical output — LinkedIn already shows the name + role above the
@@ -43,18 +48,20 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const cfg = SURFACES[slug];
   if (!cfg) return new Response("Not found", { status: 404 });
 
-  // Load real AOH wordmark PNG
-  const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h160.png");
+  // Load real AOH wordmark PNG — high-res source so embedded version stays sharp
+  const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h480.png");
   const wordmarkBuf = await readFile(wordmarkPath);
   const wordmarkDataUrl = `data:image/png;base64,${wordmarkBuf.toString("base64")}`;
 
-  // Scale typography per banner dimensions + density
+  // Scale typography per banner dimensions + density. Layout values are in
+  // banner-display units; final pixel output is scaled by SCALE.
   const scaleH = cfg.height / 396;
   const isTight = cfg.density === "tight";
   const isTall = cfg.density === "tall";
 
-  const padding = isTight ? 18 : isTall ? 64 : Math.round(56 * scaleH);
-  const wordmarkH = isTight ? 28 : isTall ? 72 : Math.round(56 * scaleH);
+  // Scale everything by SCALE so the 2x output renders all sizing proportionally
+  const padding = (isTight ? 18 : isTall ? 64 : Math.round(56 * scaleH)) * SCALE;
+  const wordmarkH = (isTight ? 28 : isTall ? 72 : Math.round(56 * scaleH)) * SCALE;
   const wordmarkW = Math.round(wordmarkH * (730 / 160));
 
   // Motto sizing — match line count
@@ -63,10 +70,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   if (isTight) mottoSize = 22;
   else if (isTall) mottoSize = 88;
   else mottoSize = lineCount === 1 ? 110 * scaleH : lineCount === 2 ? 76 * scaleH : 60 * scaleH;
-  mottoSize = Math.round(mottoSize);
+  mottoSize = Math.round(mottoSize) * SCALE;
 
-  const servicesSize = isTight ? 10 : isTall ? 24 : Math.round(18 * scaleH);
-  const urlSize = isTight ? 9 : isTall ? 18 : Math.round(15 * scaleH);
+  const servicesSize = (isTight ? 10 : isTall ? 24 : Math.round(18 * scaleH)) * SCALE;
+  const urlSize = (isTight ? 9 : isTall ? 18 : Math.round(15 * scaleH)) * SCALE;
 
   return new ImageResponse(
     (
@@ -166,6 +173,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
         </div>
       </div>
     ),
-    { width: cfg.width, height: cfg.height }
+    {
+      width: cfg.width * SCALE,
+      height: cfg.height * SCALE,
+    }
   );
 }
