@@ -108,7 +108,7 @@ const products: ProductDetailData[] = [
   {
     slug: "reach",
     number: "03",
-    name: "Reach — Lead Engine",
+    name: "Reach",
     outcome: "Done-for-you outreach. Real calls on your calendar.",
     story:
       "We build you a curated prospect list, write outreach in your voice (never a template — if it sounds like one, it didn't go out), and run the campaigns until qualified appointments land on your calendar. You show up to the call. That's it.",
@@ -133,9 +133,9 @@ const products: ProductDetailData[] = [
     setupSteps: [
       { title: "ICP intake call", sub: "We map who your best customer is." },
       { title: "Voice training + list build", sub: "We learn your tone and source the prospects." },
-      { title: "First campaign live", sub: "Roughly 2 weeks from kickoff." },
+      { title: "First campaign live", sub: "Launches in about 14 days from kickoff." },
     ],
-    cadence: "Continuous outreach. Weekly performance report.",
+    cadence: "Campaign launches in ~14 days, then continuous outreach with weekly optimization and reporting.",
     crossSell: { label: "Studio — for the content side", href: "#studio" },
     price: "$249",
     cadenceLabel: "/mo",
@@ -358,7 +358,7 @@ export default function PricingPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-2xl bg-gray-950 p-8 md:p-10 ring-1 ring-white/10">
+              <div className="rounded-2xl bg-[var(--color-hero-bg)] p-8 md:p-10 ring-1 ring-[var(--color-hero-border)]">
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-green-400 mb-3">
                   <span aria-hidden="true" className="mr-1.5 text-amber-400">💡</span>Step 1 — Start here
                 </p>
@@ -442,3 +442,5 @@ export default function PricingPage() {
     </>
   );
 }
+
+
