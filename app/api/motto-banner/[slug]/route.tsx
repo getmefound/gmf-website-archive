@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -70,6 +72,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const lineCount = motto.lines.length;
   const headlineSize = lineCount === 1 ? 110 : lineCount === 2 ? 76 : 60;
 
+  // Load the real AOH wordmark PNG (h160 = scales down cleanly to banner size)
+  const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h160.png");
+  const wordmarkBuf = await readFile(wordmarkPath);
+  const wordmarkDataUrl = `data:image/png;base64,${wordmarkBuf.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -86,36 +93,15 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
           position: "relative",
         }}
       >
-        {/* Top — wordmark */}
+        {/* Top — real AOH wordmark PNG */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 52,
-              height: 52,
-              borderRadius: 12,
-              background: GREEN_DEEP,
-              color: CREAM,
-              fontSize: 26,
-              fontWeight: 800,
-              marginRight: 14,
-            }}
-          >
-            A
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 20,
-              fontWeight: 700,
-              letterSpacing: 2.5,
-              color: CREAM,
-            }}
-          >
-            AI OUTSOURCE HUB
-          </div>
+          <img
+            src={wordmarkDataUrl}
+            alt="AI Outsource Hub"
+            width={256}
+            height={56}
+            style={{ display: "flex", height: 56, width: 256 }}
+          />
         </div>
 
         {/* Middle — motto */}
