@@ -176,19 +176,17 @@ Founded by Mike Egidio. US-based. Month-to-month. Cancel anytime.
     bannerHeight: 312,
     blocks: [
       {
-        label: "Short description (255 char)",
-        text: "Phones answered. Reviews chased. Leads followed up. Done-for-you AI services from $49/mo — no dashboards, no retainer, no contract. We set it up, we run it, you get daily updates.",
-        charLimit: 255,
+        label: "Bio / Short description (101 char limit on current Facebook)",
+        text: "Phones answered. Reviews chased. Leads followed up. Done-for-you AI from $49/mo. No dashboards.",
+        charLimit: 101,
       },
       {
-        label: "About (longer, no hard limit)",
-        text: `${B_HEADLINE}
+        label: "About (longer, no hard limit — hashtags pasted at the end are clickable on Facebook)",
+        text: `AI Outsource Hub runs done-for-you AI services — Review Automation, AI Visibility, Reach (outbound), Studio (content), Relay (24/7 AI receptionist), and Whole Stack. From $49/month.
 
-That's the whole pitch. AI Outsource Hub runs done-for-you AI services — Review Automation, AI Visibility, Reach (outbound), Studio (content), Relay (24/7 AI receptionist), and Whole Stack. From $49/month.
+We do the work. You don't learn another app. No dashboards.
 
-We do the work. You don't learn another app. No dashboards. No 12-month contract.
-
-→ aioutsourcehub.com`,
+#DoneForYouAI #AIAutomation #ReviewAutomation #AIReceptionist #SmallBusinessAI #AIVisibility`,
       },
     ],
     fields: [
