@@ -1,144 +1,72 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { TEAM, type Surface } from "@/lib/team-pack";
 
 export const dynamic = "force-static";
 export const revalidate = false;
 
-// Index TEAM by photoSlug so the route can render any surface that has a photo
-const BY_SLUG: Record<string, Surface> = Object.fromEntries(
-  TEAM.filter((s) => s.photoSlug && s.bannerWidth && s.bannerHeight).map((s) => [s.photoSlug!, s])
-);
+const NAVY = "#0A1628";
+const NAVY_2 = "#142a44";
+const CREAM = "#F8F6F1";
+const GREEN = "#7CE7B7";
+
+// Picked by Mike: motto + service list format
+const MOTTO_LINES = ["Phones answered.", "Reviews chased.", "Leads followed up."];
+const SERVICES = "Review Automation · AI Visibility · Reach · Studio · Relay · Whole Stack";
+
+type SurfaceConfig = {
+  width: number;
+  height: number;
+  density: "standard" | "tight" | "tall";
+};
+
+// All surfaces use the same banner template — wordmark + motto + services + URL.
+// Personal LinkedIn (mike/kip/teri) keep separate routes for cache/CDN even though
+// they render identical output — LinkedIn already shows the name + role above the
+// banner, so adding name to the banner itself is redundant noise.
+const SURFACES: Record<string, SurfaceConfig> = {
+  "linkedin-company": { width: 1128, height: 191, density: "tight" },
+  "facebook": { width: 820, height: 312, density: "standard" },
+  "x": { width: 1500, height: 500, density: "standard" },
+  "gbp-cover": { width: 1408, height: 768, density: "tall" },
+  "mike": { width: 1584, height: 396, density: "standard" },
+  "kip": { width: 1584, height: 396, density: "standard" },
+  "teri": { width: 1584, height: 396, density: "standard" },
+};
 
 export function generateStaticParams() {
-  return Object.keys(BY_SLUG).map((slug) => ({ slug }));
+  return Object.keys(SURFACES).map((slug) => ({ slug }));
 }
-
-const AOH_NAVY = "#0A1628";
-const AOH_GREEN = "#7CE7B7";
-const AOH_GREEN_DEEP = "#2D6A4F";
-const AOH_CREAM = "#F8F6F1";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const surface = BY_SLUG[slug];
+  const cfg = SURFACES[slug];
+  if (!cfg) return new Response("Not found", { status: 404 });
 
-  if (!surface || !surface.photoSlug || !surface.bannerWidth || !surface.bannerHeight) {
-    return new Response("Not found", { status: 404 });
-  }
+  // Load real AOH wordmark PNG
+  const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h160.png");
+  const wordmarkBuf = await readFile(wordmarkPath);
+  const wordmarkDataUrl = `data:image/png;base64,${wordmarkBuf.toString("base64")}`;
 
-  const filePath = join(process.cwd(), "public", "banners", `${surface.photoSlug}.jpg`);
-  const buf = await readFile(filePath);
-  const dataUrl = `data:image/jpeg;base64,${buf.toString("base64")}`;
+  // Scale typography per banner dimensions + density
+  const scaleH = cfg.height / 396;
+  const isTight = cfg.density === "tight";
+  const isTall = cfg.density === "tall";
 
-  const width = surface.bannerWidth;
-  const height = surface.bannerHeight;
+  const padding = isTight ? 18 : isTall ? 64 : Math.round(56 * scaleH);
+  const wordmarkH = isTight ? 28 : isTall ? 72 : Math.round(56 * scaleH);
+  const wordmarkW = Math.round(wordmarkH * (730 / 160));
 
-  // Scale typography based on banner height
-  const scale = height / 312;
-  const headlineSize = Math.max(22, Math.round(54 * scale));
-  const accentSize = Math.max(14, Math.round(20 * scale));
-  const padding = Math.max(24, Math.round(56 * scale));
+  // Motto sizing — match line count
+  const lineCount = MOTTO_LINES.length;
+  let mottoSize: number;
+  if (isTight) mottoSize = 22;
+  else if (isTall) mottoSize = 88;
+  else mottoSize = lineCount === 1 ? 110 * scaleH : lineCount === 2 ? 76 * scaleH : 60 * scaleH;
+  mottoSize = Math.round(mottoSize);
 
-  // No overlay? Just return the photo.
-  if (!surface.overlay) {
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            position: "relative",
-          }}
-        >
-          <img
-            src={dataUrl}
-            alt=""
-            width={width}
-            height={height}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </div>
-      ),
-      { width, height }
-    );
-  }
-
-  const o = surface.overlay;
-
-  // Position the text block on the navy text-pane side (panel is 58% wide)
-  const positionStyles = (() => {
-    switch (o.align) {
-      case "left":
-        return {
-          left: padding,
-          top: padding,
-          right: "55%",
-          bottom: padding,
-          alignItems: "flex-start",
-          textAlign: "left" as const,
-          justifyContent: "center",
-        };
-      case "right":
-        return {
-          left: "47%",
-          top: padding,
-          right: padding,
-          bottom: padding,
-          alignItems: "flex-start",
-          textAlign: "left" as const,
-          justifyContent: "center",
-        };
-      case "bottom-right":
-        return {
-          left: "47%",
-          top: "auto",
-          right: padding,
-          bottom: padding,
-          alignItems: "flex-end",
-          textAlign: "right" as const,
-          justifyContent: "flex-end",
-        };
-      case "lower-left-and-upper-right":
-        return {
-          left: padding,
-          right: "55%",
-          bottom: padding,
-          top: padding,
-          alignItems: "flex-start",
-          textAlign: "left" as const,
-          justifyContent: "flex-end",
-        };
-    }
-  })();
-
-  // Hard split: solid AOH-navy panel where text sits, photo bleeds through on the other side.
-  // Stronger than gradient — the photos themselves are dominantly cream so a soft gradient can't pull enough contrast.
-  const gradient = (() => {
-    switch (o.align) {
-      case "left":
-        return "linear-gradient(90deg, rgba(10,22,40,1) 0%, rgba(10,22,40,1) 56%, rgba(10,22,40,0.65) 64%, rgba(10,22,40,0) 78%)";
-      case "right":
-        return "linear-gradient(270deg, rgba(10,22,40,1) 0%, rgba(10,22,40,1) 56%, rgba(10,22,40,0.65) 64%, rgba(10,22,40,0) 78%)";
-      case "bottom-right":
-        return "linear-gradient(330deg, rgba(10,22,40,1) 0%, rgba(10,22,40,0.9) 30%, rgba(10,22,40,0.3) 55%, rgba(10,22,40,0) 78%)";
-      case "lower-left-and-upper-right":
-        return "linear-gradient(180deg, rgba(10,22,40,0.78) 0%, rgba(10,22,40,0.2) 30%, rgba(10,22,40,0.2) 70%, rgba(10,22,40,0.92) 100%)";
-    }
-  })();
-
-  // Two-pane layout: solid navy text panel on one side, photo on the other.
-  // Strategist's split spec — far higher contrast than a soft gradient overlay.
-  const textPaneOnLeft = o.align === "left" || o.align === "lower-left-and-upper-right";
-  const textPaneWidth = o.align === "bottom-right" ? "55%" : "58%";
+  const servicesSize = isTight ? 10 : isTall ? 24 : Math.round(18 * scaleH);
+  const urlSize = isTight ? 9 : isTall ? 18 : Math.round(15 * scaleH);
 
   return new ImageResponse(
     (
@@ -147,156 +75,97 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "row",
-          position: "relative",
+          flexDirection: "column",
+          background: `linear-gradient(135deg, ${NAVY} 0%, ${NAVY_2} 100%)`,
+          color: CREAM,
+          padding,
           fontFamily: "sans-serif",
-          background: AOH_NAVY,
+          justifyContent: "space-between",
+          position: "relative",
         }}
       >
-        {/* Text pane (solid navy) */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: textPaneOnLeft ? 0 : "auto",
-            right: textPaneOnLeft ? "auto" : 0,
-            width: textPaneWidth,
-            background: AOH_NAVY,
-            display: "flex",
-            zIndex: 2,
-          }}
-        />
+        {/* Top — real AOH wordmark */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={wordmarkDataUrl}
+            alt="AI Outsource Hub"
+            width={wordmarkW}
+            height={wordmarkH}
+            style={{ display: "flex", height: wordmarkH, width: wordmarkW }}
+          />
+        </div>
 
-        {/* Photo pane (right or left, fades into text pane) */}
-        <img
-          src={dataUrl}
-          alt=""
-          width={width}
-          height={height}
-          style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: textPaneOnLeft ? "auto" : 0,
-            right: textPaneOnLeft ? 0 : "auto",
-            width: "60%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 1,
-          }}
-        />
-
-        {/* Soft fade strip at the seam between photo and panel */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: textPaneOnLeft ? "55%" : "37%",
-            width: "10%",
-            background: textPaneOnLeft
-              ? "linear-gradient(90deg, rgba(10,22,40,1) 0%, rgba(10,22,40,0) 100%)"
-              : "linear-gradient(270deg, rgba(10,22,40,1) 0%, rgba(10,22,40,0) 100%)",
-            zIndex: 3,
-            display: "flex",
-          }}
-        />
-
-        {/* Upper-right wordmark (X variant only) */}
-        {o.align === "lower-left-and-upper-right" && (
-          <div
-            style={{
-              position: "absolute",
-              top: padding,
-              right: padding,
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
+        {/* Middle — motto */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {MOTTO_LINES.map((line, i) => (
             <div
+              key={i}
               style={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: Math.round(40 * scale),
-                height: Math.round(40 * scale),
-                borderRadius: 10,
-                background: AOH_GREEN_DEEP,
-                color: AOH_CREAM,
-                fontSize: Math.round(22 * scale),
+                fontSize: mottoSize,
                 fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: isTight ? -0.5 : -2,
+                color: i === MOTTO_LINES.length - 1 ? GREEN : CREAM,
               }}
             >
-              A
+              {line}
             </div>
-            <div
-              style={{
-                display: "flex",
-                fontSize: Math.round(16 * scale),
-                fontWeight: 700,
-                letterSpacing: 2,
-                color: AOH_CREAM,
-              }}
-            >
-              AOH
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
 
-        {/* Headline + accent block */}
+        {/* Bottom — services + (optional name/role) + URL */}
         <div
           style={{
-            position: "absolute",
             display: "flex",
             flexDirection: "column",
-            zIndex: 4,
-            ...positionStyles,
+            gap: isTight ? 2 : 8,
+            paddingTop: isTight ? 4 : 14,
+            borderTop: "1px solid rgba(255,255,255,0.18)",
           }}
         >
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              gap: Math.round(4 * scale),
+              fontSize: servicesSize,
+              color: GREEN,
+              fontWeight: 600,
+              letterSpacing: 0.4,
+              fontFamily: "monospace",
             }}
           >
-            {o.headlineLines.map((line, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  fontSize: headlineSize,
-                  fontWeight: 800,
-                  lineHeight: 1.08,
-                  letterSpacing: -0.8,
-                  color: AOH_CREAM,
-                  textShadow: "0 2px 18px rgba(0,0,0,0.7)",
-                }}
-              >
-                {line}
-              </div>
-            ))}
+            {SERVICES}
           </div>
-          {o.accentLine && (
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              fontSize: urlSize,
+              color: "#A8B3C4",
+              fontWeight: 600,
+              letterSpacing: 0.3,
+            }}
+          >
+            <div style={{ display: "flex" }}>aioutsourcehub.com</div>
             <div
               style={{
                 display: "flex",
-                marginTop: Math.round(14 * scale),
-                fontSize: accentSize,
-                fontWeight: 600,
-                letterSpacing: 1,
-                color: AOH_GREEN,
-                fontFamily: "monospace",
+                color: GREEN,
+                fontWeight: 700,
+                letterSpacing: 1.5,
+                textTransform: "uppercase",
+                fontSize: Math.max(9, urlSize - 2),
               }}
             >
-              {o.accentLine}
+              From $49/mo · No contract
             </div>
-          )}
+          </div>
+
         </div>
       </div>
     ),
-    { width, height }
+    { width: cfg.width, height: cfg.height }
   );
 }
