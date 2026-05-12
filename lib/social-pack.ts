@@ -283,8 +283,8 @@ That's the math local service businesses lose every week:
 
 For a shop like Bill at Southington Lawn Service, one missed Saturday-rush call is $200 in mowing plus a $1,800 annual contract walking next door.
 
-Run the napkin math on your own business:
-(weekly after-hours calls) × 0.7 missed × (average ticket) × 4 weeks = monthly revenue walking out the door
+Quick napkin math on your own business:
+weekly after-hours calls × average sale × 4 weeks = monthly revenue walking out the door
 
 Relay is our AI receptionist. Answers, qualifies the lead, books into your calendar. Introduces itself as an AI assistant; transfers to a human if the caller asks. $499/mo + $499 setup. Most clients break even in month one.
 
@@ -300,7 +300,7 @@ Tuesday 7:15pm in Southington, CT. A homeowner just got home from work, lawn's o
 Third one wins the $200 cut, the cleanup, and the $1,800 recurring contract. The first two never knew she called.
 
 Quick napkin math on your own business:
-(weekly after-hours calls) × 0.7 × (avg ticket) × 4 weeks = monthly miss
+weekly after-hours calls × average sale × 4 weeks = monthly miss
 
 I built Relay because I watched too many local-business owners lose to *availability*, not skill. Operators like Bill at Southington Lawn Service. Phones are still the buy button for lawn care, trades, vets, med spas. The buyer doesn't wait.
 
@@ -320,7 +320,7 @@ Third one wins $200 in mowing plus an $1,800 annual contract.
 
 9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
 
-Napkin math on yours: weekly after-hours calls × 0.7 × your avg ticket × 4 weeks = monthly leak.
+Napkin math on yours: weekly after-hours calls × your average sale × 4 weeks = monthly leak.
 
 This is why we built Relay. AI receptionist that catches every call, qualifies the lead, books into your calendar. Introduces itself as AI. Transfers to a human if asked. $499/mo, payback in 30 days for most.
 
@@ -372,7 +372,7 @@ $499/mo. Most clients break even in month 1.
 
 ---
 
-Napkin math: weekly after-hours calls × 0.7 × your avg ticket × 4 weeks = monthly miss.
+Napkin math: weekly after-hours calls × your average sale × 4 weeks = monthly miss.
 
 See Relay: aioutsourcehub.com/pricing#relay
 
@@ -381,7 +381,7 @@ See Relay: aioutsourcehub.com/pricing#relay
 
 9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
 
-Napkin math: weekly after-hours calls × 0.7 × your average ticket × 4 weeks = monthly revenue walking out.
+Napkin math: weekly after-hours calls × your average sale × 4 weeks = monthly revenue walking out.
 
 Relay is our AI receptionist. Catches every call, qualifies the lead, books into your calendar. Introduces itself as AI; transfers to a human if asked. $499/mo + $499 setup, 750 minutes included. Most clients break even in month one.
 
