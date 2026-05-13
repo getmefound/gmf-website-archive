@@ -20,7 +20,7 @@ export default function TermsPage() {
       <PageBody>
         <PageSection>
           <div className="space-y-10">
-            <p className="text-sm text-[var(--color-text-muted)]">Last updated: May 7, 2026</p>
+            <p className="text-sm text-[var(--color-text-muted)]">Last updated: May 13, 2026</p>
 
             <div>
               <h2 className="text-2xl font-bold mb-3">No contracts</h2>
@@ -58,10 +58,63 @@ export default function TermsPage() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold mb-3">Billing</h2>
+              <h2 className="text-2xl font-bold mb-3">Billing &amp; auto-renewal</h2>
               <p className="text-[var(--color-text-muted)] leading-relaxed">
-                Plans are billed monthly in advance via the payment method on file. Failed
-                charges pause the service until the payment method is updated.
+                Plans are billed monthly in advance via the payment method on file. Your
+                subscription <strong>renews automatically each month</strong> at the price shown on
+                your signup page until you cancel by emailing{" "}
+                <a
+                  href="mailto:support@aioutsourcehub.com"
+                  className="text-[var(--color-accent)] hover:underline"
+                >
+                  support@aioutsourcehub.com
+                </a>
+                . Failed charges pause the service until the payment method is updated.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold mb-3">Refunds</h2>
+              <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
+                <strong>Monthly fees</strong> aren't refundable once your billing period starts —
+                but we don't charge cancellation fees. Cancel anytime and we'll stop billing at
+                the end of the current period.
+              </p>
+              <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
+                <strong>One-time setup fees</strong> aren't refundable once setup work has started
+                (voice tuning, integration build, content production). If you cancel before any
+                setup work has started, we refund the setup fee in full.
+              </p>
+              <p className="text-[var(--color-text-muted)] leading-relaxed">
+                If you think there's a billing error, email{" "}
+                <a
+                  href="mailto:support@aioutsourcehub.com"
+                  className="text-[var(--color-accent)] hover:underline"
+                >
+                  support@aioutsourcehub.com
+                </a>
+                {" "}— we fix real mistakes without argument.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold mb-3">Communications (SMS + email)</h2>
+              <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
+                You authorize AOH to operate SMS and email messaging on your business's behalf —
+                sending review requests, replies, appointment confirmations, and similar messages
+                to your customers who have opted in to receive communications from your business.
+                You confirm that your customer contact list has the required consent under TCPA,
+                CAN-SPAM, and equivalent laws, and that AOH will not use it for any purpose outside
+                the service you signed up for.
+              </p>
+              <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
+                We don't sell your data or your customer list. Ever.
+              </p>
+              <p className="text-[var(--color-text-muted)] leading-relaxed">
+                For the AOH services you're paying for, we may contact <em>you</em> (the business
+                owner) at the phone and email you provided — for account updates, service alerts,
+                and onboarding. Reply <strong>STOP</strong> to any SMS from us to opt out of
+                non-essential messages. Standard message and data rates may apply.
               </p>
             </div>
 
