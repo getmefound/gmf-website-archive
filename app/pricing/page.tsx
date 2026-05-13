@@ -127,6 +127,7 @@ const products: ProductDetailData[] = [
       "Weekly campaign performance report",
       "Reply handling — we keep the conversation going until they book",
       "Fully managed — we write, send, reply, book",
+      "Boundary: Reach does not include guaranteed marketing-report/heatmap generation workflows.",
     ],
     useThisIf: [
       "You have margin to grow and can handle 3–5 new conversations a week.",
@@ -458,5 +459,4 @@ export default function PricingPage() {
     </>
   );
 }
-
 
