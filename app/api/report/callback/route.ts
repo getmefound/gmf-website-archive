@@ -8,6 +8,17 @@ type CallbackPayload = {
   event?: "report_ready" | "heatmap_ready";
 };
 
+function extractRunIdFromUrl(urlValue?: string): string | null {
+  if (!urlValue) return null;
+  try {
+    const u = new URL(urlValue);
+    const runId = u.searchParams.get("runId");
+    return runId?.trim() || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req: NextRequest) {
   const secret = process.env.REPORT_CALLBACK_TOKEN;
   const provided = req.headers.get("x-report-callback-token");
@@ -16,7 +27,12 @@ export async function POST(req: NextRequest) {
   }
 
   const body = (await req.json().catch(() => null)) as CallbackPayload | null;
-  if (!body || !body.runId) {
+  const resolvedRunId =
+    body?.runId?.trim() ||
+    extractRunIdFromUrl(body?.auditUrl) ||
+    extractRunIdFromUrl(body?.heatmapUrl);
+
+  if (!body || !resolvedRunId) {
     return NextResponse.json({ ok: false, error: "Missing runId" }, { status: 400 });
   }
 
@@ -38,7 +54,7 @@ export async function POST(req: NextRequest) {
   if (!body.event && body.auditUrl) patch.reportReadyAt = now;
 
   const run = upsertReportRunFromCallback({
-    runId: body.runId,
+    runId: resolvedRunId,
     patch,
   });
 
