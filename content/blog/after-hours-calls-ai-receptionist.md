@@ -52,11 +52,11 @@ Most customers don't even know it isn't a human. The ones who figure it out don'
 
 Let's keep this simple.
 
-Our <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> is $499/mo plus a one-time $499 setup. Round to $500 a month after the first month. Includes 750 minutes, 27+ languages, calendar booking, lead qualification, the whole thing.
+Our <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> is $299/mo plus a one-time $299 setup. Round to $300 a month after the first month. Includes 750 minutes, 27+ languages, calendar booking, lead qualification, the whole thing.
 
 You need to catch *one* extra job a month to break even on most service categories. One.
 
-If you're a plumber, $500 is a single service call. If you're a moving company, $500 is half an in-town move. If you run a med spa, $500 is one Botox appointment. If you're a vet, it's a couple wellness exams.
+If you're a plumber, $300 is a single service call. If you're a moving company, $300 is one local moving slot. If you run a med spa, $300 is one Botox touch-up. If you're a vet, it's a wellness exam plus vaccines.
 
 We're not talking about doubling your business. We're talking about not losing the jobs that already wanted you.
 
@@ -84,4 +84,4 @@ If that number is bigger than $500, the phone is already paying for itself. You 
 
 Want this run on *your* numbers — your average job size, your missed-call rate? Drop your business into our [revenue calculator on the home page](/#calculator). Takes 30 seconds, no signup. It tells you in dollars what after-hours calls are costing you each month.
 
-If you want to see what <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> would look like for your business — what it would say, how it would handle your calls — we'll set up a free walkthrough. $499/mo, $499 one-time setup, no contract. [Contact us](/contact).
+If you want to see what <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> would look like for your business — what it would say, how it would handle your calls — we'll set up a free walkthrough. $299/mo, $299 one-time setup, no contract. [Contact us](/contact).

@@ -283,7 +283,7 @@ You're catching about 1 in 10 after-hours calls. Nine in ten are gone before you
 
 If one job is worth $300–$2,000, three missed jobs a month is $2,400+ walking out the door.
 
-An AI receptionist at $499/month needs to catch *one* extra job to break even. That's a single service call.
+An AI receptionist at $299/month needs to catch *one* extra job to break even. That's a single service call.
 
 In most local businesses I look at, that payback lands inside 30 days.
 

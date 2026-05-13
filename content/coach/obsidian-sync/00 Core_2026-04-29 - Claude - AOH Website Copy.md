@@ -128,7 +128,7 @@ Public / locked target prices only. **Founding-client prices NEVER appear public
 |---|---|
 | Reviews Starter | $99/mo |
 | Reviews Pro | $199/mo |
-| Voice Agent | $499/mo + $499 setup |
+| Voice Agent | $299/mo + $299 setup |
 | AI Lead Gen | $249/mo + $99 setup |
 | Website Rebuild Upsell | +$99/mo |
 

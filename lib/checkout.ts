@@ -51,9 +51,9 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
   {
     slug: "relay",
     name: "Relay — Voice AI",
-    price: "$499",
+    price: "$299",
     cadence: "/month",
-    setup: "$499 setup",
+    setup: "$299 setup",
     summary:
       "24/7 multilingual AI receptionist that books calls into your calendar. Never miss another lead.",
     whatYouGet: [
@@ -100,8 +100,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Weekly campaign performance report",
       "Fully managed — we write, send, reply, book",
     ],
-    ctaUrl: "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56",
-    ctaKind: "book",
+    ctaUrl: "https://pay.aioutsourcehub.com/reach-plan-page",
+    ctaKind: "subscribe",
   },
   {
     slug: "whole-stack",

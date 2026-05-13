@@ -30,7 +30,7 @@ The core promise: **you don't have to figure out the AI tool, hire someone to ru
 | | Status | What it does |
 |---|---|---|
 | **Reviews** (Starter $99/mo + Pro $199/mo) | Pillar | Email-based (Starter) or full SMS+email + GBP optimization (Pro) |
-| **Voice Agent** ($499/mo + $499 setup) | Pillar | Multilingual AI receptionist, 27+ languages, books calls 24/7 |
+| **Voice Agent** ($299/mo + $299 setup) | Pillar | Multilingual AI receptionist, 27+ languages, books calls 24/7 |
 | **AI Lead Gen** ($249/mo + $99 setup) | Pillar | Cold-outreach engine + curated prospect lists per niche |
 | **Website Rebuild** ($149/mo + $499 build) | **Upsell only** — sold to existing AOH clients, never cold-pitched | Modern responsive site, ongoing maintenance |
 
@@ -82,12 +82,12 @@ Different SKUs have different minimum-revenue requirements based on the 8%-of-re
 - **Pet groomers** — $300K Reviews Starter; $400K for Voice Agent (thinnest niche)
 - **Moving / marketing consultants / B2B** — $400K universal
 
-**Why tiered:** Voice Agent at $499/mo consumes 25% of a $300K shop's marketing budget — that's the SaaS churn cluster zone. Reviews Starter at $99/mo consumes only 5% — comfortable. (Sources: Deloitte CMO 2025, Gartner CMO Spend Survey 2025, SBA, Federal Reserve SBCS, Paddle/Vitally SaaS churn benchmarks.)
+**Why tiered:** Voice Agent at $299/mo consumes 15% of a $300K shop's marketing budget — within healthy SaaS-spend range. Reviews Starter at $99/mo consumes only 5% — comfortable. (Pre-2026-05-13 Voice Agent was $499/mo at 25%, in the SaaS churn-cluster zone.) (Sources: Deloitte CMO 2025, Gartner CMO Spend Survey 2025, SBA, Federal Reserve SBCS, Paddle/Vitally SaaS churn benchmarks.)
 
 ### Operational impact
 
 - **Cold outreach (Apollo / Scout):** filter prospects to $300K+ for Reviews Starter pitches; $400K+ for full-stack pitches
-- **Sales conversation:** never pitch Voice Agent ($499/mo) to a sub-$400K shop. Lead with Reviews Starter and let them grow into the upsell.
+- **Sales conversation:** Relay ($299/mo) is safe to pitch at **$300K+ shops** (12.5% of marketing budget — healthy range). Never pitch Relay to sub-$300K shops — churn-cluster zone, will cancel in 60-90 days. Lead with Reviews Starter ($99/mo) for sub-$300K shops.
 - **Homepage diagnostic:** Reviews Starter is the low-barrier doorway button (locked 2026-04-29) — only SKU $300K shops can absorb.
 
 ### Ideal-fit signals (lean in hard)
@@ -147,7 +147,7 @@ Asymmetric pricing model — different mechanic per tier based on how each offer
 |---|---|---|
 | Reviews Starter | $99/mo, $0 setup | **Public intro: $79/mo locked-for-life** if claimed within 14 days of cold-email send. Drives impulse-buy via Stripe checkout. |
 | Reviews Pro | $199/mo + $199 setup | Public price firm. Intro pricing for early clients per discussion with management — not advertised, sales-call lever only. |
-| Voice Agent | $499/mo + $499 setup | Same — public price firm; intro per Mike's discretion. |
+| Voice Agent | $299/mo + $299 setup | Same — public price firm; intro per Mike's discretion. (Repriced 2026-05-13 from $499/$499.) |
 | AI Lead Gen | $249/mo + $99 setup | Same — public price firm; intro per Mike's discretion. |
 | Website Rebuild | $149/mo + $499 build | Same — public price firm; intro per Mike's discretion. (Sold as upsell to existing clients only.) |
 

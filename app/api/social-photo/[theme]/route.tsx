@@ -21,7 +21,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     imagePath: "/social/ai-gen/after-hours-pilot.jpg",
     topEyebrow: "AFTER-HOURS CALLS",
     hook: "9 of 10 calls go to your competitor.",
-    ctaLabel: "Relay — $499/mo",
+    ctaLabel: "Relay — $299/mo",
     ctaUrl: "aioutsourcehub.com/pricing#relay",
     accent: "green",
   },

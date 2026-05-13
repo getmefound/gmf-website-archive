@@ -295,7 +295,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ theme: 
               textTransform: "uppercase",
             }}
           >
-            Relay — $499/mo →
+            Relay — $299/mo →
           </div>
         </div>
       </div>

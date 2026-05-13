@@ -134,13 +134,19 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 > Founder, AI Outsource Hub · Done-for-you AI for local businesses · You run the business. We run the AI.
 
 **About (paste as your "About" / "Summary"):**
-> I built AI Outsource Hub because I watched too many local-business owners lose to availability and bandwidth, not skill. Their phones go to voicemail at 7pm. Their reviews go stale. Their profiles read dormant to ChatGPT. None of it is because they're bad operators — they just don't have time to be marketers too.
+> I grew up around local businesses. My family ran them. I worked in them. I watched good people — better than me at their craft — lose customers not because they were bad at the job, but because they couldn't be in two places at once. The phone rings at 7pm. They're already home. The customer calls the next number on the list.
 >
-> So we run the AI for them. No dashboards. No setup wizards. No "have you tried our new feature" emails. We answer the calls, ask for the reviews, fix the AI search visibility, and write the content. The owner stays in the truck, the chair, the kitchen, the shop.
+> That's the gap AI fills. Not "AI" the buzzword. The actual quiet kind — the kind that answers a call when you can't, asks for a review when the customer is happy, and makes sure when somebody asks ChatGPT for the best plumber in town, your name shows up.
 >
-> 15+ years automating local-business work before AOH. Based in Southington, CT.
+> I started AI Outsource Hub because most local owners don't want to learn another piece of software. They want their phone to ring more and their reviews to stay fresh, without thinking about it. So we run the AI for them. They stay in the truck, the chair, the kitchen, the shop. We handle the rest.
 >
-> If you run a service business and want to see what your missed-revenue number actually looks like, the calculator at aioutsourcehub.com runs it in 30 seconds.
+> Six services, starts at $49/month, no contract. Reviews, AI search visibility, AI receptionists, lead generation, content, and the whole bundle. Most clients pay back the first month before the second month bills.
+>
+> Based in Southington, CT. 15+ years building automation tools before AOH — most of it for local-business work that big software companies overlooked.
+>
+> If you own a service business — plumbing, HVAC, lawn care, dental, vet, med spa, pet grooming, salon — and you're curious what calls and reviews are slipping past you, the calculator at aioutsourcehub.com runs the number in 30 seconds. No signup, no email.
+>
+> Happy to talk to anyone in this space, even if AOH isn't the right fit.
 >
 > ---
 >

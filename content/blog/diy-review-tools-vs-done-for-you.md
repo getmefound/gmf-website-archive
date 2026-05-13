@@ -89,6 +89,6 @@ If you can't name that person — by first name — and they don't already have 
 
 If you'd rather just have it running, that's the case for done-for-you. The price is higher because the work is real and somebody is doing it.
 
-That's what we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> to do ($49/mo, no setup) — review asks, follow-ups, replies, the whole flow, run for you in the background. Same logic applies for <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> ($499/mo + $499 setup, our AI voice agent) and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> ($179/mo + $199 setup). You stay in your business. We handle the AI.
+That's what we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> to do ($49/mo, no setup) — review asks, follow-ups, replies, the whole flow, run for you in the background. Same logic applies for <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> ($299/mo + $299 setup, our AI voice agent) and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> ($179/mo + $199 setup). You stay in your business. We handle the AI.
 
 [See our pricing](/pricing). Or [run a check](/#calculator) on what your current review pace is costing you, before you decide which path makes sense.

@@ -60,7 +60,7 @@ Use current live pricing page when asked "what do we sell today":
 - AI Visibility: $179/mo + $199 setup
 - Reach: $249/mo + $199 setup
 - Studio: $349/mo + $299 setup
-- Relay: $499/mo + $499 setup
+- Relay: $299/mo + $299 setup
 - Whole Stack: $999/mo + $999 setup
 
 Note: Obsidian has older/alternate GTM experiments (e.g., Reviews Launch $1/day). If asked, label those as historical/test-lane unless Mike says active.

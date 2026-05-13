@@ -188,7 +188,7 @@ Asymmetric model — different mechanic per tier based on how each offer sells:
 |---|---|---|
 | **Reviews Starter** | $99/mo, $0 setup | **Public intro $79/mo locked-for-life if claimed within 14 days of cold-email send.** Drives impulse-buy via Stripe checkout. The intro itself is the marketing — math-forward, no jargon, real urgency. |
 | **Reviews Pro** | $199/mo + $199 setup | Public price only. Intro pricing available for early clients **per discussion with management** — never advertised, used as a closing lever during sales calls only. |
-| **Voice Agent** | $499/mo + $499 setup | Same — public price only. Intro pricing for early clients per discussion with management. |
+| **Voice Agent** | $299/mo + $299 setup | Same — public price only. Repriced 2026-05-13 from $499/$499. Intro pricing for early clients per discussion with management. |
 | **AI Lead Gen** | $249/mo + $99 setup | Same — public price only. Intro pricing for early clients per discussion with management. |
 | **Website Rebuild** | $149/mo + $499 build | Same — public price only. Intro pricing for early clients per discussion with management. |
 
@@ -235,7 +235,7 @@ Asymmetric model — different mechanic per tier based on how each offer sells:
 - AI Lead Gen: 60-70% (margin tighter at any rep-negotiated discount)
 - Website Rebuild: 78-82%
 
-**Stack math at PUBLIC prices (full stack):** Reviews Pro $199 + Voice $499 + Lead Gen $249 + Website $149 = **$1,096/mo recurring** — fits within 8% marketing-budget benchmark for $500K-revenue SMB ($3,300/mo budget). Internal-discounted stack pricing varies per Mike's discretion.
+**Stack math at PUBLIC prices (full stack):** Reviews Pro $199 + Voice $299 + Lead Gen $249 + Website $149 = **$896/mo recurring** — fits comfortably within 8% marketing-budget benchmark for $500K-revenue SMB ($3,300/mo budget). Internal-discounted stack pricing varies per Mike's discretion. (Voice repriced 2026-05-13 from $499; old stack was $1,096/mo.)
 
 ---
 
@@ -606,11 +606,11 @@ The diagnostic itself, framing, and 4-button structure are unchanged from 2026-0
 - **Pet groomers** — $300K Reviews Starter; $400K for Voice Agent (thinnest niche)
 - **Moving / marketing consultants / B2B** — $400K universal
 
-**Why tiered:** Math from 8%-of-revenue marketing-spend benchmark (SBA, Deloitte CMO, Gartner). Voice Agent at $499/mo consumes 25% of a $300K shop's marketing budget — that's where SaaS churn-risk research shows 60-day cancellation clusters. Reviews Starter at $99/mo consumes only 5% of the same budget — comfortable.
+**Why tiered:** Math from 8%-of-revenue marketing-spend benchmark (SBA, Deloitte CMO, Gartner). Relay (formerly Voice Agent) at $299/mo (repriced 2026-05-13 from $499) consumes 12.5% of a $300K shop's marketing budget — within healthy SaaS-spend range. Reviews Starter at $99/mo consumes only 5% of the same budget — comfortable. **New Relay floor confirmed 2026-05-13: $300K.** Below that crosses the 15% SaaS-churn-risk threshold. Pre-reprice rule was $400K floor with $499/mo Voice Agent.
 
 **Operational impact:**
 - **Cold outreach (Apollo / Scout)** — filter prospects to $300K+ for Reviews Starter pitches; $400K+ for full-stack pitches
-- **Sales conversation** — never pitch Voice Agent ($499/mo) to a sub-$400K shop. Lead with Reviews Starter and let them grow into the upsell.
+- **Sales conversation** — Relay ($299/mo) is safe to pitch at **$300K+ shops** (12.5% of marketing budget — healthy range). Never pitch Relay to sub-$300K shops — churn-cluster zone, will cancel in 60-90 days. Lead with Reviews Starter ($99/mo) for sub-$300K; let them grow into Relay later. Pre-2026-05-13 rule (never pitch sub-$400K) was tied to $499 pricing.
 - **Homepage diagnostic** — locked 2026-04-29 with Reviews Starter as low-barrier doorway; this revenue floor confirms that strategy is correct (Starter is the only SKU $300K shops can absorb).
 
 **Sources** (research conducted 2026-04-30):
