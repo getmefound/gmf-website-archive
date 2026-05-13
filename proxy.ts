@@ -13,6 +13,13 @@ function clientIp(req: NextRequest): string {
   return "unknown";
 }
 
+function hasInternalReportBypass(req: NextRequest): boolean {
+  const expected = process.env.REPORT_TEST_BYPASS_TOKEN?.trim();
+  if (!expected) return false;
+  const provided = req.headers.get("x-report-test-bypass-token")?.trim();
+  return Boolean(provided && provided === expected);
+}
+
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const method = req.method.toUpperCase();
@@ -22,6 +29,9 @@ export function proxy(req: NextRequest) {
   const isReportSubmit = pathname === "/api/report" && method === "POST";
   const isContactSubmit = pathname === "/api/contact" && method === "POST";
   if (!isReportSubmit && !isContactSubmit) {
+    return NextResponse.next();
+  }
+  if (isReportSubmit && hasInternalReportBypass(req)) {
     return NextResponse.next();
   }
 
