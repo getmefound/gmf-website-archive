@@ -30,6 +30,7 @@ export type ProductDetailData = {
     formula: string;
     note?: string;
   };
+  promoNote?: string;
 };
 
 type NextRef = { label: string; href: string };
@@ -279,6 +280,13 @@ export function ProductDetail({
                   {data.setup}
                 </span>
               </div>
+              {data.promoNote && (
+                <p className={`-mt-2 mb-4 text-xs font-medium ${
+                  dark ? "text-amber-300" : "text-amber-600"
+                }`}>
+                  🏷 {data.promoNote}
+                </p>
+              )}
               <div className="space-y-2">
                 <Link
                   href={data.ctaHref}
