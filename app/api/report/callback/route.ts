@@ -9,6 +9,12 @@ type CallbackPayload = {
   [key: string]: unknown;
 };
 
+type GhlContactResponse = {
+  contact?: {
+    customFields?: Array<{ id?: string; value?: unknown }>;
+  };
+};
+
 function extractRunIdFromUrl(urlValue?: string): string | null {
   if (!urlValue) return null;
   try {
@@ -58,6 +64,53 @@ function resolveRunId(body: CallbackPayload | null): string | null {
   return extractRunIdFromUrl(auditUrl || undefined) ?? extractRunIdFromUrl(heatmapUrl || undefined);
 }
 
+function extractRunIdFromValue(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const fromUrl = extractRunIdFromUrl(trimmed);
+  if (fromUrl) return fromUrl;
+  const uuidMatch = trimmed.match(/\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b/i);
+  return uuidMatch?.[0] ?? null;
+}
+
+function resolveContactId(body: CallbackPayload | null): string | null {
+  if (!body) return null;
+  const root = asRecord(body);
+  const customData = asRecord(root.customData);
+  return (
+    pickString(root, ["contact_id", "contactId"]) ??
+    pickString(customData, ["contact_id", "contactId"])
+  );
+}
+
+async function resolveRunIdFromGhlContact(contactId: string): Promise<string | null> {
+  const token = process.env.GHL_PIT_TOKEN?.trim();
+  if (!token) return null;
+
+  try {
+    const res = await fetch(`https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Version: "2021-07-28",
+        Accept: "application/json",
+      },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json().catch(() => null)) as GhlContactResponse | null;
+    const fields = data?.contact?.customFields ?? [];
+    for (const field of fields) {
+      const runId = extractRunIdFromValue(field.value);
+      if (runId) return runId;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req: NextRequest) {
   const secret = process.env.REPORT_CALLBACK_TOKEN;
   const provided = req.headers.get("x-report-callback-token");
@@ -66,7 +119,13 @@ export async function POST(req: NextRequest) {
   }
 
   const body = (await req.json().catch(() => null)) as CallbackPayload | null;
-  const resolvedRunId = resolveRunId(body);
+  let resolvedRunId = resolveRunId(body);
+  if (!resolvedRunId) {
+    const contactId = resolveContactId(body);
+    if (contactId) {
+      resolvedRunId = await resolveRunIdFromGhlContact(contactId);
+    }
+  }
 
   if (!body || !resolvedRunId) {
     const root = asRecord(body);
