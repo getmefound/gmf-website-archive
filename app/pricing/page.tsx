@@ -55,11 +55,11 @@ const products: ProductDetailData[] = [
     ],
     cadence: "1 email per completed job, sent within 60 minutes.",
     crossSell: { label: "AI Visibility — adds SMS + AI replies", href: "#ai-visibility" },
-    price: "$99",
+    price: "$49",
     cadenceLabel: "/mo",
     setup: "No setup fee",
-    promoNote: "First month $49 · code REVIEW50 · cancel anytime",
-    ctaLabel: "Start at $99/mo",
+    promoNote: "Introductory rate · no contract · cancel anytime",
+    ctaLabel: "Start at $49/mo",
     ctaHref: "https://pay.aioutsourcehub.com/review-automation-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.star,
@@ -99,10 +99,10 @@ const products: ProductDetailData[] = [
     ],
     cadence: "Monthly 15-min review call. Ongoing Google profile + AI visibility work.",
     crossSell: { label: "Reach — to add new outbound leads", href: "#reach" },
-    price: "$299",
+    price: "$199",
     cadenceLabel: "/mo",
     setup: "$199 setup",
-    promoNote: "First month $199 · code AI99 · cancel anytime",
+    promoNote: "First month $99 · then $199/mo · cancel anytime",
     ctaLabel: "Start AI Visibility",
     ctaHref: "https://pay.aioutsourcehub.com/ai-visibility-page",
     secondaryCtaHref: BOOKING_HREF,
@@ -143,10 +143,9 @@ const products: ProductDetailData[] = [
     ],
     cadence: "Campaign launches within 3 business days after we receive your intake details and approvals, then runs continuously with weekly reporting and optimization.",
     crossSell: { label: "Studio — for the content side", href: "#studio" },
-    price: "$449",
+    price: "$299",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    promoNote: "First month $299 · code REACH150 · cancel anytime",
     ctaLabel: "Start Reach",
     ctaHref: "https://pay.aioutsourcehub.com/reach-plan",
     secondaryCtaHref: BOOKING_HREF,
@@ -185,10 +184,9 @@ const products: ProductDetailData[] = [
     ],
     cadence: "Always-on. 750 included minutes per month.",
     crossSell: { label: "Reach — pair inbound with outbound", href: "#reach" },
-    price: "$399",
+    price: "$299",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    promoNote: "First month $299 · code RELAY100 · cancel anytime",
     ctaLabel: "Start Relay",
     ctaHref: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     secondaryCtaHref: BOOKING_HREF,
@@ -233,10 +231,9 @@ const products: ProductDetailData[] = [
     ],
     cadence: "3–5 posts/week. Monthly theme refresh.",
     crossSell: { label: "Reach — pair outbound with content", href: "#reach" },
-    price: "$599",
+    price: "$449",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    promoNote: "First month $449 · code STUDIO150 · cancel anytime",
     ctaLabel: "Start Studio",
     ctaHref: "https://pay.aioutsourcehub.com/studio",
     secondaryCtaHref: BOOKING_HREF,
@@ -278,10 +275,8 @@ const products: ProductDetailData[] = [
     price: "$999",
     cadenceLabel: "/mo",
     setup: "$999 setup",
-    promoNote: "Save $700+/mo vs buying separately · cancel anytime",
-    ctaLabel: "Start Full Service",
-    ctaHref: "https://pay.aioutsourcehub.com/full-service",
-    secondaryCtaHref: BOOKING_HREF,
+    ctaLabel: "Schedule a fit call",
+    ctaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.dashboard,
     mock: <MockWholeStackPanel />,
     variant: "dark",
@@ -386,7 +381,7 @@ export default function PricingPage() {
                 </h3>
 
                 <div className="mb-6 flex flex-wrap gap-2">
-                  {["48h to live", "$99/mo", "Cancel anytime"].map((chip) => (
+                  {["48h to live", "$49/mo", "Cancel anytime"].map((chip) => (
                     <span
                       key={chip}
                       className="inline-flex items-center rounded-full bg-transparent border border-green-400 px-3 py-1 text-xs font-semibold text-white"
@@ -406,7 +401,7 @@ export default function PricingPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 hover:bg-green-500 text-white px-6 py-3.5 text-sm font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-green-600/30"
                   >
-                    Start at $99/mo
+                    Start at $49/mo
                     <span aria-hidden="true">→</span>
                   </Link>
                   <Link

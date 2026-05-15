@@ -146,7 +146,7 @@ export function CostCompare() {
             <span className="hidden md:inline"> </span>
             Run it with us:{" "}
             <span className="text-[var(--color-accent)]">
-              $<AnimatedNumber value={149} duration={2600} />/mo
+              $<AnimatedNumber value={199} duration={2600} />/mo
             </span>
             .
           </h2>
