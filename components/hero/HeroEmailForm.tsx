@@ -1,4 +1,4 @@
-ï»¿"use client";
+"use client";
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import Script from "next/script";
@@ -55,7 +55,7 @@ const variants: Record<Variant, VariantConfig> = {
     buttonText: "See My Free Review Audit",
     checkbox: {
       label:
-        "Also check my AI Visibility Score â€” see if I'm showing up in ChatGPT and Google AI.",
+        "Also check my AI Visibility Score — see if I'm showing up in ChatGPT and Google AI.",
       caption:
         "25% of searches have already moved to AI. Most local businesses are completely invisible. Find out if you're one of them.",
     },
@@ -67,12 +67,12 @@ const variants: Record<Variant, VariantConfig> = {
       { text: " does.", speed: 70 },
     ],
     subheadline:
-      "We get your business recommended by ChatGPT and Google AI â€” before your competitors do.",
+      "We get your business recommended by ChatGPT and Google AI — before your competitors do.",
     priceLine: "$3/day. No contract.",
     buttonText: "See My Free AI Visibility Score",
     checkbox: {
       label:
-        "Also run my full Marketing Audit â€” see how my reviews and listings stack up.",
+        "Also run my full Marketing Audit — see how my reviews and listings stack up.",
       caption:
         "Reviews are the fuel that powers AI recommendations. Businesses with more reviews get recommended more. See where you stand.",
     },
@@ -84,7 +84,7 @@ const variants: Record<Variant, VariantConfig> = {
       { text: " hub for local businesses.", speed: 70 },
     ],
     subheadline:
-      "We find the tools that fit your business â€” and run them so you don't have to.",
+      "We find the tools that fit your business — and run them so you don't have to.",
     priceLine: "Starting at $1/day. No contract.",
     buttonText: "See My Free Visibility Check",
   },
@@ -238,7 +238,7 @@ function HeroInner() {
               style={{ animationDelay: "400ms" }}
             >
               {auditUrl
-                ? "Your free report is ready. Click below to view it â€” no signup, no credit card."
+                ? "Your free report is ready. Click below to view it — no signup, no credit card."
                 : config.subheadline}
             </p>
 
@@ -285,101 +285,7 @@ function HeroInner() {
           </div>
         </div>
 
-        {!auditUrl ? (
-          <div className="hidden hero-roll mt-10 rounded-2xl border border-[var(--color-hero-border)] bg-white/[0.04] p-5 md:p-6" style={{ animationDelay: "650ms" }}>
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_1fr_auto]"
-              aria-label="Request free reports"
-              noValidate
-            >
-              {!tokenMode ? (
-                <>
-                  <label htmlFor="hero-business" className="sr-only">Business name</label>
-                  <input
-                    id="hero-business"
-                    type="text"
-                    required
-                    autoComplete="organization"
-                    placeholder="Business name"
-                    value={businessName}
-                    onChange={(e) => setBusinessName(e.target.value)}
-                    className="rounded-md border border-[var(--color-hero-border)] bg-white/5 px-4 py-3 text-base text-[var(--color-hero-text)] placeholder:text-[var(--color-hero-subtext)] outline-none transition focus:border-[var(--color-accent)] focus:bg-white/10"
-                  />
-                  <label htmlFor="hero-email" className="sr-only">Business email</label>
-                  <input
-                    id="hero-email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    inputMode="email"
-                    placeholder="Business email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    aria-invalid={Boolean(error)}
-                    aria-describedby={error ? "hero-email-error" : undefined}
-                    className="rounded-md border border-[var(--color-hero-border)] bg-white/5 px-4 py-3 text-base text-[var(--color-hero-text)] placeholder:text-[var(--color-hero-subtext)] outline-none transition focus:border-[var(--color-accent)] focus:bg-white/10"
-                  />
-                </>
-              ) : (
-                <div className="md:col-span-2 rounded-md border border-[var(--color-hero-border)] bg-white/5 px-4 py-3 text-sm text-[var(--color-hero-subtext)]">
-                  Ready for {businessName || "your business"}.
-                  {email ? <> Report will be sent to <strong className="text-[var(--color-hero-text)]">{email}</strong>.</> : null}
-                </div>
-              )}
-              <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden">
-                <label htmlFor="hero-website">Leave blank</label>
-                <input
-                  id="hero-website"
-                  ref={honeypotRef}
-                  type="text"
-                  name="website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  defaultValue=""
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={pending}
-                className="min-h-[52px] min-w-fit whitespace-nowrap rounded-md bg-[var(--color-accent)] px-6 py-4 text-base font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2 focus:ring-offset-[var(--color-hero-bg)] disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {pending ? "Sending..." : tokenMode ? "Generate My Report" : config.buttonText}
-              </button>
-            </form>
-
-            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
-              <fieldset className="rounded-md border border-[var(--color-hero-border)] bg-white/5 p-3">
-                <legend className="px-1 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-hero-subtext)]">
-                  Report Type
-                </legend>
-                <div className="mt-1 grid gap-2 sm:grid-cols-2">
-                  <label className="flex items-center gap-2 text-sm text-[var(--color-hero-text)]">
-                    <input type="radio" name="report-type" value="marketing" checked={reportType === "marketing"} onChange={() => setReportType("marketing")} className="accent-[var(--color-accent)]" />
-                    Marketing Report
-                  </label>
-                  <label className="flex items-center gap-2 text-sm text-[var(--color-hero-text)]">
-                    <input type="radio" name="report-type" value="ai_visibility" checked={reportType === "ai_visibility"} onChange={() => setReportType("ai_visibility")} className="accent-[var(--color-accent)]" />
-                    AI Visibility Report
-                  </label>
-                </div>
-              </fieldset>
-
-              {config.checkbox ? (
-                <div className="rounded-md border border-[var(--color-hero-border)] bg-white/5 p-3">
-                  <label className="flex items-start gap-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      checked={secondaryReport}
-                      onChange={(e) => setSecondaryReport(e.target.checked)}
-                      className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[var(--color-accent)]"
-                    />
-                    <span className="text-sm text-[var(--color-hero-text)] leading-relaxed">
-                      {config.checkbox.label}
-                    </span>
-                  </label>
-                </div>
-              ) : null}
+        
             </div>
 
             {error ? (
@@ -572,5 +478,6 @@ export function HeroEmailForm() {
     </Suspense>
   );
 }
+
 
 
