@@ -471,7 +471,7 @@ function RevenueCalculatorInner() {
                     {results.needsAiCheck && (
                       <div className="bg-[var(--color-accent)]/15 border border-[var(--color-accent)]/40 rounded-xl p-4 mb-6 text-sm text-white leading-relaxed">
                         <strong className="block mb-1 text-white">
-                          We&apos;ll run that check for you.
+                          We&apos;ll run the AI check for you.
                         </strong>
                         Your free report includes live ChatGPT, Claude, and Google AI Overviews
                         queries for your business + niche. See exactly who&apos;s being cited (and
