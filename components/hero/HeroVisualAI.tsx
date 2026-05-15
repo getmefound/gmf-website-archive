@@ -9,9 +9,10 @@ const CHAR_DELAY_MS = 26;
 type Brand = { name: string; color: string };
 
 const BRANDS: Record<string, Brand> = {
-  google: { name: "Google",      color: "#4285F4" },
-  yelp:   { name: "Yelp",        color: "#CC2200" },
-  maps:   { name: "Google Maps", color: "#34A853" },
+  google:  { name: "Google",      color: "#4285F4" },
+  chatgpt: { name: "ChatGPT",     color: "#10A37F" },
+  maps:    { name: "Google Maps", color: "#E8491D" },
+  claude:  { name: "Claude",      color: "#DA7756" },
 };
 
 type Slide = {
@@ -31,11 +32,11 @@ const SLIDES: Slide[] = [
     meta: "Google Search",
   },
   {
-    brand: BRANDS.yelp,
-    query: "emergency plumber Austin TX",
-    before: "",
-    after: " — 4.9 ★ · \"Fast, honest, fixed it same day. Will use again.\"",
-    meta: "Yelp",
+    brand: BRANDS.chatgpt,
+    query: "best plumber near Austin",
+    before: "I recommend ",
+    after: " — 47 five-star reviews and same-day service.",
+    meta: "ChatGPT",
   },
   {
     brand: BRANDS.maps,
@@ -43,6 +44,13 @@ const SLIDES: Slide[] = [
     before: "",
     after: " · Open now · #1 in your area · 4.9 ★ · 2.1 mi",
     meta: "Google Maps",
+  },
+  {
+    brand: BRANDS.claude,
+    query: "who should I call for a plumber?",
+    before: "",
+    after: " comes highly recommended — consistent 5-star reviews, same-day availability.",
+    meta: "Claude",
   },
 ];
 
