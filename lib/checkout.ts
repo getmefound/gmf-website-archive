@@ -100,8 +100,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Weekly campaign performance report",
       "Fully managed — we write, send, reply, book",
     ],
-    ctaUrl: "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56",
-    ctaKind: "book",
+    ctaUrl: "https://pay.aioutsourcehub.com/reach-plan",
+    ctaKind: "subscribe",
   },
   {
     slug: "whole-stack",

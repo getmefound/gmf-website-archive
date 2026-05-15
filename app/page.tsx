@@ -74,7 +74,7 @@ const teaserCards: TeaserCard[] = [
       "Outreach written in your voice — never a template",
       "We book the calls. Your only job is to show up.",
     ],
-    href: "https://pay.aioutsourcehub.com/reach-plan-page",
+    href: "https://pay.aioutsourcehub.com/reach-plan",
     cta: "Start Reach",
     iconPaths: ICON_PATHS.target,
   },
