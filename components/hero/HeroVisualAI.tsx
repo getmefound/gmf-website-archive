@@ -1,196 +1,295 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const BUSINESS = "Austin's Best Plumbing";
+const CHAR_DELAY_MS = 26;
 
-type AiBrand = {
-  name: string;
-  color: string;
-  glow: string;
+type Brand = { name: string; color: string };
+
+const BRANDS: Record<string, Brand> = {
+  chatgpt: { name: "ChatGPT",   color: "#10A37F" },
+  claude:  { name: "Claude",    color: "#DA7756" },
+  google:  { name: "Google AI", color: "#4285F4" },
 };
 
-const BRANDS: Record<string, AiBrand> = {
-  chatgpt: { name: "ChatGPT", color: "#10A37F", glow: "rgba(16,163,127,0.18)" },
-  gemini: { name: "Google AI", color: "#4285F4", glow: "rgba(66,133,244,0.18)" },
-  claude: { name: "Claude", color: "#DA7756", glow: "rgba(218,119,86,0.18)" },
+type Slide = {
+  brand: Brand;
+  query: string;
+  before: string;
+  after: string;
+  meta: string;
 };
 
-type Item = {
-  brand: AiBrand;
-  question: string;
-  answer: React.ReactNode;
-  meta?: string;
-};
-
-function highlight(text: string) {
-  return (
-    <span
-      className="rounded px-1 font-semibold"
-      style={{ color: "#2D6A4F", backgroundColor: "rgba(45,106,79,0.18)" }}
-    >
-      {text}
-    </span>
-  );
-}
-
-const ITEMS: Item[] = [
+const SLIDES: Slide[] = [
   {
     brand: BRANDS.chatgpt,
-    question: "best plumber near Austin",
-    answer: (
-      <>
-        I recommend {highlight(BUSINESS)} — 47 five-star reviews and same-day
-        service.
-      </>
-    ),
-    meta: "Cited 3 sources",
-  },
-  {
-    brand: BRANDS.gemini,
-    question: "top-rated plumbers Austin TX",
-    answer: (
-      <>
-        Top-rated locally is {highlight(BUSINESS)}, known for fast response and
-        200+ verified reviews.
-      </>
-    ),
-    meta: "AI Overview · Google",
-  },
-  {
-    brand: BRANDS.claude,
-    question: "who should I call for a plumber in Austin?",
-    answer: (
-      <>
-        {highlight(BUSINESS)} comes highly recommended by locals — consistent
-        5-star reviews, same-day availability.
-      </>
-    ),
-    meta: "claude.ai",
-  },
-  {
-    brand: BRANDS.chatgpt,
-    question: "emergency plumber Austin same day",
-    answer: (
-      <>
-        For same-day work, {highlight(BUSINESS)} is consistently top-rated —
-        fast response, strong reviews.
-      </>
-    ),
+    query: "best plumber near Austin",
+    before: "I recommend ",
+    after: " — 47 five-star reviews and same-day service.",
     meta: "ChatGPT",
   },
   {
-    brand: BRANDS.gemini,
-    question: "trusted plumbing services Austin",
-    answer: (
-      <>
-        Customers rank {highlight(BUSINESS)} at the top — strong reputation,
-        fast scheduling.
-      </>
-    ),
+    brand: BRANDS.claude,
+    query: "who should I call for a plumber?",
+    before: "",
+    after: " comes highly recommended — consistent 5-star reviews, same-day availability.",
+    meta: "claude.ai",
+  },
+  {
+    brand: BRANDS.google,
+    query: "top-rated plumbers Austin TX",
+    before: "Top-rated locally: ",
+    after: " — fast response, 200+ verified reviews.",
     meta: "AI Overview · Google",
   },
 ];
 
-function ResponseCard({ item }: { item: Item }) {
+type Phase = "entering" | "thinking" | "typing" | "done" | "exiting";
+
+function ThinkingDots() {
   return (
-    <div
-      className="rounded-lg border border-white/10 bg-white/[0.035] px-3 py-2.5 backdrop-blur-sm"
-      style={{ boxShadow: `inset 0 0 0 1px ${item.brand.glow}` }}
+    <span className="inline-flex items-center gap-1.5" aria-label="Generating response">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-hero-subtext)]/50"
+          animate={{ opacity: [0.2, 1, 0.2] }}
+          transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.22 }}
+        />
+      ))}
+    </span>
+  );
+}
+
+function SlideCard({
+  slide,
+  phase,
+  charIndex,
+}: {
+  slide: Slide;
+  phase: Phase;
+  charIndex: number;
+}) {
+  const businessStart = slide.before.length;
+  const businessEnd = businessStart + BUSINESS.length;
+
+  const visibleBefore = slide.before.slice(0, Math.min(charIndex, businessStart));
+  const visibleBusiness =
+    charIndex > businessStart
+      ? BUSINESS.slice(0, Math.min(charIndex - businessStart, BUSINESS.length))
+      : "";
+  const visibleAfter =
+    charIndex > businessEnd ? slide.after.slice(0, charIndex - businessEnd) : "";
+
+  const businessComplete = charIndex >= businessEnd;
+  const showText = phase === "typing" || phase === "done" || phase === "exiting";
+  const cursorVisible = phase === "typing" || phase === "done";
+  const cursorBlink = phase === "done";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.38, ease: "easeOut" }}
+      className="rounded-xl border border-white/[0.10] bg-white/[0.04] p-5"
+      style={{
+        boxShadow: `0 0 0 1px ${slide.brand.color}22, inset 0 1px 0 rgba(255,255,255,0.04)`,
+      }}
     >
-      <div className="mb-1.5 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5">
+      {/* Platform header */}
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <span
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: item.brand.color }}
+            className="h-2 w-2 rounded-full"
+            style={{
+              backgroundColor: slide.brand.color,
+              boxShadow: `0 0 8px ${slide.brand.color}90`,
+            }}
           />
-          <p
-            className="font-mono text-[9px] uppercase tracking-[0.18em]"
-            style={{ color: item.brand.color }}
+          <span
+            className="font-mono text-[11px] font-bold uppercase tracking-[0.18em]"
+            style={{ color: slide.brand.color }}
           >
-            {item.brand.name}
-          </p>
+            {slide.brand.name}
+          </span>
         </div>
-        {item.meta && (
-          <p className="font-mono text-[8px] text-[var(--color-hero-subtext)]/55">
-            {item.meta}
+        <span className="font-mono text-[10px] text-[var(--color-hero-subtext)]/50">
+          {slide.meta}
+        </span>
+      </div>
+
+      {/* Query */}
+      <p className="mb-4 text-[12px] text-[var(--color-hero-subtext)]/70">
+        <span className="mr-1 opacity-40">›</span>
+        {slide.query}
+      </p>
+
+      {/* Response */}
+      <div className="min-h-[52px]">
+        {phase === "thinking" && <ThinkingDots />}
+        {showText && (
+          <p className="font-mono text-[13px] leading-relaxed text-[var(--color-hero-text)]">
+            {visibleBefore}
+            {visibleBusiness && (
+              <motion.span
+                className="rounded px-1 font-semibold"
+                animate={
+                  businessComplete
+                    ? { color: "#2D6A4F", backgroundColor: "rgba(45,106,79,0.22)" }
+                    : { color: "inherit", backgroundColor: "transparent" }
+                }
+                transition={{ duration: 0.35 }}
+              >
+                {visibleBusiness}
+              </motion.span>
+            )}
+            {visibleAfter}
+            {cursorVisible && (
+              <motion.span
+                className="ml-0.5 inline-block h-[13px] w-[2px] translate-y-[1px] rounded-full bg-[var(--color-hero-text)]/60 align-middle"
+                animate={cursorBlink ? { opacity: [1, 0, 1] } : { opacity: 1 }}
+                transition={cursorBlink ? { duration: 0.85, repeat: Infinity } : {}}
+              />
+            )}
           </p>
         )}
       </div>
-
-      <p className="mb-1 text-[10px] text-[var(--color-hero-subtext)]/75">
-        <span className="opacity-50">› </span>
-        {item.question}
-      </p>
-
-      <p className="font-mono text-[11.5px] leading-snug text-[var(--color-hero-text)]">
-        {item.answer}
-      </p>
-    </div>
+    </motion.div>
   );
 }
 
 export function HeroVisualAI() {
   const reduce = useReducedMotion();
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [phase, setPhase] = useState<Phase>("entering");
+  const [charIndex, setCharIndex] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const slide = SLIDES[slideIndex];
+  const fullText = slide.before + BUSINESS + slide.after;
+
+  useEffect(() => {
+    if (reduce) return;
+
+    function later(fn: () => void, ms: number) {
+      timerRef.current = setTimeout(fn, ms);
+    }
+
+    if (phase === "entering") {
+      later(() => setPhase("thinking"), 380);
+    } else if (phase === "thinking") {
+      later(() => {
+        setCharIndex(0);
+        setPhase("typing");
+      }, 920);
+    } else if (phase === "typing") {
+      if (charIndex < fullText.length) {
+        later(() => setCharIndex((c) => c + 1), CHAR_DELAY_MS);
+      } else {
+        later(() => setPhase("done"), 150);
+      }
+    } else if (phase === "done") {
+      later(() => setPhase("exiting"), 2800);
+    } else if (phase === "exiting") {
+      later(() => {
+        setSlideIndex((i) => (i + 1) % SLIDES.length);
+        setCharIndex(0);
+        setPhase("entering");
+      }, 400);
+    }
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [phase, charIndex, fullText.length, reduce]);
+
+  if (reduce) {
+    const s = SLIDES[0];
+    const full = s.before + BUSINESS + s.after;
+    return (
+      <div className="relative flex w-full items-center rounded-2xl border border-white/[0.08] bg-[#0A1628] p-5 h-[280px] md:min-h-[380px]">
+        <SlideCard slide={s} phase="done" charIndex={full.length} />
+      </div>
+    );
+  }
 
   return (
     <div
-      className="relative w-full h-[280px] md:h-full md:min-h-[380px] md:max-h-[420px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A1628]"
-      aria-label="AI search visibility loop"
+      className="relative w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A1628] h-[300px] md:h-full md:min-h-[380px] md:max-h-[440px]"
+      aria-label="AI search visibility demo"
+      aria-live="polite"
     >
+      {/* Ambient glows */}
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(45,106,79,0.15)" }}
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full blur-3xl transition-colors duration-700"
+        style={{ backgroundColor: "rgba(45,106,79,0.14)" }}
       />
-      <div className="pointer-events-none absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-white/[0.04] blur-3xl" />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-12 -bottom-12 h-44 w-44 rounded-full blur-3xl"
+        animate={{ backgroundColor: slide.brand.color + "18" }}
+        transition={{ duration: 0.8 }}
+      />
 
-      <div className="relative flex h-full flex-col px-5 pt-3 md:px-6 md:pt-4">
-        <div className="mb-3 flex items-center justify-between">
+      <div className="flex h-full flex-col justify-center px-6 py-7 md:px-7 md:py-8">
+        {/* Top bar */}
+        <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
             </span>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-hero-text)]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-hero-text)]/80">
               Live across AI search
             </p>
           </div>
-          <p className="font-mono text-[10px] text-[var(--color-hero-subtext)]/60">
-            3 platforms
-          </p>
+
+          {/* Slide indicator dots */}
+          <div className="flex items-center gap-1.5">
+            {SLIDES.map((s, i) => (
+              <motion.span
+                key={s.brand.name}
+                className="rounded-full"
+                animate={{
+                  width: i === slideIndex ? 16 : 6,
+                  height: 6,
+                  backgroundColor:
+                    i === slideIndex ? s.brand.color : "rgba(255,255,255,0.18)",
+                }}
+                transition={{ duration: 0.35 }}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="relative flex-1 overflow-hidden">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-[#0A1628] to-transparent"
-            aria-hidden="true"
+        {/* Cycling card */}
+        <AnimatePresence mode="wait">
+          <SlideCard
+            key={slideIndex}
+            slide={slide}
+            phase={phase}
+            charIndex={charIndex}
           />
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-[#0A1628] to-transparent"
-            aria-hidden="true"
-          />
+        </AnimatePresence>
 
-          {reduce ? (
-            <div className="space-y-2 pb-4">
-              {ITEMS.slice(0, 3).map((item, i) => (
-                <ResponseCard key={i} item={item} />
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              className="space-y-2"
-              animate={{ y: ["0%", "-50%"] }}
-              transition={{
-                duration: 36,
-                ease: "linear",
-                repeat: Infinity,
+        {/* Platform name row */}
+        <div className="mt-4 flex items-center justify-center gap-5">
+          {SLIDES.map((s, i) => (
+            <motion.span
+              key={s.brand.name}
+              className="font-mono text-[10px] uppercase tracking-[0.15em]"
+              animate={{
+                color: i === slideIndex ? s.brand.color : "rgba(255,255,255,0.22)",
               }}
+              transition={{ duration: 0.4 }}
             >
-              {[...ITEMS, ...ITEMS].map((item, i) => (
-                <ResponseCard key={i} item={item} />
-              ))}
-            </motion.div>
-          )}
+              {s.brand.name}
+            </motion.span>
+          ))}
         </div>
       </div>
     </div>
