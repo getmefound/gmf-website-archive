@@ -59,7 +59,7 @@ const teaserCards: TeaserCard[] = [
       "Cited in ChatGPT, Google AI, Claude",
       "Monthly call + ongoing optimization",
     ],
-    href: "https://pay.aioutsourcehub.com/checkout-ai-visibility-plan-page",
+    href: "https://pay.aioutsourcehub.com/ai-visibility-page",
     cta: "Start AI Visibility",
     iconPaths: ICON_PATHS.search,
     highlight: true,

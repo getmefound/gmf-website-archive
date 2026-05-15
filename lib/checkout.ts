@@ -45,7 +45,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Cited in ChatGPT, Google AI Overviews, Perplexity, Claude",
       "Structured data + schema markup on your site",
     ],
-    ctaUrl: "https://pay.aioutsourcehub.com/checkout-ai-visibility-plan-page",
+    ctaUrl: "https://pay.aioutsourcehub.com/ai-visibility-page",
     ctaKind: "subscribe",
   },
   {
