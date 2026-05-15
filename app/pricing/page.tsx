@@ -101,7 +101,11 @@ const products: ProductDetailData[] = [
     crossSell: { label: "Reach — to add new outbound leads", href: "#reach" },
     price: "$299",
     cadenceLabel: "/mo",
-    setup: "$199 setup",`r`n    promoNote: "First month $199 · code AI99 · cancel anytime",`r`n    ctaLabel: "Start AI Visibility",`r`n    ctaHref: "https://pay.aioutsourcehub.com/ai-visibility-page",`r`n    secondaryCtaHref: BOOKING_HREF,
+    setup: "$199 setup",
+    promoNote: "First month $199 · code AI99 · cancel anytime",
+    ctaLabel: "Start AI Visibility",
+    ctaHref: "https://pay.aioutsourcehub.com/ai-visibility-page",
+    secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.search,
     mock: <MockAIVisibilityPanel />,
     variant: "dark",
@@ -463,5 +467,6 @@ export default function PricingPage() {
     </>
   );
 }
+
 
 
