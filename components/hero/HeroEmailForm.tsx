@@ -33,6 +33,8 @@ type VariantConfig = {
   subheadline: string;
   priceLine: string;
   buttonText: string;
+  formHeadline: string;
+  formDescription: string;
   checkbox?: {
     label: string;
     caption: string;
@@ -49,7 +51,9 @@ const variants: Record<Variant, VariantConfig> = {
     ],
     subheadline: "Automated review requests, done for you.",
     priceLine: "Limited time · only $49/mo · cancel anytime",
-    buttonText: "See My Free Review Audit",
+    formHeadline: "See how your reviews stack up.",
+    formDescription: "We audit your Google reviews, response rate, and star rating. Your free report lands in your inbox in about 10 minutes. No card needed.",
+    buttonText: "Get My Free Review Audit",
     checkbox: {
       label:
         "Also check my Visibility Score — see if I'm showing up across search and new platforms.",
@@ -66,7 +70,9 @@ const variants: Record<Variant, VariantConfig> = {
     subheadline:
       "We get your business showing up across search — before your competitors take the spot.",
     priceLine: "Limited time · only $199/mo · cancel anytime",
-    buttonText: "See My Free Visibility Score",
+    formHeadline: "See if you're showing up where it counts.",
+    formDescription: "We check your visibility across Google, ChatGPT, and AI search. Free report in your inbox in about 10 minutes. No card needed.",
+    buttonText: "Get My Free Visibility Score",
     checkbox: {
       label:
         "Also run my full Marketing Audit — see how my reviews and listings stack up.",
@@ -82,7 +88,9 @@ const variants: Record<Variant, VariantConfig> = {
     subheadline:
       "We handle your reviews, rankings, and online presence — so more customers find you, and choose you.",
     priceLine: "Limited time · from $49/mo · cancel anytime",
-    buttonText: "See My Free Visibility Check",
+    formHeadline: "See exactly where you stand — in minutes.",
+    formDescription: "We check your reviews, rankings, and AI visibility across Google, ChatGPT, and more. You'll get both reports in your inbox in about 10 minutes. Free, no card needed.",
+    buttonText: "Get My Free Report",
   },
 };
 
@@ -289,12 +297,20 @@ function HeroInner() {
       {!auditUrl ? (
         <section
           aria-label="Get your free report"
-          className="bg-[var(--color-bg-page)] py-10 md:py-14"
+          className="bg-[var(--color-bg-page)] py-8 md:py-10"
         >
           <div className="mx-auto max-w-2xl px-6">
-            <p className="mb-6 text-center font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
-              Free — no credit card
-            </p>
+            <div className="mb-6 text-center">
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                Free — no credit card
+              </p>
+              <h2 className="text-2xl font-bold text-[var(--color-text-body)] mb-2">
+                {config.formHeadline}
+              </h2>
+              <p className="text-sm text-[var(--color-text-muted)] max-w-md mx-auto leading-relaxed">
+                {config.formDescription}
+              </p>
+            </div>
             <div className="rounded-2xl border border-[var(--color-hero-border)] bg-[var(--color-hero-bg)] p-6 md:p-8 text-[var(--color-hero-text)]">
               <form
                 onSubmit={handleSubmit}
@@ -357,7 +373,9 @@ function HeroInner() {
                 </button>
               </form>
 
+              {(variant !== "default" || config.checkbox) ? (
               <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+                {variant !== "default" ? (
                 <fieldset className="rounded-md border border-[var(--color-hero-border)] bg-white/5 p-3">
                   <legend className="px-1 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-hero-subtext)]">
                     Report Type
@@ -373,6 +391,7 @@ function HeroInner() {
                     </label>
                   </div>
                 </fieldset>
+                ) : null}
 
                 {config.checkbox ? (
                   <div className="rounded-md border border-[var(--color-hero-border)] bg-white/5 p-3">
@@ -390,6 +409,7 @@ function HeroInner() {
                   </div>
                 ) : null}
               </div>
+              ) : null}
 
               {error ? (
                 <p id="hero-email-error" role="alert" className="mt-3 text-sm text-[#E89B98]">
