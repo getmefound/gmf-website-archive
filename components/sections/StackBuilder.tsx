@@ -22,7 +22,7 @@ const SERVICES: Service[] = [
     oneLiner: "Reviews on autopilot after every job.",
     monthly: 49,
     setup: 0,
-    href: "https://pay.aioutsourcehub.com/checkout-review-automation-plan-page",
+    href: "https://pay.aioutsourcehub.com/review-automation-plan",
     iconPaths: ICON_PATHS.star,
   },
   {
@@ -31,7 +31,7 @@ const SERVICES: Service[] = [
     oneLiner: "Cited in ChatGPT, Google AI, Claude.",
     monthly: 179,
     setup: 199,
-    href: "https://pay.aioutsourcehub.com/checkout-ai-visibility-plan-page",
+    href: "https://pay.aioutsourcehub.com/ai-visibility-page",
     iconPaths: ICON_PATHS.search,
   },
   {
@@ -49,7 +49,7 @@ const SERVICES: Service[] = [
     oneLiner: "Branded posts 3–5×/week in your voice.",
     monthly: 349,
     setup: 299,
-    href: "https://pay.aioutsourcehub.com/checkout-studio-plan-page",
+    href: "https://pay.aioutsourcehub.com/studio",
     iconPaths: ICON_PATHS.studio,
   },
   {
@@ -58,14 +58,13 @@ const SERVICES: Service[] = [
     oneLiner: "24/7 multilingual receptionist. Books calls.",
     monthly: 499,
     setup: 499,
-    href: "https://pay.aioutsourcehub.com/checkout-relay-plan-page",
+    href: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     iconPaths: ICON_PATHS.phone,
   },
 ];
 
 const STACK_MONTHLY = 999;
-const STACK_SETUP = 999;
-const STACK_HREF = "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56";
+const STACK_SETUP = 999;`r`nconst STACK_HREF = "https://pay.aioutsourcehub.com/full-service";
 const BOOKING_HREF = "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56";
 
 function money(n: number) {

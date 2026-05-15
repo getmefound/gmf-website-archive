@@ -26,7 +26,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Monthly digest email — what was sent, what came in",
       "Cancel anytime · no contract",
     ],
-    ctaUrl: "https://pay.aioutsourcehub.com/checkout-review-automation-plan-page",
+    ctaUrl: "https://pay.aioutsourcehub.com/review-automation-plan",
     ctaKind: "subscribe",
   },
   {
@@ -64,7 +64,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "750 minutes/month included",
       "Fully managed — we build it, run it, tune it",
     ],
-    ctaUrl: "https://pay.aioutsourcehub.com/checkout-relay-plan-page",
+    ctaUrl: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     ctaKind: "subscribe",
   },
   {
@@ -82,7 +82,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Brand voice training (one-time onboarding)",
       "Fully managed — we write, design, and post",
     ],
-    ctaUrl: "https://pay.aioutsourcehub.com/checkout-studio-plan-page",
+    ctaUrl: "https://pay.aioutsourcehub.com/studio",
     ctaKind: "subscribe",
   },
   {
@@ -100,7 +100,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Weekly campaign performance report",
       "Fully managed — we write, send, reply, book",
     ],
-    ctaUrl: "https://pay.aioutsourcehub.com/reach-plan-page",
+    ctaUrl: "https://pay.aioutsourcehub.com/reach-plan",
     ctaKind: "subscribe",
   },
   {
@@ -119,8 +119,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Custom Website Rebuild ($999 build included)",
       "Single bill + priority response queue",
     ],
-    ctaUrl: "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56",
-    ctaKind: "book",
+    ctaUrl: "https://pay.aioutsourcehub.com/full-service",
+    ctaKind: "subscribe",
   },
 ];
 

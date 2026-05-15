@@ -60,7 +60,7 @@ const products: ProductDetailData[] = [
     setup: "No setup fee",
     promoNote: "First month $49 · code REVIEW50 · cancel anytime",
     ctaLabel: "Start at $99/mo",
-    ctaHref: "https://pay.aioutsourcehub.com/checkout-review-automation-plan-page",
+    ctaHref: "https://pay.aioutsourcehub.com/review-automation-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.star,
     mock: <MockReviewPanel />,
@@ -104,7 +104,7 @@ const products: ProductDetailData[] = [
     setup: "$199 setup",
     promoNote: "First month $199 · code AI99 · cancel anytime",
     ctaLabel: "Start AI Visibility",
-    ctaHref: "https://pay.aioutsourcehub.com/checkout-ai-visibility-plan-page",
+    ctaHref: "https://pay.aioutsourcehub.com/ai-visibility-page",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.search,
     mock: <MockAIVisibilityPanel />,
@@ -148,7 +148,7 @@ const products: ProductDetailData[] = [
     setup: "$299 setup",
     promoNote: "First month $299 · code REACH150 · cancel anytime",
     ctaLabel: "Start Reach",
-    ctaHref: "https://pay.aioutsourcehub.com/reach-plan-page",
+    ctaHref: "https://pay.aioutsourcehub.com/reach-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.target,
     mock: <MockReachPanel />,
@@ -190,7 +190,7 @@ const products: ProductDetailData[] = [
     setup: "$299 setup",
     promoNote: "First month $299 · code RELAY100 · cancel anytime",
     ctaLabel: "Start Relay",
-    ctaHref: "https://pay.aioutsourcehub.com/checkout-relay-plan-page",
+    ctaHref: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.phone,
     mock: <MockRelayPanel />,
@@ -238,7 +238,7 @@ const products: ProductDetailData[] = [
     setup: "$299 setup",
     promoNote: "First month $449 · code STUDIO150 · cancel anytime",
     ctaLabel: "Start Studio",
-    ctaHref: "https://pay.aioutsourcehub.com/checkout-studio-plan-page",
+    ctaHref: "https://pay.aioutsourcehub.com/studio",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.studio,
     mock: <MockStudioPanel />,
@@ -277,11 +277,7 @@ const products: ProductDetailData[] = [
     cadence: "Combined monthly call. Priority response queue.",
     price: "$999",
     cadenceLabel: "/mo",
-    setup: "$999 setup",
-    promoNote: "Save $700+/mo vs buying separately · cancel anytime",
-    ctaLabel: "Start Full Service",
-    ctaHref: BOOKING_HREF,
-    secondaryCtaHref: BOOKING_HREF,
+    setup: "$999 setup",`r`n    promoNote: "Save $700+/mo vs buying separately · cancel anytime",`r`n    ctaLabel: "Start Full Service",`r`n    ctaHref: "https://pay.aioutsourcehub.com/full-service",`r`n    secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.dashboard,
     mock: <MockWholeStackPanel />,
     variant: "dark",
@@ -401,7 +397,7 @@ export default function PricingPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <Link
-                    href="https://pay.aioutsourcehub.com/checkout-review-automation-plan-page"
+                    href="https://pay.aioutsourcehub.com/review-automation-plan"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 hover:bg-green-500 text-white px-6 py-3.5 text-sm font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-green-600/30"
                   >
                     Start at $99/mo
