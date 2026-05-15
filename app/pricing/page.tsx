@@ -383,6 +383,8 @@ export default function PricingPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <Link
                     href="https://pay.aioutsourcehub.com/review-automation-plan"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 hover:bg-green-500 text-white px-6 py-3.5 text-sm font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-green-600/30"
                   >
                     Start at $49/mo

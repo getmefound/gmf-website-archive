@@ -34,6 +34,7 @@ export function ProductDetail({
   data: ProductDetailData;
   next?: NextRef;
 }) {
+  const isExternalCta = data.ctaHref.startsWith("http://") || data.ctaHref.startsWith("https://");
   const dark = data.variant === "dark";
 
   const sectionBg = dark
@@ -231,6 +232,8 @@ export function ProductDetail({
               </div>
               <Link
                 href={data.ctaHref}
+                target={isExternalCta ? "_blank" : undefined}
+                rel={isExternalCta ? "noopener noreferrer" : undefined}
                 className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold transition-all hover:gap-3 ${
                   dark
                     ? "bg-[var(--color-accent-text)] text-[var(--color-accent)] hover:bg-white"

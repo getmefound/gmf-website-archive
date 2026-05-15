@@ -31,7 +31,7 @@ const SERVICES: Service[] = [
     oneLiner: "Cited in ChatGPT, Google AI, Perplexity.",
     monthly: 179,
     setup: 199,
-    href: "/checkout/ai-visibility",
+    href: "https://pay.aioutsourcehub.com/ai-visibility-page",
     iconPaths: ICON_PATHS.search,
   },
   {
@@ -40,7 +40,7 @@ const SERVICES: Service[] = [
     oneLiner: "Done-for-you outreach. Calls on your calendar.",
     monthly: 249,
     setup: 199,
-    href: "/checkout/reach",
+    href: "https://pay.aioutsourcehub.com/reach-plan",
     iconPaths: ICON_PATHS.target,
   },
   {
@@ -58,7 +58,7 @@ const SERVICES: Service[] = [
     oneLiner: "24/7 multilingual receptionist. Books calls.",
     monthly: 499,
     setup: 499,
-    href: "/checkout/relay",
+    href: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     iconPaths: ICON_PATHS.phone,
   },
 ];
@@ -74,6 +74,8 @@ function money(n: number) {
 
 export function StackBuilder() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const isExternalHref = (href: string) =>
+    href.startsWith("http://") || href.startsWith("https://");
 
   const toggle = (slug: string) => {
     setSelected((prev) => {
@@ -110,6 +112,7 @@ export function StackBuilder() {
         href: only.href,
         disabled: false,
         hint: only.setup > 0 ? `${money(only.setup)} one-time setup.` : "No setup fee.",
+        external: isExternalHref(only.href),
       };
     }
     return {
@@ -280,6 +283,8 @@ export function StackBuilder() {
               (
               <Link
                 href={STACK_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="underline underline-offset-2 text-[var(--color-accent)] hover:text-[var(--color-accent-hover)]"
               >
                 switch to Whole Stack
@@ -366,6 +371,8 @@ export function StackBuilder() {
               (
               <Link
                 href={STACK_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="underline underline-offset-2 text-[var(--color-accent)]"
               >
                 switch to Whole Stack
@@ -406,3 +413,6 @@ export function StackBuilder() {
     </div>
   );
 }
+
+
+
