@@ -53,7 +53,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     imagePath: "/social/ai-gen/ai-recommendation-vs-rank.jpg",
     topEyebrow: "AI VISIBILITY",
     hook: "AI names 1 of 3. Google lists 10.",
-    ctaLabel: "AI Visibility — $179/mo",
+    ctaLabel: "AI Visibility — $199/mo",
     ctaUrl: "aioutsourcehub.com/pricing#ai-visibility",
     accent: "blue",
   },
