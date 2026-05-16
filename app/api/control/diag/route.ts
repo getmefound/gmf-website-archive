@@ -19,8 +19,9 @@ export async function GET() {
 
   let ghlProbe: {
     status: number | "error";
-    bodySnippet?: string;
     pipelineCount?: number;
+    pipelines?: Array<{ name: string; stageNames: string[] }>;
+    error?: string;
   } = { status: "error" };
   if (pit && locationId) {
     try {
@@ -36,20 +37,25 @@ export async function GET() {
         },
       );
       const text = await res.text();
-      ghlProbe = {
-        status: res.status,
-        bodySnippet: text.slice(0, 400),
-      };
+      ghlProbe = { status: res.status };
       if (res.ok) {
         try {
-          const data = JSON.parse(text) as { pipelines?: unknown[] };
+          const data = JSON.parse(text) as {
+            pipelines?: Array<{ name: string; stages?: Array<{ name: string }> }>;
+          };
           ghlProbe.pipelineCount = data.pipelines?.length ?? 0;
+          ghlProbe.pipelines = data.pipelines?.map((p) => ({
+            name: p.name,
+            stageNames: (p.stages ?? []).map((s) => s.name),
+          }));
         } catch {
-          /* ignore parse */
+          ghlProbe.error = "parse_failed";
         }
+      } else {
+        ghlProbe.error = text.slice(0, 200);
       }
     } catch (err) {
-      ghlProbe = { status: "error", bodySnippet: String(err).slice(0, 200) };
+      ghlProbe = { status: "error", error: String(err).slice(0, 200) };
     }
   }
 
