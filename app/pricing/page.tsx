@@ -42,9 +42,9 @@ const products: ProductDetailData[] = [
       "Cancel anytime · no contract",
     ],
     useThisIf: [
-      "You're starting from scratch on reviews and want a low-risk first step.",
-      "You're fine replying to reviews yourself for now.",
-      "Email is the right channel for your customers (B2B, professional services).",
+      "Your last review was months ago and you can feel the slowdown.",
+      "You're doing great work but customers can't tell from your profile.",
+      "Competitors with worse service outrank you because they have fresher reviews.",
     ],
     setupSteps: [
       { title: "Connect your Google Business Profile", sub: "We audit it and fix what's broken." },
@@ -56,8 +56,8 @@ const products: ProductDetailData[] = [
     price: "$49",
     cadenceLabel: "/mo",
     setup: "No setup fee",
-    promoNote: "Introductory rate — locks in at $49 as long as you stay. Price increases as we scale.",
-    ctaLabel: "Lock in $49/mo →",
+    promoNote: "Launch rate — locks in at $49 as long as you stay. 30 days fully refundable.",
+    ctaLabel: "Start collecting reviews — $49/mo →",
     ctaHref: "https://pay.aioutsourcehub.com/review-automation-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.star,
@@ -85,9 +85,9 @@ const products: ProductDetailData[] = [
       "Your reviews tracked across platforms so nothing important gets missed",
     ],
     useThisIf: [
-      "You want reviews AND to be found across search — including ChatGPT and Google's AI answers.",
-      "You're serious about local ranking, not just dabbling.",
-      "You'd rather approve drafted replies than write them yourself.",
+      "You asked ChatGPT for the best [your category] in your town and your name didn't come up.",
+      "Customers are searching new ways and you're invisible across half of them.",
+      "Reviews are coming in but replies pile up and you don't have time to write each one.",
     ],
     setupSteps: [
       { title: "Google profile tune-up", sub: "We tighten your profile foundation beyond the Review Automation baseline." },
@@ -100,8 +100,8 @@ const products: ProductDetailData[] = [
     price: "$199",
     cadenceLabel: "/mo",
     setup: "$199 setup",
-    promoNote: "First month $99 — review replies in your voice + ChatGPT & Google AI visibility setup. Then $199/mo. No contract.",
-    ctaLabel: "Start for $99 this month →",
+    promoNote: "First month $99 (save $100) — then $199/mo. 30 days fully refundable. No contract.",
+    ctaLabel: "Get named in ChatGPT — $99 first month →",
     ctaHref: "https://pay.aioutsourcehub.com/ai-visibility-page",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.search,
@@ -130,9 +130,9 @@ const products: ProductDetailData[] = [
       "Boundary: Reach does not include guaranteed marketing-report/heatmap generation workflows.",
     ],
     useThisIf: [
-      "You have margin to grow and can handle 3–5 new conversations a week.",
-      "Your offer is clear and you know who the right customer is.",
-      "You've tried doing outreach yourself and it didn't get done.",
+      "You have room to grow and could handle 3–5 new customer calls a week.",
+      "You know who buys from you, but you don't have time to chase them.",
+      "You've tried cold outreach yourself and it never got done.",
     ],
     setupSteps: [
       { title: "Ideal customer intake call", sub: "We define who to target, who to skip, and why they buy." },
@@ -144,7 +144,8 @@ const products: ProductDetailData[] = [
     price: "$299",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    ctaLabel: "Start Reach",
+    promoNote: "First month $149 (save $150) — then $299/mo. 30 days fully refundable. No contract.",
+    ctaLabel: "Start booking calls — $149 first month →",
     ctaHref: "https://pay.aioutsourcehub.com/reach-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.target,
@@ -171,9 +172,9 @@ const products: ProductDetailData[] = [
       "Fully managed — we build it, run it, tune it",
     ],
     useThisIf: [
-      "You're missing calls and don't know how many.",
-      "You get after-hours leads or multilingual customers.",
-      "Hiring a receptionist isn't worth $40K+/year yet.",
+      "Your phone goes to voicemail every time you're with a customer.",
+      "You're losing after-hours calls you don't even know about.",
+      "Hiring a real receptionist costs $40K+/year and you're not there yet.",
     ],
     setupSteps: [
       { title: "Discovery call", sub: "We learn your service, hours, FAQs." },
@@ -185,7 +186,8 @@ const products: ProductDetailData[] = [
     price: "$299",
     cadenceLabel: "/mo",
     setup: "$299 setup",
-    ctaLabel: "Start Relay",
+    promoNote: "First month $99 (save $200) — one extra job covers it. Then $299/mo. 30 days fully refundable.",
+    ctaLabel: "Stop losing calls — $99 first month →",
     ctaHref: "https://pay.aioutsourcehub.com/checkout-relay-plan",
     secondaryCtaHref: BOOKING_HREF,
     iconPaths: ICON_PATHS.phone,
@@ -246,21 +248,32 @@ export default function PricingPage() {
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400 bg-gray-800 px-3 py-1 text-xs font-semibold text-white">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-            8 of 10 local launch spots left
+            Launch pricing — first 10 local clients
           </div>
 
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
             Pricing
           </p>
           <h1 className="font-semibold leading-[1.05] tracking-tight text-4xl md:text-6xl">
-            Pricing without the pressure.
+            You&apos;re already paying for the leak.
           </h1>
           <p className="mt-5 max-w-2xl text-lg md:text-xl text-[var(--color-hero-subtext)] leading-relaxed">
-            Six things we run for you. Start with one. Cancel anytime. We only suggest more when it&apos;d actually help you.
+            Missed calls, stale reviews, customers picking your competitor — that costs money every month. Here&apos;s what fixing it costs. Start with one job. Cancel anytime.
           </p>
-          <p className="mt-3 text-sm text-gray-400">
-            Reading this because we found you? That&apos;s how we work.
-          </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link
+              href="/calculator"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-colors"
+            >
+              <span aria-hidden="true">→</span>
+              See how much you&apos;re losing (30 sec)
+            </Link>
+            <span className="inline-flex items-center gap-1.5 text-xs text-gray-400">
+              <span aria-hidden="true" className="h-1 w-1 rounded-full bg-green-400" />
+              30 days fully refundable · no contract
+            </span>
+          </div>
         </div>
       </section>
       <PageBody>
@@ -426,7 +439,7 @@ export default function PricingPage() {
 
         <CtaBlock
           headline="Not sure where to start?"
-          subline="Get a free marketing audit. We'll show you exactly what's costing you customers — and what to fix first."
+          subline="Two paths. Get a free marketing audit and we'll show you exactly what's costing you customers — and what to fix first. Or run the math yourself in 30 seconds at /calculator. No card needed either way."
         />
       </PageBody>
       <BackToTopButton />

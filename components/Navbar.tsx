@@ -127,6 +127,9 @@ export function Navbar() {
               <Link href={withLocale("/pricing")} className="transition-colors">
                 {isSpanish ? "Qué Hacemos" : "What We Do"}
               </Link>
+              <Link href={withLocale("/calculator")} className="transition-colors">
+                {isSpanish ? "Calculadora" : "Calculator"}
+              </Link>
               <Link href={withLocale("/blog")} className="transition-colors">
                 Blog
               </Link>
@@ -233,6 +236,13 @@ export function Navbar() {
                     className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                   >
                     {isSpanish ? "Qué Hacemos" : "What We Do"}
+                  </Link>
+                  <Link
+                    href={withLocale("/calculator")}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
+                  >
+                    {isSpanish ? "Calculadora" : "Calculator"}
                   </Link>
                   <Link
                     href={withLocale("/blog")}
