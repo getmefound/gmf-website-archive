@@ -296,9 +296,9 @@ export function ProductDetail({
               )}
               {data.coupon && (
                 <div
-                  className={`mb-4 rounded-xl border-2 border-dashed px-4 py-3 ${
+                  className={`mb-4 rounded-xl border-2 border-dashed px-4 py-3.5 ${
                     dark
-                      ? "border-[var(--color-accent)]/60 bg-[var(--color-accent)]/10"
+                      ? "border-amber-400/60 bg-amber-400/10"
                       : "border-[var(--color-accent)]/50 bg-[var(--color-accent)]/[0.06]"
                   }`}
                 >
@@ -310,8 +310,8 @@ export function ProductDetail({
                     {data.coupon.headline}
                   </p>
                   <p
-                    className={`mt-1 font-mono text-base font-bold tracking-wider ${
-                      dark ? "text-[var(--color-accent)]" : "text-[var(--color-accent)]"
+                    className={`mt-1.5 font-mono text-lg font-bold tracking-[0.15em] ${
+                      dark ? "text-amber-300" : "text-[var(--color-accent)]"
                     }`}
                   >
                     Code: {data.coupon.code}
