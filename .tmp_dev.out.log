@@ -1,0 +1,270 @@
+
+> aoh-website@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.0.0.137:3000
+- Environments: .env.local
+✓ Ready in 433ms
+Creating turbopack project { dir: 'C:\\Users\\micha\\Documents\\aoh-website', testMode: true }
+
+○ Compiling /report/ai-visibility ...
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 4.4s (next.js: 4.1s, application-code: 328ms)
+ GET /api/report/status?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 404 in 128ms (next.js: 57ms, proxy.ts: 57ms, application-code: 13ms)
+ GET / 200 in 771ms (next.js: 544ms, application-code: 228ms)
+ POST /api/report 200 in 41ms (next.js: 29ms, proxy.ts: 5ms, application-code: 7ms)
+ GET /api/report/status?runId=c9433b8b-b4ec-4dbb-8089-467b8e288509 200 in 9ms (next.js: 2ms, proxy.ts: 3ms, application-code: 3ms)
+ POST /api/report/callback 200 in 109ms (next.js: 100ms, proxy.ts: 5ms, application-code: 5ms)
+✓ Compiled in 141ms
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 185ms (next.js: 112ms, application-code: 73ms)
+ POST /api/report 200 in 38ms (next.js: 14ms, proxy.ts: 18ms, application-code: 6ms)
+ GET /api/report/status?runId=0635619d-6ac3-47f8-bef1-f865983ea870 200 in 17ms (next.js: 11ms, proxy.ts: 3ms, application-code: 3ms)
+ POST /api/report/callback 200 in 20ms (next.js: 13ms, proxy.ts: 3ms, application-code: 4ms)
+ GET /api/report/status?runId=0635619d-6ac3-47f8-bef1-f865983ea870 200 in 8ms (next.js: 2ms, proxy.ts: 3ms, application-code: 3ms)
+ POST /api/report/callback 200 in 8ms (next.js: 1691µs, proxy.ts: 3ms, application-code: 3ms)
+ GET /api/report/status?runId=0635619d-6ac3-47f8-bef1-f865983ea870 200 in 10ms (next.js: 2ms, proxy.ts: 3ms, application-code: 4ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 92ms (next.js: 58ms, application-code: 34ms)
+ POST /api/report 200 in 36ms (next.js: 16ms, proxy.ts: 16ms, application-code: 4ms)
+ GET /api/report/status?runId=0acee14a-3aee-40bb-bb27-1e068844da36 200 in 16ms (next.js: 10ms, proxy.ts: 3ms, application-code: 3ms)
+ GET /api/report/status?runId=0acee14a-3aee-40bb-bb27-1e068844da36 200 in 8ms (next.js: 1815µs, proxy.ts: 3ms, application-code: 4ms)
+ GET /api/report/status?runId=0acee14a-3aee-40bb-bb27-1e068844da36 200 in 9ms (next.js: 2ms, proxy.ts: 3ms, application-code: 3ms)
+✓ Compiled in 97ms
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 164ms (next.js: 64ms, application-code: 100ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 296ms (next.js: 166ms, application-code: 130ms)
+ GET /preview/social-pack 200 in 1560ms (next.js: 1268ms, application-code: 291ms)
+ GET /api/social-card/ai-recommendation-vs-rank 200 in 1139ms (next.js: 963ms, generate-params: 750ms, application-code: 176ms)
+ GET /api/social-card/cost-of-dormant-profile 200 in 1144ms (next.js: 895ms, generate-params: 685ms, application-code: 250ms)
+ GET /api/social-photo/star-sweet-spot 200 in 1317ms (next.js: 871ms, generate-params: 708ms, application-code: 446ms)
+ GET /api/social-photo/review-velocity-90-day 200 in 1435ms (next.js: 883ms, generate-params: 697ms, application-code: 552ms)
+ GET /api/social-card/ai-search-share 200 in 220ms (next.js: 16ms, generate-params: 12ms, application-code: 204ms)
+ GET /api/social-card/software-vs-work 200 in 188ms (next.js: 4ms, generate-params: 36µs, application-code: 184ms)
+ GET /api/social-photo/diy-vs-dfy 200 in 1854ms (next.js: 885ms, generate-params: 699ms, application-code: 969ms)
+ GET /api/social-photo/after-hours-payback 200 in 1904ms (next.js: 877ms, generate-params: 701ms, application-code: 1027ms)
+ GET /api/social-photo/reviews-compound 200 in 494ms (next.js: 22ms, generate-params: 14ms, application-code: 471ms)
+ GET /api/social-photo/med-spa-math 200 in 707ms (next.js: 5ms, generate-params: 34µs, application-code: 702ms)
+ GET /api/social-photo/groomer-trust 200 in 787ms (next.js: 4ms, generate-params: 62µs, application-code: 783ms)
+ GET /api/social-card-story/after-hours-payback 200 in 1270ms (next.js: 1177ms, generate-params: 886ms, application-code: 93ms)
+ GET /preview/social-pack 200 in 157ms (next.js: 5ms, application-code: 152ms)
+ GET /api/social-card/cost-of-dormant-profile 200 in 128ms (next.js: 29ms, generate-params: 6ms, application-code: 100ms)
+ GET /api/social-card/ai-recommendation-vs-rank 200 in 186ms (next.js: 37ms, generate-params: 37µs, application-code: 149ms)
+ GET /api/social-photo/star-sweet-spot 200 in 443ms (next.js: 14ms, generate-params: 8ms, application-code: 429ms)
+ GET /api/social-card-story/after-hours-payback 200 in 211ms (next.js: 59ms, generate-params: 9ms, application-code: 152ms)
+ GET /api/social-card/ai-search-share 200 in 93ms (next.js: 5ms, generate-params: 30µs, application-code: 88ms)
+ GET /api/social-photo/review-velocity-90-day 200 in 520ms (next.js: 14ms, generate-params: 100µs, application-code: 506ms)
+ GET /api/social-card/software-vs-work 200 in 178ms (next.js: 4ms, generate-params: 30µs, application-code: 173ms)
+ GET /api/social-photo/diy-vs-dfy 200 in 770ms (next.js: 4ms, generate-params: 32µs, application-code: 766ms)
+ GET /api/social-photo/reviews-compound 200 in 518ms (next.js: 53ms, generate-params: 34µs, application-code: 465ms)
+ GET /api/social-photo/after-hours-payback 200 in 881ms (next.js: 7ms, generate-params: 20µs, application-code: 874ms)
+ GET /api/social-photo/med-spa-math 200 in 720ms (next.js: 18ms, generate-params: 34µs, application-code: 702ms)
+ GET /api/social-photo/groomer-trust 200 in 973ms (next.js: 11ms, generate-params: 8ms, application-code: 963ms)
+ GET / 200 in 290ms (next.js: 92ms, application-code: 198ms)
+ POST /api/report 200 in 93ms (next.js: 37ms, proxy.ts: 49ms, application-code: 6ms)
+ GET /api/report/status?runId=93e35666-1202-440d-aa64-be8e21830fc8 200 in 38ms (next.js: 31ms, proxy.ts: 3ms, application-code: 4ms)
+ GET /api/report/status?runId=93e35666-1202-440d-aa64-be8e21830fc8 200 in 8ms (next.js: 1673µs, proxy.ts: 3ms, application-code: 4ms)
+ GET /api/report/status?runId=93e35666-1202-440d-aa64-be8e21830fc8 200 in 7ms (next.js: 1518µs, proxy.ts: 3ms, application-code: 2ms)
+ GET /preview/social-pack 200 in 361ms (next.js: 137ms, application-code: 225ms)
+ GET /preview/social-pack 200 in 134ms (next.js: 7ms, application-code: 127ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 326ms (next.js: 154ms, application-code: 172ms)
+ GET /preview/social-pack 200 in 65ms (next.js: 4ms, application-code: 60ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 135ms (next.js: 44ms, application-code: 91ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 65ms (next.js: 27ms, application-code: 38ms)
+ GET /preview/social-pack 200 in 219ms (next.js: 169ms, application-code: 49ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 220ms (next.js: 108ms, application-code: 112ms)
+✓ Compiled in 60ms
+ GET /preview/social-pack 200 in 143ms (next.js: 114ms, application-code: 29ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 142ms (next.js: 68ms, application-code: 74ms)
+  Reload env: .env.local
+ GET /preview/social-pack 200 in 212ms (next.js: 181ms, application-code: 32ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 224ms (next.js: 123ms, application-code: 101ms)
+  Reload env: .env.local
+ GET /preview/social-pack 200 in 347ms (next.js: 152ms, application-code: 195ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 348ms (next.js: 258ms, application-code: 90ms)
+ GET /preview/social-pack 200 in 189ms (next.js: 156ms, application-code: 33ms)
+ GET /report/ai-visibility?runId=e8361743-3d1a-487c-a60a-a6f6c4a3af5e 200 in 195ms (next.js: 104ms, application-code: 91ms)
+ GET / 200 in 106ms (next.js: 27ms, application-code: 78ms)
+ GET / 200 in 489ms (next.js: 4ms, application-code: 485ms)
+✓ Compiled in 75ms
+ GET /preview/social-pack 200 in 157ms (next.js: 90ms, application-code: 67ms)
+✓ Compiled in 75ms
+ GET /preview/social-pack 200 in 170ms (next.js: 102ms, application-code: 68ms)
+✓ Compiled in 55ms
+ GET /preview/social-pack 200 in 107ms (next.js: 64ms, application-code: 42ms)
+✓ Compiled in 58ms
+ GET /preview/social-pack 200 in 130ms (next.js: 75ms, application-code: 55ms)
+ GET /preview/social-pack 200 in 146ms (next.js: 81ms, application-code: 65ms)
+ GET /preview/social-pack 200 in 102ms (next.js: 65ms, application-code: 37ms)
+  Reload env: .env.local
+✓ Compiled in 78ms
+✓ Compiled in 371ms
+✓ Compiled in 75ms
+✓ Compiled in 73ms
+✓ Compiled in 94ms
+✓ Compiled in 94ms
+✓ Compiled in 94ms
+✓ Compiled in 103ms
+✓ Compiled in 135ms
+✓ Compiled in 84ms
+✓ Compiled in 101ms
+✓ Compiled in 60ms
+✓ Compiled in 73ms
+✓ Compiled in 851ms
+✓ Compiled in 110ms
+  Reload env: .env.local
+ GET /report/ai-visibility/demo 200 in 1303ms (next.js: 921ms, application-code: 381ms)
+ GET /report/ai-visibility/demo 200 in 271ms (next.js: 119ms, application-code: 152ms)
+ GET /report/ai-visibility/demo 200 in 73ms (next.js: 8ms, application-code: 65ms)
+ GET /report/ai-visibility/demo 200 in 322ms (next.js: 11ms, application-code: 311ms)
+✓ Compiled in 653ms
+ GET /report/ai-visibility/demo 200 in 880ms (next.js: 319ms, application-code: 561ms)
+ GET /report/ai-visibility/demo 200 in 367ms (next.js: 8ms, application-code: 359ms)
+ GET /report/ai-visibility/demo 200 in 227ms (next.js: 117ms, application-code: 110ms)
+ GET /report/ai-visibility/demo 200 in 230ms (next.js: 8ms, application-code: 222ms)
+ GET /report/ai-visibility/demo 200 in 269ms (next.js: 6ms, application-code: 264ms)
+✓ Compiled in 221ms
+ GET /report/ai-visibility/demo 200 in 530ms (next.js: 116ms, application-code: 414ms)
+ GET /report/ai-visibility/demo 200 in 365ms (next.js: 5ms, application-code: 360ms)
+ GET /report/ai-visibility/demo 200 in 275ms (next.js: 6ms, application-code: 268ms)
+ GET /report/ai-visibility/demo 200 in 275ms (next.js: 49ms, application-code: 226ms)
+ GET /report/ai-visibility/demo 200 in 277ms (next.js: 88ms, application-code: 189ms)
+ GET /report/ai-visibility/demo 200 in 86ms (next.js: 6ms, application-code: 81ms)
+ GET /report/ai-visibility/demo 200 in 250ms (next.js: 8ms, application-code: 243ms)
+✓ Compiled in 97ms
+ GET /report/ai-visibility/demo 200 in 596ms (next.js: 161ms, application-code: 436ms)
+ GET /report/ai-visibility/demo 200 in 350ms (next.js: 2ms, application-code: 348ms)
+ GET /report/ai-visibility/demo 200 in 409ms (next.js: 68ms, application-code: 341ms)
+ GET /report/ai-visibility/demo 200 in 485ms (next.js: 6ms, application-code: 479ms)
+ GET /report/ai-visibility/demo 200 in 485ms (next.js: 214ms, application-code: 271ms)
+ GET /report/ai-visibility/demo 200 in 487ms (next.js: 140ms, application-code: 347ms)
+ GET /report/ai-visibility/demo 200 in 247ms (next.js: 24ms, application-code: 223ms)
+ GET /report/ai-visibility/demo 200 in 129ms (next.js: 8ms, application-code: 121ms)
+ GET /report/ai-visibility/demo 200 in 230ms (next.js: 5ms, application-code: 225ms)
+ GET /report/ai-visibility/demo 200 in 515ms (next.js: 96ms, application-code: 419ms)
+ GET /report/ai-visibility/demo 200 in 310ms (next.js: 6ms, application-code: 304ms)
+ GET /report/ai-visibility/demo 200 in 513ms (next.js: 4ms, application-code: 508ms)
+ GET /report/ai-visibility/demo 200 in 515ms (next.js: 153ms, application-code: 362ms)
+ GET /report/ai-visibility/demo 200 in 517ms (next.js: 65ms, application-code: 452ms)
+ GET /report/ai-visibility/demo 200 in 557ms (next.js: 6ms, application-code: 551ms)
+ GET /report/ai-visibility/demo 200 in 295ms (next.js: 11ms, application-code: 284ms)
+ GET /report/ai-visibility/demo 200 in 292ms (next.js: 71ms, application-code: 220ms)
+ GET /report/ai-visibility/demo 200 in 159ms (next.js: 6ms, application-code: 154ms)
+ GET /report/ai-visibility/demo 200 in 96ms (next.js: 5ms, application-code: 91ms)
+ GET /report/ai-visibility/demo 200 in 293ms (next.js: 9ms, application-code: 285ms)
+✓ Compiled in 136ms
+✓ Compiled in 97ms
+✓ Compiled in 82ms
+✓ Compiled in 89ms
+✓ Compiled in 83ms
+✓ Compiled in 88ms
+✓ Compiled in 70ms
+✓ Compiled in 99ms
+✓ Compiled in 62ms
+ GET /report/ai-visibility/demo 200 in 357ms (next.js: 110ms, application-code: 247ms)
+ GET /report/ai-visibility/demo 200 in 149ms (next.js: 65ms, application-code: 84ms)
+ GET /report/ai-visibility/demo 200 in 38ms (next.js: 4ms, application-code: 35ms)
+ GET /report/ai-visibility/demo 200 in 184ms (next.js: 63ms, application-code: 122ms)
+ GET /report/ai-visibility/demo 200 in 74ms (next.js: 4ms, application-code: 70ms)
+ GET /report/ai-visibility/demo 200 in 181ms (next.js: 3ms, application-code: 177ms)
+✓ Compiled in 171ms
+ GET /report/ai-visibility/demo 200 in 286ms (next.js: 65ms, application-code: 221ms)
+ GET /report/ai-visibility/demo 200 in 179ms (next.js: 3ms, application-code: 176ms)
+ GET /report/ai-visibility/demo 200 in 89ms (next.js: 4ms, application-code: 85ms)
+ GET /report/ai-visibility/demo 200 in 89ms (next.js: 36ms, application-code: 53ms)
+ GET /report/ai-visibility/demo 500 in 1645ms (next.js: 1506ms, application-code: 139ms)
+ GET /report/ai-visibility/demo 500 in 20ms (next.js: 8ms, application-code: 12ms)
+ GET /report/ai-visibility/demo 500 in 15ms (next.js: 4ms, application-code: 10ms)
+ GET /report/ai-visibility/demo 500 in 26ms (next.js: 7ms, application-code: 19ms)
+✓ Compiled in 199ms
+ GET /report/ai-visibility/demo 200 in 1007ms (next.js: 165ms, application-code: 842ms)
+ GET /report/ai-visibility/demo 200 in 305ms (next.js: 7ms, application-code: 298ms)
+✓ Compiled in 90ms
+ GET /report/ai-visibility/demo 200 in 578ms (next.js: 169ms, application-code: 408ms)
+ GET /report/ai-visibility/demo 200 in 278ms (next.js: 6ms, application-code: 273ms)
+ GET /report/ai-visibility/demo 200 in 202ms (next.js: 106ms, application-code: 96ms)
+ GET /report/ai-visibility/demo 200 in 205ms (next.js: 5ms, application-code: 200ms)
+✓ Compiled in 122ms
+ GET /report/ai-visibility/demo 200 in 607ms (next.js: 116ms, application-code: 491ms)
+ GET /report/ai-visibility/demo 200 in 500ms (next.js: 5ms, application-code: 495ms)
+ GET /report/ai-visibility/demo 200 in 412ms (next.js: 152ms, application-code: 260ms)
+ GET /report/ai-visibility/demo 200 in 416ms (next.js: 10ms, application-code: 406ms)
+ GET /report/ai-visibility/demo 200 in 417ms (next.js: 108ms, application-code: 309ms)
+ GET /report/ai-visibility/demo 200 in 425ms (next.js: 197ms, application-code: 228ms)
+ GET /report/ai-visibility/demo 200 in 537ms (next.js: 7ms, application-code: 530ms)
+ GET /report/ai-visibility/demo 200 in 437ms (next.js: 16ms, application-code: 422ms)
+ GET /report/ai-visibility/demo 200 in 337ms (next.js: 60ms, application-code: 277ms)
+ GET /report/ai-visibility/demo 200 in 338ms (next.js: 142ms, application-code: 196ms)
+ GET /report/ai-visibility/demo 200 in 342ms (next.js: 8ms, application-code: 334ms)
+ GET /report/ai-visibility/demo 200 in 132ms (next.js: 20ms, application-code: 112ms)
+ GET /report/ai-visibility/demo 200 in 535ms (next.js: 198ms, application-code: 336ms)
+ GET /report/ai-visibility/demo 200 in 243ms (next.js: 4ms, application-code: 238ms)
+ GET /report/ai-visibility/demo 200 in 162ms (next.js: 7ms, application-code: 154ms)
+ GET /report/ai-visibility/demo 200 in 164ms (next.js: 62ms, application-code: 101ms)
+ GET /report/ai-visibility/demo 200 in 827ms (next.js: 164ms, application-code: 663ms)
+ GET /report/ai-visibility/demo 200 in 592ms (next.js: 223ms, application-code: 369ms)
+ GET /report/ai-visibility/demo 200 in 288ms (next.js: 5ms, application-code: 284ms)
+ GET /report/ai-visibility/demo 200 in 291ms (next.js: 50ms, application-code: 240ms)
+ GET /report/ai-visibility/demo 200 in 339ms (next.js: 93ms, application-code: 246ms)
+ GET /report/ai-visibility/demo 200 in 340ms (next.js: 136ms, application-code: 204ms)
+ GET /report/ai-visibility/demo 200 in 296ms (next.js: 4ms, application-code: 292ms)
+ GET /report/ai-visibility/demo 200 in 226ms (next.js: 7ms, application-code: 219ms)
+ GET /report/ai-visibility/demo 200 in 176ms (next.js: 5ms, application-code: 171ms)
+ GET /report/ai-visibility/demo 200 in 176ms (next.js: 69ms, application-code: 107ms)
+ GET /report/ai-visibility/demo 200 in 289ms (next.js: 4ms, application-code: 285ms)
+ GET /report/ai-visibility/demo 200 in 177ms (next.js: 30ms, application-code: 148ms)
+✓ Compiled in 260ms
+ GET /report/ai-visibility/demo 200 in 426ms (next.js: 155ms, application-code: 271ms)
+ GET /report/ai-visibility/demo 200 in 263ms (next.js: 4ms, application-code: 259ms)
+ GET /report/ai-visibility/demo 200 in 224ms (next.js: 76ms, application-code: 149ms)
+ GET /report/ai-visibility/demo 200 in 261ms (next.js: 104ms, application-code: 156ms)
+ GET /report/ai-visibility/demo 200 in 264ms (next.js: 5ms, application-code: 259ms)
+ GET /report/ai-visibility/demo 200 in 327ms (next.js: 42ms, application-code: 285ms)
+ GET /report/ai-visibility/demo 200 in 164ms (next.js: 4ms, application-code: 160ms)
+ GET /report/ai-visibility/demo 200 in 113ms (next.js: 5ms, application-code: 108ms)
+ GET /report/ai-visibility/demo 200 in 354ms (next.js: 7ms, application-code: 347ms)
+ GET /report/ai-visibility/demo 200 in 451ms (next.js: 163ms, application-code: 287ms)
+ GET /report/ai-visibility/demo 200 in 177ms (next.js: 5ms, application-code: 172ms)
+ GET /report/ai-visibility/demo 200 in 177ms (next.js: 50ms, application-code: 127ms)
+ GET /report/ai-visibility/demo 200 in 83ms (next.js: 4ms, application-code: 78ms)
+ GET /report/ai-visibility/demo 200 in 83ms (next.js: 32ms, application-code: 51ms)
+ GET /report/ai-visibility/demo 200 in 472ms (next.js: 236ms, application-code: 236ms)
+ GET /report/ai-visibility/demo 200 in 129ms (next.js: 4ms, application-code: 125ms)
+ GET /report/ai-visibility/demo 200 in 129ms (next.js: 29ms, application-code: 100ms)
+ GET /report/ai-visibility/demo 200 in 70ms (next.js: 31ms, application-code: 39ms)
+ GET /report/ai-visibility/demo 200 in 71ms (next.js: 5ms, application-code: 66ms)
+ GET /report/ai-visibility/demo 200 in 207ms (next.js: 109ms, application-code: 98ms)
+ GET /report/ai-visibility/demo 404 in 1776ms (next.js: 1249ms, application-code: 526ms)
+ GET /report/ai-visibility/demo 404 in 1946ms (next.js: 1268ms, application-code: 678ms)
+ GET /report/ai-visibility/demo 200 in 392ms (next.js: 167ms, application-code: 225ms)
+ GET /report/ai-visibility/demo 200 in 670ms (next.js: 13ms, application-code: 657ms)
+ GET /report/ai-visibility/demo 200 in 669ms (next.js: 75ms, application-code: 594ms)
+ GET /report/ai-visibility/demo 200 in 421ms (next.js: 74ms, application-code: 348ms)
+ GET /report/ai-visibility/demo 200 in 426ms (next.js: 46ms, application-code: 380ms)
+ GET /report/ai-visibility/demo 200 in 218ms (next.js: 18ms, application-code: 199ms)
+ GET /report/ai-visibility/demo 200 in 216ms (next.js: 141ms, application-code: 75ms)
+ GET /report/ai-visibility/demo 200 in 693ms (next.js: 45ms, application-code: 649ms)
+ GET /report/ai-visibility/demo 200 in 542ms (next.js: 8ms, application-code: 534ms)
+ GET /report/ai-visibility/demo 200 in 215ms (next.js: 10ms, application-code: 205ms)
+ GET /report/ai-visibility/demo 200 in 215ms (next.js: 72ms, application-code: 143ms)
+ GET /report/ai-visibility/demo 200 in 218ms (next.js: 44ms, application-code: 174ms)
+ GET /report/ai-visibility/demo 200 in 114ms (next.js: 7ms, application-code: 107ms)
+ GET /report/ai-visibility/demo 200 in 222ms (next.js: 55ms, application-code: 167ms)
+ GET /report/ai-visibility/demo 200 in 132ms (next.js: 3ms, application-code: 129ms)
+ GET /report/ai-visibility/demo 200 in 133ms (next.js: 28ms, application-code: 104ms)
+ GET /report/ai-visibility/demo 200 in 70ms (next.js: 3ms, application-code: 67ms)
+ GET /report/ai-visibility/demo 200 in 71ms (next.js: 29ms, application-code: 42ms)
+✓ Compiled in 139ms
+✓ Compiled in 84ms
+✓ Compiled in 104ms
+✓ Compiled in 71ms
+✓ Compiled in 85ms
+✓ Compiled in 80ms
+✓ Compiled in 66ms
+✓ Compiled in 101ms
+✓ Compiled in 55ms
+✓ Compiled in 95ms
+✓ Compiled in 185ms
+✓ Compiled in 66ms
+✓ Compiled in 71ms
+✓ Compiled in 242ms
+✓ Compiled in 358ms
+✓ Compiled in 90ms

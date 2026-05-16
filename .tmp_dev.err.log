@@ -1,0 +1,214 @@
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+⨯ ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  [90m62 |[0m           </p>
+  [90m63 |[0m         </div>
+[31m[1m>[0m [90m64 |[0m       </section>
+  [90m   |[0m                 [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m65 |[0m
+  [90m   |[0m [31m[1m^[0m
+[31m[1m>[0m [90m66 |[0m       {[90m/* Score + revenue loss */[0m}
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m67 |[0m       <section className=[32m"mx-auto max-w-4xl px-6 pt-8"[0m>
+  [90m68 |[0m         <div className=[32m"grid grid-cols-1 sm:grid-cols-3 gap-4"[0m>
+  [90m69 |[0m
+
+Parsing ecmascript source code failed
+
+
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+⨯ ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  [90m62 |[0m           </p>
+  [90m63 |[0m         </div>
+[31m[1m>[0m [90m64 |[0m       </section>
+  [90m   |[0m                 [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m65 |[0m
+  [90m   |[0m [31m[1m^[0m
+[31m[1m>[0m [90m66 |[0m       {[90m/* Score + revenue loss */[0m}
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m67 |[0m       <section className=[32m"mx-auto max-w-4xl px-6 pt-8"[0m>
+  [90m68 |[0m         <div className=[32m"grid grid-cols-1 sm:grid-cols-3 gap-4"[0m>
+  [90m69 |[0m
+
+Parsing ecmascript source code failed
+
+
+⨯ ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  [90m62 |[0m           </p>
+  [90m63 |[0m         </div>
+[31m[1m>[0m [90m64 |[0m       </section>
+  [90m   |[0m                 [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m65 |[0m
+  [90m   |[0m [31m[1m^[0m
+[31m[1m>[0m [90m66 |[0m       {[90m/* Score + revenue loss */[0m}
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m67 |[0m       <section className=[32m"mx-auto max-w-4xl px-6 pt-8"[0m>
+  [90m68 |[0m         <div className=[32m"grid grid-cols-1 sm:grid-cols-3 gap-4"[0m>
+  [90m69 |[0m
+
+Parsing ecmascript source code failed
+
+
+⨯ ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  [90m62 |[0m           </p>
+  [90m63 |[0m         </div>
+[31m[1m>[0m [90m64 |[0m       </section>
+  [90m   |[0m                 [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m65 |[0m
+  [90m   |[0m [31m[1m^[0m
+[31m[1m>[0m [90m66 |[0m       {[90m/* Score + revenue loss */[0m}
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m67 |[0m       <section className=[32m"mx-auto max-w-4xl px-6 pt-8"[0m>
+  [90m68 |[0m         <div className=[32m"grid grid-cols-1 sm:grid-cols-3 gap-4"[0m>
+  [90m69 |[0m
+
+Parsing ecmascript source code failed
+
+
+[browser] Uncaught Error: ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./app/report/ai-visibility/demo/page.tsx:64:17)
+    at <unknown> (Error: (./app/report/ai-visibility/demo/page.tsx:64:17)
+[browser] Uncaught Error: ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed
+
+
+    at <unknown> (Error: ./app/report/ai-visibility/demo/page.tsx:64:17)
+    at <unknown> (Error: (./app/report/ai-visibility/demo/page.tsx:64:17)
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+[browser] ./app/report/ai-visibility/demo/page.tsx:64:17
+Expected '</', got 'jsx text'
+  62 |           </p>
+  63 |         </div>
+> 64 |       </section>
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 65 |
+     | ^
+> 66 |       {/* Score + revenue loss */}
+     | ^^^^^^
+  67 |       <section className="mx-auto max-w-4xl px-6 pt-8">
+  68 |         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  69 |
+
+Parsing ecmascript source code failed 
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "http://localhost:3000/AOH-logo-dark-bg.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

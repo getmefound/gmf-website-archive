@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PrintButton } from "@/components/ui/PrintButton";
 import { ReportTiming } from "@/components/report/ReportTiming";
-import { buildAIVisibilityReport, type ScoredBusiness, type SchemaResult } from "@/lib/ai-visibility";
+import {
+  buildAIVisibilityReport,
+  type AIVisibilityReport,
+  type ScoredBusiness,
+  type SchemaResult,
+} from "@/lib/ai-visibility";
 
 export const metadata: Metadata = {
   title: "AI Visibility Report",
@@ -12,6 +17,48 @@ export const metadata: Metadata = {
 };
 
 const BOOK_URL = "https://link.hub360ai.com/widget/booking/fVfL3Xth5gEW9mRjZS56";
+
+function buildFallbackReport(businessName: string, city: string): AIVisibilityReport {
+  const prospect: ScoredBusiness = {
+    name: businessName || "Your Business",
+    rating: 0,
+    reviewCount: 0,
+    website: null,
+    phone: null,
+    googleMapsUrl: null,
+    city: city || "your area",
+    category: "local business",
+    schema: {
+      hasLocalBusiness: false,
+      hasRating: false,
+      hasHours: false,
+      hasSameAs: false,
+      hasFAQ: false,
+      hasNAP: false,
+      score: 15,
+      scanFailed: true,
+    },
+    scores: {
+      overall: 28,
+      reviewStrength: 20,
+      profileComplete: 25,
+      aiReadable: 15,
+    },
+  };
+
+  return {
+    prospect,
+    competitor: null,
+    scenario: "no_competitor",
+    verdicts: [
+      "We could not fully match this business in public data yet.",
+      "This report uses baseline estimates until we complete a direct profile scan.",
+      "Book a call and we will verify the business listing and deliver the full scored version.",
+    ],
+    city: city || "your area",
+    category: "local business",
+  };
+}
 
 function scoreColor(n: number) {
   if (n >= 60) return "text-emerald-400";
@@ -195,9 +242,12 @@ export default async function AIVisibilityReportPage({
   const businessRaw = str("business");
   const cityRaw = str("city");
 
-  let report = null;
+  let report: AIVisibilityReport | null = null;
   if (businessRaw) {
     report = await buildAIVisibilityReport(businessRaw, cityRaw || undefined);
+    if (!report) {
+      report = buildFallbackReport(businessRaw, cityRaw || "");
+    }
   }
 
   const business = report?.prospect.name || businessRaw || "Your Business";
