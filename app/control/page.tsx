@@ -23,7 +23,7 @@ const MOCK = {
   refreshedAgo: "2m ago",
   fleet: {
     active: 2,
-    total: 7,
+    total: 8,
     doneToday: 14,
     queued: 23,
   },
@@ -67,6 +67,52 @@ export default function ControlPage() {
 
       {/* Agent cards — workforce view */}
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* SCHEDULER — manual, time defender */}
+        <AgentCard
+          name="Scheduler"
+          role="Time defender · books demos · briefs you before calls"
+          status="manual"
+          cadence="manual today · via Google Cal + GHL"
+          activity={{
+            lastDone: "9:00am today — confirmed Cherrydale demo for 11:00am",
+            doingNow: "Next up in 2h 15m · Cherrydale Lawn demo",
+            upNext: "3:30pm — internal · Kip review",
+          }}
+          ownedTitle="Today's agenda · 2 remaining"
+          ownedRows={[
+            {
+              primary: "11:00am · Cherrydale Lawn demo",
+              secondary: "ran /#calculator · clicked /pricing 3× · hot",
+              badge: { tone: "hot", label: "in 2h 15m" },
+            },
+            {
+              primary: "3:30pm · Kip review · internal",
+              secondary: "weekly 1:1 · 30 min",
+              badge: { tone: "default", label: "in 6h 45m" },
+            },
+            {
+              primary: "Focus time today",
+              secondary: "4.5h of unbroken blocks remaining",
+              badge: { tone: "accent", label: "good" },
+            },
+            {
+              primary: "This week",
+              secondary: "6 demos booked · 3 internal calls · 1 day clear",
+              badge: { tone: "default", label: "Mon-Fri" },
+            },
+          ]}
+          ownedFooter={
+            <div className="flex gap-2">
+              <button className="flex-1 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-emerald-300 hover:bg-emerald-500/20">
+                pre-meeting brief
+              </button>
+              <button className="flex-1 rounded-md border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-400 hover:bg-zinc-900">
+                open Google Cal
+              </button>
+            </div>
+          }
+        />
+
         {/* SCOUT — live, daily 7am */}
         <AgentCard
           name="Scout"
@@ -123,7 +169,7 @@ export default function ControlPage() {
           ownedTitle="Fleet state"
           ownedRows={[
             { primary: "Live agents", secondary: "Scout · Manager", badge: { tone: "accent", label: "2" } },
-            { primary: "Manual via Claude", secondary: "Editor v0 · Press v0", badge: { tone: "warm", label: "2" } },
+            { primary: "Manual today", secondary: "Scheduler · Editor v0 · Press v0", badge: { tone: "warm", label: "3" } },
             { primary: "Building", secondary: "Coach (ship May 25)", badge: { tone: "warm", label: "1" } },
             { primary: "Planned", secondary: "Sender · Auditor + 4 more", badge: { tone: "muted", label: "6" } },
           ]}
