@@ -102,6 +102,7 @@ const socials = [
 
 export function Footer() {
   const pathname = usePathname();
+  if (pathname === "/control" || pathname.startsWith("/control/")) return null;
   const isSpanish = pathname === "/es" || pathname.startsWith("/es/");
   const withLocale = (path: string) => {
     if (!isSpanish) return path;

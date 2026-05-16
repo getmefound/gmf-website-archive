@@ -41,6 +41,7 @@ function CloseIcon({ className }: { className?: string }) {
 
 export function Navbar() {
   const pathname = usePathname();
+  const isOperator = pathname === "/control" || pathname.startsWith("/control/");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -78,6 +79,8 @@ export function Navbar() {
       document.body.style.overflow = prevOverflow;
     };
   }, [mobileOpen]);
+
+  if (isOperator) return null;
 
   // Logo + text-color swap based on scroll state
   const logoSrc = scrolled ? "/AOH-logo-light-bg.svg" : "/AOH-logo-dark-bg.svg";
