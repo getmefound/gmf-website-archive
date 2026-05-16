@@ -69,6 +69,11 @@ const organizationSchema = {
     contactType: "support",
     email: "support@aioutsourcehub.com",
   },
+  sameAs: [
+    "https://www.linkedin.com/company/ai-outsource-hub",
+    "https://www.facebook.com/aioutsourcehub",
+    "https://www.instagram.com/aioutsourcehub",
+  ],
 };
 
 const websiteSchema = {

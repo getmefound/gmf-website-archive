@@ -128,6 +128,29 @@ export default function AboutPage() {
                 <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                   Founder · Mike Egidio
                 </p>
+                <a
+                  href="https://www.linkedin.com/in/mikeegidio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mike Egidio on LinkedIn"
+                  className="mt-2 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-3 w-3"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                  LinkedIn
+                </a>
               </div>
 
               {/* Condensed serif intro beside the image — not a paragraph block in mid-page */}
