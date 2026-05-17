@@ -196,6 +196,7 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
       "token-signed-links",
       "lead-to-client-handoff",
       "report-delivery-qa",
+      "report-generation-workflow",
     ],
     serviceOwners: ["Review Automation", "AI Visibility", "Relay", "Reporter"],
     sourceDocs: [
@@ -217,6 +218,7 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
       "platform-doc-research",
       "source-summaries",
       "sop-update-proposals",
+      "cheap-prefilter",
     ],
     serviceOwners: ["Reach", "Internal training"],
     sourceDocs: ["docs/AGENT_OPERATING_MODEL.md"],
@@ -230,7 +232,7 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
   {
     agent: "Sender",
     role: "Outbound campaign sending",
-    skills: ["cold-email", "sequence-management", "deliverability-watch", "coupon-offer-routing"],
+    skills: ["cold-email", "sequence-management", "deliverability-watch", "coupon-offer-routing", "dynamic-email-template", "report-cta-generation"],
     serviceOwners: ["Reach"],
   },
   {
@@ -259,6 +261,8 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
       "pricing-answers",
       "objection-handling",
       "brand-voice",
+      "email-draft-approval",
+      "template-merge-field-validation",
     ],
     serviceOwners: ["All sales-led services", "Internal training"],
     sourceDocs: [
