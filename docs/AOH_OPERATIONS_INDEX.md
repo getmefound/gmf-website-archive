@@ -167,6 +167,20 @@ This is a written draft meant to become:
 - a short walkthrough video
 - a dedicated GBP manager invite video
 
+## AOH Discovery Calendar
+
+Internal sales intake build spec:
+
+- `docs/AOH_DISCOVERY_ROUND_ROBIN_CALENDAR.md`
+
+Mission Control should show this as active GHL Expert work with Auditor as reviewer:
+
+- calendar: `Discovery - Round Robin`
+- public slug: `talk`
+- owner: GHL Expert
+- reviewer: Auditor
+- manager approval after QA
+
 ## Mission Control Source Mapping
 
 Mission Control seed data lives here:

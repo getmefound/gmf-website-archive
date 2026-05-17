@@ -769,11 +769,29 @@ function TaskCard({ task }: { task: BoardTask }) {
           <span className="font-mono uppercase tracking-wider text-zinc-600">Owner</span>{" "}
           {task.agent}
         </p>
+        {task.reviewer ? (
+          <p>
+            <span className="font-mono uppercase tracking-wider text-zinc-600">Reviewer</span>{" "}
+            {task.reviewer}
+          </p>
+        ) : null}
         <p>
           <span className="font-mono uppercase tracking-wider text-zinc-600">Due</span>{" "}
           {task.due}
         </p>
       </div>
+      {task.reviewChecks ? (
+        <div className="mt-3 rounded-lg border border-zinc-800 bg-black/20 p-2">
+          <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+            QA checks
+          </p>
+          <ul className="space-y-1 text-[11px] leading-snug text-zinc-500">
+            {task.reviewChecks.slice(0, 4).map((check) => (
+              <li key={check}>{check}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       <div className="mt-2 flex flex-wrap gap-1">
         {task.tags.map((tag) => (
           <span

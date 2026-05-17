@@ -34,10 +34,12 @@ export type BoardTask = {
   client: string;
   service: string;
   agent: string;
+  reviewer?: string;
   status: BoardStatus;
   priority: "P0" | "P1" | "P2" | "P3";
   due: string;
   tags: string[];
+  reviewChecks?: string[];
 };
 
 export type ScheduledWork = {
@@ -152,6 +154,9 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
       "pipelines-opportunities",
       "workflow-builder",
       "calendar-sync",
+      "round-robin-calendar-build",
+      "booking-form-fields",
+      "appointment-routing-workflows",
       "sms-email-phone-setup",
       "gbp-to-ghl-connection",
       "reputation-sync-check",
@@ -281,6 +286,23 @@ export const BOARD_COLUMNS: BoardStatus[] = [
 ];
 
 export const BOARD_TASKS: BoardTask[] = [
+  {
+    title: "Build AOH /talk Discovery Round Robin calendar",
+    client: "AOH",
+    service: "Internal Sales Intake",
+    agent: "GHL Expert",
+    reviewer: "Auditor",
+    status: "In Progress",
+    priority: "P0",
+    due: "Next",
+    tags: ["ghl", "calendar", "round-robin", "workflow", "sales-intake"],
+    reviewChecks: [
+      "Book one test call for each bottleneck answer",
+      "Confirm correct tags and pipeline stages",
+      "Confirm confirmation email and SMS reminders",
+      "Confirm booking URL is /talk and shows no token/secrets",
+    ],
+  },
   {
     title: "Load agent-owned operating model into Coach",
     client: "AOH",

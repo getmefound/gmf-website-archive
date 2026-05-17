@@ -28,6 +28,22 @@ Calendar setup includes:
 
 Personal booking calendars are the foundation for one-to-one scheduling.
 
+Round Robin team calendars should be used when a booking page may eventually distribute appointments across multiple team members. For AOH's internal discovery calendar, start with Mike as the sole team member, use availability-based distribution, and leave the structure ready for later team expansion.
+
+For the AOH `Discovery - Round Robin` calendar, GHL Expert owns:
+
+- calendar creation
+- booking slug
+- custom booking fields
+- appointment-booked workflow
+- tag routing
+- pipeline/stage movement
+- confirmation email
+- reminder SMS steps
+- internal notification
+
+Auditor must review the build with test bookings before Manager marks it live.
+
 ## Connected, Linked, And Conflict Calendars
 
 Connected calendars authorize HighLevel to access an external calendar account such as Google, Office 365, or Outlook.
@@ -162,6 +178,8 @@ SMS/email failure:
 ## Source Links
 
 - Setup booking calendar: https://help.gohighlevel.com/support/solutions/articles/155000005061
+- Round Robin team assignments: https://help.gohighlevel.com/support/solutions/articles/155000002711-managing-team-member-assignments-in-round-robin-calendars
+- Customer booked appointment trigger: https://gohighlevelassist.freshdesk.com/support/solutions/articles/155000002675-workflow-trigger-customer-booked-appointment
 - Manual booking appointments: https://help.gohighlevel.com/support/solutions/articles/48001209829
 - Linked and conflict calendars: https://help.gohighlevel.com/en/support/solutions/articles/155000002374
 - Appointment notes: https://help.gohighlevel.com/support/solutions/articles/155000003444
