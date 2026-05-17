@@ -212,20 +212,44 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     verification: "Not verified in this session against a live purchase/subaccount.",
   },
   {
-    title: "Load Review Automation snapshot",
+    title: "Client completes intake form",
+    owner: "Manager + GHL Expert",
+    status: "manual",
+    description:
+      "The client supplies the facts that cannot be known at purchase time: business name, website, phone, address or service area, logo, owner contact, preferred wording, and customer/POS path when needed.",
+    verification: "Intake package still needs final client-facing screenshots/video and completion tracking.",
+  },
+  {
+    title: "Client grants GBP access",
+    owner: "Profile + GHL Expert",
+    status: "manual",
+    description:
+      "The client either connects Google Business Profile inside GHL or invites AOH as manager, depending on the service path. Review Automation cannot launch until the correct GBP is connected or access is confirmed.",
+    verification: "GBP access path is defined, but live client-zero verification is still needed.",
+  },
+  {
+    title: "Create client subaccount from template snapshot",
     owner: "GHL Expert",
     status: "manual",
     description:
-      "For Review Automation clients, GHL Expert loads the approved snapshot, updates custom values, connects GBP, configures Reputation, and keeps base review automation email-only unless upgraded.",
-    verification: "Agent SOP exists. Live snapshot load against AOH Client Template Lab subaccount hVTckp5FcGL9Ja3GvC3R has not been verified here.",
+      "GHL Expert loads the approved snapshot from AOH Client Template Lab into the new client subaccount after the required intake/access gates are clear.",
+    verification: "Template lab ID hVTckp5FcGL9Ja3GvC3R is tracked; live snapshot load into a new client subaccount has not been verified here.",
   },
   {
-    title: "Complete client onboarding and access",
-    owner: "Manager + Profile",
+    title: "Populate client custom values",
+    owner: "GHL Expert",
     status: "partial",
     description:
-      "Client provides business details, invites AOH as GBP manager, confirms customer-flow preferences, and later provides a customer list or POS/CRM connection path.",
-    verification: "Client onboarding docs exist; final screenshot/video package is still marked for review/build.",
+      "GHL Expert fills the client subaccount values from intake and GBP access: client business name, review link, logo, phone, physical address/service area, website, owner contact, and any service-specific settings.",
+    verification: "Template/lab placeholders are being defined; real client values must come from completed intake and access proof.",
+  },
+  {
+    title: "Auditor client launch QA",
+    owner: "Auditor",
+    status: "manual",
+    description:
+      "Auditor confirms custom values are populated, GBP/Reputation is connected correctly, links route to the right business, unsubscribe works, test contact messages render cleanly, and no placeholders remain.",
+    verification: "QA checklist exists conceptually; live execution still needed before any real client launch.",
   },
   {
     title: "Launch review requests",
