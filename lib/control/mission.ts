@@ -106,6 +106,17 @@ export const SERVICES: ServiceWork[] = [
     openTasks: 2,
     blocked: 0,
   },
+  {
+    slug: "reporter",
+    name: "Reporter",
+    job: "Measure and report",
+    outcome: "Builds, delivers, and QAs campaign reports (marketing health + AI visibility + lead outcomes) to clients and internally.",
+    agents: ["GHL Expert", "Editor", "Press", "Profile", "Auditor"],
+    skills: ["report-design", "data-assembly", "token-delivery", "report-qa", "heatmap-interpretation"],
+    activeClients: 0,
+    openTasks: 3,
+    blocked: 0,
+  },
 ];
 
 export const AGENT_SKILLS: AgentSkillProfile[] = [
@@ -145,7 +156,7 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
   },
   {
     agent: "GHL Expert",
-    role: "CRM, automation, pipeline, and webhook watchdog",
+    role: "CRM, automation, pipeline, webhook watchdog, and report delivery spine",
     skills: [
       "subaccount-setup",
       "snapshot-load",
@@ -163,8 +174,13 @@ export const AGENT_SKILLS: AgentSkillProfile[] = [
       "reviews-ai-setup",
       "review-widget",
       "workflow-health",
+      "campaign-orchestration",
+      "outscraper-handoff",
+      "token-signed-links",
+      "lead-to-client-handoff",
+      "report-delivery-qa",
     ],
-    serviceOwners: ["Review Automation", "AI Visibility", "Relay"],
+    serviceOwners: ["Review Automation", "AI Visibility", "Relay", "Reporter"],
     sourceDocs: [
       "docs/GHL_CORE_KNOWLEDGE_PACK.md",
       "docs/GHL_WORKFLOWS_KNOWLEDGE_PACK.md",
@@ -432,6 +448,24 @@ export const BOARD_TASKS: BoardTask[] = [
     priority: "P2",
     due: "After first clients",
     tags: ["digest", "risk"],
+  },
+  {
+    title: "Build Reporter orchestration + reach-ghl-report-flow integration",
+    client: "AOH",
+    service: "Reporter",
+    agent: "GHL Expert",
+    reviewer: "Auditor",
+    status: "Inbox",
+    priority: "P1",
+    due: "Build slot 5d",
+    tags: ["ghl", "reporting", "outscraper", "campaign-orchestration"],
+    reviewChecks: [
+      "Outscraper→GHL prospect push working",
+      "Marketing report + heatmap trigger in workflow",
+      "Token-signed report links valid for 30 days",
+      "Confirmation + reminder emails include /report link",
+      "Report delivery log clean (no 404s or broken tokens)",
+    ],
   },
   {
     title: "Build client-facing chatbot",
