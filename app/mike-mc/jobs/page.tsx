@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
 import {
+  REACH_COMMERCIAL_DEMO,
+  REACH_INTERNAL_FLOW,
+  REACH_TOMORROW_BLOCKERS,
   SCHEDULED_JOB_COSTS,
   costPerBookedCall,
   daysRunning,
   formatUsd,
   totalCost,
+  type ReachFlowStatus,
+  type ReachInternalStep,
   type JobCostStatus,
   type ScheduledJobCost,
 } from "@/lib/control/job-costs";
@@ -60,6 +65,8 @@ export default function JobsPage() {
       </section>
 
       {reachJob ? <ReachWorkflowHero job={reachJob} /> : null}
+      <ReachInternalFlowSection />
+      <TomorrowReadinessSection />
 
       <section className="mb-8 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
         <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
@@ -92,33 +99,136 @@ function ReachWorkflowHero({ job }: { job: ScheduledJobCost }) {
         <div>
           <div className="mb-3 flex flex-wrap items-center gap-2">
             <Pill tone="accent">Reach product</Pill>
-            <Pill tone="muted">sales workflow</Pill>
+            <Pill tone="muted">commercial demo view</Pill>
           </div>
           <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
-            What Reach does
+            What Reach can do commercially
           </h2>
           <p className="mt-3 max-w-none text-base leading-relaxed text-zinc-300">
             {job.reachPart ?? job.overview}
           </p>
           <p className="mt-4 max-w-none text-base leading-relaxed text-zinc-500">
-            The company buying Reach is buying a managed outbound system: prospect selection,
-            enrichment, outreach, reply handling, booking, and cost review.
+            For a sales demo, keep this section high-level: Reach finds the right local businesses,
+            creates a report-led reason to click, sends a dynamic email using prospect and competitor
+            data, and routes interested people to a call. The longer internal build/run flow is below.
           </p>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-5">
-          {job.salesAgentTasks.map((task, index) => (
-            <WorkflowStep
-              key={task.title}
-              index={index + 1}
-              title={task.title}
-              description={task.description}
-              owner={task.owner}
-            />
+        <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-5">
+          {REACH_COMMERCIAL_DEMO.map((item, index) => (
+            <div key={item.title} className="rounded-xl border border-emerald-500/20 bg-black/25 p-4">
+              <p className="font-mono text-xs uppercase tracking-wider text-emerald-300">
+                Commercial {index + 1}
+              </p>
+              <p className="mt-3 text-base font-semibold text-zinc-100">{item.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.description}</p>
+            </div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ReachInternalFlowSection() {
+  return (
+    <section className="mb-8 rounded-2xl border border-zinc-800/70 bg-gradient-to-br from-zinc-900/70 to-zinc-950 p-5 shadow-xl shadow-black/25 md:p-6">
+      <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-sky-300">
+            Internal flow - detailed build/run truth
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+            Reach from list to client upkeep
+          </h2>
+          <p className="mt-2 max-w-none text-base leading-relaxed text-zinc-400">
+            This is the full internal chain behind the commercial Reach promise. Green means I can
+            verify the website-side piece exists. Amber means partly wired or documented but still
+            needs live GHL/prospecting verification. Red means not built yet.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Pill tone="accent">verified</Pill>
+          <Pill tone="warm">partial</Pill>
+          <Pill tone="muted">manual</Pill>
+          <Pill tone="danger">missing</Pill>
+        </div>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {REACH_INTERNAL_FLOW.map((step, index) => (
+          <InternalStepCard key={step.title} step={step} index={index + 1} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TomorrowReadinessSection() {
+  return (
+    <section className="mb-8 rounded-2xl border border-rose-500/25 bg-rose-500/5 p-5 md:p-6">
+      <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-rose-300">
+            Before sending tomorrow
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+            What still has to be true before emails go out
+          </h2>
+          <p className="mt-2 text-base leading-relaxed text-zinc-400">
+            The website build passed, but sending outreach safely needs these operational pieces
+            finished or manually controlled first.
+          </p>
+        </div>
+        <Pill tone="warn">do not scale until checked</Pill>
+      </div>
+      <div className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-5">
+        {REACH_TOMORROW_BLOCKERS.map((step, index) => (
+          <InternalStepCard key={step.title} step={step} index={index + 1} compact />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function InternalStepCard({
+  step,
+  index,
+  compact,
+}: {
+  step: ReachInternalStep;
+  index: number;
+  compact?: boolean;
+}) {
+  return (
+    <article className="rounded-xl border border-zinc-800/70 bg-zinc-950/70 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+            Step {index}
+          </p>
+          <h3 className="mt-2 text-base font-semibold leading-snug text-zinc-100">
+            {step.title}
+          </h3>
+        </div>
+        <Pill tone={flowStatusTone(step.status)}>{step.status}</Pill>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-zinc-400">{step.description}</p>
+      <div className="mt-4 rounded-lg border border-zinc-800/70 bg-black/20 p-3">
+        <p className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+          Owner
+        </p>
+        <p className="mt-1 text-sm text-zinc-300">{step.owner}</p>
+        {!compact ? (
+          <>
+            <p className="mt-3 font-mono text-xs uppercase tracking-wider text-zinc-500">
+              Verification
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-zinc-400">{step.verification}</p>
+          </>
+        ) : null}
+      </div>
+    </article>
   );
 }
 
@@ -391,4 +501,11 @@ function statusLabel(status: JobCostStatus) {
   if (status === "watch") return "watch cost";
   if (status === "paused") return "paused";
   return "too early";
+}
+
+function flowStatusTone(status: ReachFlowStatus) {
+  if (status === "verified") return "accent";
+  if (status === "partial") return "warm";
+  if (status === "missing") return "danger";
+  return "muted";
 }

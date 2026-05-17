@@ -39,6 +39,263 @@ export type ScheduledJobCost = {
   checks: string[];
 };
 
+export type ReachCommercialItem = {
+  title: string;
+  description: string;
+};
+
+export type ReachFlowStatus = "verified" | "partial" | "manual" | "missing";
+
+export type ReachInternalStep = {
+  title: string;
+  owner: string;
+  status: ReachFlowStatus;
+  description: string;
+  verification: string;
+};
+
+export const REACH_COMMERCIAL_DEMO: ReachCommercialItem[] = [
+  {
+    title: "Target the right local businesses",
+    description:
+      "Reach can focus by area, niche, service type, review gap, visibility weakness, competitor pressure, and buying fit instead of blasting a generic list.",
+  },
+  {
+    title: "Send a dynamic report-led email",
+    description:
+      "The email should plug in client data, local competitors, review/visibility signals, and a CTA that sends the prospect to view their own report.",
+  },
+  {
+    title: "Use reports as the reason to click",
+    description:
+      "Instead of asking for a meeting immediately, Reach can show the prospect what is slipping first: reviews, map visibility, AI visibility, or missed lead flow.",
+  },
+  {
+    title: "Turn replies into booked calls",
+    description:
+      "Agents sort replies, handle objections, and move interested prospects to the /talk calendar so the business owner only sees real opportunities.",
+  },
+  {
+    title: "Monitor cost and improve weekly",
+    description:
+      "The system tracks spend, replies, booked calls, and close signals so campaigns are adjusted before money is wasted.",
+  },
+];
+
+export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
+  {
+    title: "Choose campaign lane: Reviews, AI Visibility, or general Reach",
+    owner: "Coach + Manager",
+    status: "manual",
+    description:
+      "Pick the offer, niche, area, and promise before any list is built. This is where Mike decides whether the campaign sells Review Automation, AI Visibility, or Reach itself.",
+    verification: "Operationally defined, but not yet turned into a required campaign setup form.",
+  },
+  {
+    title: "Enter area and niche once, then reuse it",
+    owner: "Scout",
+    status: "partial",
+    description:
+      "AI Visibility and review campaigns can use the same core inputs: city/area, niche/category, business name, website, and top competitors when known.",
+    verification: "AI Visibility page accepts business/city inputs; full campaign intake storage is not built yet.",
+  },
+  {
+    title: "Build a cheap prefilter list first",
+    owner: "Scout",
+    status: "missing",
+    description:
+      "To control cost, Scout should not deeply scan every GBP. First filter by obvious signals: niche, location, review count, stale recent reviews, weak profile, no website, or visible competitor gap.",
+    verification: "Not automated yet. This is the cost guardrail that needs to be built before scale.",
+  },
+  {
+    title: "Score likely review opportunities",
+    owner: "Profile + Scout",
+    status: "manual",
+    description:
+      "Review prospects should be filtered for pain: low review count, old last review, competitor with fresher reviews, unanswered reviews, or weak GBP completeness.",
+    verification: "Profile skill pack defines checks; live automated scoring is not built.",
+  },
+  {
+    title: "Score likely AI Visibility opportunities",
+    owner: "Profile + Scout",
+    status: "partial",
+    description:
+      "AI Visibility uses similar area/niche inputs, then looks for citation/NAP gaps, weak content, poor profile completeness, stale reviews, and competitor visibility signals.",
+    verification: "AI Visibility report page exists and can build/fallback a report; broad prospect discovery is not automated.",
+  },
+  {
+    title: "Enrich selected prospects",
+    owner: "Enricher",
+    status: "missing",
+    description:
+      "Only shortlisted prospects should be enriched with owner/contact email, phone, website, business details, and notes for personalization.",
+    verification: "No enrichment provider/tool is wired in this repo yet.",
+  },
+  {
+    title: "Prepare GHL prospect records",
+    owner: "GHL Expert",
+    status: "partial",
+    description:
+      "GHL needs fields for campaign, report type, run ID, report URL, heatmap URL, competitor notes, pipeline stage, and email status.",
+    verification: "Website sends report fields to a GHL webhook if configured; specific GHL field mapping still needs live verification.",
+  },
+  {
+    title: "Website report handoff endpoints",
+    owner: "Website + GHL Expert",
+    status: "verified",
+    description:
+      "The site can accept a report request, create a run ID, send payload to the GHL webhook, expose report status, and receive report/heatmap callbacks.",
+    verification: "Verified by code/build: /api/report, /api/report/status, and /api/report/callback exist and compile.",
+  },
+  {
+    title: "Create marketing report and heatmap",
+    owner: "GHL Expert",
+    status: "partial",
+    description:
+      "The GHL workflow must generate the marketing audit report, run the heatmap where available, store the URLs, and call the website callback when ready.",
+    verification: "Website callback/status endpoints are built. GHL report + heatmap workflow is documented but not verified complete.",
+  },
+  {
+    title: "Create AI Visibility report",
+    owner: "Profile + GHL Expert",
+    status: "partial",
+    description:
+      "AI Visibility can use the same area/niche/business information, then show profile/review/competitor visibility issues and a baseline explanation.",
+    verification: "The AI Visibility report route exists. Direct live profile scan coverage is limited and can fall back to baseline estimates.",
+  },
+  {
+    title: "Generate prospect report link",
+    owner: "GHL Expert + Website",
+    status: "partial",
+    description:
+      "Each email needs a report CTA link that opens the right report for that prospect. Token verification exists, but the full token/link generator for campaigns still needs to be finished.",
+    verification: "Report submit/status/callback routes are built; campaign link generation is not complete.",
+  },
+  {
+    title: "Write/send dynamic outreach email",
+    owner: "Sender + Coach",
+    status: "missing",
+    description:
+      "The email must merge prospect name, business, area, niche, competitor/report signals, and a CTA to view the report. It should not read like a generic cold email.",
+    verification: "Final email template and sending workflow are not built yet.",
+  },
+  {
+    title: "Track opens, clicks, replies, and booked calls",
+    owner: "GHL Expert + Sorter",
+    status: "partial",
+    description:
+      "GHL should track report clicks, replies, opportunity stages, booked calls, and no-response follow-up windows.",
+    verification: "Mission Control can read some GHL pipeline data; campaign tracking workflow is not fully verified.",
+  },
+  {
+    title: "Sort replies and route hot leads",
+    owner: "Sorter",
+    status: "manual",
+    description:
+      "Sorter separates interested, objection, unsubscribe, bad fit, and needs-human replies so hot leads are not buried.",
+    verification: "Role is defined; automated reply triage is not yet connected.",
+  },
+  {
+    title: "Book interested prospects on /talk",
+    owner: "Booker + Scheduler",
+    status: "partial",
+    description:
+      "Warm replies should be guided to the Discovery Round Robin calendar and tagged by interest so the right pipeline/stage updates.",
+    verification: "/talk calendar spec is documented; actual GHL calendar/workflow QA still needs to pass.",
+  },
+  {
+    title: "If they buy, confirm Stripe-to-GHL handoff",
+    owner: "GHL Expert + Auditor",
+    status: "manual",
+    description:
+      "After purchase, confirm the correct GHL subaccount exists, the client is tagged, the service pipeline is created, and onboarding begins.",
+    verification: "Not verified in this session against a live purchase/subaccount.",
+  },
+  {
+    title: "Load Review Automation snapshot",
+    owner: "GHL Expert",
+    status: "manual",
+    description:
+      "For Review Automation clients, GHL Expert loads the approved snapshot, updates custom values, connects GBP, configures Reputation, and keeps base review automation email-only unless upgraded.",
+    verification: "Agent SOP exists. Live snapshot load against Review Boost subaccount hVTckp5FcGL9Ja3GvC3R has not been verified here.",
+  },
+  {
+    title: "Complete client onboarding and access",
+    owner: "Manager + Profile",
+    status: "partial",
+    description:
+      "Client provides business details, invites AOH as GBP manager, confirms customer-flow preferences, and later provides a customer list or POS/CRM connection path.",
+    verification: "Client onboarding docs exist; final screenshot/video package is still marked for review/build.",
+  },
+  {
+    title: "Launch review requests",
+    owner: "GHL Expert + Sorter",
+    status: "manual",
+    description:
+      "Sorter cleans/imports the customer list, GHL Expert maps fields and sends a test, then launches the approved review request workflow.",
+    verification: "SOP is defined; no live client launch test was verified in this turn.",
+  },
+  {
+    title: "Auditor launch QA",
+    owner: "Auditor",
+    status: "manual",
+    description:
+      "Auditor confirms GBP is correct, reviews sync into Reputation, custom values are populated, messages work, links are correct, and blockers are assigned.",
+    verification: "QA checklist exists; live execution still needed.",
+  },
+  {
+    title: "Client upkeep after completion",
+    owner: "Manager + Auditor + Profile + GHL Expert",
+    status: "manual",
+    description:
+      "After launch, agents monitor review velocity, workflow errors, unanswered reviews, profile drift, report delivery, and client risk. This becomes the 50+ client upkeep system.",
+    verification: "Scheduled work exists in Mission Control; multi-client automated monitoring still needs to be expanded.",
+  },
+];
+
+export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
+  {
+    title: "Final dynamic email template",
+    owner: "Sender + Coach",
+    status: "missing",
+    description:
+      "Need the real first email and follow-ups with merge fields for business, niche, competitor, report CTA, and unsubscribe/compliance language.",
+    verification: "Not present as a finished template in the repo.",
+  },
+  {
+    title: "Live GHL report + heatmap workflow",
+    owner: "GHL Expert",
+    status: "partial",
+    description:
+      "Need to confirm GHL generates the marketing report and heatmap, stores URLs, and calls the website callback with the right runId.",
+    verification: "Website side is built; GHL workflow completion is not verified.",
+  },
+  {
+    title: "Campaign report-link generation",
+    owner: "GHL Expert + Website",
+    status: "partial",
+    description:
+      "Need a reliable way to create each prospect's report link before the email goes out.",
+    verification: "Report request flow exists; outbound campaign link generation still needs finishing.",
+  },
+  {
+    title: "Review Boost subaccount check",
+    owner: "GHL Expert + Auditor",
+    status: "manual",
+    description:
+      "Need to inspect hVTckp5FcGL9Ja3GvC3R against the Review Automation checklist: snapshot, custom values, Reputation, GBP, templates, workflows, test contact, and QA proof.",
+    verification: "Not verified from this repo/session.",
+  },
+  {
+    title: "Prospect list filter before spending",
+    owner: "Scout",
+    status: "missing",
+    description:
+      "Need the cheap prefilter so you do not pay to deeply scan every GBP in an area/niche.",
+    verification: "Defined above, not automated.",
+  },
+];
+
 export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
   {
     slug: "reviews-outreach",
