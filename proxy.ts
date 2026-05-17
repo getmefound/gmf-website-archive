@@ -22,7 +22,22 @@ function hasInternalReportBypass(req: NextRequest): boolean {
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const hostname = req.nextUrl.hostname.toLowerCase();
   const method = req.method.toUpperCase();
+
+  if (hostname === "mc.aioutsourcehub.com") {
+    if (pathname === "/") {
+      const url = req.nextUrl.clone();
+      url.pathname = "/mike-mc";
+      return NextResponse.rewrite(url);
+    }
+
+    if (pathname === "/ops") {
+      const url = req.nextUrl.clone();
+      url.pathname = "/mike-mc/ops";
+      return NextResponse.rewrite(url);
+    }
+  }
 
   // Only rate-limit form submissions.
   // Do not throttle status polling or webhook callbacks.
@@ -61,5 +76,5 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/report/:path*", "/api/contact/:path*"],
+  matcher: ["/", "/ops", "/api/report/:path*", "/api/contact/:path*"],
 };
