@@ -379,7 +379,7 @@ export default function PricingPage() {
                     href="#review-automation"
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-white/80 transition-colors"
                   >
-                    See all 6 services
+                    See all 4 services
                     <span aria-hidden="true">↓</span>
                   </Link>
                 </div>

@@ -17,7 +17,7 @@ Copy-paste ready. Banner images served from the live site — right-click any UR
 **About (1,000 char LinkedIn limit — this is 720):**
 > AI Outsource Hub runs growth for local businesses so owners can stay in their business instead of in a dashboard.
 >
-> We handle Review Automation, AI Visibility, phone answering, outbound, and content — done-for-you, no software to log into. Six services starting at $49/mo, no contract.
+> We handle Review Automation, AI Visibility, phone answering, outbound, and content — done-for-you, no software to log into. Four services starting at $49/mo, no contract.
 >
 > Most local-business owners pay $300–$500 a month for marketing software they never open. We replace the stack with services that actually run. Reviews come in. Calls get answered. AI search names your business.
 >
@@ -39,7 +39,7 @@ Copy-paste ready. Banner images served from the live site — right-click any UR
 **About (longer, no hard limit):**
 > AI Outsource Hub runs growth for local businesses. Reviews, AI search visibility, phone answering, content, ads — handled for you. No dashboards to log into. No contracts. Just results.
 >
-> Six services, starting at $49/mo. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet grooming, and salon owners who want their phone to ring more without learning more software.
+> Four services, starting at $49/mo. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet grooming, and salon owners who want their phone to ring more without learning more software.
 >
 > aioutsourcehub.com
 
@@ -99,7 +99,7 @@ Copy-paste ready. Banner images served from the live site — right-click any UR
 >
 > We handle Review Automation, AI Visibility, phone answering, outbound, and content — done-for-you, no software to log into.
 >
-> Six services starting at $49/mo, no contract. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet grooming, and salon owners who want their phone to ring more without learning more software.
+> Four services starting at $49/mo, no contract. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet grooming, and salon owners who want their phone to ring more without learning more software.
 >
 > Most local owners pay $300–$500/mo for marketing software they never open. We replace the stack with services that actually run. Start with our free revenue calculator at aioutsourcehub.com.
 
@@ -108,7 +108,6 @@ Copy-paste ready. Banner images served from the live site — right-click any UR
 - AI Visibility (AI search)
 - Relay (Phone Answering)
 - Reach (Lead Generation)
-- Studio (Content)
 - Whole Stack (Bundle)
 
 ---
@@ -121,7 +120,7 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 
 > ---
 >
-> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Six services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
+> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Four services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
 
 ---
 
@@ -140,7 +139,7 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 >
 > I started AI Outsource Hub because most local owners don't want to learn another piece of software. They want their phone to ring more and their reviews to stay fresh, without thinking about it. So we run the rest for them. They stay in the truck, the chair, the kitchen, the shop. We handle the rest.
 >
-> Six services, starts at $49/month, no contract. Reviews, AI search visibility, phone answering, lead generation, content, and the whole bundle. Most clients pay back the first month before the second month bills.
+> Four services, starts at $49/month, no contract. Reviews, AI search visibility, phone answering, and lead generation. Most clients pay back the first month before the second month bills.
 >
 > Based in Southington, CT. 15+ years building automation tools before AOH — most of it for local-business work that big software companies overlooked.
 >
@@ -150,7 +149,7 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 >
 > ---
 >
-> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Six services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
+> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Four services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
 
 ---
 
@@ -173,7 +172,7 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 >
 > ---
 >
-> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Six services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
+> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Four services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
 
 ---
 
@@ -196,7 +195,7 @@ Every team member uses the same **closing paragraph** so any AOH person's profil
 >
 > ---
 >
-> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Six services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
+> **About AI Outsource Hub:** We run growth services for local businesses — done-for-you Review Automation, AI Visibility, phone answering, outbound, and content. No dashboards. Four services starting at $49/mo. You run the business. We run the rest. → aioutsourcehub.com
 
 ---
 

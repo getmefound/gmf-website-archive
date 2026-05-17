@@ -60,7 +60,7 @@ From $49/mo.`,
         },
         about: {
           label: "About (1000 char)",
-          text: `Local-business owners lose more money to missed calls and ghosted reviews than to any marketing problem. We fix that. AI Outsource Hub is done-for-you growth for plumbing, HVAC, lawn care, dental, vet, med spa, pet groomer, and salon owners who don't have time to babysit software. Six services. From $49/month. No agency retainer. No 40-hour onboarding. No DIY tool you'll never log into again. We set it up, we run it, and the AI answers the phone at 9pm when your competitor's voicemail picks up. Founded by Mike Egidio after watching too many great operators lose to weaker ones who simply replied faster. Built for owners who'd rather run the business than learn another dashboard.`,
+          text: `Local-business owners lose more money to missed calls and ghosted reviews than to any marketing problem. We fix that. AI Outsource Hub is done-for-you growth for plumbing, HVAC, lawn care, dental, vet, med spa, pet groomer, and salon owners who don't have time to babysit software. Four services. From $49/month. No agency retainer. No 40-hour onboarding. No DIY tool you'll never log into again. We set it up, we run it, and the AI answers the phone at 9pm when your competitor's voicemail picks up. Founded by Mike Egidio after watching too many great operators lose to weaker ones who simply replied faster. Built for owners who'd rather run the business than learn another dashboard.`,
         },
       },
       {
@@ -75,7 +75,7 @@ Just done-for-you growth.`,
         },
         about: {
           label: "About (1000 char)",
-          text: `Most "AI for small business" is a $300/month dashboard you'll log into twice and never open again. We're the opposite. AI Outsource Hub runs the rest for you — answering after-hours calls, chasing reviews, following up with leads who ghosted — so you never see a dashboard and never lose another customer to a faster competitor. Six services starting at $49/month. Built for plumbers, HVAC techs, dentists, vets, med spas, groomers, and salon owners who are sick of marketing software they don't have time to use. Founder Mike Egidio spent years watching local operators lose to weaker competitors with better follow-up. We sell the follow-up. Done-for-you. Month-to-month. Cancel anytime.`,
+          text: `Most "AI for small business" is a $300/month dashboard you'll log into twice and never open again. We're the opposite. AI Outsource Hub runs the rest for you — answering after-hours calls, chasing reviews, following up with leads who ghosted — so you never see a dashboard and never lose another customer to a faster competitor. Four services starting at $49/month. Built for plumbers, HVAC techs, dentists, vets, med spas, groomers, and salon owners who are sick of marketing software they don't have time to use. Founder Mike Egidio spent years watching local operators lose to weaker competitors with better follow-up. We sell the follow-up. Done-for-you. Month-to-month. Cancel anytime.`,
         },
       },
       {
@@ -140,7 +140,7 @@ You run the business.`,
         },
         about: {
           label: "About",
-          text: "AI Outsource Hub runs the rest for you. Six services from $49/month, built for local-business owners who'd rather work in the truck than learn another piece of software. Founded by Mike Egidio.",
+          text: "AI Outsource Hub runs the rest for you. Four services from $49/month, built for local-business owners who'd rather work in the truck than learn another piece of software. Founded by Mike Egidio.",
         },
       },
       {
@@ -343,7 +343,7 @@ for local businesses
 from $49/mo`,
         about: {
           label: "Description (750 char)",
-          text: `AI Outsource Hub is done-for-you growth for local-business owners. We answer after-hours phone calls so you never lose a customer to voicemail. We text leads back inside 60 seconds. We ask every happy customer for a Google review and intercept unhappy ones before they post. We follow up with quotes that went cold. We handle the social posting. We rebuild your online profile. Six services. From $49/month. No dashboards to log into. No agency retainer. No 40-hour onboarding. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet groomer, and salon owners. Founded by Mike Egidio. Three-person US-based team. Month-to-month. Cancel anytime.`,
+          text: `AI Outsource Hub is done-for-you growth for local-business owners. We answer after-hours phone calls so you never lose a customer to voicemail. We ask every happy customer for a Google review. We follow up with quotes that went cold. We rebuild your online profile. Four services. From $49/month. No dashboards to log into. No agency retainer. No 40-hour onboarding. Built for plumbing, HVAC, lawn care, dental, vet, med spa, pet groomer, and salon owners. Founded by Mike Egidio. Three-person US-based team. Month-to-month. Cancel anytime.`,
         },
         categories:
           "Marketing Agency (primary), Business Management Consultant, Software Company, Telephone Answering Service",
@@ -435,7 +435,7 @@ I'm here to fix that.`,
         },
         about: {
           label: "About",
-          text: `Every week I talk to a local-business owner who's losing money in plain sight — missed calls, ghosted leads, a Google profile that hasn't seen a new review in eight months. The fix isn't another piece of marketing software they won't log into. The fix is done-for-you. That's what we built. AI Outsource Hub runs the rest for you — six services from $49/month, no retainer, no contract. I'm here to make sure the best operator on the block also wins the customer.`,
+          text: `Every week I talk to a local-business owner who's losing money in plain sight — missed calls, ghosted leads, a Google profile that hasn't seen a new review in eight months. The fix isn't another piece of marketing software they won't log into. The fix is done-for-you. That's what we built. AI Outsource Hub runs the rest for you — four services from $49/month, no retainer, no contract. I'm here to make sure the best operator on the block also wins the customer.`,
         },
       },
       {

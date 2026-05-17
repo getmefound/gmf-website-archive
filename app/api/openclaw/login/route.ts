@@ -2,35 +2,45 @@ const OPENCLAW_TOKEN = "hgIa8rM0e2xzJODyAg1rsOCPRBWKsl3K";
 const OPENCLAW_BASE = "http://2.24.198.207:56006";
 
 export async function GET() {
-  // Return HTML form that auto-submits to OpenClaw.
-  // Browser handles the POST + redirect natively, so cookies work correctly.
-  const html = `
+  try {
+    // Server-side login POST (avoids mixed-content HTTPS→HTTP issue)
+    const res = await fetch(`${OPENCLAW_BASE}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `token=${encodeURIComponent(OPENCLAW_TOKEN)}`,
+      redirect: "manual",
+    });
+
+    // Extract cookie from OpenClaw response
+    const setCookie = res.headers.get("set-cookie");
+
+    // Return page that redirects to OpenClaw with JS (no mixed content)
+    const html = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Logging in to OpenClaw...</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 2rem; }
-    .loading { text-align: center; }
-    form { display: none; }
-  </style>
+  <title>Opening OpenClaw...</title>
 </head>
 <body>
-  <div class="loading">
-    <p>Connecting to OpenClaw...</p>
-  </div>
-  <form id="login" method="POST" action="${OPENCLAW_BASE}/login">
-    <input type="hidden" name="token" value="${OPENCLAW_TOKEN}">
-  </form>
   <script>
-    document.getElementById('login').submit();
+    window.location.replace("${OPENCLAW_BASE}/");
   </script>
 </body>
 </html>
-  `;
+    `;
 
-  return new Response(html, {
-    status: 200,
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-  });
+    const response = new Response(html, {
+      status: 200,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
+
+    // Forward cookie so session works after redirect
+    if (setCookie) {
+      response.headers.set("set-cookie", setCookie);
+    }
+
+    return response;
+  } catch (error) {
+    return new Response(`Error: ${error}`, { status: 500 });
+  }
 }

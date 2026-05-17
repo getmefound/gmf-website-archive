@@ -64,7 +64,7 @@ Done consistently, this fills a practice's profile with 50 to 80 new reviews a y
 
 ## What this actually looks like running
 
-You don't have to do any of this manually. Your front desk has enough to do. The whole sequence — text after appointment, smart link, reply nudges, owner-voice replies — is exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> runs in the background once it's set up. $49/mo, no setup fee, cancel anytime.
+You don't have to do any of this manually. Your front desk has enough to do. The whole sequence — email after appointment, review link, and gentle follow-up nudges — is exactly what our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> runs in the background once it's set up. $49/mo, no setup fee, cancel anytime. SMS and replies in your voice are available with AI Visibility.
 
 That's most of what we do for dental practices. The result is a profile that quietly compounds while you're chairside. Reviews show up. Patients show up. You don't think about it.
 

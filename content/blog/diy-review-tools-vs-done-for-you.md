@@ -23,7 +23,7 @@ The advertised price for most "review request" software is $29 to $79 a month. T
 
 What's not advertised:
 
-- **Setup time**: 2 to 6 hours, depending on the tool. You're configuring SMS sending, integrating with your booking system or POS, writing templates, testing
+- **Setup time**: 2 to 6 hours, depending on the tool. You're configuring sending, integrating with your booking system or POS, writing templates, testing
 - **Monthly maintenance**: Reviewing the templates, updating sender info, checking what's failing, troubleshooting when somebody complains they didn't get the text
 - **The thing nobody mentions — actually using it**: Most DIY tools require either you or someone on your team to *trigger* the request. Either by manually entering customers, or by making sure your POS sync is working
 - **SMS compliance**: In 2026, sending business SMS through these tools requires registering your business with the carriers. This is a 1- to 4-week process that takes paperwork and patience. Most DIY tools push this back on you
@@ -32,16 +32,16 @@ The software cost is real. The hidden cost is your time and your team's time. Fo
 
 ## What "done-for-you" actually costs
 
-Our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> is $49/mo with no setup fee. No contract. If you want SMS plus replies auto-drafted in your voice and our full AI search work, that's <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> at $179/mo plus $199 setup. Both real prices, both on the pricing page.
+Our <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> is $49/mo with no setup fee. No contract. If you want SMS plus replies auto-drafted in your voice and our full AI search work, that's <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> at $199/mo plus $199 setup. Both real prices, both on the pricing page.
 
 What you get for that price is *the work happening*, not the tool. We handle:
 
-- Setting up the SMS sender, getting through carrier registration
+- Setting up the email review request flow
 - Connecting to wherever your customer data lives — booking system, POS, manual entry
 - Writing the message templates and adjusting them for your category and tone
 - Monitoring deliverability and fixing issues when they come up
 - Following up with customers who didn't open the first ask
-- Replying to incoming reviews (good and bad) in your voice
+- Keeping replies as your job unless you upgrade to AI Visibility
 - Reporting back monthly on what's working
 
 The price difference between $30 software and $49 done-for-you is $19 a month. The work difference is roughly *all of it*.
@@ -89,6 +89,6 @@ If you can't name that person — by first name — and they don't already have 
 
 If you'd rather just have it running, that's the case for done-for-you. The price is higher because the work is real and somebody is doing it.
 
-That's what we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> to do ($49/mo, no setup) — review asks, follow-ups, replies, the whole flow, run for you in the background. Same logic applies for <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> ($299/mo + $299 setup, our AI voice agent) and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> ($179/mo + $199 setup). You stay in your business. We handle the AI.
+That's what we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a> to do ($49/mo, no setup) - email review asks, follow-ups, and monthly reporting, run for you in the background. Same logic applies for <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> ($299/mo + $299 setup, our AI voice agent) and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> ($199/mo + $199 setup, with SMS and replies in your voice). You stay in your business. We handle the AI.
 
 [See our pricing](/pricing). Or [run a check](/#calculator) on what your current review pace is costing you, before you decide which path makes sense.
