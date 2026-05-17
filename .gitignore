@@ -56,3 +56,6 @@ lighthouse-local-*
 
 # accidentally-cloned aoh-tooling — belongs in its own repo
 UsersmichaDocumentsaoh-tooling-scan/
+
+# local Claude/Codex runtime state
+.claude/

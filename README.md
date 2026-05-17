@@ -154,3 +154,8 @@ Project 1 in `HIRING.md` was scoped against the v9 single-page site. A lot has s
 
 ## PP Wiring
 - See \\docs/PP_GHL_WIRING.md\\ for full Prospecting Premium + GHL callback mapping.
+
+## Disaster Recovery
+
+- [`docs/LAPTOP_DEATH_RECOVERY.md`](./docs/LAPTOP_DEATH_RECOVERY.md) - restore path if the laptop dies
+- [`docs/BACKUP_READINESS_CHECKLIST.md`](./docs/BACKUP_READINESS_CHECKLIST.md) - recurring backup readiness check
