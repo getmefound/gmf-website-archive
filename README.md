@@ -157,5 +157,6 @@ Project 1 in `HIRING.md` was scoped against the v9 single-page site. A lot has s
 
 ## Disaster Recovery
 
+- [`docs/AOH_OPERATIONS_INDEX.md`](./docs/AOH_OPERATIONS_INDEX.md) - master index for backup, agents, onboarding, and operations docs
 - [`docs/LAPTOP_DEATH_RECOVERY.md`](./docs/LAPTOP_DEATH_RECOVERY.md) - restore path if the laptop dies
 - [`docs/BACKUP_READINESS_CHECKLIST.md`](./docs/BACKUP_READINESS_CHECKLIST.md) - recurring backup readiness check
