@@ -31,20 +31,20 @@ export default function JobsPage() {
     <ControlShell wide>
       <header className="mb-8 flex flex-col gap-3 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-emerald-400/70">
             AOH - Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Scheduled Jobs + Workflow Ledger
           </h1>
-          <p className="mt-1.5 text-sm text-zinc-400">
+          <p className="mt-1.5 text-base text-zinc-400">
             The sales story, agent handoffs, daily run cost, and whether each job is paying for itself.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/mike-mc"
-            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
           >
             Back to MC
           </Link>
@@ -64,10 +64,10 @@ export default function JobsPage() {
       <section className="mb-8 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
         <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-300">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-amber-300">
               Cost source
             </p>
-            <p className="mt-1 max-w-4xl text-sm leading-relaxed text-zinc-400">
+            <p className="mt-1 max-w-4xl text-base leading-relaxed text-zinc-400">
               These are operating estimates, not live vendor bills yet. The page is shaped so real OpenClaw,
               GHL, enrichment, email, and model usage can replace the estimates once telemetry is wired.
             </p>
@@ -97,10 +97,10 @@ function ReachWorkflowHero({ job }: { job: ScheduledJobCost }) {
           <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
             What Reach does
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300">
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-zinc-300">
             {job.reachPart ?? job.overview}
           </p>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-500">
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-zinc-500">
             The company buying Reach is buying a managed outbound system: prospect selection,
             enrichment, outreach, reply handling, booking, and cost review.
           </p>
@@ -140,7 +140,7 @@ function Metric({
 
   return (
     <div className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-5">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+      <p className="font-mono text-xs uppercase tracking-wider text-zinc-500">
         {label}
       </p>
       <p className={`mt-1 font-mono text-3xl font-bold leading-none ${valueClass}`}>
@@ -182,10 +182,10 @@ function JobCostCard({
           <h2 className="text-xl font-semibold tracking-tight text-zinc-50">
             {job.name}
           </h2>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="mt-1 text-base text-zinc-500">
             {job.service} - {job.owner}
           </p>
-          <p className="mt-3 max-w-4xl text-sm leading-relaxed text-zinc-400">
+          <p className="mt-3 max-w-4xl text-base leading-relaxed text-zinc-400">
             {job.notes}
           </p>
         </div>
@@ -204,22 +204,22 @@ function JobCostCard({
 
       <div className="mt-5 grid grid-cols-1 gap-4 xl:grid-cols-[0.8fr_1.2fr]">
         <section className="rounded-xl border border-zinc-800/70 bg-black/20 p-4">
-          <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+          <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
             Job overview
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-400">{job.overview}</p>
+          <p className="mt-2 text-base leading-relaxed text-zinc-400">{job.overview}</p>
           {job.reachPart ? (
             <div className="mt-4 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-emerald-300">
+              <p className="font-mono text-xs uppercase tracking-wider text-emerald-300">
                 Part of Reach
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-zinc-400">{job.reachPart}</p>
+              <p className="mt-1 text-sm leading-relaxed text-zinc-400">{job.reachPart}</p>
             </div>
           ) : null}
         </section>
 
         <section className="rounded-xl border border-zinc-800/70 bg-black/20 p-4">
-          <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+          <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
             Full workflow
           </h3>
           <div className="mt-3 grid gap-4 lg:grid-cols-2">
@@ -230,16 +230,16 @@ function JobCostCard({
       </div>
 
       <section className="mt-4 rounded-xl border border-zinc-800/70 bg-black/20 p-4">
-        <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+        <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
           Agent roles
         </h3>
         <div className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
           {job.agentRoles.map((item) => (
             <div key={`${job.slug}-${item.agent}`} className="rounded-lg border border-zinc-800/70 bg-zinc-950/70 p-3">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-emerald-300">
+              <p className="font-mono text-xs uppercase tracking-wider text-emerald-300">
                 {item.agent}
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-zinc-500">{item.role}</p>
+              <p className="mt-1 text-sm leading-relaxed text-zinc-400">{item.role}</p>
             </div>
           ))}
         </div>
@@ -248,14 +248,14 @@ function JobCostCard({
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1fr] 2xl:grid-cols-[1.15fr_0.85fr]">
         <div className="rounded-xl border border-zinc-800/70 bg-black/20 p-4">
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
               Cost breakdown
             </h3>
-            <span className="text-xs text-zinc-600">{days} day run</span>
+            <span className="text-sm text-zinc-600">{days} day run</span>
           </div>
           <div className="grid gap-2 md:grid-cols-2">
             {job.costBreakdown.map((item) => (
-              <div key={item.label} className="flex items-center justify-between gap-3 rounded-lg border border-zinc-800/70 bg-zinc-950/70 px-3 py-2 text-sm">
+              <div key={item.label} className="flex items-center justify-between gap-3 rounded-lg border border-zinc-800/70 bg-zinc-950/70 px-3 py-2 text-base">
                 <span className="text-zinc-400">{item.label}</span>
                 <span className="font-mono text-zinc-200">{formatUsd(item.amountUsd)}</span>
               </div>
@@ -264,7 +264,7 @@ function JobCostCard({
         </div>
 
         <div className="rounded-xl border border-zinc-800/70 bg-black/20 p-4">
-          <h3 className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+          <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">
             Worth it check
           </h3>
           <div className="grid grid-cols-2 gap-2 xl:grid-cols-4">
@@ -277,7 +277,7 @@ function JobCostCard({
             {job.checks.map((check) => (
               <span
                 key={check}
-                className="rounded-md border border-zinc-800 bg-zinc-900/50 px-2 py-1 text-xs text-zinc-500"
+                className="rounded-md border border-zinc-800 bg-zinc-900/50 px-2 py-1 text-sm text-zinc-500"
               >
                 {check}
               </span>
@@ -303,15 +303,15 @@ function WorkflowStep({
   return (
     <div className="rounded-xl border border-emerald-500/20 bg-black/25 p-3">
       <div className="flex items-center justify-between gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-300">
+        <span className="font-mono text-xs uppercase tracking-wider text-emerald-300">
           Step {index}
         </span>
-        <span className="rounded-md border border-zinc-800 bg-zinc-950/80 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+        <span className="rounded-md border border-zinc-800 bg-zinc-950/80 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-zinc-500">
           {owner}
         </span>
       </div>
-      <p className="mt-3 text-sm font-semibold text-zinc-100">{title}</p>
-      <p className="mt-1 text-xs leading-relaxed text-zinc-500">{description}</p>
+      <p className="mt-3 text-base font-semibold text-zinc-100">{title}</p>
+      <p className="mt-1 text-sm leading-relaxed text-zinc-400">{description}</p>
     </div>
   );
 }
@@ -329,19 +329,19 @@ function WorkflowColumn({
 
   return (
     <div>
-      <p className={`font-mono text-[10px] uppercase tracking-wider ${titleClass}`}>
+      <p className={`font-mono text-xs uppercase tracking-wider ${titleClass}`}>
         {title}
       </p>
       <div className="mt-2 space-y-2">
         {tasks.map((task) => (
           <div key={`${title}-${task.title}`} className="rounded-lg border border-zinc-800/70 bg-zinc-950/70 p-3">
             <div className="flex items-start justify-between gap-3">
-              <p className="text-sm font-medium text-zinc-200">{task.title}</p>
-              <span className="shrink-0 rounded-md border border-zinc-800 bg-zinc-900/60 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+              <p className="text-base font-medium text-zinc-200">{task.title}</p>
+              <span className="shrink-0 rounded-md border border-zinc-800 bg-zinc-900/60 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-zinc-500">
                 {task.owner}
               </span>
             </div>
-            <p className="mt-1 text-xs leading-relaxed text-zinc-500">{task.description}</p>
+            <p className="mt-1 text-sm leading-relaxed text-zinc-400">{task.description}</p>
           </div>
         ))}
       </div>
@@ -369,7 +369,7 @@ function MiniMetric({
 
   return (
     <div className="rounded-lg border border-zinc-800/70 bg-zinc-950/70 p-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+      <p className="font-mono text-xs uppercase tracking-wider text-zinc-600">
         {label}
       </p>
       <p className={`mt-1 font-mono font-semibold ${compact ? "text-sm" : "text-lg"} ${valueClass}`}>
