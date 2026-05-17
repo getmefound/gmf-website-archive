@@ -1,0 +1,294 @@
+import type { Metadata } from "next";
+import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { AGENT_SKILLS, SERVICES } from "@/lib/control/mission";
+
+export const metadata: Metadata = {
+  title: "AOH Ops Index",
+  description: "Internal operations index for AOH Mission Control.",
+  robots: { index: false, follow: false },
+};
+
+const DOCS = [
+  {
+    title: "Operations Index",
+    path: "docs/AOH_OPERATIONS_INDEX.md",
+    purpose: "Master map of the docs, agents, onboarding, and backup work.",
+  },
+  {
+    title: "Laptop Death Recovery",
+    path: "docs/LAPTOP_DEATH_RECOVERY.md",
+    purpose: "What to restore first if the laptop dies or gets replaced.",
+  },
+  {
+    title: "Backup Readiness Checklist",
+    path: "docs/BACKUP_READINESS_CHECKLIST.md",
+    purpose: "The practical safety check for accounts, code, docs, and agent access.",
+  },
+  {
+    title: "Agent Operating Model",
+    path: "docs/AGENT_OPERATING_MODEL.md",
+    purpose: "How agents hand work off, review each other, and avoid one giant messy queue.",
+  },
+  {
+    title: "Review Automation Onboarding",
+    path: "docs/CLIENT_REVIEW_AUTOMATION_ONBOARDING.md",
+    purpose: "Client-side setup flow before Profile and GHL Expert begin backend work.",
+  },
+  {
+    title: "Review Automation Skills",
+    path: "docs/REVIEW_AUTOMATION_AGENT_SKILLS.md",
+    purpose: "Agent skills, boundaries, and first-service operating rules.",
+  },
+  {
+    title: "Profile Knowledge",
+    path: "docs/PROFILE_KNOWLEDGE_PACK.md",
+    purpose: "Google Business Profile access, verification, review links, and handoffs.",
+  },
+  {
+    title: "GHL Expert Knowledge",
+    path: "docs/GHL_EXPERT_KNOWLEDGE_PACK.md",
+    purpose: "GHL setup, reputation management, workflows, and troubleshooting map.",
+  },
+];
+
+const RECOVERY_STEPS = [
+  "Open the password manager and confirm the core business accounts are reachable.",
+  "Get GitHub, Vercel, Stripe, GHL/Hub360AI, DNS, Slack, Obsidian, Google, and the VPS provider back online.",
+  "Clone the website and tooling repos, install dependencies, and run a clean build.",
+  "Restore environment variables from the hosting account instead of storing secrets in docs.",
+  "Verify Mission Control, OpenClaw, GHL access, Slack, and the document vault.",
+];
+
+const HUMAN_CHECKS = [
+  "Password manager has every account needed to operate AOH.",
+  "Vercel and GitHub are accessible without the old laptop.",
+  "Obsidian and Google Drive copies of the operating docs are current.",
+  "OpenClaw/VPS access is documented in the private recovery location.",
+  "No credentials, private keys, or secret values are stored on this webpage.",
+];
+
+export default function OpsIndexPage() {
+  return (
+    <ControlShell>
+      <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
+            AOH · Mission Control
+          </p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
+            Ops Index
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
+            A sanitized webpage for the docs, agents, backup plan, and service
+            operating model. Sensitive recovery details stay out of the website.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href="/mike-mc"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            Back to Hub
+          </a>
+          <Pill tone="accent">noindex</Pill>
+          <Pill tone="warn">sanitized</Pill>
+        </div>
+      </header>
+
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Metric label="Operating docs" value={DOCS.length.toString()} />
+        <Metric label="Agent profiles" value={AGENT_SKILLS.length.toString()} />
+        <Metric label="Service cards" value={SERVICES.length.toString()} />
+      </section>
+
+      <Section
+        eyebrow="Docs"
+        title="Where the operating knowledge lives"
+        sub="This is the public-safe map. The detailed source files remain in the repo."
+      >
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {DOCS.map((doc) => (
+            <article
+              key={doc.path}
+              className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/70 to-zinc-950 p-5"
+            >
+              <div className="mb-3 flex items-start justify-between gap-3">
+                <h2 className="text-lg font-semibold text-zinc-50">{doc.title}</h2>
+                <Pill tone="muted">doc</Pill>
+              </div>
+              <p className="mb-3 text-sm leading-relaxed text-zinc-400">
+                {doc.purpose}
+              </p>
+              <code className="block rounded-lg border border-zinc-800 bg-black/25 px-3 py-2 font-mono text-xs text-zinc-500">
+                {doc.path}
+              </code>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Services"
+        title="Offerings and agent ownership"
+        sub="Each service is meant to become repeatable across many clients: client, service, task, owner, status."
+      >
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {SERVICES.map((service) => (
+            <article
+              key={service.slug}
+              className="rounded-2xl border border-zinc-800/60 bg-zinc-950/80 p-5"
+            >
+              <div className="mb-4 flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
+                    {service.job}
+                  </p>
+                  <h2 className="mt-1 text-lg font-semibold text-zinc-50">
+                    {service.name}
+                  </h2>
+                </div>
+                <Pill tone={service.blocked ? "warn" : "accent"}>
+                  {service.openTasks} open
+                </Pill>
+              </div>
+              <p className="mb-4 text-sm leading-relaxed text-zinc-400">
+                {service.outcome}
+              </p>
+              <TagList label="Agents" items={service.agents} />
+              <TagList label="Skills" items={service.skills} muted />
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Agents"
+        title="Loaded skills by agent"
+        sub="These are the agent responsibilities Mission Control should show before real client volume arrives."
+      >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {AGENT_SKILLS.map((agent) => (
+            <article
+              key={agent.agent}
+              className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-5"
+            >
+              <div className="mb-3 flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="font-mono text-base font-bold uppercase tracking-wider text-zinc-50">
+                    {agent.agent}
+                  </h2>
+                  <p className="mt-1 text-sm text-zinc-500">{agent.role}</p>
+                </div>
+                <Pill tone="default">{agent.skills.length}</Pill>
+              </div>
+              <TagList label="Owns" items={agent.serviceOwners} />
+              <TagList label="Skills" items={agent.skills} muted />
+              {agent.sourceDocs ? (
+                <TagList label="Source docs" items={agent.sourceDocs} muted />
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Recovery"
+        title="Laptop dies scenario"
+        sub="This page shows the sequence, not the private credentials or host details."
+      >
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <Checklist title="Restore order" items={RECOVERY_STEPS} />
+          <Checklist title="Human readiness check" items={HUMAN_CHECKS} />
+        </div>
+      </Section>
+    </ControlShell>
+  );
+}
+
+function Section({
+  eyebrow,
+  title,
+  sub,
+  children,
+}: {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="mt-12">
+      <header className="mb-5 max-w-3xl">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/80">
+          {eyebrow}
+        </p>
+        <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-zinc-500">{sub}</p>
+      </header>
+      {children}
+    </section>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-5">
+      <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+        {label}
+      </p>
+      <p className="mt-1 font-mono text-4xl font-bold leading-none text-emerald-300">
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function TagList({
+  label,
+  items,
+  muted,
+}: {
+  label: string;
+  items: string[];
+  muted?: boolean;
+}) {
+  return (
+    <div className="mb-3 last:mb-0">
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-600">
+        {label}
+      </p>
+      <div className="flex flex-wrap gap-1.5">
+        {items.map((item) => (
+          <span
+            key={item}
+            className={`rounded-md border px-2 py-1 text-xs ${
+              muted
+                ? "border-zinc-800 bg-zinc-900/50 text-zinc-500"
+                : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+            }`}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Checklist({ title, items }: { title: string; items: string[] }) {
+  return (
+    <article className="rounded-2xl border border-zinc-800/60 bg-zinc-950/80 p-5">
+      <h2 className="mb-4 text-lg font-semibold text-zinc-50">{title}</h2>
+      <ul className="space-y-3">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3 text-sm leading-relaxed text-zinc-400">
+            <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-emerald-400" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
