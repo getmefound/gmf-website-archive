@@ -294,7 +294,7 @@ export default async function AIVisibilityReportPage({
               Book a Call
             </Link>
           </div>
-          {runId && <ReportTiming runId={runId} />}
+          {runId && <ReportTiming runId={runId} email={email} />}
         </div>
       </section>
 

@@ -46,7 +46,7 @@ export default async function MarketingReportPage({
               Book a Call
             </Link>
           </div>
-          {runId ? <ReportTiming runId={runId} /> : null}
+          {runId ? <ReportTiming runId={runId} email={emailRaw} /> : null}
         </div>
       </section>
 

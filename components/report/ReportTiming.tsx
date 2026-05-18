@@ -16,7 +16,7 @@ type TimingResponse = {
   };
 };
 
-export function ReportTiming({ runId }: { runId: string }) {
+export function ReportTiming({ runId, email }: { runId: string; email?: string }) {
   const [state, setState] = useState<TimingResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +26,9 @@ export function ReportTiming({ runId }: { runId: string }) {
 
     async function tick() {
       try {
-        const res = await fetch(`/api/report/status?runId=${encodeURIComponent(runId)}`, {
+        const params = new URLSearchParams({ runId });
+        if (email) params.set("email", email);
+        const res = await fetch(`/api/report/status?${params.toString()}`, {
           cache: "no-store",
         });
         const json = (await res.json()) as TimingResponse;
@@ -46,7 +48,7 @@ export function ReportTiming({ runId }: { runId: string }) {
       active = false;
       if (timer) clearTimeout(timer);
     };
-  }, [runId]);
+  }, [runId, email]);
 
   const stageLabel = useMemo(() => {
     if (!state?.ok) return "Waiting for status...";
