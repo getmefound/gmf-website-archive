@@ -44,8 +44,6 @@ const DISCOVERY_BOOKING_HREF = "https://link.hub360ai.com/widget/booking/1Xq9XMN
  *
  * Env vars required (set in Vercel project settings):
  *   VERCEL_TOKEN  GITHUB_PAT  GHL_PIT_TOKEN  GHL_LOCATION_ID
- *   GOOGLE_CALENDAR_CLIENT_ID  GOOGLE_CALENDAR_CLIENT_SECRET
- *   GOOGLE_CALENDAR_REFRESH_TOKEN  GOOGLE_CALENDAR_IDS
  * (VERCEL_PROJECT_ID has a hardcoded fallback)
  */
 
@@ -174,50 +172,35 @@ export default async function ControlPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function SchedulerCard({ data }: { data: ControlData }) {
-  const ghlEvents = data.todaysEvents;
-  const googleEvents = data.googleEvents;
+  const events = data.todaysEvents;
   const calendar = data.discoveryCalendar;
   const realRows: OwnedRow[] = [];
-  const googleLive = googleEvents !== null;
-  const ghlLive = ghlEvents !== null;
-  const schedulerLive = googleLive || ghlLive;
+  const schedulerLive = events !== null;
 
-  if (googleEvents && googleEvents.length > 0) {
-    const upcoming = googleEvents
-      .filter((e) => new Date(e.startTimeIso) > new Date())
-      .slice(0, 4);
+  if (events) {
+    const upcoming = events.slice(0, 4);
     const next = upcoming[0];
 
     for (const e of upcoming) {
       realRows.push({
         primary: `${fmtTime(e.startTimeIso)} · ${e.title}`,
-        secondary: `${timeUntil(e.startTimeIso)} · ${e.calendarName}`,
+        secondary: `${timeUntil(e.startTimeIso)} · AOH calendar ${e.kind === "blocked" ? "block" : "appointment"}`,
         badge: { tone: e === next ? "hot" : "default", label: timeUntil(e.startTimeIso) },
       });
     }
-  } else if (googleEvents && googleEvents.length === 0) {
-    realRows.push({
-      primary: "Google Calendar",
-      secondary: "Connected - no remaining events today",
-      badge: { tone: "accent", label: "live" },
-    });
-  }
 
-  if (ghlEvents) {
     realRows.push({
-      primary: calendar?.name ?? "Discovery calendar",
+      primary: calendar?.name ?? "AOH calendar",
       secondary:
-        ghlEvents.length > 0
-          ? `${ghlEvents.length} discovery bookings today`
-          : "Connected to GHL - no discovery calls on today's calendar",
+        events.length > 0
+          ? `${events.length} AOH calendar item${events.length === 1 ? "" : "s"} today`
+          : "Connected to AOH calendar - no remaining items today",
       badge: { tone: "accent", label: "live" },
     });
-  }
-
-  if (!schedulerLive) {
+  } else {
     realRows.push({
-      primary: "Google Calendar",
-      secondary: "Not wired - add Google Calendar OAuth env vars in Vercel",
+      primary: "AOH calendar",
+      secondary: "Calendar data unavailable - check HighLevel API/token",
       badge: { tone: "warn", label: "check" },
     });
   }
@@ -227,23 +210,17 @@ function SchedulerCard({ data }: { data: ControlData }) {
       name="Scheduler"
       role="Time defender · books demos · briefs you before calls"
       status={schedulerLive ? "live" : "manual"}
-      cadence={googleLive ? "live - Google Calendar + GHL" : "manual today - Google Cal not wired"}
+      cadence={schedulerLive ? "live - AOH HighLevel calendar" : "manual today - AOH calendar check needed"}
       activity={{
-        lastDone: googleLive
-          ? googleEvents.length > 0
-            ? `Google Calendar synced ${googleEvents.length} event${googleEvents.length === 1 ? "" : "s"} today`
-            : "Google Calendar connected"
-          : ghlLive
-            ? `${calendar?.name ?? "Discovery calendar"} connected`
-            : "Google Calendar not wired",
-        doingNow: googleLive
-          ? `${googleEvents.length} Google event${googleEvents.length === 1 ? "" : "s"} - ${ghlEvents?.length ?? 0} GHL discovery booking${ghlEvents?.length === 1 ? "" : "s"}`
-          : "Needs Google Calendar OAuth env vars",
-        upNext: googleLive
-          ? "Use this feed for full-day agenda and pre-meeting briefs"
-          : "Add Google Calendar OAuth credentials in Vercel",
+        lastDone: schedulerLive
+          ? `${calendar?.name ?? "AOH calendar"} connected`
+          : "AOH calendar data unavailable",
+        doingNow: schedulerLive
+          ? `${events.length} AOH calendar item${events.length === 1 ? "" : "s"} today`
+          : "Check HighLevel calendar API/token",
+        upNext: "Add manual AOH-only items as HighLevel appointments or block slots",
       }}
-      ownedTitle={googleLive ? "Today's agenda - Google Calendar live" : "Today's agenda - needs Google Calendar"}
+      ownedTitle={schedulerLive ? "Today's AOH calendar - HighLevel live" : "Today's AOH calendar - needs GHL check"}
       ownedRows={realRows}
       ownedFooter={
         <div className="flex gap-2">
@@ -256,12 +233,12 @@ function SchedulerCard({ data }: { data: ControlData }) {
             open booking page
           </a>
           <a
-            href="https://calendar.google.com"
+            href="https://app.hub360ai.com"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 rounded-md border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-center font-mono text-[10px] uppercase tracking-wider text-zinc-400 hover:bg-zinc-900"
           >
-            open Google Cal
+            open AOH calendar
           </a>
         </div>
       }

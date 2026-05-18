@@ -13,10 +13,6 @@ export async function GET() {
   const locationId = process.env.GHL_LOCATION_ID ?? "";
   const githubPat = process.env.GITHUB_PAT ?? "";
   const vercelToken = process.env.VERCEL_TOKEN ?? "";
-  const googleClientId = process.env.GOOGLE_CALENDAR_CLIENT_ID ?? "";
-  const googleClientSecret = process.env.GOOGLE_CALENDAR_CLIENT_SECRET ?? "";
-  const googleRefreshToken = process.env.GOOGLE_CALENDAR_REFRESH_TOKEN ?? "";
-  const googleCalendarIds = process.env.GOOGLE_CALENDAR_IDS ?? "";
 
   const mask = (s: string) =>
     s.length > 10 ? `${s.slice(0, 6)}…${s.slice(-4)}` : s ? "(short)" : "(empty)";
@@ -69,16 +65,6 @@ export async function GET() {
       GHL_LOCATION_ID: { present: !!locationId, value: locationId },
       GITHUB_PAT: { present: !!githubPat, masked: mask(githubPat) },
       VERCEL_TOKEN: { present: !!vercelToken, masked: mask(vercelToken) },
-      GOOGLE_CALENDAR_CLIENT_ID: { present: !!googleClientId, masked: mask(googleClientId) },
-      GOOGLE_CALENDAR_CLIENT_SECRET: {
-        present: !!googleClientSecret,
-        masked: mask(googleClientSecret),
-      },
-      GOOGLE_CALENDAR_REFRESH_TOKEN: {
-        present: !!googleRefreshToken,
-        masked: mask(googleRefreshToken),
-      },
-      GOOGLE_CALENDAR_IDS: { present: !!googleCalendarIds, value: googleCalendarIds },
     },
     ghlProbe,
     timestamp: new Date().toISOString(),

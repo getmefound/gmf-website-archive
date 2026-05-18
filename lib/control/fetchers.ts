@@ -9,10 +9,6 @@
  *   GITHUB_PAT            - github.com fine-grained token, repo:read on aoh-inc/aoh-website + aoh-inc/aoh-tooling
  *   GHL_PIT_TOKEN           - Hub360ai PIT (Bearer pit-xxx)
  *   GHL_LOCATION_ID       - sub-account id (visible in Hub360 admin URL)
- *   GOOGLE_CALENDAR_CLIENT_ID
- *   GOOGLE_CALENDAR_CLIENT_SECRET
- *   GOOGLE_CALENDAR_REFRESH_TOKEN
- *   GOOGLE_CALENDAR_IDS   - comma-separated calendar ids, defaults to primary
  *
  * All fetchers cache for 60s via Next's `next: { revalidate: 60 }`.
  */
@@ -221,16 +217,7 @@ export type CalEvent = {
   startTimeIso: string;
   endTimeIso: string;
   contactId?: string;
-};
-
-export type GoogleCalendarEvent = {
-  id: string;
-  title: string;
-  calendarId: string;
-  calendarName: string;
-  startTimeIso: string;
-  endTimeIso: string;
-  htmlLink?: string;
+  kind: "appointment" | "blocked";
 };
 
 export async function getCalendarEventsRange(
@@ -254,6 +241,8 @@ export async function getCalendarEventsRange(
       events?: Array<{
         id: string;
         title?: string;
+        name?: string;
+        eventType?: string;
         calendarId?: string;
         startTime: string;
         endTime: string;
@@ -263,11 +252,12 @@ export async function getCalendarEventsRange(
     return (
       data.events?.map((e) => ({
         id: e.id,
-        title: e.title ?? "untitled",
+        title: e.title ?? e.name ?? "AOH appointment",
         calendarId: e.calendarId,
         startTimeIso: e.startTime,
         endTimeIso: e.endTime,
         contactId: e.contactId,
+        kind: "appointment",
       })) ?? []
     );
   } catch {
@@ -275,91 +265,42 @@ export async function getCalendarEventsRange(
   }
 }
 
-async function getGoogleAccessToken(): Promise<string | null> {
-  const clientId = process.env.GOOGLE_CALENDAR_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CALENDAR_CLIENT_SECRET;
-  const refreshToken = process.env.GOOGLE_CALENDAR_REFRESH_TOKEN;
-  if (!clientId || !clientSecret || !refreshToken) return null;
-
-  try {
-    const res = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: refreshToken,
-        grant_type: "refresh_token",
-      }),
-      ...REVAL,
-    });
-    if (!res.ok) return null;
-    const data = (await res.json()) as { access_token?: string };
-    return data.access_token ?? null;
-  } catch {
-    return null;
-  }
-}
-
-function googleCalendarIds() {
-  return (process.env.GOOGLE_CALENDAR_IDS ?? "primary")
-    .split(",")
-    .map((id) => id.trim())
-    .filter(Boolean);
-}
-
-export async function getGoogleCalendarEventsRange(
+export async function getBlockedSlotsRange(
   startTimeIso: string,
   endTimeIso: string,
-): Promise<GoogleCalendarEvent[] | null> {
-  const accessToken = await getGoogleAccessToken();
-  if (!accessToken) return null;
+  calendarId: string,
+): Promise<CalEvent[] | null> {
+  const headers = ghlHeaders();
+  const locationId = process.env.GHL_LOCATION_ID;
+  if (!headers || !locationId || !calendarId) return null;
 
-  const events: GoogleCalendarEvent[] = [];
   try {
-    for (const calendarId of googleCalendarIds()) {
-      const url = new URL(
-        `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`,
-      );
-      url.searchParams.set("timeMin", startTimeIso);
-      url.searchParams.set("timeMax", endTimeIso);
-      url.searchParams.set("singleEvents", "true");
-      url.searchParams.set("orderBy", "startTime");
-      url.searchParams.set("maxResults", "20");
-
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${accessToken}`, Accept: "application/json" },
-        ...REVAL,
-      });
-      if (!res.ok) return null;
-      const data = (await res.json()) as {
-        summary?: string;
-        items?: Array<{
-          id: string;
-          summary?: string;
-          start?: { dateTime?: string; date?: string };
-          end?: { dateTime?: string; date?: string };
-          htmlLink?: string;
-        }>;
-      };
-
-      for (const event of data.items ?? []) {
-        const start = event.start?.dateTime ?? event.start?.date;
-        const end = event.end?.dateTime ?? event.end?.date ?? start;
-        if (!start || !end) continue;
-        events.push({
-          id: event.id,
-          title: event.summary ?? "busy",
-          calendarId,
-          calendarName: data.summary ?? calendarId,
-          startTimeIso: start,
-          endTimeIso: end,
-          htmlLink: event.htmlLink,
-        });
-      }
-    }
-    return events.sort(
-      (a, b) => new Date(a.startTimeIso).getTime() - new Date(b.startTimeIso).getTime(),
+    const url = new URL(`${GHL_BASE}/calendars/blocked-slots`);
+    url.searchParams.set("locationId", locationId);
+    url.searchParams.set("calendarId", calendarId);
+    url.searchParams.set("startTime", String(new Date(startTimeIso).getTime()));
+    url.searchParams.set("endTime", String(new Date(endTimeIso).getTime()));
+    const res = await fetch(url, { headers, ...REVAL });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      events?: Array<{
+        id: string;
+        title?: string;
+        name?: string;
+        calendarId?: string;
+        startTime: string;
+        endTime: string;
+      }>;
+    };
+    return (
+      data.events?.map((e) => ({
+        id: e.id,
+        title: e.title ?? e.name ?? "Blocked time",
+        calendarId: e.calendarId,
+        startTimeIso: e.startTime,
+        endTimeIso: e.endTime,
+        kind: "blocked",
+      })) ?? []
     );
   } catch {
     return null;
@@ -376,7 +317,6 @@ export type ControlData = {
   commitsTooling: GitCommit[] | null;
   pipelines: Pipeline[] | null;
   todaysEvents: CalEvent[] | null;
-  googleEvents: GoogleCalendarEvent[] | null;
   discoveryCalendar: Calendar | null;
   reviewsOutreach: { pipeline: Pipeline | null; opportunities: Opportunity[] | null };
   aiVisOutreach: { pipeline: Pipeline | null; opportunities: Opportunity[] | null };
@@ -468,7 +408,7 @@ export async function getControlData(): Promise<ControlData> {
   const startOfDay = getUtcTimeForNewYorkDay(now, 0, 0, 0, 0);
   const endOfDay = getUtcTimeForNewYorkDay(now, 23, 59, 59, 999);
 
-  const [reviewsOpps, aiVisOpps, todaysEvents, googleEvents] = await Promise.all([
+  const [reviewsOpps, aiVisOpps, appointments, blockedSlots] = await Promise.all([
     reviewsPipeline
       ? searchOpportunities(reviewsPipeline.id, 100)
       : Promise.resolve(null),
@@ -482,8 +422,20 @@ export async function getControlData(): Promise<ControlData> {
           discoveryCalendar.id,
         )
       : Promise.resolve(null),
-    getGoogleCalendarEventsRange(startOfDay.toISOString(), endOfDay.toISOString()),
+    discoveryCalendar
+      ? getBlockedSlotsRange(
+          startOfDay.toISOString(),
+          endOfDay.toISOString(),
+          discoveryCalendar.id,
+        )
+      : Promise.resolve(null),
   ]);
+  const todaysEvents =
+    appointments || blockedSlots
+      ? [...(appointments ?? []), ...(blockedSlots ?? [])].sort(
+          (a, b) => new Date(a.startTimeIso).getTime() - new Date(b.startTimeIso).getTime(),
+        )
+      : null;
 
   return {
     deploy,
@@ -491,7 +443,6 @@ export async function getControlData(): Promise<ControlData> {
     commitsTooling,
     pipelines,
     todaysEvents,
-    googleEvents,
     discoveryCalendar,
     reviewsOutreach: { pipeline: reviewsPipeline, opportunities: reviewsOpps },
     aiVisOutreach: { pipeline: aiVisPipeline, opportunities: aiVisOpps },
