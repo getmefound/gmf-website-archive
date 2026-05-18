@@ -133,8 +133,8 @@ function ReachWorkflowHero({ job }: { job: ScheduledJobCost }) {
           </p>
           <p className="mt-4 max-w-none text-base leading-relaxed text-zinc-500">
             For a sales demo, keep this section high-level: Reach finds the right local businesses,
-            creates a report-led reason to click, sends a dynamic email using prospect and competitor
-            data, and routes interested people to a call. The longer internal build/run flow is below.
+            creates a report-led reason to reply, sends a dynamic email using prospect and competitor
+            data, and routes interested people to a report or call. The longer internal build/run flow is below.
           </p>
         </div>
 
@@ -166,12 +166,13 @@ function ReachReviewGateSection() {
             Agents work and review before Mike approves
           </h2>
           <p className="mt-2 max-w-none text-base leading-relaxed text-zinc-400">
-            Reach is blocked from live sending until GHL Expert verifies HighLevel, Auditor reviews
-            the risk, and Manager decides the work is ready to escalate. Mike should not be asked
-            to gather technical details unless no agent or tool access exists.
+            Website visitor reports are live-tested. Reach is still blocked from scaled campaign
+            sending until GHL Expert verifies reply routing, Auditor reviews the risk, and Manager
+            decides the work is ready to escalate. Mike should not be asked to gather technical
+            details unless no agent or tool access exists.
           </p>
         </div>
-        <Pill tone="warn">blocked until live GHL verification</Pill>
+        <Pill tone="warn">campaign routing still gated</Pill>
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">

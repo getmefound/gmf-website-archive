@@ -16,9 +16,9 @@ Do not publish, send, enroll contacts, or enable HighLevel AI. The system is int
   - `{{custom_values.aoh_business_name}}` = `AI Outsource Hub`
   - `{{custom_values.aoh_support_email}}` = `support@aioutsourcehub.com`
   - `{{custom_values.aoh_support_phone}}` = `877-521-2224`
-  - `{{custom_values.aoh_logo_url}}` = `[PENDING LOGO URL]`
-  - `{{custom_values.aoh_discovery_calendar_link}}` = `[PENDING /aoh-talk LINK VERIFICATION]`
-  - `{{custom_values.aoh_physical_mailing_address}}` = `[PENDING MIKE ADDRESS]`
+  - `{{custom_values.aoh_logo_url}}` = `https://aioutsourcehub.com/team/mike.jpg`
+  - `{{custom_values.aoh_discovery_calendar_link}}` = `https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY`
+  - `{{custom_values.aoh_physical_mailing_address}}` = `13727 SW 152nd St. #1236, Miami, FL 33177`
 - Created and verified 9 Reach custom fields in GHL:
   - `{{contact.run_id}}` - Single line
   - `{{contact.report_url}}` - Single line
@@ -49,12 +49,21 @@ Do not publish, send, enroll contacts, or enable HighLevel AI. The system is int
 - Verified `npm run build` after website changes.
 - Pushed latest commits to GitHub.
 
-## Current blockers
+## Current blockers superseded by 2026-05-18 verification
 
-- `/aoh-talk` calendar itself is not fully completed/verified yet.
-- `aoh_logo_url` still has placeholder value.
-- `aoh_discovery_calendar_link` still has placeholder value until `/aoh-talk` URL is verified live.
-- `aoh_physical_mailing_address` still has placeholder value. No real outbound email can launch until this is real.
+- `/aoh-talk` public URL now loads and resolves to GHL calendar id
+  `1Xq9XMNFjvxgxQj9kNLY`.
+- `aoh_discovery_calendar_link` is populated in the active production location.
+- `aoh_logo_url` is populated in the active production location.
+- `aoh_physical_mailing_address` is populated in the active production
+  location.
+- Website visitor report intake, AI visibility intake, and combined report
+  delivery workflows are published in the active production location.
+- Combined report delivery was tested on a contact with both URLs and executed:
+  wait -> branch -> send email -> update opportunity -> add tag -> finish.
+
+## Remaining blockers
+
 - Reach workflow must remain Draft. Do not publish.
 - No Send Email nodes yet.
 - No contact enrollment or test workflow runs yet.
@@ -141,21 +150,15 @@ Redirect:
 
 ## Tomorrow pickup order
 
-1. Finish creating/configuring the `/aoh-talk` GHL calendar.
-2. Verify the public booking URL loads:
-   - `https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY`
-3. Update GHL custom value:
-   - `aoh_discovery_calendar_link = https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY`
-4. Update GHL custom value:
-   - `aoh_logo_url = https://aioutsourcehub.com/logos/aoh-wordmark-dark-h480.png`
-5. Decide/provide a compliant business mailing address for:
-   - `aoh_physical_mailing_address`
-6. Have GHL Expert/Auditor verify:
+1. Keep the `Reach Campaign - Draft Skeleton` unpublished until final launch
+   approval.
+2. Have GHL Expert/Auditor verify:
    - calendar public page
    - form fields
    - confirmation message
    - calendar does not expose internal "Template Lab" language
-7. Only after calendar/custom values are clean, resume Reach workflow work.
+3. Resume Reach workflow work only after final Sender/Coach/Auditor approval
+   of the reply-first campaign copy and merge fields.
 
 ## Hard rules
 

@@ -144,16 +144,16 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     owner: "Website + GHL Expert",
     status: "verified",
     description:
-      "The site can accept a report request, create a run ID, send payload to the GHL webhook, expose report status, and receive report/heatmap callbacks.",
-    verification: "Verified by code/build: /api/report, /api/report/status, and /api/report/callback exist and compile.",
+      "The site can accept a report request, create a run ID, create/update the GHL contact, write report fields, add generator tags, expose report status, and receive report/map callbacks.",
+    verification: "Verified 2026-05-18 by build, production deploy, GHL API handoff, and callback/status smoke tests.",
   },
   {
     title: "Create marketing report and heatmap",
     owner: "GHL Expert",
-    status: "partial",
+    status: "verified",
     description:
       "After a warm campaign reply or website form request, the GHL workflow must generate the marketing audit report, run the map visibility report where available, store the URLs, and call the website callback when ready.",
-    verification: "Website callback/status endpoints are built. GHL report + map visibility workflow is documented but not verified complete.",
+    verification: "Website visitor marketing intake, AI visibility intake, and combined delivery workflows are published in the active production location. Delivery workflow test executed wait -> branch -> send email -> update opportunity -> add tag -> finish.",
   },
   {
     title: "Create AI Visibility report",
@@ -169,7 +169,7 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     status: "partial",
     description:
       "Campaign prospects should receive report delivery only after a warm signal such as reply `send`, reply `book`, or a manually approved test segment. Direct report links remain a test variant, not the default.",
-    verification: "Report submit/status/callback routes are built; warm-reply campaign automation is not complete.",
+    verification: "Website visitor combined report delivery workflow is live and tested. Campaign reply classification still needs its own live automation before scaling outbound sends.",
   },
   {
     title: "Draft workflow skeleton",
@@ -206,10 +206,10 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
   {
     title: "Book interested prospects on /aoh-talk",
     owner: "Booker + Scheduler",
-    status: "partial",
+    status: "verified",
     description:
       "Warm replies should be guided to the Discovery Round Robin calendar and tagged by interest so the right pipeline/stage updates.",
-    verification: "/aoh-talk calendar spec is documented; actual GHL calendar/workflow QA still needs to pass.",
+    verification: "AOH Talk booking URL loads and production custom value aoh_discovery_calendar_link is set to https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY.",
   },
   {
     title: "If they buy, confirm Stripe-to-GHL handoff",
@@ -297,10 +297,10 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
   {
     title: "Live GHL report + heatmap workflow",
     owner: "GHL Expert",
-    status: "partial",
+    status: "verified",
     description:
-      "Need to confirm the active AOH/Hub360AI production location generates the marketing report and map visibility report after a website request or warm campaign reply, stores URLs, and calls the website callback with the right runId.",
-    verification: "Website side is built; live production-location GHL workflow completion is not verified. Do not verify this against AOH Client Template Lab unless Mike explicitly asks for template QA.",
+      "Active AOH/Hub360AI production workflows generate/store report URLs, call the website callback, and use a single combined delivery workflow to avoid duplicate customer emails.",
+    verification: "Verified 2026-05-18 in active production location: Website Visitor Free Marketing Report Intake, Website Visitor Free AI Visibility Report Intake, and Website Visitor Report Delivery are published; delivery execution completed successfully.",
   },
   {
     title: "Campaign reply-to-report automation",
@@ -308,7 +308,7 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     status: "partial",
     description:
       "Need a reliable way to turn `send` replies into report generation/delivery and `book` replies into AOH Talk booking handoff.",
-    verification: "Report request flow exists; outbound reply-to-report automation still needs finishing.",
+    verification: "Website/report delivery flow is live; outbound reply classification and campaign-specific GHL routing still need final build/QA before scaled sends.",
   },
   {
     title: "AOH Client Template Lab template check",
@@ -316,7 +316,7 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     status: "partial",
     description:
       "Fields, values, tags, and a Draft-only Reach workflow skeleton exist in the template lab. This is reusable setup only, not proof that live AOH campaigns/report workflows are wired.",
-    verification: "Template-lab setup was verified manually/visually; active production-location workflow proof is still required before launch.",
+    verification: "Template-lab setup was verified manually/visually; keep it separate from the active production workflows that now handle website visitor reports.",
   },
   {
     title: "Prospect list filter before spending",
