@@ -193,7 +193,7 @@ function SchedulerCard({ data }: { data: ControlData }) {
       primary: calendar?.name ?? "Discovery calendar",
       secondary:
         events.length > 0
-          ? `${events.length} events today`
+          ? `${events.length} discovery bookings today`
           : "Connected to GHL - no discovery calls on today's calendar",
       badge: { tone: "accent", label: "live" },
     });
@@ -209,8 +209,8 @@ function SchedulerCard({ data }: { data: ControlData }) {
     <AgentCard
       name="Scheduler"
       role="Time defender · books demos · briefs you before calls"
-      status="manual"
-      cadence={events ? "live - AOH Discovery + GHL" : "manual today - via Google Cal + GHL"}
+      status={events ? "live" : "manual"}
+      cadence={events ? "live - AOH Discovery bookings" : "manual today - Google Cal not wired"}
       activity={{
         lastDone: events
           ? events.length > 0
@@ -218,9 +218,9 @@ function SchedulerCard({ data }: { data: ControlData }) {
             : `${calendar?.name ?? "Discovery calendar"} connected`
           : "Discovery calendar data unavailable",
         doingNow: events
-          ? `${events.length} events on the calendar today`
+          ? `${events.length} discovery bookings in GHL today`
           : "Check GHL calendar API/token",
-        upNext: "When agent ships (slot 5b): defends focus blocks + auto-briefs",
+        upNext: "Next: wire Google Calendar if this should show Mike's full day",
       }}
       ownedTitle={events ? "AOH Discovery calendar - GHL live" : "AOH Discovery calendar - needs GHL check"}
       ownedRows={realRows}
