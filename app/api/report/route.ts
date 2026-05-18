@@ -302,6 +302,12 @@ type GHLForwardResult = {
 };
 
 async function forwardToGHL(payload: GHLPayload): Promise<GHLForwardResult> {
+  const hasApiHandoff = Boolean(process.env.GHL_PIT_TOKEN?.trim() && process.env.GHL_LOCATION_ID?.trim());
+
+  if (payload.reportLane === "website_free_report" && hasApiHandoff) {
+    return forwardToGHLViaApi(payload);
+  }
+
   const url =
     payload.reportLane === "website_free_report"
       ? process.env.GHL_WEBSITE_REPORT_WEBHOOK_URL?.trim() || process.env.GHL_WEBHOOK_URL?.trim()

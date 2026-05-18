@@ -49,17 +49,21 @@ Website entrypoint:
 
 Website expectation:
 
-- The website forwards the submission to
-  `process.env.GHL_WEBSITE_REPORT_WEBHOOK_URL`.
-- If that is not set, the website falls back to legacy `GHL_WEBHOOK_URL`.
-- If both are missing, the homepage can accept a request but GHL may not receive
-  it.
+- The preferred path is the no-premium API/tag handoff: the website creates or
+  updates the GHL contact, writes report fields, and adds the report request
+  tags.
+- If API credentials are unavailable, the website may fall back to
+  `process.env.GHL_WEBSITE_REPORT_WEBHOOK_URL`, then legacy `GHL_WEBHOOK_URL`.
+- Inbound Webhook triggers are not the default because they can add HighLevel
+  premium cost.
 
 Current operational blocker:
 
-- The no-premium Contact Tag flow is live-ready after GHL publication.
+- No current website visitor blocker after 2026-05-18 smoke testing.
 - Vercel has `GHL_PIT_TOKEN` and `GHL_LOCATION_ID`, so a report webhook URL is
   not required for the homepage lane.
+- Campaign reply routing is separate and still requires final build/QA before
+  scaled outbound sending.
 
 What GHL Expert must find:
 
@@ -87,12 +91,22 @@ Current live workflow design:
 - Website API writes the contact and tags.
 - `Website Visitor Free Marketing Report Intake` starts from
   `aoh_generate_marketing_report`.
-- `AI Visibility Report Ordered` starts from
+- `Website Visitor Free AI Visibility Report Intake` starts from
   `aoh_generate_ai_visibility_report`.
 - Both workflows create/update an opportunity in the `Website Leads` pipeline at
   `Website Report Requested`.
 - Marketing callback sends `event = report_ready` with `auditUrl`.
 - AI visibility/map callback sends `event = heatmap_ready` with `heatmapUrl`.
+- `Website Visitor Report Delivery` waits until both URLs exist, sends one
+  combined customer email, updates the opportunity, and tags the contact.
+
+Verified live workflows as of 2026-05-18:
+
+- `Website Visitor Free Marketing Report Intake` - published
+- `Website Visitor Free AI Visibility Report Intake` - published
+- `Website Visitor Report Delivery` - published
+- Combined delivery smoke test completed:
+  wait -> branch -> send email -> update opportunity -> add tag -> finish
 
 Manager green-light checklist:
 
@@ -151,9 +165,13 @@ Website/GHL entrypoint:
 
 Likely GHL workflow names:
 
-- `Marketing Audit Report Ordered`
-- `AI Visibility Report Ordered`
-- `First Report Engagement Tagging`
+- `Reach Reviews - First Touch to Engaged` - published
+- `Reach AI Visibility - First Touch to Engaged` - published
+- `Reach Reviews - Warm Lead` - draft
+- `Reach Reviews - Warm Tagging` - draft
+- `First Report Engagement Tagging` - published
+- Legacy/older names may still exist, including `Marketing Audit Report
+  Ordered`; do not assume they are the active campaign lane without proof.
 
 Important distinction:
 

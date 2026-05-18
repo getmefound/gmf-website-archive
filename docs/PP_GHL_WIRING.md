@@ -13,8 +13,10 @@ Important distinction:
   about templates, snapshots, reusable fields, or draft workflow QA. Public
   website report intake and campaign reply routing are live AOH/Hub360AI
   production-location concerns.
-- `GHL_WEBSITE_REPORT_WEBHOOK_URL` is the website-to-GHL receiving endpoint for
-  the public homepage report route.
+- The public homepage report route should use the no-premium API/tag handoff
+  when `GHL_PIT_TOKEN` and `GHL_LOCATION_ID` exist.
+- `GHL_WEBSITE_REPORT_WEBHOOK_URL` is only a fallback website-to-GHL receiving
+  endpoint for the public homepage report route when API handoff is unavailable.
 - `GHL_CAMPAIGN_REPORT_WEBHOOK_URL` is the website-to-GHL receiving endpoint for
   warm campaign report requests after a prospect replies `send` or `book`, or
   after a manually approved campaign test.
@@ -34,8 +36,7 @@ Important distinction:
 
 1. Visitor submits report form (`/api/report`).
 2. Site creates `runId` + redirects user to the matching report page.
-3. If a report webhook URL exists, the site posts the request to that webhook.
-4. If no report webhook URL exists, the site creates/updates the GHL contact,
+3. If API handoff credentials exist, the site creates/updates the GHL contact,
    writes existing report custom fields, and adds:
    - `aoh_website_report_requested`
    - `aoh_report_requested`
@@ -43,6 +44,8 @@ Important distinction:
    - `aoh_generate_ai_visibility_report` for AI visibility reports
    - both generator tags when the visitor requested both reports
    - `aoh_secondary_report_requested` when both reports were requested
+4. If API handoff is unavailable and a report webhook URL exists, the site posts
+   the request to that webhook.
 5. Report page polls `/api/report/status?runId=...` and shows:
    - submitted
    - report_ready
@@ -61,7 +64,7 @@ Important distinction:
 
 ## Required env vars (Vercel)
 
-- `GHL_WEBSITE_REPORT_WEBHOOK_URL` (public homepage report intake)
+- `GHL_WEBSITE_REPORT_WEBHOOK_URL` (optional public homepage fallback)
 - `GHL_CAMPAIGN_REPORT_WEBHOOK_URL` (optional campaign report intake)
 - `GHL_WEBHOOK_URL` (legacy fallback)
 - `REPORT_CALLBACK_TOKEN` (new; any long random string)
