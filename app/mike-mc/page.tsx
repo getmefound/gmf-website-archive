@@ -138,6 +138,8 @@ export default async function ControlPage() {
         <FleetStrip active={2} total={10} doneToday={14} queued={23} />
       </section>
 
+      <TeamTrackerSection />
+
       {/* Agent cards — workforce view */}
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <SchedulerCard data={data} />
@@ -170,6 +172,57 @@ export default async function ControlPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 // Per-agent cards
 // ─────────────────────────────────────────────────────────────────────────────
+
+function TeamTrackerSection() {
+  const focusTasks = BOARD_TASKS.filter(
+    (task) =>
+      task.title.includes("Campaign Reply Router") ||
+      task.title.includes("Build Sender") ||
+      task.title.includes("Reporter orchestration"),
+  );
+
+  return (
+    <section className="mb-8 rounded-2xl border border-sky-500/25 bg-sky-500/5 p-5">
+      <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">
+            Team tracker
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
+            Campaign launch work
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+            Website reports are verified. Scaled sending waits on GHL reply routing, Auditor proof,
+            then Sender.
+          </p>
+        </div>
+        <Pill tone="warn">send blocked until QA</Pill>
+      </div>
+      <div className="grid gap-3 md:grid-cols-3">
+        {focusTasks.map((task) => (
+          <article key={task.title} className="rounded-xl border border-zinc-800/70 bg-black/25 p-4">
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <h3 className="text-sm font-semibold leading-snug text-zinc-100">{task.title}</h3>
+              <Pill tone={priorityTone(task.priority)}>{task.status}</Pill>
+            </div>
+            <div className="space-y-1 text-xs text-zinc-500">
+              <p>Owner: {task.agent}</p>
+              <p>Reviewer: {task.reviewer ?? "Manager"}</p>
+              <p>Due: {task.due}</p>
+            </div>
+            {task.reviewChecks ? (
+              <ul className="mt-3 space-y-1 text-[11px] leading-snug text-zinc-500">
+                {task.reviewChecks.slice(0, 3).map((check) => (
+                  <li key={check}>{check}</li>
+                ))}
+              </ul>
+            ) : null}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function SchedulerCard({ data }: { data: ControlData }) {
   const events = data.todaysEvents;
