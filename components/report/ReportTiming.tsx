@@ -52,8 +52,8 @@ export function ReportTiming({ runId, email }: { runId: string; email?: string }
 
   const stageLabel = useMemo(() => {
     if (!state?.ok) return "Waiting for status...";
-    if (state.stage === "heatmap_ready") return "Heatmap ready";
-    if (state.stage === "report_ready") return "Report ready, heatmap pending";
+    if (state.stage === "heatmap_ready") return "Report ready";
+    if (state.stage === "report_ready") return "Report ready";
     return "Report generating";
   }, [state]);
 
@@ -67,7 +67,9 @@ export function ReportTiming({ runId, email }: { runId: string; email?: string }
         <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-[var(--color-hero-subtext)]">
           <div>Elapsed: {state.timing.secondsSinceSubmit}s</div>
           <div>Report: {state.timing.reportSeconds ?? "pending"}</div>
-          <div>Heatmap: {state.timing.heatmapSeconds ?? "pending"}</div>
+          {state.run?.heatmapUrl ? (
+            <div>Visibility map: {state.timing.heatmapSeconds ?? "pending"}</div>
+          ) : null}
         </div>
       ) : null}
       {state?.ok ? (
@@ -91,11 +93,9 @@ export function ReportTiming({ runId, email }: { runId: string; email?: string }
               rel="noreferrer"
               className="underline text-[var(--color-accent)]"
             >
-              Open heatmap
+              Open visibility map
             </a>
-          ) : (
-            <span className="text-[var(--color-hero-subtext)]">Heatmap link pending</span>
-          )}
+          ) : null}
         </div>
       ) : null}
       {error ? <p className="mt-2 text-xs text-red-300">{error}</p> : null}
