@@ -108,8 +108,8 @@ const AGENTS: Record<
   },
   scheduler: {
     title: "Scheduler",
-    persona: "Tim Ferriss",
-    aliases: ["scheduler", "tim ferriss", "tim"],
+    persona: "Stephen Covey",
+    aliases: ["scheduler", "stephen covey", "stephen", "covey"],
     reportsTo: "General Manager",
     job: "Protects calendars, booking availability, reminders, and meeting context.",
     canDo: ["check calendar readiness", "prepare meeting context", "watch booking handoffs"],

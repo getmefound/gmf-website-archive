@@ -214,13 +214,13 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Scheduler",
-    persona: "Tim Ferriss",
+    persona: "Stephen Covey",
     status: "live",
     summary: "Protects calendars, booking availability, reminders, and meeting context.",
     owns: ["AOH Talk", "calendar blocks", "meeting briefs"],
     reportsTo: "General Manager",
     tone: "ops",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Tim_Ferriss.jpg/330px-Tim_Ferriss.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Stephen_Covey.jpg/330px-Stephen_Covey.jpg",
   },
 ];
 

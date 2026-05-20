@@ -7,14 +7,14 @@ Use these as inspiration-label candidates only. Public figures are not affiliate
 | Role | Option 1 | Option 2 | Option 3 | Option 4 |
 |---|---|---|---|---|
 | President | Mike Egidio | Mike Egidio, final approver | Mike Egidio, owner/operator | Mike Egidio, command seat |
-| Scheduler | Walt Mossberg | Kara Swisher | Tim Ferriss | David Allen |
+| Scheduler | Stephen Covey | David Allen | Walt Mossberg | Kara Swisher |
 
 ## Company Operations
 
 | Role | Option 1 | Option 2 | Option 3 | Option 4 |
 |---|---|---|---|---|
 | General Manager | Andrew Grove | Sam Walton | Ray Kroc | Mary Barra |
-| Coach | Dale Carnegie | Jim Rohn | Stephen Covey | Marshall Goldsmith |
+| Coach | Dale Carnegie | Jim Rohn | Marshall Goldsmith | John Maxwell |
 
 ## Systems And IT
 
@@ -82,4 +82,4 @@ This is the set I would try first if you want the chart to feel less random-cele
 | Editor | James Patterson |
 | Press | Ted Turner |
 | Reporter | Edward Tufte |
-| Scheduler | David Allen |
+| Scheduler | Stephen Covey |

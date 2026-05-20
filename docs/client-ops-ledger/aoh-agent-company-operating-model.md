@@ -98,7 +98,7 @@ Mission Control may use business or field-associated public figures as inspirati
 | Editor | James Patterson | Chooses angles, priorities, brand voice, and what content is worth making. |
 | Press | Ted Turner | Publishes approved content and records proof that it went out correctly. |
 | Reporter | TBD | Confirms report links open, match the right contact, and tell a useful story. |
-| Scheduler | Tim Ferriss | Protects calendars, booking availability, reminders, and meeting context. |
+| Scheduler | Stephen Covey | Protects calendars, booking availability, reminders, and meeting context. |
 
 ## Daily Operating Flow
 
