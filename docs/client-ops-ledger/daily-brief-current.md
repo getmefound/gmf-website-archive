@@ -7,7 +7,7 @@ Prepared by: Manager
 
 | # | Decision | Recommendation | Risk | Approval needed |
 |---|---|---|---|---|
-| 1 | Whether to import or start a warmup campaign batch | Wait for GHL Expert to confirm each dedicated subdomain, then approve one small lane at a time | Warmup/domain readiness and live drip trigger risk | Mike approval required for import and separate approval required for start-drip |
+| 1 | Whether to start a warmup drip after import-only | Relay import-only is complete for the 2 QA OK contacts. Do not start drip until drip readiness is yes and Mike separately approves start-drip | Warmup/domain readiness and live drip trigger risk | Mike approval required for start-drip |
 
 ## 2. Campaigns Being Prepared
 
@@ -15,7 +15,7 @@ Prepared by: Manager
 |---|---|---|---:|---:|---|
 | Reviews | `reviews` | Pet boarding / Connecticut | 8 fresh verified | $2 | Waiting Sales Manager QA review and Reviews subdomain confirmation |
 | AI Visibility | `ai` | Senior living / Connecticut | 6 fresh verified | $2 | Waiting Sales Manager QA review and AI subdomain confirmation |
-| Relay | `relay` | Veterinary / Connecticut | 4 fresh verified | $2 | Waiting Sales Manager QA review and Relay subdomain confirmation |
+| Relay | `relay` | Veterinary / Connecticut | 4 fresh verified | $2 | Import-only completed for 2 QA OK contacts. 2 flagged Cornell personal-email duplicate rows held. Drip not started |
 
 ## 3. Required Checks Before Any Live Action
 
@@ -23,11 +23,11 @@ Prepared by: Manager
 |---|---|---|
 | Confirm Reviews sending subdomain and daily send limit | GHL Expert | Waiting |
 | Confirm AI Visibility sending subdomain and daily send limit | GHL Expert | Waiting |
-| Confirm Relay sending subdomain and daily send limit | GHL Expert | Waiting |
+| Confirm Relay sending subdomain and daily send limit | GHL Expert | Mike visually confirmed for import-only approval. Drip readiness still no |
 | Confirm each start tag triggers only intended workflow | GHL Expert | API metadata passed; visual sender-domain check still required |
-| Confirm no HighLevel AI feature is enabled | GHL Expert | Required before approval |
+| Confirm no HighLevel AI feature is enabled | GHL Expert | Mike visually confirmed OFF for Relay import-only approval. Required again before start-drip |
 | Generate approval packet per lane | Manager | Ready after preflight |
-| Review personal email / duplicate-contact QA flags | Sales Manager | Waiting |
+| Review personal email / duplicate-contact QA flags | Sales Manager | Relay resolved: 2 OK imported and 2 flagged rows held. Reviews and AI still waiting |
 
 GHL Expert read-only API result:
 
@@ -53,7 +53,7 @@ Remaining GHL Expert visual checks:
 |---|---:|---:|---:|---:|---|
 | Reviews | 25 | 19 | 8 | 7 | `docs/client-ops-ledger/outbox/reach-reviews-approval-2026-05-20.md` |
 | AI Visibility | 25 | 20 | 6 | 5 | `docs/client-ops-ledger/outbox/reach-ai-approval-2026-05-20.md` |
-| Relay | 25 | 7 | 4 | 2 | `docs/client-ops-ledger/outbox/reach-relay-approval-2026-05-20.md` |
+| Relay | 25 | 7 | 4 | 2 | 2 QA OK rows imported-only; 2 flagged rows held |
 
 ## 5. Tag Safety
 
@@ -76,7 +76,7 @@ Recommended path:
 5. Approve one lane start-drip only when the lane's sending subdomain is confirmed ready.
 6. Keep each first warmup batch to the lane's allowed daily send volume.
 
-Current strongest lane by cleanliness: Relay, but only 4 verified contacts. Reviews has the most volume, but needs the most QA judgment.
+Current strongest lane by cleanliness: Relay import-only is complete for the 2 QA OK contacts. Current next move: do not start Relay drip until `ready_for_drip=yes` and Mike separately approves start-drip. Reviews has the most volume, but needs the most QA judgment.
 
 ## 7. Fresh Batch Prep Commands
 
