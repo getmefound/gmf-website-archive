@@ -21,6 +21,7 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `client-profile-template.md` | Per-client profile template for Obsidian. Use one note per client. |
 | `client-ops-ledger-runbook.md` | How Mike, Manager, Auditor, Hub, and delivery agents should use the ledger. |
 | `aoh-agent-company-operating-model.md` | Canonical company hierarchy: Mike as President, General Manager, specialist agents, recommendations, jobs, approvals. |
+| `mike-daily-agent-quickstart.md` | Plain-English daily guide for Mike to talk to agents, run Reach checks, and issue safe approvals in Slack. |
 | `agent-model-routing-policy.md` | Cost-control policy for choosing no LLM, cheap, standard, strong, or human decision tiers. |
 | `reach-campaign-agent-runbook.md` | Safe agent workflow for Reach email campaign prep, approval, import, drip start, and logging. |
 | `slack-agent-command-runbook.md` | How Mike talks to Manager, GHL Expert, Sales Manager, and approval gates through Slack-ready commands. |
@@ -39,7 +40,7 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 4. Require all agent runs to write back to the ledger through a controlled workflow, not by freeform editing.
 5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
 6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
-7. Use `slack-agent-command-runbook.md` and `npm run agent:brief` for Mike-facing briefs and approval commands.
+7. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md` and `npm run agent:brief` for deeper setup and command details.
 8. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 
 ## Higher-Level Truth

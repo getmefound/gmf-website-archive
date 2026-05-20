@@ -6,6 +6,8 @@ This is the first wiring layer for talking to the AOH agent team from Slack or a
 
 Slack is the human command surface. Mission Control and the ledger remain the source of truth. The command center reads the ledger, prepares replies, and refuses live GHL action unless the approval and safety gates are clear.
 
+For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. This runbook is the technical setup and command reference.
+
 ## What Is Wired Now
 
 | Layer | Status | Notes |
