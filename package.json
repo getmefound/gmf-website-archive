@@ -9,6 +9,12 @@
     "lint": "eslint",
     "smoke:report": "node tools/smoke-report.mjs",
     "reach:launch": "node scripts/launch-reach-campaign.mjs",
+    "reach:verify": "node scripts/verify-reach-emails.mjs",
+    "reach:preflight": "node scripts/reach-agent-preflight.mjs",
+    "reach:fresh": "node scripts/reach-filter-fresh-prospects.mjs",
+    "reach:csv": "node scripts/reach-json-to-csv.mjs",
+    "reach:prep": "node scripts/reach-prep-batch.mjs",
+    "reach:quality": "node scripts/reach-quality-review.mjs",
     "audit:security": "node scripts/auditor-security-sweep.mjs"
   },
   "dependencies": {

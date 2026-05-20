@@ -190,6 +190,26 @@ pause all client-facing actions
 
 ## Tool Decisions
 
+### Cost And Model Routing
+
+Agents should not choose expensive models by habit.
+
+Use `agent-model-routing-policy.md` as the operating rule for Gemini, ChatGPT/OpenAI, Claude, and any future model providers.
+
+Default posture:
+
+| Work type | Default tier |
+|---|---|
+| CSV cleanup, dedupe, counting, import formatting | No LLM |
+| Obvious fit/bad-fit classification | Cheap model |
+| Campaign strategy, copy review, reply triage | Standard model |
+| GHL workflow risk, final approval packet, ambiguous business decision support | Strong model only when justified |
+| Import approval, drip start, billing, AI feature changes | Human |
+
+Systems Director owns the current provider/model mapping and budget caps. Manager chooses the job tier using the policy. Chief of Staff escalates over-budget or risky recommendations to Mike.
+
+Reach campaign work must follow `reach-campaign-agent-runbook.md`.
+
 ### Core Operating Stack
 
 | Layer | Tool | Decision |
@@ -267,6 +287,8 @@ Agents need approval before:
 - posting social comments or sending DMs
 - making claims about results
 - contacting prospects or clients as AOH
+- exceeding the approved job budget
+- escalating to a strong model without a written reason
 
 Hard AOH rule:
 

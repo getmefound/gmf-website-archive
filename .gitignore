@@ -51,12 +51,20 @@ lighthouse-local-*
 # Keep explicit website-owned operational scripts below.
 /scripts/*
 !/scripts/launch-reach-campaign.mjs
+!/scripts/verify-reach-emails.mjs
+!/scripts/reach-agent-preflight.mjs
+!/scripts/reach-filter-fresh-prospects.mjs
+!/scripts/reach-json-to-csv.mjs
+!/scripts/reach-prep-batch.mjs
+!/scripts/reach-quality-review.mjs
 !/scripts/auditor-security-sweep.mjs
 /data/
 
 # tmp / scratch artifacts (dev logs, ad-hoc scan outputs, pids)
 .tmp_*
 tmp-reach*.json
+tmp-reach*.csv
+docs/client-ops-ledger/outbox/
 CTempcustomfields.json
 
 # accidentally-cloned aoh-tooling — belongs in its own repo

@@ -1,0 +1,4 @@
+lane,dedicated_subdomain,warmup_status,warmup_started,allowed_daily_send_volume,ready_for_import,ready_for_drip,last_checked,checked_by,notes
+reviews,TBD,warming,TBD,TBD,yes,no,2026-05-20,GHL Expert,Fill in the Reviews sending subdomain before approving start-drip.
+ai,TBD,warming,TBD,TBD,yes,no,2026-05-20,GHL Expert,Fill in the AI Visibility sending subdomain before approving start-drip.
+relay,TBD,warming,TBD,TBD,yes,no,2026-05-20,GHL Expert,Fill in the Relay sending subdomain before approving start-drip.

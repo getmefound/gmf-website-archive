@@ -21,6 +21,14 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `client-profile-template.md` | Per-client profile template for Obsidian. Use one note per client. |
 | `client-ops-ledger-runbook.md` | How Mike, Manager, Auditor, Hub, and delivery agents should use the ledger. |
 | `aoh-agent-company-operating-model.md` | Canonical company hierarchy: Mike as President, Secretary, Manager, specialist agents, recommendations, jobs, approvals. |
+| `agent-model-routing-policy.md` | Cost-control policy for choosing no LLM, cheap, standard, strong, or human decision tiers. |
+| `reach-campaign-agent-runbook.md` | Safe agent workflow for Reach email campaign prep, approval, import, drip start, and logging. |
+| `agent-jobs-template.csv` | Starter job queue format for agent work, budgets, approvals, and next actions. |
+| `agent-jobs.csv` | Current working job queue for agent work. |
+| `daily-brief-template.md` | Chief of Staff daily brief format for Mike approvals and status. |
+| `daily-brief-current.md` | Current Chief of Staff brief for today's campaign readiness work. |
+| `sending-domain-readiness.csv` | Per-lane subdomain warmup/readiness checklist. |
+| `sending-domain-readiness-checklist.md` | GHL Expert signoff checklist before approving start-drip. |
 
 ## Recommended Workflow
 
@@ -28,10 +36,16 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 2. Create one Obsidian client profile note per paying client using `client-profile-template.md`.
 3. Give every client a stable `client_id` before any agent touches the account.
 4. Require all agent runs to write back to the ledger through a controlled workflow, not by freeform editing.
-5. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
+5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
+6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
+7. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 
 ## Higher-Level Truth
 
 Before building more client ops automation, read `aoh-agent-company-operating-model.md`. The ledger is one part of a larger company operating model:
 
 Mike reviews and approves. Secretary prepares the brief. Manager scans the company. Specialist agents investigate. Approved recommendations become jobs. Completed jobs update the ledger and client profiles.
+
+For outreach campaigns, the extra rule is:
+
+> Agents may research, clean, verify, and prepare. Mike must explicitly approve GHL imports and drip starts.
