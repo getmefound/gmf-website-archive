@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
 
 export const metadata: Metadata = {
-  title: "AOH 2000s Org Chart - The Hub",
-  description: "Internal AOH 2000s-style hierarchy chart for human and agent inspiration personas.",
+  title: "AOH Org Chart - The Hub",
+  description: "Internal AOH hierarchy chart for human and agent inspiration personas.",
   robots: { index: false, follow: false },
 };
 
@@ -339,7 +339,7 @@ export default function OrgChartPage() {
             AOH - Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
-            AOH 2000s Org Chart
+            AOH Org Chart
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
             Business and field-associated public figures are used as inspiration labels only. They are not
@@ -358,8 +358,8 @@ export default function OrgChartPage() {
         </div>
       </header>
 
-      <section className="border border-[#394b63] bg-[#172233] p-3 text-slate-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.08)] md:p-5">
-        <div className="mb-4 flex items-center justify-between rounded-t-md border border-[#5f7fa8] bg-gradient-to-b from-[#5476a8] via-[#2b4f7d] to-[#142c4c] px-3 py-2 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_7px_rgba(0,0,0,0.28)]">
+      <section className="border border-slate-700 bg-[#101827] p-3 text-slate-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] md:p-5">
+        <div className="mb-5 flex items-center justify-between border border-slate-600 bg-[#1c2b43] px-3 py-2 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_2px_7px_rgba(0,0,0,0.28)]">
           <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
             AI Outsource Hub - Agent Company Hierarchy
           </h2>
@@ -369,12 +369,12 @@ export default function OrgChartPage() {
         <div className="flex flex-col items-center">
           <OrgBox role={findRole("President")} size="large" />
           <Connector />
-          <div className="grid w-full max-w-5xl grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-2">
             <OrgBox role={findRole("Chief of Staff")} />
             <OrgBox role={findRole("General Manager")} />
           </div>
           <Connector />
-          <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="grid w-full grid-cols-1 gap-5 xl:grid-cols-2 2xl:grid-cols-3">
             {DEPARTMENTS.map((department) => (
               <DepartmentBox key={department.title} department={department} />
             ))}
@@ -404,13 +404,13 @@ export default function OrgChartPage() {
 
 function DepartmentBox({ department }: { department: { title: string; lead: string; support: string[] } }) {
   return (
-    <section className="border border-[#465b73] bg-[#223149] p-2 shadow-[0_2px_9px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.06)]">
-      <div className="mb-2 rounded-t-sm border border-[#5b789d] bg-gradient-to-b from-[#476b99] to-[#203b61] px-2 py-1 font-mono text-xs font-bold uppercase tracking-wide text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+    <section className="border border-slate-700 bg-[#182235] p-3 shadow-[0_2px_9px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)]">
+      <div className="mb-3 border border-slate-600 bg-[#253854] px-3 py-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
         {department.title}
       </div>
       <OrgBox role={findRole(department.lead)} compact />
-      <div className="mx-auto h-4 w-px bg-[#5b6f88]" />
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="mx-auto h-4 w-px bg-slate-600" />
+      <div className="grid grid-cols-1 gap-3">
         {department.support.map((title) => (
           <OrgBox key={title} role={findRole(title)} compact />
         ))}
@@ -421,29 +421,29 @@ function DepartmentBox({ department }: { department: { title: string; lead: stri
 
 function OrgBox({ role, size = "normal", compact = false }: { role: OrgRole; size?: "normal" | "large"; compact?: boolean }) {
   return (
-    <article className="border border-[#56677d] bg-gradient-to-b from-[#d7dde6] to-[#aeb8c7] shadow-[0_2px_7px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.7)]">
-      <div className={`${TITLE_BAR_CLASS[role.tone]} flex items-center justify-between gap-2 px-2 py-1 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]`}>
+    <article className="border border-slate-600 bg-[#202b3d] shadow-[0_2px_8px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.05)]">
+      <div className={`${TITLE_BAR_CLASS[role.tone]} flex items-center justify-between gap-2 px-3 py-1.5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]`}>
         <span className="truncate font-mono text-[11px] font-bold uppercase tracking-wide">{role.title}</span>
         <span className="rounded-none border border-white/50 px-1 font-mono text-[9px] uppercase">{role.status}</span>
       </div>
       <div className={`grid gap-3 p-3 ${size === "large" ? "sm:grid-cols-[96px_1fr]" : "grid-cols-[72px_1fr]"}`}>
         <PersonPhoto role={role} large={size === "large"} />
         <div className="min-w-0">
-          <h3 className={`${size === "large" ? "text-xl" : "text-base"} font-serif font-bold leading-tight text-[#111827]`}>
+          <h3 className={`${size === "large" ? "text-xl" : "text-base"} font-serif font-bold leading-tight text-slate-50`}>
             {role.persona}
           </h3>
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-[#3b4a5c]">
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-slate-400">
             inspiration persona
           </p>
-          {!compact && <p className="mt-2 text-sm leading-snug text-[#1f2937]">{role.summary}</p>}
+          {!compact && <p className="mt-2 text-sm leading-snug text-slate-200">{role.summary}</p>}
           {role.reportsTo && (
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-wide text-[#465568]">
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-wide text-slate-400">
               reports to {role.reportsTo}
             </p>
           )}
           <div className="mt-2 flex flex-wrap gap-1">
             {role.owns.slice(0, compact ? 2 : 4).map((item) => (
-              <span key={item} className="border border-[#7d8a9a] bg-[#eef2f7] px-1.5 py-0.5 text-[10px] text-[#1f2937] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+              <span key={item} className="border border-slate-600 bg-[#111827] px-1.5 py-0.5 text-[10px] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                 {item}
               </span>
             ))}
@@ -461,7 +461,7 @@ function PersonPhoto({ role, large = false }: { role: OrgRole; large?: boolean }
   return (
     <div
       aria-label={isTbd ? `${role.title} persona pending` : `${role.persona} portrait`}
-      className={`${size} flex items-center justify-center border border-[#5f6f83] bg-[#7f8fa3] bg-cover bg-center font-mono text-xs font-bold text-slate-200 shadow-[0_1px_4px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.25)]`}
+      className={`${size} flex items-center justify-center border border-slate-600 bg-[#111827] bg-cover bg-center font-mono text-xs font-bold text-slate-400 shadow-[0_1px_4px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]`}
       role="img"
       style={{
         backgroundImage: isTbd ? undefined : `url("${role.image}")`,
@@ -476,7 +476,7 @@ function PersonPhoto({ role, large = false }: { role: OrgRole; large?: boolean }
 function Connector() {
   return (
     <div className="flex h-8 w-full items-center justify-center">
-      <div className="h-full w-px bg-[#5b6f88]" />
+      <div className="h-full w-px bg-slate-600" />
     </div>
   );
 }
