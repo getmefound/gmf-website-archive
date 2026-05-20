@@ -423,7 +423,7 @@ ${address(actor)}, all campaign live actions are blocked.
 ${buildManagerStatus(actor)}`;
   }
 
-  if (mentionsQaReview(normalized)) return buildQaResponse(actor);
+  if (mentionsQaReview(normalized)) return buildQaResponse(actor, normalized);
 
   const addressedAgent = findAddressedAgent(normalized);
   if (addressedAgent) {
@@ -683,7 +683,11 @@ ${agent.nextStep.replace(/^Ask: `|`\.$/g, "")}
 ${agent.safety ? `Safety:\n${agent.safety}` : "Safety:\nI can recommend and prepare. Risky or client-facing action still needs approval."}`;
 }
 
-function buildQaResponse(actor: UserContext) {
+function buildQaResponse(actor: UserContext, normalized = "") {
+  const laneKey = findLaneKey(normalized);
+  const wantsLaneDecision = /\b(resolve|recommend|safe|import|specific|flagged|flags|rows|remove|approve|clean)\b/.test(normalized);
+  if (laneKey && wantsLaneDecision) return buildLaneQaDecisionResponse(laneKey, actor);
+
   return `*Sales Manager Reach QA - ${today()}*
 
 ${address(actor)}, here is the current list-quality review.
@@ -698,17 +702,95 @@ Decision rule:
 
 - Remove or approve questionable personal-email contacts before live outreach.
 - If a business appears more than once, keep only the best contact unless there is a clear reason.
-- Do not ask Mike to approve start-drip until GHL Expert finishes visual sender-domain/warmup/AI-toggle checks.`;
+- Do not ask Mike to approve start-drip until GHL Expert finishes visual sender-domain/warmup/AI-toggle checks.
+
+For the actual rows and a lane recommendation, use:
+
+\`\`\`text
+/manager Sales Manager, resolve Relay QA flags and recommend import only
+\`\`\``;
+}
+
+function buildLaneQaDecisionResponse(laneKey: LaneKey, actor: UserContext) {
+  const lane = LANES[laneKey];
+  const job = reachJobs().find((item) => item.campaign_lane?.toLowerCase() === laneKey);
+  const sourceFile = job?.source_file?.trim() || "";
+  const qa = readQaDetails(sourceFile);
+
+  if (!job || !sourceFile) {
+    return `*Sales Manager ${lane.label} QA - ${today()}*
+
+${address(actor)}, I cannot resolve ${lane.label} QA because the job or source CSV is missing from the queue.`;
+  }
+
+  if (!qa) {
+    return `*Sales Manager ${lane.label} QA - ${today()}*
+
+${address(actor)}, I found the ${lane.label} job, but I do not have the QA CSV/report available.
+
+Source file:
+\`${sourceFile}\`
+
+Next step:
+
+\`\`\`text
+npm run reach:quality -- --lane ${laneKey} --csv ${sourceFile}
+\`\`\``;
+  }
+
+  const heldRows = qa.reviewRows;
+  const okRows = qa.okRows;
+  const rowWord = heldRows.length === 1 ? "row" : "rows";
+  const okWord = okRows.length === 1 ? "row" : "rows";
+  const decision = heldRows.length
+    ? `Hold/remove the ${heldRows.length} flagged ${rowWord}. Use the ${okRows.length} OK ${okWord} for import-only after GHL visual checks clear.`
+    : `All ${okRows.length} ${okWord} are OK from this QA pass.`;
+
+  return `*Sales Manager ${lane.label} QA decision - ${today()}*
+
+${address(actor)}, here is the row-level QA decision.
+
+Decision:
+
+- ${decision}
+- Do not start drip yet.
+- Import-only should use the QA file with OK rows only, not the original unfiltered verified file.
+
+OK to keep for import-only:
+
+${formatQaRows(okRows)}
+
+Hold/remove before live outreach:
+
+${formatQaRows(heldRows)}
+
+Recommended next command after GHL visual sender-domain/warmup/AI-toggle review clears:
+
+\`\`\`text
+/manager approve ${laneKey} import only
+\`\`\`
+
+Safety:
+
+- Personal-email and duplicate-business rows stay out of the import path.
+- This does not approve start-drip.
+- No contacts, tags, workflows, settings, or HighLevel AI features were changed.`;
 }
 
 function buildApprovalResponse(approval: { laneKey: LaneKey; action: "import" | "start" }, actor: UserContext) {
   const lane = LANES[approval.laneKey];
   const job = reachJobs().find((item) => item.campaign_lane?.toLowerCase() === approval.laneKey);
-  const sourceFile = job?.source_file?.trim() || "CSV_PATH";
-  const limit = extractVerifiedCount(job?.notes) || "N";
+  const sourceFile = job?.source_file?.trim() || "";
+  const approvalSource = approvalImportSource({
+    action: approval.action,
+    sourceFile,
+    fallbackLimit: extractVerifiedCount(job?.notes) || "N",
+  });
   const domain = domainRows().find((item) => item.lane?.toLowerCase() === approval.laneKey) ?? {};
-  const blockers = approvalBlockers({ action: approval.action, job, domain });
-  const command = `npm run reach:launch -- --lane ${approval.laneKey} --csv ${sourceFile} --limit ${limit} --commit${
+  const blockers = approvalBlockers({ action: approval.action, job, domain, approvalSource });
+  const command = `npm run reach:launch -- --lane ${approval.laneKey} --csv ${approvalSource.sourceFile || "CSV_PATH"} --limit ${approvalSource.limit} --commit${
+    approvalSource.onlyOk ? " --only-ok" : ""
+  }${
     approval.action === "start" ? " --start-drip" : ""
   }`;
 
@@ -728,6 +810,8 @@ Exact command after clearance:
 ${command}
 \`\`\`
 
+${approvalSource.note ? `Source handling:\n\n- ${approvalSource.note}\n` : ""}
+
 Execution:
 
 Live execution was not attempted by Slack listener.
@@ -743,13 +827,22 @@ function approvalBlockers({
   action,
   job,
   domain,
+  approvalSource,
 }: {
   action: "import" | "start";
   job: CsvRow | undefined;
   domain: CsvRow;
+  approvalSource: ReturnType<typeof approvalImportSource>;
 }) {
   const blockers: string[] = [];
   if (!job) blockers.push("No matching job is present in the agent job queue.");
+  if (!approvalSource.sourceFile) blockers.push("The job has no source CSV.");
+  if (approvalSource.sourceFile && !existsSync(resolve(approvalSource.sourceFile))) {
+    blockers.push(`Source CSV not found locally: ${approvalSource.sourceFile}`);
+  }
+  if (action === "import" && approvalSource.onlyOk && approvalSource.limit === 0) {
+    blockers.push("No QA-approved OK rows remain for import-only.");
+  }
   if (String(domain.ready_for_import ?? "").toLowerCase() !== "yes") {
     blockers.push("Domain readiness says ready_for_import is not yes.");
   }
@@ -757,10 +850,43 @@ function approvalBlockers({
     blockers.push("Domain readiness says ready_for_drip is not yes.");
   }
   if (String(job?.status ?? "").includes("waiting_sales_and_visual_ghl_review")) {
-    blockers.push("Sales Manager QA and GHL Expert visual sender-domain/warmup/AI-toggle review are still waiting.");
+    blockers.push(
+      approvalSource.onlyOk
+        ? "GHL Expert visual sender-domain/warmup/AI-toggle review is still waiting. Sales QA can be handled with OK-only rows."
+        : "Sales Manager QA and GHL Expert visual sender-domain/warmup/AI-toggle review are still waiting.",
+    );
   }
   if (String(job?.status ?? "").includes("paused")) blockers.push("Campaign live actions are paused.");
   return blockers;
+}
+
+function approvalImportSource({
+  action,
+  sourceFile,
+  fallbackLimit,
+}: {
+  action: "import" | "start";
+  sourceFile: string;
+  fallbackLimit: number | string;
+}) {
+  if (action === "import") {
+    const qa = readQaDetails(sourceFile);
+    if (qa) {
+      return {
+        sourceFile: qa.qaPath,
+        limit: qa.okRows.length,
+        onlyOk: true,
+        note: `Using \`${qa.qaPath}\` with \`--only-ok\` so flagged rows are excluded from import-only.`,
+      };
+    }
+  }
+
+  return {
+    sourceFile,
+    limit: fallbackLimit,
+    onlyOk: false,
+    note: "",
+  };
 }
 
 async function runGhlReadinessCheck({ forceFresh = false } = {}): Promise<GhlResult> {
@@ -1105,13 +1231,19 @@ function shouldRunAsync(command: string) {
 
 function parseApproval(normalized: string): { laneKey: LaneKey; action: "import" | "start" } | null {
   if (!normalized.includes("approve")) return null;
-  const laneKey = (Object.keys(LANES) as LaneKey[]).find((key) =>
-    LANES[key].aliases.some((alias) => containsAlias(normalized, alias)),
-  );
+  const laneKey = findLaneKey(normalized);
   if (!laneKey) return null;
   if (normalized.includes("start") || normalized.includes("drip")) return { laneKey, action: "start" };
   if (normalized.includes("import")) return { laneKey, action: "import" };
   return null;
+}
+
+function findLaneKey(normalized: string): LaneKey | null {
+  return (
+    (Object.keys(LANES) as LaneKey[]).find((key) =>
+      LANES[key].aliases.some((alias) => containsAlias(normalized, alias)),
+    ) ?? null
+  );
 }
 
 function laneSummaries() {
@@ -1167,6 +1299,34 @@ function readQaText(label: string) {
       .find((rowCells) => /^\d+$/.test(rowCells[4] ?? "")) ?? [];
   const qa = cells[4];
   return qa ? `${qa} QA review flag${qa === "1" ? "" : "s"}` : "QA count unavailable";
+}
+
+function readQaDetails(sourceFile: string) {
+  if (!sourceFile) return null;
+  const candidates = [
+    sourceFile.replace(/-verified\.csv$/i, "-qa.csv"),
+    sourceFile.replace(/\.csv$/i, "-qa.csv"),
+  ];
+  const qaPath = candidates.find((path) => existsSync(resolve(path)));
+  if (!qaPath) return null;
+
+  const rows = readCsv(qaPath);
+  const reviewRows = rows.filter((row) => String(row.qa_recommendation ?? "").toLowerCase() === "review_before_live");
+  const okRows = rows.filter((row) => String(row.qa_recommendation ?? "").toLowerCase() !== "review_before_live");
+  return { qaPath, rows, okRows, reviewRows };
+}
+
+function formatQaRows(rows: CsvRow[]) {
+  if (!rows.length) return "- None";
+  return rows
+    .map((row) => {
+      const business = row.name?.trim() || "Unknown business";
+      const email = row.email?.trim() || "missing email";
+      const city = row.city?.trim() || "unknown city";
+      const flags = row.qa_flags?.trim() || "ok";
+      return `- ${business} | ${email} | ${city} | ${flags}`;
+    })
+    .join("\n");
 }
 
 function readCsv(path: string): CsvRow[] {

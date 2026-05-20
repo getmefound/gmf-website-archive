@@ -19,7 +19,7 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 | Fast Slack response mode | Wired | Normal commands answer from the ledger/brief quickly; slower GHL/Reach checks acknowledge first and post follow-up results in the background. |
 | Slack-ready command router | Wired | `npm run agent:command -- --command "Manager, status"` returns the same kind of message a Slack bot should post. |
 | GHL Expert readiness command | Wired | `GHL Expert, check Reach readiness` runs the read-only GHL checker. |
-| Sales Manager QA command | Wired | `Sales Manager, review Reach QA` summarizes current QA risk counts. |
+| Sales Manager QA command | Wired | `Sales Manager, review Reach QA` summarizes current QA risk counts. `Sales Manager, resolve Relay QA flags and recommend import only` shows row-level keep/hold recommendations. |
 | Mike identity and tone | Wired | Agents recognize Mike by Slack user ID, answer first-name by default, and switch to formal when asked. |
 | Approval command parsing | Wired with gates | Approval commands generate the exact live command, but live execution stays blocked while agent gates are unresolved. |
 | Production listener secrets | Wired | Production has the Slack signing secret and bot token configured in Vercel. |
@@ -51,6 +51,7 @@ Manager, run Reach Cold Email Campaign
 Manager, brief
 GHL Expert, check Reach readiness
 Sales Manager, review Reach QA
+Sales Manager, resolve Relay QA flags and recommend import only
 Coach, review this copy
 Scheduler, what needs attention
 Reporter, verify report delivery status
@@ -340,6 +341,12 @@ The first response from agents is intentionally conservative: they identify thei
 ## Live Action Guard
 
 The command center does not import contacts or start drips by default.
+
+When a QA CSV exists, import-only approval uses the QA CSV with `--only-ok` so flagged rows are excluded from the import path. For example, Relay import-only resolves to:
+
+```bash
+npm run reach:launch -- --lane relay --csv tmp-reach-relay-2026-05-20-next-qa.csv --limit 2 --commit --only-ok
+```
 
 Live execution requires all of the following:
 

@@ -77,8 +77,11 @@ If Manager says agent review is still needed, ask:
 
 ```text
 /manager Sales Manager, review Reach QA
+/manager Sales Manager, resolve Relay QA flags and recommend import only
 /manager GHL Expert, check Reach readiness
 ```
+
+The `resolve Relay QA flags` version should name the actual rows to keep or hold. For Relay on May 20, 2026, Sales Manager should recommend keeping only the OK rows for import-only and holding the personal-email/duplicate-business rows.
 
 ## Approval Commands
 
@@ -89,6 +92,8 @@ Use import-only first when a lane is ready:
 /manager approve reviews import only
 /manager approve ai import only
 ```
+
+Import-only approval should use the QA file with OK rows only when QA flags exist. It should not import held personal-email or duplicate-business rows.
 
 Start-drip approval is separate and should only happen after GHL Expert confirms the lane is ready for drip:
 

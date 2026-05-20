@@ -101,7 +101,7 @@ function routeCommand(command, args) {
   }
 
   if (mentionsQaReview(normalized)) {
-    return buildQaResponse();
+    return buildQaResponse(normalized);
   }
 
   if (mentionsBrief(normalized)) {
@@ -404,9 +404,12 @@ ${brief.text}
   };
 }
 
-function buildQaResponse() {
+function buildQaResponse(normalized = "") {
   const data = loadData();
   const summaries = getReachJobs(data.jobs).map((job) => laneSummary(job, data.domains));
+  const laneKey = findLaneKey(normalized);
+  const wantsLaneDecision = /\b(resolve|recommend|safe|import|specific|flagged|flags|rows|remove|approve|clean)\b/.test(normalized);
+  if (laneKey && wantsLaneDecision) return buildLaneQaDecisionResponse(laneKey, data);
 
   return {
     kind: "agent-sales-manager-qa",
@@ -426,6 +429,90 @@ Decision rule:
 - Remove or approve questionable personal-email contacts before live outreach.
 - If a business appears more than once, keep only the best contact unless there is a clear reason.
 - Do not ask Mike to approve start-drip until GHL Expert finishes the visual sender-domain/warmup/AI-toggle check.
+
+For the actual rows and a lane recommendation, use:
+
+\`\`\`text
+Sales Manager, resolve Relay QA flags and recommend import only
+\`\`\`
+`,
+  };
+}
+
+function buildLaneQaDecisionResponse(laneKey, data) {
+  const lane = LANES[laneKey];
+  const job = getReachJobs(data.jobs).find((item) => String(item.campaign_lane ?? "").toLowerCase() === laneKey);
+  const sourceFile = String(job?.source_file ?? "").trim();
+  const qa = readQaDetails(sourceFile);
+
+  if (!job || !sourceFile) {
+    return {
+      kind: `agent-sales-manager-${laneKey}-qa-decision`,
+      text: `*Sales Manager ${lane.label} QA - ${today()}*
+
+I cannot resolve ${lane.label} QA because the job or source CSV is missing from the queue.
+`,
+    };
+  }
+
+  if (!qa) {
+    return {
+      kind: `agent-sales-manager-${laneKey}-qa-decision`,
+      text: `*Sales Manager ${lane.label} QA - ${today()}*
+
+I found the ${lane.label} job, but I do not have the QA CSV/report available.
+
+Source file:
+\`${sourceFile}\`
+
+Next step:
+
+\`\`\`text
+npm run reach:quality -- --lane ${laneKey} --csv ${sourceFile}
+\`\`\`
+`,
+    };
+  }
+
+  const heldRows = qa.reviewRows;
+  const okRows = qa.okRows;
+  const rowWord = heldRows.length === 1 ? "row" : "rows";
+  const okWord = okRows.length === 1 ? "row" : "rows";
+  const decision = heldRows.length
+    ? `Hold/remove the ${heldRows.length} flagged ${rowWord}. Use the ${okRows.length} OK ${okWord} for import-only after GHL visual checks clear.`
+    : `All ${okRows.length} ${okWord} are OK from this QA pass.`;
+
+  return {
+    kind: `agent-sales-manager-${laneKey}-qa-decision`,
+    text: `*Sales Manager ${lane.label} QA decision - ${today()}*
+
+Here is the row-level QA decision.
+
+Decision:
+
+- ${decision}
+- Do not start drip yet.
+- Import-only should use the QA file with OK rows only, not the original unfiltered verified file.
+
+OK to keep for import-only:
+
+${formatQaRows(okRows)}
+
+Hold/remove before live outreach:
+
+${formatQaRows(heldRows)}
+
+Recommended next command after GHL visual sender-domain/warmup/AI-toggle review clears:
+
+\`\`\`text
+approve ${laneKey} import only
+\`\`\`
+
+Safety:
+
+- Personal-email and duplicate-business rows stay out of the import path.
+- This does not approve start-drip.
+- No contacts, tags, workflows, settings, or HighLevel AI features were changed.
 `,
   };
 }
@@ -473,10 +560,14 @@ function buildApprovalResponse(approval, args) {
   const domain = data.domains.find((item) => String(item.lane ?? "").toLowerCase() === approval.laneKey) ?? {};
   const sourceFile = String(job?.source_file ?? "").trim();
   const verifiedCount = sourceFile ? countCsvRows(sourceFile) : 0;
-  const limit = verifiedCount || extractVerifiedCount(job?.notes) || "N";
+  const approvalSource = approvalImportSource({
+    action: approval.action,
+    sourceFile,
+    fallbackLimit: verifiedCount || extractVerifiedCount(job?.notes) || "N",
+  });
   const actionLabel = approval.action === "start" ? "start drip" : "import only";
-  const command = `npm run reach:launch -- --lane ${approval.laneKey} --csv ${sourceFile || "CSV_PATH"} --limit ${limit} --commit${approval.action === "start" ? " --start-drip" : ""}`;
-  const blockers = approvalBlockers({ action: approval.action, job, domain, sourceFile });
+  const command = `npm run reach:launch -- --lane ${approval.laneKey} --csv ${approvalSource.sourceFile || "CSV_PATH"} --limit ${approvalSource.limit} --commit${approvalSource.onlyOk ? " --only-ok" : ""}${approval.action === "start" ? " --start-drip" : ""}`;
+  const blockers = approvalBlockers({ action: approval.action, job, domain, approvalSource });
   let execution = "Live execution was not attempted.";
   let recorded = "";
 
@@ -505,6 +596,8 @@ Exact command after clearance:
 ${command}
 \`\`\`
 
+${approvalSource.note ? `Source handling:\n\n- ${approvalSource.note}\n` : ""}
+
 Execution:
 
 ${execution}
@@ -522,7 +615,7 @@ ${recorded}
 function parseApproval(normalized) {
   if (!normalized.includes("approve")) return null;
 
-  const laneKey = Object.entries(LANES).find(([, lane]) => lane.aliases.some((alias) => containsAlias(normalized, alias)))?.[0];
+  const laneKey = findLaneKey(normalized);
   if (!laneKey) return null;
 
   if (normalized.includes("start") || normalized.includes("drip")) {
@@ -534,11 +627,20 @@ function parseApproval(normalized) {
   return null;
 }
 
-function approvalBlockers({ action, job, domain, sourceFile }) {
+function findLaneKey(normalized) {
+  return Object.entries(LANES).find(([, lane]) => lane.aliases.some((alias) => containsAlias(normalized, alias)))?.[0] ?? null;
+}
+
+function approvalBlockers({ action, job, domain, approvalSource }) {
   const blockers = [];
   if (!job) blockers.push("No matching job is present in the agent job queue.");
-  if (!sourceFile) blockers.push("The job has no source CSV.");
-  if (sourceFile && !existsSync(resolve(sourceFile))) blockers.push(`Source CSV not found locally: ${sourceFile}`);
+  if (!approvalSource.sourceFile) blockers.push("The job has no source CSV.");
+  if (approvalSource.sourceFile && !existsSync(resolve(approvalSource.sourceFile))) {
+    blockers.push(`Source CSV not found locally: ${approvalSource.sourceFile}`);
+  }
+  if (action === "import" && approvalSource.onlyOk && approvalSource.limit === 0) {
+    blockers.push("No QA-approved OK rows remain for import-only.");
+  }
   if (String(domain.ready_for_import ?? "").toLowerCase() !== "yes") {
     blockers.push("Domain readiness says ready_for_import is not yes.");
   }
@@ -547,12 +649,37 @@ function approvalBlockers({ action, job, domain, sourceFile }) {
   }
   const status = String(job?.status ?? "");
   if (status.includes("waiting_sales_and_visual_ghl_review")) {
-    blockers.push("Sales Manager QA and GHL Expert visual sender-domain/warmup/AI-toggle review are still waiting.");
+    blockers.push(
+      approvalSource.onlyOk
+        ? "GHL Expert visual sender-domain/warmup/AI-toggle review is still waiting. Sales QA can be handled with OK-only rows."
+        : "Sales Manager QA and GHL Expert visual sender-domain/warmup/AI-toggle review are still waiting.",
+    );
   }
   if (status.includes("paused")) {
     blockers.push("Campaign live actions are paused.");
   }
   return blockers;
+}
+
+function approvalImportSource({ action, sourceFile, fallbackLimit }) {
+  if (action === "import") {
+    const qa = readQaDetails(sourceFile);
+    if (qa) {
+      return {
+        sourceFile: qa.qaPath,
+        limit: qa.okRows.length,
+        onlyOk: true,
+        note: `Using \`${qa.qaPath}\` with \`--only-ok\` so flagged rows are excluded from import-only.`,
+      };
+    }
+  }
+
+  return {
+    sourceFile,
+    limit: fallbackLimit,
+    onlyOk: false,
+    note: "",
+  };
 }
 
 function recordApproval({ laneKey, action, blockers, command }) {
@@ -652,6 +779,34 @@ function readQaSummary(sourceFile) {
   const review = rows.filter((row) => String(row.qa_recommendation ?? "") === "review_before_live").length;
   const ok = rows.length - review;
   return { ok, review };
+}
+
+function readQaDetails(sourceFile) {
+  if (!sourceFile) return null;
+  const candidates = [
+    sourceFile.replace(/-verified\.csv$/i, "-qa.csv"),
+    sourceFile.replace(/\.csv$/i, "-qa.csv"),
+  ];
+  const qaPath = candidates.find((path) => existsSync(resolve(path)));
+  if (!qaPath) return null;
+
+  const rows = readCsv(qaPath);
+  const reviewRows = rows.filter((row) => String(row.qa_recommendation ?? "").toLowerCase() === "review_before_live");
+  const okRows = rows.filter((row) => String(row.qa_recommendation ?? "").toLowerCase() !== "review_before_live");
+  return { qaPath, rows, okRows, reviewRows };
+}
+
+function formatQaRows(rows) {
+  if (!rows.length) return "- None";
+  return rows
+    .map((row) => {
+      const business = String(row.name ?? "").trim() || "Unknown business";
+      const email = String(row.email ?? "").trim() || "missing email";
+      const city = String(row.city ?? "").trim() || "unknown city";
+      const flags = String(row.qa_flags ?? "").trim() || "ok";
+      return `- ${business} | ${email} | ${city} | ${flags}`;
+    })
+    .join("\n");
 }
 
 function readQaMarkdownSummary(sourceFile) {

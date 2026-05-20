@@ -80,12 +80,21 @@ async function main() {
   if (startDrip && !commit) {
     die("--start-drip requires --commit because it adds the live start tag.");
   }
+  const onlyOk = Boolean(args["only-ok"] ?? args.onlyOk);
 
   const prospects = args.csv
     ? readProspectsFromCsv(String(args.csv), laneKey)
     : await scrapeProspects(args, laneKey, limit);
+  const qaAware = prospects.some((prospect) => "qa_recommendation" in prospect || "qa_flags" in prospect);
+  if (onlyOk && !qaAware) {
+    die("--only-ok requires a QA CSV with qa_recommendation or qa_flags columns.");
+  }
+  const selectedProspects = onlyOk ? prospects.filter(isQaOkProspect) : prospects;
+  if (onlyOk) {
+    console.log(`QA OK-only filter kept ${selectedProspects.length} of ${prospects.length} rows.`);
+  }
 
-  const cleaned = prospects
+  const cleaned = selectedProspects
     .map((prospect) => normalizeProspect(prospect, laneKey))
     .filter((prospect) => prospect.name && prospect.email);
 
@@ -205,6 +214,13 @@ function normalizeProspect(input, laneKey) {
     lane: laneKey,
     sourceQuery: pick(input, ["searchQuery", "query"]),
   };
+}
+
+function isQaOkProspect(input) {
+  const recommendation = String(input.qa_recommendation ?? "").trim().toLowerCase();
+  const flags = String(input.qa_flags ?? "").trim();
+  if (recommendation) return recommendation === "ok";
+  return !flags;
 }
 
 async function upsertContact({ token, locationId, prospect, lane, laneKey }) {
@@ -469,6 +485,7 @@ Options:
   --enrich false
   --commit
   --start-drip
+  --only-ok
 `);
 }
 

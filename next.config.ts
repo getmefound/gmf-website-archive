@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       "./docs/client-ops-ledger/agent-jobs.csv",
       "./docs/client-ops-ledger/sending-domain-readiness.csv",
       "./docs/client-ops-ledger/daily-brief-current.md",
+      "./docs/client-ops-ledger/outbox/reach-*-quality-*.md",
+      "./tmp-reach-*.csv",
+      "./tmp-reach-*-report.json",
     ],
   },
   async redirects() {
