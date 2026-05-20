@@ -59,6 +59,19 @@ Manager will ask which campaign to prepare before doing anything else.
 
 `Deploy Reach Cold Email Campaign` means Manager runs the team gates first. It does not live-send by itself.
 
+## Ask Manager To Interpret
+
+When the result is too technical, ask Manager directly:
+
+```text
+/manager what does this mean?
+/manager explain the Reach result in plain English
+/manager what should I do next?
+/manager are we ready to send?
+```
+
+Manager should answer with a plain-English readout, the current blocker, and the next safe commands.
+
 If Manager says agent review is still needed, ask:
 
 ```text

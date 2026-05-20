@@ -251,6 +251,8 @@ Slash-command style:
 /manager run Reach Cold Email Campaign
 /manager deploy campaign
 /manager deploy Reach Cold Email Campaign
+/manager explain the Reach result in plain English
+/manager are we ready to send?
 /manager list agents
 /manager Sales Manager, review Reach QA
 /manager GHL Expert, check Reach readiness
@@ -291,6 +293,15 @@ This specific shortcut means the same safe routine:
 ```
 
 It runs through Manager, Sales Manager QA, and GHL Expert readiness first. It does not import contacts or start a drip by itself.
+
+Manager should also answer interpretation questions after a campaign result:
+
+```text
+/manager what does this mean?
+/manager explain the Reach result in plain English
+/manager what should I do next?
+/manager are we ready to send?
+```
 
 Use batch names only when Mike explicitly wants a historical or special run.
 

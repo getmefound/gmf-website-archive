@@ -409,6 +409,8 @@ ${address(actor)}, all campaign live actions are blocked.
 
   if (mentionsReachCampaignStatus(normalized)) return buildReachCampaignStatusResponse(actor);
 
+  if (mentionsReachDecisionQuestion(normalized)) return buildReachDecisionResponse(actor);
+
   if (mentionsReachColdEmailCampaign(normalized)) {
     return buildReachColdEmailCampaignResponse(actor, { forceFreshGhl: wantsFreshCheck(normalized) });
   }
@@ -438,6 +440,8 @@ Supported examples:
 \`\`\`text
 Manager, status
 Manager, run Reach Cold Email Campaign
+Manager, explain the Reach result
+Manager, are we ready to send?
 Manager, list agents
 Coach, review this copy: ...
 Scheduler, what needs attention
@@ -553,6 +557,53 @@ Sales Manager, review Reach QA
 GHL Expert, check Reach readiness
 Manager, run Reach Cold Email Campaign
 \`\`\``;
+}
+
+function buildReachDecisionResponse(actor: UserContext) {
+  const summaries = laneSummaries();
+  const waiting = reachJobs().filter((job) => String(job.status ?? "").startsWith("waiting")).length;
+  const dripReady = summaries.filter((summary) => String(summary.dripReady).toLowerCase() === "yes").length;
+  const importReady = summaries.filter((summary) => String(summary.importReady).toLowerCase() === "yes").length;
+  const recommendation = readRecommendation();
+
+  return `*Manager plain-English readout - ${today()}*
+
+${address(actor)}, short version: we are not ready to send emails yet.
+
+What this means:
+
+- The team preflight ran. No live action ran.
+- ${summaries.length} Reach lanes are staged; ${waiting} still need Sales Manager QA and visual GHL review.
+- ${importReady} lanes are marked import-ready, but import-only does not send emails.
+- ${dripReady} lanes are marked drip-ready, so do not start drip yet.
+- The read-only GHL API check can pass while visual checks are still open.
+
+Current best move:
+
+1. Have Sales Manager review the QA flags.
+2. Have GHL Expert run/confirm fresh readiness.
+3. If those clear, approve the smallest clean lane for import-only first.
+
+Recommended next commands:
+
+\`\`\`text
+/manager Sales Manager, review Reach QA
+/manager GHL Expert, check Reach readiness fresh
+/manager approve relay import only
+\`\`\`
+
+Do not approve start-drip yet.
+
+Safety:
+
+- No contacts were imported.
+- No drip was started.
+- No GHL workflows or settings were changed.
+- No HighLevel AI features were enabled or toggled.
+
+Recommendation:
+
+${recommendation}`;
 }
 
 function buildCampaignClarificationResponse(actor: UserContext) {
@@ -1033,6 +1084,7 @@ function isSupportedCommand(text: string) {
   const normalized = normalizeCommand(text);
   return (
     mentionsGenericCampaignDeploy(normalized) ||
+    mentionsReachDecisionQuestion(normalized) ||
     mentionsReachColdEmailCampaign(normalized) ||
     mentionsAgentList(normalized) ||
     mentionsBrief(normalized) ||
@@ -1213,6 +1265,26 @@ function mentionsReachCampaignStatus(normalized: string) {
 function mentionsGenericCampaignDeploy(normalized: string) {
   if (mentionsReachColdEmailCampaign(normalized)) return false;
   return /\b(run|start|deploy|launch)\s+(the\s+|a\s+)?campaign\b/.test(normalized);
+}
+
+function mentionsReachDecisionQuestion(normalized: string) {
+  const asksForDecision =
+    /\b(what does this mean|what does it mean|explain|plain english|translate|what happened|what ran|what next|what now|what should|what do i do|next step|next steps|should i|can i|are we ready|ready to send|ready to deploy|ready to launch|can we send|can we start|send emails|start drip)\b/.test(
+      normalized,
+    );
+  if (!asksForDecision) return false;
+  return (
+    mentionsReachColdEmailCampaign(normalized) ||
+    normalized.includes("reach") ||
+    normalized.includes("campaign") ||
+    normalized.includes("email") ||
+    normalized.includes("drip") ||
+    normalized.includes("what does this mean") ||
+    normalized.includes("what next") ||
+    normalized.includes("what should") ||
+    normalized.includes("what do i do") ||
+    normalized.includes("ready to")
+  );
 }
 
 function mentionsGhlReadiness(normalized: string) {
