@@ -199,6 +199,14 @@ Review checklist:
 | Job is within budget | Systems Director |
 | Approval packet is plain English | Chief of Staff |
 
+GHL Expert read-only API check:
+
+```bash
+npm run reach:ghl-check
+```
+
+This checks known dedicated sending domains from the Reach runbook, GHL location access, Reach pipelines, workflow metadata when exposed by the API, and configured custom field IDs. It does not change GHL.
+
 ## Stage 5 - Chief of Staff Approval Packet
 
 Chief of Staff gives Mike one clean packet.

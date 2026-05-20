@@ -15,6 +15,7 @@
     "reach:csv": "node scripts/reach-json-to-csv.mjs",
     "reach:prep": "node scripts/reach-prep-batch.mjs",
     "reach:quality": "node scripts/reach-quality-review.mjs",
+    "reach:ghl-check": "node scripts/reach-ghl-expert-check.mjs",
     "audit:security": "node scripts/auditor-security-sweep.mjs"
   },
   "dependencies": {

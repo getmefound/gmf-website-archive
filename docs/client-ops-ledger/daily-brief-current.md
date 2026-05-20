@@ -24,10 +24,28 @@ Prepared by: Chief of Staff
 | Confirm Reviews sending subdomain and daily send limit | GHL Expert | Waiting |
 | Confirm AI Visibility sending subdomain and daily send limit | GHL Expert | Waiting |
 | Confirm Relay sending subdomain and daily send limit | GHL Expert | Waiting |
-| Confirm each start tag triggers only intended workflow | GHL Expert | Waiting |
+| Confirm each start tag triggers only intended workflow | GHL Expert | API metadata passed; visual sender-domain check still required |
 | Confirm no HighLevel AI feature is enabled | GHL Expert | Required before approval |
 | Generate approval packet per lane | Chief of Staff | Ready after preflight |
 | Review personal email / duplicate-contact QA flags | Sales Manager | Waiting |
+
+GHL Expert read-only API result:
+
+- Active GHL location confirmed: `tRbczwt6oJsXK4tjuzOI`
+- Reviews domain from runbook: `mail.aioutsourcehubs.com`
+- AI Visibility domain from runbook: `mail.getaioutsourcehub.com`
+- Relay domain from runbook: `mail.myaioutsourcehub.com`
+- Reach pipelines found for all three lanes
+- `Warm Leads` stages found for all three lanes
+- cold drip workflows found and published for all three lanes
+- reply workflows found and published for all three lanes
+- 17/17 campaign custom fields verified by API
+
+Remaining GHL Expert visual checks:
+
+- exact sender/from email inside each workflow email node
+- sending domain warmup status inside GHL/email settings
+- HighLevel AI feature toggles remain OFF
 
 ## 4. Fresh Prep Results
 
@@ -52,7 +70,7 @@ Do not start all three live drips at once.
 Recommended path:
 
 1. Sales Manager reviews QA flags and removes questionable personal/duplicate contacts if needed.
-2. GHL Expert fills in `sending-domain-readiness.csv`.
+2. GHL Expert completes visual sender-domain/warmup/AI-toggle checks in GHL.
 3. Chief of Staff regenerates preflight packet for the final approved CSV.
 4. Approve one lane import-only if the domain is still warming.
 5. Approve one lane start-drip only when the lane's sending subdomain is confirmed ready.
