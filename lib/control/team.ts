@@ -16,7 +16,7 @@ export type AgentTeamMember = {
 export const AGENT_TEAM: AgentTeamMember[] = [
   {
     agent: "Manager",
-    displayName: "Elon Musk",
+    displayName: "Grant Mercer",
     codename: "Control",
     title: "Manager",
     status: "active",
@@ -31,7 +31,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "GHL Expert",
-    displayName: "Bill Gates",
+    displayName: "Nolan Pierce",
     codename: "Switchboard",
     title: "Systems Architect",
     status: "active",
@@ -46,11 +46,11 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Systems Director",
-    displayName: "Charlie Munger",
+    displayName: "Martin Vale",
     codename: "Lock",
     title: "IT and Risk Director",
     status: "review",
-    archetype: "Charlie Munger inversion lens",
+    archetype: "Risk inversion lens",
     archetypeNote: "Starts with what could fail across tools, access, costs, and infrastructure.",
     responsibility:
       "Keeps AOH's technical stack healthy: OpenClaw, VPS, GitHub, Vercel, GHL, Slack, backups, tokens, tool sprawl, and launch risk.",
@@ -61,11 +61,11 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Sender",
-    displayName: "Steve Jobs",
+    displayName: "Leo Park",
     codename: "Signal",
     title: "Campaign Voice",
     status: "building",
-    archetype: "Steve Jobs product-taste lens",
+    archetype: "Product-taste lens",
     archetypeNote: "Keeps the message simple, specific, and hard to confuse.",
     responsibility:
       "Prepares reply-first campaign emails and watches sending quality, merge fields, and deliverability.",
@@ -76,7 +76,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Sorter",
-    displayName: "Marie Curie",
+    displayName: "Isabel Chen",
     codename: "Triage",
     title: "Reply Classifier",
     status: "planned",
@@ -91,7 +91,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Scout",
-    displayName: "Nikola Tesla",
+    displayName: "Nora Pierce",
     codename: "Radar",
     title: "Prospect Researcher",
     status: "planned",
@@ -106,7 +106,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Booker",
-    displayName: "Oprah Winfrey",
+    displayName: "Olivia Kane",
     codename: "Calendar",
     title: "Appointment Handoff",
     status: "planned",
@@ -121,7 +121,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Local Visibility Manager",
-    displayName: "Serena Williams",
+    displayName: "Elena Brooks",
     codename: "Presence",
     title: "Local Visibility Specialist",
     status: "building",
@@ -136,7 +136,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Coach",
-    displayName: "Tony Robbins",
+    displayName: "Thomas Reed",
     codename: "Playbook",
     title: "Knowledge and Sales Clarity",
     status: "building",
@@ -151,7 +151,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Reporter",
-    displayName: "Warren Buffett",
+    displayName: "Iris Bennett",
     codename: "Proof",
     title: "Report Delivery and QA",
     status: "active",
@@ -166,7 +166,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Press",
-    displayName: "MrBeast",
+    displayName: "Miles Carter",
     codename: "Publish",
     title: "Content Publisher",
     status: "planned",
@@ -181,7 +181,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
   },
   {
     agent: "Scheduler",
-    displayName: "Tim Cook",
+    displayName: "Grace Turner",
     codename: "Time",
     title: "Calendar Defender",
     status: "active",
