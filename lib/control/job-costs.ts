@@ -104,20 +104,20 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     owner: "Scout",
     status: "missing",
     description:
-      "To control cost, Scout should not deeply scan every GBP. First filter by obvious signals: niche, location, review count, stale recent reviews, weak profile, no website, or visible competitor gap.",
+      "To control cost, Scout should not deeply scan every GBP. First filter by obvious signals: niche, location, review count, stale recent reviews, weak Local Visibility Manager, no website, or visible competitor gap.",
     verification: "Not automated yet. This is the cost guardrail that needs to be built before scale.",
   },
   {
     title: "Score likely review opportunities",
-    owner: "Profile + Scout",
+    owner: "Local Visibility Manager + Scout",
     status: "manual",
     description:
       "Review prospects should be filtered for pain: low review count, old last review, competitor with fresher reviews, unanswered reviews, or weak GBP completeness.",
-    verification: "Profile skill pack defines checks; live automated scoring is not built.",
+    verification: "Local Visibility Manager skill pack defines checks; live automated scoring is not built.",
   },
   {
     title: "Score likely AI Visibility opportunities",
-    owner: "Profile + Scout",
+    owner: "Local Visibility Manager + Scout",
     status: "partial",
     description:
       "AI Visibility uses similar area/niche inputs, then looks for citation/NAP gaps, weak content, poor profile completeness, stale reviews, and competitor visibility signals.",
@@ -157,11 +157,11 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Create AI Visibility report",
-    owner: "Profile + GHL Expert",
+    owner: "Local Visibility Manager + GHL Expert",
     status: "partial",
     description:
-      "AI Visibility can use the same area/niche/business information, then show profile/review/competitor visibility issues and a baseline explanation.",
-    verification: "The AI Visibility report route exists. Direct live profile scan coverage is limited and can fall back to baseline estimates.",
+      "AI Visibility can use the same area/niche/business information, then show Local Visibility Manager/review/competitor visibility issues and a baseline explanation.",
+    verification: "The AI Visibility report route exists. Direct live Local Visibility Manager scan coverage is limited and can fall back to baseline estimates.",
   },
   {
     title: "Generate warm-reply report delivery",
@@ -173,11 +173,11 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Draft workflow skeleton",
-    owner: "GHL Expert + Auditor",
+    owner: "GHL Expert + Systems Director",
     status: "partial",
     description:
       "The Reach Campaign - Draft Skeleton workflow exists in Draft mode with a reach_enrolled tag trigger, safety gate, route branches, waits, and note placeholders. It must stay unpublished.",
-    verification: "Mike visually confirmed Draft mode, no Send Email nodes, no enrolled contacts, and Auditor approved the draft structure with blockers.",
+    verification: "Mike visually confirmed Draft mode, no Send Email nodes, no enrolled contacts, and Systems Director approved the draft structure with blockers.",
   },
   {
     title: "Write/send dynamic outreach email",
@@ -185,7 +185,7 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     status: "missing",
     description:
       "The email must merge prospect name, business, area, niche, competitor/report signals, and a reply-first CTA such as `reply send` or `reply book`. It should not read like a generic cold email, and Send Email nodes remain blocked.",
-    verification: "Draft copy exists from Sender/Coach, but real GHL email nodes are blocked until address, logo, calendar, unsubscribe, and Auditor QA pass.",
+    verification: "Draft copy exists from Sender/Coach, but real GHL email nodes are blocked until address, logo, calendar, unsubscribe, and Systems Director QA pass.",
   },
   {
     title: "Track replies, report requests, and booked calls",
@@ -213,7 +213,7 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
   },
   {
     title: "If they buy, confirm Stripe-to-GHL handoff",
-    owner: "GHL Expert + Auditor",
+    owner: "GHL Expert + Systems Director",
     status: "manual",
     description:
       "After purchase, confirm the correct GHL subaccount exists, the client is tagged, the service pipeline is created, and onboarding begins.",
@@ -229,7 +229,7 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Client grants GBP access",
-    owner: "Profile + GHL Expert",
+    owner: "Local Visibility Manager + GHL Expert",
     status: "manual",
     description:
       "The client either connects Google Business Profile inside GHL or invites AOH as manager, depending on the service path. Review Automation cannot launch until the correct GBP is connected or access is confirmed.",
@@ -252,11 +252,11 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     verification: "Template/lab placeholders are being defined; real client values must come from completed intake and access proof.",
   },
   {
-    title: "Auditor client launch QA",
-    owner: "Auditor",
+    title: "Systems Director client launch QA",
+    owner: "Systems Director",
     status: "manual",
     description:
-      "Auditor confirms custom values are populated, GBP/Reputation is connected correctly, links route to the right business, unsubscribe works, test contact messages render cleanly, and no placeholders remain.",
+      "Systems Director confirms custom values are populated, GBP/Reputation is connected correctly, links route to the right business, unsubscribe works, test contact messages render cleanly, and no placeholders remain.",
     verification: "QA checklist exists conceptually; live execution still needed before any real client launch.",
   },
   {
@@ -268,19 +268,19 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     verification: "SOP is defined; no live client launch test was verified in this turn.",
   },
   {
-    title: "Auditor launch QA",
-    owner: "Auditor",
+    title: "Systems Director launch QA",
+    owner: "Systems Director",
     status: "manual",
     description:
-      "Auditor confirms GBP is correct, reviews sync into Reputation, custom values are populated, messages work, links are correct, and blockers are assigned.",
+      "Systems Director confirms GBP is correct, reviews sync into Reputation, custom values are populated, messages work, links are correct, and blockers are assigned.",
     verification: "QA checklist exists; live execution still needed.",
   },
   {
     title: "Client upkeep after completion",
-    owner: "Manager + Auditor + Profile + GHL Expert",
+    owner: "Manager + Systems Director + Local Visibility Manager + GHL Expert",
     status: "manual",
     description:
-      "After launch, agents monitor review velocity, workflow errors, unanswered reviews, profile drift, report delivery, and client risk. This becomes the 50+ client upkeep system.",
+      "After launch, agents monitor review velocity, workflow errors, unanswered reviews, Local Visibility Manager drift, report delivery, and client risk. This becomes the 50+ client upkeep system.",
     verification: "Scheduled work exists in Mission Control; multi-client automated monitoring still needs to be expanded.",
   },
 ];
@@ -291,8 +291,8 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     owner: "Sender + Coach",
     status: "partial",
     description:
-      "Draft first-touch/follow-up copy exists in docs/AOH_REACH_CAMPAIGN_COPY.md. The approved strategy separates three lanes: Reviews $1 first month, AI Visibility free snapshot/report, and Relay missed-call details. Each lane still needs final GHL merge-field validation, real footer values, unsubscribe proof, daily cap, and Auditor approval before any scaled send.",
-    verification: "Sender, Coach, and Auditor pressure-tested the offer structure on 2026-05-18; copy is drafted but not approved for scaled live send nodes until reply router QA passes.",
+      "Draft first-touch/follow-up copy exists in docs/AOH_REACH_CAMPAIGN_COPY.md. The approved strategy separates three lanes: Reviews $1 first month, AI Visibility free snapshot/report, and Relay missed-call details. Each lane still needs final GHL merge-field validation, real footer values, unsubscribe proof, daily cap, and Systems Director approval before any scaled send.",
+    verification: "Sender, Coach, and Systems Director pressure-tested the offer structure on 2026-05-18; copy is drafted but not approved for scaled live send nodes until reply router QA passes.",
   },
   {
     title: "Live GHL report + heatmap workflow",
@@ -312,7 +312,7 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
   },
   {
     title: "AOH Client Template Lab template check",
-    owner: "GHL Expert + Auditor",
+    owner: "GHL Expert + Systems Director",
     status: "partial",
     description:
       "Fields, values, tags, and a Draft-only Reach workflow skeleton exist in the template lab. This is reusable setup only, not proof that live AOH campaigns/report workflows are wired.",
@@ -328,7 +328,7 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
   },
   {
     title: "Controlled launch caps and first-hour watch",
-    owner: "Auditor + Manager",
+    owner: "Systems Director + Manager",
     status: "partial",
     description:
       "The dedicated-domain warmup ladder is documented: 10-20 emails/day for 3 days, then 40-50/day for 3 days, then 80-100/day for 3 days, followed by a Day 9 warmup/status check before any increase. Mission Control still needs automated live telemetry for lane status, daily cap, suppression count, duplicate prevention status, failures, and first-hour watch owner.",
@@ -376,8 +376,8 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     internalTasks: [
       {
         title: "Measure cost against booked calls",
-        description: "Auditor watches daily spend, cost per booked call, reply quality, and whether the list or message should change.",
-        owner: "Auditor",
+        description: "Systems Director watches daily spend, cost per booked call, reply quality, and whether the list or message should change.",
+        owner: "Systems Director",
       },
       {
         title: "Keep the workflow visible",
@@ -396,7 +396,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       { agent: "Sender", role: "Prepares and sends the outreach sequence without making it sound templated." },
       { agent: "Sorter", role: "Reads replies, separates real interest from noise, and flags hot leads." },
       { agent: "Booker", role: "Moves interested replies toward a call on the calendar." },
-      { agent: "Auditor", role: "Checks cost, booked-call rate, and whether the list/copy should change." },
+      { agent: "Systems Director", role: "Checks cost, booked-call rate, and whether the list/copy should change." },
     ],
     cadence: "Daily at 7:00am",
     status: "watch",
@@ -452,21 +452,21 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     internalTasks: [
       {
         title: "Supply proof points",
-        description: "Profile gives the campaign the checklist and findings that make the visibility pitch credible.",
-        owner: "Profile",
+        description: "Local Visibility Manager gives the campaign the checklist and findings that make the visibility pitch credible.",
+        owner: "Local Visibility Manager",
       },
       {
         title: "Decide whether to keep spending",
-        description: "Auditor compares replies and booked audits against the daily cost before scaling.",
-        owner: "Auditor",
+        description: "Systems Director compares replies and booked audits against the daily cost before scaling.",
+        owner: "Systems Director",
       },
     ],
     agentRoles: [
-      { agent: "Scout", role: "Finds prospects with profile, review, citation, or AI visibility gaps." },
+      { agent: "Scout", role: "Finds prospects with Local Visibility Manager, review, citation, or AI visibility gaps." },
       { agent: "Sender", role: "Sends the visibility-audit angle and keeps the message aligned to AOH's offer." },
       { agent: "Sorter", role: "Classifies replies and sends interested leads toward discovery." },
-      { agent: "Profile", role: "Provides the visibility checklist and proof points used in the pitch." },
-      { agent: "Auditor", role: "Watches reply quality and whether booked audits justify the daily spend." },
+      { agent: "Local Visibility Manager", role: "Provides the visibility checklist and proof points used in the pitch." },
+      { agent: "Systems Director", role: "Watches reply quality and whether booked audits justify the daily spend." },
     ],
     cadence: "Daily at 7:15am",
     status: "watch",
@@ -504,8 +504,8 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       {
         title: "Run website report smoke test",
         description:
-          "Auditor submits one homepage report request, then confirms GHL tags, both report workflows, Website Leads opportunity creation, callbacks, and usable report links.",
-        owner: "Auditor",
+          "Systems Director submits one homepage report request, then confirms GHL tags, both report workflows, Website Leads opportunity creation, callbacks, and usable report links.",
+        owner: "Systems Director",
       },
       {
         title: "Catch broken automations",
@@ -519,14 +519,14 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
       {
         title: "Review recurring issues",
-        description: "Auditor watches for repeated breaks so the system gets fixed instead of repeatedly patched.",
-        owner: "Auditor",
+        description: "Systems Director watches for repeated breaks so the system gets fixed instead of repeatedly patched.",
+        owner: "Systems Director",
       },
     ],
     agentRoles: [
       { agent: "GHL Expert", role: "Checks workflow errors, calendar sync, report tags, Website Leads pipeline movement, and webhook health." },
       { agent: "Manager", role: "Turns any failure into a visible Mission Control task or blocker." },
-      { agent: "Auditor", role: "Runs the homepage report smoke test, reviews recurring failures, and decides whether the system is drifting." },
+      { agent: "Systems Director", role: "Runs the homepage report smoke test, reviews recurring failures, and decides whether the system is drifting." },
       { agent: "Reporter", role: "Confirms generated marketing and AI visibility report links are usable." },
       { agent: "Website/Codex", role: "Fixes /api/report, Vercel env, or callback issues when the handoff breaks." },
     ],
@@ -551,21 +551,21 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     slug: "secret-exposure-sweep",
     name: "Secret exposure sweep",
     service: "Security",
-    owner: "Auditor",
+    owner: "Systems Director",
     overview:
       "Scan for obvious credential leaks, unsafe token exposure, and risky public/client-side configuration before they become incidents.",
     salesAgentTasks: [
       {
         title: "Keep client trust clean",
-        description: "Auditor makes sure sales and demo links are not exposing tokens or sensitive operational details.",
-        owner: "Auditor",
+        description: "Systems Director makes sure sales and demo links are not exposing tokens or sensitive operational details.",
+        owner: "Systems Director",
       },
     ],
     internalTasks: [
       {
         title: "Run exposure checks",
-        description: "Auditor scans for secrets in source, screenshots, URLs, and unsafe public configuration.",
-        owner: "Auditor",
+        description: "Systems Director scans for secrets in source, screenshots, URLs, and unsafe public configuration.",
+        owner: "Systems Director",
       },
       {
         title: "Route fixes",
@@ -579,7 +579,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
     ],
     agentRoles: [
-      { agent: "Auditor", role: "Runs the sweep, flags exposures, and blocks risky deploys." },
+      { agent: "Systems Director", role: "Runs the sweep, flags exposures, and blocks risky deploys." },
       { agent: "Manager", role: "Routes any security fix to the right owner and keeps it visible." },
       { agent: "GHL Expert", role: "Helps when leaked or unsafe credentials touch HighLevel integrations." },
     ],
@@ -601,24 +601,24 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     checks: ["Tokens in URLs", "Secrets in source", "Unsafe env names", "Public screenshots"],
   },
   {
-    slug: "profile-visibility-sweep",
-    name: "Profile visibility sweep",
+    slug: "local-visibility-sweep",
+    name: "Local visibility sweep",
     service: "AI Visibility",
-    owner: "Profile",
+    owner: "Local Visibility Manager",
     overview:
       "Check AOH or client profiles for basic visibility decay: profile completeness, reviews, unanswered reviews, and NAP drift.",
     salesAgentTasks: [
       {
         title: "Create client-facing findings",
-        description: "Profile turns profile gaps, unanswered reviews, and visibility drift into simple sales talking points.",
-        owner: "Profile",
+        description: "Local Visibility Manager turns profile gaps, unanswered reviews, and visibility drift into simple sales talking points.",
+        owner: "Local Visibility Manager",
       },
     ],
     internalTasks: [
       {
         title: "Monitor profile health",
-        description: "Profile checks GBP completeness, photos, services, categories, reviews, and NAP consistency.",
-        owner: "Profile",
+        description: "Local Visibility Manager checks GBP completeness, photos, services, categories, reviews, and NAP consistency.",
+        owner: "Local Visibility Manager",
       },
       {
         title: "Confirm GHL connection health",
@@ -632,9 +632,9 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
     ],
     agentRoles: [
-      { agent: "Profile", role: "Checks GBP completeness, reviews, photos, services, categories, and NAP consistency." },
+      { agent: "Local Visibility Manager", role: "Checks GBP completeness, reviews, photos, services, categories, and NAP consistency." },
       { agent: "GHL Expert", role: "Confirms connected HighLevel/GBP pieces still sync where needed." },
-      { agent: "Auditor", role: "Confirms recurring profile issues are not being ignored." },
+      { agent: "Systems Director", role: "Confirms recurring profile issues are not being ignored." },
       { agent: "Coach", role: "Turns findings into client-facing explanations or monthly report language." },
     ],
     cadence: "Weekly",

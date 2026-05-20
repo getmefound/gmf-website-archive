@@ -125,7 +125,7 @@ export default async function ControlPage() {
             href="/mike-mc/team"
             className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
           >
-            Team
+            Org Chart
           </a>
           <a
             href={OPENCLAW_HREF}
@@ -204,7 +204,7 @@ function TeamTrackerSection() {
             Campaign launch work
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-            Website reports are verified. Scaled sending waits on GHL reply routing, Auditor proof,
+            Website reports are verified. Scaled sending waits on GHL reply routing, Systems Director proof,
             then Sender.
           </p>
         </div>
@@ -412,7 +412,7 @@ function ManagerCard({ data }: { data: ControlData }) {
         { primary: "Live agents", secondary: "Scout · Manager", badge: { tone: "accent", label: "2" } },
         { primary: "Manual today", secondary: "Scheduler · GHL Expert · Editor v0 · Press v0", badge: { tone: "warm", label: "4" } },
         { primary: "Building", secondary: "Coach (ship May 25)", badge: { tone: "warm", label: "1" } },
-        { primary: "Planned", secondary: "Sender · Auditor + 4 more", badge: { tone: "muted", label: "6" } },
+        { primary: "Planned", secondary: "Sender · Systems Director + 4 more", badge: { tone: "muted", label: "6" } },
       ]}
     />
   );
@@ -439,7 +439,7 @@ function GhlExpertCard({ data }: { data: ControlData }) {
   if (activeTask) {
     realRows.push({
       primary: activeTask.title,
-      secondary: `${activeTask.service} · reviewer: ${activeTask.reviewer ?? "Auditor"} · due ${activeTask.due}`,
+      secondary: `${activeTask.service} · reviewer: ${activeTask.reviewer ?? "Systems Director"} · due ${activeTask.due}`,
       badge: { tone: "warm", label: "working" },
     });
   }
@@ -523,8 +523,8 @@ function GhlExpertCard({ data }: { data: ControlData }) {
 function ProfileCard() {
   return (
     <AgentCard
-      name="Profile"
-      role="GBP + local visibility specialist"
+      name="Local Visibility Manager"
+      role="Google profile + local visibility"
       status="planned"
       cadence="build after Coach"
       activity={{
@@ -663,18 +663,18 @@ function SenderCard() {
 function AuditorCard() {
   return (
     <AgentCard
-      name="Auditor"
-      role="Watchdog · stuck deals + inbox + site signals"
+      name="Systems Director"
+      role="IT stack · security + tool health"
       status="planned"
       cadence="build LAST · slot 11"
       activity={{
-        doingNow: "Not yet built — Mike watches manually",
-        upNext: "Needs fleet stability before it can audit",
+        doingNow: "Not yet built - Mike watches manually",
+        upNext: "Owns tech-stack review once Mission Control jobs stabilize",
       }}
       ownedTitle="Will own (Mike's manual watch today)"
       ownedRows={[
-        { primary: "Inbox demands", secondary: "7 emails waiting on reply · oldest 2d", badge: { tone: "warn", label: "manual" } },
-        { primary: "Stuck deals", secondary: "5 warm not called in 7+ days", badge: { tone: "warn", label: "manual" } },
+        { primary: "Tool stack review", secondary: "OpenClaw, VPS, GitHub, Vercel, Slack, GHL", badge: { tone: "warn", label: "manual" } },
+        { primary: "Security and access checks", secondary: "tokens, stale permissions, exposed URLs, backups", badge: { tone: "warn", label: "manual" } },
         { primary: "Site signals", secondary: "calc_run + contact_submit events live in Vercel Analytics", badge: { tone: "accent", label: "tracking" } },
       ]}
       ownedFooter={

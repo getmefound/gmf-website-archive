@@ -41,13 +41,13 @@ The system should make Mike's day simpler, not make Mike manage every agent dire
 | Secretary / Chief of Staff | Prepares the morning brief, filters noise, groups recommendations, and gives Mike a clean approval queue. |
 | Manager | Scans the company, finds work that may need doing, asks specialist agents to investigate, and creates recommendations. |
 | GHL Expert | Scans GHL/hub360ai client accounts, workflows, reviews, contacts, opportunities, tags, and account health. |
-| AI Visibility Agent | Checks client website, AI visibility work, search visibility, content requirements, and AI-readiness tasks. |
+| Local Visibility Manager | Checks Google Business Profile access, local visibility, AI visibility work, citations, review links, and profile health. |
 | Reviews Agent | Checks review requests, review counts, reporting cadence, replies, and review automation health. |
 | Relay Agent | Checks voice agent call logs, missed calls, routing, fallback behavior, and client issues. |
 | Studio | Creates approved content assets. |
 | Press | Publishes approved content and verifies scheduled/published status. |
 | Hub | Answers account questions by reading the ledger, GHL, Drive, and client profile notes. |
-| Auditor | Looks for cost anomalies, repeated failures, stale work, missed reports, and cross-agent risk patterns. |
+| Systems Director | Looks after IT stack health, security, access, backups, tool decisions, costs, repeated failures, and cross-agent risk patterns. |
 
 ## Daily Operating Flow
 
@@ -69,10 +69,10 @@ Manager does not do everything itself. Manager asks specialist agents to investi
 Examples:
 
 - GHL Expert scans all client GHL accounts.
-- AI Visibility Agent checks AI visibility client work.
+- Local Visibility Manager checks Google profile, local visibility, and AI visibility client work.
 - Reviews Agent checks review delivery.
 - Relay Agent checks voice/call delivery.
-- Auditor checks cost/risk/failure patterns.
+- Systems Director checks stack health, security, cost, risk, and failure patterns.
 
 Then Manager creates recommendations.
 
@@ -229,10 +229,10 @@ HighLevel AI features must remain OFF unless Mike explicitly authorizes them man
 
 - [ ] Build Manager daily scan.
 - [ ] Build GHL Expert daily scan.
-- [ ] Build AI Visibility Agent scan.
+- [ ] Build Local Visibility Manager scan.
 - [ ] Build Reviews Agent scan.
 - [ ] Build Relay Agent scan.
-- [ ] Build Auditor exception scan.
+- [ ] Build Systems Director exception and tech-stack scan.
 - [ ] Have Manager convert findings into recommendations.
 - [ ] Have Secretary convert recommendations into the daily brief.
 
@@ -258,6 +258,7 @@ HighLevel AI features must remain OFF unless Mike explicitly authorizes them man
 - [ ] Deploy Langfuse when agent volume makes debugging/cost visibility necessary.
 - [ ] Track cost by agent and client.
 - [ ] Track failed runs and stale scans.
+- [ ] Have Systems Director recommend keep/replace/remove/defer for tools before Mike buys or switches software.
 
 ### Phase 6 - Optional Glue
 
@@ -282,7 +283,6 @@ The agents do the work.
 
 The ledger and client profiles update.
 
-Auditor watches for risk.
+Systems Director watches the stack, access, cost, and risk.
 
 Secretary prepares the next brief.
-
