@@ -303,7 +303,8 @@ HighLevel AI features must remain OFF unless Mike explicitly authorizes them man
 - [ ] Define stable `client_id` format.
 - [ ] Add `human_approval_required` gates to the ledger.
 - [ ] Create a daily Morning Brief format for Secretary.
-- [ ] Define Slack channel or DM destination for Morning Brief.
+- [x] Wire a Slack-ready command router for Morning Brief, status, GHL checks, QA review, approvals, and pause commands.
+- [x] Define `#04-aoh-ops` as the first Manager / Chief of Staff command channel.
 
 ### Phase 2 - Manager and Specialist Scans
 
@@ -323,7 +324,8 @@ HighLevel AI features must remain OFF unless Mike explicitly authorizes them man
 
 - [ ] Create a `recommended_jobs` queue.
 - [ ] Create job lifecycle statuses.
-- [ ] Add approval commands in Slack.
+- [x] Add local Slack-ready approval commands through `scripts/agent-command-center.mjs`.
+- [ ] Connect the command router to the real Slack bot or OpenClaw backend.
 - [ ] Convert approved recommendations into jobs.
 - [ ] Write completed jobs back to Client Ops Ledger and client profile notes.
 

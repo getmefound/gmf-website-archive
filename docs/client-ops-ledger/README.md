@@ -23,6 +23,7 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `aoh-agent-company-operating-model.md` | Canonical company hierarchy: Mike as President, Secretary, Manager, specialist agents, recommendations, jobs, approvals. |
 | `agent-model-routing-policy.md` | Cost-control policy for choosing no LLM, cheap, standard, strong, or human decision tiers. |
 | `reach-campaign-agent-runbook.md` | Safe agent workflow for Reach email campaign prep, approval, import, drip start, and logging. |
+| `slack-agent-command-runbook.md` | How Mike talks to Manager, Chief of Staff, GHL Expert, Sales Manager, and approval gates through Slack-ready commands. |
 | `agent-jobs-template.csv` | Starter job queue format for agent work, budgets, approvals, and next actions. |
 | `agent-jobs.csv` | Current working job queue for agent work. |
 | `daily-brief-template.md` | Chief of Staff daily brief format for Mike approvals and status. |
@@ -38,7 +39,8 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 4. Require all agent runs to write back to the ledger through a controlled workflow, not by freeform editing.
 5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
 6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
-7. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
+7. Use `slack-agent-command-runbook.md` and `npm run agent:brief` for Mike-facing briefs and approval commands.
+8. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 
 ## Higher-Level Truth
 
