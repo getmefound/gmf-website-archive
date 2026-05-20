@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
 
 export const metadata: Metadata = {
-  title: "AOH 90s Org Chart - The Hub",
-  description: "Internal AOH 90s-style hierarchy chart for human and agent inspiration personas.",
+  title: "AOH 2000s Org Chart - The Hub",
+  description: "Internal AOH 2000s-style hierarchy chart for human and agent inspiration personas.",
   robots: { index: false, follow: false },
 };
 
@@ -30,17 +30,17 @@ const ROLES: OrgRole[] = [
     summary: "Approves direction, client-facing risk, pricing, tool changes, and final go/no-go calls.",
     owns: ["business decisions", "approvals", "client promises"],
     tone: "executive",
-    image: "/team/mike-org.jpg",
+    image: "/team/mje.png",
   },
   {
     title: "Chief of Staff",
-    persona: "Sheryl Sandberg",
+    persona: "Indra Nooyi",
     status: "planned",
     summary: "Prepares the morning brief, filters noise, and turns recommendations into a clean approval queue.",
     owns: ["morning brief", "approval queue", "daily agenda"],
     reportsTo: "President",
     tone: "executive",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Sheryl_Sandberg_WEF_2013_%28crop_by_James_Tamim%29.jpg/330px-Sheryl_Sandberg_WEF_2013_%28crop_by_James_Tamim%29.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Indra_Nooyi_-_World_Economic_Forum_Annual_Meeting_2010.jpg/330px-Indra_Nooyi_-_World_Economic_Forum_Annual_Meeting_2010.jpg",
   },
   {
     title: "General Manager",
@@ -54,27 +54,27 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Systems Director",
-    persona: "Charlie Munger",
+    persona: "Bill Gates",
     status: "planned",
     summary: "Owns IT, tool stack health, access, security, backups, costs, and whether new software is worth adding.",
     owns: ["OpenClaw", "VPS", "GitHub", "Vercel", "Slack", "GHL access", "backups"],
     reportsTo: "General Manager",
     tone: "systems",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Charlie_Munger_%28cropped%29.jpg/330px-Charlie_Munger_%28cropped%29.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg/330px-Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg",
   },
   {
     title: "Sales Manager",
-    persona: "Zig Ziglar",
+    persona: "Gary Vaynerchuk",
     status: "building",
     summary: "Owns the revenue pipeline from campaign choice to booked calls, including when to pause, change, or scale outreach.",
     owns: ["campaign strategy", "sales pipeline", "reply follow-up", "booked-call handoff"],
     reportsTo: "General Manager",
     tone: "revenue",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Zig_Ziglar_at_Get_Motivated_Seminar%2C_Cow_Palace_2009-3-24_3.JPG/330px-Zig_Ziglar_at_Get_Motivated_Seminar%2C_Cow_Palace_2009-3-24_3.JPG",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gary_Vaynerchuk_public_domain.jpg/330px-Gary_Vaynerchuk_public_domain.jpg",
   },
   {
     title: "Client Success Manager",
-    persona: "Tony Hsieh",
+    persona: "TBD",
     status: "planned",
     summary: "Owns whether clients are onboarded, happy, reported to, renewed, and not quietly ignored after the sale.",
     owns: ["onboarding health", "client check-ins", "renewals", "retention risks"],
@@ -84,7 +84,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Hub",
-    persona: "Marc Benioff",
+    persona: "TBD",
     status: "planned",
     summary: "Answers account questions by reading the ledger, GHL, Drive, client notes, and delivery history.",
     owns: ["client Q&A", "account lookups", "status answers"],
@@ -94,17 +94,17 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "GHL Expert",
-    persona: "Bill Gates",
+    persona: "Paul Allen",
     status: "live",
     summary: "Owns hub360ai/GHL setup, workflows, pipelines, tags, callbacks, reports, and automation health.",
     owns: ["GHL workflows", "pipelines", "calendars", "report delivery"],
     reportsTo: "Systems Director",
     tone: "systems",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg/330px-Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Paul_G._Allen.jpg/330px-Paul_G._Allen.jpg",
   },
   {
     title: "Local Visibility Manager",
-    persona: "Seth Godin",
+    persona: "TBD",
     status: "building",
     summary: "Owns Google Business Profile access, profile health, citations, review links, and local/AI visibility signals.",
     owns: ["Google profile", "local visibility", "citations", "AI visibility checks"],
@@ -114,7 +114,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Reviews Manager",
-    persona: "Jeff Bezos",
+    persona: "TBD",
     status: "planned",
     summary: "Owns review automation delivery, review request health, replies, reporting cadence, and review-volume warnings.",
     owns: ["review requests", "review reports", "reply health", "review velocity"],
@@ -124,7 +124,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Relay Manager",
-    persona: "Alexander Graham Bell",
+    persona: "TBD",
     status: "planned",
     summary: "Owns voice-agent delivery, missed-call recovery, call summaries, routing quality, and escalation issues.",
     owns: ["voice delivery", "call logs", "missed calls", "routing QA"],
@@ -134,17 +134,17 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Coach",
-    persona: "Tony Robbins",
+    persona: "Dale Carnegie",
     status: "building",
     summary: "Keeps product truth, SOPs, sales language, client instructions, and response drafts aligned.",
     owns: ["SOPs", "pricing answers", "objection handling", "client-safe wording"],
     reportsTo: "General Manager",
     tone: "ops",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Tony_Robbins.jpg/330px-Tony_Robbins.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Dale_Carnegie_%281887%E2%80%931955%29.jpg/330px-Dale_Carnegie_%281887%E2%80%931955%29.jpg",
   },
   {
     title: "Scout",
-    persona: "Nikola Tesla",
+    persona: "TBD",
     status: "live",
     summary: "Finds prospects, weak profiles, review gaps, niche signals, and cheap prefilter evidence.",
     owns: ["prospect research", "fit scoring", "source notes"],
@@ -154,7 +154,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Sender",
-    persona: "Steve Jobs",
+    persona: "TBD",
     status: "planned",
     summary: "Prepares outreach, watches deliverability, validates merge fields, and keeps campaigns reply-first.",
     owns: ["email campaigns", "follow-ups", "deliverability"],
@@ -164,7 +164,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Sorter",
-    persona: "Marie Curie",
+    persona: "TBD",
     status: "planned",
     summary: "Classifies replies, catches hot leads, handles opt-outs, and routes unclear items for review.",
     owns: ["reply triage", "hot lead routing", "suppression"],
@@ -174,7 +174,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Booker",
-    persona: "Oprah Winfrey",
+    persona: "TBD",
     status: "planned",
     summary: "Turns buying intent into booked calls and keeps handoffs clean.",
     owns: ["booking links", "show-rate follow-up", "meeting handoff"],
@@ -184,7 +184,7 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Engagement Scout",
-    persona: "Gary Vaynerchuk",
+    persona: "TBD",
     status: "planned",
     summary: "Finds social conversations worth entering and drafts comments or DM suggestions for approval.",
     owns: ["social listening", "comment drafts", "DM opportunities", "engagement log"],
@@ -193,38 +193,28 @@ const ROLES: OrgRole[] = [
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gary_Vaynerchuk_public_domain.jpg/330px-Gary_Vaynerchuk_public_domain.jpg",
   },
   {
-    title: "Studio",
-    persona: "Walt Disney",
-    status: "live",
-    summary: "Creates approved visuals, assets, and eventually content variants for AOH and clients.",
-    owns: ["creative assets", "visual drafts", "content production"],
-    reportsTo: "General Manager",
-    tone: "delivery",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Walt_Disney_1946_%28cropped2%29.JPG/330px-Walt_Disney_1946_%28cropped2%29.JPG",
-  },
-  {
     title: "Editor",
-    persona: "Anna Wintour",
+    persona: "James Patterson",
     status: "manual",
     summary: "Chooses angles, priorities, brand voice, and what content is worth making.",
     owns: ["editorial plan", "angle selection", "voice review"],
     reportsTo: "General Manager",
     tone: "delivery",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/AnnaWintour-byPhilipRomano.jpg/330px-AnnaWintour-byPhilipRomano.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/James_Patterson_at_the_Library_of_Congress_National_Book_Festival_on_August_24%2C_2024_%28cropped%29.jpg/500px-James_Patterson_at_the_Library_of_Congress_National_Book_Festival_on_August_24%2C_2024_%28cropped%29.jpg",
   },
   {
     title: "Press",
-    persona: "Richard Branson",
+    persona: "Ted Turner",
     status: "manual",
     summary: "Publishes approved content and records proof that it went out correctly.",
     owns: ["publishing", "scheduling", "proof of publish"],
     reportsTo: "General Manager",
     tone: "delivery",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Richard_Branson_Addresses_the_Our_Ocean_Conference_2015_in_Valpara%C3%ADso_%2821783214958%29_%28cropped%29.jpg/330px-Richard_Branson_Addresses_the_Our_Ocean_Conference_2015_in_Valpara%C3%ADso_%2821783214958%29_%28cropped%29.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Ted_Turner.jpg/500px-Ted_Turner.jpg",
   },
   {
     title: "Reporter",
-    persona: "Warren Buffett",
+    persona: "TBD",
     status: "live",
     summary: "Confirms report links open, match the right contact, and tell a useful story.",
     owns: ["report QA", "delivery proof", "monthly reporting"],
@@ -234,13 +224,13 @@ const ROLES: OrgRole[] = [
   },
   {
     title: "Scheduler",
-    persona: "Tim Cook",
+    persona: "Tim Ferriss",
     status: "live",
     summary: "Protects calendars, booking availability, reminders, and meeting context.",
     owns: ["AOH Talk", "calendar blocks", "meeting briefs"],
     reportsTo: "Chief of Staff",
     tone: "ops",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Tim_Cook_March_2026_%28cropped_2%29.jpg/330px-Tim_Cook_March_2026_%28cropped_2%29.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Tim_Ferriss.jpg/330px-Tim_Ferriss.jpg",
   },
 ];
 
@@ -278,7 +268,54 @@ const DEPARTMENTS = [
   {
     title: "Marketing Department",
     lead: "Editor",
-    support: ["Studio", "Press"],
+    support: ["Press"],
+  },
+];
+
+const TBD_OPTIONS = [
+  {
+    role: "Client Success Manager",
+    options: ["Danny Meyer", "Tony Hsieh", "Horst Schulze", "Jeanne Bliss"],
+  },
+  {
+    role: "Hub",
+    options: ["Marc Benioff", "Stewart Butterfield", "Meg Whitman", "Jim Barksdale"],
+  },
+  {
+    role: "Local Visibility Manager",
+    options: ["Mike Blumenthal", "Joy Hawkins", "Rand Fishkin", "Darren Shaw"],
+  },
+  {
+    role: "Reviews Manager",
+    options: ["Jay Baer", "Shep Hyken", "Fred Reichheld", "Joey Coleman"],
+  },
+  {
+    role: "Relay Manager",
+    options: ["Claude Shannon", "Alexander Graham Bell", "Walt Mossberg", "David Pogue"],
+  },
+  {
+    role: "Scout",
+    options: ["Nate Silver", "Malcolm Gladwell", "Daniel Kahneman", "Annie Duke"],
+  },
+  {
+    role: "Sender",
+    options: ["David Ogilvy", "Claude Hopkins", "Eugene Schwartz", "Ann Handley"],
+  },
+  {
+    role: "Sorter",
+    options: ["Barbara Minto", "Annie Duke", "Nate Silver", "Daniel Kahneman"],
+  },
+  {
+    role: "Booker",
+    options: ["Barbara Corcoran", "Mary Kay Ash", "Sara Blakely", "Daymond John"],
+  },
+  {
+    role: "Engagement Scout",
+    options: ["Guy Kawasaki", "Mark Cuban", "Alexis Ohanian", "Casey Neistat"],
+  },
+  {
+    role: "Reporter",
+    options: ["Edward Tufte", "Hans Rosling", "Byron Wien", "Nate Silver"],
   },
 ];
 
@@ -302,7 +339,7 @@ export default function OrgChartPage() {
             AOH - Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
-            AOH 90s Org Chart
+            AOH 2000s Org Chart
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
             Business and field-associated public figures are used as inspiration labels only. They are not
@@ -321,12 +358,12 @@ export default function OrgChartPage() {
         </div>
       </header>
 
-      <section className="border-2 border-[#808080] bg-[#c0c0c0] p-3 text-[#111] shadow-[inset_2px_2px_0_#ffffff,inset_-2px_-2px_0_#404040] md:p-5">
-        <div className="mb-4 flex items-center justify-between border-2 border-[#808080] bg-[#000080] px-3 py-2 text-white shadow-[inset_1px_1px_0_#8aa1ff,inset_-1px_-1px_0_#001a4d]">
+      <section className="border border-slate-400 bg-[#eef2f7] p-3 text-[#111] shadow-[0_18px_40px_rgba(15,23,42,0.22)] md:p-5">
+        <div className="mb-4 flex items-center justify-between rounded-t-md border border-[#2b579a] bg-gradient-to-b from-[#5f8dd3] to-[#1f4f9a] px-3 py-2 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]">
           <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
             AI Outsource Hub - Agent Company Hierarchy
           </h2>
-          <span className="font-mono text-xs">v1.0</span>
+          <span className="font-mono text-xs">v2.0</span>
         </div>
 
         <div className="flex flex-col items-center">
@@ -347,14 +384,28 @@ export default function OrgChartPage() {
           Portraits load from public Wikimedia/Wikipedia image paths where available. Persona labels are inspiration only.
         </p>
       </section>
+
+      <section className="mt-6 border border-zinc-800 bg-zinc-950/70 p-4">
+        <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-zinc-100">
+          Better TBD Persona Options
+        </h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {TBD_OPTIONS.map((item) => (
+            <article key={item.role} className="border border-zinc-800 bg-zinc-900/60 p-3">
+              <h3 className="text-sm font-semibold text-zinc-100">{item.role}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-zinc-400">{item.options.join(" / ")}</p>
+            </article>
+          ))}
+        </div>
+      </section>
     </ControlShell>
   );
 }
 
 function DepartmentBox({ department }: { department: { title: string; lead: string; support: string[] } }) {
   return (
-    <section className="border-2 border-[#808080] bg-[#d7d3c7] p-2 shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#606060]">
-      <div className="mb-2 bg-[#000080] px-2 py-1 font-mono text-xs font-bold uppercase tracking-wide text-white">
+    <section className="border border-slate-400 bg-white p-2 shadow-[0_2px_7px_rgba(15,23,42,0.16)]">
+      <div className="mb-2 rounded-t-sm bg-gradient-to-b from-[#4f7fc7] to-[#224f94] px-2 py-1 font-mono text-xs font-bold uppercase tracking-wide text-white">
         {department.title}
       </div>
       <OrgBox role={findRole(department.lead)} compact />
@@ -370,8 +421,8 @@ function DepartmentBox({ department }: { department: { title: string; lead: stri
 
 function OrgBox({ role, size = "normal", compact = false }: { role: OrgRole; size?: "normal" | "large"; compact?: boolean }) {
   return (
-    <article className="border-2 border-[#808080] bg-[#e7e3d7] shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#606060]">
-      <div className={`${TITLE_BAR_CLASS[role.tone]} flex items-center justify-between gap-2 px-2 py-1 text-white`}>
+    <article className="border border-slate-400 bg-[#f8fafc] shadow-[0_2px_5px_rgba(15,23,42,0.13)]">
+      <div className={`${TITLE_BAR_CLASS[role.tone]} flex items-center justify-between gap-2 px-2 py-1 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]`}>
         <span className="truncate font-mono text-[11px] font-bold uppercase tracking-wide">{role.title}</span>
         <span className="rounded-none border border-white/50 px-1 font-mono text-[9px] uppercase">{role.status}</span>
       </div>
@@ -392,7 +443,7 @@ function OrgBox({ role, size = "normal", compact = false }: { role: OrgRole; siz
           )}
           <div className="mt-2 flex flex-wrap gap-1">
             {role.owns.slice(0, compact ? 2 : 4).map((item) => (
-              <span key={item} className="border border-[#808080] bg-[#f5f1e6] px-1.5 py-0.5 text-[10px] text-[#222]">
+              <span key={item} className="border border-slate-300 bg-white px-1.5 py-0.5 text-[10px] text-[#222]">
                 {item}
               </span>
             ))}
@@ -405,17 +456,20 @@ function OrgBox({ role, size = "normal", compact = false }: { role: OrgRole; siz
 
 function PersonPhoto({ role, large = false }: { role: OrgRole; large?: boolean }) {
   const size = large ? "h-24 w-24" : "h-[72px] w-[72px]";
+  const isTbd = role.persona === "TBD";
 
   return (
     <div
-      aria-label={`${role.persona} portrait`}
-      className={`${size} border-2 border-[#808080] bg-[#bdb8aa] bg-cover bg-center shadow-[inset_1px_1px_0_#ffffff,inset_-1px_-1px_0_#606060]`}
+      aria-label={isTbd ? `${role.title} persona pending` : `${role.persona} portrait`}
+      className={`${size} flex items-center justify-center border border-slate-400 bg-slate-200 bg-cover bg-center font-mono text-xs font-bold text-slate-500 shadow-[0_1px_3px_rgba(15,23,42,0.2)]`}
       role="img"
       style={{
-        backgroundImage: `url("${role.image}")`,
+        backgroundImage: isTbd ? undefined : `url("${role.image}")`,
         backgroundPosition: role.imagePosition ?? "center",
       }}
-    />
+    >
+      {isTbd ? "TBD" : null}
+    </div>
   );
 }
 

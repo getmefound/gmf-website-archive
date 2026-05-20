@@ -52,7 +52,6 @@ The system should make Mike's day simpler, not make Mike manage every agent dire
 | Sender | Prepares outreach campaigns, follow-ups, merge-field checks, and deliverability guardrails. |
 | Sorter | Classifies replies, catches hot leads, handles opt-outs, and routes unclear messages for review. |
 | Booker | Turns real buying intent into booked calls and clean handoffs. |
-| Studio | Creates approved content assets. |
 | Editor | Chooses angles, priorities, brand voice, and what content is worth making. |
 | Press | Publishes approved content and verifies scheduled/published status. |
 | Hub | Answers account questions by reading the ledger, GHL, Drive, and client profile notes. |
@@ -70,7 +69,7 @@ Use this as the practical org chart inside Mission Control:
 | Sales Department | Sales Manager | Scout, Sender, Sorter, Booker, Engagement Scout |
 | Client Success | Client Success Manager | Hub, Reporter |
 | Client Delivery | Local Visibility Manager | Reviews Manager, Relay Manager |
-| Marketing Department | Editor | Studio, Press |
+| Marketing Department | Editor | Press |
 
 Sales Manager is the sales-side supervisor. Engagement Scout is not a manager; it is a sales specialist that finds social conversations worth entering and drafts comments or DM suggestions for approval.
 
@@ -83,27 +82,26 @@ Mission Control may use business or field-associated public figures as inspirati
 | Role | Inspiration persona | Responsibility |
 |---|---|---|
 | President | Mike Egidio | Approves direction, client-facing risk, pricing, tool changes, and final go/no-go calls. |
-| Chief of Staff | Sheryl Sandberg | Prepares the morning brief and turns recommendations into a clean approval queue. |
+| Chief of Staff | Indra Nooyi | Prepares the morning brief and turns recommendations into a clean approval queue. |
 | General Manager | Elon Musk | Runs the agent company day to day, assigns owners, tracks blockers, and escalates to Mike. |
-| Systems Director | Charlie Munger | Owns IT, tool stack health, access, security, backups, costs, and tool decisions. |
-| Sales Manager | Zig Ziglar | Owns campaign strategy, revenue pipeline, reply follow-up, and booked-call handoffs. |
-| Client Success Manager | Tony Hsieh | Owns onboarding health, client check-ins, renewals, retention risk, and reporting cadence. |
-| Hub | Marc Benioff | Answers account questions from the ledger, GHL, Drive, client notes, and delivery history. |
-| GHL Expert | Bill Gates | Owns hub360ai/GHL workflows, pipelines, calendars, callbacks, reports, and automation health. |
-| Local Visibility Manager | Seth Godin | Owns Google profile access, local visibility, citations, review links, and AI visibility signals. |
-| Reviews Manager | Jeff Bezos | Owns review automation delivery, review request health, replies, and review-volume warnings. |
-| Relay Manager | Alexander Graham Bell | Owns voice-agent delivery, missed-call recovery, call summaries, routing quality, and escalations. |
-| Coach | Tony Robbins | Keeps product truth, SOPs, sales language, client instructions, and response drafts aligned. |
-| Scout | Nikola Tesla | Finds prospects, weak profiles, review gaps, niche signals, and cheap prefilter evidence. |
-| Sender | Steve Jobs | Prepares outreach, watches deliverability, validates merge fields, and keeps campaigns reply-first. |
-| Sorter | Marie Curie | Classifies replies, catches hot leads, handles opt-outs, and routes unclear items for review. |
-| Booker | Oprah Winfrey | Turns buying intent into booked calls and clean meeting handoffs. |
-| Engagement Scout | Gary Vaynerchuk | Finds social conversations worth entering and drafts comments or DM suggestions for approval. |
-| Studio | Walt Disney | Creates approved visuals, assets, and content variants for AOH and clients. |
-| Editor | Anna Wintour | Chooses angles, priorities, brand voice, and what content is worth making. |
-| Press | Richard Branson | Publishes approved content and records proof that it went out correctly. |
-| Reporter | Warren Buffett | Confirms report links open, match the right contact, and tell a useful story. |
-| Scheduler | Tim Cook | Protects calendars, booking availability, reminders, and meeting context. |
+| Systems Director | Bill Gates | Owns IT, tool stack health, access, security, backups, costs, and tool decisions. |
+| Sales Manager | Gary Vaynerchuk | Owns campaign strategy, revenue pipeline, reply follow-up, and booked-call handoffs. |
+| Client Success Manager | TBD | Owns onboarding health, client check-ins, renewals, retention risk, and reporting cadence. |
+| Hub | TBD | Answers account questions from the ledger, GHL, Drive, client notes, and delivery history. |
+| GHL Expert | Paul Allen | Owns hub360ai/GHL workflows, pipelines, calendars, callbacks, reports, and automation health. |
+| Local Visibility Manager | TBD | Owns Google profile access, local visibility, citations, review links, and AI visibility signals. |
+| Reviews Manager | TBD | Owns review automation delivery, review request health, replies, and review-volume warnings. |
+| Relay Manager | TBD | Owns voice-agent delivery, missed-call recovery, call summaries, routing quality, and escalations. |
+| Coach | Dale Carnegie | Keeps product truth, SOPs, sales language, client instructions, and response drafts aligned. |
+| Scout | TBD | Finds prospects, weak profiles, review gaps, niche signals, and cheap prefilter evidence. |
+| Sender | TBD | Prepares outreach, watches deliverability, validates merge fields, and keeps campaigns reply-first. |
+| Sorter | TBD | Classifies replies, catches hot leads, handles opt-outs, and routes unclear items for review. |
+| Booker | TBD | Turns buying intent into booked calls and clean meeting handoffs. |
+| Engagement Scout | TBD | Finds social conversations worth entering and drafts comments or DM suggestions for approval. |
+| Editor | James Patterson | Chooses angles, priorities, brand voice, and what content is worth making. |
+| Press | Ted Turner | Publishes approved content and records proof that it went out correctly. |
+| Reporter | TBD | Confirms report links open, match the right contact, and tell a useful story. |
+| Scheduler | Tim Ferriss | Protects calendars, booking availability, reminders, and meeting context. |
 
 ## Daily Operating Flow
 
