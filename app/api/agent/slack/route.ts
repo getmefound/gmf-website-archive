@@ -863,6 +863,7 @@ async function getSlackApi<T>(url: URL, token: string): Promise<T> {
 function isPollableSlackCommand(message: SlackMessage, botUserId: string) {
   const text = message.text?.trim() ?? "";
   if (!text || !message.ts) return false;
+  if (text.startsWith("/")) return false;
   if (message.subtype || message.bot_id || message.user === botUserId) return false;
   return isSupportedCommand(text);
 }

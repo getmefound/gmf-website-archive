@@ -241,6 +241,7 @@ Fallback polling:
 
 - Vercel Cron calls `/api/agent/slack?poll=1` every minute.
 - The route checks `CRON_SECRET`, reads recent `#04-aoh-ops` messages, and posts Manager responses for commands that do not already have a later bot reply.
+- The fallback ignores slash commands because `/manager` already gets an immediate Slack response.
 - This is a backup for Slack Event Subscription gaps. Slack Events should still be configured for instant responses.
 
 Slash-command style:
