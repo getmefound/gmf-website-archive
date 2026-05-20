@@ -17,6 +17,7 @@ Slack is the human command surface. Mission Control and the ledger remain the so
 | Slack-ready command router | Wired | `npm run agent:command -- --command "Manager, status"` returns the same kind of message a Slack bot should post. |
 | GHL Expert readiness command | Wired | `GHL Expert, check Reach readiness` runs the read-only GHL checker. |
 | Sales Manager QA command | Wired | `Sales Manager, review Reach QA` summarizes current QA risk counts. |
+| Mike identity and tone | Wired | Agents recognize Mike by Slack user ID, answer first-name by default, and switch to formal when asked. |
 | Approval command parsing | Wired with gates | Approval commands generate the exact live command, but live execution stays blocked while agent gates are unresolved. |
 | Slack posting | Env-gated | `npm run agent:slack` posts only if `SLACK_MISSION_CONTROL_WEBHOOK_URL` or `SLACK_WEBHOOK_URL` is set. |
 | Slack HTTP listener | Wired in code | `/api/agent/slack` verifies Slack requests and routes `Manager, ...` commands. Requires Slack app env/config before it answers on its own. |
@@ -54,6 +55,32 @@ approve ai start drip
 approve relay start drip
 pause all campaign live actions
 ```
+
+## Names And Tone
+
+No special introduction command is needed.
+
+When Mike types from his Slack account, agents should know him as Mike. The listener recognizes Mike by `AOH_OWNER_SLACK_USER_ID`; the current default is `U0ATPQYFA85`.
+
+Default style:
+
+```text
+Mike, here is the current operating picture.
+```
+
+Formal style:
+
+```text
+Coach, review this copy formally
+```
+
+Expected response style:
+
+```text
+Mr. Egidio, you are speaking with Coach.
+```
+
+If Mike wants first-name tone again, he can say `first name`, `casual`, or just omit the tone instruction.
 
 ## Local Commands
 
@@ -107,6 +134,10 @@ Required environment variables:
 | `SLACK_SIGNING_SECRET` | Verifies inbound Slack requests. Required. |
 | `SLACK_BOT_TOKEN` | Lets the listener post replies back in Slack. Required for normal message events. |
 | `SLACK_AGENT_ALLOWED_CHANNEL_IDS` | Comma-separated channel IDs allowed to trigger the listener. Default includes `C0ATTA4NBR8` for `#04-aoh-ops`. |
+| `AOH_OWNER_SLACK_USER_ID` | Slack user ID for Mike so agents know who is speaking. Default: `U0ATPQYFA85`. |
+| `AOH_OWNER_FIRST_NAME` | First-name address for Mike. Default: `Mike`. |
+| `AOH_OWNER_FORMAL_NAME` | Formal address for Mike. Default: `Mr. Egidio`. |
+| `SLACK_LISTENER_TEST_TOKEN` | Optional local-only bypass token for testing the endpoint without a real Slack signature. |
 | `GHL_PIT_TOKEN` | Lets GHL Expert run read-only readiness checks. |
 | `GHL_LOCATION_ID` | Active AOH / hub360ai location for read-only GHL checks. |
 

@@ -11,6 +11,9 @@ const DOMAINS_PATH = "docs/client-ops-ledger/sending-domain-readiness.csv";
 const DAILY_BRIEF_PATH = "docs/client-ops-ledger/daily-brief-current.md";
 const GHL_API_BASE = "https://services.leadconnectorhq.com";
 const GHL_API_VERSION = "2021-07-28";
+const OWNER_SLACK_USER_ID = process.env.AOH_OWNER_SLACK_USER_ID?.trim() || "U0ATPQYFA85";
+const OWNER_FIRST_NAME = process.env.AOH_OWNER_FIRST_NAME?.trim() || "Mike";
+const OWNER_FORMAL_NAME = process.env.AOH_OWNER_FORMAL_NAME?.trim() || "Mr. Egidio";
 
 type CsvRow = Record<string, string>;
 
@@ -36,6 +39,13 @@ type AgentKey =
   | "coach"
   | "editor"
   | "press";
+
+type UserContext = {
+  userId: string;
+  name: string;
+  isMike: boolean;
+  tone: "first-name" | "formal";
+};
 
 const LANES: Record<
   LaneKey,
@@ -313,6 +323,10 @@ async function handleJsonEvent(req: NextRequest, rawBody: string) {
   const text = typeof event.text === "string" ? event.text.trim() : "";
   const channel = typeof event.channel === "string" ? event.channel : "";
   const threadTs = typeof event.ts === "string" ? event.ts : undefined;
+  const actor = buildUserContext({
+    userId: typeof event.user === "string" ? event.user : "",
+    commandText: text,
+  });
 
   if (!text || !channel || !isSupportedCommand(text)) {
     return NextResponse.json({ ok: true, ignored: "not_agent_command" });
@@ -321,7 +335,7 @@ async function handleJsonEvent(req: NextRequest, rawBody: string) {
     return NextResponse.json({ ok: true, ignored: "not_allowed_channel" });
   }
 
-  const response = await buildAgentResponse(text);
+  const response = await buildAgentResponse(text, actor);
   await postSlackMessage({ channel, text: response, threadTs });
 
   return NextResponse.json({ ok: true });
@@ -334,20 +348,25 @@ async function handleSlashLikeCommand(rawBody: string) {
     ? commandText
     : `Manager, ${commandText}`;
 
-  const response = await buildAgentResponse(text);
+  const actor = buildUserContext({
+    userId: params.get("user_id") ?? "",
+    fallbackName: params.get("user_name") ?? "",
+    commandText: text,
+  });
+  const response = await buildAgentResponse(text, actor);
   return NextResponse.json({
     response_type: "in_channel",
     text: response,
   });
 }
 
-async function buildAgentResponse(command: string): Promise<string> {
+async function buildAgentResponse(command: string, actor = buildUserContext()): Promise<string> {
   const normalized = normalizeCommand(command);
 
   if (normalized.includes("pause all campaign live actions")) {
     return `*Manager pause acknowledged - ${today()}*
 
-All campaign live actions are blocked.
+${address(actor)}, all campaign live actions are blocked.
 
 - Do not import contacts into GHL.
 - Do not add start-drip tags.
@@ -356,28 +375,28 @@ All campaign live actions are blocked.
   }
 
   const approval = parseApproval(normalized);
-  if (approval) return buildApprovalResponse(approval);
+  if (approval) return buildApprovalResponse(approval, actor);
 
-  if (mentionsReachColdEmailCampaign(normalized)) return buildReachColdEmailCampaignResponse();
-  if (mentionsAgentList(normalized)) return buildAgentListResponse();
+  if (mentionsReachColdEmailCampaign(normalized)) return buildReachColdEmailCampaignResponse(actor);
+  if (mentionsAgentList(normalized)) return buildAgentListResponse(actor);
 
   if (mentionsGhlReadiness(normalized)) {
     const result = await runGhlReadinessCheck();
-    return `${renderGhlResult(result)}
+    return `${renderGhlResult(result, actor)}
 
-${buildManagerStatus()}`;
+${buildManagerStatus(actor)}`;
   }
 
-  if (mentionsQaReview(normalized)) return buildQaResponse();
+  if (mentionsQaReview(normalized)) return buildQaResponse(actor);
 
   const addressedAgent = findAddressedAgent(normalized);
   if (addressedAgent) {
-    if (addressedAgent === "general-manager" && mentionsBrief(normalized)) return buildManagerStatus();
-    if (addressedAgent === "chief-of-staff" && mentionsBrief(normalized)) return buildManagerStatus();
-    return buildAgentRoleResponse(addressedAgent);
+    if (addressedAgent === "general-manager" && mentionsBrief(normalized)) return buildManagerStatus(actor);
+    if (addressedAgent === "chief-of-staff" && mentionsBrief(normalized)) return buildManagerStatus(actor);
+    return buildAgentRoleResponse(addressedAgent, actor);
   }
 
-  if (mentionsBrief(normalized)) return buildManagerStatus();
+  if (mentionsBrief(normalized)) return buildManagerStatus(actor);
 
   return `*Manager command not recognized - ${today()}*
 
@@ -396,14 +415,14 @@ pause all campaign live actions
 \`\`\``;
 }
 
-async function buildReachColdEmailCampaignResponse() {
+async function buildReachColdEmailCampaignResponse(actor: UserContext) {
   const summaries = laneSummaries();
   const recommendation = readRecommendation();
   const ghlResult = await runGhlReadinessCheck();
 
   return `*Reach Cold Email Campaign - ${today()}*
 
-Manager ran today's active Reach Cold Email Campaign routine.
+${address(actor)}, I ran today's active Reach Cold Email Campaign routine.
 
 What ran:
 
@@ -444,11 +463,13 @@ Plain-English recommendation:
 ${recommendation}`;
 }
 
-function buildManagerStatus() {
+function buildManagerStatus(actor = buildUserContext()) {
   const summaries = laneSummaries();
   const waiting = reachJobs().filter((job) => String(job.status ?? "").startsWith("waiting")).length;
 
   return `*Manager status - ${today()}*
+
+${address(actor)}, here is the current operating picture.
 
 Current position:
 
@@ -472,7 +493,7 @@ pause all campaign live actions
 \`\`\``;
 }
 
-function buildAgentListResponse() {
+function buildAgentListResponse(actor: UserContext) {
   const groups = [
     ["Executive Office", ["chief-of-staff", "scheduler"]],
     ["Company Operations", ["general-manager", "coach"]],
@@ -485,7 +506,7 @@ function buildAgentListResponse() {
 
   return `*AOH agent directory*
 
-You can speak to any agent by starting a Slack message with their role name.
+${address(actor)}, you can speak to any agent by starting a Slack message with their role name.
 
 ${groups
   .map(([department, keys]) => {
@@ -509,9 +530,11 @@ Press, what is ready to publish
 Safety remains the same: agents can recommend and prepare, but they do not import contacts, start drips, publish, DM, or enable HighLevel AI without approval.`;
 }
 
-function buildAgentRoleResponse(agentKey: AgentKey) {
+function buildAgentRoleResponse(agentKey: AgentKey, actor: UserContext) {
   const agent = AGENTS[agentKey];
   return `*${agent.title} - ${agent.persona}*
+
+${address(actor)}, you are speaking with ${agent.title}.
 
 Reports to: ${agent.reportsTo}
 
@@ -529,8 +552,10 @@ ${agent.nextStep.replace(/^Ask: `|`\.$/g, "")}
 ${agent.safety ? `Safety:\n${agent.safety}` : "Safety:\nI can recommend and prepare. Risky or client-facing action still needs approval."}`;
 }
 
-function buildQaResponse() {
+function buildQaResponse(actor: UserContext) {
   return `*Sales Manager Reach QA - ${today()}*
+
+${address(actor)}, here is the current list-quality review.
 
 Review focus:
 
@@ -545,7 +570,7 @@ Decision rule:
 - Do not ask Mike to approve start-drip until GHL Expert finishes visual sender-domain/warmup/AI-toggle checks.`;
 }
 
-function buildApprovalResponse(approval: { laneKey: LaneKey; action: "import" | "start" }) {
+function buildApprovalResponse(approval: { laneKey: LaneKey; action: "import" | "start" }, actor: UserContext) {
   const lane = LANES[approval.laneKey];
   const job = reachJobs().find((item) => item.campaign_lane?.toLowerCase() === approval.laneKey);
   const sourceFile = job?.source_file?.trim() || "CSV_PATH";
@@ -557,6 +582,8 @@ function buildApprovalResponse(approval: { laneKey: LaneKey; action: "import" | 
   }`;
 
   return `*Manager heard approval - ${today()}*
+
+${address(actor)}, I heard the approval request and checked the gates.
 
 Request: ${lane.label} / ${approval.action === "start" ? "start drip" : "import only"}
 
@@ -632,8 +659,10 @@ async function runGhlReadinessCheck() {
   }
 }
 
-function renderGhlResult(result: { ok: boolean; lines: string[] }) {
+function renderGhlResult(result: { ok: boolean; lines: string[] }, actor: UserContext) {
   return `*GHL Expert readiness check - ${today()}*
+
+${address(actor)}, I ran the read-only GHL check.
 
 Mode: read-only
 
@@ -883,6 +912,53 @@ function mentionsQaReview(normalized: string) {
 
 function normalizeCommand(command: string) {
   return command.toLowerCase().replace(/[.,:;|]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function buildUserContext({
+  userId = "",
+  fallbackName = "",
+  commandText = "",
+}: {
+  userId?: string;
+  fallbackName?: string;
+  commandText?: string;
+} = {}): UserContext {
+  const cleanUserId = userId.trim();
+  const cleanFallbackName = cleanName(fallbackName);
+  const isMike =
+    Boolean(OWNER_SLACK_USER_ID && cleanUserId === OWNER_SLACK_USER_ID) ||
+    ["mike", "michael", "mike egidio"].includes(cleanFallbackName.toLowerCase());
+  const tone = wantsFormalTone(commandText) ? "formal" : "first-name";
+  const name = isMike ? (tone === "formal" ? OWNER_FORMAL_NAME : OWNER_FIRST_NAME) : cleanFallbackName || "there";
+
+  return {
+    userId: cleanUserId,
+    name,
+    isMike,
+    tone,
+  };
+}
+
+function address(actor: UserContext) {
+  return actor.name || "there";
+}
+
+function cleanName(name: string) {
+  const trimmed = name.trim();
+  if (!trimmed) return "";
+  return trimmed
+    .replace(/^@+/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : ""))
+    .join(" ");
+}
+
+function wantsFormalTone(commandText: string) {
+  const lowered = commandText.toLowerCase();
+  if (/\b(first[-\s]?name|casual|informal)\b/.test(lowered)) return false;
+  return /\b(formal|formally|mr\.?\s+egidio|mister\s+egidio)\b/.test(lowered);
 }
 
 function startsWithKnownAgent(text: string) {

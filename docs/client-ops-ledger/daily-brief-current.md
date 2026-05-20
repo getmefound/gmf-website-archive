@@ -135,4 +135,6 @@ Slack HTTP listener endpoint: `/api/agent/slack`.
 
 Direct agent addressing is now expected in Slack, for example `Coach, review this copy` or `Reporter, verify report delivery status`.
 
+Agents recognize Mike by Slack user ID and answer first-name by default. Add `formal` to a command when a formal response is wanted.
+
 The command center will not import contacts or start a drip unless a separate live execution guard is intentionally opened.
