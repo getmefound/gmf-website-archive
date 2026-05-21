@@ -17,6 +17,7 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 | Owner Reach status question | Wired | `Manager, is Reach set to run today, and do I need anything?` gives Mike the short owner answer without a role-card intro. |
 | Reach team training command | Wired | `Manager, train Reach team` reminds each agent what it owns for discovery, QA, GHL readiness, sending, cost, replies, and booking. |
 | Owner peek command | Wired | `Manager, owner peek` explains where Mike should look and whether Manager DMs are wired. |
+| Manager recovery check | Wired | `npm run reach:manager-check` records whether Relay needs an automatic capped retry after the morning campaign run. |
 | Agent directory | Wired | `Manager, list agents` shows the agent team and example commands. |
 | Direct agent addressing | Wired | Mike can address agents by role, such as `Coach, ...`, `Scheduler, ...`, `Reporter, ...`, or `Press, ...`. |
 | Fast Slack response mode | Wired | Normal commands answer from the ledger/brief quickly; slower GHL/Reach checks acknowledge first and post follow-up results in the background. |
@@ -60,6 +61,7 @@ Recommended DM policy: one short daily owner brief plus urgent exceptions only. 
 
 - Business discovery/refill runs around 7:30 AM Eastern on weekdays.
 - The guarded warmup/send check runs around 9:00 AM Eastern daily.
+- Manager recovery check runs around 9:20 AM Eastern and retries Relay once inside the daily cap if Relay is short.
 - Relay gets enough clean contacts by rotating through the approved search list, checking emails with NeverBounce before GHL, removing risky contacts, and waiting until the list is clean enough to send.
 
 ## Command Map
@@ -167,6 +169,7 @@ npm run agent:command -- --command "Manager, is Reach set to run today, and do I
 npm run agent:command -- --command "Manager, run Reach Cold Email Campaign"
 npm run agent:command -- --command "Manager, train Reach team"
 npm run agent:command -- --command "Manager, owner peek"
+npm run reach:manager-check
 npm run agent:command -- --command "GHL Expert, check Reach readiness"
 npm run agent:command -- --command "approve relay import only"
 ```

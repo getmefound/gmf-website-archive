@@ -147,9 +147,10 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
 
   for (let attempt = 1; laneExecute !== "start" && attempt <= maxAttempts && pool.length < target && !scrapeSpendBlocker; attempt++) {
     if (totalScraped >= maxTotalScraped) break;
-    const search = laneConfig.searches[(searchOffset + attempt - 1) % laneConfig.searches.length];
+    const attemptNumber = searchOffset + attempt;
+    const search = laneConfig.searches[(attemptNumber - 1) % laneConfig.searches.length];
     const remainingScrape = Math.max(1, Math.min(scrapeLimit, maxTotalScraped - totalScraped));
-    const prefix = `tmp-reach-warmup-${laneKey}-${date}-a${attempt}`;
+    const prefix = `tmp-reach-warmup-${laneKey}-${date}-a${attemptNumber}`;
     const rawJson = `${prefix}.json`;
     const cleanCsv = `${prefix}-clean.csv`;
     const freshCsv = `${prefix}-fresh.csv`;
@@ -176,7 +177,7 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
     spendScrapeRunBudget(runBudget, remainingScrape);
     if (!scrapeResult.ok) {
       attempts.push({
-        attempt,
+        attempt: attemptNumber,
         industry: search.industry,
         area: search.area,
         state: search.state ?? "",
@@ -224,7 +225,7 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
       if (pool.length >= target) break;
     }
     attempts.push({
-      attempt,
+      attempt: attemptNumber,
       industry: search.industry,
       area: search.area,
       state: search.state ?? "",
@@ -552,15 +553,21 @@ function spendScrapeRunBudget(runBudget, amount) {
 }
 
 function priorSearchAttemptCount(laneKey) {
-  return warmupReportFiles(laneKey).reduce((sum, file) => {
+  const reportCount = warmupReportFiles(laneKey).reduce((sum, file) => {
     const report = readWarmupReport(file);
     return sum + scrapeAttemptsFromReport(report).length;
   }, 0);
+  const fileNumbers = warmupRawScrapeFiles(laneKey)
+    .map((file) => Number(file.match(/-a(\d+)\.json$/)?.[1] ?? 0))
+    .filter((number) => number > 0);
+  return Math.max(reportCount, ...fileNumbers, 0);
 }
 
 function scrapedForLaneOnDate(laneKey, date) {
   const report = readWarmupReport(`reach-warmup-${laneKey}-${date}.json`);
-  return scrapeAttemptsFromReport(report).reduce((sum, attempt) => sum + (Number(attempt.scrapeLimit) || 0), 0);
+  const reportTotal = scrapeAttemptsFromReport(report).reduce((sum, attempt) => sum + (Number(attempt.scrapeLimit) || 0), 0);
+  const rawTotal = warmupRawScrapeFiles(laneKey, date).reduce((sum, file) => sum + readJsonArrayLength(file), 0);
+  return Math.max(reportTotal, rawTotal);
 }
 
 function scrapeAttemptsFromReport(report) {
@@ -576,6 +583,21 @@ function readWarmupReport(file) {
     return JSON.parse(readFileSync(path, "utf8"));
   } catch {
     return null;
+  }
+}
+
+function warmupRawScrapeFiles(laneKey, date = "") {
+  const datePattern = date ? date.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") : "\\d{4}-\\d{2}-\\d{2}";
+  const pattern = new RegExp(`^tmp-reach-warmup-${laneKey}-${datePattern}-a\\d+\\.json$`);
+  return readdirSync(".").filter((file) => pattern.test(file)).sort();
+}
+
+function readJsonArrayLength(path) {
+  try {
+    const value = JSON.parse(readFileSync(resolve(path), "utf8"));
+    return Array.isArray(value) ? value.length : 0;
+  } catch {
+    return 0;
   }
 }
 

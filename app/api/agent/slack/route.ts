@@ -629,7 +629,7 @@ function buildReachRunTodayResponse(actor: UserContext) {
 ${address(actor)}, short answer: ${autoOn ? "yes, auto is set." : "no, auto is not turned on in the ledger."}
 
 - Already moving: ${startedText}.
-- Runs: discovery/refill around 7:30 AM ET on weekdays; send check around 9:00 AM ET daily.
+- Runs: discovery/refill around 7:30 AM ET on weekdays; send check around 9:00 AM ET daily; Manager recovery check around 9:20 AM ET.
 - Your action: none right now.
 - Safety: emails are checked by NeverBounce before GHL, and HighLevel AI stays OFF.
 

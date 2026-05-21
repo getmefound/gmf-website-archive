@@ -46,6 +46,7 @@ Normal schedule:
 
 - Discovery/refill runs around 7:30 AM Eastern on weekdays.
 - The guarded send check runs around 9:00 AM Eastern daily.
+- Manager recovery check runs around 9:20 AM Eastern and retries Relay once inside the daily cap if Relay is short.
 - Relay keeps finding more businesses, checks emails before GHL, drops risky contacts, and waits until the list is clean enough to send.
 
 If you want to see who you can talk to:
