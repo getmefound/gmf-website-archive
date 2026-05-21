@@ -12,113 +12,12 @@
     "target": 20,
     "max": 20
   },
-  "status": "executed",
-  "selectedCount": 17,
-  "selectedCsv": "tmp-reach-warmup-ai-2026-05-20-selected-qa.csv",
-  "blockers": [],
-  "attempts": [
-    {
-      "attempt": 1,
-      "industry": "senior living",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 6,
-      "okRows": 2,
-      "added": 2,
-      "poolSize": 2,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a1-qa.csv"
-    },
-    {
-      "attempt": 2,
-      "industry": "assisted living",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 8,
-      "okRows": 1,
-      "added": 0,
-      "poolSize": 2,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a2-qa.csv"
-    },
-    {
-      "attempt": 3,
-      "industry": "med spa",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 14,
-      "okRows": 2,
-      "added": 2,
-      "poolSize": 4,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a3-qa.csv"
-    },
-    {
-      "attempt": 4,
-      "industry": "chiropractor",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 8,
-      "okRows": 3,
-      "added": 3,
-      "poolSize": 7,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a4-qa.csv"
-    },
-    {
-      "attempt": 5,
-      "industry": "law firm",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 10,
-      "okRows": 2,
-      "added": 2,
-      "poolSize": 9,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a5-qa.csv"
-    },
-    {
-      "attempt": 6,
-      "industry": "dental office",
-      "area": "Connecticut",
-      "state": "Connecticut",
-      "scrapeLimit": 20,
-      "qaRows": 8,
-      "okRows": 2,
-      "added": 2,
-      "poolSize": 11,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a6-qa.csv"
-    },
-    {
-      "attempt": 7,
-      "industry": "senior living",
-      "area": "Westchester County NY",
-      "state": "New York",
-      "scrapeLimit": 20,
-      "qaRows": 7,
-      "okRows": 4,
-      "added": 4,
-      "poolSize": 15,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a7-qa.csv"
-    },
-    {
-      "attempt": 8,
-      "industry": "assisted living",
-      "area": "Massachusetts",
-      "state": "Massachusetts",
-      "scrapeLimit": 20,
-      "qaRows": 9,
-      "okRows": 3,
-      "added": 2,
-      "poolSize": 17,
-      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a8-qa.csv"
-    }
+  "status": "held",
+  "selectedCount": 0,
+  "selectedCsv": "",
+  "blockers": [
+    "Import-only warmup already executed for this lane/date; skipped before scraping to protect Outscraper credits."
   ],
-  "actionResults": [
-    {
-      "action": "import",
-      "outFile": "tmp-reach-warmup-ai-2026-05-20-import.json",
-      "resultFile": "tmp-reach-warmup-ai-2026-05-20-import-ghl-results.json"
-    }
-  ]
+  "attempts": [],
+  "actionResults": []
 }

@@ -1,9 +1,11 @@
 
 > aoh-website@0.1.0 reach:warmup
-> node scripts/reach-warmup-autopilot.mjs --lane reviews --execute auto
+> node scripts/reach-warmup-autopilot.mjs --lane reviews,ai --execute auto
 
 
 Reviews report: /home/runner/work/aoh-website/aoh-website/docs/client-ops-ledger/outbox/reach-warmup-reviews-2026-05-20.md
+
+AI Visibility report: /home/runner/work/aoh-website/aoh-website/docs/client-ops-ledger/outbox/reach-warmup-ai-2026-05-20.md
 
 Warmup summary: /home/runner/work/aoh-website/aoh-website/docs/client-ops-ledger/outbox/reach-warmup-summary-2026-05-20.md
 Done.
