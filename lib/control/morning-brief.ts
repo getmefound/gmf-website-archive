@@ -123,8 +123,14 @@ function toGhlEmailStat(row: Record<string, string>): GhlEmailStat {
 }
 
 function readSection(text: string, title: string): string {
-  const pattern = new RegExp(`^## ${escapeRegExp(title)}\\s*$([\\s\\S]*?)(?=^## |\\s*$)`, "m");
-  return text.match(pattern)?.[1]?.trim() ?? "";
+  const heading = new RegExp(`^## ${escapeRegExp(title)}\\s*$`, "m");
+  const match = heading.exec(text);
+  if (!match) return "";
+
+  const sectionStart = match.index + match[0].length;
+  const afterHeading = text.slice(sectionStart);
+  const nextHeading = afterHeading.search(/\r?\n##\s+/);
+  return (nextHeading === -1 ? afterHeading : afterHeading.slice(0, nextHeading)).trim();
 }
 
 function readBullets(section: string): string[] {

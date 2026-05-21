@@ -19,6 +19,14 @@ Build Mike's version first. Sell the client version as:
 
 Do not sell "AI agents" first. Sell owner clarity.
 
+The live page is Mike's operating view first:
+
+- Reach/GHL outreach stats are live through the HighLevel read-only email stats API.
+- News and market signals are started through Google News RSS feeds.
+- Calendar is a custom connector next.
+- Email inbox is a custom connector next.
+- Archive and proof are live through ledger docs, outbox files, and current CSVs.
+
 ## Commercial Brief
 
 This is the standard offer most clients can buy:
@@ -56,6 +64,7 @@ Start read-only. Do not auto-send replies or move meetings without approval.
 - GHL workflow email stats are connected by read-only API.
 - Morning Brief now has `Commercial Brief` and `Custom Layer` sections.
 - Mission Control page: `/mike-mc/morning-brief`.
+- The page is worded for Mike's owner view first, with sales/pricing notes secondary.
 - Email and calendar should be the next custom connectors after the internal brief proves useful.
 - Daily stats movement will become cleaner after multiple saved daily GHL snapshots exist.
 

@@ -96,7 +96,7 @@ It writes:
 Mission Control page:
 
 - `/mike-mc/morning-brief`
-- Shows the current brief, GHL stats, standard/commercial package, custom layer, retention, pricing anchors, source health, proof files, and brief archive.
+- Shows Mike's current owner brief, Reach/GHL outreach stats, news signal, source status, custom connector status, retention, pricing notes, proof files, and brief archive.
 
 Optional flags:
 
@@ -114,6 +114,14 @@ Current connected data:
 - GHL import/start result files
 - GHL workflow email stats from the read-only HighLevel API
 - Google News RSS starter feeds; Google Alerts can replace or supplement them later
+
+Current source status on the page:
+
+- Outreach stats: live from HighLevel.
+- News: starter feeds live.
+- Calendar: custom connector next.
+- Email: custom connector next.
+- Archive/proof: live from ledger and outbox files.
 
 GHL stats command:
 

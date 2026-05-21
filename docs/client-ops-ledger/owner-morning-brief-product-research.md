@@ -15,6 +15,7 @@ Do not sell "AI agents" first. Sell:
 Mission Control page:
 
 - `/mike-mc/morning-brief`
+- Current page is Mike's operating view first.
 - Standard / Commercial is the packaged product.
 - Custom Layer is paid setup for inbox, calendar, GHL/CRM, GBP, calls, ads, payments, or client-specific workflows.
 
@@ -61,6 +62,14 @@ Start with home services and appointment-based local businesses. They feel misse
 ## Email And Calendar Recommendation
 
 Use email and calendar as the first custom layer, not the base product.
+
+Current page status:
+
+- GHL/Reach outreach stats: live through the HighLevel read-only email stats API.
+- News and market signals: starter Google News RSS feeds are live.
+- Calendar: not connected to the Morning Brief yet; add as a read-only custom connector.
+- Email inbox: not connected to the Morning Brief yet; add Gmail/Outlook read-only access when Mike approves.
+- Archive and proof: live through ledger docs, outbox files, and current CSVs.
 
 Why:
 
@@ -124,14 +133,15 @@ Positioning:
 
 - Standard / Commercial = daily push + live owner page + archive.
 - Custom = private system connectors and custom agents.
-- Best sales demo = sit with the owner, open `/mike-mc/morning-brief`, show the brief, then click Custom only if they ask for deeper systems.
+- Best sales walkthrough = sit with the owner, open `/mike-mc/morning-brief`, show the brief, then click Custom only if they ask for deeper systems.
 
 Design direction:
 
-- White, polished, client-room friendly.
-- Show current owner numbers first.
+- White, polished, and built around Mike's daily owner questions first.
+- Show current owner numbers and source status first.
 - Keep proof files lower on the page.
 - Avoid making the owner read logs, workflow names, or raw source files unless they ask.
+- Keep sales/pricing notes available, but secondary to Mike's operating brief.
 
 ## What The Agents Should Do
 
