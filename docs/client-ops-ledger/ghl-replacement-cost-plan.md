@@ -22,6 +22,136 @@ Recommended current decision:
 - Use $297 Unlimited only if AOH needs more GHL locations before the AOH-built backend is ready.
 - Avoid $497 Agency Pro unless AOH is reselling GHL as software or needs marked-up rebilling/SaaS Mode.
 
+## Review Automation Promise
+
+This is the promise AOH needs to fulfill for the base Review Automation offer before deciding what GHL can be replaced with.
+
+Current public promise from pricing, checkout, onboarding, and agent docs:
+
+| Promise | What it means operationally | Base or upgrade? |
+| --- | --- | --- |
+| Automated email review requests after every job | A completed customer/job should trigger an email asking for a Google review. | Base |
+| Google Business Profile audit + fix | AOH checks the client's GBP basics and fixes/flags profile gaps in week 1. | Base |
+| Google Business Profile connection/access | Client adds AOH as GBP Manager; AOH captures the correct review link and can help with profile work. | Base |
+| Monthly recap | Client gets a simple summary of what went out, what came in, and what needs attention. | Base |
+| Client does not learn software | Client uses AOH page/email/text, not GHL dashboards. | Base |
+| Cancel anytime/no contract | Operationally means no long onboarding lock-in and easy offboarding. | Base |
+| Replies in client's voice | AI or AOH-drafted public review replies. | AI Visibility/upgrade |
+| SMS review requests | Text-message review requests and compliance setup. | AI Visibility/upgrade |
+| Social review posting | Turning reviews into social/GBP posts. | Upgrade/custom |
+| AI Visibility/rankings/heatmaps | AI search, local ranking, competitor monitoring. | Upgrade/custom |
+
+Copy alignment note:
+
+- Some social/blog copy says AOH "filters unhappy customers privately" before sending the rest to Google.
+- If AOH keeps saying that publicly, the base product needs a private feedback step before the Google link, such as "How did we do?" with happy customers routed to Google and unhappy customers routed to the owner.
+- If AOH wants the simplest $49/mo product, public copy should say "email review requests and follow-up" instead of promising advanced filtering.
+
+Recommended product boundary:
+
+- Base Review Automation should include email requests, light private feedback routing, GBP audit/fix, review link setup, client page, and monthly recap.
+- AI Visibility should include SMS, AI review response drafts/replies, deeper profile/AI visibility work, and heatmap/ranking reports.
+
+## Best Non-GHL Fulfillment Model For Review Automation
+
+Goal: fulfill the $49/mo promise without needing GHL subaccounts for every client.
+
+Recommended stack:
+
+| Job | Best non-GHL fulfillment | Estimated cost profile | Notes |
+| --- | --- | --- | --- |
+| Client page | AOH website route like `/client/[slug]`, protected by magic link/password before real data. | Mostly existing website cost. | This becomes the client's "dashboard" without calling it software. |
+| Intake/setup form | AOH form/API writes to database and alerts Manager. | Mostly existing website cost. | Pre-fill from signup/order data where possible. |
+| Client/customer database | Postgres/Supabase/Neon tables for clients, jobs/customers, exclusions, review links, sends, events. | About $25-$100/mo early stage depending on provider/usage. | One shared AOH database is cheaper than one GHL subaccount per client. |
+| Customer/job upload | CSV upload to AOH page, plus manual paste/list option. | Low. Storage may be pennies to low dollars at first. | Must include do-not-contact and bad-fit exclusions. |
+| Google review link | Store URL captured from GBP or public profile. | Free. | The review link is enough to send email requests without GHL. |
+| GBP audit/fix | Local Visibility Manager checklist, screenshots, and manual profile updates through Google access. | Labor/agent time, not platform-heavy. | This does not require GHL. |
+| Review request email | Send through a transactional/email API provider. | Low at review volume. GHL LC Email is $0.675/1,000, external email APIs are also low. | Needs unsubscribe, bounce tracking, templates, and sender domain setup. |
+| Private feedback filter | AOH-hosted landing page asks for rating/feedback before showing Google link to happy customers. | Mostly existing website cost. | This supports the "filter unhappy privately" promise without GHL. |
+| Follow-up cadence | AOH cron/workflow sends a gentle follow-up if no click/review after X days. | Low. | Start simple: one follow-up. |
+| Send windows | AOH scheduler respects timezone and business hours. | Low. | Prevents awkward sends. |
+| Suppression/DND | AOH database stores unsubscribed, excluded, bounced, complaint, and do-not-contact statuses. | Low. | Required before replacing GHL safely. |
+| Monthly recap | AOH generates an email/client-page summary. | Low. | Start with "requests sent, clicks, reviews reported, issues, next action." |
+| Low-review tips | Rule-based tips on client page when weekly/monthly review goal is low. | Free/low. | Already started on client page. |
+| Manager alerts | Slack/email alert when setup is blocked, review count is low, or sends fail. | Low. | Keeps Mike from babysitting. |
+| AI response drafts | OpenAI/Gemini draft reply on demand, approval required. | Usage-based and likely low. | Upgrade feature; do not auto-publish at first. |
+| SMS | Twilio directly if/when sold. | Usage-based plus compliance/admin. | Upgrade only. Do not add to $49 base unless pricing changes. |
+| Heatmaps/rankings | Vendor/export/manual report only for AI Visibility clients. | Per report or paid plan. | Do not pay per-client GHL/Search Atlas for base reviews. |
+
+Minimum AOH-owned Review Automation v1:
+
+1. Client record and client page.
+2. Intake form with GBP access confirmation and customer upload.
+3. Customer/job table with exclusion flags.
+4. Review link storage.
+5. Email template and send log.
+6. Private feedback page that can route happy customers to Google.
+7. One follow-up email.
+8. Unsubscribe/suppression.
+9. Monthly recap.
+10. Manager/Auditor proof log.
+
+This v1 fulfills the actual $49/mo promise without GHL.
+
+What not to build into v1:
+
+- Full CRM.
+- Full pipeline/opportunity system.
+- SMS.
+- AI auto-replies.
+- Heatmaps.
+- Social posting.
+- Client login with heavy permissions.
+- POS/CRM integrations for every client on day one.
+
+## Review Automation Fulfillment Jobs Outside GHL
+
+| Fulfillment job | Owner | AOH-built process | Done means |
+| --- | --- | --- | --- |
+| Payment/order confirmed | Manager | Stripe/checkout event creates client record and setup status. | Client exists in AOH system with plan, owner, email, and status. |
+| Client setup page created | Website/Codex | Generate `/client/[slug]` page from client record. | Client sees service status and what is needed. |
+| Intake collected | Manager/Coach | AOH form collects business info, review flow, exclusions, customer source, GBP invite confirmation. | Required setup fields complete or blockers shown. |
+| GBP access accepted | Local Visibility Manager | Accept/check Manager access in Google; capture proof. | Correct profile/location confirmed. |
+| GBP audit/fix | Local Visibility Manager | Run profile checklist: name, category, services, hours, phone, site, photos, posts, review link, unanswered reviews. | Fixes made or client/Mike blockers listed. |
+| Review link captured | Local Visibility Manager | Store Google review URL in AOH client record. | Test link opens the correct review destination. |
+| Customer list cleaned | Sorter | Normalize CSV/list, dedupe, remove exclusions, flag missing email. | Clean sendable customer list exists. |
+| Review email written | Coach/Sender | Use approved template with business name, customer name, and review link/private feedback link. | Test email renders cleanly. |
+| Email sender configured | Systems Director/Sender | Configure domain/sender in chosen email provider. | SPF/DKIM/DMARC pass, test email delivered. |
+| Review request sent | Sender/System | Cron/API sends only eligible customers during approved window. | Send log shows success/fail per customer. |
+| Follow-up sent | Sender/System | One follow-up to non-click/non-response customers after configured delay. | Follow-up respects suppression and does not over-send. |
+| Private feedback handled | Sorter/Manager | Low-rating/private feedback gets routed to owner/Manager, not Google-first. | Unhappy feedback is visible and not pushed publicly by automation. |
+| New reviews tracked | Local Visibility Manager/Auditor | Start manual check or API/vendor check; record review count and new review notes. | Monthly recap has review outcome data. |
+| Monthly recap sent | Manager | Generate simple summary and email/client-page update. | Client sees what went out, what came in, and what is needed. |
+| Low-review coaching | Manager/Coach | If review count is below goal, page shows simple owner tips. | Client gets practical next action, not internal tooling detail. |
+| QA and proof | Auditor | Check sends, links, suppressions, GBP link, and summary accuracy. | Client can be marked live/healthy. |
+
+## GHL-Free Cost View For Review Automation
+
+Assumptions for a 50-client base Review Automation scenario:
+
+- Each client sends 50-300 review request emails/month.
+- Base plan uses email, not SMS.
+- AI reply drafting is upgrade-only.
+- Heatmaps/rankings are upgrade-only.
+- Clients do not log into GHL.
+
+Likely monthly platform cost without GHL:
+
+| Cost bucket | Rough expectation |
+| --- | --- |
+| Database/app storage | Low; likely one paid database tier is enough early. |
+| Email sending | Low; 50 clients x 300 emails = 15,000 emails/month, still inexpensive with most email APIs. |
+| File uploads | Low if only CSV/logo files. |
+| AI usage | Near zero for base plan; usage-based for upgrades. |
+| SMS | Zero for base plan. Usage-based only for AI Visibility or higher plan. |
+| Heatmaps | Zero for base plan. Per-report/vendor cost only when sold. |
+
+Business conclusion:
+
+- GHL is convenient, but not economically required for base Review Automation.
+- The hard parts are not expensive software; they are workflow reliability, deliverability, suppression, proof, and GBP/review tracking.
+- Build AOH Review Automation around those jobs first.
+
 ## Known GHL Cost Points
 
 As of 2026-05-21, based on HighLevel official docs:
