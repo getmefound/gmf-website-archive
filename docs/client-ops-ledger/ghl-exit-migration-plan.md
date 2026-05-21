@@ -7,7 +7,9 @@ Last updated: 2026-05-21
 
 ## Plain-English Decision
 
-AOH should move off GHL as the operating backbone.
+AOH should move off GHL as the long-term operating backbone, but should use the
+$97 plan as the cheapest short-term bridge if it keeps the active workflows
+working.
 
 GHL becomes a short bridge:
 
@@ -55,7 +57,7 @@ Do not tell support the cancellation plan. The immediate ask is only:
 
 > I am reducing cost. What breaks if I move from $497 to $97?
 
-## GHL Freeze Rules
+## GHL $97 Bridge Rules
 
 After downgrade:
 
@@ -66,43 +68,76 @@ After downgrade:
 - no Premium Prospecting add-on
 - no new paid GHL feature unless Mike manually approves
 - no client-facing promise that depends on a GHL-only feature
-- no new GHL calendar or booking dependency
+- no separate Calendly, Smartlead/Instantly, or review email sender until GHL
+  becomes the bottleneck
 
 GHL is allowed only for:
 
 - keeping current Reach workflows alive while migration is underway
+- keeping current booking/calendar links alive if the $97 plan supports them
+- sending Review Automation and Reach emails at low volume while replacement is
+  being tested
 - exporting settings/history
 - training GHL Expert on how to translate automations into AOH-owned systems
 
 ## Calendar Decision
 
-Do not migrate or rebuild the old GHL calendars.
+Do not buy Calendly yet if GHL $97 keeps booking working.
 
-AOH should use a new booking tool:
+Short-term:
 
-- Calendly for the main AOH booking system
-- Google Calendar underneath as the actual calendar source
+- use the existing GHL booking/calendar links if they survive the downgrade
+- keep Google Calendar as the real calendar source wherever possible
+- archive the old GHL calendar setup for proof
 
-Start with Calendly for:
+Buy Calendly only when one of these becomes true:
 
-- sales calls
-- Review Automation setup calls
-- AI Visibility strategy calls
-- client check-ins
+- GHL $97 removes or breaks booking
+- AOH needs cleaner website embeds
+- AOH needs routing or round-robin booking
+- GHL calendar management becomes slower than the $10-$16/mo Calendly cost
 
-Use Calendly Standard while Mike is the main bookable person. Upgrade to a
-team/routing plan only when AOH needs round-robin, routing, or multiple sales
-or setup calendars.
+Calendly is the fallback, not the immediate purchase.
 
-GHL calendar data should be archived only. It is not a migration target.
+## Tool Spend Decision
+
+Do not add replacement tools just to replace GHL.
+
+While GHL $97 works, defer:
+
+- Calendly
+- Smartlead or Instantly
+- a separate review-request email sender
+
+Use GHL short term for:
+
+- booking links
+- current Reach drips
+- low-volume Review Automation email sends
+- current GHL email stats while campaigns are still there
+
+Approximate cost avoided by waiting:
+
+| Deferred tool | Approx monthly cost avoided |
+| --- | ---: |
+| Calendly | $10-$12 |
+| Smartlead | $39+ |
+| Instantly alternative | $47+ |
+| Separate review email sender | $0-$20 early |
+
+Bridge decision:
+
+- If GHL $97 works, it is the cheaper and simpler short-term answer.
+- If GHL blocks reporting, deliverability, booking, or client scaling, replace
+  that one piece only.
 
 ## Replacement Workstreams
 
 | Workstream | Replacement target | Exit gate |
 | --- | --- | --- |
-| Review Automation | AOH client page, database, review email sender, private feedback page, monthly recap | AOH can run review requests for AOH and 1 pilot client without GHL. |
+| Review Automation | AOH client page, database, optional GHL/email sender bridge, private feedback page, monthly recap | AOH can run review requests for AOH and 1 pilot client with GHL bridge or without GHL. |
 | AI Visibility | AOH client page, GBP checklist, AI scans, heatmap vendor/API, AI reply drafts, monthly report | AOH can produce one AI Visibility report without GHL/Search Atlas. |
-| Reach cold email | Smartlead or Instantly for sending/drips, AOH for sourcing/scoring/reporting | New campaign can send, stop on reply, track stats, and report without GHL. |
+| Reach cold email | Keep GHL drips short term; later Smartlead/Instantly only if GHL becomes the blocker | New campaign can send, stop on reply, track stats, and report without forcing $297/$497. |
 | Report routing | AOH database/API tracks report requests and ready state | Website report request no longer needs GHL workflow state. |
 | Email stats | Email provider/API stats feed AOH brief | Morning brief can show campaign stats without GHL email stats. |
 | Relay | Partner/reseller voice AI platform | Relay does not require GHL subaccounts or GHL phone workflows. |
@@ -145,7 +180,7 @@ Export or document:
 - pipelines and stages
 - email templates
 - campaign stats
-- active booking links only as references; do not rebuild GHL calendars
+- active booking links and calendar settings if GHL $97 keeps them working
 - report workflow names and callback paths
 - wallet/add-ons/current billable features
 
@@ -329,12 +364,12 @@ Days 2-3:
 - build AOH Review Automation v1 spec from the client page
 - pick database/email sender path
 - define first AOH test send
-- create new Calendly event types for sales and Review Automation setup
+- keep current GHL booking links unless downgrade breaks booking
 
 Days 4-5:
 
-- pick Reach sender replacement: Smartlead or Instantly
-- map current GHL tags/workflows to the new campaign states
+- keep current GHL Reach drips if $97 supports them
+- map current GHL tags/workflows to future AOH campaign states
 
 Days 6-7:
 

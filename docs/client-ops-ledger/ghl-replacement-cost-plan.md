@@ -19,8 +19,27 @@ Best path:
 Recommended current decision:
 
 - Use $97 Starter while AOH has 1-3 GHL-backed locations.
+- While $97 works, do not buy Calendly, Smartlead/Instantly, or a separate
+  review-request email sender.
 - Use $297 Unlimited only if AOH needs more GHL locations before the AOH-built backend is ready.
 - Avoid $497 Agency Pro unless AOH is reselling GHL as software or needs marked-up rebilling/SaaS Mode.
+
+Cheapest short-term stack:
+
+| Need | Short-term tool | Extra monthly cost |
+| --- | --- | ---: |
+| Booking | GHL calendar/booking if it survives downgrade | $0 beyond GHL |
+| Reach cold email drips | Current GHL workflows | $0 beyond GHL + usage |
+| Review request email | LC Email/GHL bridge while AOH tests | usage only |
+| Client page/status | AOH website | $0 beyond current hosting |
+
+Tools to defer:
+
+| Deferred tool | Why defer |
+| --- | --- |
+| Calendly | Not needed if GHL $97 booking works. |
+| Smartlead/Instantly | Not needed until GHL cold email becomes a deliverability/reporting/scaling blocker. |
+| Separate review email sender | Not needed until AOH Review Automation needs better logs, bounce events, or independence from GHL. |
 
 ## Review Automation Promise
 
@@ -66,7 +85,7 @@ Recommended stack:
 | Customer/job upload | CSV upload to AOH page, plus manual paste/list option. | Low. Storage may be pennies to low dollars at first. | Must include do-not-contact and bad-fit exclusions. |
 | Google review link | Store URL captured from GBP or public profile. | Free. | The review link is enough to send email requests without GHL. |
 | GBP audit/fix | Local Visibility Manager checklist, screenshots, and manual profile updates through Google access. | Labor/agent time, not platform-heavy. | This does not require GHL. |
-| Review request email | Send through a transactional/email API provider. | Low at review volume. GHL LC Email is $0.675/1,000, external email APIs are also low. | Needs unsubscribe, bounce tracking, templates, and sender domain setup. |
+| Review request email | Use GHL/LC Email as bridge, then move to transactional/email API only when needed. | Low at review volume. GHL LC Email is $0.675/1,000, external email APIs are also low. | Needs unsubscribe, bounce tracking, templates, and sender domain setup before full GHL exit. |
 | Private feedback filter | AOH-hosted landing page asks for rating/feedback before showing Google link to happy customers. | Mostly existing website cost. | This supports the "filter unhappy privately" promise without GHL. |
 | Follow-up cadence | AOH cron/workflow sends a gentle follow-up if no click/review after X days. | Low. | Start simple: one follow-up. |
 | Send windows | AOH scheduler respects timezone and business hours. | Low. | Prevents awkward sends. |
@@ -193,7 +212,7 @@ External replacement cost references:
 | --- | --- | --- | --- | --- |
 | Client subaccounts | Separates settings, contacts, reputation, workflows by client. | Starter is limited; Unlimited may be needed if we keep this model. | Yes. Store clients, contacts, jobs, review links, sends, and stats in AOH database. | Replace over time. Do not make subaccounts the client product. |
 | Contact database | Stores leads/customers, tags, DND, history. | Low direct cost, but locks us into GHL workflows. | Yes. Build AOH contacts table with tags, status, consent, DND, source, and client ID. | Replace for Review Automation first. |
-| Email review requests | Sends review request emails. | LC Email is cheap. Main risk is dependency and workflow complexity. | Yes. Use an email API with templates, unsubscribe handling, logs, and retries. | Build AOH version. Keep GHL until deliverability/logging is proven. |
+| Email review requests | Sends review request emails. | LC Email is cheap. Main risk is dependency and workflow complexity. | Yes, later. Use an email API with templates, unsubscribe handling, logs, and retries only when needed. | Keep GHL $97 bridge first. Build AOH sender only when deliverability/logging or cancellation requires it. |
 | SMS review requests | Upgrade feature, not base Review Automation. | SMS usage plus compliance/A2P complexity. | Yes, but needs Twilio, opt-out handling, A2P, logs. | Delay. Add only for higher-priced plans. |
 | Review link storage | Stores and injects Google review links. | Low. | Yes. Store per client in AOH. | Replace immediately in AOH client hub. |
 | Google Business Profile connection | Pulls/replies to reviews through reputation tools. | Valuable, but tied to subaccount model. | Possibly. Use Google Business Profile APIs where available and/or manual first. | Research/build carefully. This is the hardest replacement piece. |
@@ -202,11 +221,11 @@ External replacement cost references:
 | Reviews AI auto-pilot | Auto-replies to reviews. | Brand and cost risk. | Yes, but should still require approval at first. | Do not sell autopilot until manual approval flow works. |
 | Review widget | Embeds reviews on website. | Low value unless included in package. | Yes. Build simple AOH widget or use Google embeds/manual highlights. | Replace later. Not urgent. |
 | Reach cold email contact import | Imports verified cold prospects into GHL. | Low platform cost, but workflow lock-in. | Yes. Build AOH campaign database and sender integration. | Keep short term. Replace after Review Automation core. |
-| Reach drip workflows | Sends cold emails, waits, stops on replies. | GHL does this well today. | Yes, but requires careful unsubscribe, reply detection, suppression, and warmup logic. | Keep for now unless GHL cost blocks us. Replace in phase 2. |
+| Reach drip workflows | Sends cold emails, waits, stops on replies. | GHL does this well today. | Yes, but requires careful unsubscribe, reply detection, suppression, and warmup logic. | Keep on GHL $97 for now unless cost, reporting, or deliverability blocks us. Replace later with Smartlead/Instantly only if needed. |
 | Reach reply routing | Tags warm replies, routes report/book requests. | Low cost but workflow complexity. | Yes. Use inbound email parser/webhook + AOH routing. | Replace after first real campaign proof. |
 | Email campaign stats | Reads GHL email stats for morning brief. | Low. | Yes. Email providers expose events/stats. | Replace when email sending moves off GHL. |
 | Report flow/opportunities | Website adds contacts/tags; GHL workflows deliver report and track opportunity. | Low to medium; premium webhook actions can add cost. | Yes. AOH already owns website/API. Store report request state in AOH. | Replace. GHL can remain temporary tracker. |
-| Calendar booking | Booking link/calendar routing. | Low. | Yes. Use Calendly with Google Calendar as the calendar source. | Do not migrate old GHL calendars. Create new Calendly event types. |
+| Calendar booking | Booking link/calendar routing. | Low. | Yes, later. Use Calendly with Google Calendar only if GHL $97 booking is not good enough. | Keep GHL booking short term if it works. Do not buy Calendly yet. |
 | Conversations/inbox | Central reply inbox. | Useful if all channels live in GHL. | Partly. Use email inbox + Slack summaries first. | Keep only while using GHL sending. |
 | Missed-call/Relay phone flows | Possible future Relay product. | Phone/SMS usage and AI can add up. | Yes with Twilio, but operationally more sensitive. | Keep separate from Review Automation decision. |
 | Heatmaps/local SEO | AI Visibility reports and sales proof. | Search Atlas at $79/subaccount becomes too expensive at 50 clients. | Yes. Use external reports only for paid scans or monthly clients. | Do not keep GHL for heatmaps. Outsource or replace. |
@@ -285,6 +304,29 @@ Verdict:
 
 - Recommended.
 
+### Scenario D: Cheapest $97 Bridge
+
+Use GHL $97 for booking, current Reach drips, current Review Automation email
+sends, and email stats while AOH owns client pages, intake, private feedback,
+customer upload, and reporting.
+
+Good:
+
+- avoids Calendly, Smartlead/Instantly, and separate email sender cost for now
+- keeps active campaigns moving
+- lets AOH keep building without rushing the cutover
+
+Bad:
+
+- still depends on GHL for some live sending and booking
+- not enough for many separate client subaccounts
+- reporting/API limits may still force replacement later
+
+Verdict:
+
+- Best immediate cost-control move.
+- Replace only the piece that breaks or blocks growth.
+
 ## Replacement Build Plan
 
 ### Phase 1: AOH Review Core
@@ -310,6 +352,7 @@ Keep GHL for:
 - Existing cold email Reach workflows
 - Temporary review backend if needed
 - Existing email stats until AOH sender is live
+- Calendars/booking if $97 keeps them working
 
 ### Phase 2: AOH Review Automation Sender
 
@@ -363,6 +406,7 @@ Keep GHL until:
 - Unsubscribe is proven.
 - Deliverability is acceptable.
 - Reply routing is proven.
+- Or until GHL $97 cannot support the active campaign workflow.
 
 ### Phase 5: Replace GHL Reporting/Heatmap Dependency
 
@@ -413,8 +457,10 @@ Enable SEO/Search Atlas only when:
 2. GHL Expert lists which subaccounts/locations exist and what each one is used for.
 3. GHL Expert confirms whether any live workflow requires $297 or $497 features.
 4. Website/Codex scopes AOH Review Core tables and API routes.
-5. Manager decides whether to downgrade to $97 now or wait until after one more live campaign/review test.
+5. Manager downgrades to $97 if support confirms booking, workflows, contacts,
+   stats, API access, and current drips keep working.
 6. Auditor creates a monthly GHL cost report: base plan, wallet usage, AI, SEO, phone, email, validation, premium workflow actions.
+7. Do not buy Calendly, Smartlead/Instantly, or a separate email sender until a specific blocker appears.
 
 ## Sources
 
