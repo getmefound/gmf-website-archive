@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
-import { AGENT_SKILLS, SERVICES } from "@/lib/control/mission";
+import { SERVICES } from "@/lib/control/mission";
 
 export const metadata: Metadata = {
   title: "AOH Ops Index",
@@ -97,8 +97,8 @@ export default function OpsIndexPage() {
 
       <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <Metric label="Operating docs" value={DOCS.length.toString()} />
-        <Metric label="Agent profiles" value={AGENT_SKILLS.length.toString()} />
-        <Metric label="Service cards" value={SERVICES.length.toString()} />
+        <Metric label="Offerings" value={SERVICES.length.toString()} />
+        <Metric label="Recovery checks" value={HUMAN_CHECKS.length.toString()} />
       </section>
 
       <Section
@@ -129,63 +129,35 @@ export default function OpsIndexPage() {
 
       <Section
         eyebrow="Services"
-        title="Offerings and agent ownership"
-        sub="Each service is meant to become repeatable across many clients: client, service, task, owner, status."
+        title="Offerings and who owns them"
+        sub="Plain owner view: what the service does, who owns it, and who supports delivery."
       >
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {SERVICES.map((service) => (
             <article
               key={service.slug}
-              className="rounded-2xl border border-zinc-800/60 bg-zinc-950/80 p-5"
+              className="rounded-lg border border-zinc-800/60 bg-zinc-950/80 p-5"
             >
-              <div className="mb-4 flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
-                    {service.job}
-                  </p>
-                  <h2 className="mt-1 text-lg font-semibold text-zinc-50">
-                    {service.name}
-                  </h2>
-                </div>
-                <Pill tone={service.blocked ? "warn" : "accent"}>
-                  {service.openTasks} open
-                </Pill>
-              </div>
-              <p className="mb-4 text-sm leading-relaxed text-zinc-400">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
+                {service.job}
+              </p>
+              <h2 className="mt-1 text-lg font-semibold text-zinc-50">
+                {service.name}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
                 {service.outcome}
               </p>
-              <TagList label="Agents" items={service.agents} />
-              <TagList label="Skills" items={service.skills} muted />
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        eyebrow="Agents"
-        title="Loaded skills by agent"
-        sub="These are the agent responsibilities Mission Control should show before real client volume arrives."
-      >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {AGENT_SKILLS.map((agent) => (
-            <article
-              key={agent.agent}
-              className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-5"
-            >
-              <div className="mb-3 flex items-start justify-between gap-3">
-                <div>
-                  <h2 className="font-mono text-base font-bold uppercase tracking-wider text-zinc-50">
-                    {agent.agent}
-                  </h2>
-                  <p className="mt-1 text-sm text-zinc-500">{agent.role}</p>
-                </div>
-                <Pill tone="default">{agent.skills.length}</Pill>
-              </div>
-              <TagList label="Owns" items={agent.serviceOwners} />
-              <TagList label="Skills" items={agent.skills} muted />
-              {agent.sourceDocs ? (
-                <TagList label="Source docs" items={agent.sourceDocs} muted />
-              ) : null}
+              <dl className="mt-5 space-y-3 text-sm">
+                <OwnershipRow label="Owner" value={service.agents[0] ?? "Manager"} />
+                <OwnershipRow
+                  label="Support team"
+                  value={service.agents.slice(1).join(", ") || "Assigned as needed"}
+                />
+                <OwnershipRow
+                  label="Current view"
+                  value={service.blocked ? "Needs Manager attention" : "Ready for normal agent work"}
+                />
+              </dl>
             </article>
           ))}
         </div>
@@ -245,34 +217,13 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-function TagList({
-  label,
-  items,
-  muted,
-}: {
-  label: string;
-  items: string[];
-  muted?: boolean;
-}) {
+function OwnershipRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="mb-3 last:mb-0">
-      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-600">
+    <div className="grid gap-1 border-t border-zinc-900 pt-3 sm:grid-cols-[120px_1fr] sm:gap-4">
+      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-600">
         {label}
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {items.map((item) => (
-          <span
-            key={item}
-            className={`rounded-md border px-2 py-1 text-xs ${
-              muted
-                ? "border-zinc-800 bg-zinc-900/50 text-zinc-500"
-                : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
-            }`}
-          >
-            {item}
-          </span>
-        ))}
-      </div>
+      </dt>
+      <dd className="leading-relaxed text-zinc-300">{value}</dd>
     </div>
   );
 }
