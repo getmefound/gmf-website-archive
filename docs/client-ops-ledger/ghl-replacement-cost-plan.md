@@ -197,7 +197,7 @@ External replacement cost references:
 | Reach reply routing | Tags warm replies, routes report/book requests. | Low cost but workflow complexity. | Yes. Use inbound email parser/webhook + AOH routing. | Replace after first real campaign proof. |
 | Email campaign stats | Reads GHL email stats for morning brief. | Low. | Yes. Email providers expose events/stats. | Replace when email sending moves off GHL. |
 | Report flow/opportunities | Website adds contacts/tags; GHL workflows deliver report and track opportunity. | Low to medium; premium webhook actions can add cost. | Yes. AOH already owns website/API. Store report request state in AOH. | Replace. GHL can remain temporary tracker. |
-| Calendar booking | Booking link/calendar routing. | Low. | Yes. Google Calendar or existing booking tool. | Replace or keep simple external link. Not a GHL reason. |
+| Calendar booking | Booking link/calendar routing. | Low. | Yes. Use Calendly with Google Calendar as the calendar source. | Do not migrate old GHL calendars. Create new Calendly event types. |
 | Conversations/inbox | Central reply inbox. | Useful if all channels live in GHL. | Partly. Use email inbox + Slack summaries first. | Keep only while using GHL sending. |
 | Missed-call/Relay phone flows | Possible future Relay product. | Phone/SMS usage and AI can add up. | Yes with Twilio, but operationally more sensitive. | Keep separate from Review Automation decision. |
 | Heatmaps/local SEO | AI Visibility reports and sales proof. | Search Atlas at $79/subaccount becomes too expensive at 50 clients. | Yes. Use external reports only for paid scans or monthly clients. | Do not keep GHL for heatmaps. Outsource or replace. |

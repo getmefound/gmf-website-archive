@@ -66,12 +66,35 @@ After downgrade:
 - no Premium Prospecting add-on
 - no new paid GHL feature unless Mike manually approves
 - no client-facing promise that depends on a GHL-only feature
+- no new GHL calendar or booking dependency
 
 GHL is allowed only for:
 
 - keeping current Reach workflows alive while migration is underway
 - exporting settings/history
 - training GHL Expert on how to translate automations into AOH-owned systems
+
+## Calendar Decision
+
+Do not migrate or rebuild the old GHL calendars.
+
+AOH should use a new booking tool:
+
+- Calendly for the main AOH booking system
+- Google Calendar underneath as the actual calendar source
+
+Start with Calendly for:
+
+- sales calls
+- Review Automation setup calls
+- AI Visibility strategy calls
+- client check-ins
+
+Use Calendly Standard while Mike is the main bookable person. Upgrade to a
+team/routing plan only when AOH needs round-robin, routing, or multiple sales
+or setup calendars.
+
+GHL calendar data should be archived only. It is not a migration target.
 
 ## Replacement Workstreams
 
@@ -122,7 +145,7 @@ Export or document:
 - pipelines and stages
 - email templates
 - campaign stats
-- calendars/booking links
+- active booking links only as references; do not rebuild GHL calendars
 - report workflow names and callback paths
 - wallet/add-ons/current billable features
 
@@ -296,6 +319,7 @@ Days 2-3:
 - build AOH Review Automation v1 spec from the client page
 - pick database/email sender path
 - define first AOH test send
+- create new Calendly event types for sales and Review Automation setup
 
 Days 4-5:
 
