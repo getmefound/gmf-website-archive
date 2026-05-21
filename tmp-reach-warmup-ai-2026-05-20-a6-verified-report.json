@@ -1,115 +1,111 @@
 [
   {
-    "email": "msgilles@optonline.net",
+    "email": "wsnyder@dentalassoc.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "invalid",
     "flags": [
-      "free_email_host",
       "has_dns",
       "smtp_connectable"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "carolyn@ruckusmediagroup.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "westies2001@yahoo.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "free_email_host",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "info@bvsl.net",
+    "email": "kim.wells@snet.net",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
     "flags": [
-      "smtp_connectable",
+      "free_email_host",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "annielucarelli1230@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@centralctdental.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
       "role_account",
       "has_dns",
-      "has_dns_mx",
-      "connect_fails"
+      "smtp_connectable"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "descalante@bvsl.net",
+    "email": "office@supremedentalct.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "dds@smilekeepers.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
     "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "karrington@bvsl.net",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "a.orourke@edgehillcommunity.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "lincolnheights-don@emeritus.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "jane.hirsch@marriott.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "catchall",
-    "flags": [
-      "smtp_connectable",
-      "accepts_all",
       "has_dns"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "bellevue.boc@sunriseseniorliving.com",
+    "email": "rlerman@griffinhealth.org",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jdwor83693@aol.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "tulsinama@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "as@ctfdental.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -120,18 +116,19 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "llarkin@slr-usa.com",
+    "email": "info@ctfdental.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
     "flags": [
+      "role_account",
       "has_dns",
       "smtp_connectable"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "ssweeney@slr-usa.com",
+    "email": "westhaven@generaldentalct.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "invalid",
@@ -142,36 +139,60 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "nheimrath@slr-usa.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "llepage@lcbseniorliving.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "kevin.carkey@marriott.com",
+    "email": "webmaster@generaldentalct.com",
     "decision": "remove",
     "provider": "neverbounce",
-    "status": "catchall",
+    "status": "invalid",
     "flags": [
-      "smtp_connectable",
-      "accepts_all",
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@centerdentaloffice.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "spencer@smartdentallabs.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "hello@mcddental.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "role_account",
       "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "cdicomesdental@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
     ],
     "suggestedCorrection": ""
   }

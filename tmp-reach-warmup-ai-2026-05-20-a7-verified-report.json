@@ -1,6 +1,6 @@
 [
   {
-    "email": "info@csgtrials.com",
+    "email": "info@thewcenter.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -13,7 +13,42 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "andrew@csgtrials.com",
+    "email": "jkennedy@epochsl.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jbriggs@waterstoneatwellesley.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "plally@waterstoneatwellesley.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "mpolanco@cslal.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -25,29 +60,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "plevin@expertwitnessexchange.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "plevin@connecticutinjuryhelp.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "boinkpl@gmail.com",
+    "email": "tomkranz1@gmail.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -59,47 +72,85 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "jfaspell@aspelllaw.com",
+    "email": "drobi@cslal.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx",
+      "accepts_all"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "bmoynihan@thekensingtonal.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
     "flags": [
-      "smtp_connectable",
-      "spamtrap_network",
       "has_dns"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "aspell@aspelllaw.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "j.aspell@aspelllaw.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "berginfraser@snet.net",
+    "email": "cwatson@thekensingtonal.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
     "flags": [
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "dtomlinson@thekensingtonwhiteplains.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "pmahan@goodneighborcare.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "lirtzmans@grandvictorianspringlake.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "dennisonl@grandvictorianspringlake.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "mary.speed@comcast.net",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
       "free_email_host",
       "has_dns",
       "has_dns_mx"
@@ -107,64 +158,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "creyes@thefloodlawfirm.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "sjackson@thefloodlawfirm.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "j.welcome@welcomelawfirm.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "contact@welcomelawfirm.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "role_account",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "jwelcome@welcomelawfirm.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "spamtrap_network",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "approaching.lightspeed@gmail.com",
+    "email": "mespeed@yahoo.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -176,10 +170,22 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "chrisf@moz.com",
+    "email": "bbernst@benchmarkquality.com",
     "decision": "remove",
     "provider": "neverbounce",
-    "status": "invalid",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "connieh@broadviewseniorliving.org",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
     "flags": [
       "has_dns",
       "smtp_connectable"
@@ -187,45 +193,36 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "josh@avvo.com",
+    "email": "donna.acosta@bethelwell.org",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "catchall",
     "flags": [
       "smtp_connectable",
       "accepts_all",
-      "has_dns"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "michael@mchamberslaw.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "smtp_connectable",
       "has_dns",
       "has_dns_mx"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "tavis@tindall-lawfirm.com",
-    "decision": "keep",
+    "email": "dorothy.parchment@bethelwell.org",
+    "decision": "remove",
     "provider": "neverbounce",
-    "status": "valid",
+    "status": "catchall",
     "flags": [
+      "smtp_connectable",
+      "accepts_all",
       "has_dns",
-      "smtp_connectable"
+      "has_dns_mx"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "matt@tindall-lawfirm.com",
-    "decision": "remove",
+    "email": "llomax@drumhill.org",
+    "decision": "keep",
     "provider": "neverbounce",
-    "status": "invalid",
+    "status": "valid",
     "flags": [
       "has_dns",
       "smtp_connectable"

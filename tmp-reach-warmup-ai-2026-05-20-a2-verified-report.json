@@ -29,9 +29,8 @@
     "provider": "neverbounce",
     "status": "invalid",
     "flags": [
-      "smtp_connectable",
       "has_dns",
-      "has_dns_mx"
+      "smtp_connectable"
     ],
     "suggestedCorrection": ""
   },
@@ -67,42 +66,6 @@
       "smtp_connectable",
       "has_dns",
       "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "ron@shadyoaksassistedliving.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "v.belanger@shadyoaksassistedliving.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "jason.coppola@ct.gov",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "government_host",
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
     ],
     "suggestedCorrection": ""
   },
@@ -144,6 +107,41 @@
     "suggestedCorrection": ""
   },
   {
+    "email": "ron@shadyoaksassistedliving.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "v.belanger@shadyoaksassistedliving.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jason.coppola@ct.gov",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "government_host",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
     "email": "ed@charterofchattanooga.com",
     "decision": "keep",
     "provider": "neverbounce",
@@ -166,19 +164,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "sarah@ctassistedliving.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "janetoddwis@comcast.net",
+    "email": "mary.speed@comcast.net",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
@@ -191,45 +177,53 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "info@ctassistedliving.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "role_account",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "athomecandcservices@gmail.com",
+    "email": "mespeed@yahoo.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
     "flags": [
-      "smtp_connectable",
       "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "bbernst@benchmarkquality.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
       "has_dns",
       "has_dns_mx"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "rd'aquila@assistedlivingct.com",
-    "decision": "remove",
+    "email": "gmayeran@maplewoodsl.com",
+    "decision": "keep",
     "provider": "neverbounce",
-    "status": "catchall",
+    "status": "valid",
     "flags": [
-      "smtp_connectable",
-      "accepts_all",
-      "has_dns"
+      "has_dns",
+      "smtp_connectable"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "brentaustin96@gmail.com",
+    "email": "mteague@maplewoodsl.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "katianne.rosbrough@gmail.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",

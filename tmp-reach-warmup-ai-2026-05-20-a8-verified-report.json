@@ -1,18 +1,42 @@
 [
   {
-    "email": "msgilles@optonline.net",
+    "email": "hmagliozzi@maseniorcare.org",
     "decision": "remove",
     "provider": "neverbounce",
-    "status": "invalid",
+    "status": "unknown",
+    "flags": [],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jchen@maseniorcare.org",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "mbeach@maseniorcare.org",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "providencehouse@coreypark.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
     "flags": [
-      "free_email_host",
+      "smtp_connectable",
       "has_dns",
-      "smtp_connectable"
+      "has_dns_mx"
     ],
     "suggestedCorrection": ""
   },
   {
-    "email": "carolyn@ruckusmediagroup.com",
+    "email": "llepage@lcbseniorliving.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -23,81 +47,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "westies2001@yahoo.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "free_email_host",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "info@bvsl.net",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "role_account",
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "descalante@bvsl.net",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "karrington@bvsl.net",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "a.orourke@edgehillcommunity.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "lincolnheights-don@emeritus.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [
-      "has_dns",
-      "has_dns_mx",
-      "connect_fails"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "jane.hirsch@marriott.com",
+    "email": "kevin.carkey@marriott.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "catchall",
@@ -109,13 +59,120 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "bellevue.boc@sunriseseniorliving.com",
+    "email": "kfoley@benchmarkquality.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "matt.winsryg@atriaseniorliving.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
     "flags": [
       "has_dns",
       "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "amigoscantina@hotmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "aperkins@advancedsolutions.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "poregan@germancentre.org",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "tellmemore62@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "smtp_connectable",
+      "free_email_host",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "ibeck@germancentre.org",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "pstephens@abhow.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "kmckinney@abhow.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "canderson@abhow.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
     ],
     "suggestedCorrection": ""
   },
@@ -153,25 +210,14 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "llepage@lcbseniorliving.com",
+    "email": "artisanleasing@soleraseniorliving.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
     "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "kevin.carkey@marriott.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "catchall",
-    "flags": [
       "smtp_connectable",
-      "accepts_all",
-      "has_dns"
+      "has_dns",
+      "has_dns_mx"
     ],
     "suggestedCorrection": ""
   }

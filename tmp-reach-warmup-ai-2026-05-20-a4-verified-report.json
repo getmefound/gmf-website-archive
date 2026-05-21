@@ -1,18 +1,14 @@
 [
   {
-    "email": "drwest@stamfordchiro.com",
+    "email": "info@ctspinecenter.com",
     "decision": "remove",
     "provider": "neverbounce",
     "status": "unknown",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
+    "flags": [],
     "suggestedCorrection": ""
   },
   {
-    "email": "ianwkeyser@gmail.com",
+    "email": "ctspinecenter@gmail.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -46,40 +42,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "ctchiro@connecticutchiro.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "emullarkey@ithaca.edu",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "acedemic_host",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "fox6866@aol.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "free_email_host"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "molaub@gmail.com",
+    "email": "drpaterna@yahoo.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -88,14 +51,6 @@
       "has_dns",
       "smtp_connectable"
     ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "miguel.colan@ctrehabchiro.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "unknown",
-    "flags": [],
     "suggestedCorrection": ""
   },
   {
@@ -113,55 +68,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "drdrew@drpesale.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "info@dccglastonbury.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "role_account",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "drabate@dccglastonbury.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "drheath@dccglastonbury.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "smtp_connectable",
-      "has_dns",
-      "has_dns_mx"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "joshgrove1202@yahoo.com",
+    "email": "drbrianmurphy@yahoo.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -173,38 +80,11 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "bslater@emergingthreatspro.com",
+    "email": "support@stamfordspine.com",
     "decision": "remove",
     "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "devonjenelle@gmail.com",
-    "decision": "keep",
-    "provider": "neverbounce",
-    "status": "valid",
-    "flags": [
-      "free_email_host",
-      "has_dns",
-      "smtp_connectable"
-    ],
-    "suggestedCorrection": ""
-  },
-  {
-    "email": "connecticutpaincenter7@gmail.com",
-    "decision": "remove",
-    "provider": "neverbounce",
-    "status": "invalid",
-    "flags": [
-      "free_email_host",
-      "has_dns",
-      "smtp_connectable"
-    ],
+    "status": "unknown",
+    "flags": [],
     "suggestedCorrection": ""
   },
   {
@@ -220,7 +100,7 @@
     "suggestedCorrection": ""
   },
   {
-    "email": "scuvnut@aol.com",
+    "email": "ivyhick@gmail.com",
     "decision": "keep",
     "provider": "neverbounce",
     "status": "valid",
@@ -229,6 +109,62 @@
       "has_dns",
       "smtp_connectable"
     ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@mchiropractic.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "donette@mchiropractic.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "drdrew@drpesale.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "dc@checkyourspine.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "bad_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "micah@micahrich.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@chiropracticnewhaven.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [],
     "suggestedCorrection": ""
   }
 ]
