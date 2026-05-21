@@ -31,19 +31,32 @@ Best for:
 - good business with weak online proof
 - clients about to start Cold Email Reach or Social Reach
 
-Starter package:
+Client-zero rule:
+
+- Build AOH first.
+- Save before/after proof.
+- Then sell the same process to founding clients.
+
+Normal starter package:
+
+- ~~5 social posts~~
+- ~~1 useful blog post~~
+
+Founding client launch special:
 
 - short online presence audit
-- five catch-up social posts
-- one useful blog post
+- 10 catch-up social posts
+- 5 useful blog posts
 - light cleanup recommendations
 - proof links/screenshots
+- Morning Brief bonus
 - next Reach angle
 
 Suggested price:
 
-- $399-$750 starter
-- $950-$1,500 stronger package
+- $997 one time launch special
+- later standard: $750-$1,250 for 5 posts + 1 blog
+- later stronger package: $1,500-$2,500
 
 ## Social Reach
 
@@ -96,4 +109,8 @@ Suggested price after pilot:
 - LinkedIn prohibits scraping, bots, and automated posting/commenting through unauthorized tools.
 - Meta/Facebook restricts automated data collection.
 - Content Marketing Institute and HubSpot content references support the value of useful owned content before campaigns.
+- Tufts social media best practices support regular page maintenance and posting cadence.
+- Sprout Social and Eclincher pricing references show normal SMB social packages often cost hundreds to thousands per month.
+- Socinova shows low-cost bulk content competitors, so AOH should sell speed, proof, Morning Brief visibility, and Reach handoff.
+- Do not quote a made-up "people scroll back X posts" stat. Use the source-backed visible-first-impression argument instead.
 

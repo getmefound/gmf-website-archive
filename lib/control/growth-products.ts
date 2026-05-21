@@ -10,9 +10,28 @@ export type GrowthProductStep = {
   proof: string;
 };
 
+export type GrowthProductSpecialOffer = {
+  label: string;
+  standardLabel: string;
+  standardItems: string[];
+  specialLabel: string;
+  specialItems: string[];
+  price: string;
+  bonus: string;
+  note: string;
+};
+
+export type GrowthProductSourceClaim = {
+  label: string;
+  claim: string;
+  detail: string;
+  url: string;
+};
+
 export type GrowthProduct = {
   slug: string;
   href: string;
+  publicHref?: string;
   name: string;
   shortName: string;
   type: string;
@@ -32,7 +51,9 @@ export type GrowthProduct = {
   guardrails: string[];
   sellAs: string;
   pricingDirection: string;
+  specialOffer?: GrowthProductSpecialOffer;
   nextBuild: string[];
+  sourceClaims?: GrowthProductSourceClaim[];
   sources: {
     label: string;
     url: string;
@@ -43,14 +64,15 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
   {
     slug: "presence-refresh",
     href: "/mike-mc/jobs/presence-refresh",
+    publicHref: "/lp/presence-refresh",
     name: "Presence Refresh",
     shortName: "Presence Refresh",
-    type: "One-time setup add-on",
+    type: "One-time launch add-on",
     status: "build-now",
     tone: "accent",
     headline: "Make the business look active before we drive new attention to it.",
     plainEnglish:
-      "Before Reach sends people to check a business, agents fill obvious inactivity gaps: recent social posts, a useful blog post, profile basics, and proof links.",
+      "Before Reach sends people to check a business, agents fill obvious inactivity gaps: recent social posts, useful blog posts, profile basics, and proof links.",
     idealClient: [
       "Dead or stale social pages",
       "No recent website/blog content",
@@ -59,9 +81,10 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
     ],
     whatClientBuys: [
       "Short online presence audit",
-      "Catch-up social post pack",
-      "One useful blog post",
+      "Launch special: 10 catch-up social posts",
+      "Launch special: 5 useful blog posts",
       "Light brand cleanup and proof of publish",
+      "Morning Brief bonus with proof links and next moves",
       "Recommended next campaign angle",
     ],
     agentOwners: [
@@ -93,7 +116,7 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
         owner: "Editor",
         status: "draft",
         description:
-          "Draft social posts that make the business look active and one blog that supports expertise and searchability.",
+          "Draft the launch-special pack: 10 social posts and 5 useful blog posts that make the business look active without sounding generic.",
         proof: "Draft pack ready for approval.",
       },
       {
@@ -133,14 +156,62 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
     sellAs:
       "A setup product before Reach: we make sure prospects do not see a stale business when they look you up.",
     pricingDirection:
-      "One-time setup. Starter $399-$750, stronger pack $950-$1,500 depending on channels, blog depth, and publishing access.",
+      "Launch special: $997 one time for 10 social posts, 5 blog posts, and the Morning Brief bonus. After proof is strong, move this toward $1,500-$2,500 depending on channels, blog depth, and publishing access.",
+    specialOffer: {
+      label: "Founding client special",
+      standardLabel: "Normal starter pack",
+      standardItems: ["5 social posts", "1 blog post"],
+      specialLabel: "Launch special",
+      specialItems: ["10 social posts", "5 blog posts"],
+      price: "$997 one time",
+      bonus: "Morning Brief included: what changed, proof links, and the next Reach move.",
+      note:
+        "Use AOH as client zero first, then sell this as the fast credibility setup before Cold Email Reach or Social Reach.",
+    },
     nextBuild: [
+      "Run AOH first so Mike has a real before/after to show clients.",
       "Create intake checklist for services, tone, photos, access, and approval contact.",
       "Create before/after proof template.",
-      "Create 5-post plus 1-blog default package.",
+      "Create 10-post plus 5-blog launch-special package.",
+      "Add Morning Brief proof cards after publish.",
+      "Use the public offer page in sales conversations.",
       "Add proof links into Mission Control after publish.",
     ],
+    sourceClaims: [
+      {
+        label: "Current activity",
+        claim: "Recent activity is a visible trust signal.",
+        detail:
+          "Tufts social media guidance says pages should be checked regularly and non-X channels can reasonably post 3-5 times weekly; that supports the need for a current-looking feed.",
+        url: "https://communications.tufts.edu/social-media-best-practices/",
+      },
+      {
+        label: "Blog value",
+        claim: "Useful blogs still support awareness, engagement, leads, SEO, and expertise.",
+        detail:
+          "HubSpot's 2025 blogging report found marketers still use blogs for brand awareness, customer engagement, lead generation, SEO, and thought leadership.",
+        url: "https://blog.hubspot.com/marketing/state-of-blogging",
+      },
+      {
+        label: "Market pricing",
+        claim: "This launch special is intentionally aggressive versus normal SMB social packages.",
+        detail:
+          "Sprout Social says small-business social packages commonly bundle monthly posts, scheduling, and reporting; freelancers often run $500-$3,000/month and agencies $2,000+/month.",
+        url: "https://sproutsocial.com/insights/social-media-packages-small-business/",
+      },
+      {
+        label: "Content price anchor",
+        claim: "Bulk content competitors can price posts and blogs cheaply, so AOH must win on speed, proof, and Reach connection.",
+        detail:
+          "Socinova publicly lists bulk graphic posts and SEO blogs as low-cost content products, which makes our proof/reporting and campaign handoff the differentiator.",
+        url: "https://socinova.com/value-pricing/",
+      },
+    ],
     sources: [
+      {
+        label: "Tufts social media best practices",
+        url: "https://communications.tufts.edu/social-media-best-practices/",
+      },
       {
         label: "HubSpot 2025 blogging report",
         url: "https://blog.hubspot.com/marketing/state-of-blogging",
@@ -148,6 +219,18 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
       {
         label: "Content Marketing Institute 2025 B2B benchmarks",
         url: "https://contentmarketinginstitute.com/b2b-research/b2b-content-marketing-trends-research-2025",
+      },
+      {
+        label: "Sprout Social small business social packages",
+        url: "https://sproutsocial.com/insights/social-media-packages-small-business/",
+      },
+      {
+        label: "Eclincher 2026 social media pricing",
+        url: "https://www.eclincher.com/articles/social-media-management-pricing-rates-and-costs-for-2026",
+      },
+      {
+        label: "Socinova value content pricing",
+        url: "https://socinova.com/value-pricing/",
       },
     ],
   },

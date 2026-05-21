@@ -14,7 +14,7 @@ The Morning Brief gives Mike the owner view before the day starts:
 4. What changed in the market.
 5. The one best move for the day.
 
-This starts as an internal AOH brief for Mike. After it proves useful for a few weeks, package it as a client offer.
+This starts as an internal AOH brief for Mike. For the new Presence Refresh launch special, use Morning Brief as an included proof bonus before selling it as a standalone client offer.
 
 ## Agent Ownership
 
@@ -97,6 +97,7 @@ Mission Control page:
 
 - `/mike-mc/morning-brief`
 - Shows Mike's current owner brief, Reach/GHL outreach stats, news signal, source status, custom connector status, retention, pricing notes, proof files, and brief archive.
+- For Presence Refresh, the brief should show what was refreshed, proof links, open approvals, and the next Reach move.
 
 Optional flags:
 

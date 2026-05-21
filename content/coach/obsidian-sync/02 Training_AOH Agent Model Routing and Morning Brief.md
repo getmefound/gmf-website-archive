@@ -121,6 +121,8 @@ docs/client-ops-ledger/owner-morning-brief-product-research.md
 
 The brief is now split into a Commercial Brief and a Custom Layer. Commercial is what most clients can buy. Custom is where inbox, calendar, GHL/CRM, GBP, ads, call tracking, or payment integrations are added.
 
+For Presence Refresh, Morning Brief is the included proof bonus: what was refreshed, proof links, open approvals, and the next Reach move.
+
 ## Slack command to remember
 
 ```text

@@ -19,6 +19,8 @@ Build Mike's version first. Sell the client version as:
 
 Do not sell "AI agents" first. Sell owner clarity.
 
+For the Presence Refresh launch special, Morning Brief is a bonus/reporting layer, not the main thing being sold. It should show what was refreshed, proof links, open approvals, and the next Reach move.
+
 The live page is Mike's operating view first:
 
 - Reach/GHL outreach stats are live through the HighLevel read-only email stats API.

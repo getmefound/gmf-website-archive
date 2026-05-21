@@ -23,6 +23,14 @@ export function GrowthProductPage({ product }: { product: GrowthProduct }) {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          {product.publicHref ? (
+            <Link
+              href={product.publicHref}
+              className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-emerald-300 transition hover:bg-emerald-500/20"
+            >
+              Public offer
+            </Link>
+          ) : null}
           <Link
             href="/mike-mc/jobs"
             className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
@@ -45,6 +53,8 @@ export function GrowthProductPage({ product }: { product: GrowthProduct }) {
         <Metric label="Agents" value={product.agentOwners.length.toString()} />
         <Metric label="Steps" value={product.steps.length.toString()} />
       </section>
+
+      {product.specialOffer ? <SpecialOfferCard offer={product.specialOffer} /> : null}
 
       <section className="mb-8 rounded-2xl border border-emerald-500/25 bg-emerald-500/5 p-5 md:p-6">
         <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
@@ -122,6 +132,23 @@ export function GrowthProductPage({ product }: { product: GrowthProduct }) {
             <p className="font-mono text-xs uppercase tracking-wider text-zinc-500">
               Source links
             </p>
+            {product.sourceClaims ? (
+              <div className="mt-3 grid gap-2">
+                {product.sourceClaims.map((item) => (
+                  <a
+                    key={item.url}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg border border-zinc-800/70 bg-zinc-950/70 px-3 py-3 text-sm transition hover:border-zinc-700 hover:bg-zinc-900"
+                  >
+                    <span className="block font-semibold text-zinc-200">{item.label}</span>
+                    <span className="mt-1 block leading-relaxed text-zinc-400">{item.claim}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-zinc-500">{item.detail}</span>
+                  </a>
+                ))}
+              </div>
+            ) : null}
             <div className="mt-3 grid gap-2 md:grid-cols-2">
               {product.sources.map((source) => (
                 <a
@@ -161,6 +188,58 @@ export function GrowthProductPage({ product }: { product: GrowthProduct }) {
         </div>
       </section>
     </ControlShell>
+  );
+}
+
+function SpecialOfferCard({ offer }: { offer: NonNullable<GrowthProduct["specialOffer"]> }) {
+  return (
+    <section className="mb-8 rounded-2xl border border-emerald-500/35 bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-zinc-950 p-5 shadow-2xl shadow-black/25 md:p-6">
+      <div className="grid gap-5 xl:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-emerald-300">
+            {offer.label}
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+            Make the offer bigger while we are proving it.
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-zinc-300">
+            {offer.note}
+          </p>
+          <div className="mt-4 inline-flex rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 font-mono text-lg font-bold text-emerald-200">
+            {offer.price}
+          </div>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2">
+          <div className="rounded-xl border border-zinc-800/70 bg-black/25 p-4">
+            <p className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+              {offer.standardLabel}
+            </p>
+            <ul className="mt-3 space-y-2">
+              {offer.standardItems.map((item) => (
+                <li key={item} className="text-lg font-semibold text-zinc-500 line-through decoration-rose-400/80 decoration-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-xl border border-emerald-500/35 bg-emerald-500/10 p-4">
+            <p className="font-mono text-xs uppercase tracking-wider text-emerald-300">
+              {offer.specialLabel}
+            </p>
+            <ul className="mt-3 space-y-2">
+              {offer.specialItems.map((item) => (
+                <li key={item} className="text-lg font-semibold text-zinc-50">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 border-t border-emerald-500/20 pt-3 text-sm leading-relaxed text-emerald-100/90">
+              Bonus: {offer.bonus}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

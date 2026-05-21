@@ -23,6 +23,7 @@ This keeps the front page useful as more agent jobs are added.
 | Find new leads | `/mike-mc/jobs#commercial-reach` | Explain the main growth job simply. |
 | What agents do | `/mike-mc/jobs#commercial-reach-steps` | Show each agent step in plain English. |
 | Presence Refresh | `/mike-mc/jobs/presence-refresh` | One-time setup to make a business look active before Reach sends attention. |
+| Presence Refresh public offer | `/lp/presence-refresh` | Clean client-facing page with launch special, source links, and Morning Brief bonus. |
 | Social Reach | `/mike-mc/jobs/social-reach` | Pilot for social conversation listening, helpful comment drafts, and human-approved engagement. |
 | Custom agents | `/mike-mc/jobs#custom-agent-layer` | Show optional CRM/custom-agent work after the sale. |
 | Send status | `/mike-mc/jobs/reach-cold-email-campaign` | Check whether emails are ready to send or still blocked. |
@@ -52,11 +53,12 @@ Presence Refresh is the first add-on to build:
 
 1. Audit stale website/social presence.
 2. Pick one useful customer-facing angle.
-3. Draft five catch-up social posts.
-4. Draft one useful blog post.
+3. Draft the launch special: 10 catch-up social posts.
+4. Draft the launch special: 5 useful blog posts.
 5. Publish only after approval.
-6. Save proof links/screenshots.
-7. Hand the refreshed proof to Reach.
+6. Add the Morning Brief proof summary.
+7. Save proof links/screenshots.
+8. Hand the refreshed proof to Reach.
 
 This is a setup product. It helps prospects see a current, credible business when outreach sends them to check the client.
 

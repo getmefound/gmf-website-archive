@@ -47,9 +47,10 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 4. Require all agent runs to write back to the ledger through a controlled workflow, not by freeform editing.
 5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
 6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
-7. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md`, `npm run agent:brief`, and `npm run morning:brief` for deeper setup and command details.
-8. Keep the Obsidian synced note `AOH Agent Model Routing and Morning Brief.md` current when model/provider or Morning Brief ownership changes.
-9. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
+7. Use `presence-refresh-product-runbook.md` and `/lp/presence-refresh` for the 10 social post + 5 blog launch special before selling it live.
+8. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md`, `npm run agent:brief`, and `npm run morning:brief` for deeper setup and command details.
+9. Keep the Obsidian synced note `AOH Agent Model Routing and Morning Brief.md` current when model/provider or Morning Brief ownership changes.
+10. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 
 ## Higher-Level Truth
 
