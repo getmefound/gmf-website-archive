@@ -192,7 +192,7 @@ async function fetchNewsItems(config) {
       const res = await fetch(source.feedUrl, { headers: { "User-Agent": "AOH-Morning-Brief/1.0" } });
       if (!res.ok) throw new Error(`${res.status}`);
       const xml = await res.text();
-      results.push(...parseFeedItems(xml, source.name).slice(0, 3));
+      results.push(...parseFeedItems(xml, source.name).slice(0, 1));
     } catch (error) {
       results.push({
         source: source.name,
@@ -201,7 +201,7 @@ async function fetchNewsItems(config) {
       });
     }
   }
-  return results.slice(0, 8);
+  return results.slice(0, 4);
 }
 
 function parseFeedItems(xml, sourceName) {
@@ -293,7 +293,7 @@ function renderLaneRow(lane) {
 
 function renderNews(brief) {
   if (brief.news.length) {
-    return brief.news.map((item) => `- ${item.source}: ${item.title}${item.link ? ` (${item.link})` : ""}`).join("\n");
+    return brief.news.map((item) => `- ${item.source}: ${item.title}`).join("\n");
   }
   return "- Waiting for Google Alerts/RSS feed URLs. Until then, Scout should bring one useful industry signal manually.";
 }

@@ -8,32 +8,32 @@
   },
   "newsSources": [
     {
-      "name": "Google Alerts - AI automation for small business",
-      "type": "google_alert",
+      "name": "AI automation",
+      "type": "google_news_rss",
       "query": "AI automation for small business",
-      "feedUrl": "",
-      "status": "waiting_for_feed_url"
+      "feedUrl": "https://news.google.com/rss/search?q=AI%20automation%20small%20business&hl=en-US&gl=US&ceid=US:en",
+      "status": "active_starter_source"
     },
     {
-      "name": "Google Alerts - GoHighLevel",
-      "type": "google_alert",
+      "name": "GoHighLevel",
+      "type": "google_news_rss",
       "query": "GoHighLevel",
-      "feedUrl": "",
-      "status": "waiting_for_feed_url"
+      "feedUrl": "https://news.google.com/rss/search?q=GoHighLevel&hl=en-US&gl=US&ceid=US:en",
+      "status": "active_starter_source"
     },
     {
-      "name": "Google Alerts - Google Business Profile",
-      "type": "google_alert",
+      "name": "Google Business Profile",
+      "type": "google_news_rss",
       "query": "Google Business Profile local marketing",
-      "feedUrl": "",
-      "status": "waiting_for_feed_url"
+      "feedUrl": "https://news.google.com/rss/search?q=Google%20Business%20Profile%20local%20marketing&hl=en-US&gl=US&ceid=US:en",
+      "status": "active_starter_source"
     },
     {
-      "name": "Google Alerts - AI receptionist",
-      "type": "google_alert",
+      "name": "AI receptionist",
+      "type": "google_news_rss",
       "query": "AI receptionist local business",
-      "feedUrl": "",
-      "status": "waiting_for_feed_url"
+      "feedUrl": "https://news.google.com/rss/search?q=AI%20receptionist%20local%20business&hl=en-US&gl=US&ceid=US:en",
+      "status": "active_starter_source"
     }
   ],
   "ghlStatsSources": [

@@ -25,7 +25,10 @@ Prepared by: General Manager
 
 ## Market Signal
 
-- Waiting for Google Alerts/RSS feed URLs. Until then, Scout should bring one useful industry signal manually.
+- AI automation: AI Business Automation Tools - Trend Hunter
+- GoHighLevel: GO HIGH LEVEL?: Las Vegas Realtor Britney Gaitan Facing Massive Exposure in Robocall TCPA Class Action After Using GoHighLevel to Send Ringless Voicemails to Expired Listings - TCPAWorld
+- Google Business Profile: 50-Year Marketing Expertise Backs New AI Platform for Local Search - USA Today
+- AI receptionist: Your favorite Texas restaurant may soon let AI answer the phone - Austin American-Statesman
 
 ## Agents Feeding This Brief
 
@@ -42,7 +45,7 @@ Keep auto on. Have GHL Expert clear Relay drip readiness before any start-drip a
 
 ## Source Status
 
-- News feeds active: 0; waiting for URLs: 4.
+- News feeds active: 4; waiting for URLs: 0.
 - GHL email stats: not connected yet.
 
 ## Proof Used

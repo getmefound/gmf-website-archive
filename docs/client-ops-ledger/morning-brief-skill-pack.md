@@ -108,7 +108,7 @@ Current connected data:
 - Reach warmup reports
 - GHL import/start result files
 - optional GHL email stats CSV
-- optional Google Alerts/RSS feed URLs
+- Google News RSS starter feeds; Google Alerts can replace or supplement them later
 
 The expected GHL stats shape is in `docs/client-ops-ledger/ghl-email-stats-template.csv`.
 
