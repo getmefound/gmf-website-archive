@@ -306,6 +306,13 @@ The client hub is the client-facing status page after signup:
 - keeps GHL as the backend while giving clients a simpler page
 - should be password or magic-link protected before real private client data is shown
 
+GHL replacement and cost planning:
+
+- `docs/client-ops-ledger/ghl-replacement-cost-plan.md`
+  - maps every current GHL job to cost, replacement option, and keep/replace/avoid decision
+  - recommends $97 while AOH/pilots fit, $297 only if more GHL locations are needed before AOH replacement is ready, and avoiding $497 unless AOH sells GHL as software
+  - treats per-client AI Employee, Search Atlas/SEO, and premium prospecting as paid-client add-ons only, not default AOH overhead
+
 ## AOH Discovery Calendar
 
 Internal sales intake build spec:

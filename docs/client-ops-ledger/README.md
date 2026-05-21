@@ -30,6 +30,7 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `reach-campaign-agent-runbook.md` | Safe agent workflow for Reach email campaign prep, approval, import, drip start, and logging. |
 | `presence-refresh-product-runbook.md` | One-time setup add-on for stale social/website presence before Reach campaigns. |
 | `social-reach-pilot-runbook.md` | Guarded Social Reach pilot: listening, opportunity scoring, helpful drafts, and human-approved posting. |
+| `ghl-replacement-cost-plan.md` | Planning map for what AOH uses GHL for, what each area costs, and what to keep, replace, or avoid at 50+ clients. |
 | `mission-control-job-flow-index.md` | Mission Control job index links and the split between Commercial Reach and optional custom agent/CRM work. |
 | `slack-agent-command-runbook.md` | How Mike talks to Manager, GHL Expert, Sales Manager, and approval gates through Slack-ready commands. |
 | `agent-jobs-template.csv` | Starter job queue format for agent work, budgets, approvals, and next actions. |
@@ -48,9 +49,10 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
 6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
 7. Use `presence-refresh-product-runbook.md` and `/lp/presence-refresh` for the 10 social post + 5 blog launch special before selling it live.
-8. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md`, `npm run agent:brief`, and `npm run morning:brief` for deeper setup and command details.
-9. Keep the Obsidian synced note `AOH Agent Model Routing and Morning Brief.md` current when model/provider or Morning Brief ownership changes.
-10. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
+8. Use `ghl-replacement-cost-plan.md` before changing GHL plans, enabling GHL add-ons, or deciding whether to build an AOH-owned replacement.
+9. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md`, `npm run agent:brief`, and `npm run morning:brief` for deeper setup and command details.
+10. Keep the Obsidian synced note `AOH Agent Model Routing and Morning Brief.md` current when model/provider or Morning Brief ownership changes.
+11. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 
 ## Higher-Level Truth
 
