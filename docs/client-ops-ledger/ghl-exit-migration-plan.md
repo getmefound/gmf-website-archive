@@ -92,6 +92,27 @@ GHL is allowed only for:
 Owner: GHL Expert  
 Reviewer: Auditor
 
+Repeatable command:
+
+```bash
+npm run ghl:exit-inventory
+```
+
+This creates a dated, read-only metadata inventory in
+`docs/client-ops-ledger/outbox/`. It does not export contacts, customer records,
+message bodies, token values, passwords, or HighLevel AI settings.
+
+Current 2026-05-21 inventory snapshot:
+
+- 1 GHL location
+- 6 pipelines
+- 167 workflows
+- 191 custom fields
+- 91 custom values
+- 10 email workflow campaigns
+- 8 calendars
+- 228 tags
+
 Export or document:
 
 - active locations/subaccounts
@@ -110,6 +131,9 @@ Done means:
 - there is a dated export folder or doc
 - no secret values are printed in docs
 - Manager knows what still depends on GHL
+
+Contact/customer exports, if needed later, must go to a gitignored folder such
+as `data/ghl-exit/YYYY-MM-DD/` and must not be committed.
 
 ### Step 2: AOH Review Automation Core
 
@@ -250,6 +274,12 @@ Mike should only need to see:
 - Current blocker
 - Next safest action
 - Monthly cost avoided
+
+Manager command:
+
+```text
+Manager, GHL exit status
+```
 
 ## First 7 Days
 

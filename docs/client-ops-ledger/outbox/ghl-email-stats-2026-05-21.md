@@ -6,7 +6,7 @@ Mode: read-only
 
 ## Owner Summary
 
-- Reviews: 20 sent, 18 delivered, 7 opened, 0 replies, 1 bounces, 0 unsubscribes.
+- Reviews: 20 sent, 18 delivered, 7 opened, 0 replies, 2 bounces, 0 unsubscribes.
 - AI Visibility: 26 sent, 22 delivered, 13 opened, 0 replies, 4 bounces, 0 unsubscribes.
 - Relay: 5 sent, 5 delivered, 4 opened, 0 replies, 0 bounces, 0 unsubscribes.
 

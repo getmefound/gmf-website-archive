@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const OUTBOX_DIR = "docs/client-ops-ledger/outbox";
@@ -134,6 +134,10 @@ function routeCommand(command, args) {
     return buildGhlVisualChecklistResponse(findLaneKey(normalized));
   }
 
+  if (mentionsGhlExit(normalized)) {
+    return buildGhlExitStatusResponse();
+  }
+
   if (mentionsGhlReadiness(normalized)) {
     return buildGhlCheckResponse();
   }
@@ -170,6 +174,7 @@ Supported commands:
 - \`Manager, owner peek\`
 - \`Manager, morning brief\`
 - \`Manager, model routing\`
+- \`Manager, GHL exit status\`
 - \`Local Visibility Manager, prepare GBP access test\`
 - \`Manager, run Reach Cold Email Campaign\`
 - \`Manager, show Reach warmup autopilot\`
@@ -892,6 +897,63 @@ ${trimOutput(result.stdout || result.stderr || "No output captured.")}
 No contacts, tags, workflows, settings, or HighLevel AI features were changed.
 
 ${brief.text}
+`,
+  };
+}
+
+function buildGhlExitStatusResponse() {
+  const data = loadData();
+  const job =
+    data.jobs.find((item) => String(item.job_id ?? "").includes("GHL-EXIT")) ??
+    data.jobs.find((item) => String(item.job_type ?? "").includes("platform_migration"));
+  const inventory = readLatestGhlExitInventory();
+  const counts = inventory?.surfaces
+    ?.filter((surface) => surface.ok)
+    .map((surface) => `${surface.count} ${surface.label.toLowerCase()}`)
+    .join("; ");
+
+  return {
+    kind: "manager-ghl-exit-status",
+    text: `*GHL exit status - ${today()}*
+
+Short answer: migration is started. GHL should stay as the $97 bridge until the replacement proves itself.
+
+Current job:
+
+- Status: ${job?.status || "not logged"}
+- Owner: ${job?.owner_agent || "Manager"}
+- Next: ${job?.next_action || "Run the read-only inventory, then assign export and replacement owners."}
+
+Current GHL footprint:
+
+- ${counts || "Run `npm run ghl:exit-inventory` to refresh the footprint."}
+
+What changed today:
+
+- GHL Expert has a read-only exit inventory command.
+- GHL readiness rechecks now preserve prior start-drip approvals instead of resetting them.
+- Reviews and AI Visibility stay drip-ready; Relay still waits until its clean-list gate clears.
+
+Agent owners:
+
+- Manager: status and blocker summary.
+- GHL Expert: export and translate current GHL assets.
+- Systems Director: downgrade/cancel gates, cost, cron, vendor checks.
+- Website/Codex: build the AOH-owned Review Automation and client-page replacement.
+- Sender: move Reach sending/drips off GHL later.
+- Auditor: verify no secret/customer data is committed.
+
+Next safe action:
+
+Keep the downgrade call focused on what breaks moving to $97. Do not cancel yet. Do not build new work inside GHL.
+
+Useful commands:
+
+\`\`\`text
+Manager, GHL exit status
+GHL Expert, check Reach readiness
+Manager, status
+\`\`\`
 `,
   };
 }
@@ -1680,6 +1742,12 @@ function mentionsGhlReadiness(normalized) {
   );
 }
 
+function mentionsGhlExit(normalized) {
+  const mentionsHighLevel = normalized.includes("ghl") || normalized.includes("highlevel") || normalized.includes("high level");
+  if (!mentionsHighLevel) return false;
+  return /\b(exit|migration|migrate|replacement|replace|downgrade|cancel|off ghl|move off)\b/.test(normalized);
+}
+
 function mentionsGhlVisualReadiness(normalized) {
   return (
     normalized.includes("ghl") &&
@@ -1799,6 +1867,16 @@ function trimOutput(value) {
   return text.length > 1800 ? `${text.slice(0, 1800)}\n...trimmed...` : text;
 }
 
+function readLatestGhlExitInventory() {
+  if (!existsSync(OUTBOX_DIR)) return null;
+  const files = readdirSync(OUTBOX_DIR)
+    .filter((file) => /^ghl-exit-inventory-\d{4}-\d{2}-\d{2}\.json$/.test(file))
+    .sort();
+  const latest = files.at(-1);
+  if (!latest) return null;
+  return readJsonIfExists(`${OUTBOX_DIR}/${latest}`);
+}
+
 function today() {
   return easternDate();
 }
@@ -1841,6 +1919,7 @@ Examples:
   npm run agent:brief
   npm run agent:command -- --command "Manager, status"
   npm run agent:command -- --command "Manager, run Reach Cold Email Campaign"
+  npm run agent:command -- --command "Manager, GHL exit status"
   npm run agent:command -- --command "GHL Expert, check Reach readiness"
   npm run agent:command -- --command "approve relay import only"
   npm run agent:slack

@@ -21,6 +21,7 @@
     "reach:discover": "node scripts/reach-discovery-first.mjs",
     "reach:inventory": "node scripts/build-reach-scrape-inventory.mjs",
     "ghl:email-stats": "node scripts/ghl-email-stats.mjs",
+    "ghl:exit-inventory": "node scripts/ghl-exit-inventory.mjs",
     "morning:brief": "node scripts/morning-brief.mjs",
     "agent:brief": "node scripts/agent-command-center.mjs",
     "agent:command": "node scripts/agent-command-center.mjs",

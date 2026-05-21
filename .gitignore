@@ -60,6 +60,7 @@ lighthouse-local-*
 !/scripts/reach-ghl-expert-check.mjs
 !/scripts/build-reach-scrape-inventory.mjs
 !/scripts/ghl-email-stats.mjs
+!/scripts/ghl-exit-inventory.mjs
 !/scripts/agent-command-center.mjs
 !/scripts/manager-agent-eval.mjs
 !/scripts/manager-slack-training-candidates.mjs
