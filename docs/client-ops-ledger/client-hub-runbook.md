@@ -10,17 +10,17 @@ The client hub is the simple client-facing page for setup and service status.
 
 It should answer:
 
-- what AOH already knows
 - what the client still needs to provide
-- what AOH is doing next
-- what is live
+- whether the service is running
+- whether results/proof are available
 - what is locked behind an upgrade
 
 The client should not need to log into GHL for normal setup visibility.
 
 Client-facing rule: do not list internal agent names on the client hub. Show
-`AOH handling`, `Waiting on you`, `Working`, `Needed`, `Done`, and `Locked`.
-Keep the agent ownership map internal.
+only what matters to the business owner. Lead with `Needed from you`, then
+service status, then upgrade preview. Keep internal ownership, internal tools,
+and completed setup clutter off the first screen.
 
 ## Live Routes
 
@@ -42,15 +42,11 @@ Both pages are `noindex`.
 
 Every Review Automation client hub should show:
 
-- business info
-- Google Business Profile access status
-- logo/brand status
-- review link status
 - recent customer/job list status
-- review request message status
-- GHL workflow status
-- test request status
-- client live status
+- Google access status only if it affects setup or launch
+- review request count/status
+- proof/status after launch
+- action buttons for updating setup details or sending a file
 
 This is the commercial standard service.
 
@@ -162,5 +158,5 @@ Before real private client data goes on a hub:
 When asked for client hub status, Manager should answer in owner language:
 
 ```text
-Mike, the client hub is the simple setup page. Clients see what we know, what is missing, what AOH is handling, and the locked AI Visibility upgrade. They do not see our internal agent names or need GHL.
+Mike, the client hub leads with what the client still needs to do, then shows service status and the locked AI Visibility upgrade. It does not show internal agent names, internal tools, or completed setup clutter.
 ```

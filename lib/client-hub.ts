@@ -166,7 +166,6 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       { label: "Review requests", value: "0", sub: "waiting on customer list" },
       { label: "Google access", value: "Needs confirm", sub: "client invite step" },
       { label: "Automation", value: "Draft", sub: "not sending yet" },
-      { label: "Owner action", value: "2 items", sub: "GBP access + list" },
     ],
     uploadRequests: [
       {
@@ -281,7 +280,6 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       { label: "Review requests", value: "Test only", sub: "no real sends yet" },
       { label: "Google access", value: "Confirmed", sub: "AOH profile" },
       { label: "Automation", value: "Checking", sub: "AOH checking" },
-      { label: "Owner action", value: "1 item", sub: "approve first safe test" },
     ],
     uploadRequests: [
       {

@@ -42,9 +42,13 @@ export default async function ClientHubPage({ params }: PageProps) {
 
   if (!client) notFound();
 
-  const completed = client.checklist.filter((item) => item.status === "done").length;
-  const total = client.checklist.length;
-  const progress = Math.round((completed / total) * 100);
+  const clientNeeds = [
+    ...client.checklist.filter((item) => item.owner === "Client" && item.status !== "done"),
+    ...client.uploadRequests.filter((item) => item.status === "needed"),
+  ];
+  const visibleMetrics = client.metrics.filter((metric) =>
+    ["Review requests", "Google access"].includes(metric.label),
+  );
 
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#f7f8f4] text-slate-950 focus:outline-none">
@@ -57,9 +61,6 @@ export default async function ClientHubPage({ params }: PageProps) {
               </span>
               <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">
                 {client.statusLabel}
-              </span>
-              <span className="rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-amber-900">
-                Private page: {client.protection}
               </span>
             </div>
 
@@ -79,23 +80,22 @@ export default async function ClientHubPage({ params }: PageProps) {
             </div>
           </div>
 
-          <aside className="rounded-lg border border-slate-200 bg-slate-50 p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-              AOH status
+          <aside className="rounded-lg border border-amber-200 bg-amber-50 p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-800">
+              Needed from you
             </p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">
-              {progress}% ready
+            <p className="mt-2 text-3xl font-semibold text-slate-950">
+              {clientNeeds.length} item{clientNeeds.length === 1 ? "" : "s"}
             </p>
-            <div className="mt-4 h-2 rounded-full bg-slate-200">
-              <div
-                className="h-2 rounded-full bg-emerald-700"
-                style={{ width: `${progress}%` }}
-                aria-hidden="true"
-              />
-            </div>
-            <p className="mt-4 text-sm leading-6 text-slate-600">
-              Next client action: <span className="font-semibold text-slate-950">{client.nextClientAction}</span>
+            <p className="mt-3 text-sm leading-6 text-slate-700">
+              {client.nextClientAction}
             </p>
+            <a
+              href="#needed"
+              className="mt-5 inline-flex rounded-lg bg-amber-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-800"
+            >
+              View what is needed
+            </a>
           </aside>
         </div>
       </section>
@@ -103,11 +103,9 @@ export default async function ClientHubPage({ params }: PageProps) {
       <section className="border-b border-slate-200 bg-[#eef3ea]">
         <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-4">
           {[
-            ["Setup", "#setup"],
+            ["What is needed", "#needed"],
             ["Review Automation", "#reviews"],
-            ["Uploads", "#uploads"],
             ["AI Visibility", "#ai-visibility"],
-            ["Next steps", "#next-steps"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -121,7 +119,7 @@ export default async function ClientHubPage({ params }: PageProps) {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-8 lg:grid-cols-4">
-        {client.metrics.map((metric) => (
+        {visibleMetrics.map((metric) => (
           <article key={metric.label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
               {metric.label}
@@ -134,31 +132,49 @@ export default async function ClientHubPage({ params }: PageProps) {
         ))}
       </section>
 
-      <section id="setup" className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[0.92fr_1.08fr]">
-        <div>
+      <section id="needed" className="mx-auto max-w-7xl px-6 py-8">
+        <div className="grid gap-8 lg:grid-cols-[360px_1fr]">
           <SectionHeader
-            eyebrow="Setup"
-            title="What we have and what is still needed"
-            sub="This is the page the client can check instead of logging into another dashboard."
+            eyebrow="Action needed"
+            title="What we still need from you"
+            sub="If this section is empty, you can leave the setup work to us."
           />
-          <BusinessCard client={client} />
-        </div>
 
-        <div className="grid gap-3">
-          {client.checklist.map((item) => (
-            <article key={item.label} className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-[160px_1fr]">
-              <div>
-                <StatusPill status={item.status} />
-                <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-                  {item.owner === "Client" ? "Waiting on you" : "AOH handling"}
+          <div className="grid gap-3">
+            {clientNeeds.length ? (
+              clientNeeds.map((item) => (
+                <article key={`${item.label}-${item.detail}`} className="rounded-lg border border-amber-200 bg-white p-5 shadow-sm">
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <StatusPill status={item.status} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-950">{item.label}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.detail}</p>
+                </article>
+              ))
+            ) : (
+              <article className="rounded-lg border border-emerald-200 bg-emerald-50 p-6">
+                <StatusPill status="done" />
+                <h3 className="mt-4 text-xl font-semibold text-slate-950">Nothing needed right now</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  We have what we need for the next setup step.
                 </p>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-slate-950">{item.label}</h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600">{item.detail}</p>
-              </div>
-            </article>
-          ))}
+              </article>
+            )}
+            <div className="mt-3 flex flex-wrap gap-3">
+              <Link
+                href="/intake/review-automation"
+                className="rounded-lg bg-emerald-800 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
+                Update setup details
+              </Link>
+              <a
+                href="mailto:mike@aioutsourcehub.com?subject=Client%20hub%20upload"
+                className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+              >
+                Send file to AOH
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -180,7 +196,7 @@ export default async function ClientHubPage({ params }: PageProps) {
 
           <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-800">
-              What the client sees
+              Review status
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-950">
               Simple status, not a messy dashboard
@@ -195,37 +211,6 @@ export default async function ClientHubPage({ params }: PageProps) {
               SMS, AI-drafted replies, ranking reports, and ChatGPT visibility stay in AI Visibility unless the client upgrades.
             </p>
           </div>
-        </div>
-      </section>
-
-      <section id="uploads" className="mx-auto max-w-7xl px-6 py-10">
-        <SectionHeader
-          eyebrow="Client updates"
-          title="Files and details we may need"
-          sub="The goal is to prefill most of this from signup and only ask the client for the missing pieces."
-        />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {client.uploadRequests.map((request) => (
-            <article key={request.label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-              <StatusPill status={request.status} />
-              <h3 className="mt-4 text-base font-semibold text-slate-950">{request.label}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{request.detail}</p>
-            </article>
-          ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/intake/review-automation"
-            className="rounded-lg bg-emerald-800 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
-          >
-            Update setup details
-          </Link>
-          <a
-            href="mailto:mike@aioutsourcehub.com?subject=Client%20hub%20upload"
-            className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
-          >
-            Send file to AOH
-          </a>
         </div>
       </section>
 
@@ -266,26 +251,6 @@ export default async function ClientHubPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      <section id="next-steps" className="mx-auto max-w-7xl px-6 py-10">
-        <SectionHeader
-          eyebrow="Next steps"
-          title="What happens behind the scenes"
-          sub="You see the simple status. AOH handles the setup work, proof checks, and launch notes."
-        />
-        <div className="grid gap-4 lg:grid-cols-5">
-          {client.nextSteps.map((step) => (
-            <article key={step.step} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-              <StatusPill status={step.status} />
-              <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">
-                {step.step}
-              </p>
-              <h3 className="mt-3 text-base font-semibold text-slate-950">{step.job}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{step.output}</p>
-            </article>
-          ))}
-        </div>
-      </section>
     </main>
   );
 }
@@ -300,38 +265,6 @@ function LogoMark({ client, size = "normal" }: { client: ClientHubProfile; size?
     >
       {client.logoText}
     </div>
-  );
-}
-
-function BusinessCard({ client }: { client: ClientHubProfile }) {
-  const rows = [
-    ["Owner", client.ownerName],
-    ["Website", client.website],
-    ["Phone", client.phone],
-    ["Email", client.email],
-    ["Location", client.location],
-    ["Category", client.category],
-    ["Brand", client.brandNote],
-  ];
-
-  return (
-    <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-center gap-4">
-        <LogoMark client={client} />
-        <div>
-          <h2 className="text-xl font-semibold text-slate-950">{client.businessName}</h2>
-          <p className="text-sm text-slate-500">Prefilled client profile</p>
-        </div>
-      </div>
-      <dl className="mt-5 divide-y divide-slate-100">
-        {rows.map(([label, value]) => (
-          <div key={label} className="grid gap-1 py-3 text-sm sm:grid-cols-[110px_1fr]">
-            <dt className="font-semibold text-slate-500">{label}</dt>
-            <dd className="text-slate-800">{value}</dd>
-          </div>
-        ))}
-      </dl>
-    </article>
   );
 }
 
