@@ -20,6 +20,7 @@
     "reach:manager-check": "node scripts/reach-manager-check.mjs",
     "reach:discover": "node scripts/reach-discovery-first.mjs",
     "reach:inventory": "node scripts/build-reach-scrape-inventory.mjs",
+    "morning:brief": "node scripts/morning-brief.mjs",
     "agent:brief": "node scripts/agent-command-center.mjs",
     "agent:command": "node scripts/agent-command-center.mjs",
     "agent:slack": "node scripts/agent-command-center.mjs --post-slack",

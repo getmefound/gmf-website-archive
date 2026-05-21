@@ -9,6 +9,7 @@ const JOBS_PATH = "docs/client-ops-ledger/agent-jobs.csv";
 const DOMAINS_PATH = "docs/client-ops-ledger/sending-domain-readiness.csv";
 const WARMUP_CONFIG_PATH = "docs/client-ops-ledger/reach-warmup-autopilot.json";
 const DAILY_BRIEF_PATH = "docs/client-ops-ledger/daily-brief-current.md";
+const MORNING_BRIEF_CURRENT_PATH = "docs/client-ops-ledger/morning-brief-current.md";
 
 const LANES = {
   reviews: {
@@ -341,6 +342,14 @@ ${dailySignals.recommendation || "Keep auto on. Let agents handle routine refill
 }
 
 function buildMorningBriefResult() {
+  const currentBrief = readText(MORNING_BRIEF_CURRENT_PATH).trim();
+  if (currentBrief) {
+    return {
+      kind: "agent-morning-brief",
+      text: currentBrief,
+    };
+  }
+
   const data = loadData();
   const reachJobs = getReachJobs(data.jobs);
   const summaries = reachJobs.map((job) => laneSummary(job, data.domains));

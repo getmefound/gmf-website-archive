@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "delivery": {
+    "owner": "Mike",
+    "primaryChannel": "#04-aoh-ops",
+    "targetTimeEastern": "7:45 AM",
+    "dmPolicy": "one short daily owner brief plus urgent exceptions only"
+  },
+  "newsSources": [
+    {
+      "name": "Google Alerts - AI automation for small business",
+      "type": "google_alert",
+      "query": "AI automation for small business",
+      "feedUrl": "",
+      "status": "waiting_for_feed_url"
+    },
+    {
+      "name": "Google Alerts - GoHighLevel",
+      "type": "google_alert",
+      "query": "GoHighLevel",
+      "feedUrl": "",
+      "status": "waiting_for_feed_url"
+    },
+    {
+      "name": "Google Alerts - Google Business Profile",
+      "type": "google_alert",
+      "query": "Google Business Profile local marketing",
+      "feedUrl": "",
+      "status": "waiting_for_feed_url"
+    },
+    {
+      "name": "Google Alerts - AI receptionist",
+      "type": "google_alert",
+      "query": "AI receptionist local business",
+      "feedUrl": "",
+      "status": "waiting_for_feed_url"
+    }
+  ],
+  "ghlStatsSources": [
+    {
+      "lane": "reviews",
+      "workflow": "Reviews Special - Pilot Drip",
+      "source": "GHL Marketing > Emails > Statistics export",
+      "status": "waiting_for_export_or_api"
+    },
+    {
+      "lane": "ai",
+      "workflow": "AI Visibility - Pilot Drip",
+      "source": "GHL Marketing > Emails > Statistics export",
+      "status": "waiting_for_export_or_api"
+    },
+    {
+      "lane": "relay",
+      "workflow": "Relay - Pilot Drip",
+      "source": "GHL Marketing > Emails > Statistics export",
+      "status": "waiting_for_export_or_api"
+    }
+  ]
+}

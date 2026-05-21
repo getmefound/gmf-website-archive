@@ -33,6 +33,8 @@ General Manager sends the final brief. Specialist agents feed the brief.
 Current agent commands read known local files:
 
 - `docs/client-ops-ledger/daily-brief-current.md`
+- `docs/client-ops-ledger/morning-brief-current.md`
+- `docs/client-ops-ledger/morning-brief-sources.json`
 - `docs/client-ops-ledger/agent-jobs.csv`
 - `docs/client-ops-ledger/sending-domain-readiness.csv`
 - `docs/client-ops-ledger/outbox/*`
@@ -76,6 +78,38 @@ Self-managed retrieval, such as Qdrant or Postgres/pgvector:
 | Campaign results | GHL stats/export or read-only API proof, not screenshots alone. |
 
 Forums are useful for edge cases, but they do not override official docs or live system proof.
+
+## Current Build
+
+The v1 generator is:
+
+```bash
+npm run morning:brief
+```
+
+It writes:
+
+- `docs/client-ops-ledger/morning-brief-current.md`
+- `docs/client-ops-ledger/outbox/morning-brief-YYYY-MM-DD.md`
+
+Optional flags:
+
+```bash
+npm run morning:brief -- --date 2026-05-21
+npm run morning:brief -- --fetch-news
+npm run morning:brief -- --post-slack
+```
+
+Current connected data:
+
+- Reach job ledger
+- sending domain readiness
+- Reach warmup reports
+- GHL import/start result files
+- optional GHL email stats CSV
+- optional Google Alerts/RSS feed URLs
+
+The expected GHL stats shape is in `docs/client-ops-ledger/ghl-email-stats-template.csv`.
 
 ## Owner Brief Shape
 

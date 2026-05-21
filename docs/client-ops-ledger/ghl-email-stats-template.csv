@@ -1,0 +1,2 @@
+date,lane,workflow,total,delivered_pct,opened_pct,clicked_pct,replied,bounced,unsubscribed,source,notes
+2026-05-21,reviews,Reviews Special - Pilot Drip,20,90,38.89,,,,,manual_screenshot_or_export,Example shape only; replace with actual GHL export/API data before using in the brief.

@@ -13,7 +13,7 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 | Layer | Status | Notes |
 |---|---|---|
 | Manager status brief | Wired | `npm run agent:brief` reads the current job queue, domain readiness, QA counts, and daily brief. |
-| Morning Brief command | Wired | `Manager, morning brief` gives the owner view and shows which agent feeds each part of the brief. |
+| Morning Brief command | Wired | `npm run morning:brief` generates the current owner brief. `Manager, morning brief` gives the owner view and shows which agent feeds each part of the brief. |
 | Reach Cold Email Campaign command | Wired | `Manager, run Reach Cold Email Campaign` runs today's safe QA/readiness routine and reports approval needs. |
 | Owner Reach status question | Wired | `Manager, is Reach set to run today, and do I need anything?` gives Mike the short owner answer without a role-card intro. |
 | Reach team training command | Wired | `Manager, train Reach team` reminds each agent what it owns for discovery, QA, GHL readiness, sending, cost, replies, and booking. |
@@ -161,6 +161,13 @@ Generate the current Manager brief:
 
 ```bash
 npm run agent:brief
+```
+
+Generate the current Morning Brief:
+
+```bash
+npm run morning:brief
+npm run morning:brief -- --fetch-news
 ```
 
 Route a command:

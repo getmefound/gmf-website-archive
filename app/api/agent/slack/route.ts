@@ -10,6 +10,7 @@ const JOBS_PATH = "docs/client-ops-ledger/agent-jobs.csv";
 const DOMAINS_PATH = "docs/client-ops-ledger/sending-domain-readiness.csv";
 const WARMUP_CONFIG_PATH = "docs/client-ops-ledger/reach-warmup-autopilot.json";
 const DAILY_BRIEF_PATH = "docs/client-ops-ledger/daily-brief-current.md";
+const MORNING_BRIEF_CURRENT_PATH = "docs/client-ops-ledger/morning-brief-current.md";
 const OUTBOX_DIR = "docs/client-ops-ledger/outbox";
 const GHL_API_BASE = "https://services.leadconnectorhq.com";
 const GHL_API_VERSION = "2021-07-28";
@@ -642,6 +643,9 @@ Manager, run Reach Cold Email Campaign
 }
 
 function buildMorningBriefResponse(actor: UserContext) {
+  const currentBrief = readText(MORNING_BRIEF_CURRENT_PATH).trim();
+  if (currentBrief) return currentBrief;
+
   const summaries = laneSummaries();
   const managerCheck = readText(`${OUTBOX_DIR}/reach-manager-check-${today()}.md`);
   const relayClean = managerCheck.match(/Relay clean contacts:\s*([^\n.]+)\./)?.[1] ?? "";
