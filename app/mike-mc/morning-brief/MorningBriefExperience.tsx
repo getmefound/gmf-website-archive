@@ -192,7 +192,7 @@ export function MorningBriefExperience({
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3">
-              <HeroMetric label="Outreach sent" value={totals.sent.toString()} />
+              <HeroMetric label="Cold Emails Sent" value={totals.sent.toString()} />
               <HeroMetric label="Delivery rate" value={`${totals.deliveredPct}%`} tone="green" />
               <HeroMetric label="Open rate" value={`${totals.openedPct}%`} tone="amber" />
             </div>
