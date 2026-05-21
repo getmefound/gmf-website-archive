@@ -34,7 +34,7 @@
     "reason": "Check warmup status, bounces, spam placement, replies, unsubscribes, complaints, duplicate prevention, and sender-domain health before increasing."
   },
   "guardrails": {
-    "max_refill_attempts_per_lane": 5,
+    "max_refill_attempts_per_lane": 8,
     "max_scrape_limit_per_attempt": 100,
     "max_total_scraped_per_lane_per_day": 500,
     "max_daily_start_drip_per_lane": 100,
