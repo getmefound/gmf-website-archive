@@ -105,6 +105,7 @@ Manager, morning brief
 Current local generator:
 
 ```bash
+npm run ghl:email-stats
 npm run morning:brief
 ```
 
@@ -113,8 +114,12 @@ Current source files:
 ```text
 docs/client-ops-ledger/morning-brief-current.md
 docs/client-ops-ledger/morning-brief-sources.json
+docs/client-ops-ledger/ghl-email-stats-current.csv
 docs/client-ops-ledger/ghl-email-stats-template.csv
+docs/client-ops-ledger/owner-morning-brief-product-research.md
 ```
+
+The brief is now split into a Commercial Brief and a Custom Layer. Commercial is what most clients can buy. Custom is where inbox, calendar, GHL/CRM, GBP, ads, call tracking, or payment integrations are added.
 
 ## Slack command to remember
 

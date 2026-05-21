@@ -223,10 +223,10 @@ function sourceStatusLines(config) {
   const newsSources = Array.isArray(config.newsSources) ? config.newsSources : [];
   const activeNews = newsSources.filter((source) => source.feedUrl && source.status !== "disabled").length;
   const waitingNews = newsSources.filter((source) => !source.feedUrl && source.status !== "disabled").length;
-  const ghlStats = existsSync(resolve(GHL_STATS_PATH));
+  const ghlRows = readCsv(GHL_STATS_PATH);
   return [
     `News feeds active: ${activeNews}; waiting for URLs: ${waitingNews}.`,
-    `GHL email stats: ${ghlStats ? basename(GHL_STATS_PATH) : "not connected yet"}.`,
+    `GHL email stats: ${ghlRows.length ? `${ghlRows.length} lanes from ${basename(GHL_STATS_PATH)}` : "not connected yet"}.`,
   ];
 }
 
@@ -239,15 +239,21 @@ function renderMorningBrief(brief) {
 Date: ${brief.date}
 Prepared by: General Manager
 
-## Owner Read
+## Commercial Brief
 
 - Reach: ${brief.lanes.map(renderOwnerLane).join(" ")}
+- Market: ${renderTopNewsLine(brief)}
 - Mike today: ${mikeAction}
+
+## Custom Layer
+
+- GHL stats: ${brief.hasGhlStats ? "connected by read-only API." : "waiting on API/export."}
+- Email/calendar: next custom connectors to add after the brief proves useful internally.
 - Safety: HighLevel AI stays OFF. GHL Expert owns sender/domain proof before start-drip.
 
-## Campaign Results
+## Reach Results
 
-| Lane | Current action | Clean/selected | GHL result | Drip ready |
+| Lane | Current action | Clean/selected | Email performance | Drip ready |
 |---|---|---|---|---|
 ${brief.lanes.map(renderLaneRow).join("\n")}
 
@@ -262,7 +268,6 @@ ${renderNews(brief)}
 ## Agents Feeding This Brief
 
 - GHL Expert: GHL campaign stats, workflow proof, exports, and readiness checks.
-- Local Visibility Manager: Google Business Profile access/update status and local visibility findings.
 - Sales Manager: what the campaign numbers mean and what to do next.
 - Scout / Market Watcher: industry news, competitor signals, and offer ideas.
 - Systems Director: cron reliability, source health, and cost risk.
@@ -284,11 +289,11 @@ ${renderProof(brief)}
 
 function renderOwnerLane(lane) {
   const action = lane.execute ? lane.execute : lane.status;
-  return `${lane.label} ${action} (${lane.actionSummary}).`;
+  return `${lane.label} ${action} (${renderPerformance(lane.performance) || lane.actionSummary}).`;
 }
 
 function renderLaneRow(lane) {
-  return `| ${lane.label} | ${lane.execute || lane.status} | ${lane.verified} | ${lane.actionSummary} | ${lane.readyForDrip} |`;
+  return `| ${lane.label} | ${lane.execute || lane.status} | ${lane.verified} | ${renderPerformance(lane.performance) || lane.actionSummary} | ${lane.readyForDrip} |`;
 }
 
 function renderNews(brief) {
@@ -298,13 +303,31 @@ function renderNews(brief) {
   return "- Waiting for Google Alerts/RSS feed URLs. Until then, Scout should bring one useful industry signal manually.";
 }
 
+function renderTopNewsLine(brief) {
+  const top = brief.news[0];
+  return top ? `${top.source}: ${top.title}` : "Scout brings one useful industry signal each morning.";
+}
+
+function renderPerformance(performance) {
+  if (!performance) return "";
+  const sent = value(performance.sent || performance.total);
+  const deliveredPct = value(performance.delivered_pct);
+  const openedPct = value(performance.opened_pct);
+  const replied = value(performance.replied);
+  const bounced = value(performance.bounced);
+  const unsubscribed = value(performance.unsubscribed);
+  if (!sent || sent === "0") return "no sends yet";
+  return `GHL total: ${sent} sent, ${deliveredPct}% delivered, ${openedPct}% opened, ${replied} replies, ${bounced} bounces, ${unsubscribed} unsubscribes`;
+}
+
 function renderProof(brief) {
   const paths = [
     JOBS_PATH,
     DOMAINS_PATH,
     DAILY_BRIEF_PATH,
+    brief.hasGhlStats ? GHL_STATS_PATH : "",
     ...brief.lanes.flatMap((lane) => lane.proof),
-  ];
+  ].filter(Boolean);
   return [...new Set(paths)].map((path) => `- ${path}`).join("\n");
 }
 
@@ -382,6 +405,10 @@ function decodeXml(value) {
 
 function same(a, b) {
   return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
+}
+
+function value(input) {
+  return String(input ?? "").trim() || "0";
 }
 
 async function postSlack(text) {

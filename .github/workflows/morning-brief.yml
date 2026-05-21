@@ -33,6 +33,8 @@ jobs:
       SLACK_CHANNEL: ${{ vars.MORNING_BRIEF_SLACK_CHANNEL || vars.REACH_SLACK_CHANNEL || 'C0ATTA4NBR8' }}
       MANAGER_NOTIFY_TOKEN: ${{ secrets.MANAGER_NOTIFY_TOKEN || secrets.REPORT_TEST_BYPASS_TOKEN }}
       MANAGER_NOTIFY_URL: ${{ vars.MANAGER_NOTIFY_URL || 'https://aioutsourcehub.com/api/agent/slack?manager_notify=1' }}
+      GHL_PIT_TOKEN: ${{ secrets.GHL_PIT_TOKEN }}
+      GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
       TZ: America/New_York
 
     steps:
@@ -66,6 +68,10 @@ jobs:
         if: steps.delivery_time.outputs.should_run == 'true'
         run: npm ci
 
+      - name: Fetch GHL email stats
+        if: steps.delivery_time.outputs.should_run == 'true'
+        run: npm run ghl:email-stats -- --soft-fail
+
       - name: Generate brief
         if: steps.delivery_time.outputs.should_run == 'true'
         id: brief
@@ -89,7 +95,10 @@ jobs:
           git config user.email "actions@github.com"
           RUN_DATE="${{ steps.brief.outputs.run_date }}"
           git add -f \
+            docs/client-ops-ledger/ghl-email-stats-current.csv \
             docs/client-ops-ledger/morning-brief-current.md \
+            "docs/client-ops-ledger/outbox/ghl-email-stats-${RUN_DATE}.csv" \
+            "docs/client-ops-ledger/outbox/ghl-email-stats-${RUN_DATE}.md" \
             "docs/client-ops-ledger/outbox/morning-brief-${RUN_DATE}.md" || true
           if git diff --cached --quiet; then
             echo "No morning brief changes to commit."

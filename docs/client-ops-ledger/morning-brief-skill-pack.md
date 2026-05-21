@@ -1,6 +1,6 @@
 # Morning Brief Skill Pack
 
-Status: v1 owner brief design
+Status: v1 owner brief active
 Owner: General Manager
 Last updated: 2026-05-21
 
@@ -107,39 +107,55 @@ Current connected data:
 - sending domain readiness
 - Reach warmup reports
 - GHL import/start result files
-- optional GHL email stats CSV
+- GHL workflow email stats from the read-only HighLevel API
 - Google News RSS starter feeds; Google Alerts can replace or supplement them later
 
+GHL stats command:
+
+```bash
+npm run ghl:email-stats
+```
+
+It writes:
+
+- `docs/client-ops-ledger/ghl-email-stats-current.csv`
+- `docs/client-ops-ledger/outbox/ghl-email-stats-YYYY-MM-DD.csv`
+- `docs/client-ops-ledger/outbox/ghl-email-stats-YYYY-MM-DD.md`
+
 The expected GHL stats shape is in `docs/client-ops-ledger/ghl-email-stats-template.csv`.
+
+Note: the HighLevel API returns workflow-campaign totals. Daily movement can be calculated after there are multiple saved daily snapshots.
 
 ## Owner Brief Shape
 
 ```text
 Morning Brief - YYYY-MM-DD
 
-1. Overnight result
+1. Commercial Brief
 - Reach: sent/delivered/opened/replied/bounced if available.
 - Leads: new clean contacts found.
 - Replies: hot replies, opt-outs, unclear replies.
+- Market: one useful signal.
 
-2. Needs Mike today
+2. Custom Layer
+- GHL stats/API proof.
+- Email and calendar status once connected.
+- Custom client systems only when paid/approved.
+
+3. Needs Mike today
 - Approval, spend change, target change, or client-facing risk only.
 
-3. Agents working
+4. Agents working
 - GHL Expert: campaign stats and GHL proof.
-- Local Visibility Manager: GBP access/update status and local visibility findings.
 - Sales Manager: what the numbers mean.
 - Scout: news/opportunity signals.
 - Systems Director: cron/source failures.
-
-4. Market signal
-- One useful industry/news item and why it matters.
 
 5. Recommended move
 - One clear action.
 ```
 
-## Client Offer Later
+## Client Offer
 
 Working name: **Owner Morning Brief**
 
@@ -151,16 +167,27 @@ Potential packages:
 
 | Package | Includes |
 |---|---|
-| Basic Brief | Reviews, missed calls, new leads, urgent replies, owner summary. |
-| Growth Brief | Basic plus competitor/news/opportunity tracking. |
-| Custom Brief | Growth plus CRM/calendar/ad/call tracking integrations. |
+| Commercial Brief | New leads/replies, campaign results, reviews, missed calls, market signal, one recommended move. |
+| Growth Brief | Commercial plus competitor/news/opportunity tracking and weekly trend notes. |
+| Custom Brief | Growth plus GHL/CRM, inbox, calendar, GBP, call tracking, ad, or payment integrations. |
+
+Best first targets:
+
+- home services
+- dental, med spa, wellness, chiropractic
+- local professional services
+- restaurants/hospitality only where review volume and margins support it
+- real estate only with tighter compliance controls
 
 ## Research Notes
 
+- Product research and source list: `docs/client-ops-ledger/owner-morning-brief-product-research.md`
 - OpenAI file search uses vector stores as knowledge bases and lets Responses retrieve relevant files at runtime: https://developers.openai.com/api/docs/guides/tools-file-search
 - OpenAI Agents SDK supports FileSearchTool, WebSearchTool, filters, result limits, and included search results: https://openai.github.io/openai-agents-python/tools/
 - HighLevel says official API docs live in the Developer Marketplace and support directs developers there for API work: https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation
 - HighLevel email statistics/export docs are the source for campaign reporting shape: https://help.gohighlevel.com/support/solutions/articles/155000005552-how-to-access-the-all-in-one-dashboard-for-email-marketing and https://help.gohighlevel.com/support/solutions/articles/155000007499-exporting-email-marketing-data
+- HighLevel Email Statistics API used by AOH: https://marketplace.gohighlevel.com/docs/ghl/emails/get-campaign-stats-under-campaigns-v-2
+- HighLevel workflow campaign list API used by AOH: https://marketplace.gohighlevel.com/docs/ghl/emails/list-workflow-campaigns-v-2
 - Google Alerts can track topics and control frequency, sources, language, region, and result count: https://support.google.com/websearch/answer/4815696
 - LangChain retrieval docs describe the standard pieces: document loaders, splitters, embeddings, vector stores, and RAG architectures: https://docs.langchain.com/oss/python/langchain/retrieval
 - Qdrant documents hybrid search as dense semantic search plus sparse/BM25 keyword search and reranking: https://qdrant.tech/documentation/search-precision/reranking-hybrid-search/

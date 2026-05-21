@@ -40,20 +40,20 @@
     {
       "lane": "reviews",
       "workflow": "Reviews Special - Pilot Drip",
-      "source": "GHL Marketing > Emails > Statistics export",
-      "status": "waiting_for_export_or_api"
+      "source": "HighLevel Email Statistics API - workflow-campaigns",
+      "status": "active_api"
     },
     {
       "lane": "ai",
       "workflow": "AI Visibility - Pilot Drip",
-      "source": "GHL Marketing > Emails > Statistics export",
-      "status": "waiting_for_export_or_api"
+      "source": "HighLevel Email Statistics API - workflow-campaigns",
+      "status": "active_api"
     },
     {
       "lane": "relay",
       "workflow": "Relay - Pilot Drip",
-      "source": "GHL Marketing > Emails > Statistics export",
-      "status": "waiting_for_export_or_api"
+      "source": "HighLevel Email Statistics API - workflow-campaigns",
+      "status": "active_api"
     }
   ]
 }

@@ -59,6 +59,7 @@ lighthouse-local-*
 !/scripts/reach-quality-review.mjs
 !/scripts/reach-ghl-expert-check.mjs
 !/scripts/build-reach-scrape-inventory.mjs
+!/scripts/ghl-email-stats.mjs
 !/scripts/agent-command-center.mjs
 !/scripts/auditor-security-sweep.mjs
 !/scripts/sync-coach-obsidian.ps1
