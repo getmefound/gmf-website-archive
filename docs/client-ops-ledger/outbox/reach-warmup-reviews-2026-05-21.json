@@ -12,30 +12,12 @@
     "target": 20,
     "max": 20
   },
-  "status": "executed",
-  "selectedCount": 12,
-  "selectedCsv": "tmp-reach-warmup-reviews-2026-05-21-selected-qa.csv",
-  "blockers": [],
-  "attempts": [
-    {
-      "attempt": "imported",
-      "industry": "imported warmup contacts",
-      "area": "3 prior import sources",
-      "state": "",
-      "scrapeLimit": 0,
-      "qaRows": 19,
-      "okRows": 19,
-      "added": 12,
-      "poolSize": 12,
-      "qaCsv": "prior import inventory",
-      "error": "reused_prior_import_for_start_drip"
-    }
+  "status": "held",
+  "selectedCount": 0,
+  "selectedCsv": "",
+  "blockers": [
+    "Start-drip warmup already executed for this lane/date; skipped before scraping to protect Outscraper credits."
   ],
-  "actionResults": [
-    {
-      "action": "start",
-      "outFile": "tmp-reach-warmup-reviews-2026-05-21-start.json",
-      "resultFile": "tmp-reach-warmup-reviews-2026-05-21-start-ghl-results.json"
-    }
-  ]
+  "attempts": [],
+  "actionResults": []
 }

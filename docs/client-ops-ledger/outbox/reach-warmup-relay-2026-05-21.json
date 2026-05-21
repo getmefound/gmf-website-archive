@@ -1,0 +1,75 @@
+{
+  "date": "2026-05-21",
+  "lane": "relay",
+  "label": "Relay",
+  "execute": "import",
+  "warmupDay": 2,
+  "quota": {
+    "name": "days_1_3",
+    "from_day": 1,
+    "to_day": 3,
+    "min": 10,
+    "target": 20,
+    "max": 20
+  },
+  "status": "blocked",
+  "selectedCount": 5,
+  "selectedCsv": "tmp-reach-warmup-relay-2026-05-21-selected-qa.csv",
+  "blockers": [
+    "Only 5 OK rows found; minimum is 10.",
+    "Selected rows below minimum 10."
+  ],
+  "attempts": [
+    {
+      "attempt": "cache",
+      "industry": "paid scrape inventory",
+      "area": "6 saved QA files",
+      "state": "",
+      "scrapeLimit": 0,
+      "qaRows": 43,
+      "okRows": 3,
+      "added": 3,
+      "poolSize": 3,
+      "qaCsv": "cached relay QA inventory",
+      "error": "reused_paid_scrape_inventory"
+    },
+    {
+      "attempt": 1,
+      "industry": "veterinary",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 2,
+      "okRows": 2,
+      "added": 1,
+      "poolSize": 4,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-21-a1-qa.csv"
+    },
+    {
+      "attempt": 2,
+      "industry": "emergency veterinary",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 14,
+      "okRows": 1,
+      "added": 0,
+      "poolSize": 4,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-21-a2-qa.csv"
+    },
+    {
+      "attempt": 3,
+      "industry": "HVAC contractor",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 9,
+      "okRows": 1,
+      "added": 1,
+      "poolSize": 5,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-21-a3-qa.csv"
+    }
+  ],
+  "verification": null,
+  "actionResults": []
+}
