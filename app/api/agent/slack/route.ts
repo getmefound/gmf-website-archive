@@ -629,23 +629,17 @@ function buildReachRunTodayResponse(actor: UserContext) {
 ${address(actor)}, short answer: ${autoOn ? "yes, auto is set." : "no, auto is not turned on in the ledger."}
 
 - Already moving: ${startedText}.
-- Mike action: none unless you want to raise spend or override a safety hold.
-- Safety: NeverBounce/QA guardrails stay in front of GHL; HighLevel AI stays OFF.
+- Your action: none right now.
+- Safety: emails are checked before GHL, and HighLevel AI stays OFF.
 
 Waiting:
 
-${waitingText}
-
-Use this anytime:
-
-\`\`\`text
-Manager, is Reach set to run today, and do I need anything?
-\`\`\``;
+${waitingText}`;
 }
 
 function renderOwnerLaneStatus(summary: ReturnType<typeof laneSummaries>[number]) {
   if (summary.status.includes("auto_waiting")) {
-    return `- ${summary.label}: waiting for more clean contacts and drip-ready = ${summary.dripReady}.`;
+    return `- ${summary.label}: waiting until the list is clean enough to send.`;
   }
   return `- ${summary.label}: ${summary.status.replaceAll("_", " ")}.`;
 }
