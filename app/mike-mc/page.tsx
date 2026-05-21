@@ -16,7 +16,6 @@ import {
   type ControlData,
 } from "@/lib/control/fetchers";
 import {
-  AGENT_SKILLS,
   BOARD_COLUMNS,
   BOARD_TASKS,
   SCHEDULED_WORK,
@@ -172,7 +171,6 @@ export default async function ControlPage() {
 
       <ServiceMapSection />
       <MissionBoardSection />
-      <AgentSkillsSection />
       <ScheduledWorkSection />
 
       <footer className="mt-12 border-t border-zinc-800/60 pt-5 text-center">
@@ -920,49 +918,17 @@ function MissionBoardSection() {
   );
 }
 
-function AgentSkillsSection() {
-  return (
-    <section className="mt-12">
-      <SectionHeader
-        eyebrow="Skill loadout"
-        title="What each agent must know"
-        sub="These are the initial skill profiles to load into agent identities before real client work starts."
-      />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {AGENT_SKILLS.map((profile) => (
-          <article
-            key={profile.agent}
-            className="rounded-2xl border border-zinc-800/60 bg-zinc-950/80 p-5"
-          >
-            <div className="mb-3 flex items-start justify-between gap-3">
-              <div>
-                <h3 className="font-mono text-base font-bold uppercase tracking-wider text-zinc-50">
-                  {profile.agent}
-                </h3>
-                <p className="mt-1 text-sm text-zinc-500">{profile.role}</p>
-              </div>
-              <Pill tone="default">{profile.skills.length}</Pill>
-            </div>
-            <LabelList label="Services" items={profile.serviceOwners} />
-            <LabelList label="Skills" items={profile.skills} muted />
-            {profile.sourceDocs ? (
-              <LabelList label="Source docs" items={profile.sourceDocs} muted />
-            ) : null}
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ScheduledWorkSection() {
   return (
     <section className="mt-12">
       <SectionHeader
-        eyebrow="Scheduled work"
-        title="Recurring checks to keep 50+ clients sane"
-        sub="These are the boring-but-vital tasks agents should run before problems reach Mike."
+        eyebrow="Planned checks"
+        title="Recurring checks to build next"
+        sub="These are not all live jobs yet. They are the checks to automate as clients grow."
       />
+      <div className="mb-4">
+        <Pill tone="warm">planned, not fully built</Pill>
+      </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {SCHEDULED_WORK.map((item) => (
           <article
