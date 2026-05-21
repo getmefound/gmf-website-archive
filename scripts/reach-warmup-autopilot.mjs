@@ -110,6 +110,14 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
   const seen = new Set(laneExecute === "start" ? history.started : [...history.imported, ...history.started]);
   const earlyBlockers = earlyLiveActionBlockers({ laneKey, execute: laneExecute, guardrails, date });
   if (earlyBlockers.length) {
+    const existingReport = readWarmupReport(`reach-warmup-${laneKey}-${date}.json`);
+    if (existingReport?.status === "executed" && existingReport?.execute === laneExecute) {
+      const jsonPath = resolve(OUTBOX, `reach-warmup-${laneKey}-${date}.json`);
+      const mdPath = resolve(OUTBOX, `reach-warmup-${laneKey}-${date}.md`);
+      console.log("");
+      console.log(`${lane.label} report: ${mdPath}`);
+      return { ...existingReport, jsonPath, mdPath };
+    }
     return writeLaneReport({
       laneKey,
       lane,
@@ -234,6 +242,14 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
   if (selectedRows.length < min) blockers.push(`Only ${selectedRows.length} OK rows found; minimum is ${min}.`);
   if (selectedRows.length < min && scrapeSpendBlocker) blockers.push(scrapeSpendBlocker);
   if (selectedRows.length < min && maxTotalScraped <= 0) {
+    const existingReport = readWarmupReport(`reach-warmup-${laneKey}-${date}.json`);
+    if (existingReport?.status === "blocked" && Number(existingReport.selectedCount) >= selectedRows.length) {
+      const jsonPath = resolve(OUTBOX, `reach-warmup-${laneKey}-${date}.json`);
+      const mdPath = resolve(OUTBOX, `reach-warmup-${laneKey}-${date}.md`);
+      console.log("");
+      console.log(`${lane.label} report: ${mdPath}`);
+      return { ...existingReport, jsonPath, mdPath };
+    }
     blockers.push("Outscraper scrape budget is already exhausted for this run or lane/day; no new scraping was attempted.");
   }
   if (laneExecute !== "none") blockers.push(...liveActionBlockers({ laneKey, lane, domains, selectedRows, min, max, execute: laneExecute, config, date, history }));
