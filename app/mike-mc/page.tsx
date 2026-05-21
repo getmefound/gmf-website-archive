@@ -24,6 +24,7 @@ import {
   type BoardTask,
   type MissionTone,
 } from "@/lib/control/mission";
+import { INTERNAL_JOBS } from "@/lib/control/internal-jobs";
 
 export const metadata: Metadata = {
   title: "The Hub",
@@ -150,6 +151,7 @@ export default async function ControlPage() {
         <FleetStrip active={2} total={10} doneToday={14} queued={23} />
       </section>
 
+      <JobsInProgressSection />
       <TeamTrackerSection />
 
       {/* Agent cards — workforce view */}
@@ -184,6 +186,93 @@ export default async function ControlPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 // Per-agent cards
 // ─────────────────────────────────────────────────────────────────────────────
+
+function JobsInProgressSection() {
+  const job = INTERNAL_JOBS[0];
+
+  return (
+    <section className="mb-8 rounded-2xl border border-amber-500/25 bg-amber-500/5 p-5">
+      <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-300">
+            Jobs in progress
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
+            Internal work queue
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+            Live job rooms show what each agent has done, what is left, and where the handoff is blocked.
+          </p>
+        </div>
+        <Pill tone="warm">1 active</Pill>
+      </div>
+
+      <article className="rounded-xl border border-zinc-800/70 bg-zinc-950/70 p-4">
+        <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              <Pill tone={job.statusTone}>{job.status}</Pill>
+              <Pill tone="muted">owner: {job.owner}</Pill>
+            </div>
+            <a
+              href={job.href}
+              className="text-xl font-semibold tracking-tight text-zinc-50 transition hover:text-amber-200"
+            >
+              {job.title}
+            </a>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+              {job.summary}
+            </p>
+            <p className="mt-3 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2 text-sm leading-relaxed text-amber-100/90">
+              Blocked on: {job.currentBlocker}
+            </p>
+          </div>
+
+          <div>
+            <div className="grid grid-cols-2 gap-2 md:grid-cols-4 xl:grid-cols-2">
+              {job.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="rounded-lg border border-zinc-800/70 bg-black/20 p-3"
+                >
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+                    {metric.label}
+                  </p>
+                  <p className="mt-1 font-mono text-xl font-bold text-zinc-100">
+                    {metric.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <a
+              href={job.href}
+              className="mt-3 inline-flex rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-amber-200 transition hover:bg-amber-500/20"
+            >
+              Open job room
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-2 border-t border-zinc-800/60 pt-4 md:grid-cols-3">
+          {job.lanes.map((lane) => (
+            <div key={lane.name} className="rounded-lg border border-zinc-800/70 bg-black/20 p-3">
+              <div className="mb-2 flex items-start justify-between gap-2">
+                <p className="font-mono text-xs font-semibold uppercase tracking-wider text-zinc-200">
+                  {lane.name}
+                </p>
+                <Pill tone={lane.tone}>{lane.dripState}</Pill>
+              </div>
+              <p className="text-sm leading-relaxed text-zinc-400">{lane.status}</p>
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-zinc-600">
+                {lane.rows} - {lane.qa}
+              </p>
+            </div>
+          ))}
+        </div>
+      </article>
+    </section>
+  );
+}
 
 function TeamTrackerSection() {
   const focusTasks = BOARD_TASKS.filter(
