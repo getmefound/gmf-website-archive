@@ -1,0 +1,237 @@
+[
+  {
+    "email": "plevin@expertwitnessexchange.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "plevin@connecticutinjuryhelp.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "boinkpl@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "approaching.lightspeed@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "chrisf@moz.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "josh@avvo.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "berginfraser@snet.net",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "creyes@thefloodlawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "sjackson@thefloodlawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "airkrafts@aol.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "matthew@maddoxfirm.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "mmaddox402@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "eblomberg@theberkowitzlawfirm.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "channa@theberkowitzlawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "spamtrap_network",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "kferraro@theberkowitzlawfirm.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "tavis@tindall-lawfirm.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "matt@tindall-lawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jonathan@tindall-lawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "j.welcome@welcomelawfirm.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "contact@welcomelawfirm.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "smtp_connectable",
+      "role_account",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  }
+]

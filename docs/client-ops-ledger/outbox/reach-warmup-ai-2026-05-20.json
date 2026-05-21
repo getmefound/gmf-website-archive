@@ -1,0 +1,85 @@
+{
+  "date": "2026-05-20",
+  "lane": "ai",
+  "label": "AI Visibility",
+  "execute": "import",
+  "warmupDay": 1,
+  "quota": {
+    "name": "days_1_3",
+    "from_day": 1,
+    "to_day": 3,
+    "min": 10,
+    "target": 20,
+    "max": 20
+  },
+  "status": "blocked",
+  "selectedCount": 8,
+  "selectedCsv": "tmp-reach-warmup-ai-2026-05-20-selected-qa.csv",
+  "blockers": [
+    "Only 8 OK rows found; minimum is 10.",
+    "Selected rows below minimum 10."
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "industry": "senior living",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 6,
+      "okRows": 1,
+      "added": 1,
+      "poolSize": 1,
+      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a1-qa.csv"
+    },
+    {
+      "attempt": 2,
+      "industry": "assisted living",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 6,
+      "okRows": 1,
+      "added": 0,
+      "poolSize": 1,
+      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a2-qa.csv"
+    },
+    {
+      "attempt": 3,
+      "industry": "med spa",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 13,
+      "okRows": 2,
+      "added": 2,
+      "poolSize": 3,
+      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a3-qa.csv"
+    },
+    {
+      "attempt": 4,
+      "industry": "chiropractor",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 13,
+      "okRows": 3,
+      "added": 3,
+      "poolSize": 6,
+      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a4-qa.csv"
+    },
+    {
+      "attempt": 5,
+      "industry": "law firm",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 11,
+      "okRows": 2,
+      "added": 2,
+      "poolSize": 8,
+      "qaCsv": "tmp-reach-warmup-ai-2026-05-20-a5-qa.csv"
+    }
+  ],
+  "actionResults": []
+}

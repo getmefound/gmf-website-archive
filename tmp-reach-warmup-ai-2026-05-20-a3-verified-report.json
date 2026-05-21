@@ -1,0 +1,229 @@
+[
+  {
+    "email": "hello@hhp.sprucecare.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "contains_subdomain",
+      "role_account",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "frontdesk@holistichealingpartners.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jenna@ctskin.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@ctskin.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jennifer@ctskin.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "marria@momtaz.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "yourskinspecialist@greenwichmedicalspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "greenwichmedicalmassage@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "callahanscott@msn.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "customerservice@dvmedspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "officemanager@dvmedspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "michelle@samaramedspa.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@samaramedspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "christian@samaramedspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "wweeiihhuuaanngg@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "filler@godaddy.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@ctbotox.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "role_account",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "john@ctbotox.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "frontdesk@physiciansmedspa.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "smtp_connectable",
+      "role_account",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  }
+]
