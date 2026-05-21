@@ -1,4 +1,4 @@
 lane,dedicated_subdomain,warmup_status,warmup_started,allowed_daily_send_volume,ready_for_import,ready_for_drip,last_checked,checked_by,notes
-reviews,mail.aioutsourcehubs.com,warming,TBD,10-20,yes,no,2026-05-20,GHL Expert,From mike@mail.aioutsourcehubs.com. Visual GHL sender-domain/warmup confirmation still required before start-drip.
-ai,mail.getaioutsourcehub.com,warming,TBD,10-20,yes,no,2026-05-20,GHL Expert,From mike@mail.getaioutsourcehub.com. Visual GHL sender-domain/warmup confirmation still required before start-drip.
-relay,mail.myaioutsourcehub.com,warming,TBD,10-20,yes,no,2026-05-20,GHL Expert,From mike@mail.myaioutsourcehub.com. Visual GHL sender-domain/warmup confirmation still required before start-drip.
+reviews,mail.aioutsourcehubs.com,warming,TBD,10-20,yes,yes,2026-05-21,GHL Expert + Mike approval,From mike@mail.aioutsourcehubs.com. Mike authorized guarded warmup start for prior imported contacts only; no scraping or HighLevel AI changes.
+ai,mail.getaioutsourcehub.com,warming,TBD,10-20,yes,yes,2026-05-21,GHL Expert + Mike approval,From mike@mail.getaioutsourcehub.com. Mike authorized guarded warmup start for prior imported contacts only; no scraping or HighLevel AI changes.
+relay,mail.myaioutsourcehub.com,warming,TBD,10-20,yes,no,2026-05-21,GHL Expert,From mike@mail.myaioutsourcehub.com. Visual GHL sender-domain/warmup confirmation still required before start-drip.

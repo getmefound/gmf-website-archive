@@ -1,0 +1,41 @@
+{
+  "date": "2026-05-21",
+  "lane": "ai",
+  "label": "AI Visibility",
+  "execute": "start",
+  "warmupDay": 2,
+  "quota": {
+    "name": "days_1_3",
+    "from_day": 1,
+    "to_day": 3,
+    "min": 10,
+    "target": 20,
+    "max": 20
+  },
+  "status": "executed",
+  "selectedCount": 20,
+  "selectedCsv": "tmp-reach-warmup-ai-2026-05-21-selected-qa.csv",
+  "blockers": [],
+  "attempts": [
+    {
+      "attempt": "imported",
+      "industry": "imported warmup contacts",
+      "area": "3 prior import sources",
+      "state": "",
+      "scrapeLimit": 0,
+      "qaRows": 26,
+      "okRows": 26,
+      "added": 20,
+      "poolSize": 20,
+      "qaCsv": "prior import inventory",
+      "error": "reused_prior_import_for_start_drip"
+    }
+  ],
+  "actionResults": [
+    {
+      "action": "start",
+      "outFile": "tmp-reach-warmup-ai-2026-05-21-start.json",
+      "resultFile": "tmp-reach-warmup-ai-2026-05-21-start-ghl-results.json"
+    }
+  ]
+}
