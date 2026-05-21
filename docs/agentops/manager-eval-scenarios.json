@@ -94,13 +94,14 @@
         "Confirmed for the AOH client-zero test",
         "AOH's own Google Business Profile is the practice account",
         "Profile gaps:",
-        "Starter draft:",
+        "Agent-prepared draft:",
         "Proof needed:",
-        "Needs Mike:",
+        "Manager recommendation:",
+        "Automation gap:",
         "People and access",
         "Default access is Manager",
         "No password sharing",
-        "Nothing gets published until Mike approves",
+        "Nothing gets published until Mike says exactly: `publish GBP post`",
         "AI Outsource Hub helps local businesses automate"
       ],
       "must_not_include": [
@@ -118,11 +119,12 @@
       "intent": "gbp_post_approval",
       "must_include": [
         "GBP post approval",
-        "approval is recorded for the AOH Google Business Profile draft only",
+        "Manager recommendation: use the approved AOH Google Business Profile draft",
         "This is *not* a Reach drip approval",
         "Final post:",
+        "Agent work:",
         "Proof checklist:",
-        "Wait for Mike to say exactly: `publish GBP post`",
+        "Public publishing still needs Mike to say exactly: `publish GBP post`",
         "Do not publish from Slack",
         "Do not start any Reach drip"
       ],

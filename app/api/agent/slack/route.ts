@@ -747,9 +747,10 @@ Access:
 Profile gaps:
 
 - Not fully inspected from Slack yet.
-- First visual check should cover hours, services, categories, photos, posts, review link, and unanswered reviews.
+- Local Visibility Manager owns the visual check: hours, services, categories, photos, posts, review link, and unanswered reviews.
+- Automation gap: the Slack listener cannot open Mike's authenticated Google profile by itself yet.
 
-Starter draft:
+Agent-prepared draft:
 
 AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
@@ -757,12 +758,14 @@ Proof needed:
 
 - Screenshot of People and access showing AOH access.
 - Screenshot of the profile edit area before any public change.
-- Screenshot of the final draft before publishing.
+- Screenshot of the final preview before publishing.
 
-Needs Mike:
+Manager recommendation:
 
-- Approve this draft, revise it, or tell Local Visibility Manager which safer AOH update to draft instead.
-- Nothing gets published until Mike approves.
+- This draft is safe to use as the first AOH GBP post.
+- Agent team should prepare the post and proof.
+- Mike should only be asked for the final public-publish decision.
+- Nothing gets published until Mike says exactly: \`publish GBP post\`.
 
 Client rule for later:
 
@@ -783,7 +786,7 @@ Training loop: \`docs/agentops/local-visibility-manager-gbp-training-loop.md\``;
 function buildGbpPostApprovalResponse(actor: UserContext) {
   return `*GBP post approval - ${today()}*
 
-${address(actor)}, approval is recorded for the AOH Google Business Profile draft only.
+${address(actor)}, Manager recommendation: use the approved AOH Google Business Profile draft.
 
 This is *not* a Reach drip approval.
 
@@ -791,13 +794,11 @@ Final post:
 
 AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
-Final steps:
+Agent work:
 
-- Open AOH's Google Business Profile.
-- Choose the post/update option.
-- Paste the approved draft.
-- Capture the final preview screenshot.
-- Wait for Mike to say exactly: \`publish GBP post\`.
+- Local Visibility Manager prepares the GBP post.
+- Press captures proof screenshots.
+- Manager reports final status back to Mike.
 
 Proof checklist:
 
@@ -805,6 +806,10 @@ Proof checklist:
 - Screenshot before publishing.
 - Screenshot after Google accepts/submits the post.
 - Note whether Google says the post is pending review.
+
+Only final owner gate:
+
+- Public publishing still needs Mike to say exactly: \`publish GBP post\`.
 
 Safety:
 

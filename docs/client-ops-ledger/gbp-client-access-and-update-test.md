@@ -79,9 +79,10 @@ When asked to prepare the test, Local Visibility Manager should return:
 
 - Access: confirmed, blocked, or needs owner action
 - Profile health: top gaps only, or "not fully inspected from Slack yet"
-- Starter draft: one safe post, service update, photo need, or description improvement
+- Agent-prepared draft: one safe post, service update, photo need, or description improvement
 - Proof needed: screenshot/video list for the future client instructions
-- Approval needed: the exact public change Mike must approve
+- Manager recommendation: publish, revise, or hold
+- Owner gate: only the final public-publish decision should require Mike
 - Handoff: whether GHL Expert is needed for HighLevel connection work
 
 ## Done Means
@@ -91,7 +92,8 @@ This training is done when:
 - AOH profile access is confirmed
 - Local Visibility Manager can explain the client process in plain language
 - the first AOH profile update is drafted
-- Mike approved or rejected the draft
+- Manager gives Mike a final recommendation
+- Mike approves or rejects public publishing
 - the final lesson is documented for future client onboarding
 
 ## Client-Safe Explanation
