@@ -715,14 +715,15 @@ function ProfileCard() {
     <AgentCard
       name="Local Visibility Manager"
       role="Google profile + local visibility"
-      status="planned"
-      cadence="build after Coach"
+      status="manual"
+      cadence="client-zero test now"
       activity={{
-        doingNow: "Not yet built - job definition added to Mission Control",
-        upNext: "AOH Google Business Profile audit as client zero",
+        doingNow: "Testing AOH Google Business Profile access/update handoff",
+        upNext: "Choose the AOH Google email clients should invite",
       }}
-      ownedTitle="Will own"
+      ownedTitle="Owns now"
       ownedRows={[
+        { primary: "GBP access test", secondary: "AOH profile first; client adds AOH email, no passwords", badge: { tone: "warm", label: "now" } },
         { primary: "Google Business Profile audit/fix", secondary: "categories, services, hours, photos, description", badge: { tone: "accent", label: "core" } },
         { primary: "Citation/NAP consistency", secondary: "name, address, phone, website drift checks", badge: { tone: "default", label: "weekly" } },
         { primary: "AI visibility signals", secondary: "reviews, trust signals, local proof, monthly benchmark", badge: { tone: "warm", label: "soon" } },

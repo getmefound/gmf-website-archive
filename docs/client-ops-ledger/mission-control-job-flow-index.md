@@ -26,6 +26,7 @@ This keeps the front page useful as more agent jobs are added.
 | Send status | `/mike-mc/jobs/reach-cold-email-campaign` | Check whether emails are ready to send or still blocked. |
 | Spending | `/mike-mc/jobs` | See daily spend and spend so far by job. |
 | Morning Brief skill pack | `docs/client-ops-ledger/morning-brief-skill-pack.md` | Shows who feeds Mike's daily owner brief and how knowledge should be sourced. |
+| GBP access test | `docs/client-ops-ledger/gbp-client-access-and-update-test.md` | Shows how clients add AOH by email so Local Visibility Manager can update profiles without password sharing. |
 
 ## Commercial Reach
 
@@ -66,7 +67,7 @@ The Morning Brief is Mike's daily owner view:
 4. Market/news signal.
 5. One recommended move.
 
-Manager owns the final brief. GHL Expert feeds campaign stats, Sales Manager explains what the numbers mean, Scout watches market/news opportunities, and Systems Director watches cron/source failures.
+Manager owns the final brief. GHL Expert feeds campaign stats, Local Visibility Manager feeds Google Business Profile access/update status, Sales Manager explains what the numbers mean, Scout watches market/news opportunities, and Systems Director watches cron/source failures.
 
 This is internal first. If it proves useful, sell it as Owner Morning Brief.
 

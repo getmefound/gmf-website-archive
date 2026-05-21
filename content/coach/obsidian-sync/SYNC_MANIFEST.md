@@ -1,5 +1,5 @@
 # Obsidian Sync Manifest
-Synced: 2026-05-21 10:02:00
+Synced: 2026-05-21 10:31:24
 VaultRoot: C:\Users\micha\Obsidian\Oracle\04 AI Outsource Hub
 
 ## Copied
@@ -7,6 +7,7 @@ VaultRoot: C:\Users\micha\Obsidian\Oracle\04 AI Outsource Hub
 - content\coach\obsidian-sync\02 Training_AOH Brand Voice v1.md
 - content\coach\obsidian-sync\02 Training_AOH Agent Architecture v1.md
 - content\coach\obsidian-sync\02 Training_AOH Agent Model Routing and Morning Brief.md
+- content\coach\obsidian-sync\02 Training_AOH GBP Client Access and Update Test.md
 - content\coach\obsidian-sync\02 Training_product-knowledge_Reviews Starter.md
 - content\coach\obsidian-sync\02 Training_product-knowledge_Reviews Pro.md
 - content\coach\obsidian-sync\02 Training_product-knowledge_Reviews + AI Visibility Bundle.md

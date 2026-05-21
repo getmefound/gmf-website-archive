@@ -539,7 +539,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     service: "AI Visibility",
     owner: "Local Visibility Manager",
     overview:
-      "Check AOH or client profiles for basic visibility decay: profile completeness, reviews, unanswered reviews, and NAP drift.",
+      "Check AOH or client profiles for access, basic visibility decay, profile completeness, reviews, unanswered reviews, and NAP drift.",
     salesAgentTasks: [
       {
         title: "Create client-facing findings",
@@ -550,7 +550,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     internalTasks: [
       {
         title: "Monitor profile health",
-        description: "Local Visibility Manager checks GBP completeness, photos, services, categories, reviews, and NAP consistency.",
+        description: "Local Visibility Manager checks GBP access, completeness, photos, services, categories, reviews, and NAP consistency.",
         owner: "Local Visibility Manager",
       },
       {
@@ -565,7 +565,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
     ],
     agentRoles: [
-      { agent: "Local Visibility Manager", role: "Checks GBP completeness, reviews, photos, services, categories, and NAP consistency." },
+      { agent: "Local Visibility Manager", role: "Checks GBP access, completeness, reviews, photos, services, categories, and NAP consistency." },
       { agent: "GHL Expert", role: "Confirms connected HighLevel/GBP pieces still sync where needed." },
       { agent: "Systems Director", role: "Confirms recurring profile issues are not being ignored." },
       { agent: "Coach", role: "Turns findings into client-facing explanations or monthly report language." },
@@ -579,13 +579,13 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     estimatedPipelineValueUsd: 0,
     lastRun: "Not started",
     nextRun: "This week",
-    notes: "Estimated daily average of a weekly job. Useful once AOH GBP is treated as client zero.",
+    notes: "Estimated daily average of a weekly job. Useful now that AOH GBP is the client-zero access/update test.",
     costBreakdown: [
       { label: "GBP checks", amountUsd: 0.08 },
       { label: "Review/NAP scan", amountUsd: 0.07 },
       { label: "Summary", amountUsd: 0.06 },
     ],
-    checks: ["GBP completeness", "New reviews", "Unanswered reviews", "NAP drift"],
+    checks: ["GBP access", "GBP completeness", "New reviews", "Unanswered reviews", "NAP drift"],
   },
 ];
 

@@ -22,6 +22,7 @@ This starts as an internal AOH brief for Mike. After it proves useful for a few 
 |---|---|
 | General Manager | Final brief, priority order, owner language, decisions, blockers. |
 | GHL Expert | GHL campaign stats, workflows, pipeline proof, export/readiness checks. |
+| Local Visibility Manager | Google Business Profile access, profile updates, local visibility checks, review links, and client GBP handoff proof. |
 | Sales Manager | What the campaign numbers mean and what to do next. |
 | Scout / Market Watcher | Industry news, competitor signals, niche opportunities, offer ideas. |
 | Systems Director | Cron reliability, source health, cost, failed jobs, missing data. |
@@ -126,6 +127,7 @@ Morning Brief - YYYY-MM-DD
 
 3. Agents working
 - GHL Expert: campaign stats and GHL proof.
+- Local Visibility Manager: GBP access/update status and local visibility findings.
 - Sales Manager: what the numbers mean.
 - Scout: news/opportunity signals.
 - Systems Director: cron/source failures.

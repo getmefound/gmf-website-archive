@@ -19,6 +19,7 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 | Reach team training command | Wired | `Manager, train Reach team` reminds each agent what it owns for discovery, QA, GHL readiness, sending, cost, replies, and booking. |
 | Owner peek command | Wired | `Manager, owner peek` explains where Mike should look and whether Manager DMs are wired. |
 | Model routing command | Wired | `Manager, model routing` explains which work uses no LLM, cheap models, standard models, strong models, or Mike. |
+| GBP access test command | Wired | `Local Visibility Manager, prepare GBP access test` explains the client-zero GBP invite/update process. |
 | Manager recovery check | Wired | `npm run reach:manager-check` records whether Relay needs an automatic capped retry after the morning campaign run. |
 | Agent directory | Wired | `Manager, list agents` shows the agent team and example commands. |
 | Direct agent addressing | Wired | Mike can address agents by role, such as `Coach, ...`, `Scheduler, ...`, `Reporter, ...`, or `Press, ...`. |
@@ -82,6 +83,7 @@ Manager, owner peek
 Manager, brief
 Manager, morning brief
 Manager, model routing
+Local Visibility Manager, prepare GBP access test
 GHL Expert, check Reach readiness
 GHL Expert, visually confirm Relay sender domain, warmup status, workflow sender nodes, and HighLevel AI toggles OFF
 Sales Manager, review Reach QA
@@ -182,6 +184,7 @@ npm run agent:command -- --command "Manager, train Reach team"
 npm run agent:command -- --command "Manager, owner peek"
 npm run agent:command -- --command "Manager, morning brief"
 npm run agent:command -- --command "Manager, model routing"
+npm run agent:command -- --command "Local Visibility Manager, prepare GBP access test"
 npm run reach:manager-check
 npm run agent:command -- --command "GHL Expert, check Reach readiness"
 npm run agent:command -- --command "approve relay import only"
@@ -551,6 +554,7 @@ Client Success, what client risks need attention?
 Hub, what do we know about this account?
 Reporter, verify report delivery status
 Local Visibility Manager, what visibility gaps matter today?
+Local Visibility Manager, prepare GBP access test
 Reviews Manager, check review automation health
 Relay Manager, check Relay readiness
 Coach, review this copy
@@ -560,6 +564,30 @@ Scheduler, what meetings or booking issues need attention?
 ```
 
 The first response from agents is intentionally conservative: they identify their job, what they can help with, and the safest next command. Deeper tool actions should be added role by role as each agent gets a verified workflow.
+
+## Google Business Profile Access Test
+
+Local Visibility Manager owns Google Business Profile access and updates.
+
+Use AOH's own profile first as client zero:
+
+```text
+Local Visibility Manager, prepare GBP access test
+```
+
+Client-safe rule:
+
+- no Google password sharing
+- client invites the AOH Google email under Business Profile settings -> People and access
+- default access is Manager, not Owner
+- Local Visibility Manager checks access and drafts the update
+- Mike approves before anything public is posted
+
+Reference:
+
+```text
+docs/client-ops-ledger/gbp-client-access-and-update-test.md
+```
 
 ## Live Action Guard
 

@@ -42,7 +42,7 @@ The system should make Mike's day simpler, not make Mike manage every agent dire
 | Sales Manager | Owns the revenue pipeline, campaign strategy, prospecting priorities, reply follow-up, and booked-call handoffs. |
 | Client Success Manager | Owns onboarding health, client check-ins, retention risk, reporting cadence, and making sure sold clients are not ignored. |
 | GHL Expert | Scans GHL/hub360ai client accounts, workflows, reviews, contacts, opportunities, tags, and account health. |
-| Local Visibility Manager | Checks Google Business Profile access, local visibility, AI visibility work, citations, review links, and profile health. |
+| Local Visibility Manager | Owns Google Business Profile access, profile updates, local visibility, AI visibility work, citations, review links, and profile health. |
 | Reviews Manager | Checks review requests, review counts, reporting cadence, replies, and review automation health. |
 | Relay Manager | Checks voice agent call logs, missed calls, routing, fallback behavior, and client issues. |
 | Engagement Scout | Finds social conversations worth entering and drafts comments or DM suggestions for approval. |
@@ -86,7 +86,7 @@ Mission Control may use business or field-associated public figures as inspirati
 | Client Success Manager | TBD | Owns onboarding health, client check-ins, renewals, retention risk, and reporting cadence. |
 | Hub | TBD | Answers account questions from the ledger, GHL, Drive, client notes, and delivery history. |
 | GHL Expert | Paul Allen | Owns hub360ai/GHL workflows, pipelines, calendars, callbacks, reports, and automation health. |
-| Local Visibility Manager | TBD | Owns Google profile access, local visibility, citations, review links, and AI visibility signals. |
+| Local Visibility Manager | TBD | Owns Google profile access, profile updates, local visibility, citations, review links, and AI visibility signals. |
 | Reviews Manager | TBD | Owns review automation delivery, review request health, replies, and review-volume warnings. |
 | Relay Manager | TBD | Owns voice-agent delivery, missed-call recovery, call summaries, routing quality, and escalations. |
 | Coach | Dale Carnegie | Keeps product truth, SOPs, sales language, client instructions, and response drafts aligned. |
@@ -122,7 +122,7 @@ Examples:
 - Sales Manager scans the revenue pipeline and asks Scout, Sender, Sorter, Booker, or Engagement Scout to investigate.
 - Client Success Manager scans onboarding, reporting, client health, retention risk, and account follow-up.
 - GHL Expert scans all client GHL accounts.
-- Local Visibility Manager checks Google profile, local visibility, and AI visibility client work.
+- Local Visibility Manager checks Google profile access, profile updates, local visibility, and AI visibility client work.
 - Reviews Manager checks review delivery.
 - Relay Manager checks voice/call delivery.
 - Engagement Scout scans social conversations and drafts comments or DMs, but does not post without approval.
@@ -308,6 +308,7 @@ HighLevel AI features must remain OFF unless Mike explicitly authorizes them man
 - [ ] Build Client Success Manager client health scan.
 - [ ] Build GHL Expert daily scan.
 - [ ] Build Local Visibility Manager scan.
+- [ ] Test Google Business Profile access/update handoff on AOH as client zero.
 - [ ] Build Reviews Manager scan.
 - [ ] Build Relay Manager scan.
 - [ ] Build Engagement Scout social opportunity scan.

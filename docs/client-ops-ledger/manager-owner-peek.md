@@ -38,6 +38,7 @@ Manager, owner peek
 Manager, status
 Manager, run Reach Cold Email Campaign
 Manager, train Reach team
+Local Visibility Manager, prepare GBP access test
 ```
 
 ## What Manager Should Bring Mike
@@ -47,6 +48,7 @@ Manager should bring Mike:
 - decisions that affect spend
 - safety overrides
 - target/offer changes
+- Google Business Profile access blockers
 - client-facing risk
 - stuck work that agents cannot clear
 
@@ -57,4 +59,3 @@ Manager should not bring Mike:
 - every internal QA note
 - every GitHub workflow line
 - every routine auto-run
-

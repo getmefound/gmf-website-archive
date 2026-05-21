@@ -11,6 +11,7 @@ $files = @(
   "02 Training\AOH Brand Voice v1.md",
   "02 Training\AOH Agent Architecture v1.md",
   "02 Training\AOH Agent Model Routing and Morning Brief.md",
+  "02 Training\AOH GBP Client Access and Update Test.md",
   "02 Training\product-knowledge\Reviews Starter.md",
   "02 Training\product-knowledge\Reviews Pro.md",
   "02 Training\product-knowledge\Reviews + AI Visibility Bundle.md",

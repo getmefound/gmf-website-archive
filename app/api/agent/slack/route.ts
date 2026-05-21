@@ -262,11 +262,11 @@ const AGENTS: Record<
   "local-visibility-manager": {
     title: "Local Visibility Manager",
     persona: "TBD",
-    aliases: ["local visibility manager", "local visibility", "local vis", "visibility manager"],
+    aliases: ["local visibility manager", "local visibility", "local vis", "visibility manager", "gbp manager", "gmb manager"],
     reportsTo: "Client Success Manager",
-    job: "Owns Google Business Profile access, profile health, citations, review links, and AI visibility signals.",
-    canDo: ["check visibility gaps", "summarize GBP readiness", "recommend local profile work"],
-    nextStep: "Ask: `Local Visibility Manager, what visibility gaps matter today`.",
+    job: "Owns Google Business Profile access, profile updates, profile health, citations, review links, and AI visibility signals.",
+    canDo: ["prepare GBP access tests", "check visibility gaps", "summarize GBP readiness"],
+    nextStep: "Ask: `Local Visibility Manager, prepare GBP access test`.",
   },
   "reviews-manager": {
     title: "Reviews Manager",
@@ -466,6 +466,8 @@ ${address(actor)}, all campaign live actions are blocked.
 
   if (mentionsModelRouting(normalized)) return buildModelRoutingResponse(actor);
 
+  if (mentionsGbpAccessTest(normalized)) return buildGbpAccessTestResponse(actor);
+
   if (mentionsReachRunStatusQuestion(normalized)) return buildReachRunTodayResponse(actor);
 
   if (mentionsColdReachStart(normalized)) return buildColdReachStartResponse(actor, normalized, context);
@@ -516,6 +518,7 @@ Manager, train Reach team
 Manager, owner peek
 Manager, morning brief
 Manager, model routing
+Local Visibility Manager, prepare GBP access test
 Manager, run Reach Cold Email Campaign
 Manager, show Reach warmup autopilot
 Manager, explain the Reach result
@@ -675,6 +678,7 @@ Needs Mike today:
 Who feeds the brief:
 
 - GHL Expert: GHL campaign numbers, workflow proof, and exports.
+- Local Visibility Manager: GBP access/update status and local visibility findings.
 - Sales Manager: what the numbers mean and what to do next.
 - Scout / Market Watcher: industry news, competitor signals, and offer ideas.
 - Systems Director: cron/source failures and cost risk.
@@ -726,6 +730,34 @@ Claude:
 - Optional for v1. Keep it if you want a second strong reviewer for strategy, writing, code review, or tricky GHL decisions. Not needed for scripted Reach autopilot or the basic Morning Brief generator.
 
 Reference: \`docs/client-ops-ledger/agent-model-routing-policy.md\``;
+}
+
+function buildGbpAccessTestResponse(actor: UserContext) {
+  return `*GBP access test - ${today()}*
+
+${address(actor)}, Local Visibility Manager owns this.
+
+Client-zero test:
+
+- Use AOH's own Google Business Profile first.
+- The business owner adds the AOH Google email under Business Profile settings -> People and access.
+- Default access is Manager, not Owner.
+- No password sharing.
+- Local Visibility Manager confirms access, checks profile basics, and drafts the first update.
+- Mike approves before anything public is posted.
+
+Who helps:
+
+- Local Visibility Manager: access, profile check, update draft, review link.
+- Manager: tracks blocker and puts it in the brief.
+- GHL Expert: helps only if GBP needs to connect into HighLevel/reputation workflows.
+
+Need from Mike:
+
+- The AOH Google email clients should invite.
+- The first AOH GBP update you want tested.
+
+Reference: \`docs/client-ops-ledger/gbp-client-access-and-update-test.md\``;
 }
 
 function buildReachRunTodayResponse(actor: UserContext) {
@@ -983,6 +1015,7 @@ Manager, train Reach team
 Manager, brief
 GHL Expert, check Reach readiness
 Sales Manager, review Reach QA
+Local Visibility Manager, prepare GBP access test
 Coach, review this copy
 Reporter, verify report delivery status
 Press, what is ready to publish
@@ -1774,6 +1807,7 @@ function isSupportedCommand(text: string) {
     mentionsReachRunStatusQuestion(normalized) ||
     mentionsGenericCampaignDeploy(normalized) ||
     mentionsWarmupAutopilot(normalized) ||
+    mentionsGbpAccessTest(normalized) ||
     mentionsReachDecisionQuestion(normalized) ||
     mentionsReachColdEmailCampaign(normalized) ||
     mentionsAgentList(normalized) ||
@@ -2041,6 +2075,15 @@ function mentionsModelRouting(normalized: string) {
     normalized.includes("need claude") ||
     normalized.includes("claude")
   );
+}
+
+function mentionsGbpAccessTest(normalized: string) {
+  const mentionsGbp =
+    /\b(gbp|gmb)\b/.test(normalized) ||
+    normalized.includes("google business") ||
+    normalized.includes("business profile");
+  if (!mentionsGbp) return false;
+  return /\b(access|invite|manager|owner|profile update|update|handoff|test|client zero|client-zero)\b/.test(normalized);
 }
 
 function mentionsAgentList(normalized: string) {

@@ -11,6 +11,7 @@ const JOBS_PATH = `${LEDGER_DIR}/agent-jobs.csv`;
 const DOMAINS_PATH = `${LEDGER_DIR}/sending-domain-readiness.csv`;
 const DAILY_BRIEF_PATH = `${LEDGER_DIR}/daily-brief-current.md`;
 const GHL_STATS_PATH = `${LEDGER_DIR}/ghl-email-stats-current.csv`;
+const GBP_TEST_PATH = `${LEDGER_DIR}/gbp-client-access-and-update-test.md`;
 
 const LANES = [
   { key: "reviews", label: "Reviews" },
@@ -163,6 +164,10 @@ function buildNeedsMike({ lanes, managerCheck, ghlStats }) {
     needs.push("No Mike action: Systems/GHL Expert still need to connect GHL Email Statistics export/API for opens, clicks, replies, bounces, and unsubscribes.");
   }
 
+  if (existsSync(resolve(GBP_TEST_PATH))) {
+    needs.push("After the brief: choose the AOH Google email clients should invite for Google Business Profile access.");
+  }
+
   if (!needs.length) {
     needs.push("No Mike action unless you want to change spend, target industry, or safety rules.");
   }
@@ -178,9 +183,12 @@ function buildNeedsMike({ lanes, managerCheck, ghlStats }) {
 function readRecommendation(dailyBrief, lanes) {
   const explicit = dailyBrief.match(/Current strongest lane by cleanliness:[^\n]+/)?.[0];
   if (explicit) return explicit;
+  const gbpNext = existsSync(resolve(GBP_TEST_PATH))
+    ? " Then have Local Visibility Manager test GBP access/update on AOH as client zero."
+    : "";
   const waitingDrip = lanes.find((lane) => lane.readyForDrip === "no");
-  if (waitingDrip) return `Keep auto on. Have GHL Expert clear ${waitingDrip.label} drip readiness before any start-drip action.`;
-  return "Keep auto on. Let agents handle routine checks; bring Mike only decisions, spend changes, or safety exceptions.";
+  if (waitingDrip) return `Keep auto on. Have GHL Expert clear ${waitingDrip.label} drip readiness before any start-drip action.${gbpNext}`;
+  return `Keep auto on. Let agents handle routine checks; bring Mike only decisions, spend changes, or safety exceptions.${gbpNext}`;
 }
 
 async function fetchNewsItems(config) {
@@ -227,6 +235,7 @@ function sourceStatusLines(config) {
   return [
     `News feeds active: ${activeNews}; waiting for URLs: ${waitingNews}.`,
     `GHL email stats: ${ghlStats ? basename(GHL_STATS_PATH) : "not connected yet"}.`,
+    `GBP access/update test: ${existsSync(resolve(GBP_TEST_PATH)) ? "documented; waiting for the AOH Google email to use" : "not documented yet"}.`,
   ];
 }
 
@@ -262,6 +271,7 @@ ${renderNews(brief)}
 ## Agents Feeding This Brief
 
 - GHL Expert: GHL campaign stats, workflow proof, exports, and readiness checks.
+- Local Visibility Manager: Google Business Profile access/update status and local visibility findings.
 - Sales Manager: what the campaign numbers mean and what to do next.
 - Scout / Market Watcher: industry news, competitor signals, and offer ideas.
 - Systems Director: cron reliability, source health, and cost risk.
@@ -302,6 +312,7 @@ function renderProof(brief) {
     JOBS_PATH,
     DOMAINS_PATH,
     DAILY_BRIEF_PATH,
+    ...(existsSync(resolve(GBP_TEST_PATH)) ? [GBP_TEST_PATH] : []),
     ...brief.lanes.flatMap((lane) => lane.proof),
   ];
   return [...new Set(paths)].map((path) => `- ${path}`).join("\n");

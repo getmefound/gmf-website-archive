@@ -94,6 +94,10 @@ function routeCommand(command, args) {
     return buildModelRoutingResult();
   }
 
+  if (mentionsGbpAccessTest(normalized)) {
+    return buildGbpAccessTestResult();
+  }
+
   if (mentionsReachRunStatusQuestion(normalized)) {
     return buildReachRunTodayResponse();
   }
@@ -162,6 +166,7 @@ Supported commands:
 - \`Manager, owner peek\`
 - \`Manager, morning brief\`
 - \`Manager, model routing\`
+- \`Local Visibility Manager, prepare GBP access test\`
 - \`Manager, run Reach Cold Email Campaign\`
 - \`Manager, show Reach warmup autopilot\`
 - \`Manager, explain the Reach result\`
@@ -207,6 +212,7 @@ Manager, run Reach Cold Email Campaign
 Manager, train Reach team
 GHL Expert, check Reach readiness
 Sales Manager, review Reach QA
+Local Visibility Manager, prepare GBP access test
 Coach, review this copy
 Reporter, verify report delivery status
 Press, what is ready to publish
@@ -387,6 +393,7 @@ Who feeds the brief:
 - GHL Expert: GHL campaign numbers, workflow proof, and exports.
 - Sales Manager: what the numbers mean and what to do next.
 - Scout / Market Watcher: industry news, competitor signals, and offer ideas.
+- Local Visibility Manager: GBP access/update status and local visibility findings.
 - Systems Director: cron/source failures and cost risk.
 - Manager: final owner summary to you.
 
@@ -439,6 +446,37 @@ Claude:
 - Optional for v1. Keep it if you want a second strong reviewer for strategy, writing, code review, or tricky GHL decisions. Not needed for scripted Reach autopilot or the basic Morning Brief generator.
 
 Reference: \`docs/client-ops-ledger/agent-model-routing-policy.md\``,
+  };
+}
+
+function buildGbpAccessTestResult() {
+  return {
+    kind: "gbp-access-test",
+    text: `*GBP access test - ${today()}*
+
+Mike, Local Visibility Manager owns this.
+
+Client-zero test:
+
+- Use AOH's own Google Business Profile first.
+- The business owner adds the AOH Google email under Business Profile settings -> People and access.
+- Default access is Manager, not Owner.
+- No password sharing.
+- Local Visibility Manager confirms access, checks profile basics, and drafts the first update.
+- Mike approves before anything public is posted.
+
+Who helps:
+
+- Local Visibility Manager: access, profile check, update draft, review link.
+- Manager: tracks blocker and puts it in the brief.
+- GHL Expert: helps only if GBP needs to connect into HighLevel/reputation workflows.
+
+Need from Mike:
+
+- The AOH Google email clients should invite.
+- The first AOH GBP update you want tested.
+
+Reference: \`docs/client-ops-ledger/gbp-client-access-and-update-test.md\``,
   };
 }
 
@@ -1402,6 +1440,15 @@ function mentionsModelRouting(normalized) {
     normalized.includes("need claude") ||
     normalized.includes("claude")
   );
+}
+
+function mentionsGbpAccessTest(normalized) {
+  const mentionsGbp =
+    /\b(gbp|gmb)\b/.test(normalized) ||
+    normalized.includes("google business") ||
+    normalized.includes("business profile");
+  if (!mentionsGbp) return false;
+  return /\b(access|invite|manager|owner|profile update|update|handoff|test|client zero|client-zero)\b/.test(normalized);
 }
 
 function mentionsAgentList(normalized) {
