@@ -38,6 +38,7 @@ export type ClientHubProfile = {
   website: string;
   phone: string;
   email: string;
+  googleReviewUrl?: string;
   location: string;
   category: string;
   logoText: string;
@@ -62,6 +63,7 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
     website: "https://abcbusiness.com",
     phone: "(555) 010-0199",
     email: "owner@abcbusiness.com",
+    googleReviewUrl: "",
     location: "East Coast",
     category: "Local service business",
     logoText: "AB",
@@ -182,6 +184,7 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
     website: "https://aioutsourcehub.com",
     phone: "(877) 521-2224",
     email: "mike@aioutsourcehub.com",
+    googleReviewUrl: "",
     location: "United States",
     category: "AI automation and growth services",
     logoText: "AOH",

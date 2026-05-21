@@ -166,8 +166,14 @@ export default async function ClientHubPage({ params }: PageProps) {
             )}
             <div className="mt-3 flex flex-wrap gap-3">
               <Link
-                href="/intake/review-automation"
+                href={`/client/${client.slug}/customers`}
                 className="rounded-lg bg-emerald-800 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
+                Upload customers
+              </Link>
+              <Link
+                href="/intake/review-automation"
+                className="rounded-lg border border-emerald-200 bg-emerald-50 px-5 py-3 text-sm font-semibold text-emerald-900 transition hover:border-emerald-300 hover:bg-emerald-100"
               >
                 Update details
               </Link>

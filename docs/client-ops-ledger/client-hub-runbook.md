@@ -38,6 +38,18 @@ Sample client shape:
 
 Both pages are `noindex`.
 
+Customer upload route:
+
+```text
+/client/[slug]/customers
+```
+
+Private feedback route:
+
+```text
+/review/[slug]
+```
+
 ## Standard Section
 
 Every Review Automation client hub should show:
@@ -49,6 +61,7 @@ Every Review Automation client hub should show:
 - response rate
 - short tips only when reviews are behind goal
 - action buttons for updating setup details or sending a file
+- customer upload link for recent jobs/customers
 
 This is the commercial standard service.
 
@@ -161,6 +174,23 @@ Before real private client data goes on a hub:
 - keep upload links secure
 - keep GHL/webhook tokens out of the page
 - keep pages `noindex`
+
+Customer uploads:
+
+- full customer rows must go only to `AOH_REVIEW_AUTOMATION_WEBHOOK_URL`,
+  `AOH_CLIENT_INTAKE_WEBHOOK_URL`, or another AOH-owned secure intake path
+- Slack receives only counts and summary, not the full customer list
+- rows missing email, duplicates, and do-not-contact matches are held back before
+  Sender gets a sendable list
+- if no AOH webhook is configured, the page may show a summary, but real customer
+  outreach should wait until secure storage/intake is connected
+
+Private feedback:
+
+- 1-3 star feedback stays private for owner follow-up
+- 4-5 star feedback can continue to the Google review link only after the
+  client profile has a verified `googleReviewUrl`
+- no feedback is published automatically
 
 ## Manager Slack Summary
 

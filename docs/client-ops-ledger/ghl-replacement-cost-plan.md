@@ -91,6 +91,15 @@ Minimum AOH-owned Review Automation v1:
 9. Monthly recap.
 10. Manager/Auditor proof log.
 
+Build status:
+
+- Client page exists at `/client/[slug]`.
+- Customer upload v1 exists at `/client/[slug]/customers`.
+- Customer rows are summarized and cleaned before outreach.
+- Full customer rows are not posted to Slack.
+- Private feedback v1 exists at `/review/[slug]`.
+- Google routing waits for a verified per-client review link.
+
 This v1 fulfills the actual $49/mo promise without GHL.
 
 What not to build into v1:

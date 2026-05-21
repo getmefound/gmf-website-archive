@@ -183,6 +183,16 @@ Done means:
 - happy feedback reaches Google review link
 - send log and client page update correctly
 
+Current v1 foundation:
+
+- `/client/[slug]/customers` accepts customer/job rows and applies basic
+  missing-email, duplicate, and do-not-contact holds.
+- `/api/review-automation/customers` forwards full packets only to the AOH-owned
+  review automation webhook when configured; Slack gets summary counts.
+- `/review/[slug]` collects private feedback before Google.
+- `/api/review-automation/feedback` routes 1-3 star feedback privately and only
+  sends 4-5 star customers to Google when a verified review link exists.
+
 ### Step 3: AOH AI Visibility Core
 
 Owner: Local Visibility Manager  
