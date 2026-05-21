@@ -112,6 +112,12 @@ export default async function ControlPage() {
           >
             Morning Brief
           </a>
+          <Link
+            href="/client/ai-outsource-hub"
+            className="rounded-md border border-emerald-500/35 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-emerald-300 transition hover:bg-emerald-500/20"
+          >
+            Client Hub
+          </Link>
           <a
             href="/mike-mc/ops"
             className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"

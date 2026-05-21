@@ -35,6 +35,11 @@ const DOCS = [
     purpose: "Client-side setup flow before Profile and GHL Expert begin backend work.",
   },
   {
+    title: "Client Hub Runbook",
+    path: "docs/client-ops-ledger/client-hub-runbook.md",
+    purpose: "Client-facing status page for setup, standard Review Automation, and locked AI Visibility preview.",
+  },
+  {
     title: "Review Automation Skills",
     path: "docs/REVIEW_AUTOMATION_AGENT_SKILLS.md",
     purpose: "Agent skills, boundaries, and first-service operating rules.",

@@ -277,6 +277,7 @@ Client-facing draft:
 
 - `docs/CLIENT_REVIEW_AUTOMATION_ONBOARDING.md`
 - `docs/client-ops-ledger/review-automation-client-intake.md`
+- `docs/client-ops-ledger/client-hub-runbook.md`
 
 This is the self-serve onboarding flow for Review Automation:
 
@@ -294,6 +295,15 @@ This is a written draft meant to become:
 - screenshots
 - a short walkthrough video
 - a dedicated GBP manager invite video
+
+The client hub is the client-facing status page after signup:
+
+- client-zero route: `/client/ai-outsource-hub`
+- sample client route: `/client/abc-business`
+- shows standard Review Automation setup status
+- shows locked AI Visibility preview as the custom/upgrade area
+- keeps GHL as the backend while giving clients a simpler page
+- should be password or magic-link protected before real private client data is shown
 
 ## AOH Discovery Calendar
 

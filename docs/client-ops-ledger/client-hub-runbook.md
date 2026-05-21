@@ -1,0 +1,162 @@
+# Client Hub Runbook
+
+Status: v1 live page
+Last updated: 2026-05-21
+Owner: Manager
+
+## Purpose
+
+The client hub is the simple client-facing page for setup and service status.
+
+It should answer:
+
+- what AOH already knows
+- what the client still needs to provide
+- what agents are doing
+- what is live
+- what is locked behind an upgrade
+
+The client should not need to log into GHL for normal setup visibility.
+
+## Live Routes
+
+Client-zero:
+
+```text
+/client/ai-outsource-hub
+```
+
+Sample client shape:
+
+```text
+/client/abc-business
+```
+
+Both pages are `noindex`.
+
+## Standard Section
+
+Every Review Automation client hub should show:
+
+- business info
+- Google Business Profile access status
+- logo/brand status
+- review link status
+- recent customer/job list status
+- review request message status
+- GHL workflow status
+- test request status
+- client live status
+
+This is the commercial standard service.
+
+## Custom / Upgrade Section
+
+AI Visibility is shown as a locked preview unless the client buys it.
+
+Locked preview can show:
+
+- ChatGPT visibility
+- review replies
+- local ranking gaps
+- competitor watch
+
+Do not show real private ranking data or client-only analysis until the client is on AI Visibility or Mike approves.
+
+## Prefill Rule
+
+Do not ask clients to retype known signup data.
+
+The page should prefill from:
+
+- checkout/signup data
+- GHL contact or opportunity fields
+- intake form
+- public website basics
+- agent-collected public data
+
+Ask the client only for missing or changeable items.
+
+## Plain Customer System Question
+
+Do not ask most owners for "CRM/POS" first.
+
+Use:
+
+```text
+Where do you keep recent customers or jobs?
+```
+
+Good answer choices:
+
+- spreadsheet
+- email inbox
+- phone/contact list
+- booking software
+- invoice/payment system
+- CRM
+- not sure
+
+## Logo Rule
+
+Agents should try easy public logo discovery first:
+
+1. website favicon or apple-touch icon
+2. website metadata or schema logo
+3. OpenGraph image when clearly branded
+4. client upload
+
+Client upload wins if the auto-found logo is wrong.
+
+## Agent Ownership
+
+Manager owns the client-facing summary.
+
+Local Visibility Manager owns:
+
+- Google Business Profile access
+- profile gaps
+- review link
+- profile screenshots/proof
+
+Reviews Manager owns:
+
+- who receives review requests
+- who should not receive them
+- request timing
+- customer/job list readiness
+
+GHL Expert owns:
+
+- HighLevel workflow setup
+- custom fields and tags
+- sender checks
+- workflow logs
+- HighLevel AI features OFF unless Mike manually authorizes otherwise
+
+Systems Director owns:
+
+- access risk
+- missing env/config
+- cost and failure watch
+- privacy and protection gaps
+
+## Client Protection
+
+The v1 page is safe only because it uses sample/client-zero data.
+
+Before real private client data goes on a hub:
+
+- enable owner password or magic-link access
+- do not expose customer lists publicly
+- keep upload links secure
+- keep GHL/webhook tokens out of the page
+- keep pages `noindex`
+
+## Manager Slack Summary
+
+When asked for client hub status, Manager should answer in owner language:
+
+```text
+Mike, the client hub is the simple setup page. It shows what we know, what is missing, what agents are doing, and the locked AI Visibility upgrade. The client does not need GHL for normal setup.
+```
