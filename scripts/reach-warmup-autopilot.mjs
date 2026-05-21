@@ -105,7 +105,7 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
   const pool = [];
   const attempts = [];
   const history = readLaneHistory(laneKey, lane);
-  const seen = new Set([...history.imported, ...history.started]);
+  const seen = new Set(laneExecute === "start" ? history.started : [...history.imported, ...history.started]);
   const earlyBlockers = earlyLiveActionBlockers({ laneKey, execute: laneExecute, guardrails, date });
   if (earlyBlockers.length) {
     return writeLaneReport({
@@ -125,13 +125,16 @@ function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
     });
   }
 
-  const scrapeSpendBlocker = scrapeSpendBlockerFor({ args, guardrails });
-  const cachedAttempt = addCachedInventoryRows({ laneKey, pool, seen, target });
-  if (cachedAttempt) attempts.push(cachedAttempt);
+  const scrapeSpendBlocker = laneExecute === "start" ? "" : scrapeSpendBlockerFor({ args, guardrails });
+  const inventoryAttempt =
+    laneExecute === "start"
+      ? addImportedStartRows({ laneKey, lane, pool, seen, target })
+      : addCachedInventoryRows({ laneKey, pool, seen, target });
+  if (inventoryAttempt) attempts.push(inventoryAttempt);
 
   let totalScraped = 0;
 
-  for (let attempt = 1; attempt <= maxAttempts && pool.length < target && !scrapeSpendBlocker; attempt++) {
+  for (let attempt = 1; laneExecute !== "start" && attempt <= maxAttempts && pool.length < target && !scrapeSpendBlocker; attempt++) {
     if (totalScraped >= maxTotalScraped) break;
     const search = laneConfig.searches[(attempt - 1) % laneConfig.searches.length];
     const remainingScrape = Math.max(1, Math.min(scrapeLimit, maxTotalScraped - totalScraped));
@@ -307,6 +310,100 @@ function hasScrapeSpendApproval(args, guardrails) {
   if (args["allow-scrape-spend"] || args.allowScrapeSpend) return true;
   const envName = String(guardrails.outscraper_spend_approval_env ?? "REACH_ALLOW_OUTSCRAPER_SPEND");
   return /^(1|true|yes|y|approved)$/i.test(String(process.env[envName] ?? "").trim());
+}
+
+function addImportedStartRows({ laneKey, lane, pool, seen, target }) {
+  const { rows, sourceCount } = loadImportedStartInventory(laneKey, lane);
+  if (!sourceCount) return null;
+
+  let added = 0;
+  for (const row of rows) {
+    const email = String(row.email ?? "").trim().toLowerCase();
+    if (!email || seen.has(email)) continue;
+    seen.add(email);
+    pool.push(row);
+    added++;
+    if (pool.length >= target) break;
+  }
+
+  return {
+    attempt: "imported",
+    industry: "imported warmup contacts",
+    area: `${sourceCount} prior import source${sourceCount === 1 ? "" : "s"}`,
+    state: "",
+    scrapeLimit: 0,
+    qaRows: rows.length,
+    okRows: rows.length,
+    added,
+    poolSize: pool.length,
+    qaCsv: "prior import inventory",
+    error: added ? "reused_prior_import_for_start_drip" : "no_imported_not_started_rows",
+  };
+}
+
+function loadImportedStartInventory(laneKey, lane) {
+  const byEmail = new Map();
+  const sources = new Set();
+
+  for (const file of warmupImportReportFiles(laneKey)) {
+    let report = null;
+    try {
+      report = JSON.parse(readFileSync(resolve(OUTBOX, file), "utf8"));
+    } catch {
+      continue;
+    }
+    if (report?.execute !== "import" || report?.status !== "executed" || !report?.selectedCsv) continue;
+    const selectedCsv = String(report.selectedCsv);
+    for (const row of readCsv(selectedCsv)) {
+      const email = String(row.email ?? "").trim().toLowerCase();
+      if (!email) continue;
+      byEmail.set(email, { ...row, email, qa_recommendation: row.qa_recommendation || "ok", import_source_file: selectedCsv });
+    }
+    sources.add(selectedCsv);
+  }
+
+  for (const file of importResultFiles(laneKey)) {
+    let rows = [];
+    try {
+      rows = JSON.parse(readFileSync(resolve(file), "utf8"));
+    } catch {
+      continue;
+    }
+    for (const row of Array.isArray(rows) ? rows : []) {
+      const email = String(row.email ?? "").trim().toLowerCase();
+      const tags = Array.isArray(row.tags) ? row.tags : [];
+      if (!email || row.upsert !== true || row.tagged !== true || !tags.includes(lane.importedTag)) continue;
+      if (!byEmail.has(email)) {
+        byEmail.set(email, {
+          name: row.name || email,
+          email,
+          qa_flags: "",
+          qa_recommendation: "ok",
+          import_source_file: file,
+        });
+      }
+      sources.add(file);
+    }
+  }
+
+  return { rows: [...byEmail.values()], sourceCount: sources.size };
+}
+
+function warmupImportReportFiles(laneKey) {
+  if (!existsSync(OUTBOX)) return [];
+  return readdirSync(OUTBOX)
+    .filter((file) => file.startsWith(`reach-warmup-${laneKey}-`) && file.endsWith(".json"))
+    .sort();
+}
+
+function importResultFiles(laneKey) {
+  return readdirSync(".")
+    .filter((file) => {
+      const isImportResult = file.endsWith("-import-ghl-results.json");
+      const isLane = file.startsWith(`tmp-reach-warmup-${laneKey}-`) || file.startsWith(`tmp-reach-${laneKey}-`);
+      return isImportResult && isLane;
+    })
+    .sort();
 }
 
 function addCachedInventoryRows({ laneKey, pool, seen, target }) {
@@ -509,6 +606,7 @@ ${reports
 - It will not call Outscraper when balance protection is on unless spend is explicitly approved.
 - It will not exceed the run-level Outscraper scrape cap across all lanes.
 - It will not reuse contacts already imported or started in prior GHL result files.
+- In start mode, it reuses prior imported contacts instead of scraping new contacts.
 - It will not start drip unless the lane is marked ready_for_drip=yes.
 - HighLevel AI features must stay OFF.
 `;

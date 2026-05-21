@@ -381,6 +381,10 @@ Start drip:
 npm run reach:warmup -- --lane relay --execute start
 ```
 
+Start mode uses prior import inventory. It should not scrape new prospects just
+to start a drip; it adds the start tag only to contacts already imported and not
+already started.
+
 Auto mode:
 
 ```bash

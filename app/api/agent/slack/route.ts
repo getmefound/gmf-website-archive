@@ -733,6 +733,7 @@ What I will own:
 - Expand the search if the first niche or area is too small.
 - Import only QA OK contacts when the lane is import-ready.
 - Start drip only when the lane is marked \`ready_for_drip=yes\`.
+- When starting drip, use prior imported contacts instead of scraping new contacts.
 - Stop at the configured attempt and scrape caps so this cannot loop forever.
 - If budget protection is ON, skip new Outscraper calls unless spend was explicitly approved.
 
