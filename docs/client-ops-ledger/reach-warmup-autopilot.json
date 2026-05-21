@@ -36,6 +36,7 @@
   "guardrails": {
     "max_refill_attempts_per_lane": 3,
     "max_scrape_limit_per_attempt": 20,
+    "max_total_scraped_per_run": 60,
     "max_total_scraped_per_lane_per_day": 60,
     "require_outscraper_spend_approval": true,
     "outscraper_spend_approval_env": "REACH_ALLOW_OUTSCRAPER_SPEND",

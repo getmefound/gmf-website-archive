@@ -339,6 +339,7 @@ What it does:
 - replaces bad/risky emails automatically
 - expands to the next search when the first niche/area is too small
 - stops at max attempts and scrape caps so it cannot loop forever
+- caps the full all-lane run at 60 scraped records total unless the config is deliberately changed
 - skips new paid Outscraper calls when budget protection is ON unless Mike explicitly approves spend
 - writes reports to `docs/client-ops-ledger/outbox`
 

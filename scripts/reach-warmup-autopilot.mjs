@@ -46,8 +46,9 @@ function main() {
   mkdirSync(OUTBOX, { recursive: true });
 
   const reports = [];
+  const runBudget = createScrapeRunBudget(config);
   for (const laneKey of selectedLanes) {
-    reports.push(runLane({ laneKey, config, domains, args, date, execute }));
+    reports.push(runLane({ laneKey, config, domains, args, date, execute, runBudget }));
   }
 
   const summaryPath = resolve(OUTBOX, `reach-warmup-summary-${date}.md`);
@@ -57,7 +58,7 @@ function main() {
   console.log("Done.");
 }
 
-function runLane({ laneKey, config, domains, args, date, execute }) {
+function runLane({ laneKey, config, domains, args, date, execute, runBudget }) {
   const lane = LANES[laneKey];
   const laneConfig = config.lanes?.[laneKey];
   if (!lane || !laneConfig?.enabled) die(`Lane is not enabled: ${laneKey}`);
@@ -94,7 +95,10 @@ function runLane({ laneKey, config, domains, args, date, execute }) {
     guardrails.max_scrape_limit_per_attempt ?? 100,
   );
   const scrapeTimeoutMs = numberArg(args["scrape-timeout-ms"] ?? args.scrapeTimeoutMs, 120_000);
-  const maxTotalScraped = guardrails.max_total_scraped_per_lane_per_day ?? 500;
+  const maxTotalScraped = Math.min(
+    guardrails.max_total_scraped_per_lane_per_day ?? 500,
+    scrapeRunBudgetRemaining(runBudget),
+  );
   const provider = String(args.provider ?? "neverbounce");
   const skipVerify = Boolean(args["skip-verify"]);
   const pool = [];
@@ -138,6 +142,24 @@ function runLane({ laneKey, config, domains, args, date, execute }) {
     });
   }
 
+  if (maxTotalScraped <= 0) {
+    return writeLaneReport({
+      laneKey,
+      lane,
+      date,
+      execute: laneExecute,
+      requestedExecute: execute,
+      dayNumber,
+      quota: { ...quota, target, min, max },
+      status: "held",
+      selectedRows: [],
+      selectedCsv: "",
+      attempts: [],
+      blockers: ["Run-level Outscraper scrape budget is already exhausted; skipped this lane before scraping."],
+      actionResults: [],
+    });
+  }
+
   const seen = new Set([...history.imported, ...history.started]);
   let totalScraped = 0;
 
@@ -169,6 +191,7 @@ function runLane({ laneKey, config, domains, args, date, execute }) {
       rawJson,
     ]);
     totalScraped += remainingScrape;
+    spendScrapeRunBudget(runBudget, remainingScrape);
     if (!scrapeResult.ok) {
       attempts.push({
         attempt,
@@ -314,6 +337,24 @@ function hasScrapeSpendApproval(args, guardrails) {
   return /^(1|true|yes|y|approved)$/i.test(String(process.env[envName] ?? "").trim());
 }
 
+function createScrapeRunBudget(config) {
+  const max = Number(config.guardrails?.max_total_scraped_per_run ?? Infinity);
+  return {
+    max: Number.isFinite(max) && max >= 0 ? max : Infinity,
+    used: 0,
+  };
+}
+
+function scrapeRunBudgetRemaining(runBudget) {
+  if (!runBudget) return Infinity;
+  return Math.max(0, runBudget.max - runBudget.used);
+}
+
+function spendScrapeRunBudget(runBudget, amount) {
+  if (!runBudget) return;
+  runBudget.used += Math.max(0, Number(amount) || 0);
+}
+
 function liveActionBlockers({ laneKey, lane, domains, selectedRows, min, max, execute, config, date, history }) {
   const guardrails = config.guardrails ?? {};
   const blockers = [];
@@ -435,6 +476,7 @@ ${reports
 - The runner keeps refilling bad or risky emails until it reaches the daily quota or hits max attempts/scrape caps.
 - It will not loop forever.
 - It will not call Outscraper when balance protection is on unless spend is explicitly approved.
+- It will not exceed the run-level Outscraper scrape cap across all lanes.
 - It will not reuse contacts already imported or started in prior GHL result files.
 - It will not start drip unless the lane is marked ready_for_drip=yes.
 - HighLevel AI features must stay OFF.

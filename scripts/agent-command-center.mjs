@@ -339,6 +339,7 @@ function buildWarmupAutopilotResponse(normalized) {
   const spendGuardText = config?.guardrails?.require_outscraper_spend_approval
     ? "ON - new Outscraper calls require explicit spend approval"
     : "standard caps only";
+  const scrapeRunCap = config?.guardrails?.max_total_scraped_per_run ?? "not set";
 
   return {
     kind: "reach-warmup-autopilot",
@@ -350,6 +351,7 @@ Current warmup day: ${dayNumber}
 Current quota: ${quotaText}
 Mode: ${config?.mode || "not configured"}
 Outscraper spend guard: ${spendGuardText}
+Outscraper run cap: ${scrapeRunCap} scraped records total across all lanes
 
 Lane readiness:
 
@@ -392,6 +394,7 @@ function buildColdReachStartResponse(normalized) {
   const spendGuardText = config?.guardrails?.require_outscraper_spend_approval
     ? "ON - new Outscraper calls require explicit spend approval"
     : "standard caps only";
+  const scrapeRunCap = config?.guardrails?.max_total_scraped_per_run ?? "not set";
 
   return {
     kind: "reach-cold-start",
@@ -403,6 +406,7 @@ Default mode: *Warmup Autopilot*
 Current warmup day: ${dayNumber}
 Current quota: ${quotaText}
 Outscraper spend guard: ${spendGuardText}
+Outscraper run cap: ${scrapeRunCap} scraped records total across all lanes
 
 What Manager owns:
 

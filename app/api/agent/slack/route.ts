@@ -703,6 +703,7 @@ async function buildColdReachStartResponse(actor: UserContext, normalized: strin
   const quotaText = quota ? `${quota.min}-${quota.max} emails/day, target ${quota.target}` : "hold for deliverability review";
   const allowScrapeSpend = hasOutscraperSpendApproval(normalized);
   const spendApprovalRequired = config?.guardrails?.require_outscraper_spend_approval === true;
+  const scrapeRunCap = config?.guardrails?.max_total_scraped_per_run ?? "not set";
   const queued = await queueReachWarmupWorkflow({
     lane: requestedLane ?? "all",
     actor,
@@ -721,6 +722,7 @@ Current warmup day: ${dayNumber}
 Current quota: ${quotaText}
 Runner: ${queued.ok ? `queued in GitHub Actions (\`${queued.runLabel}\`)` : `not queued yet (${queued.error})`}
 Outscraper spend guard: ${spendApprovalRequired ? (allowScrapeSpend ? "approved for this run" : "ON - no new paid scraping unless you explicitly approve Outscraper spend") : "standard caps only"}
+Outscraper run cap: ${scrapeRunCap} scraped records total across all lanes
 
 What I will own:
 
