@@ -312,6 +312,9 @@ GHL replacement and cost planning:
   - maps every current GHL job to cost, replacement option, and keep/replace/avoid decision
   - recommends $97 while AOH/pilots fit, $297 only if more GHL locations are needed before AOH replacement is ready, and avoiding $497 unless AOH sells GHL as software
   - treats per-client AI Employee, Search Atlas/SEO, and premium prospecting as paid-client add-ons only, not default AOH overhead
+- `docs/client-ops-ledger/ghl-exit-migration-plan.md`
+  - parallel migration plan: downgrade to $97, freeze new GHL dependencies, export current GHL assets, rebuild Review Automation/AI Visibility/Reach/reporting outside GHL, and cancel only after gates pass
+  - keeps GHL Expert involved as an export/translation/training role, not as a reason to keep GHL as the AOH backbone
 
 ## AOH Discovery Calendar
 
