@@ -42,6 +42,41 @@ Profile Manager run:
 7. Manager asks Mike only for the final public-publish decision.
 8. Log what worked and what needs to be clearer for clients.
 
+## Review Link Skill
+
+Profile Manager must be able to find the direct Google review request link without asking Mike to hunt for it.
+
+Click path:
+
+1. Log into the Google account that has access to AOH's profile.
+2. Search Google for `AI Outsource Hub`.
+3. Open the Business Profile controls for the correct AOH profile.
+4. Select `Read reviews`.
+5. Select `Get more reviews`.
+6. Copy the review link. If Google shows a QR/share panel, copy the link from that panel.
+
+Acceptable labels Google may show:
+
+- `Get more reviews`
+- `Ask for reviews`
+- `Share review form`
+- review QR code/share link
+
+Proof before handoff:
+
+- Link opens the Google review flow for AI Outsource Hub.
+- Business name is correct.
+- Link is public, not an admin-only URL.
+- No profile edits, posts, replies, or settings changes were made.
+
+If blocked, report only:
+
+- Which logged-in account was checked.
+- Whether AOH profile controls were visible.
+- Whether reviews were visible.
+- Which button/step was missing.
+- Screenshot needed from Mike if the authenticated profile cannot be opened by the agent.
+
 ## Required Response Format
 
 ```text
@@ -80,3 +115,5 @@ Next handoff:
 - Google Business Profile owner and manager access: https://support.google.com/business/answer/3403100
 - Google Business Profile edits: https://support.google.com/business/answer/3039617
 - Google Business Profile posts: https://support.google.com/business/answer/7342169
+- Google review link / QR code requests: https://support.google.com/business/answer/16816815
+- Google tips to get more reviews: https://support.google.com/business/answer/3474122

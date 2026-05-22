@@ -100,7 +100,38 @@ If not verified:
 
 ## Review Link Checklist
 
-Google allows managers/owners to get a shareable review link/QR code from the review area.
+Google allows managers/owners to create and share a link or QR code to request reviews.
+
+Primary click path:
+
+1. Log into the Google Account that has access to the business.
+2. Search Google for the business name or go to Google Business Profile.
+3. Open the Business Profile controls for the correct business.
+4. Select **Read reviews**.
+5. Select **Get more reviews**.
+6. Copy the review link, or open the QR/share option and copy the link from there.
+
+Alternate wording Google may show:
+
+- "Ask for reviews"
+- "Get more reviews"
+- "Share review form"
+- review link / QR code share option
+
+Proof checks:
+
+- The link opens a Google review flow for the correct business.
+- The business name shown is the exact client/AOH profile, not a similarly named business.
+- The profile is verified enough for reviews to be requested.
+- The link is public and does not include private admin/session-only URLs.
+
+If blocked:
+
+- Record which Google account is logged in.
+- Record whether the profile control panel is visible.
+- Record whether the business is verified.
+- Record whether the profile tools show "Read reviews" or "Ask for reviews."
+- Do not make public edits or publish posts while trying to get the link.
 
 Profile should capture:
 
@@ -111,7 +142,7 @@ Profile should capture:
 - last review date
 - number of unreplied reviews
 
-Hand review link to GHL Expert for custom values/Reputation setup.
+Hand review link to Reviews Manager for AOH-owned Review Automation. Hand it to GHL Expert only if GHL still needs a temporary bridge value.
 
 ## Profile Health Checklist
 

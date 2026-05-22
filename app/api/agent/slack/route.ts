@@ -468,6 +468,8 @@ ${address(actor)}, all campaign live actions are blocked.
 
   if (mentionsModelRouting(normalized)) return buildModelRoutingResponse(actor);
 
+  if (mentionsGbpReviewLink(normalized)) return buildGbpReviewLinkResponse(actor);
+
   if (mentionsGbpAccessTest(normalized)) return buildGbpAccessTestResponse(actor);
 
   if (mentionsReachRunStatusQuestion(normalized)) return buildReachRunTodayResponse(actor);
@@ -521,6 +523,7 @@ Manager, owner peek
 Manager, morning brief
 Manager, model routing
 Profile Manager, prepare GBP access test
+Profile Manager, get AOH Google review link
 Manager, run Reach Cold Email Campaign
 Manager, show Reach warmup autopilot
 Manager, explain the Reach result
@@ -780,7 +783,54 @@ Handoff:
 - GHL Expert helps only if GBP needs to connect into HighLevel/reputation workflows.
 
 Reference: \`docs/client-ops-ledger/gbp-client-access-and-update-test.md\`
-Training loop: \`docs/agentops/local-visibility-manager-gbp-training-loop.md\``;
+Training loop: \`docs/agentops/profile-manager-gbp-training-loop.md\``;
+}
+
+function buildGbpReviewLinkResponse(actor: UserContext) {
+  return `*Google review link capture - ${today()}*
+
+${address(actor)}, Profile Manager owns this.
+
+Goal:
+
+- Get the verified AOH Google review link.
+- Do not publish anything.
+- Do not change profile settings.
+- Hand the link to Reviews Manager so Review Automation can send to the right place.
+
+What Profile Manager should do:
+
+1. Open Google while logged into the Google account that has AOH profile access.
+2. Search for \`AI Outsource Hub\` and open the correct Business Profile controls.
+3. Select \`Read reviews\`.
+4. Select \`Get more reviews\`, \`Ask for reviews\`, or the review QR/share option.
+5. Copy the public review request link.
+6. Test that the link opens the Google review flow for AI Outsource Hub.
+7. Report back with: access status, review link found yes/no, final link if found, blocker if no.
+
+Proof standard:
+
+- The link opens the correct AOH review flow.
+- The business name is AI Outsource Hub.
+- The link is public, not a private admin URL.
+- No profile settings, posts, replies, or public edits were changed.
+
+Blocked if:
+
+- Google does not show the profile tools.
+- \`Read reviews\` or \`Get more reviews\` is missing.
+- The link opens the wrong business or an admin-only page.
+- AOH needs additional profile verification.
+
+Next handoff:
+
+- Reviews Manager adds the link to the AOH client profile.
+- Sender only dry-runs until the link is stored and Mike approves the client-zero test.
+
+References:
+- \`docs/PROFILE_KNOWLEDGE_PACK.md\`
+- Google review link/QR help: https://support.google.com/business/answer/16816815
+- Google review tips: https://support.google.com/business/answer/3474122`;
 }
 
 function buildGbpPostApprovalResponse(actor: UserContext) {
@@ -2152,6 +2202,17 @@ function mentionsGbpAccessTest(normalized: string) {
     normalized.includes("business profile");
   if (!mentionsGbp) return false;
   return /\b(access|invite|manager|owner|profile update|update|handoff|test|client zero|client-zero|draft|post|proof|publish|approve|approved)\b/.test(normalized);
+}
+
+function mentionsGbpReviewLink(normalized: string) {
+  const mentionsProfile =
+    /\b(gbp|gmb)\b/.test(normalized) ||
+    normalized.includes("google business") ||
+    normalized.includes("business profile") ||
+    normalized.includes("profile manager") ||
+    normalized.includes("local visibility manager");
+  if (!mentionsProfile) return false;
+  return normalized.includes("review link") || normalized.includes("google review link") || normalized.includes("share review");
 }
 
 function mentionsGbpPostApproval(normalized: string) {

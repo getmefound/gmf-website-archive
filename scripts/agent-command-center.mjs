@@ -547,16 +547,26 @@ Goal:
 
 What Profile Manager should do:
 
-1. Open AOH's Google Business Profile while logged in as Mike.
-2. Find the review/share review form link.
-3. Confirm it opens the AI Outsource Hub review page.
-4. Save only the final public review link.
-5. Report back with: access status, review link found yes/no, blocker if no.
+1. Open Google while logged into the Google account that has AOH profile access.
+2. Search for \`AI Outsource Hub\` and open the correct Business Profile controls.
+3. Select \`Read reviews\`.
+4. Select \`Get more reviews\`, \`Ask for reviews\`, or the review QR/share option.
+5. Copy the public review request link.
+6. Test that the link opens the Google review flow for AI Outsource Hub.
+7. Report back with: access status, review link found yes/no, final link if found, blocker if no.
+
+Proof standard:
+
+- The link opens the correct AOH review flow.
+- The business name is AI Outsource Hub.
+- The link is public, not a private admin URL.
+- No profile settings, posts, replies, or public edits were changed.
 
 Blocked if:
 
 - Google does not show the profile tools.
-- The link opens the wrong business.
+- \`Read reviews\` or \`Get more reviews\` is missing.
+- The link opens the wrong business or an admin-only page.
 - AOH needs additional profile verification.
 
 Next handoff:
@@ -564,7 +574,10 @@ Next handoff:
 - Reviews Manager adds the link to the AOH client profile.
 - Sender only dry-runs until storage and email sender env are ready.
 
-Reference: \`docs/PROFILE_KNOWLEDGE_PACK.md\``,
+References:
+- \`docs/PROFILE_KNOWLEDGE_PACK.md\`
+- Google review link/QR help: https://support.google.com/business/answer/16816815
+- Google review tips: https://support.google.com/business/answer/3474122`,
   };
 }
 

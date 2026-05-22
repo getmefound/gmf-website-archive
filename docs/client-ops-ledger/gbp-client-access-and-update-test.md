@@ -108,6 +108,29 @@ Use this language:
 Profile Manager, prepare GBP access test
 ```
 
+## Review Link Command
+
+```text
+Profile Manager, get AOH Google review link
+```
+
+Profile Manager should use this process:
+
+1. Search Google for `AI Outsource Hub` while logged into the Google account with profile access.
+2. Confirm the Business Profile controls are for the correct business.
+3. Open `Read reviews`.
+4. Choose `Get more reviews`, `Ask for reviews`, or the review QR/share option.
+5. Copy the public review request link.
+6. Test that the link opens the correct Google review flow.
+7. Report the link to Reviews Manager, or report the exact missing step if blocked.
+
+Rules:
+
+- Do not publish anything.
+- Do not edit profile settings.
+- Do not use an admin-only URL.
+- Do not guess the link.
+
 ## Source
 
 Google Business Profile help says owners can invite additional owners or managers, each user should use their own Google Account, managers can edit profile info, respond to reviews, and manage posts, and the invite path is Business Profile settings -> People and access -> Add -> enter email -> choose Owner or Manager -> Invite.
@@ -117,6 +140,10 @@ Source: https://support.google.com/business/answer/3403100
 Google says verified Business Profiles can be edited on Search or Maps, and common profile edits include address/service area, hours, phone, website, social links, photos, business description, products, services, and Q&A.
 
 Source: https://support.google.com/business/answer/3039617
+
+Google says Business Profile owners/managers can create a link or QR code to request reviews, using the review area and `Get more reviews`.
+
+Source: https://support.google.com/business/answer/16816815
 
 Google says Business Profile posts can share updates, offers, events, photos, videos, and action buttons, and Google reviews posts before they show publicly.
 
