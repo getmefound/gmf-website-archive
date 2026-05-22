@@ -134,6 +134,10 @@ function routeCommand(command, args) {
     return buildGhlVisualChecklistResponse(findLaneKey(normalized));
   }
 
+  if (mentionsGhlSmoke(normalized)) {
+    return buildGhlSmoke97Response();
+  }
+
   if (mentionsGhlExit(normalized)) {
     return buildGhlExitStatusResponse();
   }
@@ -179,6 +183,7 @@ Supported commands:
 - \`Manager, morning brief\`
 - \`Manager, model routing\`
 - \`Manager, GHL exit status\`
+- \`GHL Expert, run $97 smoke check\`
 - \`Reviews Manager, status\`
 - \`Local Visibility Manager, prepare GBP access test\`
 - \`Manager, run Reach Cold Email Campaign\`
@@ -958,9 +963,29 @@ Useful commands:
 
 \`\`\`text
 Manager, GHL exit status
+GHL Expert, run $97 smoke check
 GHL Expert, check Reach readiness
 Manager, status
 \`\`\`
+`,
+  };
+}
+
+function buildGhlSmoke97Response() {
+  const result = runNpm(["run", "ghl:smoke-97"]);
+  return {
+    kind: "ghl-97-smoke-check",
+    text: `*GHL $97 smoke check - ${today()}*
+
+Mode: read-only
+
+Result: ${result.ok ? "passed" : "needs attention"}
+
+\`\`\`text
+${trimOutput(result.stdout || result.stderr || "No output captured.")}
+\`\`\`
+
+No contacts, workflows, settings, wallets, add-ons, or HighLevel AI features were changed.
 `,
   };
 }
@@ -1796,6 +1821,12 @@ function mentionsGhlExit(normalized) {
   const mentionsHighLevel = normalized.includes("ghl") || normalized.includes("highlevel") || normalized.includes("high level");
   if (!mentionsHighLevel) return false;
   return /\b(exit|migration|migrate|replacement|replace|downgrade|cancel|off ghl|move off)\b/.test(normalized);
+}
+
+function mentionsGhlSmoke(normalized) {
+  const mentionsHighLevel = normalized.includes("ghl") || normalized.includes("highlevel") || normalized.includes("high level");
+  if (!mentionsHighLevel) return false;
+  return /\b(smoke|post downgrade|post-downgrade|97 check|bridge check|what broke|broken)\b/.test(normalized);
 }
 
 function mentionsReviewAutomationStatus(normalized) {

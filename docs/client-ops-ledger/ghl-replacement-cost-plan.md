@@ -506,6 +506,20 @@ Enable SEO/Search Atlas only when:
 7. Auditor creates a monthly GHL cost report: base plan, wallet usage, AI, SEO, phone, email, validation, premium workflow actions.
 8. Do not buy Calendly, Smartlead/Instantly, or a separate email sender until a specific blocker appears.
 
+Repeatable check:
+
+```bash
+npm run ghl:smoke-97
+```
+
+This gives Manager one pass/watch/blocker report for the $97 bridge.
+
+Latest result:
+
+- 2026-05-22: pass. The checked GHL bridge surfaces still worked after the
+  downgrade. Keep GHL at $97 while AOH Review Automation and Reach replacements
+  are tested.
+
 ## Sources
 
 - HighLevel Pricing Guide: https://help.gohighlevel.com/support/solutions/articles/155000001156-highlevel-pricing-guide

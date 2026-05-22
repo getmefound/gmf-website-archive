@@ -22,6 +22,7 @@
     "reach:inventory": "node scripts/build-reach-scrape-inventory.mjs",
     "ghl:email-stats": "node scripts/ghl-email-stats.mjs",
     "ghl:exit-inventory": "node scripts/ghl-exit-inventory.mjs",
+    "ghl:smoke-97": "node scripts/ghl-post-downgrade-smoke.mjs",
     "morning:brief": "node scripts/morning-brief.mjs",
     "agent:brief": "node scripts/agent-command-center.mjs",
     "agent:command": "node scripts/agent-command-center.mjs",

@@ -55,6 +55,15 @@ Post-downgrade smoke checks:
 - Reach drips and warmup can still be inspected
 - Review email bridge can still send low-volume messages if needed
 
+Repeatable smoke command:
+
+```bash
+npm run ghl:smoke-97
+```
+
+This runs read-only inventory, Reach readiness, and GHL email stats checks, then
+writes one owner report to `docs/client-ops-ledger/outbox/`.
+
 ## GHL $97 Bridge Rules
 
 Now that downgrade is done:
@@ -213,6 +222,16 @@ Post-downgrade requirement:
 - If inventory still works, mark API metadata access as intact.
 - If it fails, Systems Director opens a blocker and prioritizes replacing the
   affected GHL dependency first.
+- Use `npm run ghl:smoke-97` as the combined post-downgrade check.
+
+2026-05-22 result:
+
+- `$97` smoke check passed.
+- Location, workflows, calendars, pipelines, email campaign metadata, Reach
+  readiness, and GHL email stats were still available through read-only checks.
+- Reviews and AI Visibility remain drip-ready.
+- Relay remains import-ready but not drip-ready until visual sender-domain/warmup
+  confirmation is complete.
 
 Export or document:
 
