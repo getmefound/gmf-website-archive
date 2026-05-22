@@ -1054,7 +1054,8 @@ Live pieces:
 - Send-candidate endpoint: built, but waits on storage and verified Google review link.
 - Send-batch endpoint: built with dry-run first, capped live sends, and send logging.
 - Monthly recap endpoint: built for owner/client reporting.
-- Summary storage: ready once Upstash env is set on Vercel.
+- Summary storage: live and passed write/read/cleanup.
+- Email sender: Resend env is live and ready for proof testing.
 - Slack/automation handoff: summary-only; optional webhook can be added.
 - Manager status API: built and protected by internal token.
 
@@ -1074,7 +1075,7 @@ What Manager can check:
 Still needed:
 
 - Add each client's verified Google review link before happy feedback can route to Google.
-- Add email sender env and test AOH client-zero before replacing GHL sends.
+- Test AOH client-zero before replacing GHL sends.
 
 Useful URL for systems/Manager:
 

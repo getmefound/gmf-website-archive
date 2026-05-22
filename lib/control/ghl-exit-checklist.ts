@@ -10,15 +10,16 @@ export type GhlExitChecklistItem = {
 export const GHL_EXIT_SUMMARY = {
   title: "GHL Exit + Review Automation",
   ownerNote:
-    "GHL is now a $97 bridge. The replacement is mostly built, but we do not cancel GHL until storage, the Google review link, and a real AOH send test pass.",
+    "GHL is now a $97 bridge. Review Automation storage and email are live, but we do not cancel GHL until the Google review link and a real AOH send test pass.",
   cancelGate:
     "Cancel GHL only after Review Automation, Reach sending, and booking are working outside GHL for AOH.",
 };
 
 export const GHL_EXIT_METRICS = [
   { label: "GHL plan", value: "$97", tone: "warm" as const },
-  { label: "Smoke check", value: "Passed", tone: "accent" as const },
-  { label: "Blockers", value: "2", tone: "danger" as const },
+  { label: "Storage", value: "Ready", tone: "accent" as const },
+  { label: "Email", value: "Ready", tone: "accent" as const },
+  { label: "Blockers", value: "1", tone: "danger" as const },
   { label: "Cancel GHL", value: "Not yet", tone: "muted" as const },
 ];
 
@@ -62,8 +63,8 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
   {
     title: "Storage keys in Vercel",
     owner: "Systems Director",
-    status: "blocked",
-    detail: "Add Upstash Redis env vars so history, suppressions, and send logs persist live.",
+    status: "done",
+    detail: "Upstash Redis is live and passed write, read, and cleanup checks.",
   },
   {
     title: "AOH Google review link",
@@ -84,10 +85,16 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     detail: "AOH can dry-run a capped send batch, preview recipients, and log send attempts.",
   },
   {
+    title: "Email sender setup",
+    owner: "Sender",
+    status: "done",
+    detail: "Resend env is live for review request sends from the AOH domain.",
+  },
+  {
     title: "Live review request sender",
     owner: "Sender",
     status: "next",
-    detail: "Add email provider env, run proof checks, then send only after the AOH client-zero test passes.",
+    detail: "Run proof checks, then send only after the AOH Google review link and client-zero approval are in place.",
   },
   {
     title: "Monthly recap endpoint",
