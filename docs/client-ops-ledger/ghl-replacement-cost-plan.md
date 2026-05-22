@@ -1,6 +1,6 @@
 # GHL Replacement And Cost Plan
 
-Status: planning v1  
+Status: $97 bridge active  
 Owner: Manager  
 Specialists: GHL Expert, Systems Director, Website/Codex, Auditor  
 Last updated: 2026-05-21
@@ -11,14 +11,14 @@ GHL should not be the long-term center of AOH if clients are going to use AOH cl
 
 Best path:
 
-1. Downgrade from the $497 plan as soon as no active feature requires it.
+1. Downgrade from the $497 plan as soon as no active feature requires it. Done on 2026-05-21.
 2. Keep the cheapest useful GHL plan while AOH proves Review Automation and Reach.
 3. Build the AOH-owned replacement in phases.
 4. Do not buy per-client GHL AI, SEO heatmaps, or SaaS features unless a client is paying enough to justify that exact add-on.
 
 Recommended current decision:
 
-- Use $97 Starter while AOH has 1-3 GHL-backed locations.
+- Use $97 Starter while AOH has 1-3 GHL-backed locations. This is now active.
 - While $97 works, do not buy Calendly, Smartlead/Instantly, or a separate
   review-request email sender.
 - Use $297 Unlimited only if AOH needs more GHL locations before the AOH-built backend is ready.
@@ -467,11 +467,11 @@ Rule:
 
 ## Decision Rules
 
-Downgrade to $97 when:
+Downgrade to $97:
 
-- AOH has no need for more than the included locations.
-- No active rebilling/SaaS Mode feature is needed.
-- No required feature only exists on $297/$497.
+- Done by Mike on 2026-05-21.
+- Watch for broken booking, workflows, stats, API access, or current drips.
+- Do not add new GHL-dependent services.
 
 Move to $297 when:
 
@@ -501,10 +501,10 @@ Enable SEO/Search Atlas only when:
 2. GHL Expert lists which subaccounts/locations exist and what each one is used for.
 3. GHL Expert confirms whether any live workflow requires $297 or $497 features.
 4. Website/Codex scopes AOH Review Core tables and API routes.
-5. Manager downgrades to $97 if support confirms booking, workflows, contacts,
-   stats, API access, and current drips keep working.
-6. Auditor creates a monthly GHL cost report: base plan, wallet usage, AI, SEO, phone, email, validation, premium workflow actions.
-7. Do not buy Calendly, Smartlead/Instantly, or a separate email sender until a specific blocker appears.
+5. Manager records $97 downgrade done.
+6. GHL Expert and Systems Director run post-downgrade smoke checks: booking, workflows, contacts, stats, API access, and current drips.
+7. Auditor creates a monthly GHL cost report: base plan, wallet usage, AI, SEO, phone, email, validation, premium workflow actions.
+8. Do not buy Calendly, Smartlead/Instantly, or a separate email sender until a specific blocker appears.
 
 ## Sources
 

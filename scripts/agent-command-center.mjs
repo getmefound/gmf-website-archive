@@ -921,7 +921,7 @@ function buildGhlExitStatusResponse() {
     kind: "manager-ghl-exit-status",
     text: `*GHL exit status - ${today()}*
 
-Short answer: use GHL $97 as the cheapest bridge while the replacement proves itself.
+Short answer: GHL is now on the $97 bridge plan. Use it only while the AOH replacement proves itself.
 
 Current job:
 
@@ -935,6 +935,7 @@ Current GHL footprint:
 
 What changed today:
 
+- Mike downgraded GHL to $97.
 - GHL Expert has a read-only exit inventory command.
 - GHL readiness rechecks now preserve prior start-drip approvals instead of resetting them.
 - Reviews and AI Visibility stay drip-ready; Relay still waits until its clean-list gate clears.
@@ -951,7 +952,7 @@ Agent owners:
 
 Next safe action:
 
-Keep the downgrade call focused on what breaks moving to $97. Do not cancel yet. Use GHL for booking, current drips, and low-volume email while AOH-owned Review Automation is tested.
+Run post-downgrade smoke checks. Confirm booking, workflows, stats, API metadata, current Reach drips, and low-volume email still work. Do not cancel yet.
 
 Useful commands:
 

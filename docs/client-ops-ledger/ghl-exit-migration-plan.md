@@ -1,6 +1,6 @@
 # GHL Exit Migration Plan
 
-Status: planning v1  
+Status: $97 bridge active  
 Owner: Manager  
 Specialists: Systems Director, GHL Expert, Website/Codex, Sender, Auditor  
 Last updated: 2026-05-21
@@ -11,10 +11,9 @@ AOH should move off GHL as the long-term operating backbone, but should use the
 $97 plan as the cheapest short-term bridge if it keeps the active workflows
 working.
 
-GHL becomes a short bridge:
+GHL is now a short bridge:
 
-1. Downgrade to the $97 plan if support confirms data/workflows/API access will
-   remain intact.
+1. Downgrade to the $97 plan. Done by Mike on 2026-05-21.
 2. Do not build new AOH services around GHL.
 3. Export and document current GHL assets.
 4. Rebuild Review Automation, AI Visibility, Reach, and reports outside GHL.
@@ -35,13 +34,15 @@ GHL is still being used for:
 Canceling before these are replaced risks losing campaign history, workflow
 settings, contacts, and proof.
 
-## Downgrade Rule
+## Downgrade Status
 
-Downgrade target:
+Current plan:
 
-- $97 Starter plan
+- $97 Starter plan is active as of 2026-05-21.
+- GHL is bridge-only.
+- Next job is not another plan decision. Next job is post-downgrade smoke testing.
 
-Before approving the downgrade, confirm with GHL support:
+Post-downgrade smoke checks:
 
 - contacts stay intact
 - workflows stay intact
@@ -51,15 +52,12 @@ Before approving the downgrade, confirm with GHL support:
 - pipelines stay intact
 - API keys/access still work enough for export and transition
 - existing automations do not stop because of a plan gate
-- upgrade-back path is available if something breaks
-
-Do not tell support the cancellation plan. The immediate ask is only:
-
-> I am reducing cost. What breaks if I move from $497 to $97?
+- Reach drips and warmup can still be inspected
+- Review email bridge can still send low-volume messages if needed
 
 ## GHL $97 Bridge Rules
 
-After downgrade:
+Now that downgrade is done:
 
 - no new client subaccounts
 - no GHL SaaS Mode work
@@ -208,6 +206,13 @@ Current 2026-05-21 inventory snapshot:
 - 10 email workflow campaigns
 - 8 calendars
 - 228 tags
+
+Post-downgrade requirement:
+
+- Re-run the read-only inventory after the $97 downgrade.
+- If inventory still works, mark API metadata access as intact.
+- If it fails, Systems Director opens a blocker and prioritizes replacing the
+  affected GHL dependency first.
 
 Export or document:
 
@@ -394,7 +399,8 @@ Manager, GHL exit status
 
 Day 1:
 
-- downgrade call/support confirmation
+- downgrade to $97: done on 2026-05-21
+- post-downgrade read-only inventory and smoke check
 - export current GHL inventory
 - freeze new GHL-dependent work
 - keep intake packets flowing to AOH-owned webhooks/Slack before the temporary
