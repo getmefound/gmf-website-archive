@@ -130,6 +130,13 @@ function JobIndexSection() {
       detail: "Your internal room for whether emails are ready to send or still blocked.",
     },
     {
+      title: "GHL Exit",
+      label: "$97 bridge",
+      tone: "warm" as const,
+      href: "/mike-mc/jobs/ghl-exit",
+      detail: "What is done, blocked, and next before AOH can cancel GHL.",
+    },
+    {
       title: "Presence Refresh",
       label: "build now",
       tone: "accent" as const,

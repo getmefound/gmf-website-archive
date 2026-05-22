@@ -275,6 +275,13 @@ function JobsInProgressSection() {
       detail: "Shows whether emails are ready to send or still blocked.",
     },
     {
+      title: "GHL Exit",
+      href: "/mike-mc/jobs/ghl-exit",
+      badge: "$97 bridge",
+      tone: "warm" as const,
+      detail: "Track what is done, blocked, and next before canceling GHL.",
+    },
+    {
       title: "Spending",
       href: "/mike-mc/jobs",
       badge: `${SCHEDULED_JOB_COSTS.length} jobs`,
