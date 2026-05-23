@@ -1,8 +1,8 @@
 {
-  "enabled": true,
-  "mode": "agent_guarded_autopilot",
+  "enabled": false,
+  "mode": "paused_for_rebrand_and_ghl_exit",
   "planned_start_date": "2026-05-20",
-  "autopilot_start_enabled": true,
+  "autopilot_start_enabled": false,
   "daily_quota_ladder": [
     {
       "name": "days_1_3",
@@ -57,7 +57,7 @@
   },
   "lanes": {
     "reviews": {
-      "enabled": true,
+      "enabled": false,
       "label": "Reviews",
       "from_domain": "mail.aioutsourcehubs.com",
       "searches": [
@@ -72,7 +72,7 @@
       ]
     },
     "ai": {
-      "enabled": true,
+      "enabled": false,
       "label": "AI Visibility",
       "from_domain": "mail.getaioutsourcehub.com",
       "searches": [
@@ -87,7 +87,7 @@
       ]
     },
     "relay": {
-      "enabled": true,
+      "enabled": false,
       "label": "Relay",
       "from_domain": "mail.myaioutsourcehub.com",
       "searches": [

@@ -1,9 +1,9 @@
 # GHL Exit Migration Plan
 
-Status: $97 bridge active  
+Status: $97 bridge active; campaign sending paused  
 Owner: Manager  
 Specialists: Systems Director, GHL Expert, Website/Codex, Sender, Auditor  
-Last updated: 2026-05-21
+Last updated: 2026-05-22
 
 ## Plain-English Decision
 
@@ -11,13 +11,25 @@ AOH should move off GHL as the long-term operating backbone, but should use the
 $97 plan as the cheapest short-term bridge if it keeps the active workflows
 working.
 
-GHL is now a short bridge:
+GHL is now a short bridge, but campaign sending is paused during the
+NearMeReady rebrand and domain migration:
 
 1. Downgrade to the $97 plan. Done by Mike on 2026-05-21.
 2. Do not build new AOH services around GHL.
-3. Export and document current GHL assets.
-4. Rebuild Review Automation, AI Visibility, Reach, and reports outside GHL.
-5. Cancel GHL only after live replacement checks pass.
+3. Do not warm or send from old GHL campaign domains.
+4. Export and document current GHL assets.
+5. Rebuild Review Automation, AI Visibility, Reach, and reports outside GHL.
+6. Cancel GHL only after live replacement checks pass.
+
+Emergency stop completed on 2026-05-22:
+
+- Reach warmup autopilot disabled.
+- Reviews, AI Visibility, and Relay marked paused with `ready_for_import=no`
+  and `ready_for_drip=no`.
+- 40 contacts removed from Reach workflows/campaigns and AOH campaign tags by
+  API.
+- GHL workflow definitions still need a visual Draft/Off check in the GHL UI
+  because the public workflow status-change API was not authorized.
 
 ## Why Not Cancel Immediately
 

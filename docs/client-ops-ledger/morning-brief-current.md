@@ -1,18 +1,18 @@
 # Morning Brief
 
-Date: 2026-05-21
+Date: 2026-05-22
 Prepared by: General Manager
 
 ## Commercial Brief
 
-- Reach: Reviews start (GHL total: 20 sent, 90% delivered, 38.89% opened, 0 replies, 1 bounces, 0 unsubscribes). AI Visibility start (GHL total: 26 sent, 84.62% delivered, 59.09% opened, 0 replies, 4 bounces, 0 unsubscribes). Relay import (GHL total: 5 sent, 100% delivered, 80% opened, 0 replies, 0 bounces, 0 unsubscribes).
+- Reach: all GHL campaign live actions paused for the NearMeReady rebrand, GHL exit, and sending-domain migration. Do not warm or send from old GHL campaign domains.
 - Market: AI automation: AI Business Automation Tools - Trend Hunter
-- Mike today: No action from you.
+- Mike today: visually turn the six Reach workflows to Draft/Off in GHL if not already done.
 
 ## Custom Layer
 
-- GHL stats: connected by read-only API.
-- Email/calendar: next custom connectors to add after the brief proves useful internally.
+- GHL stats: historical only during pause.
+- Email/calendar: rebuild outside GHL after NearMeReady sending domains are chosen.
 - Safety: HighLevel AI stays OFF. GHL Expert owns sender/domain proof before start-drip.
 
 ## Reach Results
@@ -25,8 +25,8 @@ Prepared by: General Manager
 
 ## Needs Mike Today
 
-- No Mike action: GHL Expert needs to clear Relay drip readiness before sending can start.
-- Relay clean contact check: 10/10.
+- Local automation is paused and GHL contacts were removed from Reach workflows/campaigns by API.
+- GHL UI visual check still needed: set the six Reach workflows to Draft/Off.
 
 ## Market Signal
 
@@ -45,7 +45,7 @@ Prepared by: General Manager
 
 ## Recommended Move
 
-Keep auto on. Have GHL Expert clear Relay drip readiness before any start-drip action.
+Keep auto off. Do not resume GHL warmup or sending on the old domains.
 
 ## Source Status
 
