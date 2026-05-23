@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
+import { getResendDomainStatus, sendGetMeFoundEmail } from "@/lib/getmefound-email";
+import { createAgentTask, logEmailEvent, saveContactSubmission } from "@/lib/ops-store";
 import { checkEmailRate } from "@/lib/rate-limit";
 
 const TURNSTILE_VERIFY_URL =
@@ -86,39 +88,117 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  await forwardToGHL({
+  const submittedAt = new Date().toISOString();
+  const contact = {
     name: name.trim(),
-    email: (email as string).trim().toLowerCase(),
+    email: normalizedEmail,
     message: message.trim(),
-    timestamp: new Date().toISOString(),
     source: "getmefound.ai/contact",
+    user_agent: req.headers.get("user-agent"),
+    ip_hint: ip,
+  };
+
+  const contactResult = await saveContactSubmission(contact);
+  if (!contactResult.ok) {
+    console.error("Supabase contact save failed", contactResult.status, contactResult.error);
+  }
+
+  const contactSubmissionId = contactResult.ok ? contactResult.data?.[0]?.id : null;
+  const taskResult = await createAgentTask({
+    title: `Follow up with ${contact.name}`,
+    kind: "contact_follow_up",
+    priority: "normal",
+    source: "website_contact",
+    payload: {
+      ...contact,
+      contactSubmissionId,
+      submittedAt,
+    },
+  });
+  if (!taskResult.ok) {
+    console.error("Supabase agent task save failed", taskResult.status, taskResult.error);
+  }
+
+  const subject = `New GetMeFound contact: ${contact.name}`;
+  const notificationStatus = await sendContactNotification({
+    ...contact,
+    subject,
+    contactSubmissionId,
+    submittedAt,
   });
 
-  return NextResponse.json({ ok: true });
+  const emailLogResult = await logEmailEvent({
+    provider: "resend",
+    event_type: "contact_notification",
+    to_email: "mike@getmefound.ai",
+    subject,
+    status: notificationStatus.sent ? "sent" : "skipped",
+    provider_id: notificationStatus.id,
+    error: notificationStatus.sent ? undefined : notificationStatus.reason,
+    payload: {
+      contactSubmissionId,
+      resendDomainStatus: notificationStatus.domainStatus,
+    },
+  });
+  if (!emailLogResult.ok) {
+    console.error("Supabase email event save failed", emailLogResult.status, emailLogResult.error);
+  }
+
+  return NextResponse.json({
+    ok: true,
+    saved: contactResult.ok,
+    taskCreated: taskResult.ok,
+    notification: notificationStatus.sent ? "sent" : "pending",
+  });
 }
 
-type ContactPayload = {
+async function sendContactNotification(input: {
   name: string;
   email: string;
   message: string;
-  timestamp: string;
   source: string;
-};
-
-async function forwardToGHL(payload: ContactPayload): Promise<void> {
-  const url = process.env.GHL_CONTACT_WEBHOOK_URL ?? process.env.GHL_WEBHOOK_URL;
-  if (!url) return;
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      console.error("GHL contact webhook responded", res.status, await res.text().catch(() => ""));
-    }
-  } catch (err) {
-    console.error("GHL contact webhook failed", err);
+  user_agent: string | null;
+  ip_hint: string | null;
+  subject: string;
+  contactSubmissionId: string | null | undefined;
+  submittedAt: string;
+}): Promise<{ sent: boolean; id?: string; reason?: string; domainStatus?: string }> {
+  const domain = await getResendDomainStatus();
+  if (!domain.ok || domain.domainStatus !== "verified") {
+    return {
+      sent: false,
+      reason: domain.ok ? `Resend domain is ${domain.domainStatus}.` : domain.error,
+      domainStatus: domain.ok ? domain.domainStatus : "unavailable",
+    };
   }
+
+  const lines = [
+    "New GetMeFound contact submission",
+    "",
+    `Name: ${input.name}`,
+    `Email: ${input.email}`,
+    `Source: ${input.source}`,
+    `Submitted: ${input.submittedAt}`,
+    input.contactSubmissionId ? `Supabase ID: ${input.contactSubmissionId}` : null,
+    "",
+    input.message,
+  ].filter(Boolean);
+
+  const result = await sendGetMeFoundEmail({
+    to: "mike@getmefound.ai",
+    subject: input.subject,
+    text: lines.join("\n"),
+    replyTo: input.email,
+  });
+
+  if (!result.ok) {
+    console.error("Resend contact notification failed", result.status, result.error);
+    return {
+      sent: false,
+      reason: result.error,
+      domainStatus: domain.domainStatus,
+    };
+  }
+
+  return { sent: true, id: result.id, domainStatus: domain.domainStatus };
 }
