@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
-import { getResendDomainStatus, sendGetMeFoundEmail } from "@/lib/getmefound-email";
-import { createAgentTask, logEmailEvent, saveContactSubmission } from "@/lib/ops-store";
+import { createAgentTask, saveContactSubmission } from "@/lib/ops-store";
 import { checkEmailRate } from "@/lib/rate-limit";
+import { postToSlack, GMF_MANAGER_CHANNEL } from "@/lib/slack";
 
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -117,82 +117,29 @@ export async function POST(req: NextRequest) {
     console.error("Supabase agent task save failed", taskResult.status, taskResult.error);
   }
 
-  const subject = `New GetMeFound contact: ${contact.name}`;
-  const notificationStatus = await sendContactNotification({
-    ...contact,
-    subject,
-    submittedAt,
-  });
+  const slackMessage = [
+    `*New contact from getmefound.ai*`,
+    ``,
+    `*Name:* ${contact.name}`,
+    `*Email:* ${contact.email}`,
+    `*Message:* ${contact.message}`,
+    ``,
+    `*Source:* ${contact.source}`,
+    `*Submitted:* ${submittedAt}`,
+    ``,
+    `Manager — review this. If they seem ready to move forward, draft a reply. Escalate to Mike only if they need a pricing decision or are ready to sign.`,
+  ].join("\n");
 
-  const emailLogResult = await logEmailEvent({
-    provider: "resend",
-    event_type: "contact_notification",
-    to_email: "mike@getmefound.ai",
-    subject,
-    status: notificationStatus.sent ? "sent" : "skipped",
-    provider_id: notificationStatus.id,
-    error: notificationStatus.sent ? undefined : notificationStatus.reason,
-    payload: {
-      resendDomainStatus: notificationStatus.domainStatus,
-    },
-  });
-  if (!emailLogResult.ok) {
-    console.error("Supabase email event save failed", emailLogResult.status, emailLogResult.error);
+  const slackResult = await postToSlack(GMF_MANAGER_CHANNEL, slackMessage);
+  if (!slackResult.ok) {
+    console.error("Slack contact post failed", slackResult.error);
   }
 
   return NextResponse.json({
     ok: true,
     saved: contactResult.ok,
     taskCreated: taskResult.ok,
-    notification: notificationStatus.sent ? "sent" : "pending",
+    notified: slackResult.ok,
   });
 }
 
-async function sendContactNotification(input: {
-  name: string;
-  email: string;
-  message: string;
-  source: string;
-  user_agent: string | null;
-  ip_hint: string | null;
-  subject: string;
-  submittedAt: string;
-}): Promise<{ sent: boolean; id?: string; reason?: string; domainStatus?: string }> {
-  const domain = await getResendDomainStatus();
-  if (!domain.ok || domain.domainStatus !== "verified") {
-    return {
-      sent: false,
-      reason: domain.ok ? `Resend domain is ${domain.domainStatus}.` : domain.error,
-      domainStatus: domain.ok ? domain.domainStatus : "unavailable",
-    };
-  }
-
-  const lines = [
-    "New GetMeFound contact submission",
-    "",
-    `Name: ${input.name}`,
-    `Email: ${input.email}`,
-    `Source: ${input.source}`,
-    `Submitted: ${input.submittedAt}`,
-    "",
-    input.message,
-  ].filter(Boolean);
-
-  const result = await sendGetMeFoundEmail({
-    to: "mike@getmefound.ai",
-    subject: input.subject,
-    text: lines.join("\n"),
-    replyTo: input.email,
-  });
-
-  if (!result.ok) {
-    console.error("Resend contact notification failed", result.status, result.error);
-    return {
-      sent: false,
-      reason: result.error,
-      domainStatus: domain.domainStatus,
-    };
-  }
-
-  return { sent: true, id: result.id, domainStatus: domain.domainStatus };
-}

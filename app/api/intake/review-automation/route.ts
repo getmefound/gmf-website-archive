@@ -3,6 +3,7 @@ import { validateEmail } from "@/lib/email-validation";
 import { checkEmailRate } from "@/lib/rate-limit";
 import { envValueAny } from "@/lib/getmefound-env";
 import { supabaseRest } from "@/lib/supabase-rest";
+import { postToSlack, GMF_MANAGER_CHANNEL } from "@/lib/slack";
 
 type IntakePayload = {
   businessName?: unknown;
@@ -177,23 +178,9 @@ async function forwardToGmfIntakeWebhook(payload: CleanIntake) {
 }
 
 async function forwardToSlack(payload: CleanIntake) {
-  const webhook =
-    process.env.SLACK_CLIENT_INTAKE_WEBHOOK_URL?.trim() ||
-    process.env.SLACK_MISSION_CONTROL_WEBHOOK_URL?.trim() ||
-    process.env.SLACK_WEBHOOK_URL?.trim();
-  if (!webhook) return;
-
-  const response = await fetch(webhook, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ text: buildSlackMessage(payload) }),
-  }).catch((error) => {
-    console.error("Client intake Slack webhook failed", error);
-    return null;
-  });
-
-  if (response && !response.ok) {
-    console.error("Client intake Slack webhook responded", response.status, await response.text().catch(() => ""));
+  const result = await postToSlack(GMF_MANAGER_CHANNEL, buildSlackMessage(payload));
+  if (!result.ok) {
+    console.error("Client intake Slack post failed", result.error);
   }
 }
 
