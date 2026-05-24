@@ -3,7 +3,7 @@ import { DownloadButton } from "./DownloadButton";
 
 const CHECKOUT_URL = "https://pay.getmefound.ai/ai-visibility-page";
 
-const BOOK_URL = "https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY";
+const BOOK_URL = "/contact";
 
 const prospect = {
   name: "Joe's Plumbing",

@@ -9,6 +9,8 @@ Last updated: 2026-05-24
 - Vercel project is `aoh-inc/getmefound`.
 - Production site is live at `https://getmefound.ai`.
 - OpenAI, Supabase, and Resend environment variables are saved locally and in Vercel.
+- Vercel Production no longer lists GHL API/webhook env keys. Local old GHL credentials still exist and should be archived or removed after exports are complete.
+- Public report and presence-refresh booking links now route to `/contact` instead of the old GHL calendar. Use this as the free fallback until a Google Calendar appointment page is created.
 - Supabase schema and RLS policies are applied and verified.
 - Resend domain `send.getmefound.ai` is verified.
 - Review Automation storage is live on Supabase.
@@ -97,8 +99,8 @@ Last updated: 2026-05-24
 - Production report-flow smoke passed on 2026-05-24: dry-run packet accepted, stored report count read successfully, and no live report record was created.
 - Internal Report Flow delivery view is live at `/mike-mc/report-flow`; it shows owner summary, deliverable links, blockers, and recent report activity without needing GHL.
 - Production Report Flow page verification passed: no-token access shows only the gate; bearer-token access renders owner summary and report activity.
-- New `/api/report` submissions now record `report_flow_status` events in Supabase, so report requests have a GMF-owned audit trail even while the legacy GHL handoff remains as a bridge.
-- Production report ops smoke passed again after the persistence change; no live report request was fired because `/api/report` still bridges to GHL contact/report handoff.
+- New `/api/report` submissions now record `report_flow_status` events in Supabase, so report requests have a GMF-owned audit trail. The code still contains the legacy GHL handoff path, but Production currently has no GHL env keys listed.
+- Production report ops smoke passed again on 2026-05-24; the check used protected dry-run status only and did not trigger a live report request.
 - Client setup jobs are now event-sourced through Supabase `review_automation_events` as `client_setup_update` records.
 - Internal setup job room is live at `/mike-mc/setup-jobs`; it tracks Manager, Profile Manager, Reviews Manager, Systems Director, Auditor, and launch-gate checks.
 - `npm run clients:setup-seed` created the GetMeFound client-zero setup job and profile.
@@ -116,18 +118,18 @@ Last updated: 2026-05-24
 - Production authenticated render verification passed for `/mike-mc/ghl-exit-ops`, `/mike-mc/clients`, `/mike-mc/review-proof/ai-outsource-hub`, and `/mike-mc/review-replies/ai-outsource-hub`.
 - A production `/api/contact` smoke test saved the contact, created the follow-up task, logged the email event, and sent the internal Resend notification. Smoke-test database rows were removed afterward.
 - Smartlead has three connected outreach inboxes warming and one drafted campaign shell. No live prospect sends are active.
-- 2026-05-23 Smartlead readiness is still `NOT READY`: each inbox has 1 warmup sent; target is at least 10 with 0 spam.
+- 2026-05-24 Smartlead readiness is still `NOT READY`: each inbox has 9 warmup sent, 0 spam, and 100 reputation; target is at least 10 with 0 spam before any live prospect sends.
 
 ## Next Queue
 
-1. Let Smartlead warm the three outreach inboxes and review `npm run smartlead:warmup-report` before adding live leads.
-2. Build and QA a tiny 15-30 lead first test list before activating any campaign. Use `docs/GETMEFOUND_FIRST_SMARTLEAD_CAMPAIGN.md`.
-3. Prepare the first real client/pilot customer batch using the customer template, then review `/mike-mc/review-proof/[slug]` before any live send.
-4. Use `npm run review:recap-smoke` to preview or send a one-recipient monthly recap.
-5. Re-check follow-up due candidates after the configured wait window before sending follow-ups.
-6. Improve the review-reply workspace with direct Google Business Profile posting only after manual approval and client trust rules are proven.
-7. Add daily sync-health alerts and reconciliation before promising POS/CRM auto-sync as a paid add-on.
-8. Plan the next rebrand migration pass: `GMF_*` env rollout, client-zero slug decision, GMF logo asset generation, current doc filename rename, Obsidian rename, and old sending-domain retirement.
+1. Export GHL data before cancellation: contacts, conversations, appointments, workflows, forms, funnels/pages, templates, pipelines, custom fields, media, and reports.
+2. Keep public report requests as a GMF-owned manual/internal workflow or hide the report flow until fully automated reporting is off GHL.
+3. Let Smartlead warm the three outreach inboxes and review `npm run smartlead:warmup-report` before adding live leads.
+4. Build and QA a tiny 15-30 lead first test list before activating any campaign. Use `docs/GETMEFOUND_FIRST_SMARTLEAD_CAMPAIGN.md`.
+5. Prepare the first real client/pilot customer batch using the customer template, then review `/mike-mc/review-proof/[slug]` before any live send.
+6. Use `npm run review:recap-smoke` to preview or send a one-recipient monthly recap.
+7. Re-check follow-up due candidates after the configured wait window before sending follow-ups.
+8. Replace `/contact` with a Google Calendar appointment page when the free calendar link is ready.
 9. Keep each workflow checked weekly by its named owner.
 10. Keep GHL AI features off unless Mike explicitly authorizes them manually.
 

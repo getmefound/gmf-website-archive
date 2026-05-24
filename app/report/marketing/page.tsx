@@ -40,7 +40,7 @@ export default async function MarketingReportPage({
           <div className="mt-6 flex flex-wrap gap-3">
             <PrintButton />
             <Link
-              href="https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY"
+              href="/contact"
               className="rounded-xl border border-[var(--color-hero-border)] px-5 py-3 text-sm font-semibold text-[var(--color-hero-subtext)] hover:bg-white/5"
             >
               Book a Call

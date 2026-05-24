@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { growthProductBySlug } from "@/lib/control/growth-products";
 
-const BOOKING_HREF = "https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY";
+const BOOKING_HREF = "/contact";
 
 const product = growthProductBySlug("presence-refresh");
 const offer = product?.specialOffer;

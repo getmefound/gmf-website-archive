@@ -10,9 +10,9 @@ export type GhlExitChecklistItem = {
 export const GHL_EXIT_SUMMARY = {
   title: "GHL Exit + Review Automation",
   ownerNote:
-    "GHL is now a $97 bridge. Review Automation storage and email are live, but we do not cancel GHL until the Google review link and a real GMF send test pass.",
+    "GHL is now only a $97 bridge. The GMF stack can handle contact intake, review storage, review email, client records, POS/CRM health checks, and internal report status without GHL.",
   cancelGate:
-    "Cancel GHL only after Review Automation, Reach sending, and booking are working outside GHL for GMF.",
+    "Cash-first cancel path: export GHL data, replace any public booking/report links still relying on GHL, pause outreach until Smartlead clears warmup, then cancel.",
 };
 
 export const GHL_EXIT_METRICS = [
@@ -20,7 +20,7 @@ export const GHL_EXIT_METRICS = [
   { label: "Storage", value: "Ready", tone: "accent" as const },
   { label: "Email", value: "Ready", tone: "accent" as const },
   { label: "Blockers", value: "1", tone: "danger" as const },
-  { label: "Cancel GHL", value: "Not yet", tone: "muted" as const },
+  { label: "Cancel GHL", value: "Close", tone: "warm" as const },
 ];
 
 export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
@@ -64,19 +64,19 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     title: "Storage keys in Vercel",
     owner: "Systems Director",
     status: "done",
-    detail: "Upstash Redis is live and passed write, read, and cleanup checks.",
+    detail: "Supabase storage env is present locally and in Vercel. Upstash is only a fallback path now.",
   },
   {
     title: "GMF Google review link",
     owner: "Profile Manager",
-    status: "blocked",
-    detail: "Capture and save the real GMF Google review link before any real review request send.",
+    status: "done",
+    detail: "The GMF client profile has a working Google review URL for review request testing.",
   },
   {
     title: "GMF client-zero test",
     owner: "Reviews Manager",
-    status: "next",
-    detail: "Run the full GMF test with safe contacts before selling this workflow as client-ready.",
+    status: "done",
+    detail: "Client-zero review request send and private feedback tests passed with GMF-owned storage.",
   },
   {
     title: "Review request sender endpoint",
@@ -93,8 +93,8 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
   {
     title: "Live review request sender",
     owner: "Sender",
-    status: "next",
-    detail: "Run proof checks, then send only after the GMF Google review link and client-zero approval are in place.",
+    status: "done",
+    detail: "Review request sending is available through Resend with internal-token approval, logs, suppression, and follow-up checks.",
   },
   {
     title: "Monthly recap endpoint",
@@ -109,28 +109,46 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     detail: "Client hub now has a simple monthly recap card ready for live data wiring.",
   },
   {
-    title: "Booking replacement",
+    title: "Booking fallback",
     owner: "Scheduler",
+    status: "done",
+    detail: "Public report and landing page booking links now route to the GMF contact page instead of the old GHL calendar. A proper Google Calendar appointment page can replace this later.",
+  },
+  {
+    title: "Export GHL data",
+    owner: "Manager + Mike",
+    status: "blocked",
+    detail: "Export contacts, conversations, appointments, workflows, forms, funnels/pages, templates, pipelines, custom fields, and reports before access is removed.",
+  },
+  {
+    title: "Production GHL env check",
+    owner: "Systems Director",
+    status: "done",
+    detail: "Vercel production env no longer lists GHL API or webhook keys. Local old GHL keys should be archived or removed after export.",
+  },
+  {
+    title: "Report request fallback",
+    owner: "Manager + Reporter",
     status: "next",
-    detail: "Pick Google Calendar or Calendly and move booking away from GHL when ready.",
+    detail: "Keep report requests as GMF-owned manual/internal work or hide the public report flow until automated report fulfillment is fully off GHL.",
   },
   {
     title: "Reach replacement",
     owner: "Sender",
-    status: "later",
-    detail: "Move cold email send, drip, reply tracking, and safety checks outside GHL.",
+    status: "next",
+    detail: "Smartlead is connected but not ready for live prospect sends yet. Keep prospect sends paused until all inboxes clear warmup gates.",
   },
   {
     title: "AI Visibility replacement",
     owner: "Profile Manager",
-    status: "later",
-    detail: "Replace GHL-dependent reporting with GMF-owned ranking checks, notes, and monthly proof.",
+    status: "next",
+    detail: "Use GMF-owned profile checks, notes, screenshots, and monthly proof for Stay Found while automated ranking reports mature.",
   },
   {
     title: "Final GHL cancel gate",
     owner: "Manager",
-    status: "later",
-    detail: "Only cancel after GMF can sell, fulfill, send, book, and report without GHL.",
+    status: "next",
+    detail: "Cancel is reasonable once exports are saved and non-GHL booking/report paths are confirmed. Outreach can stay paused rather than keeping GHL.",
   },
 ];
 
