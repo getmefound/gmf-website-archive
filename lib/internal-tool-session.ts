@@ -27,7 +27,7 @@ export async function startInternalToolSession(token: string) {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/mike-mc",
+    path: "/",
     maxAge: INTERNAL_TOOL_SESSION_MAX_AGE,
   });
   return true;
