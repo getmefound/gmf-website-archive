@@ -101,7 +101,7 @@ jobs:
         if: always()
         shell: bash
         run: |
-          git config user.name "AOH Manager"
+          git config user.name "GMF Manager"
           git config user.email "actions@github.com"
           git add -f docs/client-ops-ledger/outbox/reach-warmup-* tmp-reach-warmup-* "reach-warmup-${{ steps.warmup.outputs.run_date }}.log" || true
           if git diff --cached --quiet; then

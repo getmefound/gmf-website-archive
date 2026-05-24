@@ -1,7 +1,7 @@
-# AOH Agent Operating Model
+# GetMeFound Agent Operating Model
 
 Status: draft source of truth
-Scope: how AOH agents own knowledge, hand off work, and show progress in Mission Control.
+Scope: how GetMeFound agents own knowledge, hand off work, and show progress in Mission Control.
 
 ## Core Rule
 
@@ -36,7 +36,7 @@ The client should not need a Zoom setup call as the default path.
 They receive written instructions with screenshots and a video. Their work is to provide access and information:
 
 - business basics
-- Google Business Profile manager invite to AOH
+- Google Business Profile manager invite to GetMeFound
 - how completed customers should enter the review flow
 - customer list, if available now
 - POS/CRM name and integration details, if known
@@ -80,7 +80,7 @@ Coach makes the knowledge usable by the specialist agents.
 
 Owns Google Business Profile access and health.
 
-Profile verifies the client added AOH as a manager, confirms the correct business/location, checks verification status, finds the review link, and hands off to GHL Expert when GHL can be connected.
+Profile verifies the client added GetMeFound as a manager, confirms the correct business/location, checks verification status, finds the review link, and hands off to GHL Expert when GHL can be connected.
 
 ### GHL Expert
 
@@ -117,7 +117,7 @@ Auditor also owns security drift. Before deploys and during daily checks, Audito
 
 ## Handoff Rules
 
-- Profile hands off to GHL Expert only after AOH has GBP manager access or a clear blocker is recorded.
+- Profile hands off to GHL Expert only after GetMeFound has GBP manager access or a clear blocker is recorded.
 - GHL Expert hands off to Sorter when a customer list needs cleanup.
 - Sorter hands back to GHL Expert when the list is ready to import.
 - GHL Expert hands off to Auditor before launch is marked done.
@@ -140,6 +140,36 @@ Auditor also owns security drift. Before deploys and during daily checks, Audito
 - post-launch monitoring status
 - model/tool tier used when the work is agent-driven
 - proof required before Done
+
+## Workflow Library
+
+Mission Control now has a workflow library at `/mike-mc/workflows`.
+
+Each workflow must have:
+
+- uniform name such as `Launch 01: Client Setup`
+- one-sentence purpose
+- short workflow description
+- visible status: ready, working, blocked, manual, or planned
+- relevant counters
+- weekly check owner
+- audit owner
+- agent-by-agent handoff boxes
+- ready criteria
+- stall protocol
+- Mike escalation rule
+- client email approval rule
+- Coach training note
+
+If a workflow stops:
+
+1. Auditor names the stalled step and responsible agent.
+2. Responsible agent says what they are doing to fix it.
+3. If the fix needs client information, the responsible agent drafts the client email.
+4. Manager asks Mike to approve that exact email or approve a different message.
+5. Manager keeps the workflow visible until the blocker clears or the workflow is intentionally paused.
+
+Coach owns the workflow knowledge layer. Coach should keep the workflow pages aligned with SOPs and make sure each specialist agent knows only the parts they need to execute.
 
 ## Auditor Security Checklist
 

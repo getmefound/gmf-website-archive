@@ -19,6 +19,14 @@ export function envValue(name: string) {
   return cleanEnvValue(process.env[name]);
 }
 
+export function envValueAny(...names: string[]) {
+  for (const name of names) {
+    const value = envValue(name);
+    if (value) return value;
+  }
+  return "";
+}
+
 export function getEnvChecks(): EnvCheck[] {
   return REQUIRED_ENV.map((item) => ({
     name: item.name,

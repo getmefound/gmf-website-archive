@@ -226,7 +226,7 @@ function buildAgentListResponse() {
 
   return {
     kind: "agent-directory",
-    text: `*AOH agent directory - ${today()}*
+    text: `*GMF agent directory - ${today()}*
 
 Manager owns the brief, approval queue, routing, blockers, and escalations to Mike.
 
@@ -488,8 +488,8 @@ Mike, Profile Manager status:
 
 Access:
 
-- Confirmed for the AOH client-zero test.
-- AOH's own Google Business Profile is the practice account.
+- Confirmed for the GMF client-zero test.
+- GetMeFound's own Google Business Profile is the practice account.
 
 Profile gaps:
 
@@ -499,17 +499,17 @@ Profile gaps:
 
 Agent-prepared draft:
 
-AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
+GetMeFound helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
 Proof needed:
 
-- Screenshot of People and access showing AOH access.
+- Screenshot of People and access showing GMF access.
 - Screenshot of the profile edit area before any public change.
 - Screenshot of the final preview before publishing.
 
 Manager recommendation:
 
-- This draft is safe to use as the first AOH GBP post.
+- This draft is safe to use as the first GMF GBP post.
 - Agent team should prepare the post and proof.
 - Mike should only be asked for the final public-publish decision.
 - Nothing gets published until Mike says exactly: \`publish GBP post\`.
@@ -540,25 +540,25 @@ Owner: Profile Manager
 
 Goal:
 
-- Get the verified AOH Google review link.
+- Get the verified GMF Google review link.
 - Do not publish anything.
 - Do not change profile settings.
 - Hand the link to Reviews Manager so Review Automation can send to the right place.
 
 What Profile Manager should do:
 
-1. Open Google while logged into the Google account that has AOH profile access.
-2. Search for \`AI Outsource Hub\` and open the correct Business Profile controls.
+1. Open Google while logged into the Google account that has GMF profile access.
+2. Search for \`GetMeFound\` and open the correct Business Profile controls.
 3. Select \`Read reviews\`.
 4. Select \`Get more reviews\`, \`Ask for reviews\`, or the review QR/share option.
 5. Copy the public review request link.
-6. Test that the link opens the Google review flow for AI Outsource Hub.
+6. Test that the link opens the Google review flow for GetMeFound.
 7. Report back with: access status, review link found yes/no, final link if found, blocker if no.
 
 Proof standard:
 
-- The link opens the correct AOH review flow.
-- The business name is AI Outsource Hub.
+- The link opens the correct GMF review flow.
+- The business name is GetMeFound.
 - The link is public, not a private admin URL.
 - No profile settings, posts, replies, or public edits were changed.
 
@@ -567,11 +567,11 @@ Blocked if:
 - Google does not show the profile tools.
 - \`Read reviews\` or \`Get more reviews\` is missing.
 - The link opens the wrong business or an admin-only page.
-- AOH needs additional profile verification.
+- GMF needs additional profile verification.
 
 Next handoff:
 
-- Reviews Manager adds the link to the AOH client profile.
+- Reviews Manager adds the link to the GMF client profile.
 - Sender only dry-runs until storage and email sender env are ready.
 
 References:
@@ -586,13 +586,13 @@ function buildGbpPostApprovalResult() {
     kind: "gbp-post-approval",
     text: `*GBP post approval - ${today()}*
 
-Mike, Manager recommendation: use the approved AOH Google Business Profile draft.
+Mike, Manager recommendation: use the approved GMF Google Business Profile draft.
 
 This is *not* a Reach drip approval.
 
 Final post:
 
-AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
+GetMeFound helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
 Agent work:
 
@@ -602,7 +602,7 @@ Agent work:
 
 Proof checklist:
 
-- People and access screenshot already shows AOH control.
+- People and access screenshot already shows GMF control.
 - Screenshot before publishing.
 - Screenshot after Google accepts/submits the post.
 - Note whether Google says the post is pending review.
@@ -985,7 +985,7 @@ function buildGhlExitStatusResponse() {
     kind: "manager-ghl-exit-status",
     text: `*GHL exit status - ${today()}*
 
-Short answer: GHL is now on the $97 bridge plan. Use it only while the AOH replacement proves itself.
+Short answer: GHL is now on the $97 bridge plan. Use it only while the GMF replacement proves itself.
 
 Current job:
 
@@ -1010,7 +1010,7 @@ Agent owners:
 - Manager: status and blocker summary.
 - GHL Expert: export and translate current GHL assets.
 - Systems Director: downgrade/cancel gates, cost, cron, vendor checks.
-- Website/Codex: build the AOH-owned Review Automation and client-page replacement.
+- Website/Codex: build the GMF-owned Review Automation and client-page replacement.
 - Sender: move Reach sending/drips off GHL later.
 - Auditor: verify no secret/customer data is committed.
 
@@ -1054,7 +1054,7 @@ function buildReviewAutomationStatusResponse() {
     kind: "reviews-manager-status",
     text: `*Reviews Manager status - ${today()}*
 
-Short answer: AOH Review Automation is being moved onto our own client page, with GHL kept as the $97 bridge for sending while we test.
+Short answer: GMF Review Automation is being moved onto our own client page, with GHL kept as the $97 bridge for sending while we test.
 
 Live pieces:
 
@@ -1088,7 +1088,7 @@ What Manager can check:
 Still needed:
 
 - Add each client's verified Google review link before happy feedback can route to Google.
-- Test AOH client-zero before replacing GHL sends.
+- Test GMF client-zero before replacing GHL sends.
 
 Useful URL for systems/Manager:
 

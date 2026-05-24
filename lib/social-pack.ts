@@ -1,4 +1,4 @@
-﻿export type ChannelKey =
+export type ChannelKey =
   | "linkedin-company"
   | "linkedin-personal"
   | "facebook"
@@ -51,7 +51,7 @@ So the goal isn't a clean 5.0. The goal is volume, recency, and a couple of impe
 
 That's what we run for clients. Review Automation is $49/mo, no setup fee. We ask every customer at the right moment, route the unhappy ones to you privately, and let the rest flow to Google. Most clients add 8 to 15 reviews in the first 30 days.
 
-Full breakdown of the math: https://aioutsourcehub.com/blog/46-beats-50-star-rating-sweet-spot
+Full breakdown of the math: https://getmefound.ai/blog/46-beats-50-star-rating-sweet-spot
 
 What's your current star rating, and how many reviews are behind it?`,
       "linkedin-personal": `I tell clients to stop chasing 5.0.
@@ -62,7 +62,7 @@ Northwestern's research has been clear on this for years. Conversions peak at 4.
 
 We run Review Automation for $49/mo. No setup. It asks at the right moment, filters the angry ones to you privately, and pushes the rest to Google. Clients land in the sweet spot inside a quarter.
 
-The blog has the full Spiegel data: https://aioutsourcehub.com/blog/46-beats-50-star-rating-sweet-spot
+The blog has the full Spiegel data: https://getmefound.ai/blog/46-beats-50-star-rating-sweet-spot
 
 Curious what other owners think: is a 5.0 a brag or a red flag?`,
       facebook: `Your 5.0 rating might be costing you bookings.
@@ -73,7 +73,7 @@ A 4.7 with fresh reviews beats a 5.0 with 20 old ones every time.
 
 We run Review Automation for $49/mo. No setup fee. Asks every customer, filters the unhappy ones to you privately, sends the rest to Google. Clients hit the sweet spot inside 60-90 days.
 
-Read how it works: https://aioutsourcehub.com/pricing#review-automation`,
+Read how it works: https://getmefound.ai/pricing#review-automation`,
       instagram: `4.6 outsells 5.0.
 
 Northwestern's research caught what owners miss. Buyers don't trust perfect. They trust real. A 4.7 with 80 fresh reviews and a couple of imperfect ones converts better than a flawless profile with 25 old ones.
@@ -91,7 +91,7 @@ A 4.7 with 80 reviews beats a 5.0 with 25, every time.
 
 Review Automation $49/mo, no setup.
 
-Price the fix â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Price the fix â†’ https://getmefound.ai/pricing#review-automation`,
       google: `A perfect 5.0 might be costing you bookings.
 
 Northwestern research shows conversions peak at 4.6-4.8 stars. Past that, buyers assume reviews are fake.
@@ -100,8 +100,8 @@ A 4.7 with 80 fresh reviews beats a 5.0 with 25 old ones.
 
 Review Automation is $49/mo, no setup. Asks every customer, filters unhappy ones to you, sends the rest to Google.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/46-beats-50-star-rating-sweet-spot`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/46-beats-50-star-rating-sweet-spot`,
     },
   },
 
@@ -121,9 +121,9 @@ Most owners don't see this because the loss is invisible. No one calls to say "I
 
 Review Automation is $49/mo, no setup. We ask every customer at the right moment, filter complaints to you privately, and route the rest to Google. Clients pull 10 to 15 new reviews in month one.
 
-Full Luca study breakdown: https://aioutsourcehub.com/blog/real-cost-missed-google-review
+Full Luca study breakdown: https://getmefound.ai/blog/real-cost-missed-google-review
 
-Run yours: https://aioutsourcehub.com/#calculator
+Run yours: https://getmefound.ai/#calculator
 
 What's the last date on your newest Google review?`,
       "linkedin-personal": `I ran the numbers on a dormant Google profile last week.
@@ -136,16 +136,16 @@ Worst part: it's invisible. The customer doesn't tell you they passed. They just
 
 We fix this with Review Automation, $49/mo, no setup. Asks every customer, filters the angry ones to you, sends the rest to Google. Clients add 10-15 reviews in month one.
 
-Run the math yourself: https://aioutsourcehub.com/#calculator
+Run the math yourself: https://getmefound.ai/#calculator
 
-Blog with the full Harvard breakdown: https://aioutsourcehub.com/blog/real-cost-missed-google-review
+Blog with the full Harvard breakdown: https://getmefound.ai/blog/real-cost-missed-google-review
 
 Honest question for the owners here: when's the last time you looked at your newest review's date?`,
       facebook: `A dormant Google profile is costing you $38,400/year.
 
 Harvard study (Luca, 2016): a one-star difference = 5-9% revenue. A $480K business losing 8% of customers to a competitor with fresher reviews loses $38,400/year. Quietly. The customer just calls someone else.
 
-Run your number: https://aioutsourcehub.com/#calculator
+Run your number: https://getmefound.ai/#calculator
 
 We fix this for $49/mo, no setup. Review Automation asks every customer, filters complaints to you privately, sends the rest to Google.`,
       instagram: `Your dormant Google profile is leaking $38K a year.
@@ -163,7 +163,7 @@ Customer never tells you they passed. They just call someone else.
 
 Review Automation $49/mo, no setup.
 
-Run your loss â†’ https://aioutsourcehub.com/#calculator`,
+Run your loss â†’ https://getmefound.ai/#calculator`,
       google: `Your dormant Google profile is costing you real revenue.
 
 Harvard study: a 1-star bump = 5-9% revenue. A $480K business losing 8% of discovery to a fresher competitor = $38,400/year.
@@ -172,8 +172,8 @@ The customer never calls to say they passed. They just call someone else.
 
 Review Automation, $49/mo, no setup. We ask every customer, filter unhappy ones to you, send the rest to Google.
 
-Calculator: https://aioutsourcehub.com/#calculator
-Pricing: https://aioutsourcehub.com/pricing#review-automation`,
+Calculator: https://getmefound.ai/#calculator
+Pricing: https://getmefound.ai/pricing#review-automation`,
     },
   },
 
@@ -191,9 +191,9 @@ We see this every week with clients. New customer onboards with 140 lifetime rev
 
 Review Automation is $49/mo, no setup. We ask every customer at the moment they're most likely to leave one, filter unhappy customers to you privately, and route the rest to Google.
 
-Full breakdown of the 90-day math: https://aioutsourcehub.com/blog/review-velocity-90-day-rule
+Full breakdown of the 90-day math: https://getmefound.ai/blog/review-velocity-90-day-rule
 
-Run yours: https://aioutsourcehub.com/#calculator
+Run yours: https://getmefound.ai/#calculator
 
 What's the date on your most recent Google review?`,
       "linkedin-personal": `A plumber called me last month. 240 lifetime reviews, 4.8 stars, sitting in position 6 in the map pack.
@@ -204,9 +204,9 @@ Google's local algorithm doesn't care about your career total. It cares about th
 
 We onboarded him. Review Automation, $49/mo, no setup. Sixty days in he had 38 new reviews and moved to position 3. Same business. Different velocity.
 
-The full 90-day rule breakdown: https://aioutsourcehub.com/blog/review-velocity-90-day-rule
+The full 90-day rule breakdown: https://getmefound.ai/blog/review-velocity-90-day-rule
 
-Run your own math: https://aioutsourcehub.com/#calculator
+Run your own math: https://getmefound.ai/#calculator
 
 For the owners here: is "lifetime review count" the metric you obsess over, or are you tracking last 90 days?`,
       facebook: `60 fresh reviews beat 200 old ones.
@@ -215,9 +215,9 @@ Google weights recency hard. A profile with the newest review from 2022 reads do
 
 Review Automation, $49/mo, no setup. We ask every customer at the right moment so new reviews keep landing.
 
-Run your lost-revenue number: https://aioutsourcehub.com/#calculator
+Run your lost-revenue number: https://getmefound.ai/#calculator
 
-Full breakdown: https://aioutsourcehub.com/blog/review-velocity-90-day-rule`,
+Full breakdown: https://getmefound.ai/blog/review-velocity-90-day-rule`,
       instagram: `60 fresh reviews beat 200 old ones.
 
 A plumber I onboarded had 240 lifetime reviews and sat at position 6 in the map pack. His newest was 11 months old. The shop at position 1? Half his lifetime count, newest review 3 days ago.
@@ -233,15 +233,15 @@ Google weights recency. Your "lifetime review count" is a vanity number â€”
 
 Review Automation $49/mo, no setup.
 
-Start the systematic ask â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Start the systematic ask â†’ https://getmefound.ai/pricing#review-automation`,
       google: `60 reviews from the last 90 days beat 200 reviews from five years ago.
 
 Google weights recency. A dormant profile reads closed, even at 4.9 stars.
 
 Review Automation, $49/mo, no setup. Systematic ask, filters complaints to you privately, sends the rest to Google. Most clients hit the velocity threshold inside one quarter.
 
-Calculator: https://aioutsourcehub.com/#calculator
-Pricing: https://aioutsourcehub.com/pricing#review-automation`,
+Calculator: https://getmefound.ai/#calculator
+Pricing: https://getmefound.ai/pricing#review-automation`,
     },
   },
 
@@ -259,9 +259,9 @@ Most local businesses are invisible in AI results because AI doesn't crawl your 
 
 AI Visibility is $179/mo + $199 setup. We audit what AI currently knows about your business, fix the schema and citations, and rebuild your presence so the answer engines pick you when a customer asks "best plumber near me."
 
-Full breakdown of the AI vs. Google math: https://aioutsourcehub.com/blog/why-chatgpt-recommends-by-name
+Full breakdown of the AI vs. Google math: https://getmefound.ai/blog/why-chatgpt-recommends-by-name
 
-Run your numbers: https://aioutsourcehub.com/#calculator
+Run your numbers: https://getmefound.ai/#calculator
 
 Have you searched your own business in ChatGPT yet? What did it say?`,
       "linkedin-personal": `I ran an experiment with a dental practice last month.
@@ -272,9 +272,9 @@ This is the gap nobody is talking about. Google sends 10 links and lets the user
 
 We run AI Visibility for $179/mo + $199 setup. We fix the schema, citations, and structured signals so the answer engines pick you. The dental practice above? Ranking in ChatGPT's top 3 for their town inside 8 weeks.
 
-Blog with the full math: https://aioutsourcehub.com/blog/why-chatgpt-recommends-by-name
+Blog with the full math: https://getmefound.ai/blog/why-chatgpt-recommends-by-name
 
-Calculator: https://aioutsourcehub.com/#calculator
+Calculator: https://getmefound.ai/#calculator
 
 Try this now: ask ChatGPT to recommend your category in your town. Are you in the top 3? Honest answers welcome.`,
       facebook: `ChatGPT only names 1-3 businesses. Google lists 10.
@@ -287,8 +287,8 @@ AI Visibility, $179/mo + $199 setup. We fix the schema, citations, and structure
 
 Try it yourself: ask ChatGPT to recommend your business category in your town. Are you named?
 
-Run the test, then see the fix: https://aioutsourcehub.com/pricing#ai-visibility
-Full breakdown: https://aioutsourcehub.com/blog/why-chatgpt-recommends-by-name`,
+Run the test, then see the fix: https://getmefound.ai/pricing#ai-visibility
+Full breakdown: https://getmefound.ai/blog/why-chatgpt-recommends-by-name`,
       instagram: `Google lists 10. AI picks 3.
 
 A Google click converts at 3-8%. An AI recommendation converts at 18-30%. When ChatGPT names you, the customer isn't shopping. They're buying.
@@ -306,7 +306,7 @@ Different game. Most local businesses are invisible in AI.
 
 AI Visibility $179/mo + $199 setup. We fix what AI reads.
 
-See what we fix â†’ https://aioutsourcehub.com/pricing#ai-visibility`,
+See what we fix â†’ https://getmefound.ai/pricing#ai-visibility`,
       google: `Google lists 10 results. ChatGPT picks 1-3 by name.
 
 AI traffic converts at 18-30%. Google clicks convert at 3-8%. Different game, different signals.
@@ -315,8 +315,8 @@ AI Visibility, $179/mo + $199 setup. We audit what AI knows about your business,
 
 Test yourself: ask ChatGPT for the best [your category] in your town. Are you named?
 
-Pricing: https://aioutsourcehub.com/pricing#ai-visibility
-Full breakdown: https://aioutsourcehub.com/blog/why-chatgpt-recommends-by-name`,
+Pricing: https://getmefound.ai/pricing#ai-visibility
+Full breakdown: https://getmefound.ai/blog/why-chatgpt-recommends-by-name`,
     },
   },
 
@@ -336,9 +336,9 @@ The software isn't the problem. The work is. Tools don't do the work. People do.
 
 Review Automation is $49/mo, no setup. We do the work. Most clients land 10-15 reviews in month one and 50-80 by month six.
 
-Full DIY vs. DFY breakdown: https://aioutsourcehub.com/blog/diy-review-tools-vs-done-for-you
+Full DIY vs. DFY breakdown: https://getmefound.ai/blog/diy-review-tools-vs-done-for-you
 
-If the math surprises you, the $49/mo done-for-you alternative is at https://aioutsourcehub.com/pricing#review-automation`,
+If the math surprises you, the $49/mo done-for-you alternative is at https://getmefound.ai/pricing#review-automation`,
       "linkedin-personal": `Owner asked me last week: "Why am I paying $49/mo when I can buy software for $30?"
 
 I told him the software wasn't the problem. The work was. Then I pulled up his account. He'd had the $30 tool for 7 months. Connected once. SMS compliance unfinished. POS integration broken since March. 14 reviews total.
@@ -347,7 +347,7 @@ Did the math with him. With his time costed at $50/hr (he runs a $400K plumbing 
 
 We onboarded him. First 30 days: 11 new reviews. Zero hours of his time. He texted me last week: "I didn't realize software was the expensive option."
 
-Review Automation, $49/mo, no setup. We do the work. The math is at https://aioutsourcehub.com/blog/diy-review-tools-vs-done-for-you
+Review Automation, $49/mo, no setup. We do the work. The math is at https://getmefound.ai/blog/diy-review-tools-vs-done-for-you
 
 Real question for the owners here: how many marketing tools do you own that you haven't logged into this quarter?`,
       facebook: `That $30/mo review software is costing you $15 per review.
@@ -356,9 +356,9 @@ Math: 6 months in, most DIY users have 8 hours sunk, broken POS sync, SMS compli
 
 We charge $5 per review. Done-for-you, no dashboard, no setup time.
 
-Review Automation, $49/mo: https://aioutsourcehub.com/pricing#review-automation
+Review Automation, $49/mo: https://getmefound.ai/pricing#review-automation
 
-Full math: https://aioutsourcehub.com/blog/diy-review-tools-vs-done-for-you`,
+Full math: https://getmefound.ai/blog/diy-review-tools-vs-done-for-you`,
       instagram: `DIY review software: $15 per review.
 Done-for-you: $5 per review.
 
@@ -375,15 +375,15 @@ Done-for-you over the same 6 months: $5 per review.
 
 Review Automation $49/mo, no setup.
 
-Price the done-for-you â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Price the done-for-you â†’ https://getmefound.ai/pricing#review-automation`,
       google: `DIY review software costs $15 per review. We charge $5.
 
 Six months of "free" software = 8 hours of your time, broken integrations, 12 reviews. We deliver 50-80 reviews in the same period. No dashboard, no setup.
 
 Review Automation, $49/mo, no setup fee.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/diy-review-tools-vs-done-for-you`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/diy-review-tools-vs-done-for-you`,
     },
   },
 
@@ -413,11 +413,11 @@ That's the math local service businesses lose every week:
 
 For a shop like Bill at Southington Lawn Service, one missed Saturday-rush call is $200 in mowing plus a $1,800 annual contract walking next door.
 
-Run your own numbers in 30 seconds: https://aioutsourcehub.com/#calculator
+Run your own numbers in 30 seconds: https://getmefound.ai/#calculator
 
 Relay is our phone answering service. Answers, qualifies the lead, books into your calendar. Introduces itself as an AI assistant; transfers to a human if the caller asks. $299/mo + $299 setup. Most clients break even in month one.
 
-See if Relay pays for itself in your industry: https://aioutsourcehub.com/pricing#relay
+See if Relay pays for itself in your industry: https://getmefound.ai/pricing#relay
 
 (Per-vertical breakdown in the first comment.)`,
       "linkedin-personal": `9 of 10 after-hours calls go to your competitor.
@@ -428,7 +428,7 @@ Tuesday 7:15pm in Southington, CT. A homeowner just got home from work, lawn's o
 
 Third one wins the $200 cut, the cleanup, and the $1,800 recurring contract. The first two never knew she called.
 
-Run your own numbers in 30 seconds: https://aioutsourcehub.com/#calculator
+Run your own numbers in 30 seconds: https://getmefound.ai/#calculator
 
 I built Relay because I watched too many local-business owners lose to *availability*, not skill. Operators like Bill at Southington Lawn Service. Phones are still the buy button for lawn care, trades, vets, med spas. The buyer doesn't wait.
 
@@ -436,7 +436,7 @@ One question that comes up in every demo: "won't customers hate that it's a bot?
 
 $299/mo, $299 setup. Most clients break even the first month.
 
-See Relay direct: https://aioutsourcehub.com/pricing#relay
+See Relay direct: https://getmefound.ai/pricing#relay
 
 If you run a local service business, what does your after-hours call volume actually look like?`,
       facebook: `Tuesday 7:15pm. A homeowner in Southington, CT just got home from work. Lawn's overgrown. Daughter's graduation party Saturday. She calls 3 lawn services.
@@ -448,16 +448,16 @@ Third one wins $200 in mowing plus an $1,800 annual contract.
 
 9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
 
-Run yours in 30 seconds: https://aioutsourcehub.com/#calculator
+Run yours in 30 seconds: https://getmefound.ai/#calculator
 
 This is why we built Relay. A phone answering service that catches every call, qualifies the lead, books into your calendar. Introduces itself as AI. Transfers to a human if asked. $299/mo, payback in 30 days for most.
 
-See Relay: https://aioutsourcehub.com/pricing#relay`,
+See Relay: https://getmefound.ai/pricing#relay`,
       instagram: `Tuesday 7:15pm. She calls 3 lawn services. First two: voicemail. Third one picks up â€” and wins $200 + an $1,800 contract.
 
 9 of 10 after-hours calls go to your competitor.
 
-See your monthly loss: aioutsourcehub.com/#calculator
+See your monthly loss: getmefound.ai/#calculator
 
 #LocalBusiness #LawnCare #SmallBusinessOwner #LocalServices`,
       x: `9 of 10 after-hours calls go to your competitor.
@@ -468,16 +468,16 @@ Tuesday 7:15pm. Homeowner calls 3 lawn services. Two: voicemail. Third picks up 
 
 Relay (phone answering service) catches every call. $299/mo.
 
-See your loss â†’ aioutsourcehub.com/#calculator`,
+See your loss â†’ getmefound.ai/#calculator`,
       google: `Tuesday 7:15pm. A homeowner just got home from work. Lawn is overgrown, hosting a party Saturday. She calls 3 lawn services. First two: voicemail. Third one picks up â€” and wins the cut, the cleanup, and the $1,800 contract.
 
 9 of 10 after-hours calls go to your competitor. Not because your service is worse. Because nobody picked up.
 
-Run yours in 30 seconds: https://aioutsourcehub.com/#calculator
+Run yours in 30 seconds: https://getmefound.ai/#calculator
 
 Relay is our phone answering service. Catches every call, qualifies the lead, books into your calendar. Introduces itself as AI; transfers to a human if asked. $299/mo + $299 setup, 750 minutes included. Most clients break even in month one.
 
-See Relay: https://aioutsourcehub.com/pricing#relay`,
+See Relay: https://getmefound.ai/pricing#relay`,
     },
   },
 
@@ -495,7 +495,7 @@ Most local businesses have zero strategy for it. Their SEO agency optimized for 
 
 AI Visibility is $179/mo + $199 setup. We audit what AI currently knows about your business across ChatGPT, Claude, Perplexity, and Google AI Overviews. We fix the schema, citations, and structured signals so the answer engines actually pick you. Most clients show up in the top 3 named recommendations inside 60-90 days.
 
-Full breakdown of AI visibility vs. classic SEO: https://aioutsourcehub.com/blog/ai-visibility-vs-seo
+Full breakdown of AI visibility vs. classic SEO: https://getmefound.ai/blog/ai-visibility-vs-seo
 
 When's the last time you searched your own business in ChatGPT? What did you find?`,
       "linkedin-personal": `I asked a roofer last month how much of his lead flow comes from AI search.
@@ -508,7 +508,7 @@ This is the shift nobody is preparing for. Classic SEO still matters, but the sh
 
 We run AI Visibility for $179/mo + $199 setup. Fixed signals, structured presence, named in answer engines inside 60-90 days for most.
 
-Full blog: https://aioutsourcehub.com/blog/ai-visibility-vs-seo
+Full blog: https://getmefound.ai/blog/ai-visibility-vs-seo
 
 Honest question for the owners here: have you ever asked ChatGPT to recommend your category in your town? What did it say?`,
       facebook: `1 in 4 local searches is now happening in AI.
@@ -519,9 +519,9 @@ If your SEO is set up for Google only, you're invisible in a quarter of your mar
 
 AI Visibility, $179/mo + $199 setup. We fix the structured signals AI uses to pick businesses.
 
-Full breakdown: https://aioutsourcehub.com/blog/ai-visibility-vs-seo
+Full breakdown: https://getmefound.ai/blog/ai-visibility-vs-seo
 
-Pricing: https://aioutsourcehub.com/pricing#ai-visibility`,
+Pricing: https://getmefound.ai/pricing#ai-visibility`,
       instagram: `1 in 4 people looking for your business are asking ChatGPT instead of Googling.
 
 Try it right now. Ask ChatGPT: "best [your category] in [your town]."
@@ -539,15 +539,15 @@ If your SEO is Google-only, you're invisible in 25% of your market.
 
 AI Visibility $179/mo + $199 setup.
 
-See the fix â†’ https://aioutsourcehub.com/pricing#ai-visibility`,
+See the fix â†’ https://getmefound.ai/pricing#ai-visibility`,
       google: `About 1 in 4 local searches has moved to AI: ChatGPT, Claude, Perplexity, Google AI Overviews.
 
 The share is higher on high-intent queries. If your SEO is set up for Google only, you're invisible in a quarter of your highest-value market.
 
 AI Visibility, $179/mo + $199 setup. We fix the structured signals AI uses.
 
-Pricing: https://aioutsourcehub.com/pricing#ai-visibility
-Full breakdown: https://aioutsourcehub.com/blog/ai-visibility-vs-seo`,
+Pricing: https://getmefound.ai/pricing#ai-visibility
+Full breakdown: https://getmefound.ai/blog/ai-visibility-vs-seo`,
     },
   },
 
@@ -565,9 +565,9 @@ Run the math on a dental practice. 80 reviews collected this year at an average 
 
 Review Automation is $49/mo, no setup. Most clients add 50-80 reviews/year. Treat reviews like a capital investment, not a marketing expense.
 
-Read the math on why review assets compound for a decade: https://aioutsourcehub.com/blog/dental-practices-reviews-compounding-asset
+Read the math on why review assets compound for a decade: https://getmefound.ai/blog/dental-practices-reviews-compounding-asset
 
-Then price the $49/mo automation that starts your stack: https://aioutsourcehub.com/pricing#review-automation`,
+Then price the $49/mo automation that starts your stack: https://getmefound.ai/pricing#review-automation`,
       "linkedin-personal": `The smartest local owner I know thinks of reviews like a 401k.
 
 He's a dentist outside Hartford. Every patient gets asked. Every single one. He's been doing it for 11 years. His profile has 840 reviews, newest one yesterday. New patients tell him they picked him because his profile "felt like a real practice." That's compounded trust. He can't be unseated by a competitor opening up next year because they're starting from zero.
@@ -576,7 +576,7 @@ Most owners treat reviews like a chore. He treats them like capital. Every revie
 
 We run Review Automation for $49/mo, no setup, for owners who want to start compounding. The systematic ask is the lever.
 
-Blog with the full math: https://aioutsourcehub.com/blog/dental-practices-reviews-compounding-asset
+Blog with the full math: https://getmefound.ai/blog/dental-practices-reviews-compounding-asset
 
 For the owners here: if you stopped all your marketing tomorrow, which asset would still be earning in 2036?`,
       facebook: `Ads stop the day you stop paying. Reviews work for 10 years.
@@ -585,8 +585,8 @@ A review collected today is still in your Google profile in 2036, still ranking 
 
 Review Automation, $49/mo, no setup. Most clients add 50-80 reviews/year.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/dental-practices-reviews-compounding-asset`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/dental-practices-reviews-compounding-asset`,
       instagram: `The review you collect today is still earning in 2036.
 
 The ad you ran last week stopped the second you paused it.
@@ -606,15 +606,15 @@ Reviews are a stock. Ads are a flow. Most owners spend 80% of their budget on fl
 
 Review Automation $49/mo, no setup.
 
-Start compounding â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Start compounding â†’ https://getmefound.ai/pricing#review-automation`,
       google: `Reviews compound. Ads don't.
 
 A review collected today is still in your Google profile in 2036, still ranking and converting. Ads stop the day you stop paying.
 
 Review Automation, $49/mo, no setup. Start treating reviews like capital, not chores.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/dental-practices-reviews-compounding-asset`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/dental-practices-reviews-compounding-asset`,
     },
   },
 
@@ -634,9 +634,9 @@ And it's not one client. It's four. The same missed review costs you the date-fo
 
 Review Automation is $49/mo, no setup. We ask every client at the moment they leave glowing (right after the consult result lands), filter unhappy reviews to you privately, and route the rest to Google.
 
-Full breakdown of the four-booking math: https://aioutsourcehub.com/blog/med-spas-one-missed-review-four-bookings
+Full breakdown of the four-booking math: https://getmefound.ai/blog/med-spas-one-missed-review-four-bookings
 
-Run yours: https://aioutsourcehub.com/#calculator
+Run yours: https://getmefound.ai/#calculator
 
 Med-spa owners: what does your newest Google review's date say?`,
       "linkedin-personal": `A med-spa owner showed me her booking funnel last month and asked why her Tuesday-night traffic didn't convert.
@@ -647,9 +647,9 @@ The Tuesday-night Botox shopper is high-intent and date-paranoid. She's been thi
 
 We rolled her onto Review Automation, $49/mo, no setup. Asks every client at the right moment (right after the result settles, not at checkout). 47 days in, she had 22 new reviews and her Tuesday-night conversion rate had doubled.
 
-The full four-booking math: https://aioutsourcehub.com/blog/med-spas-one-missed-review-four-bookings
+The full four-booking math: https://getmefound.ai/blog/med-spas-one-missed-review-four-bookings
 
-Run the lost-revenue math: https://aioutsourcehub.com/#calculator
+Run the lost-revenue math: https://getmefound.ai/#calculator
 
 Med-spa owners reading this: what's the date on your newest Google review?`,
       facebook: `One missed review = four lost bookings for a med spa.
@@ -658,9 +658,9 @@ Tuesday night Botox shopper. Your profile first. 4.8 stars, but newest review is
 
 Review Automation, $49/mo, no setup. We ask every client at the right moment so reviews keep landing.
 
-Run your number: https://aioutsourcehub.com/#calculator
+Run your number: https://getmefound.ai/#calculator
 
-Full breakdown: https://aioutsourcehub.com/blog/med-spas-one-missed-review-four-bookings`,
+Full breakdown: https://getmefound.ai/blog/med-spas-one-missed-review-four-bookings`,
       instagram: `One missed review = 4 lost bookings.
 
 Tuesday night, 9:47pm. A client has been thinking about Botox for 6 months. She opens Google. Your profile is first, 4.8 stars. But the newest review is 8 months old. She backs out.
@@ -674,16 +674,16 @@ Tuesday 9:47pm. Botox shopper backs out because your newest review is 8 months o
 
 Review Automation $49/mo, no setup.
 
-Stop the leak â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Stop the leak â†’ https://getmefound.ai/pricing#review-automation`,
       google: `One missed review costs a med spa four bookings.
 
 Tuesday night Botox shopper sees your dormant profile, backs out, books the spa with fresher reviews. That's a $400 first visit + $2,000/year client lost in 90 seconds.
 
 Review Automation, $49/mo, no setup. We ask every client at the right moment (right after the result settles).
 
-Calculator: https://aioutsourcehub.com/#calculator
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/med-spas-one-missed-review-four-bookings`,
+Calculator: https://getmefound.ai/#calculator
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/med-spas-one-missed-review-four-bookings`,
     },
   },
 
@@ -703,7 +703,7 @@ Timing is the other lever. The pickup-moment ask (right when the dog walks out h
 
 Review Automation is $49/mo, no setup. We ask at the pickup moment, prompt for story details, filter unhappy reviews to you privately. Most groomers hit the 20-review threshold inside 60 days.
 
-Full breakdown for groomers: https://aioutsourcehub.com/blog/pet-groomers-reviews-decide-bookings
+Full breakdown for groomers: https://getmefound.ai/blog/pet-groomers-reviews-decide-bookings
 
 Groomers reading this: how many of your reviews mention a specific dog story vs. a generic "great job"?`,
       "linkedin-personal": `I sat down with a pet groomer outside Chicago last month. Beautiful shop, great work, 14 Google reviews.
@@ -714,7 +714,7 @@ The pickup moment is everything. The dog walks out, the parent is relieved and g
 
 We onboarded her on Review Automation, $49/mo, no setup. Built the pickup-moment ask into her checkout flow with story prompts. 52 days in: 31 new reviews, and the booking funnel started converting again.
 
-Full breakdown for groomers: https://aioutsourcehub.com/blog/pet-groomers-reviews-decide-bookings
+Full breakdown for groomers: https://getmefound.ai/blog/pet-groomers-reviews-decide-bookings
 
 For the groomers here: pickup-moment ask, or 2-day-later text?`,
       facebook: `Pet parents don't book groomers under 20 reviews.
@@ -723,8 +723,8 @@ It's a hard threshold. The fix is timing. Pickup-moment ask converts at 30-50%. 
 
 Review Automation, $49/mo, no setup. We ask at the pickup moment with story prompts.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/pet-groomers-reviews-decide-bookings`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/pet-groomers-reviews-decide-bookings`,
       instagram: `Pet parents don't book under 20 reviews.
 
 Hard threshold. After that, what reviews SAY matters more than how many. Anxious doodle stories convert. Generic 5-stars don't.
@@ -740,15 +740,15 @@ Pickup-moment ask: 30-50% convert. 2-day text: 5-10%. 10 seconds of timing = 6x 
 
 Review Automation $49/mo, no setup.
 
-Hit 20 reviews â†’ https://aioutsourcehub.com/pricing#review-automation`,
+Hit 20 reviews â†’ https://getmefound.ai/pricing#review-automation`,
       google: `Pet parents don't book groomers under 20 reviews.
 
 Hard threshold. The fix is timing and story prompts. Pickup-moment ask converts at 30-50%. The standard 2-day text converts at 5-10%.
 
 Review Automation, $49/mo, no setup. Pickup-moment ask, story prompts, unhappy reviews filtered to you privately.
 
-Pricing: https://aioutsourcehub.com/pricing#review-automation
-Full breakdown: https://aioutsourcehub.com/blog/pet-groomers-reviews-decide-bookings`,
+Pricing: https://getmefound.ai/pricing#review-automation
+Full breakdown: https://getmefound.ai/blog/pet-groomers-reviews-decide-bookings`,
     },
   },
 ];

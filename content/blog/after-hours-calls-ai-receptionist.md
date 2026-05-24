@@ -6,7 +6,7 @@ category: "Operations"
 coverImage: "https://images.unsplash.com/photo-1498811008858-d95a730b2ffc?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["AI Receptionist", "Voice Agent", "Reviews"]
 ---

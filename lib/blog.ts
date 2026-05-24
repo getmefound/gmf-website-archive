@@ -34,7 +34,7 @@ export type Post = PostMeta & {
 
 const DEFAULT_AUTHOR: BlogAuthor = {
   name: "Mike Egidio",
-  role: "Founder, AI Outsource Hub",
+  role: "Founder, GetMeFound",
   avatar: "/team/mike.jpg",
 };
 

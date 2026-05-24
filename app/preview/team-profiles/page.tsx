@@ -88,7 +88,7 @@ function SurfaceSection({ surface }: { surface: Surface }) {
           <div className="bg-black/40 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white/60 flex items-center justify-between">
             <span>Banner — right-click to save</span>
             <div className="flex items-center gap-2">
-              <CopyButton text={`https://aioutsourcehub.com${bannerUrl}`} />
+              <CopyButton text={`https://getmefound.ai${bannerUrl}`} />
               <a
                 href={bannerUrl}
                 target="_blank"
@@ -243,7 +243,7 @@ export default function TeamProfilesPreview() {
                 </div>
               </div>
               <p className="mt-3 text-xs text-white/60 leading-relaxed">
-                The full wordmark <code className="text-white/80">AI OUTSOURCE HUB</code> won't fit a circular crop — the "AI OUTSOURCE HUB" text would clip at the edges. Use the icon-only file. Brand recognition still works because the "Ai" monogram is the AOH logomark.
+                The full wordmark <code className="text-white/80">AI OUTSOURCE HUB</code> won't fit a circular crop — the "AI OUTSOURCE HUB" text would clip at the edges. Use the icon-only file. Brand recognition still works because the "Ai" monogram is the GMF logomark.
               </p>
             </div>
 
@@ -268,7 +268,7 @@ export default function TeamProfilesPreview() {
                         {logo.filename}
                       </code>
                     </div>
-                    <CopyButton text={`https://aioutsourcehub.com${logo.url}`} />
+                    <CopyButton text={`https://getmefound.ai${logo.url}`} />
                   </div>
                   <div className="flex items-center gap-3 mb-2">
                     <img

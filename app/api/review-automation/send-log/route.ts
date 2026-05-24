@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
             clientSlug,
             customerEmail: packet.customerEmail,
             reason: `Auto-held after bounced review request${packet.detail ? `: ${packet.detail}` : "."}`,
-            source: "aioutsourcehub.com:review-automation-send-log",
+            source: "getmefound.ai:review-automation-send-log",
           }),
         )
       : null;

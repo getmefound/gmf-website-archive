@@ -150,7 +150,7 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     status: "verified",
     description:
       "Warm replies get moved to the calendar so you are talking to people with interest.",
-    verification: "AOH Talk booking URL loads and production custom value aoh_discovery_calendar_link is set.",
+    verification: "GMF Talk booking URL loads and production custom value aoh_discovery_calendar_link is set.",
   },
   {
     title: "Review spend and results",
@@ -227,7 +227,7 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     owner: "GHL Expert",
     status: "verified",
     description:
-      "Active AOH/Hub360AI production workflows generate/store report URLs, call the website callback, and use a single combined delivery workflow to avoid duplicate customer emails.",
+      "Active GMF/Hub360AI production workflows generate/store report URLs, call the website callback, and use a single combined delivery workflow to avoid duplicate customer emails.",
     verification: "Verified 2026-05-18 in active production location: Website Visitor Free Marketing Report Intake, Website Visitor Free AI Visibility Report Intake, and Website Visitor Report Delivery are published; delivery execution completed successfully.",
   },
   {
@@ -235,15 +235,15 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     owner: "GHL Expert + Website",
     status: "partial",
     description:
-      "Need reliable campaign reply automations: Reviews/AI `send` replies trigger the correct report generation/delivery, Relay `send` replies send missed-call details, `book` replies trigger AOH Talk booking handoff, unclear replies become tasks, and unsubscribe/not-interested replies stop safely.",
+      "Need reliable campaign reply automations: Reviews/AI `send` replies trigger the correct report generation/delivery, Relay `send` replies send missed-call details, `book` replies trigger GMF Talk booking handoff, unclear replies become tasks, and unsubscribe/not-interested replies stop safely.",
     verification: "Website/report delivery flow is live. Live MC diagnostics see production GHL location tRbczwt6oJsXK4tjuzOI and the Reach - Reviews / Reach - AI pipelines. docs/AOH_CAMPAIGN_REPLY_ROUTER.md now defines the exact router blueprint. GHL UI build and QA still need to pass before scaled sends.",
   },
   {
-    title: "AOH Client Template Lab template check",
+    title: "GMF Client Template Lab template check",
     owner: "GHL Expert + Systems Director",
     status: "partial",
     description:
-      "Fields, values, tags, and a Draft-only Reach workflow skeleton exist in the template lab. This is reusable setup only, not proof that live AOH campaigns/report workflows are wired.",
+      "Fields, values, tags, and a Draft-only Reach workflow skeleton exist in the template lab. This is reusable setup only, not proof that live GMF campaigns/report workflows are wired.",
     verification: "Template-lab setup was verified manually/visually; keep it separate from the active production workflows that now handle website visitor reports.",
   },
   {
@@ -396,7 +396,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     ],
     agentRoles: [
       { agent: "Scout", role: "Finds prospects with Profile Manager, review, citation, or AI visibility gaps." },
-      { agent: "Sender", role: "Sends the visibility-audit angle and keeps the message aligned to AOH's offer." },
+      { agent: "Sender", role: "Sends the visibility-audit angle and keeps the message aligned to GMF's offer." },
       { agent: "Sorter", role: "Classifies replies and sends interested leads toward discovery." },
       { agent: "Profile Manager", role: "Provides the visibility checklist and proof points used in the pitch." },
       { agent: "Systems Director", role: "Watches reply quality and whether booked audits justify the daily spend." },
@@ -539,7 +539,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     service: "AI Visibility",
     owner: "Profile Manager",
     overview:
-      "Check AOH or client profiles for access, basic visibility decay, profile completeness, reviews, unanswered reviews, and NAP drift.",
+      "Check GMF or client profiles for access, basic visibility decay, profile completeness, reviews, unanswered reviews, and NAP drift.",
     salesAgentTasks: [
       {
         title: "Create client-facing findings",
@@ -579,7 +579,7 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     estimatedPipelineValueUsd: 0,
     lastRun: "Not started",
     nextRun: "This week",
-    notes: "Estimated daily average of a weekly job. Useful now that AOH GBP is the client-zero access/update test.",
+    notes: "Estimated daily average of a weekly job. Useful now that GMF GBP is the client-zero access/update test.",
     costBreakdown: [
       { label: "GBP checks", amountUsd: 0.08 },
       { label: "Review/NAP scan", amountUsd: 0.07 },

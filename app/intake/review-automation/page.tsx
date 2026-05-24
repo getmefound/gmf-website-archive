@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { ReviewAutomationIntakeForm } from "@/components/ReviewAutomationIntakeForm";
 
 const inviteEmail =
-  process.env.NEXT_PUBLIC_AOH_GBP_INVITE_EMAIL?.trim() || "mike@aioutsourcehub.com";
+  process.env.NEXT_PUBLIC_GMF_GBP_INVITE_EMAIL?.trim() ||
+  process.env.NEXT_PUBLIC_AOH_GBP_INVITE_EMAIL?.trim() ||
+  "mike@getmefound.ai";
 
 export const metadata: Metadata = {
-  title: "Client Setup Intake - AI Outsource Hub",
+  title: "Client Setup Intake - GetMeFound",
   description: "Submit business setup details for Review Automation and Google Business Profile access.",
   robots: { index: false, follow: false },
 };
@@ -53,7 +55,7 @@ export default function ReviewAutomationIntakePage() {
             <li>
               <span className="font-semibold text-slate-950">1. Access check</span>
               <br />
-              Profile Manager confirms whether AOH can see the Google profile.
+              Profile Manager confirms whether GetMeFound can see the Google profile.
             </li>
             <li>
               <span className="font-semibold text-slate-950">2. Setup routing</span>

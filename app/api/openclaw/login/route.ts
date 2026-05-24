@@ -123,7 +123,7 @@ function challengeHeaders(): HeadersInit {
     "Cache-Control": "no-store",
     "Referrer-Policy": "no-referrer",
     "X-Robots-Tag": "noindex, nofollow",
-    "WWW-Authenticate": 'Basic realm="AOH OpenClaw", charset="UTF-8"',
+    "WWW-Authenticate": 'Basic realm="GMF OpenClaw", charset="UTF-8"',
   };
 }
 

@@ -1,7 +1,7 @@
-# AOH Social Pack — 12 themes × 4 platforms
+# GMF Social Pack — 12 themes × 4 platforms
 
 Copy-paste ready. Each theme has a matching 1080×1080 image at:
-`https://aioutsourcehub.com/api/social-card/<theme-slug>`
+`https://getmefound.ai/api/social-card/<theme-slug>`
 
 Image accent color shifts per theme so the feed reads as varied, not bulk-generated.
 
@@ -26,7 +26,7 @@ The sweet spot is 4.6–4.8 with at least 25–50 reviews. Looks great, reads as
 
 You don't need to chase perfect. You need to be visibly good — with enough reviews to prove it.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 Customers don't trust a 5.0. They trust 4.6.
@@ -76,7 +76,7 @@ That's not the missing review you didn't get last week. It's the cumulative abse
 
 The gap doesn't close. It widens.
 
-Want this run on your real numbers? Free calculator: aioutsourcehub.com
+Want this run on your real numbers? Free calculator: getmefound.ai
 
 ### Facebook
 $38,400/year.
@@ -101,7 +101,7 @@ That's roughly what a local business loses when reviews go quiet and a competito
 
 Not a marketing expense. Pure revenue walking out the door.
 
-Run the math on your business: aioutsourcehub.com
+Run the math on your business: getmefound.ai
 
 ---
 
@@ -168,7 +168,7 @@ Those conversions land closer to 18–30%.
 
 A ChatGPT recommendation isn't traffic. It's a customer who's already most of the way to picking up the phone.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 A Google click is the start of a journey. A ChatGPT recommendation is the end of one.
@@ -226,7 +226,7 @@ The price difference is $19 a month. The work difference is roughly *all of it*.
 
 Software gives you a tool. Done-for-you gives you the result.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 The $30 software isn't cheaper if nobody runs it.
@@ -283,24 +283,24 @@ You're catching about 1 in 10 after-hours calls. Nine in ten are gone before you
 
 If one job is worth $300–$2,000, three missed jobs a month is $2,400+ walking out the door.
 
-Run your own numbers in 30 seconds: aioutsourcehub.com/#calculator
+Run your own numbers in 30 seconds: getmefound.ai/#calculator
 
 Relay, our 24/7 phone answering service, is $299/month — $99 your first month. Needs to catch *one* extra job to break even. That's a single service call.
 
 In most local businesses I look at, that payback lands inside 30 days.
 
-Relay → aioutsourcehub.com/pricing#relay
+Relay → getmefound.ai/pricing#relay
 
 ### Facebook
 You catch about 1 in 10 after-hours calls. Nine in ten are gone before you knew they existed.
 
 Most local businesses get 15–30 a week. 60–70% go to voicemail. Most customers won't leave one.
 
-Run yours in 30 seconds: aioutsourcehub.com/#calculator
+Run yours in 30 seconds: getmefound.ai/#calculator
 
 Relay (our 24/7 phone answering service, $299/mo, first month $99) catches them. One extra job a month and it pays for itself. Most do in 30 days.
 
-aioutsourcehub.com/pricing#relay
+getmefound.ai/pricing#relay
 
 ### Instagram
 You catch 1 in 10 after-hours calls.
@@ -309,7 +309,7 @@ The other 9 went to your competitor.
 
 Relay = 24/7 phone answering, $299/mo ($99 first month). Catches just ONE extra job a month and it pays for itself.
 
-See your loss: aioutsourcehub.com/#calculator
+See your loss: getmefound.ai/#calculator
 
 #LocalBusiness #SmallBusinessTips #AIReceptionist #HVAC #Plumbing #LocalServices
 
@@ -318,7 +318,7 @@ You catch 1 in 10 after-hours calls. The other 9 went to your competitor.
 
 Relay = 24/7 phone answering, $299/mo. One extra job pays for it.
 
-See your loss: aioutsourcehub.com/#calculator
+See your loss: getmefound.ai/#calculator
 
 ---
 
@@ -343,7 +343,7 @@ Most local businesses are invisible there.
 
 The fix isn't more Google ads. It's getting your business set up so AI tools can confidently recommend you. Clean profile. Consistent info everywhere. Fresh reviews. A few small AI-friendly bits on your site.
 
-We handle the whole thing. aioutsourcehub.com
+We handle the whole thing. getmefound.ai
 
 ### Facebook
 Roughly 1 in 4 local searches has moved to AI.
@@ -391,7 +391,7 @@ Zero dashboards. Reviews still come in. Calls still get answered. AI visibility 
 
 You stay in your business. We run the rest.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 The marketing tool you bought a year ago that you haven't opened in six months isn't a marketing tool anymore. It's a $79/month bill.
@@ -437,7 +437,7 @@ Reviews are a stock, not a flow. The review you collect today still pays you ten
 
 Ads are a tax. Reviews are an investment.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 Ads stop the day you stop paying.
@@ -484,7 +484,7 @@ Reviews are the opposite. You "pay" once — by asking the customer at the end o
 
 You don't need Yelp ads. You don't need to pay for leads. You need the ask to actually happen, every job, automatically.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 Yelp ads rent visibility. Reviews own it.
@@ -535,7 +535,7 @@ One missed review is doing more damage than it looks. That review would have:
 
 Stack the math. One missing review = roughly four lost bookings.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 She wanted Botox. She picked your med spa first.
@@ -587,7 +587,7 @@ That's it. Don't say "five stars please." Don't offer a discount.
 
 A pickup ask converts at 30–50%. A two-day-later text converts at 5–10%. Timing is everything.
 
-aioutsourcehub.com
+getmefound.ai
 
 ### Facebook
 Pet parents don't book under 20 reviews. After that, what the reviews SAY matters most.

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
 
 export const metadata: Metadata = {
-  title: "AOH Org Chart - The Hub",
-  description: "Internal AOH hierarchy chart for human and agent inspiration personas.",
+  title: "GMF Org Chart - The Hub",
+  description: "Internal GMF hierarchy chart for human and agent inspiration personas.",
   robots: { index: false, follow: false },
 };
 
@@ -217,7 +217,7 @@ const ROLES: OrgRole[] = [
     persona: "Stephen Covey",
     status: "live",
     summary: "Protects calendars, booking availability, reminders, and meeting context.",
-    owns: ["AOH Talk", "calendar blocks", "meeting briefs"],
+    owns: ["GMF Talk", "calendar blocks", "meeting briefs"],
     reportsTo: "General Manager",
     tone: "ops",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Stephen_Covey.jpg/330px-Stephen_Covey.jpg",
@@ -322,14 +322,14 @@ export default function OrgChartPage() {
       <header className="mb-6 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH - Mission Control
+            GMF - Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
-            AOH Org Chart
+            GMF Org Chart
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
             Business and field-associated public figures are used as inspiration labels only. They are not
-            affiliated with AOH and do not endorse this system.
+            affiliated with GMF and do not endorse this system.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -347,7 +347,7 @@ export default function OrgChartPage() {
       <section className="border border-slate-700 bg-[#101827] p-3 text-slate-100 shadow-[0_18px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] md:p-5">
         <div className="mb-5 flex items-center justify-between border border-slate-600 bg-[#1c2b43] px-3 py-2 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_2px_7px_rgba(0,0,0,0.28)]">
           <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
-            AI Outsource Hub - Agent Company Hierarchy
+            GetMeFound - Agent Company Hierarchy
           </h2>
           <span className="font-mono text-xs">v2.0</span>
         </div>

@@ -83,7 +83,7 @@ export default function BannerMottoPicker() {
             Banner motto — pick one
           </h1>
           <p className="text-white/70 max-w-2xl leading-relaxed">
-            Simple typographic banner template. Same design across LinkedIn co, FB, X, GBP, and team personal LinkedIns. Motto sits middle, services list runs underneath, AOH wordmark top-left.
+            Simple typographic banner template. Same design across LinkedIn co, FB, X, GBP, and team personal LinkedIns. Motto sits middle, services list runs underneath, GMF wordmark top-left.
           </p>
           <p className="text-white/60 max-w-2xl leading-relaxed mt-3 text-sm">
             7 motto options below — tap any banner to select. Service list format below that — three styles.

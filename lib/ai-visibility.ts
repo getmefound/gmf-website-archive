@@ -77,7 +77,7 @@ async function scanSchema(websiteUrl: string): Promise<SchemaResult> {
     const res = await fetch(url, {
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (compatible; AOHBot/1.0; +https://aioutsourcehub.com)",
+          "Mozilla/5.0 (compatible; GMFBot/1.0; +https://getmefound.ai)",
       },
       signal: AbortSignal.timeout(8000),
       redirect: "follow",

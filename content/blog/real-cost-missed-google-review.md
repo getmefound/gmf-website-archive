@@ -6,7 +6,7 @@ category: "Reviews"
 coverImage: "/api/blog-cover/real-cost-missed-google-review"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["Reviews", "Local Search", "Pricing Math"]
 ---

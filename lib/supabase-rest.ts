@@ -44,8 +44,10 @@ export async function supabaseRest<T>(
     cache: "no-store",
   }).catch((error) => {
     const message = error instanceof Error ? error.message : "Unknown Supabase error.";
-    return new Response(JSON.stringify({ message }), { status: 0 });
+    return errorResult(message);
   });
+
+  if (!(response instanceof Response)) return response;
 
   const data = (await response.json().catch(() => null)) as
     | { message?: string; error?: string; code?: string }
@@ -69,4 +71,8 @@ export async function supabaseRest<T>(
   }
 
   return { ok: true, status: response.status, data: data as T };
+}
+
+function errorResult(message: string): SupabaseResult<never> {
+  return { ok: false, status: 0, error: message };
 }

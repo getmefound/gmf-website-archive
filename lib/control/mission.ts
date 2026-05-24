@@ -358,7 +358,7 @@ export const BOARD_COLUMNS: BoardStatus[] = [
 export const BOARD_TASKS: BoardTask[] = [
   {
     title: "Build Campaign Reply Router for send/book replies",
-    client: "AOH",
+    client: "GMF",
     service: "Reach",
     agent: "GHL Expert",
     reviewer: "Systems Director",
@@ -368,7 +368,7 @@ export const BOARD_TASKS: BoardTask[] = [
     tags: ["ghl", "reach", "reply-routing", "send", "book", "campaign-launch"],
     reviewChecks: [
       "Reply `send` triggers report request and exactly one delivery",
-      "Reply `book` sends the AOH Talk booking link without unintended report generation",
+      "Reply `book` sends the GMF Talk booking link without unintended report generation",
       "Relay reply `send` sends missed-call details without default report generation",
       "Unclear replies create a Sorter review task and do not spend on reports",
       "Unsubscribe/STOP replies suppress follow-up and do not generate reports",
@@ -378,7 +378,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Approve controlled Reach offer lanes",
-    client: "AOH",
+    client: "GMF",
     service: "Reach",
     agent: "Sender",
     reviewer: "Coach + Systems Director",
@@ -397,7 +397,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Prepare first-hour campaign watch",
-    client: "AOH",
+    client: "GMF",
     service: "Reach",
     agent: "Systems Director",
     reviewer: "Manager",
@@ -415,7 +415,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Package Presence Refresh setup offer",
-    client: "AOH",
+    client: "GMF",
     service: "Presence Refresh",
     agent: "Press",
     reviewer: "Coach + Systems Director",
@@ -426,7 +426,7 @@ export const BOARD_TASKS: BoardTask[] = [
     reviewChecks: [
       "Define launch special: presence audit, 10 social posts, 5 blogs, proof links",
       "Use Morning Brief as the included proof bonus",
-      "Run AOH as client zero before selling the package",
+      "Run GMF as client zero before selling the package",
       "Create approval checklist before anything publishes",
       "Keep claims factual and specific to the client",
       "Show before/after proof in Mission Control",
@@ -434,7 +434,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Pilot Social Reach with human approval",
-    client: "AOH",
+    client: "GMF",
     service: "Social Reach",
     agent: "Scout",
     reviewer: "Sales Manager + Systems Director",
@@ -451,8 +451,8 @@ export const BOARD_TASKS: BoardTask[] = [
     ],
   },
   {
-    title: "Build AOH /aoh-talk Discovery Round Robin calendar",
-    client: "AOH",
+    title: "Build GMF Discovery Round Robin calendar",
+    client: "GMF",
     service: "Internal Sales Intake",
     agent: "GHL Expert",
     reviewer: "Systems Director",
@@ -469,7 +469,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Load agent-owned operating model into Coach",
-    client: "AOH",
+    client: "GMF",
     service: "Internal Build",
     agent: "Coach",
     status: "In Progress",
@@ -479,7 +479,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Teach Profile Manager GBP access + handoff rules",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "Profile Manager",
     reviewer: "Manager",
@@ -488,8 +488,8 @@ export const BOARD_TASKS: BoardTask[] = [
     due: "Now - client-zero test",
     tags: ["gbp", "manager-access", "reviews", "client-zero"],
     reviewChecks: [
-      "Use AOH Google Business Profile before asking clients",
-      "Client adds AOH email under People and access",
+      "Use GMF Google Business Profile before asking clients",
+      "Client adds GMF email under People and access",
       "Default role is Manager, not Owner",
       "No password sharing",
       "Mike approves before public updates post",
@@ -497,7 +497,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Rotate exposed OpenClaw gateway token",
-    client: "AOH",
+    client: "GMF",
     service: "Mission Control",
     agent: "Systems Director",
     status: "Done",
@@ -507,7 +507,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Teach GHL Expert Review Automation backend setup",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "GHL Expert",
     status: "Assigned",
@@ -517,7 +517,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Create self-serve client onboarding instructions",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "Coach",
     status: "Review",
@@ -527,7 +527,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Record GBP manager invite walkthrough video",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "Profile Manager",
     status: "Inbox",
@@ -537,7 +537,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Build Review Automation backend SOP from GHL packs",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "GHL Expert",
     status: "Assigned",
@@ -547,7 +547,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Scout current GHL + GBP docs monthly",
-    client: "AOH",
+    client: "GMF",
     service: "Internal Training",
     agent: "Scout",
     status: "Assigned",
@@ -556,8 +556,8 @@ export const BOARD_TASKS: BoardTask[] = [
     tags: ["research", "ghl", "gbp"],
   },
   {
-    title: "Audit AOH Google Business Profile as first client",
-    client: "AOH",
+    title: "Audit GMF Google Business Profile as first client",
+    client: "GMF",
     service: "AI Visibility",
     agent: "Profile Manager",
     status: "Assigned",
@@ -565,15 +565,15 @@ export const BOARD_TASKS: BoardTask[] = [
     due: "After GBP invite is accepted",
     tags: ["client-zero", "gbp-audit", "profile-update"],
     reviewChecks: [
-      "Confirm access works from the AOH invited account",
+      "Confirm access works from the GMF invited account",
       "Check hours, categories, services, photos, posts, review link, and unanswered reviews",
-      "Draft one safe AOH profile update",
+      "Draft one safe GMF profile update",
       "Log confusing client handoff steps for screenshots/video",
     ],
   },
   {
     title: "Add workflow execution count and webhook latency tracking",
-    client: "AOH",
+    client: "GMF",
     service: "Review Automation",
     agent: "GHL Expert",
     status: "Inbox",
@@ -583,7 +583,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Build Sender for Reviews and AI Visibility campaigns",
-    client: "AOH",
+    client: "GMF",
     service: "Reach",
     agent: "Sender",
     status: "Assigned",
@@ -599,7 +599,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Define Slack commands for Mission Board",
-    client: "AOH",
+    client: "GMF",
     service: "Mission Control",
     agent: "Manager",
     reviewer: "Systems Director",
@@ -617,7 +617,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Build Systems Director stack digest after pipeline has real volume",
-    client: "AOH",
+    client: "GMF",
     service: "Internal Build",
     agent: "Systems Director",
     status: "Blocked / Later",
@@ -627,7 +627,7 @@ export const BOARD_TASKS: BoardTask[] = [
   },
   {
     title: "Build Reporter orchestration + reach-ghl-report-flow integration",
-    client: "AOH",
+    client: "GMF",
     service: "Reporter",
     agent: "GHL Expert",
     reviewer: "Systems Director",
@@ -639,13 +639,13 @@ export const BOARD_TASKS: BoardTask[] = [
       "Outscraper→GHL prospect push working",
       "Marketing report + map visibility trigger waits for website request or warm campaign reply",
       "Reply `send` creates report request and delivery",
-      "Reply `book` routes to AOH Talk booking handoff",
+      "Reply `book` routes to GMF Talk booking handoff",
       "Report delivery log clean and no secret-bearing URLs are exposed",
     ],
   },
   {
     title: "Build client-facing chatbot",
-    client: "AOH",
+    client: "GMF",
     service: "Future",
     agent: "Coach",
     status: "Blocked / Later",

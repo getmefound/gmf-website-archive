@@ -164,7 +164,7 @@ export function ReviewAutomationIntakeForm({ inviteEmail }: { inviteEmail: strin
         <legend className="text-sm font-semibold text-slate-950">Google Business Profile access</legend>
         <p className="mt-2 text-sm leading-6 text-slate-600">
           Add <span className="font-mono text-slate-950">{inviteEmail}</span> as Manager. Use Owner only if
-          AOH specifically asked for ownership work.
+          GetMeFound specifically asked for ownership work.
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           <RadioCard

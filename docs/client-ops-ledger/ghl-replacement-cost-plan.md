@@ -56,7 +56,7 @@ Current public promise from pricing, checkout, onboarding, and agent docs:
 | Client does not learn software | Client uses AOH page/email/text, not GHL dashboards. | Base |
 | Cancel anytime/no contract | Operationally means no long onboarding lock-in and easy offboarding. | Base |
 | Replies in client's voice | AI or AOH-drafted public review replies. | AI Visibility/upgrade |
-| SMS review requests | Text-message review requests and compliance setup. | AI Visibility/upgrade |
+| SMS review requests | Text-message review requests, A2P/10DLC registration, opt-out handling, and compliance setup. | Upgrade/add-on |
 | Social review posting | Turning reviews into social/GBP posts. | Upgrade/custom |
 | AI Visibility/rankings/heatmaps | AI search, local ranking, competitor monitoring. | Upgrade/custom |
 
@@ -69,7 +69,8 @@ Copy alignment note:
 Recommended product boundary:
 
 - Base Review Automation should include email requests, light private feedback routing, GBP audit/fix, review link setup, client page, and monthly recap.
-- AI Visibility should include SMS, AI review response drafts/replies, deeper profile/AI visibility work, and heatmap/ranking reports.
+- SMS review requests should not be included in the cheap base plan. They are an upgrade/add-on because US business texting requires A2P/10DLC registration, opt-in language, STOP handling, and carrier compliance.
+- AI Visibility should include AI review response drafts/replies, deeper profile/AI visibility work, and heatmap/ranking reports. SMS can be bundled only when the price covers compliance setup and usage.
 
 ## Best Non-GHL Fulfillment Model For Review Automation
 
@@ -94,7 +95,7 @@ Recommended stack:
 | Low-review tips | Rule-based tips on client page when weekly/monthly review goal is low. | Free/low. | Already started on client page. |
 | Manager alerts | Slack/email alert when setup is blocked, review count is low, or sends fail. | Low. | Keeps Mike from babysitting. |
 | AI response drafts | OpenAI/Gemini draft reply on demand, approval required. | Usage-based and likely low. | Upgrade feature; do not auto-publish at first. |
-| SMS | Twilio directly if/when sold. | Usage-based plus compliance/admin. | Upgrade only. Do not add to $49 base unless pricing changes. |
+| SMS | Twilio directly if/when sold. | Usage-based plus A2P/10DLC registration and compliance/admin. | Upgrade only. Do not add to the base plan. |
 | Heatmaps/rankings | Vendor/export/manual report only for AI Visibility clients. | Per report or paid plan. | Do not pay per-client GHL/Search Atlas for base reviews. |
 
 Minimum AOH-owned Review Automation v1:
@@ -150,6 +151,125 @@ What not to build into v1:
 - Social posting.
 - Client login with heavy permissions.
 - POS/CRM integrations for every client on day one.
+
+## Client Hub Offer Map
+
+The GMF client page should replace the feeling of a GHL subaccount without
+making the client learn software.
+
+Included in base Review Automation:
+
+| Client page area | Purpose |
+| --- | --- |
+| Setup status | Shows whether GBP access, review link, sender, and customer flow are ready. |
+| Needed from you | Gives the client the next small action instead of sending them into a dashboard. |
+| Upload customers | Lets the client upload or paste recent completed customers/jobs. |
+| Review link status | Confirms the correct Google destination is stored. |
+| Email review requests | Shows simple sent/fail/held status for email review requests. |
+| Private feedback | Routes unhappy feedback privately before asking happy customers for Google reviews. |
+| Do-not-contact/exclusions | Reminds the client not to upload customers who should not be contacted. |
+| Monthly recap | Shows requests sent, feedback, review movement, blockers, and next action. |
+| Low-review tips | Gives practical actions when reviews are lagging. |
+| Support/send-file link | Gives a simple way to send files or ask for help. |
+
+Visible but locked upgrade modules:
+
+| Locked module | Why it helps sell the next plan | Suggested boundary |
+| --- | --- | --- |
+| AI review replies | Client sees how GMF can reply in their voice without GHL. | AI Visibility/Review Intelligence |
+| Safe 5-star auto-replies | Shows future autopilot value after trust is earned. | Higher tier or explicit add-on |
+| SMS review requests | Valuable, but requires A2P/10DLC, STOP handling, and logs. | Paid SMS add-on |
+| POS/CRM auto-sync | Removes manual uploads. | Paid setup/add-on |
+| Review website widget | Turns good reviews into website proof. | Upgrade or setup fee |
+| AI Visibility scan | Shows whether the business appears in AI answers. | AI Visibility |
+| Local ranking/heatmap report | Gives local SEO proof without GHL/Search Atlas. | AI Visibility/local SEO |
+| Competitor review watch | Shows review gap versus nearby competitors. | AI Visibility/local SEO |
+| Social/GBP review posts | Repurposes 5-star reviews into posts. | Upgrade/custom |
+| Listings/citation cleanup | Fixes directory consistency. | Local SEO add-on |
+| Missed-call/voice AI follow-up | Captures missed leads. | Separate Relay/voice plan |
+| Multi-location reporting | Helps owners with more than one location. | Higher tier |
+
+Label locked modules as one of:
+
+- Included
+- Upgrade
+- Add-on
+- Coming soon
+- Custom
+
+Do not label a module as available until AOH/GMF can actually fulfill it.
+
+## POS/CRM Connection Strategy
+
+GHL feels strong because it has many integrations. GMF should not try to copy
+every integration on day one. The practical replacement is a ladder.
+
+| Level | Method | Cost/offer logic |
+| --- | --- | --- |
+| 1 | Manual upload, paste, or send-file workflow | Base plan. Fastest way to go live. |
+| 2 | Scheduled export import | Base or small add-on if the client can export clean files. |
+| 3 | Zapier/Make/native webhook | Paid setup because mapping and testing are required. |
+| 4 | Direct API connector | Paid/custom; build only for common systems or clients who fund it. |
+| 5 | SFTP/vendor feed/database export | Custom for larger clients. |
+
+Data GMF needs from each client:
+
+- POS/CRM system name
+- review-ready trigger
+- available fields: name, email, phone, job/order/date, location, amount if needed
+- export/API/webhook/Zapier/Make availability
+- admin contact for that system
+- consent and do-not-contact rules
+- desired send delay after the event
+- location mapping for multi-location clients
+
+Recommended connector priority:
+
+| System type | Examples | Why it matters |
+| --- | --- | --- |
+| Payments/invoices | Stripe, Square | Easy review-ready trigger: paid invoice or completed checkout. |
+| E-commerce | Shopify | Clear trigger: fulfilled order. |
+| Local appointments/POS | Square, Vagaro, Mindbody | Good fit for salons, spas, wellness, fitness, local service. |
+| Home services | Jobber, Housecall Pro, ServiceTitan | High review value; job-completed events matter. |
+| Restaurants | Toast, Square | High volume, but compliance and data access may be harder. |
+
+Sales language:
+
+"We start with a simple upload so you can go live quickly. If your POS or CRM
+supports exports, webhooks, Zapier, or an API, we can add an auto-sync path as a
+paid setup so review requests go out after the right customer event."
+
+## POS/CRM Integration Risk Register
+
+POS integration is not a reason to avoid the GMF plan, but it is a reason to
+avoid promising universal auto-sync in the base offer.
+
+| Risk | Why it matters | GMF mitigation |
+| --- | --- | --- |
+| API access may be plan-gated | Some systems expose APIs only on higher client plans. | Ask for POS plan name during onboarding; quote auto-sync only after access is confirmed. |
+| Not every event exists | The POS may have payments but no clean "job completed" event. | Define the review-ready event before setup: paid invoice, closed job, fulfilled order, completed appointment, or manual approval. |
+| Webhooks can duplicate events | Many webhook systems deliver at least once, not exactly once. | Store external event IDs and make imports idempotent. |
+| Webhooks can arrive out of order | A customer update can arrive before the related job/order is ready. | Queue events, re-check state before sending, and delay review requests. |
+| Webhooks can be disabled after failures | Some vendors disable failing endpoints or stop retrying. | Respond quickly, process async, and add health alerts/reconciliation. |
+| Polling/Zapier limits can miss volume spikes | Polling triggers may cap items per poll or run on plan-dependent intervals. | Use direct webhooks where possible; add daily reconciliation imports. |
+| Customer consent may be unclear | POS data does not always prove marketing/SMS consent. | Email in base; SMS only after explicit opt-in/compliance review. |
+| Wrong timing can annoy customers | Restaurants, med spas, and home services have different "ready" moments. | Per-client send delay and exclusion rules. |
+| Location mapping can be messy | Multi-location accounts may mix customers under one POS. | Store location IDs and require mapping before sending. |
+| API keys create security liability | Client API keys can expose customer and revenue data. | Prefer OAuth where available; store secrets outside git; allow revocation; limit scopes. |
+| HIPAA/regulated industries need extra care | Health/wellness clients may include sensitive service data. | Avoid storing service notes; keep only name/contact/date/location and route edge cases to manual review. |
+| Review gating policy risk | Sending only happy customers to Google can violate platform policy. | Do not suppress unhappy customers from public review options; use private feedback for service recovery, but do not selectively solicit only positives. |
+
+Build requirements before any direct connector goes live:
+
+- inbound event table with raw payload reference
+- normalized customer/job table
+- idempotency key per source event
+- suppression check before every send
+- configurable send delay
+- daily reconciliation job for systems that support polling/export
+- failure alert when events stop arriving
+- per-client "last successful sync" on the client hub
+- manual override/hold button before live sending
 
 ## Review Automation Fulfillment Jobs Outside GHL
 
@@ -207,6 +327,7 @@ Assumptions for a 50-client base Review Automation scenario:
 
 - Each client sends 50-300 review request emails/month.
 - Base plan uses email, not SMS.
+- SMS is a paid add-on only because A2P/10DLC is required for automated US business texting.
 - AI reply drafting is upgrade-only.
 - Heatmaps/rankings are upgrade-only.
 - Clients do not log into GHL.
@@ -430,10 +551,15 @@ Build:
 - Owner approval flow
 - Approved public reply process
 - Review trends and low-review coaching
+- Client voice profile
+- Trust levels for graduated automation
+- Safe 5-star auto-replies after approval history proves the voice
 
 Rule:
 
 - Do not auto-publish replies until manual approval proves safe.
+- Never auto-publish 1-4 star replies or reviews involving refunds, legal, safety, medical, discrimination, harassment, staff accusations, threats, or sarcasm.
+- Position the system as "autopilot for praise, human judgment for problems."
 
 ### Phase 4: Replace Reach GHL Dependency
 

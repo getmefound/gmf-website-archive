@@ -6,7 +6,7 @@ category: "AI & Search"
 coverImage: "https://images.unsplash.com/photo-1746286721981-f4bb5be91cf5?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["AI Visibility", "Local Search", "ChatGPT"]
 featured: true

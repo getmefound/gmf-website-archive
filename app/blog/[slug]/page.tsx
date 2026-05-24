@@ -200,7 +200,7 @@ export default async function BlogPostPage({
     author: { "@type": "Person", name: post.author.name },
     publisher: {
       "@type": "Organization",
-      name: "AI Outsource Hub",
+      name: "GetMeFound",
       url: SITE_URL,
     },
     datePublished: post.date,

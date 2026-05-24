@@ -181,7 +181,7 @@ export function MorningBriefExperience({
                 <span className="status-chip">Mike view</span>
               </div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                AOH Owner Brief
+                GMF Owner Brief
               </p>
               <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 md:text-6xl">
                 Mike&apos;s Morning Brief

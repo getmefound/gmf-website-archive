@@ -18,7 +18,7 @@ import { GROWTH_PRODUCTS, productStatusLabel } from "@/lib/control/growth-produc
 
 export const metadata: Metadata = {
   title: "Agent Jobs - The Hub",
-  description: "A simple view of what AOH agents are doing and what each job costs.",
+  description: "A simple view of what GMF agents are doing and what each job costs.",
   robots: { index: false, follow: false },
 };
 
@@ -37,7 +37,7 @@ export default function JobsPage() {
       <header className="mb-8 flex flex-col gap-3 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH - Mission Control
+            GMF - Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Agent Jobs
@@ -134,7 +134,7 @@ function JobIndexSection() {
       label: "$97 bridge",
       tone: "warm" as const,
       href: "/mike-mc/jobs/ghl-exit",
-      detail: "What is done, blocked, and next before AOH can cancel GHL.",
+      detail: "What is done, blocked, and next before GMF can cancel GHL.",
     },
     {
       title: "Presence Refresh",

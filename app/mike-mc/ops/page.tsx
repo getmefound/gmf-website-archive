@@ -3,8 +3,8 @@ import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
 import { SERVICES } from "@/lib/control/mission";
 
 export const metadata: Metadata = {
-  title: "AOH Ops Index",
-  description: "Internal operations index for AOH Mission Control.",
+  title: "GMF Ops Index",
+  description: "Internal operations index for GMF Mission Control.",
   robots: { index: false, follow: false },
 };
 
@@ -75,7 +75,7 @@ const RECOVERY_STEPS = [
 ];
 
 const HUMAN_CHECKS = [
-  "Password manager has every account needed to operate AOH.",
+  "Password manager has every account needed to operate GMF.",
   "Vercel and GitHub are accessible without the old laptop.",
   "Obsidian and Google Drive copies of the operating docs are current.",
   "OpenClaw/VPS access is documented in the private recovery location.",
@@ -88,7 +88,7 @@ export default function OpsIndexPage() {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH · Mission Control
+            GMF · Mission Control
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Ops Index

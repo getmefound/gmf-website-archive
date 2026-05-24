@@ -5,7 +5,7 @@ import { GrowthProductPage } from "../_components/GrowthProductPage";
 
 export const metadata: Metadata = {
   title: "Presence Refresh - The Hub",
-  description: "One-time AOH Reach add-on for refreshing stale social and website presence.",
+  description: "One-time GMF Reach add-on for refreshing stale social and website presence.",
   robots: { index: false, follow: false },
 };
 

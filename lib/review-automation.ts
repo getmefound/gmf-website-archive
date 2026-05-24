@@ -1,4 +1,5 @@
 import { getClientHub } from "@/lib/client-hub";
+import { envValueAny } from "@/lib/getmefound-env";
 
 export type ReviewCustomerRow = {
   name: string;
@@ -61,12 +62,123 @@ export type ReviewSendLogPacket = {
   timestamp: string;
 };
 
-export type ReviewAutomationEventType = "customer_upload" | "private_feedback" | "suppression_update" | "send_log";
+export type ReviewReplySafety = {
+  autoPostEligible: boolean;
+  riskLevel: "low" | "medium" | "high";
+  flags: string[];
+  reason: string;
+};
+
+export type ReviewReplyDraftPacket = {
+  clientSlug: string;
+  clientName: string;
+  reviewerName: string;
+  rating: number;
+  reviewText: string;
+  draftText: string;
+  mode: string;
+  model: string;
+  status: "drafted" | "approved" | "rejected" | "posted" | "dry_run" | "failed";
+  safety: ReviewReplySafety;
+  decisionNote?: string;
+  timestamp: string;
+};
+
+export type ReviewIntegrationEventPacket = {
+  clientSlug: string;
+  clientName: string;
+  systemName: string;
+  connectionLevel: string;
+  eventKey: string;
+  externalEventId: string;
+  eventType: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  occurredAt: string;
+  status: "dry_run" | "received" | "held";
+  holdReason: string;
+  duplicate: boolean;
+  duplicateOf?: string;
+  sendCandidateEligible: boolean;
+  metadata: Record<string, unknown>;
+  timestamp: string;
+};
+
+export type ReviewSmsCompliancePacket = {
+  clientSlug: string;
+  clientName: string;
+  provider: "twilio" | "manual" | "unknown";
+  brandStatus: "not_started" | "drafting" | "submitted" | "approved" | "rejected";
+  campaignStatus: "not_started" | "drafting" | "submitted" | "approved" | "rejected";
+  optInStatus: "missing" | "drafted" | "approved";
+  stopHandlingStatus: "missing" | "planned" | "ready";
+  sampleMessageStatus: "missing" | "drafted" | "approved";
+  liveSendingAllowed: boolean;
+  notes: string;
+  timestamp: string;
+};
+
+export type ReportFlowStatusPacket = {
+  clientSlug: string;
+  clientName: string;
+  reportLane: "website_free_report" | "campaign_report" | "client_report";
+  reportType: "marketing" | "ai_visibility";
+  source: string;
+  status: "planned" | "submitted" | "report_ready" | "heatmap_ready" | "blocked";
+  runId: string;
+  auditUrl: string;
+  heatmapUrl: string;
+  blocker: string;
+  timestamp: string;
+};
+
+export type ClientSetupJobPacket = {
+  clientSlug: string;
+  clientName: string;
+  jobId: string;
+  source: string;
+  actor: "Manager" | "Profile Manager" | "Reviews Manager" | "Systems Director" | "Auditor" | "System";
+  stepKey:
+    | "intake"
+    | "manager_review"
+    | "gbp_access"
+    | "gbp_verification"
+    | "profile_optimization"
+    | "review_link"
+    | "review_automation"
+    | "systems_safety"
+    | "auditor_gate"
+    | "launch_ready";
+  status: "not_started" | "in_progress" | "waiting_on_client" | "blocked" | "review" | "done";
+  note: string;
+  blocker: string;
+  nextAction: string;
+  proofUrl: string;
+  metadata: Record<string, unknown>;
+  timestamp: string;
+};
+
+export type ReviewAutomationEventType =
+  | "customer_upload"
+  | "private_feedback"
+  | "suppression_update"
+  | "send_log"
+  | "review_reply_draft"
+  | "integration_event"
+  | "sms_compliance_update"
+  | "report_flow_status"
+  | "client_setup_update";
 export type ReviewAutomationPacket =
   | ReviewCustomerPacket
   | ReviewFeedbackPacket
   | ReviewSuppressionPacket
-  | ReviewSendLogPacket;
+  | ReviewSendLogPacket
+  | ReviewReplyDraftPacket
+  | ReviewIntegrationEventPacket
+  | ReviewSmsCompliancePacket
+  | ReportFlowStatusPacket
+  | ClientSetupJobPacket;
 
 export function buildCustomerPacket(input: {
   clientSlug: string;
@@ -84,7 +196,7 @@ export function buildCustomerPacket(input: {
     clientName: client?.businessName ?? input.clientSlug,
     submittedBy: input.submittedBy,
     submittedEmail: input.submittedEmail,
-    source: "aioutsourcehub.com:review-automation-customer-upload",
+    source: "getmefound.ai:review-automation-customer-upload",
     timestamp: new Date().toISOString(),
     rows: suppressed,
     summary: summarizeRows(suppressed),
@@ -128,7 +240,7 @@ export function buildSuppressionPacket(input: {
     clientName: client?.businessName ?? input.clientSlug,
     customerEmail: input.customerEmail.trim().toLowerCase(),
     reason: cleanLongText(input.reason, 500),
-    source: input.source ?? "aioutsourcehub.com:review-automation-unsubscribe",
+    source: input.source ?? "getmefound.ai:review-automation-unsubscribe",
     timestamp: new Date().toISOString(),
   } satisfies ReviewSuppressionPacket;
 }
@@ -161,11 +273,16 @@ export async function forwardReviewAutomationEvent(
   payload: ReviewAutomationPacket,
 ) {
   const url =
-    process.env.AOH_REVIEW_AUTOMATION_WEBHOOK_URL?.trim() ||
-    process.env.AOH_CLIENT_INTAKE_WEBHOOK_URL?.trim() ||
-    process.env.AOH_INTAKE_WEBHOOK_URL?.trim();
+    envValueAny(
+      "GMF_REVIEW_AUTOMATION_WEBHOOK_URL",
+      "GMF_CLIENT_INTAKE_WEBHOOK_URL",
+      "GMF_INTAKE_WEBHOOK_URL",
+      "AOH_REVIEW_AUTOMATION_WEBHOOK_URL",
+      "AOH_CLIENT_INTAKE_WEBHOOK_URL",
+      "AOH_INTAKE_WEBHOOK_URL",
+    );
 
-  if (!url) return { ok: false, configured: false, error: "AOH review automation webhook is not configured." };
+  if (!url) return { ok: false, configured: false, error: "GMF review automation webhook is not configured." };
 
   try {
     const response = await fetch(url, {
@@ -210,7 +327,9 @@ export async function postReviewAutomationSlackSummary(
         ? renderFeedbackSlack(payload as ReviewFeedbackPacket, webhookResult)
         : eventType === "suppression_update"
           ? renderSuppressionSlack(payload as ReviewSuppressionPacket, webhookResult)
-          : renderSendLogSlack(payload as ReviewSendLogPacket, webhookResult);
+          : eventType === "send_log"
+            ? renderSendLogSlack(payload as ReviewSendLogPacket, webhookResult)
+            : renderGenericSlack(eventType, payload, webhookResult);
 
   await fetch(webhook, {
     method: "POST",
@@ -240,15 +359,15 @@ function parseCustomerRows(raw: string) {
     .slice(0, 500);
 
   const rows = lines.map(parseCustomerLine);
-  const first = rows[0];
-  if (first && /name|email|phone|customer/i.test(Object.values(first).join(" "))) {
+  const firstLineCells = splitCustomerLine(lines[0] ?? "").map((cell) => cell.trim().toLowerCase());
+  if (looksLikeCustomerHeader(firstLineCells)) {
     return rows.slice(1);
   }
   return rows;
 }
 
 function parseCustomerLine(line: string): ReviewCustomerRow {
-  const cells = splitCsvLine(line);
+  const cells = splitCustomerLine(line);
   return {
     name: cells[0] ?? "",
     email: normalizeEmail(cells[1] ?? ""),
@@ -258,6 +377,21 @@ function parseCustomerLine(line: string): ReviewCustomerRow {
     suppressed: false,
     suppressReason: "",
   };
+}
+
+function splitCustomerLine(line: string) {
+  if (line.includes("\t")) {
+    return line.split("\t").map((cell) => cell.trim());
+  }
+  return splitCsvLine(line);
+}
+
+function looksLikeCustomerHeader(cells: string[]) {
+  const compact = new Set(cells.map((cell) => cell.replace(/[\s_-]+/g, "")));
+  const hasEmail = compact.has("email") || compact.has("emailaddress");
+  const hasName = compact.has("name") || compact.has("customer") || compact.has("customername") || compact.has("firstname");
+  const hasPhone = compact.has("phone") || compact.has("phonenumber") || compact.has("mobile");
+  return hasEmail && (hasName || hasPhone);
 }
 
 function applySuppression(rows: ReviewCustomerRow[], doNotContactText: string) {
@@ -345,7 +479,7 @@ function renderCustomerUploadSlack(
 *Held back:* ${packet.summary.suppressedRows}
 *Missing email:* ${packet.summary.missingEmailRows}
 *Duplicates:* ${packet.summary.duplicateEmailRows}
-*AOH webhook:* ${webhookResult.ok ? "received full packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
+*GMF webhook:* ${webhookResult.ok ? "received full packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
 *Storage:* ${webhookResult.ok ? "saved or forwarded" : "not saved yet"}
 
 Manager next: Reviews Manager checks sendable rows, confirms the review link, then Sender sends only after proof checks.`;
@@ -361,7 +495,7 @@ function renderFeedbackSlack(
 *Rating:* ${packet.rating}/5
 *Customer:* ${packet.customerName || "not provided"}${packet.customerEmail ? ` - ${packet.customerEmail}` : ""}
 *Route:* ${packet.shouldRouteToGoogle ? "happy customer can continue to Google" : "private owner follow-up"}
-*AOH webhook:* ${webhookResult.ok ? "received packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
+*GMF webhook:* ${webhookResult.ok ? "received packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
 *Storage:* ${webhookResult.ok ? "saved or forwarded" : "not saved yet"}
 
 Feedback: ${packet.feedback || "none"}`;
@@ -376,7 +510,7 @@ function renderSuppressionSlack(
 *Client:* ${packet.clientName}
 *Email:* ${maskEmail(packet.customerEmail)}
 *Reason:* ${packet.reason || "not provided"}
-*AOH webhook:* ${webhookResult.ok ? "received packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
+*GMF webhook:* ${webhookResult.ok ? "received packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
 *Storage:* ${webhookResult.ok ? "saved or forwarded" : "not saved yet"}
 
 Manager next: Future review request uploads should hold this email back.`;
@@ -396,6 +530,21 @@ function renderSendLogSlack(
 *Storage:* ${webhookResult.ok ? "saved or forwarded" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not saved yet"}
 
 Manager next: ${shouldAlert ? "Check whether this customer should be held back or retried." : "No action unless the client asks for send proof."}`;
+}
+
+function renderGenericSlack(
+  eventType: ReviewAutomationEventType,
+  packet: ReviewAutomationPacket,
+  webhookResult: { ok: boolean; configured: boolean; error?: string },
+) {
+  return `*Review Automation event*
+
+*Client:* ${packet.clientName}
+*Type:* ${eventType}
+*GMF webhook:* ${webhookResult.ok ? "received packet" : webhookResult.configured ? `failed - ${webhookResult.error || "unknown"}` : "not configured"}
+*Storage:* ${webhookResult.ok ? "saved or forwarded" : "not saved yet"}
+
+Manager next: Review this event in the GMF internal workspace if action is needed.`;
 }
 
 function maskEmail(email: string) {

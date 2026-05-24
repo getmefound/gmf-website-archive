@@ -49,7 +49,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const cfg = SURFACES[slug];
   if (!cfg) return new Response("Not found", { status: 404 });
 
-  // Load real AOH wordmark PNG — high-res source so embedded version stays sharp
+  // Load real GMF wordmark PNG — high-res source so embedded version stays sharp
   const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h480.png");
   const wordmarkBuf = await readFile(wordmarkPath);
   const wordmarkDataUrl = `data:image/png;base64,${wordmarkBuf.toString("base64")}`;
@@ -93,11 +93,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
           position: "relative",
         }}
       >
-        {/* Top — real AOH wordmark */}
+        {/* Top — real GMF wordmark */}
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={wordmarkDataUrl}
-            alt="AI Outsource Hub"
+            alt="GetMeFound"
             width={wordmarkW}
             height={wordmarkH}
             style={{ display: "flex", height: wordmarkH, width: wordmarkW }}
@@ -163,7 +163,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
               width: isTall ? "auto" : "100%",
             }}
           >
-            <div style={{ display: "flex" }}>aioutsourcehub.com</div>
+            <div style={{ display: "flex" }}>getmefound.ai</div>
             <div
               style={{
                 display: "flex",

@@ -13,6 +13,10 @@ grant all privileges on public.contact_submissions to service_role;
 grant all privileges on public.agent_tasks to service_role;
 grant all privileges on public.email_events to service_role;
 grant all privileges on public.tooling_status to service_role;
+grant all privileges on public.client_profiles to service_role;
+grant all privileges on public.client_integrations to service_role;
+grant all privileges on public.review_automation_events to service_role;
+grant all privileges on public.review_automation_suppressions to service_role;
 
 drop policy if exists "allow contact submissions insert" on public.contact_submissions;
 create policy "allow contact submissions insert"
@@ -41,3 +45,35 @@ on public.tooling_status
 for select
 to anon, authenticated
 using (true);
+
+drop policy if exists "service role manages client profiles" on public.client_profiles;
+create policy "service role manages client profiles"
+on public.client_profiles
+for all
+to service_role
+using (true)
+with check (true);
+
+drop policy if exists "service role manages client integrations" on public.client_integrations;
+create policy "service role manages client integrations"
+on public.client_integrations
+for all
+to service_role
+using (true)
+with check (true);
+
+drop policy if exists "service role manages review automation events" on public.review_automation_events;
+create policy "service role manages review automation events"
+on public.review_automation_events
+for all
+to service_role
+using (true)
+with check (true);
+
+drop policy if exists "service role manages review automation suppressions" on public.review_automation_suppressions;
+create policy "service role manages review automation suppressions"
+on public.review_automation_suppressions
+for all
+to service_role
+using (true)
+with check (true);

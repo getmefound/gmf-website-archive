@@ -9,7 +9,7 @@ Service focus: Review Automation
 
 GHL Expert owns the HighLevel backend setup after the client completes self-serve onboarding and Profile confirms Google Business Profile access.
 
-GHL Expert does not own Google Business Profile access itself. Profile owns access and hands off when AOH has the correct Google profile authority.
+GHL Expert does not own Google Business Profile access itself. Profile owns access and hands off when GMF has the correct Google profile authority.
 
 ## Core Mental Model
 
@@ -22,7 +22,7 @@ Profile handles the authority step. GHL Expert handles the HighLevel connection 
 
 HighLevel's GBP integration is the path that syncs Google messages, reviews, and reputation data into the CRM. Once connected, the Reputation area is where reviews, review requests, widgets, Reviews AI, summaries, and related reputation tools live.
 
-## AOH Plan Boundary
+## GMF Plan Boundary
 
 Base Review Automation includes:
 
@@ -50,7 +50,7 @@ Required before GHL setup:
 
 - payment/order confirmed by Manager
 - business basics submitted
-- AOH has GBP manager access or a blocker is recorded
+- GMF has GBP manager access or a blocker is recorded
 - review request/customer-flow details submitted
 
 Optional but useful:
@@ -107,16 +107,16 @@ Important rule: if a trigger link should track clicks, insert the actual trigger
 
 ### 5. Connect Google Business Profile inside HighLevel
 
-After Profile confirms AOH has manager access:
+After Profile confirms GMF has manager access:
 
 1. Open the client subaccount.
 2. Go to Settings > Integrations.
 3. Connect Google Business Profile.
-4. Sign in with the AOH Google account that has manager access.
+4. Sign in with the GMF Google account that has manager access.
 5. Select the correct business/location.
 6. Confirm the profile is connected.
 
-Do not assume manager access means GHL is connected. Manager access only gives the AOH Google account permission to authorize the connection.
+Do not assume manager access means GHL is connected. Manager access only gives the GMF Google account permission to authorize the connection.
 
 ### 6. Confirm Reputation sync
 
@@ -188,7 +188,7 @@ Plan gate: Reviews AI belongs to AI Visibility or an approved upgrade, not base 
 
 Reviews AI can work in suggestive mode or auto-pilot mode. Reviews AI Agents can be created with tone, sentiment handling, language behavior, and brand instructions.
 
-For AOH default:
+For GMF default:
 
 - keep instructions short and specific
 - use the client's requested tone/language
@@ -253,8 +253,8 @@ Before marking done:
 
 GBP not visible in HighLevel connection:
 
-- AOH may not have accepted the manager invite.
-- The wrong AOH Google account may be signed in.
+- GMF may not have accepted the manager invite.
+- The wrong GMF Google account may be signed in.
 - The client may have invited an individual account instead of the agency/business group.
 - Profile should re-check access.
 

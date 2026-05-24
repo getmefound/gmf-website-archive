@@ -15,9 +15,9 @@ const OUTBOX_DIR = "docs/client-ops-ledger/outbox";
 const GHL_API_BASE = "https://services.leadconnectorhq.com";
 const GHL_API_VERSION = "2021-07-28";
 const DEFAULT_AGENT_CHANNEL_ID = "C0ATTA4NBR8";
-const OWNER_SLACK_USER_ID = process.env.AOH_OWNER_SLACK_USER_ID?.trim() || "U0ATPQYFA85";
-const OWNER_FIRST_NAME = process.env.AOH_OWNER_FIRST_NAME?.trim() || "Mike";
-const OWNER_FORMAL_NAME = process.env.AOH_OWNER_FORMAL_NAME?.trim() || "Mr. Egidio";
+const OWNER_SLACK_USER_ID = process.env.GMF_OWNER_SLACK_USER_ID?.trim() || process.env.GMF_OWNER_SLACK_USER_ID?.trim() || "U0ATPQYFA85";
+const OWNER_FIRST_NAME = process.env.GMF_OWNER_FIRST_NAME?.trim() || process.env.GMF_OWNER_FIRST_NAME?.trim() || "Mike";
+const OWNER_FORMAL_NAME = process.env.GMF_OWNER_FORMAL_NAME?.trim() || process.env.GMF_OWNER_FORMAL_NAME?.trim() || "Mr. Egidio";
 const configuredGhlCacheTtlMs = Number(process.env.GHL_READINESS_CACHE_TTL_MS ?? 5 * 60 * 1000);
 const GHL_READINESS_CACHE_TTL_MS = Number.isFinite(configuredGhlCacheTtlMs) ? configuredGhlCacheTtlMs : 5 * 60 * 1000;
 
@@ -523,7 +523,7 @@ Manager, owner peek
 Manager, morning brief
 Manager, model routing
 Profile Manager, prepare GBP access test
-Profile Manager, get AOH Google review link
+Profile Manager, get GMF Google review link
 Manager, run Reach Cold Email Campaign
 Manager, show Reach warmup autopilot
 Manager, explain the Reach result
@@ -744,8 +744,8 @@ ${address(actor)}, Profile Manager status:
 
 Access:
 
-- Confirmed for the AOH client-zero test.
-- AOH's own Google Business Profile is the practice account.
+- Confirmed for the GMF client-zero test.
+- GetMeFound's own Google Business Profile is the practice account.
 
 Profile gaps:
 
@@ -755,17 +755,17 @@ Profile gaps:
 
 Agent-prepared draft:
 
-AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
+GetMeFound helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
 Proof needed:
 
-- Screenshot of People and access showing AOH access.
+- Screenshot of People and access showing GMF access.
 - Screenshot of the profile edit area before any public change.
 - Screenshot of the final preview before publishing.
 
 Manager recommendation:
 
-- This draft is safe to use as the first AOH GBP post.
+- This draft is safe to use as the first GMF GBP post.
 - Agent team should prepare the post and proof.
 - Mike should only be asked for the final public-publish decision.
 - Nothing gets published until Mike says exactly: \`publish GBP post\`.
@@ -793,25 +793,25 @@ ${address(actor)}, Profile Manager owns this.
 
 Goal:
 
-- Get the verified AOH Google review link.
+- Get the verified GMF Google review link.
 - Do not publish anything.
 - Do not change profile settings.
 - Hand the link to Reviews Manager so Review Automation can send to the right place.
 
 What Profile Manager should do:
 
-1. Open Google while logged into the Google account that has AOH profile access.
-2. Search for \`AI Outsource Hub\` and open the correct Business Profile controls.
+1. Open Google while logged into the Google account that has GMF profile access.
+2. Search for \`GetMeFound\` and open the correct Business Profile controls.
 3. Select \`Read reviews\`.
 4. Select \`Get more reviews\`, \`Ask for reviews\`, or the review QR/share option.
 5. Copy the public review request link.
-6. Test that the link opens the Google review flow for AI Outsource Hub.
+6. Test that the link opens the Google review flow for GetMeFound.
 7. Report back with: access status, review link found yes/no, final link if found, blocker if no.
 
 Proof standard:
 
-- The link opens the correct AOH review flow.
-- The business name is AI Outsource Hub.
+- The link opens the correct GMF review flow.
+- The business name is GetMeFound.
 - The link is public, not a private admin URL.
 - No profile settings, posts, replies, or public edits were changed.
 
@@ -820,11 +820,11 @@ Blocked if:
 - Google does not show the profile tools.
 - \`Read reviews\` or \`Get more reviews\` is missing.
 - The link opens the wrong business or an admin-only page.
-- AOH needs additional profile verification.
+- GMF needs additional profile verification.
 
 Next handoff:
 
-- Reviews Manager adds the link to the AOH client profile.
+- Reviews Manager adds the link to the GMF client profile.
 - Sender only dry-runs until the link is stored and Mike approves the client-zero test.
 
 References:
@@ -836,13 +836,13 @@ References:
 function buildGbpPostApprovalResponse(actor: UserContext) {
   return `*GBP post approval - ${today()}*
 
-${address(actor)}, Manager recommendation: use the approved AOH Google Business Profile draft.
+${address(actor)}, Manager recommendation: use the approved GMF Google Business Profile draft.
 
 This is *not* a Reach drip approval.
 
 Final post:
 
-AI Outsource Hub helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
+GetMeFound helps local businesses automate the follow-up work that usually falls through the cracks: review requests, lead outreach, missed-call response, and client updates. The goal is simple: help owners stay visible, respond faster, and grow without adding more admin work.
 
 Agent work:
 
@@ -852,7 +852,7 @@ Agent work:
 
 Proof checklist:
 
-- People and access screenshot already shows AOH control.
+- People and access screenshot already shows GMF control.
 - Screenshot before publishing.
 - Screenshot after Google accepts/submits the post.
 - Note whether Google says the post is pending review.
@@ -1106,7 +1106,7 @@ function buildAgentListResponse(actor: UserContext) {
     ["Marketing", ["editor", "press"]],
   ] as const;
 
-  return `*AOH agent directory*
+  return `*GMF agent directory*
 
 ${address(actor)}, you can speak to any agent by starting a Slack message with their role name.
 
@@ -1725,7 +1725,7 @@ async function queueReachWarmupWorkflow({
   const token = process.env.GITHUB_REACH_RUNNER_TOKEN?.trim();
   if (!token) return { ok: false, error: "GITHUB_REACH_RUNNER_TOKEN is not configured" };
 
-  const repo = process.env.GITHUB_REACH_REPO?.trim() || "aoh-inc/aoh-website";
+  const repo = process.env.GITHUB_REACH_REPO?.trim() || "mje-gmf/website";
   const workflow = process.env.GITHUB_REACH_WORKFLOW_ID?.trim() || "reach-warmup-autopilot.yml";
   const ref = process.env.GITHUB_REACH_REF?.trim() || "main";
   const url = `https://api.github.com/repos/${repo}/actions/workflows/${workflow}/dispatches`;

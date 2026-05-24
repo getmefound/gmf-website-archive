@@ -320,7 +320,7 @@ export function HeroVisualReviews() {
   return (
     <div
       className="relative w-full h-[280px] md:h-full md:min-h-[420px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A1628]"
-      aria-label="AOH product loop"
+      aria-label="GMF product loop"
     >
       <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[var(--color-accent)]/15 blur-3xl" />
       <div className="pointer-events-none absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-white/[0.04] blur-3xl" />

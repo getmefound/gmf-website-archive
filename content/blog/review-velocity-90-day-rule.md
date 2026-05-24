@@ -6,7 +6,7 @@ category: "Reviews"
 coverImage: "https://images.unsplash.com/photo-1675352161828-c07170f1b114?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["Reviews", "Local Search", "Google Maps"]
 ---

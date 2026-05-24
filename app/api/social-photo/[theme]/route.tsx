@@ -22,7 +22,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "AFTER-HOURS CALLS",
     hook: "9 of 10 calls go to your competitor.",
     ctaLabel: "Relay — $299/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#relay",
+    ctaUrl: "getmefound.ai/pricing#relay",
     accent: "green",
   },
   "star-sweet-spot": {
@@ -30,7 +30,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "REVIEWS · STAR MATH",
     hook: "Customers don't trust 5.0.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "amber",
   },
   "cost-of-dormant-profile": {
@@ -38,7 +38,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "THE COST OF DOING NOTHING",
     hook: "$38,400/year walking out.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "red",
   },
   "review-velocity-90-day": {
@@ -46,7 +46,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "THE 90-DAY RULE",
     hook: "60 fresh reviews beat 200 old ones.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "green",
   },
   "ai-recommendation-vs-rank": {
@@ -54,7 +54,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "AI VISIBILITY",
     hook: "AI names 1 of 3. Google lists 10.",
     ctaLabel: "AI Visibility — $199/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#ai-visibility",
+    ctaUrl: "getmefound.ai/pricing#ai-visibility",
     accent: "blue",
   },
   "diy-vs-dfy": {
@@ -62,15 +62,15 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "DIY vs DONE-FOR-YOU",
     hook: "$30 software isn't cheaper if no one runs it.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "amber",
   },
   "software-vs-work": {
     imagePath: "/social/ai-gen/software-vs-work.jpg",
     topEyebrow: "DONE-FOR-YOU",
     hook: "Haven't opened the app in 6 months? It's a bill, not a tool.",
-    ctaLabel: "See AOH pricing",
-    ctaUrl: "aioutsourcehub.com/pricing",
+    ctaLabel: "See GMF pricing",
+    ctaUrl: "getmefound.ai/pricing",
     accent: "amber",
   },
   "reviews-compound": {
@@ -78,7 +78,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "REVIEWS COMPOUND",
     hook: "Ads stop. Reviews still pay you in 2036.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "green",
   },
   "med-spa-math": {
@@ -86,7 +86,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "MED SPA MATH",
     hook: "1 missed review = 4 lost bookings.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "amber",
   },
   "groomer-trust": {
@@ -94,7 +94,7 @@ const PHOTOS: Record<string, PhotoOverlay> = {
     topEyebrow: "PET GROOMERS",
     hook: "Pet parents don't book under 20 reviews.",
     ctaLabel: "Review Automation — $49/mo",
-    ctaUrl: "aioutsourcehub.com/pricing#review-automation",
+    ctaUrl: "getmefound.ai/pricing#review-automation",
     accent: "blue",
   },
 };

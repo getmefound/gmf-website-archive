@@ -17,6 +17,6 @@ jobs:
 
       - name: Run homepage report smoke test
         env:
-          REPORT_SMOKE_BASE_URL: https://aioutsourcehub.com
+          REPORT_SMOKE_BASE_URL: https://getmefound.ai
           REPORT_TEST_BYPASS_TOKEN: ${{ secrets.REPORT_TEST_BYPASS_TOKEN }}
         run: node tools/smoke-report.mjs

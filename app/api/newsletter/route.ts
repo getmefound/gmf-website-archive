@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     await forwardToGHL({
       email: email.toLowerCase(),
       timestamp: new Date().toISOString(),
-      source: "aioutsourcehub.com/newsletter",
+      source: "getmefound.ai/newsletter",
     });
     return NextResponse.json({ ok: true });
   } catch {

@@ -9,7 +9,7 @@ const offer = product?.specialOffer;
 const sourceClaims = product?.sourceClaims ?? [];
 
 export const metadata: Metadata = {
-  title: "Presence Refresh Launch Special - AI Outsource Hub",
+  title: "Presence Refresh Launch Special - GetMeFound",
   description:
     "A $499 limited-time content refresh before Reach campaigns send prospects to check your business.",
   robots: { index: false, follow: false },

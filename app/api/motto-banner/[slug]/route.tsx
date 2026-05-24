@@ -72,7 +72,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const lineCount = motto.lines.length;
   const headlineSize = lineCount === 1 ? 110 : lineCount === 2 ? 76 : 60;
 
-  // Load the real AOH wordmark PNG (h160 = scales down cleanly to banner size)
+  // Load the real GMF wordmark PNG (h160 = scales down cleanly to banner size)
   const wordmarkPath = join(process.cwd(), "public", "logos", "aoh-wordmark-dark-h160.png");
   const wordmarkBuf = await readFile(wordmarkPath);
   const wordmarkDataUrl = `data:image/png;base64,${wordmarkBuf.toString("base64")}`;
@@ -93,11 +93,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
           position: "relative",
         }}
       >
-        {/* Top — real AOH wordmark PNG */}
+        {/* Top — real GMF wordmark PNG */}
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={wordmarkDataUrl}
-            alt="AI Outsource Hub"
+            alt="GetMeFound"
             width={256}
             height={56}
             style={{ display: "flex", height: 56, width: 256 }}
@@ -156,7 +156,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
               letterSpacing: 0.5,
             }}
           >
-            <div style={{ display: "flex" }}>aioutsourcehub.com</div>
+            <div style={{ display: "flex" }}>getmefound.ai</div>
             <div
               style={{
                 display: "flex",

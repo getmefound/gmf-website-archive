@@ -283,7 +283,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ theme: 
           }}
         >
           <div style={{ display: "flex", fontSize: 18, color: "#A8B3C4", fontWeight: 600 }}>
-            aioutsourcehub.com/pricing#relay
+            getmefound.ai/pricing#relay
           </div>
           <div
             style={{

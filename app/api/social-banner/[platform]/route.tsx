@@ -41,15 +41,15 @@ const BANNERS: Record<string, Banner> = {
     height: 396,
     variant: "person",
     name: "Mike Egidio",
-    role: "Founder · AI Outsource Hub",
-    focus: "I built AOH so local-business owners can run their business while we run the rest.",
+    role: "Founder · GetMeFound",
+    focus: "I built GMF so local-business owners can run their business while we run the rest.",
   },
   "kip": {
     width: 1584,
     height: 396,
     variant: "person",
     name: "Kip Leathers",
-    role: "Business Development · AI Outsource Hub",
+    role: "Business Development · GetMeFound",
     focus: "I find the right local-business owners to talk to — then open the conversation.",
   },
   "teri": {
@@ -57,7 +57,7 @@ const BANNERS: Record<string, Banner> = {
     height: 396,
     variant: "person",
     name: "Teri Egidio",
-    role: "Sales Manager · AI Outsource Hub",
+    role: "Sales Manager · GetMeFound",
     focus: "I run the inbound pipeline and onboard every new client so day one feels handled.",
   },
 };
@@ -168,7 +168,7 @@ function BrandBanner({ b }: { b: Banner }) {
             letterSpacing: 0.5,
           }}
         >
-          aioutsourcehub.com
+          getmefound.ai
         </div>
         <div
           style={{

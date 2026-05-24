@@ -30,7 +30,7 @@ import { GROWTH_PRODUCTS, productStatusLabel } from "@/lib/control/growth-produc
 
 export const metadata: Metadata = {
   title: "The Hub",
-  description: "AOH operator console.",
+  description: "GMF operator console.",
   robots: { index: false, follow: false },
 };
 
@@ -96,7 +96,7 @@ export default async function ControlPage() {
       <header className="mb-8 flex flex-col gap-3 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH · Operator
+            GMF · Operator
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             The Hub
@@ -124,6 +124,36 @@ export default async function ControlPage() {
           >
             Ops Docs
           </a>
+          <a
+            href="/mike-mc/clients"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            Clients
+          </a>
+          <a
+            href="/mike-mc/ghl-exit-ops"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            GHL Exit Ops
+          </a>
+          <a
+            href="/mike-mc/report-flow"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            Reports
+          </a>
+          <a
+            href="/mike-mc/setup-jobs"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            Setup Jobs
+          </a>
+          <Link
+            href="/mike-mc/workflows"
+            className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            Workflows
+          </Link>
           <a
             href="/mike-mc/jobs"
             className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
@@ -189,7 +219,7 @@ export default async function ControlPage() {
 
       <footer className="mt-12 border-t border-zinc-800/60 pt-5 text-center">
         <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">
-          AOH · The Hub · slice 3 · {liveSources}/4 sources live · Vercel /
+          GMF · The Hub · slice 3 · {liveSources}/4 sources live · Vercel /
           GitHub / GHL
         </p>
       </footer>
@@ -474,22 +504,22 @@ function SchedulerCard({ data }: { data: ControlData }) {
     for (const e of upcoming) {
       realRows.push({
         primary: `${fmtTime(e.startTimeIso)} · ${e.title}`,
-        secondary: `${timeUntil(e.startTimeIso)} · AOH calendar ${e.kind === "blocked" ? "block" : "appointment"}`,
+        secondary: `${timeUntil(e.startTimeIso)} · GMF calendar ${e.kind === "blocked" ? "block" : "appointment"}`,
         badge: { tone: e === next ? "hot" : "default", label: timeUntil(e.startTimeIso) },
       });
     }
 
     realRows.push({
-      primary: calendar?.name ?? "AOH calendar",
+      primary: calendar?.name ?? "GMF calendar",
       secondary:
         events.length > 0
-          ? `${events.length} AOH calendar item${events.length === 1 ? "" : "s"} today`
-          : "Connected to AOH calendar - no remaining items today",
+          ? `${events.length} GMF calendar item${events.length === 1 ? "" : "s"} today`
+          : "Connected to GMF calendar - no remaining items today",
       badge: { tone: "accent", label: "live" },
     });
   } else {
     realRows.push({
-      primary: "AOH calendar",
+      primary: "GMF calendar",
       secondary: "Calendar data unavailable - check HighLevel API/token",
       badge: { tone: "warn", label: "check" },
     });
@@ -500,17 +530,17 @@ function SchedulerCard({ data }: { data: ControlData }) {
       name="Scheduler"
       role="Time defender · books demos · briefs you before calls"
       status={schedulerLive ? "live" : "manual"}
-      cadence={schedulerLive ? "live - AOH HighLevel calendar" : "manual today - AOH calendar check needed"}
+      cadence={schedulerLive ? "live - GMF HighLevel calendar" : "manual today - GMF calendar check needed"}
       activity={{
         lastDone: schedulerLive
-          ? `${calendar?.name ?? "AOH calendar"} connected`
-          : "AOH calendar data unavailable",
+          ? `${calendar?.name ?? "GMF calendar"} connected`
+          : "GMF calendar data unavailable",
         doingNow: schedulerLive
-          ? `${events.length} AOH calendar item${events.length === 1 ? "" : "s"} today`
+          ? `${events.length} GMF calendar item${events.length === 1 ? "" : "s"} today`
           : "Check HighLevel calendar API/token",
-        upNext: "Add manual AOH-only items as HighLevel appointments or block slots",
+        upNext: "Add manual GMF-only items as HighLevel appointments or block slots",
       }}
-      ownedTitle={schedulerLive ? "Today's AOH calendar - HighLevel live" : "Today's AOH calendar - needs GHL check"}
+      ownedTitle={schedulerLive ? "Today's GMF calendar - HighLevel live" : "Today's GMF calendar - needs GHL check"}
       ownedRows={realRows}
       ownedFooter={
         <div className="flex gap-2">
@@ -528,7 +558,7 @@ function SchedulerCard({ data }: { data: ControlData }) {
             rel="noopener noreferrer"
             className="flex-1 rounded-md border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-center font-mono text-[10px] uppercase tracking-wider text-zinc-400 hover:bg-zinc-900"
           >
-            open AOH calendar
+            open GMF calendar
           </a>
         </div>
       }
@@ -712,7 +742,7 @@ function GhlExpertCard({ data }: { data: ControlData }) {
           ? `Polled GHL · ${data.pipelines.length} pipelines mapped`
           : "9:00am today — Mike confirmed Review Automation workflow firing",
         doingNow: activeTask
-          ? "Working on AOH /aoh-talk Discovery Round Robin calendar"
+          ? "Working on GMF /aoh-talk Discovery Round Robin calendar"
           : data.pipelines ? "Watching pipeline stages + opportunity flow" : "Manual via Hub360ai admin",
         upNext: "Agent build slot 5c — add workflow exec count + webhook latency tracking",
       }}
@@ -745,12 +775,12 @@ function ProfileCard() {
       status="manual"
       cadence="client-zero test now"
       activity={{
-        doingNow: "Testing AOH Google Business Profile access/update handoff",
-        upNext: "Pick the first safe AOH profile update to test",
+        doingNow: "Testing GMF Google Business Profile access/update handoff",
+        upNext: "Pick the first safe GMF profile update to test",
       }}
       ownedTitle="Owns now"
       ownedRows={[
-        { primary: "GBP access test", secondary: "AOH profile first; client adds AOH email, no passwords", badge: { tone: "warm", label: "now" } },
+        { primary: "GBP access test", secondary: "GMF profile first; client adds GMF email, no passwords", badge: { tone: "warm", label: "now" } },
         { primary: "Google Business Profile audit/fix", secondary: "categories, services, hours, photos, description", badge: { tone: "accent", label: "core" } },
         { primary: "Citation/NAP consistency", secondary: "name, address, phone, website drift checks", badge: { tone: "default", label: "weekly" } },
         { primary: "AI visibility signals", secondary: "reviews, trust signals, local proof, monthly benchmark", badge: { tone: "warm", label: "soon" } },
@@ -797,7 +827,7 @@ function PressCard({ data }: { data: ControlData }) {
       const t = data.commitsTooling[0];
       if (t) {
         realRows.push({
-          primary: `aoh-tooling · ${t.message.slice(0, 50)}`,
+          primary: `tooling · ${t.message.slice(0, 50)}`,
           secondary: `${t.sha} · ${relativeTime(t.dateIso)}`,
           badge: { tone: "default", label: t.sha },
         });
@@ -897,7 +927,7 @@ function AuditorCard() {
       ]}
       ownedFooter={
         <a
-          href="https://vercel.com/aoh-inc/aoh-website/analytics"
+          href="https://vercel.com/aoh-inc/getmefound/analytics"
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full rounded-md border border-zinc-800 bg-zinc-900/50 py-2 text-center font-mono text-[10px] uppercase tracking-wider text-zinc-400 transition hover:bg-zinc-900 hover:text-zinc-300"

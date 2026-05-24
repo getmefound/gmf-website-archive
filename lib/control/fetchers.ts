@@ -5,8 +5,8 @@
  *
  * Env vars required (set in Vercel project settings):
  *   VERCEL_TOKEN          - api.vercel.com bearer, full account scope
- *   VERCEL_PROJECT_ID     - prj_xxx for aoh-website
- *   GITHUB_PAT            - github.com fine-grained token, repo:read on aoh-inc/aoh-website + aoh-inc/aoh-tooling
+ *   VERCEL_PROJECT_ID     - prj_xxx for the GetMeFound project
+ *   GITHUB_PAT            - github.com fine-grained token, repo:read on mje-gmf/website
  *   GHL_PIT_TOKEN           - Hub360ai PIT (Bearer pit-xxx)
  *   GHL_LOCATION_ID       - sub-account id (visible in Hub360 admin URL)
  *
@@ -29,7 +29,7 @@ export type LatestDeploy = {
 
 export async function getLatestDeploy(): Promise<LatestDeploy | null> {
   const token = process.env.VERCEL_TOKEN;
-  // Known project id for aoh-inc/aoh-website — fallback so this works without
+  // Known project id for the active GetMeFound Vercel project — fallback so this works without
   // needing VERCEL_PROJECT_ID set explicitly.
   const projectId = process.env.VERCEL_PROJECT_ID ?? "prj_Wz2r5ZCXt8NyKVKQo2cbAdGCd7rw";
   if (!token) return null;
@@ -76,13 +76,18 @@ export type GitCommit = {
   dateIso: string;
 };
 
-export async function getRecentCommits(
-  repo: "aoh-website" | "aoh-tooling",
-  limit = 5,
-): Promise<GitCommit[] | null> {
+type GitHubRepoKey = "website" | "aoh-tooling";
+
+const GITHUB_REPOS: Record<GitHubRepoKey, { owner: string; repo: string }> = {
+  website: { owner: "mje-gmf", repo: "website" },
+  "aoh-tooling": { owner: "aoh-inc", repo: "aoh-tooling" },
+};
+
+export async function getRecentCommits(repoKey: GitHubRepoKey, limit = 5): Promise<GitCommit[] | null> {
+  const repo = GITHUB_REPOS[repoKey];
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
-    "User-Agent": "aoh-control",
+    "User-Agent": "getmefound-control",
     "X-GitHub-Api-Version": "2022-11-28",
   };
   if (process.env.GITHUB_PAT) {
@@ -91,7 +96,7 @@ export async function getRecentCommits(
 
   try {
     const res = await fetch(
-      `https://api.github.com/repos/aoh-inc/${repo}/commits?per_page=${limit}`,
+      `https://api.github.com/repos/${repo.owner}/${repo.repo}/commits?per_page=${limit}`,
       { headers, ...REVAL },
     );
     if (!res.ok) return null;
@@ -252,7 +257,7 @@ export async function getCalendarEventsRange(
     return (
       data.events?.map((e) => ({
         id: e.id,
-        title: e.title ?? e.name ?? "AOH appointment",
+        title: e.title ?? e.name ?? "GMF appointment",
         calendarId: e.calendarId,
         startTimeIso: e.startTime,
         endTimeIso: e.endTime,
@@ -339,7 +344,7 @@ function pickDiscoveryCalendar(calendars: Calendar[] | null) {
   if (configured) return configured;
   return (
     calendars.find((calendar) =>
-      /discovery.*round robin|see if aoh fits/i.test(calendar.name),
+      /discovery.*round robin|see if (aoh|gmf|getmefound) fits/i.test(calendar.name),
     ) ?? { id: configuredId, name: "Discovery - Round Robin" }
   );
 }
@@ -394,7 +399,7 @@ function getUtcTimeForNewYorkDay(
 export async function getControlData(): Promise<ControlData> {
   const [deploy, commitsWebsite, commitsTooling, pipelines, calendars] = await Promise.all([
     getLatestDeploy(),
-    getRecentCommits("aoh-website", 3),
+    getRecentCommits("website", 3),
     getRecentCommits("aoh-tooling", 3),
     getPipelines(),
     getCalendars(),

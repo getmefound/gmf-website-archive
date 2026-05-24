@@ -3,10 +3,16 @@ import type {
   ReviewAutomationPacket,
   ReviewCustomerPacket,
   ReviewFeedbackPacket,
+  ReviewIntegrationEventPacket,
+  ClientSetupJobPacket,
+  ReviewReplyDraftPacket,
   ReviewSendLogPacket,
+  ReviewSmsCompliancePacket,
   ReviewSuppressionPacket,
+  ReportFlowStatusPacket,
 } from "@/lib/review-automation";
 import { cleanEnvValue } from "@/lib/env";
+import { hasSupabaseConfig, supabaseRest } from "@/lib/supabase-rest";
 
 export type ReviewAutomationRecord = {
   id: string;
@@ -44,11 +50,31 @@ type ReviewAutomationRecordResult =
   | { ok: false; configured: true; error: string; status?: number };
 
 const DEFAULT_TTL_DAYS = 90;
+const EVENTS_TABLE = "review_automation_events";
+const SUPPRESSIONS_TABLE = "review_automation_suppressions";
+
+type SupabaseReviewEventRow = {
+  id: string;
+  created_at: string;
+  event_type: ReviewAutomationEventType;
+  client_slug: string;
+  client_name: string;
+  summary: Record<string, unknown>;
+  payload: ReviewAutomationPacket;
+};
+
+type SupabaseSuppressionRow = {
+  customer_email: string;
+};
 
 export async function saveReviewAutomationEvent(
   eventType: ReviewAutomationEventType,
   payload: ReviewAutomationPacket,
 ): Promise<StorageResult> {
+  if (hasSupabaseConfig()) {
+    return saveReviewAutomationEventToSupabase(eventType, payload);
+  }
+
   const url = cleanEnvValue(process.env.UPSTASH_REDIS_REST_URL);
   const token = cleanEnvValue(process.env.UPSTASH_REDIS_REST_TOKEN);
   const id = `${Date.now()}-${crypto.randomUUID()}`;
@@ -99,6 +125,32 @@ export async function saveReviewAutomationEvent(
 }
 
 export async function saveReviewSuppression(packet: ReviewSuppressionPacket): Promise<StorageResult> {
+  if (hasSupabaseConfig()) {
+    const eventResult = await saveReviewAutomationEventToSupabase("suppression_update", packet);
+    const suppressionResult = await supabaseRest<Array<{ id: string }>>(SUPPRESSIONS_TABLE, {
+      method: "POST",
+      prefer: "resolution=merge-duplicates,return=representation",
+      body: {
+        client_slug: packet.clientSlug,
+        customer_email: packet.customerEmail.toLowerCase(),
+        reason: packet.reason || null,
+        source: packet.source || null,
+      },
+    });
+
+    if (!suppressionResult.ok) {
+      return {
+        ok: false,
+        configured: true,
+        id: eventResult.ok ? eventResult.id : `${Date.now()}-${crypto.randomUUID()}`,
+        status: suppressionResult.status,
+        error: suppressionResult.error,
+      };
+    }
+
+    return eventResult;
+  }
+
   const url = cleanEnvValue(process.env.UPSTASH_REDIS_REST_URL);
   const token = cleanEnvValue(process.env.UPSTASH_REDIS_REST_TOKEN);
   const id = `${Date.now()}-${crypto.randomUUID()}`;
@@ -126,6 +178,25 @@ export async function saveReviewSuppression(packet: ReviewSuppressionPacket): Pr
 }
 
 export async function listReviewSuppressions(clientSlug: string) {
+  if (hasSupabaseConfig()) {
+    const query = new URLSearchParams({
+      select: "customer_email",
+      client_slug: `eq.${clientSlug}`,
+      order: "created_at.desc",
+      limit: "1000",
+    });
+    const result = await supabaseRest<SupabaseSuppressionRow[]>(SUPPRESSIONS_TABLE, { query: query.toString() });
+    if (!result.ok) {
+      return { ok: false as const, configured: true as const, emails: [], status: result.status, error: result.error };
+    }
+
+    return {
+      ok: true as const,
+      configured: true as const,
+      emails: result.data.map((row) => String(row.customer_email).toLowerCase()),
+    };
+  }
+
   const url = cleanEnvValue(process.env.UPSTASH_REDIS_REST_URL);
   const token = cleanEnvValue(process.env.UPSTASH_REDIS_REST_TOKEN);
 
@@ -156,7 +227,10 @@ export async function listReviewAutomationSummaries(input: {
     ok: true,
     configured: true,
     index: result.index,
-    records: result.records.map(({ payload: _payload, ...summary }) => summary),
+    records: result.records.map(({ payload, ...summary }) => {
+      void payload;
+      return summary;
+    }),
   };
 }
 
@@ -164,6 +238,28 @@ export async function listReviewAutomationRecords(input: {
   clientSlug?: string;
   limit?: number;
 }): Promise<ReviewAutomationRecordResult> {
+  if (hasSupabaseConfig()) {
+    const limit = Math.min(500, Math.max(1, Math.floor(input.limit ?? 20)));
+    const query = new URLSearchParams({
+      select: "id,created_at,event_type,client_slug,client_name,summary,payload",
+      order: "created_at.desc",
+      limit: String(limit),
+    });
+    if (input.clientSlug) query.set("client_slug", `eq.${input.clientSlug}`);
+
+    const result = await supabaseRest<SupabaseReviewEventRow[]>(EVENTS_TABLE, { query: query.toString() });
+    if (!result.ok) {
+      return { ok: false, configured: true, status: result.status, error: result.error };
+    }
+
+    return {
+      ok: true,
+      configured: true,
+      index: input.clientSlug ? `supabase:${EVENTS_TABLE}:${input.clientSlug}` : `supabase:${EVENTS_TABLE}:all`,
+      records: result.data.map(recordFromSupabaseRow),
+    };
+  }
+
   const url = cleanEnvValue(process.env.UPSTASH_REDIS_REST_URL);
   const token = cleanEnvValue(process.env.UPSTASH_REDIS_REST_TOKEN);
 
@@ -171,7 +267,7 @@ export async function listReviewAutomationRecords(input: {
     return { ok: false, configured: false, error: "UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN is not set." };
   }
 
-  const limit = Math.min(50, Math.max(1, Math.floor(input.limit ?? 20)));
+  const limit = Math.min(500, Math.max(1, Math.floor(input.limit ?? 20)));
   const index = input.clientSlug ? clientIndexKey(input.clientSlug) : globalIndexKey();
   const idsResult = await runRedisPipeline<string[][]>(url, token, [["LRANGE", index, "0", String(limit - 1)]]);
 
@@ -194,6 +290,119 @@ export async function listReviewAutomationRecords(input: {
     .filter((record): record is ReviewAutomationRecord => Boolean(record));
 
   return { ok: true, configured: true, index, records };
+}
+
+export async function checkReviewAutomationStorage() {
+  if (hasSupabaseConfig()) {
+    const id = crypto.randomUUID();
+    const payload = {
+      clientSlug: "storage-health",
+      clientName: "Storage Health",
+      timestamp: new Date().toISOString(),
+      submittedBy: "system",
+      submittedEmail: "system@getmefound.ai",
+      source: "storage-health",
+      summary: { totalRows: 0, sendableRows: 0, suppressedRows: 0, missingEmailRows: 0, duplicateEmailRows: 0 },
+      rows: [],
+    } satisfies ReviewCustomerPacket;
+    const save = await supabaseRest<SupabaseReviewEventRow[]>(EVENTS_TABLE, {
+      method: "POST",
+      prefer: "return=representation",
+      body: {
+        id,
+        event_type: "customer_upload",
+        client_slug: payload.clientSlug,
+        client_name: payload.clientName,
+        created_at: payload.timestamp,
+        summary: summarizePayload("customer_upload", payload),
+        payload,
+      },
+    });
+    if (!save.ok) return { ok: false as const, configured: true as const, provider: "supabase", stage: "write", status: save.status, error: save.error };
+
+    const query = new URLSearchParams({ select: "id", id: `eq.${id}`, limit: "1" });
+    const read = await supabaseRest<Array<{ id: string }>>(EVENTS_TABLE, { query: query.toString() });
+    if (!read.ok || read.data[0]?.id !== id) {
+      return {
+        ok: false as const,
+        configured: true as const,
+        provider: "supabase",
+        stage: "read",
+        status: read.status,
+        error: read.ok ? "Health record was not readable." : read.error,
+      };
+    }
+
+    const cleanup = await supabaseRest<null>(EVENTS_TABLE, { method: "DELETE", query: `id=eq.${id}` });
+    return {
+      ok: cleanup.ok,
+      configured: true as const,
+      provider: "supabase",
+      stage: cleanup.ok ? "ready" : "cleanup",
+      status: cleanup.status,
+      error: cleanup.ok ? undefined : cleanup.error,
+    };
+  }
+
+  const url = cleanEnvValue(process.env.UPSTASH_REDIS_REST_URL);
+  const token = cleanEnvValue(process.env.UPSTASH_REDIS_REST_TOKEN);
+  if (!url || !token) {
+    return { ok: false as const, configured: false as const, provider: "none", stage: "env", error: "No review automation storage is configured." };
+  }
+
+  const key = `review-automation:health:${crypto.randomUUID()}`;
+  const value = new Date().toISOString();
+  const write = await runRedisPipeline(url, token, [["SET", key, value, "EX", "60"]]);
+  if (!write.ok) return { ok: false as const, configured: true as const, provider: "upstash", stage: "write", status: write.status, error: write.error };
+
+  const read = await runRedisPipeline<unknown[]>(url, token, [["GET", key]]);
+  const cleanup = await runRedisPipeline(url, token, [["DEL", key]]);
+  const readValue = read.ok && Array.isArray(read.values) ? read.values[0] : null;
+
+  return {
+    ok: read.ok && readValue === value,
+    configured: true as const,
+    provider: "upstash",
+    stage: read.ok && readValue === value ? "ready" : "read",
+    status: read.status ?? write.status ?? cleanup.status,
+    error: read.ok && readValue === value ? undefined : "Health record was not readable.",
+  };
+}
+
+async function saveReviewAutomationEventToSupabase(
+  eventType: ReviewAutomationEventType,
+  payload: ReviewAutomationPacket,
+): Promise<StorageResult> {
+  const id = crypto.randomUUID();
+  const record = buildRecord({ id, eventType, payload });
+  const result = await supabaseRest<SupabaseReviewEventRow[]>(EVENTS_TABLE, {
+    method: "POST",
+    prefer: "return=representation",
+    body: {
+      id,
+      event_type: eventType,
+      client_slug: record.clientSlug,
+      client_name: record.clientName,
+      created_at: record.createdAt,
+      summary: record.summary,
+      payload: record.payload,
+    },
+  });
+
+  if (!result.ok) return { ok: false, configured: true, id, status: result.status, error: result.error };
+  return { ok: true, configured: true, id, status: result.status };
+}
+
+function recordFromSupabaseRow(row: SupabaseReviewEventRow): ReviewAutomationRecord {
+  return {
+    id: row.id,
+    eventType: row.event_type,
+    clientSlug: row.client_slug,
+    clientName: row.client_name,
+    createdAt: row.created_at,
+    summary: row.summary ?? {},
+    payload: row.payload,
+  };
 }
 
 async function runRedisPipeline<T>(
@@ -279,6 +488,70 @@ function summarizePayload(eventType: ReviewAutomationEventType, payload: ReviewA
     return summarizeSendLog(payload as ReviewSendLogPacket);
   }
 
+  if (eventType === "review_reply_draft") {
+    const packet = payload as ReviewReplyDraftPacket;
+    return {
+      rating: packet.rating,
+      reviewerName: packet.reviewerName,
+      mode: packet.mode,
+      status: packet.status,
+      model: packet.model,
+      riskLevel: packet.safety?.riskLevel ?? "unknown",
+      autoPostEligible: Boolean(packet.safety?.autoPostEligible),
+    };
+  }
+
+  if (eventType === "integration_event") {
+    const packet = payload as ReviewIntegrationEventPacket;
+    return {
+      systemName: packet.systemName,
+      externalEventId: packet.externalEventId,
+      eventType: packet.eventType,
+      customerEmail: maskEmail(packet.customerEmail),
+      status: packet.status,
+      holdReason: packet.holdReason,
+      duplicate: Boolean(packet.duplicate),
+      sendCandidateEligible: Boolean(packet.sendCandidateEligible),
+    };
+  }
+
+  if (eventType === "sms_compliance_update") {
+    const packet = payload as ReviewSmsCompliancePacket;
+    return {
+      provider: packet.provider,
+      brandStatus: packet.brandStatus,
+      campaignStatus: packet.campaignStatus,
+      optInStatus: packet.optInStatus,
+      stopHandlingStatus: packet.stopHandlingStatus,
+      liveSendingAllowed: packet.liveSendingAllowed,
+    };
+  }
+
+  if (eventType === "report_flow_status") {
+    const packet = payload as ReportFlowStatusPacket;
+    return {
+      reportLane: packet.reportLane,
+      reportType: packet.reportType,
+      status: packet.status,
+      runId: packet.runId,
+      hasAuditUrl: Boolean(packet.auditUrl),
+      hasHeatmapUrl: Boolean(packet.heatmapUrl),
+      blocker: packet.blocker,
+    };
+  }
+
+  if (eventType === "client_setup_update") {
+    const packet = payload as ClientSetupJobPacket;
+    return {
+      jobId: packet.jobId,
+      actor: packet.actor,
+      stepKey: packet.stepKey,
+      status: packet.status,
+      hasBlocker: Boolean(packet.blocker),
+      hasProof: Boolean(packet.proofUrl),
+    };
+  }
+
   const packet = payload as ReviewSuppressionPacket;
   return {
     customerEmail: maskEmail(packet.customerEmail),
@@ -309,7 +582,7 @@ function parseRecord(value: unknown) {
 }
 
 function storageTtlDays() {
-  const value = Number(process.env.AOH_REVIEW_AUTOMATION_STORAGE_TTL_DAYS);
+  const value = Number(process.env.GMF_REVIEW_AUTOMATION_STORAGE_TTL_DAYS ?? process.env.AOH_REVIEW_AUTOMATION_STORAGE_TTL_DAYS);
   return Number.isFinite(value) && value > 0 ? Math.min(365, Math.floor(value)) : DEFAULT_TTL_DAYS;
 }
 

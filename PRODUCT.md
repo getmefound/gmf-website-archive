@@ -51,4 +51,4 @@ Supporting offers can exist as upsells or consulting services:
 - Google Workspace for `getmefound.ai` is live.
 - GitHub now points to `mje-gmf/website`.
 - GHL campaign warmup was paused for the domain/company reset.
-- The old AOH repo and deployment should be treated as archive/reference, not the future production system.
+- The old pre-GetMeFound repo and deployment should be treated as archive/reference, not the future production system.

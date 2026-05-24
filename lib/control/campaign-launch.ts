@@ -94,7 +94,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
     branch: "Booking intent",
     keywordExamples: ["book", "calendar", "appointment", "send booking link"],
     actions: [
-      "Send AOH Talk booking link",
+      "Send GMF Talk booking link",
       "Add aoh_reply_book and aoh_campaign_booking_link_sent",
       "Move opportunity to Warm Leads",
       "Do not generate report unless separately approved",
@@ -143,7 +143,7 @@ export const LAUNCH_GATES = [
   "GHL Customer Replied action POSTs contactId, replyText, and campaignLane to /api/campaign/reply-router.",
   "GHL Campaign Reply Router is built in production location tRbczwt6oJsXK4tjuzOI.",
   "Reply send generates or queues exactly one correct report path.",
-  "Reply book sends AOH Talk and does not accidentally generate a report.",
+  "Reply book sends GMF Talk and does not accidentally generate a report.",
   "Relay reply send sends missed-call details without default report generation.",
   "Unclear replies create a human review task.",
   "STOP/unsubscribe/not interested suppress safely.",

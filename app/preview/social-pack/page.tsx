@@ -74,7 +74,7 @@ function ChannelCard({
             </span>
           )}
           <CopyButton text={content} label="Copy text" />
-          <CopyButton text={cardUrlFor(themeSlug, "https://aioutsourcehub.com")} label="Copy img URL" />
+          <CopyButton text={cardUrlFor(themeSlug, "https://getmefound.ai")} label="Copy img URL" />
           {isXManual && (
             <a
               href={X_NATIVE_LINK}

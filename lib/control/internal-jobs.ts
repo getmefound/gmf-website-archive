@@ -396,7 +396,7 @@ export const REACH_TEAM_TRAINING: ReachTeamTraining[] = [
       "Move real interest toward the calendar with clean handoff notes.",
     escalates:
       "Asks Scheduler when booking links, availability, or meeting context are unclear.",
-    proof: "AOH Talk booking link",
+    proof: "GMF Talk booking link",
     status: "next",
     tone: "muted",
   },

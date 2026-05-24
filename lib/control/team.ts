@@ -39,7 +39,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
     archetypeNote: "Turns HighLevel into repeatable workflows, fields, stages, and proof checks.",
     responsibility:
       "Builds and verifies HighLevel workflows, calendars, pipelines, tags, callbacks, and report delivery.",
-    owns: ["GHL workflows", "Website Leads pipeline", "AOH Talk calendar", "report callbacks"],
+    owns: ["GHL workflows", "Website Leads pipeline", "GMF Talk calendar", "report callbacks"],
     proof: ["green execution logs", "correct tags", "correct stage", "no duplicate sends"],
     currentFocus: "Build Campaign Reply Router for `send`, `book`, unclear, and opt-out replies.",
     color: "emerald",
@@ -53,7 +53,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
     archetype: "Charlie Munger inversion lens",
     archetypeNote: "Starts with what could fail across tools, access, costs, and infrastructure.",
     responsibility:
-      "Keeps AOH's technical stack healthy: OpenClaw, VPS, GitHub, Vercel, GHL, Slack, backups, tokens, tool sprawl, and launch risk.",
+      "Keeps GetMeFound's technical stack healthy: OpenClaw, VPS, GitHub, Vercel, GHL, Slack, backups, tokens, tool sprawl, and launch risk.",
     owns: ["tech-stack reviews", "security sweep", "access checks", "cost guardrails"],
     proof: ["no-go risks listed", "secrets absent", "backups verified", "tool changes approved"],
     currentFocus: "Make the stack visible before adding more tools or client volume.",
@@ -113,7 +113,7 @@ export const AGENT_TEAM: AgentTeamMember[] = [
     archetype: "Sales floor discipline lens",
     archetypeNote: "Turns interest into a real appointment instead of another loose thread.",
     responsibility:
-      "Routes booking-intent replies to AOH Talk, follows up on show rate, and keeps call handoffs clean.",
+      "Routes booking-intent replies to GMF Talk, follows up on show rate, and keeps call handoffs clean.",
     owns: ["aoh-talk handoff", "booking intent", "show-rate follow-up", "meeting notes"],
     proof: ["booking link sent", "opportunity updated", "task created", "call booked"],
     currentFocus: "Receives `book` replies from Campaign Reply Router.",
@@ -188,10 +188,10 @@ export const AGENT_TEAM: AgentTeamMember[] = [
     archetype: "Executive assistant lens",
     archetypeNote: "Protects time and makes sure real meetings have context.",
     responsibility:
-      "Watches AOH calendar, booking availability, conflict calendars, reminders, and meeting prep.",
-    owns: ["AOH Talk", "calendar blocks", "meeting briefs", "availability"],
+      "Watches GMF calendar, booking availability, conflict calendars, reminders, and meeting prep.",
+    owns: ["GMF Talk", "calendar blocks", "meeting briefs", "availability"],
     proof: ["booking page opens", "calendar item visible", "conflicts respected", "brief ready"],
-    currentFocus: "AOH Talk link is live; calendar data should stay AOH-only in MC.",
+    currentFocus: "GMF Talk link is live; calendar data should stay GMF-only in MC.",
     color: "sky",
   },
 ];

@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getClientHubActivity } from "@/lib/client-hub-activity";
+import { getClientHubProfile, getClientIntegrationSettings } from "@/lib/client-profile-store";
+import { summarizeIntegrationEventHealth } from "@/lib/review-integration-events";
+import { listReviewAutomationRecords } from "@/lib/review-automation-store";
+import { getReviewReplyDigest } from "@/lib/review-reply-digest";
+import { getSmsReadiness } from "@/lib/review-sms-readiness";
 import {
   CLIENT_HUBS,
-  getClientHub,
   statusClasses,
   statusLabel,
   type ClientHubProfile,
   type ClientHubStatus,
 } from "@/lib/client-hub";
+
+export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -20,7 +27,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   if (!client) {
     return {
@@ -31,19 +38,39 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${client.businessName} Client Hub`,
-    description: `AOH setup hub for ${client.businessName}.`,
+    description: `GMF setup hub for ${client.businessName}.`,
     robots: { index: false, follow: false },
   };
 }
 
 export default async function ClientHubPage({ params }: PageProps) {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   if (!client) notFound();
 
+  const activity = await getClientHubActivity(client.slug);
+  const integration = await getClientIntegrationSettings({ clientSlug: client.slug });
+  const integrationRecords = await listReviewAutomationRecords({ clientSlug: client.slug, limit: 500 });
+  const integrationHealth = integrationRecords.ok ? summarizeIntegrationEventHealth(integrationRecords.records) : null;
+  const smsReadiness = await getSmsReadiness(client.slug);
+  const smsDoneCount = smsReadiness.checklist.filter((item) => item.done).length;
+  const replyDigest = await getReviewReplyDigest({ clientSlug: client.slug, days: 30 });
   const clientNeeds = client.checklist.filter((item) => item.owner === "Client" && item.status !== "done");
-  const reviewsBehind = client.reviews.weeklyReviews < client.reviews.weeklyGoal;
+  const weeklyReviews = activity.ok ? activity.weekly.feedback : client.reviews.weeklyReviews;
+  const requestsSent = activity.ok ? activity.monthly.sent : client.reviews.requestsSent;
+  const monthlyFeedback = activity.ok ? activity.monthly.feedback : client.monthlyRecap.feedbackCaptured;
+  const monthlyHeldBack = activity.ok ? activity.monthly.heldBack : client.monthlyRecap.heldBack;
+  const responseRate =
+    activity.ok && activity.monthly.sent > 0
+      ? `${Math.round((activity.monthly.feedback / activity.monthly.sent) * 100)}%`
+      : client.reviews.responseRate;
+  const reviewsBehind = weeklyReviews < client.reviews.weeklyGoal;
+  const activityNote = activity.ok
+    ? activity.monthly.sent > 0
+      ? `${activity.monthly.sent} review request${activity.monthly.sent === 1 ? "" : "s"} sent in the last 30 days.`
+      : client.monthlyRecap.ownerNote
+    : "Live activity is temporarily unavailable; static setup status is shown.";
 
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#f7f8f4] text-slate-950 focus:outline-none">
@@ -113,9 +140,9 @@ export default async function ClientHubPage({ params }: PageProps) {
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-4">
-              <MiniStat label="This week" value={`${client.reviews.weeklyReviews}/${client.reviews.weeklyGoal}`} />
-              <MiniStat label="Requests sent" value={client.reviews.requestsSent.toString()} />
-              <MiniStat label="Response" value={client.reviews.responseRate} />
+              <MiniStat label="This week" value={`${weeklyReviews}/${client.reviews.weeklyGoal}`} />
+              <MiniStat label="Requests sent" value={requestsSent.toString()} />
+              <MiniStat label="Response" value={responseRate} />
               <MiniStat label="Automation" value={client.metrics[2]?.value ?? "Checking"} />
             </div>
 
@@ -126,7 +153,7 @@ export default async function ClientHubPage({ params }: PageProps) {
                     Monthly recap
                   </p>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {client.monthlyRecap.ownerNote}
+                    {activityNote}
                   </p>
                 </div>
                 <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-slate-600">
@@ -134,9 +161,9 @@ export default async function ClientHubPage({ params }: PageProps) {
                 </span>
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <MiniStat label="Sent" value={client.monthlyRecap.requestsSent.toString()} />
-                <MiniStat label="Feedback" value={client.monthlyRecap.feedbackCaptured.toString()} />
-                <MiniStat label="Held back" value={client.monthlyRecap.heldBack.toString()} />
+                <MiniStat label="Sent" value={requestsSent.toString()} />
+                <MiniStat label="Feedback" value={monthlyFeedback.toString()} />
+                <MiniStat label="Held back" value={monthlyHeldBack.toString()} />
               </div>
             </div>
 
@@ -155,6 +182,97 @@ export default async function ClientHubPage({ params }: PageProps) {
                 </ul>
               </div>
             ) : null}
+          </div>
+        </div>
+      </section>
+
+      <section id="data-connection" className="border-b border-slate-200 bg-[#f7f8f4]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[320px_1fr]">
+          <SectionHeader
+            eyebrow="Data connection"
+            title="How new customers enter the review system"
+            sub="Manual upload is included. Automatic POS or CRM sync can be added when the client system supports it."
+          />
+
+          <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+            <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                    Current source
+                  </p>
+                  <h2 className="mt-3 text-2xl font-semibold text-slate-950">
+                    {integration.systemName}
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {connectionCopy(integration.connectionLevel)}
+                  </p>
+                </div>
+                <span className={`rounded-md border px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] ${integrationTone(integration.connectionLevel)}`}>
+                  {integration.connectionLevel.replaceAll("_", " ")}
+                </span>
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-4">
+                <MiniStat label="Delay" value={`${integration.sendDelayDays} day${integration.sendDelayDays === 1 ? "" : "s"}`} />
+                <MiniStat label="Received" value={String(integrationHealth?.received ?? 0)} />
+                <MiniStat label="Clean" value={String(integrationHealth?.sendCandidateEligible ?? 0)} />
+                <MiniStat label="Held" value={String(integrationHealth?.held ?? 0)} />
+              </div>
+
+              <p className="mt-4 text-sm leading-6 text-slate-600">
+                {integrationHealth?.latestAt
+                  ? `Latest customer event recorded ${formatShortDate(integrationHealth.latestAt)}.`
+                  : "No POS/CRM events have been recorded yet. Use customer upload to start quickly."}
+              </p>
+            </article>
+
+            <article className="rounded-lg border border-amber-200 bg-amber-50 p-6 shadow-sm">
+              <StatusPill status={isAutoConnection(integration.connectionLevel) ? "working" : "locked"} />
+              <h3 className="mt-4 text-xl font-semibold text-slate-950">
+                POS/CRM auto-sync
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                Auto-sync is available as a paid setup after we confirm the system has an export, webhook, Zapier, Make, or API path. We still hold duplicates, missing emails, and suppressed customers before any proof queue.
+              </p>
+              <Link
+                href={`/client/${client.slug}/customers`}
+                className="mt-5 inline-flex rounded-lg bg-amber-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-amber-800"
+              >
+                Upload customers
+              </Link>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="upgrades" className="border-b border-slate-200 bg-[#f7f8f4]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[320px_1fr]">
+          <SectionHeader
+            eyebrow="Available next"
+            title="Add-ons and approvals"
+            sub="Items that can be unlocked after the base review flow is live."
+          />
+
+          <div className="grid gap-3 md:grid-cols-3">
+            <UpgradeCard
+              label="Review replies"
+              status={replyDigest.counts.drafted ? `${replyDigest.counts.drafted} pending` : client.voiceProfile?.mode ?? "Draft only"}
+              detail={replyDigest.counts.posted ? `${replyDigest.counts.posted} replies marked posted. AI drafts still require the saved approval rules.` : "AI drafts in your saved voice with approval before anything is posted."}
+              tone="emerald"
+            />
+            <UpgradeCard
+              label="SMS requests"
+              status={smsReadiness.ready ? "Ready" : `${smsDoneCount}/5 ready`}
+              detail={smsReadiness.ready ? "SMS review requests are compliance-ready for this client." : "Available after A2P/10DLC setup, opt-in language, STOP handling, and sample message are approved."}
+              tone="amber"
+            />
+            <UpgradeCard
+              label="POS auto-sync"
+              status="Custom"
+              detail="Starts with manual upload, then connects exports, webhooks, Zapier, or direct APIs when supported."
+              tone="slate"
+            />
           </div>
         </div>
       </section>
@@ -199,7 +317,7 @@ export default async function ClientHubPage({ params }: PageProps) {
                 Update details
               </Link>
               <a
-                href="mailto:mike@aioutsourcehub.com?subject=Client%20hub%20upload"
+                href="mailto:mike@getmefound.ai?subject=Client%20hub%20upload"
                 className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
               >
                 Send file
@@ -292,4 +410,60 @@ function MiniStat({ label, value }: { label: string; value: string }) {
       <p className="mt-2 text-base font-semibold text-slate-950">{value}</p>
     </div>
   );
+}
+
+function UpgradeCard({
+  label,
+  status,
+  detail,
+  tone,
+}: {
+  label: string;
+  status: string;
+  detail: string;
+  tone: "emerald" | "amber" | "slate";
+}) {
+  const toneClasses = {
+    emerald: "border-emerald-200 bg-emerald-50 text-emerald-800",
+    amber: "border-amber-200 bg-amber-50 text-amber-900",
+    slate: "border-slate-200 bg-white text-slate-700",
+  }[tone];
+
+  return (
+    <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <span className={`rounded-md border px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] ${toneClasses}`}>
+        {status}
+      </span>
+      <h3 className="mt-4 text-lg font-semibold text-slate-950">{label}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-600">{detail}</p>
+    </article>
+  );
+}
+
+function connectionCopy(connectionLevel: string) {
+  const clean = connectionLevel.toLowerCase();
+  if (clean.includes("webhook") || clean.includes("api") || clean.includes("zapier") || clean.includes("make")) {
+    return "Customer events can be accepted automatically after setup and proof checks.";
+  }
+  if (clean.includes("export")) {
+    return "Customer lists can be imported from scheduled exports when available.";
+  }
+  return "Customer lists are uploaded or pasted first, so review requests can start without waiting on a POS integration.";
+}
+
+function integrationTone(connectionLevel: string) {
+  return isAutoConnection(connectionLevel)
+    ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+    : "border-slate-200 bg-slate-50 text-slate-600";
+}
+
+function isAutoConnection(connectionLevel: string) {
+  const clean = connectionLevel.toLowerCase();
+  return ["webhook", "api", "zapier", "make", "sync"].some((term) => clean.includes(term));
+}
+
+function formatShortDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "an unknown date";
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }

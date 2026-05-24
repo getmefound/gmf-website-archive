@@ -5,8 +5,15 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const OUTBOX_DIR = "docs/client-ops-ledger/outbox";
-const REQUIRED_ENV = ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
-const OPTIONAL_ENV = ["AOH_INTERNAL_API_TOKEN", "REPORT_TEST_BYPASS_TOKEN", "AOH_REVIEW_AUTOMATION_WEBHOOK_URL"];
+const SUPABASE_ALT_SECRET_ENV = "SUPABASE_SERVICE_ROLE_KEY";
+const UPSTASH_ENV = ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
+const OPTIONAL_ENV = [
+  "GMF_INTERNAL_API_TOKEN",
+  "AOH_INTERNAL_API_TOKEN",
+  "REPORT_TEST_BYPASS_TOKEN",
+  "GMF_REVIEW_AUTOMATION_WEBHOOK_URL",
+  "AOH_REVIEW_AUTOMATION_WEBHOOK_URL",
+];
 
 main();
 
@@ -29,11 +36,13 @@ function main() {
 }
 
 function checkLocalEnv() {
-  const required = REQUIRED_ENV.map((name) => ({ name, present: Boolean(process.env[name]?.trim()) }));
+  const supabase = checkSupabaseEnv((name) => Boolean(process.env[name]?.trim()));
+  const upstash = UPSTASH_ENV.map((name) => ({ name, present: Boolean(process.env[name]?.trim()) }));
   const optional = OPTIONAL_ENV.map((name) => ({ name, present: Boolean(process.env[name]?.trim()) }));
   return {
-    ready: required.every((item) => item.present),
-    required,
+    ready: supabase.ready || upstash.every((item) => item.present),
+    supabase,
+    upstash,
     optional,
   };
 }
@@ -45,18 +54,21 @@ function checkVercelEnv() {
       ready: false,
       available: false,
       error: trim(`${result.stdout || ""}\n${result.stderr || ""}`) || "vercel env ls failed",
-      required: REQUIRED_ENV.map((name) => ({ name, present: false })),
+      supabase: checkSupabaseEnv(() => false),
+      upstash: UPSTASH_ENV.map((name) => ({ name, present: false })),
       optional: OPTIONAL_ENV.map((name) => ({ name, present: false })),
     };
   }
 
   const output = `${result.stdout || ""}\n${result.stderr || ""}`;
-  const required = REQUIRED_ENV.map((name) => ({ name, present: output.includes(name) }));
+  const supabase = checkSupabaseEnv((name) => output.includes(name));
+  const upstash = UPSTASH_ENV.map((name) => ({ name, present: output.includes(name) }));
   const optional = OPTIONAL_ENV.map((name) => ({ name, present: output.includes(name) }));
   return {
-    ready: required.every((item) => item.present),
+    ready: supabase.ready || upstash.every((item) => item.present),
     available: true,
-    required,
+    supabase,
+    upstash,
     optional,
   };
 }
@@ -73,11 +85,12 @@ ${ownerSummary({ local, vercel })}
 
 ## Local Env
 
-| Env var | Required | Present |
+| Env var | Storage path | Present |
 |---|---:|---:|
 ${[
-  ...local.required.map((item) => ({ ...item, required: "yes" })),
-  ...local.optional.map((item) => ({ ...item, required: "no" })),
+  ...local.supabase.items.map((item) => ({ ...item, required: "supabase" })),
+  ...local.upstash.map((item) => ({ ...item, required: "upstash fallback" })),
+  ...local.optional.map((item) => ({ ...item, required: "optional" })),
 ]
   .map((item) => `| ${item.name} | ${item.required} | ${item.present ? "yes" : "no"} |`)
   .join("\n")}
@@ -86,32 +99,53 @@ ${[
 
 ${vercel.available === false ? `- Vercel env check failed: ${cell(vercel.error)}` : "- Vercel env list was readable."}
 
-| Env var | Required | Present in Vercel list |
+| Env var | Storage path | Present in Vercel list |
 |---|---:|---:|
 ${[
-  ...vercel.required.map((item) => ({ ...item, required: "yes" })),
-  ...vercel.optional.map((item) => ({ ...item, required: "no" })),
+  ...vercel.supabase.items.map((item) => ({ ...item, required: "supabase" })),
+  ...vercel.upstash.map((item) => ({ ...item, required: "upstash fallback" })),
+  ...vercel.optional.map((item) => ({ ...item, required: "optional" })),
 ]
   .map((item) => `| ${item.name} | ${item.required} | ${item.present ? "yes" : "no"} |`)
   .join("\n")}
 
 ## What This Means
 
-- Review pages and APIs can exist without Redis.
-- Persistent customer upload history, private feedback history, suppression, bounce auto-hold, send logs, and follow-up due checks need Redis.
-- Add the two required Upstash env vars to Vercel Production before calling this live-ready.
+- Review Automation storage can use the existing Supabase project.
+- Upstash Redis is now only a fallback path.
+- Persistent customer upload history, private feedback history, suppression, bounce auto-hold, send logs, and follow-up due checks need either Supabase storage tables or Upstash.
 - Do not print or commit the values.
 `;
 }
 
 function ownerSummary({ local, vercel }) {
   if (local.ready && vercel.ready) return "Pass: Review Automation storage env is present locally and in Vercel.";
-  const missingLocal = local.required.filter((item) => !item.present).map((item) => item.name);
-  const missingVercel = vercel.required.filter((item) => !item.present).map((item) => item.name);
+  const missingLocal = missingStorage(local);
+  const missingVercel = missingStorage(vercel);
   const parts = [];
   if (missingLocal.length) parts.push(`local missing ${missingLocal.join(", ")}`);
   if (missingVercel.length) parts.push(`Vercel missing ${missingVercel.join(", ")}`);
   return `Blocked: ${parts.join("; ")}.`;
+}
+
+function checkSupabaseEnv(hasName) {
+  const url = { name: "NEXT_PUBLIC_SUPABASE_URL", present: hasName("NEXT_PUBLIC_SUPABASE_URL") };
+  const secret = {
+    name: "SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY",
+    present: hasName("SUPABASE_SECRET_KEY") || hasName(SUPABASE_ALT_SECRET_ENV),
+  };
+  return {
+    ready: url.present && secret.present,
+    items: [url, secret],
+  };
+}
+
+function missingStorage(check) {
+  if (check.ready) return [];
+  if (!check.supabase.ready) {
+    return check.supabase.items.filter((item) => !item.present).map((item) => item.name);
+  }
+  return check.upstash.filter((item) => !item.present).map((item) => item.name);
 }
 
 function loadEnv(path) {

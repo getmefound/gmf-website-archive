@@ -32,7 +32,7 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL: ${{ vars.MORNING_BRIEF_SLACK_CHANNEL || vars.REACH_SLACK_CHANNEL || 'C0ATTA4NBR8' }}
       MANAGER_NOTIFY_TOKEN: ${{ secrets.MANAGER_NOTIFY_TOKEN || secrets.REPORT_TEST_BYPASS_TOKEN }}
-      MANAGER_NOTIFY_URL: ${{ vars.MANAGER_NOTIFY_URL || 'https://aioutsourcehub.com/api/agent/slack?manager_notify=1' }}
+      MANAGER_NOTIFY_URL: ${{ vars.MANAGER_NOTIFY_URL || 'https://getmefound.ai/api/agent/slack?manager_notify=1' }}
       GHL_PIT_TOKEN: ${{ secrets.GHL_PIT_TOKEN }}
       GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
       TZ: America/New_York
@@ -91,7 +91,7 @@ jobs:
         if: steps.delivery_time.outputs.should_run == 'true'
         shell: bash
         run: |
-          git config user.name "AOH Manager"
+          git config user.name "GMF Manager"
           git config user.email "actions@github.com"
           RUN_DATE="${{ steps.brief.outputs.run_date }}"
           git add -f \

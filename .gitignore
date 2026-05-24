@@ -46,6 +46,7 @@ next-env.d.ts
 lighthouse-*.report.html
 lighthouse-*.report.json
 lighthouse-local-*
+tmp-getmefound-*
 
 # moved to dedicated tooling repos (aoh-tooling, laudy-tooling) + vault.
 # Keep explicit website-owned operational scripts below.
@@ -61,6 +62,14 @@ lighthouse-local-*
 !/scripts/build-reach-scrape-inventory.mjs
 !/scripts/ghl-email-stats.mjs
 !/scripts/ghl-exit-inventory.mjs
+!/scripts/namecheap-check.mjs
+!/scripts/namecheap-private-email-dns.mjs
+!/scripts/outreach-mailbox-check.mjs
+!/scripts/smartlead-add-outreach-accounts.mjs
+!/scripts/smartlead-check.mjs
+!/scripts/smartlead-create-campaign-draft.mjs
+!/scripts/smartlead-readiness.mjs
+!/scripts/smartlead-warmup-report.mjs
 !/scripts/agent-command-center.mjs
 !/scripts/manager-agent-eval.mjs
 !/scripts/manager-slack-training-candidates.mjs

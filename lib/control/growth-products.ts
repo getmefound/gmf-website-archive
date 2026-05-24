@@ -168,10 +168,10 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
       price: "$499 one time",
       bonus: "Morning Brief included: what changed, proof links, and the next Reach move.",
       note:
-        "Use AOH as client zero first, then sell this limited-time price as the fast credibility setup before Cold Email Reach or Social Reach.",
+        "Use GMF as client zero first, then sell this limited-time price as the fast credibility setup before Cold Email Reach or Social Reach.",
     },
     nextBuild: [
-      "Run AOH first so Mike has a real before/after to show clients.",
+      "Run GMF first so Mike has a real before/after to show clients.",
       "Create intake checklist for services, tone, photos, access, and approval contact.",
       "Create before/after proof template.",
       "Create 10-post plus 5-blog launch-special package.",
@@ -203,7 +203,7 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
       },
       {
         label: "Content price anchor",
-        claim: "Bulk content competitors can price posts and blogs cheaply, so AOH must win on speed, proof, and Reach connection.",
+        claim: "Bulk content competitors can price posts and blogs cheaply, so GMF must win on speed, proof, and Reach connection.",
         detail:
           "Socinova publicly lists bulk graphic posts and SEO blogs as low-cost content products, which makes our proof/reporting and campaign handoff the differentiator.",
         url: "https://socinova.com/value-pricing/",
@@ -273,7 +273,7 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
         owner: "Scout",
         status: "manual",
         description:
-          "Client or AOH identifies approved groups, pages, hashtags, posts, newsletters, and LinkedIn feeds to watch.",
+          "Client or GMF identifies approved groups, pages, hashtags, posts, newsletters, and LinkedIn feeds to watch.",
         proof: "Watchlist with source, platform, access owner, and posting rules.",
       },
       {
@@ -302,7 +302,7 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
       },
       {
         title: "Human posts or approves",
-        owner: "Client or AOH owner",
+        owner: "Client or GMF owner",
         status: "manual",
         description:
           "A real human posts from the real account. The agent does not auto-comment on LinkedIn or Facebook.",
@@ -341,7 +341,7 @@ export const GROWTH_PRODUCTS: GrowthProduct[] = [
     pricingDirection:
       "Pilot manually first. If it works, sell at $500-$1,500/month depending on sources watched, comment volume, and approval speed.",
     nextBuild: [
-      "Run AOH pilot with 10 approved LinkedIn/Facebook/community sources.",
+      "Run GMF pilot with 10 approved LinkedIn/Facebook/community sources.",
       "Create opportunity scoring sheet.",
       "Create comment approval queue.",
       "Track DMs, replies, booked calls, and useful market language.",

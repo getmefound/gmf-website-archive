@@ -66,7 +66,7 @@ Common envs:
 
 Top-level routes include `/`, `/about`, `/pricing`, `/contact`, `/faq`, `/privacy`, and `/terms`.
 
-The public shell currently carries the GetMeFound brand. Some internal packs, legacy API helpers, and archived content may still refer to AOH/AI Outsource Hub until those systems are retired or rewritten.
+The public shell carries the GetMeFound brand. Some archived logs and compatibility helpers may still contain old AOH names where changing them would break a historical reference or a live bridge.
 
 ## Deploy
 

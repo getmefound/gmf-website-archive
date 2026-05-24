@@ -105,7 +105,7 @@ const TRUSTED_REPORT_HOSTS = [
   "msgsndr.com",
   "leadconnectorhq.com",
   "hub360ai.com",
-  "aioutsourcehub.com",
+  "getmefound.ai",
   "getmefound.ai",
 ];
 

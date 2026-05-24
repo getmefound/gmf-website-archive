@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
 import { checkEmailRate } from "@/lib/rate-limit";
+import { envValueAny } from "@/lib/getmefound-env";
 
 type IntakePayload = {
   businessName?: unknown;
@@ -101,11 +102,11 @@ export async function POST(req: NextRequest) {
     customerSystem,
     notes,
     inviteEmail,
-    source: "aioutsourcehub.com/intake/review-automation",
+    source: "getmefound.ai/intake/review-automation",
     timestamp: new Date().toISOString(),
   };
 
-  const tasks: Promise<void>[] = [forwardToAohIntakeWebhook(payload), forwardToSlack(payload)];
+  const tasks: Promise<void>[] = [forwardToGmfIntakeWebhook(payload), forwardToSlack(payload)];
   if (!ghlForwardingDisabled()) {
     tasks.push(forwardToGhl(payload));
   }
@@ -127,7 +128,7 @@ function cleanEnum(value: unknown, allowed: Set<string>, fallback: string) {
 }
 
 function defaultInviteEmail() {
-  return process.env.AOH_GBP_INVITE_EMAIL?.trim() || "mike@aioutsourcehub.com";
+  return envValueAny("GMF_GBP_INVITE_EMAIL", "AOH_GBP_INVITE_EMAIL") || "mike@getmefound.ai";
 }
 
 async function forwardToGhl(payload: CleanIntake) {
@@ -154,10 +155,9 @@ async function forwardToGhl(payload: CleanIntake) {
   }
 }
 
-async function forwardToAohIntakeWebhook(payload: CleanIntake) {
+async function forwardToGmfIntakeWebhook(payload: CleanIntake) {
   const url =
-    process.env.AOH_CLIENT_INTAKE_WEBHOOK_URL?.trim() ||
-    process.env.AOH_INTAKE_WEBHOOK_URL?.trim();
+    envValueAny("GMF_CLIENT_INTAKE_WEBHOOK_URL", "GMF_INTAKE_WEBHOOK_URL", "AOH_CLIENT_INTAKE_WEBHOOK_URL", "AOH_INTAKE_WEBHOOK_URL");
   if (!url) return;
 
   const response = await fetch(url, {
@@ -166,15 +166,15 @@ async function forwardToAohIntakeWebhook(payload: CleanIntake) {
     body: JSON.stringify({
       ...payload,
       taskPacket: buildTaskPacket(payload),
-      destination: "aoh_owned_intake",
+      destination: "gmf_owned_intake",
     }),
   }).catch((error) => {
-    console.error("Client intake AOH webhook failed", error);
+    console.error("Client intake GMF webhook failed", error);
     return null;
   });
 
   if (response && !response.ok) {
-    console.error("Client intake AOH webhook responded", response.status, await response.text().catch(() => ""));
+    console.error("Client intake GMF webhook responded", response.status, await response.text().catch(() => ""));
   }
 }
 
@@ -200,7 +200,7 @@ async function forwardToSlack(payload: CleanIntake) {
 }
 
 function ghlForwardingDisabled() {
-  const value = String(process.env.AOH_DISABLE_GHL_FORWARDING ?? process.env.AOH_GHL_FREE_MODE ?? "")
+  const value = String(process.env.GMF_DISABLE_GHL_FORWARDING ?? process.env.GMF_GHL_FREE_MODE ?? process.env.AOH_DISABLE_GHL_FORWARDING ?? process.env.AOH_GHL_FREE_MODE ?? "")
     .trim()
     .toLowerCase();
   return ["1", "true", "yes", "on"].includes(value);
@@ -214,13 +214,13 @@ function buildTaskPacket(payload: CleanIntake) {
       manager: "route and brief",
       localVisibilityManager: "verify Google Business Profile access and profile basics",
       reviewsManager: "prepare review automation setup",
-      systemsDirector: "keep setup moving through AOH-owned intake and alert paths",
+      systemsDirector: "keep setup moving through GMF-owned intake and alert paths",
       ghlExpert: "bridge-only HighLevel setup/export while GHL remains active",
     },
     safety: [
       "No password sharing.",
       "Default GBP role is Manager.",
-      "AOH-owned intake path should receive the packet before any GHL bridge handoff.",
+      "GMF-owned intake path should receive the packet before any GHL bridge handoff.",
       "Do not enable HighLevel AI features without Mike's manual approval.",
       "Public GBP changes need client or Mike approval before publishing.",
     ],
@@ -242,7 +242,7 @@ function buildSlackMessage(payload: CleanIntake) {
 *Manager routing:*
 - Profile Manager: verify GBP access and profile basics.
 - Reviews Manager: prepare review automation setup.
-- Systems Director: keep AOH-owned intake and alert paths healthy.
+- Systems Director: keep GMF-owned intake and alert paths healthy.
 - GHL Expert: bridge-only HighLevel setup/export while GHL remains active.
 
 *Safety:*

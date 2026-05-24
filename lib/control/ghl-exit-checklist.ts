@@ -10,9 +10,9 @@ export type GhlExitChecklistItem = {
 export const GHL_EXIT_SUMMARY = {
   title: "GHL Exit + Review Automation",
   ownerNote:
-    "GHL is now a $97 bridge. Review Automation storage and email are live, but we do not cancel GHL until the Google review link and a real AOH send test pass.",
+    "GHL is now a $97 bridge. Review Automation storage and email are live, but we do not cancel GHL until the Google review link and a real GMF send test pass.",
   cancelGate:
-    "Cancel GHL only after Review Automation, Reach sending, and booking are working outside GHL for AOH.",
+    "Cancel GHL only after Review Automation, Reach sending, and booking are working outside GHL for GMF.",
 };
 
 export const GHL_EXIT_METRICS = [
@@ -40,7 +40,7 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     title: "Customer upload page",
     owner: "Reviews Manager",
     status: "done",
-    detail: "Client/customer lists can be uploaded into the AOH system.",
+    detail: "Client/customer lists can be uploaded into the GMF system.",
   },
   {
     title: "Private feedback page",
@@ -67,40 +67,40 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     detail: "Upstash Redis is live and passed write, read, and cleanup checks.",
   },
   {
-    title: "AOH Google review link",
+    title: "GMF Google review link",
     owner: "Profile Manager",
     status: "blocked",
-    detail: "Capture and save the real AOH Google review link before any real review request send.",
+    detail: "Capture and save the real GMF Google review link before any real review request send.",
   },
   {
-    title: "AOH client-zero test",
+    title: "GMF client-zero test",
     owner: "Reviews Manager",
     status: "next",
-    detail: "Run the full AOH test with safe contacts before selling this workflow as client-ready.",
+    detail: "Run the full GMF test with safe contacts before selling this workflow as client-ready.",
   },
   {
     title: "Review request sender endpoint",
     owner: "Sender",
     status: "done",
-    detail: "AOH can dry-run a capped send batch, preview recipients, and log send attempts.",
+    detail: "GMF can dry-run a capped send batch, preview recipients, and log send attempts.",
   },
   {
     title: "Email sender setup",
     owner: "Sender",
     status: "done",
-    detail: "Resend env is live for review request sends from the AOH domain.",
+    detail: "Resend env is live for review request sends from the GMF domain.",
   },
   {
     title: "Live review request sender",
     owner: "Sender",
     status: "next",
-    detail: "Run proof checks, then send only after the AOH Google review link and client-zero approval are in place.",
+    detail: "Run proof checks, then send only after the GMF Google review link and client-zero approval are in place.",
   },
   {
     title: "Monthly recap endpoint",
     owner: "Manager",
     status: "done",
-    detail: "AOH can summarize uploads, sends, bounces, feedback, suppressions, and owner notes.",
+    detail: "GMF can summarize uploads, sends, bounces, feedback, suppressions, and owner notes.",
   },
   {
     title: "Client-facing monthly recap",
@@ -124,13 +124,13 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     title: "AI Visibility replacement",
     owner: "Profile Manager",
     status: "later",
-    detail: "Replace GHL-dependent reporting with AOH-owned ranking checks, notes, and monthly proof.",
+    detail: "Replace GHL-dependent reporting with GMF-owned ranking checks, notes, and monthly proof.",
   },
   {
     title: "Final GHL cancel gate",
     owner: "Manager",
     status: "later",
-    detail: "Only cancel after AOH can sell, fulfill, send, book, and report without GHL.",
+    detail: "Only cancel after GMF can sell, fulfill, send, book, and report without GHL.",
   },
 ];
 

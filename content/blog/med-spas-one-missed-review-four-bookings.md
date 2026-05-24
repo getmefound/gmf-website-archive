@@ -6,7 +6,7 @@ category: "Industry"
 coverImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["Med Spa", "Reviews", "Local Search"]
 ---

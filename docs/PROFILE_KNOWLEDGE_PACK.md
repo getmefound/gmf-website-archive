@@ -9,26 +9,26 @@ Service focus: Review Automation, AI Visibility, Publishing
 
 Profile owns Google Business Profile access, readiness, and local profile health.
 
-Profile does not own HighLevel automation setup. Profile hands off to GHL Expert after AOH has the correct GBP access or after a clear access blocker is recorded.
+Profile does not own HighLevel automation setup. Profile hands off to GHL Expert after GMF has the correct GBP access or after a clear access blocker is recorded.
 
 ## Core Mental Model
 
 Google Business Profile access and HighLevel connection are different steps.
 
-GBP Manager access lets AOH manage the client's Google profile. It does not automatically connect the profile to HighLevel.
+GBP Manager access lets GMF manage the client's Google profile. It does not automatically connect the profile to HighLevel.
 
 The correct Review Automation flow is:
 
-1. Client invites AOH as GBP Manager or invites the AOH agency/business group.
+1. Client invites GMF as GBP Manager or invites the GMF agency/business group.
 2. Profile accepts and verifies the correct location.
 3. Profile confirms the profile is verified/usable or records the blocker.
-4. GHL Expert connects that profile inside HighLevel using an AOH Google account with access.
+4. GHL Expert connects that profile inside HighLevel using an GMF Google account with access.
 
 ## Access Options
 
 ### Individual manager invite
 
-Client invites the official AOH Google account as Manager.
+Client invites the official GMF Google account as Manager.
 
 Client path:
 
@@ -36,7 +36,7 @@ Client path:
 2. Select the business.
 3. Open Business Profile settings.
 4. Open People and access.
-5. Add the AOH email.
+5. Add the GMF email.
 6. Choose Manager.
 7. Send invite.
 
@@ -46,7 +46,7 @@ Use this for simple first version onboarding.
 
 Google supports agency organizations and business groups. The client can invite an organization/business group, or the agency can request access.
 
-Use this when AOH is ready to manage many profiles at scale. It is cleaner for 50+ clients because AOH can organize profiles by business group instead of scattered individual access.
+Use this when GMF is ready to manage many profiles at scale. It is cleaner for 50+ clients because GMF can organize profiles by business group instead of scattered individual access.
 
 ## Owner vs Manager
 
@@ -54,7 +54,7 @@ Google says Owners have full control, including adding/removing users and removi
 
 Google says Managers have mostly the same profile access as Owners, but cannot add/remove users or remove the profile.
 
-For AOH Review Automation, Manager is usually enough because AOH needs to:
+For GMF Review Automation, Manager is usually enough because GMF needs to:
 
 - edit profile info
 - manage the profile on Search/Maps
@@ -72,7 +72,7 @@ Profile should not request Owner unless there is a specific reason.
 Profile "done" for access means:
 
 - invite accepted
-- AOH account/business group can see the business
+- GMF account/business group can see the business
 - correct business/location confirmed
 - pending/wrong invites resolved or assigned to Manager
 - GHL Expert told which Google account should be used for HighLevel connection
@@ -121,7 +121,7 @@ Alternate wording Google may show:
 Proof checks:
 
 - The link opens a Google review flow for the correct business.
-- The business name shown is the exact client/AOH profile, not a similarly named business.
+- The business name shown is the exact client/GMF profile, not a similarly named business.
 - The profile is verified enough for reviews to be requested.
 - The link is public and does not include private admin/session-only URLs.
 
@@ -142,7 +142,7 @@ Profile should capture:
 - last review date
 - number of unreplied reviews
 
-Hand review link to Reviews Manager for AOH-owned Review Automation. Hand it to GHL Expert only if GHL still needs a temporary bridge value.
+Hand review link to Reviews Manager for GMF-owned Review Automation. Hand it to GHL Expert only if GHL still needs a temporary bridge value.
 
 ## Profile Health Checklist
 
@@ -189,7 +189,7 @@ Profile should understand enough HighLevel to know the handoff:
 
 Client invited wrong email:
 
-- Manager asks client to cancel and invite the official AOH account or business group.
+- Manager asks client to cancel and invite the official GMF account or business group.
 
 Client cannot find People and access:
 
@@ -201,7 +201,7 @@ Client does not own the profile:
 
 - identify who owns it
 - request access
-- have owner add AOH
+- have owner add GMF
 
 Profile not verified:
 
@@ -217,7 +217,7 @@ Multiple locations:
 
 Wrong Google account:
 
-- AOH may have access under a different account
+- GMF may have access under a different account
 - GHL Expert must use the same account that has manager access
 
 ## Source Links

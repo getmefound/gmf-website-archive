@@ -1,4 +1,4 @@
-﻿// Final team profile kit â€” picked motto + matching profile copy across 8 surfaces.
+// Final team profile kit â€” picked motto + matching profile copy across 8 surfaces.
 // Motto: "Phones answered. Reviews chased. Leads followed up."
 // No "local businesses" framing.
 // Banners served from /api/team-banner/[slug].
@@ -129,7 +129,7 @@ export const SURFACES: Surface[] = [
         label: "About (LinkedIn company About, ~2,000 char limit â€” Unicode bold renders inline)",
         text: `${B_HEADLINE}
 
-That's what AI Outsource Hub runs for you â€” done-for-you growth, no dashboards, no retainer.
+That's what GetMeFound runs for you â€” done-for-you growth, no dashboards, no retainer.
 
 ${B_WHAT_I_DO}
 Four services starting at $49/month:
@@ -146,7 +146,7 @@ Service businesses ready to stop losing customers to faster competitors with bet
 
 Founded by Mike Egidio. US-based. Month-to-month. Cancel anytime.
 
-â†’ aioutsourcehub.com`,
+â†’ getmefound.ai`,
       },
       {
         label: "Specialties (paste into Specialties field, comma-separated)",
@@ -154,11 +154,11 @@ Founded by Mike Egidio. US-based. Month-to-month. Cancel anytime.
       },
     ],
     fields: [
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Website", value: "https://getmefound.ai" },
       { field: "Industry", value: "Marketing Services" },
       { field: "Company size", value: "2â€“10 employees" },
       { field: "Custom button label", value: "Visit website" },
-      { field: "Custom button URL", value: "https://aioutsourcehub.com/?utm_source=linkedin&utm_medium=company" },
+      { field: "Custom button URL", value: "https://getmefound.ai/?utm_source=linkedin&utm_medium=company" },
     ],
     hashtags: {
       label: "Hashtags for posts (not in About)",
@@ -180,7 +180,7 @@ Founded by Mike Egidio. US-based. Month-to-month. Cancel anytime.
       },
       {
         label: "About (255 char limit on current Facebook â€” hashtags pasted at the end render clickable)",
-        text: `AI Outsource Hub runs done-for-you growth services â€” Review Automation, AI Visibility, Reach, and Relay (24/7 phone answering). From $49/mo.
+        text: `GetMeFound runs done-for-you growth services â€” Review Automation, AI Visibility, Reach, and Relay (24/7 phone answering). From $49/mo.
 
 We run it. You don't learn another app.
 
@@ -189,10 +189,10 @@ We run it. You don't learn another app.
       },
     ],
     fields: [
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Website", value: "https://getmefound.ai" },
       { field: "CTA button", value: "Book Now" },
       { field: "CTA button URL", value: "https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY" },
-      { field: "Contact email", value: "support@aioutsourcehub.com" },
+      { field: "Contact email", value: "support@getmefound.ai" },
       { field: "Page category", value: "Marketing Agency" },
     ],
     hashtags: {
@@ -210,12 +210,12 @@ We run it. You don't learn another app.
     blocks: [
       {
         label: "Bio (160 char limit)",
-        text: "Phones answered. Reviews chased. Leads followed up. Done-for-you growth from $49/mo. No dashboards. aioutsourcehub.com",
+        text: "Phones answered. Reviews chased. Leads followed up. Done-for-you growth from $49/mo. No dashboards. getmefound.ai",
         charLimit: 160,
       },
     ],
     fields: [
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Website", value: "https://getmefound.ai" },
       { field: "Location", value: "US â€” service nationwide" },
       { field: "Pinned tweet idea", value: "Lead with the cost-of-dormant-profile post â€” $38,400/year math, runs hot on X" },
     ],
@@ -242,20 +242,20 @@ Done-for-you growth Â· from $49/mo`,
       },
       {
         label: "Profile picture URL (right-click â†’ save)",
-        text: "https://aioutsourcehub.com/logos/aoh-icon-400-navy.png",
+        text: "https://getmefound.ai/logos/aoh-icon-400-navy.png",
       },
       {
         label: "Native bio links (Instagram supports 5 since 2023 â€” Edit profile â†’ Links â†’ Add external link)",
-        text: `1. Review Automation pricing  â†’  https://aioutsourcehub.com/pricing#review-automation
-2. AI Visibility pricing      â†’  https://aioutsourcehub.com/pricing#ai-visibility
-3. Reach pricing              â†’  https://aioutsourcehub.com/pricing#reach
-4. Relay pricing              â†’  https://aioutsourcehub.com/pricing#relay
-5. Lost-Revenue Calculator    â†’  https://aioutsourcehub.com/#calculator`,
+        text: `1. Review Automation pricing  â†’  https://getmefound.ai/pricing#review-automation
+2. AI Visibility pricing      â†’  https://getmefound.ai/pricing#ai-visibility
+3. Reach pricing              â†’  https://getmefound.ai/pricing#reach
+4. Relay pricing              â†’  https://getmefound.ai/pricing#relay
+5. Lost-Revenue Calculator    â†’  https://getmefound.ai/#calculator`,
       },
     ],
     fields: [
       { field: "Category", value: "Marketing Agency" },
-      { field: "Contact email", value: "support@aioutsourcehub.com" },
+      { field: "Contact email", value: "support@getmefound.ai" },
     ],
     hashtags: {
       label: "Hashtags for IG posts (NOT in bio â€” bio hashtags eat character budget)",
@@ -274,19 +274,19 @@ Done-for-you growth Â· from $49/mo`,
         label: "Business description (750 char)",
         text: `Phones answered. Reviews chased. Leads followed up.
 
-AI Outsource Hub runs done-for-you growth services â€” Review Automation, AI Visibility, phone answering services, and outbound lead generation. Four services from $49/month. No dashboards to log into. No retainer. We set it up, we run it, you get daily updates by text and email. Built for service businesses that want hands-off growth automation without becoming experts in it. Free presence audit on our site. Founded by Mike Egidio. US-based. Month-to-month, cancel anytime.`,
+GetMeFound runs done-for-you growth services â€” Review Automation, AI Visibility, phone answering services, and outbound lead generation. Four services from $49/month. No dashboards to log into. No retainer. We set it up, we run it, you get daily updates by text and email. Built for service businesses that want hands-off growth automation without becoming experts in it. Free presence audit on our site. Founded by Mike Egidio. US-based. Month-to-month, cancel anytime.`,
         charLimit: 750,
       },
       {
         label: "Logo URL",
-        text: "https://aioutsourcehub.com/logos/aoh-icon-1080.png",
+        text: "https://getmefound.ai/logos/aoh-icon-1080.png",
       },
     ],
     fields: [
       { field: "Primary category", value: "Marketing Agency" },
       { field: "Additional categories", value: "Internet Marketing Service, Software Company, Business Management Consultant, Telephone Answering Service" },
       { field: "Services to list", value: "Review Automation ($49/mo) Â· AI Visibility ($199/mo) Â· Reach Lead Engine ($299/mo) Â· Relay Phone Answering ($299/mo)" },
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Website", value: "https://getmefound.ai" },
       { field: "Appointment URL", value: "https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY" },
     ],
   },
@@ -304,17 +304,17 @@ AI Outsource Hub runs done-for-you growth services â€” Review Automation, A
     blocks: [
       {
         label: "Headline (220 char limit)",
-        text: "Founder, AI Outsource Hub Â· Phones answered. Reviews chased. Leads followed up. Done-for-you growth from $49/mo Â· We run it, you don't learn it Â· aioutsourcehub.com",
+        text: "Founder, GetMeFound Â· Phones answered. Reviews chased. Leads followed up. Done-for-you growth from $49/mo Â· We run it, you don't learn it Â· getmefound.ai",
         charLimit: 220,
       },
       {
         label: "About (LinkedIn personal About â€” Unicode bold renders inline)",
         text: `${B_HEADLINE}
 
-That's the whole pitch. I built AI Outsource Hub to run those three things for service-business owners who don't have time to babysit another marketing tool.
+That's the whole pitch. I built GetMeFound to run those three things for service-business owners who don't have time to babysit another marketing tool.
 
 ${B_WHAT_I_DO}
-I run AOH. Four done-for-you growth services from $49/month:
+I run GMF. Four done-for-you growth services from $49/month:
 Â· Review Automation
 Â· AI Visibility (get cited in ChatGPT, Google AI, Claude)
 Â· Reach (outbound lead generation)
@@ -328,16 +328,16 @@ Operators who'd rather be in the truck, the chair, or the operatory than in a ma
 
 Three-person US-based team. Month-to-month. Cancel anytime.
 
-â†’ aioutsourcehub.com`,
+â†’ getmefound.ai`,
       },
       {
         label: "Featured links (pin 3 in the Featured section)",
-        text: "1. Free audit â€” https://aioutsourcehub.com\n2. Pricing â€” https://aioutsourcehub.com/pricing\n3. Latest blog post â€” https://aioutsourcehub.com/blog",
+        text: "1. Free audit â€” https://getmefound.ai\n2. Pricing â€” https://getmefound.ai/pricing\n3. Latest blog post â€” https://getmefound.ai/blog",
       },
     ],
     fields: [
-      { field: "Contact email", value: "mike@aioutsourcehub.com" },
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Contact email", value: "mike@getmefound.ai" },
+      { field: "Website", value: "https://getmefound.ai" },
       { field: "Open to", value: "Business inquiries Â· Speaking Â· Consulting" },
     ],
     hashtags: {
@@ -355,33 +355,33 @@ Three-person US-based team. Month-to-month. Cancel anytime.
     blocks: [
       {
         label: "Headline (220 char limit)",
-        text: "Business Development @ AI Outsource Hub Â· I open the door for service-business owners who want done-for-you growth without the agency BS Â· From $49/mo Â· aioutsourcehub.com",
+        text: "Business Development @ GetMeFound Â· I open the door for service-business owners who want done-for-you growth without the agency BS Â· From $49/mo Â· getmefound.ai",
         charLimit: 220,
       },
       {
         label: "About",
         text: `${B_HEADLINE}
 
-That's what we run at AI Outsource Hub. My job is to find the operators who'd actually benefit â€” and start the conversation in a way that doesn't waste their time.
+That's what we run at GetMeFound. My job is to find the operators who'd actually benefit â€” and start the conversation in a way that doesn't waste their time.
 
 ${B_WHAT_I_DO}
-I run business development at AOH. Four done-for-you growth services from $49/month, set up and run by us. No demos. No decks. I walk through your phone log, your reviews, and your lead-response time, then show you the leak.
+I run business development at GMF. Four done-for-you growth services from $49/month, set up and run by us. No demos. No decks. I walk through your phone log, your reviews, and your lead-response time, then show you the leak.
 
 ${B_WHO_FOR}
 Service-business owners who've been ignoring "the automation thing" because it felt like too much to figure out. We figure it out for you.
 
 If that's a conversation you want to have, message me.
 
-â†’ aioutsourcehub.com`,
+â†’ getmefound.ai`,
       },
       {
         label: "Featured links (pin 3)",
-        text: "1. Free audit â€” https://aioutsourcehub.com\n2. Reviews service â€” https://aioutsourcehub.com/pricing#review-automation\n3. About AOH â€” https://aioutsourcehub.com/about",
+        text: "1. Free audit â€” https://getmefound.ai\n2. Reviews service â€” https://getmefound.ai/pricing#review-automation\n3. About GMF â€” https://getmefound.ai/about",
       },
     ],
     fields: [
-      { field: "Contact email", value: "kip@aioutsourcehub.com" },
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Contact email", value: "kip@getmefound.ai" },
+      { field: "Website", value: "https://getmefound.ai" },
     ],
     hashtags: {
       label: "Hashtags for posts",
@@ -398,17 +398,17 @@ If that's a conversation you want to have, message me.
     blocks: [
       {
         label: "Headline (220 char limit)",
-        text: "Sales Manager & Onboarding @ AI Outsource Hub Â· I make sure your first 30 days feel handled, not figured out Â· Done-for-you growth from $49/mo Â· aioutsourcehub.com",
+        text: "Sales Manager & Onboarding @ GetMeFound Â· I make sure your first 30 days feel handled, not figured out Â· Done-for-you growth from $49/mo Â· getmefound.ai",
         charLimit: 220,
       },
       {
         label: "About",
         text: `${B_HEADLINE}
 
-That's the promise at AI Outsource Hub. My job is making sure your first 30 days actually feel that way â€” handled, not figured out.
+That's the promise at GetMeFound. My job is making sure your first 30 days actually feel that way â€” handled, not figured out.
 
 ${B_WHAT_I_DO}
-I run sales and onboarding at AOH. When you sign with us, I'm the one you talk to. I gather what we need, set up your services, and get your services live â€” usually inside a week. You won't chase me. I'll already have messaged you.
+I run sales and onboarding at GMF. When you sign with us, I'm the one you talk to. I gather what we need, set up your services, and get your services live â€” usually inside a week. You won't chase me. I'll already have messaged you.
 
 ${B_HOW}
 Four done-for-you services from $49/month. No 40-page onboarding doc. No "log into our portal and click through these 12 steps." We do the setup. You see the results.
@@ -416,16 +416,16 @@ Four done-for-you services from $49/month. No 40-page onboarding doc. No "log in
 ${B_WHO_FOR}
 Owners who are tired of being sold tools they never use. We're the opposite of that.
 
-â†’ aioutsourcehub.com`,
+â†’ getmefound.ai`,
       },
       {
         label: "Featured links (pin 3)",
-        text: "1. Free audit â€” https://aioutsourcehub.com\n2. Pricing â€” https://aioutsourcehub.com/pricing\n3. How onboarding works â€” https://aioutsourcehub.com/about",
+        text: "1. Free audit â€” https://getmefound.ai\n2. Pricing â€” https://getmefound.ai/pricing\n3. How onboarding works â€” https://getmefound.ai/about",
       },
     ],
     fields: [
-      { field: "Contact email", value: "teri@aioutsourcehub.com" },
-      { field: "Website", value: "https://aioutsourcehub.com" },
+      { field: "Contact email", value: "teri@getmefound.ai" },
+      { field: "Website", value: "https://getmefound.ai" },
     ],
     hashtags: {
       label: "Hashtags for posts",

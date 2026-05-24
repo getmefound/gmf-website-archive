@@ -289,7 +289,7 @@ ${rows}
 
 ${inventory.surfaces.map(renderSurfaceNotes).join("\n")}
 
-## Local AOH Artifacts
+## Local GMF Artifacts
 
 | File | Present |
 |---|---:|

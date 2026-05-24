@@ -5,7 +5,7 @@ import { GrowthProductPage } from "../_components/GrowthProductPage";
 
 export const metadata: Metadata = {
   title: "Social Reach - The Hub",
-  description: "AOH guarded pilot for social listening and helpful engagement.",
+  description: "GMF guarded pilot for social listening and helpful engagement.",
   robots: { index: false, follow: false },
 };
 

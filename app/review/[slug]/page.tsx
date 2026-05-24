@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ReviewFeedbackForm } from "@/components/ReviewFeedbackForm";
-import { CLIENT_HUBS, getClientHub } from "@/lib/client-hub";
+import { CLIENT_HUBS } from "@/lib/client-hub";
+import { getClientHubProfile } from "@/lib/client-profile-store";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   return {
     title: client ? `Feedback for ${client.businessName}` : "Feedback",
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ReviewFeedbackPage({ params }: PageProps) {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   if (!client) notFound();
 

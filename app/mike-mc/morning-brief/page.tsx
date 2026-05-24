@@ -4,7 +4,7 @@ import { MorningBriefExperience } from "./MorningBriefExperience";
 
 export const metadata: Metadata = {
   title: "Mike's Morning Brief",
-  description: "Mike's live owner morning brief for AOH Mission Control.",
+  description: "Mike's live owner morning brief for GMF Mission Control.",
   robots: { index: false, follow: false },
 };
 

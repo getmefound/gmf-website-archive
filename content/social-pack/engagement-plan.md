@@ -21,7 +21,7 @@ That means:
    - 2+ sentences, no "great post 🔥"
    - Reference something specific from their post
    - Add a contrasting data point or related anecdote
-   - Don't pitch AOH unless they pitched you first
+   - Don't pitch GMF unless they pitched you first
 
 ### Mid-day (10 min, 12-1pm)
 
@@ -79,14 +79,14 @@ When prospect from mailer/calls connects on LinkedIn:
 > Quick follow-up — ran the AI-visibility check on [their business name] today. Their Google profile is [specific finding]. No urgency, but happy to send the 1-paragraph summary if useful.
 
 **Day 7 (if still no reply):**
-> Last note — if not the right time, no worries. The calculator at aioutsourcehub.com runs the missed-revenue math in 30 seconds if you ever want a number to chew on.
+> Last note — if not the right time, no worries. The calculator at getmefound.ai runs the missed-revenue math in 30 seconds if you ever want a number to chew on.
 
 ## Don't do
 
 - Don't comment "Great post!" on anything — algorithm flags this as low-quality
 - Don't auto-DM new connections with a sales pitch — instant unfollow
 - Don't tag more than 5 accounts in any post or comment — spam signal
-- Don't post on weekends about AOH product directly (Sat post is groomer-niche, Sun is reviews-philosophy — both passive)
+- Don't post on weekends about GMF product directly (Sat post is groomer-niche, Sun is reviews-philosophy — both passive)
 - Don't reply to your own comments more than twice in a thread (looks desperate)
 
 ## Measurable goals for week 1
@@ -106,7 +106,7 @@ If you hit half these numbers by Friday, the foundation is solid. If you hit les
 
 - LinkedIn Analytics (per post): click post → "View analytics"
 - LinkedIn Profile Analytics: Me → Profile Strength → see who viewed
-- Vercel Analytics referrer filter (when site is on Vercel): aioutsourcehub.com Analytics → filter by `linkedin.com` referrer
+- Vercel Analytics referrer filter (when site is on Vercel): getmefound.ai Analytics → filter by `linkedin.com` referrer
 - GHL Social Planner reporting: Marketing → Social Planner → Analytics
 
 ## Week 2+ build queue (proper scope)
@@ -120,13 +120,13 @@ These are NOT week 1 deliverables. Documented so they don't get forgotten or tre
 - Estimate: 4-6 hours dev + 2 hours content per theme
 
 ### Week 2 — LinkedIn polls
-- Polls don't fit the AOH "we have the math" tone
+- Polls don't fit the GMF "we have the math" tone
 - Best poll angles: "Which marketing tool do you actually open weekly?" / "Where do customers find you most?"
 - GHL Social Planner does NOT support poll creation via API — manual in LinkedIn UI
 - Estimate: 15 min/week manual creation
 
 ### Week 2 — LinkedIn PDF document posts
-- Compile best 3-5 math posts into single PDF "AOH 2026 Local Business Math Playbook"
+- Compile best 3-5 math posts into single PDF "GMF 2026 Local Business Math Playbook"
 - Upload as document post on LinkedIn (3× organic reach vs single image)
 - Estimate: 2-3 hours design + 30 min upload
 

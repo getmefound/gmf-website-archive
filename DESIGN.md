@@ -1,4 +1,4 @@
-# AOH — Design System
+# GMF — Design System
 
 > **Status:** Locked v9 (2026-05-04). Tokens defined in `app/globals.css` under `@theme`. Components implement these tokens via Tailwind utility classes or `var(--token)` directly.
 >
@@ -8,9 +8,9 @@
 
 ## Theme: Quiet Competence with Warmth
 
-Register: **Stripe / Linear / Anthropic** for structural confidence, with **warm-white background + earthy neutrals** to bridge AOH's local-SMB audience. The site looks like a leader-in-field operation that's confident enough not to shout — but inviting enough that a 55-year-old pet groomer doesn't bounce because "this isn't for me."
+Register: **Stripe / Linear / Anthropic** for structural confidence, with **warm-white background + earthy neutrals** to bridge GetMeFound's local-SMB audience. The site looks like a leader-in-field operation that's confident enough not to shout — but inviting enough that a 55-year-old pet groomer doesn't bounce because "this isn't for me."
 
-The core tension we resolved: 11x.ai's tech-startup aesthetic (astronauts on alien landscapes) reads as "expensive enterprise" to AOH's audience. We adopted 11x.ai's **structure** (minimalist, generous whitespace, bold-typography hero, customer-trust strip), dropped its **imagery**, added warmth via earthy neutrals + real founder photos.
+The core tension we resolved: 11x.ai's tech-startup aesthetic (astronauts on alien landscapes) reads as "expensive enterprise" to GetMeFound's audience. We adopted 11x.ai's **structure** (minimalist, generous whitespace, bold-typography hero, customer-trust strip), dropped its **imagery**, added warmth via earthy neutrals + real founder photos.
 
 What this means concretely:
 
@@ -118,13 +118,13 @@ When adding new animations: keep them subtle, gate them by reduced-motion, and a
 - `public/llms.txt` — plain-text business summary that AI crawlers (GPTBot, ClaudeBot) prefer over HTML
 - `public/robots.txt` — explicitly allows GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, Googlebot, xAI, cohere-ai
 
-If you add a new section or page, add the appropriate Schema.org block (e.g., `Service`, `FAQPage`, `BreadcrumbList`) to maintain AEO / GEO surface. See vault `04 AI Outsource Hub/HR/Training/playbooks/SEO-AEO-GEO Setup.md` for the full schema list AOH commits to.
+If you add a new section or page, add the appropriate Schema.org block (e.g., `Service`, `FAQPage`, `BreadcrumbList`) to maintain AEO / GEO surface. See vault `04 GetMeFound/HR/Training/playbooks/SEO-AEO-GEO Setup.md` for the full schema list GMF commits to.
 
 ## What this site is NOT (visual-system anti-patterns)
 
 - **No bizfix landing page** — no giant "GET STARTED FREE" buttons in 30pt orange. No screaming.
 - **No tech-bro AI agency** — no purple gradients, no abstract neural-network illustrations, no AI-persona avatars (no "Alice"-style mascots).
-- **No local-craftsman warm-tone** — AOH is positioning nationally; regional warmth is the wrong vibe.
+- **No local-craftsman warm-tone** — GMF is positioning nationally; regional warmth is the wrong vibe.
 - **No stock photo** — zero. Real founder photos only.
 - **No second accent color** — pine green is the only accent. Adding a second accent breaks the system.
 - **No pure black or pure white** — `#1A1F2E` for text, `#F8F6F1` for backgrounds, `#FFFFFF` for elevated surfaces only.
@@ -139,7 +139,7 @@ If you add a new section or page, add the appropriate Schema.org block (e.g., `S
 
 ## Outstanding design TODOs
 
-- **Logo refresh.** Current logo is placeholder. Workflow: vault `04 AI Outsource Hub/Marketing/Workflows/Brand Mark Refresh.md`. Pine-green-on-warm-white target; constructed mark, not a wordmark.
+- **Logo refresh.** Current logo is placeholder. Workflow: vault `04 GetMeFound/Marketing/Workflows/Brand Mark Refresh.md`. Pine-green-on-warm-white target; constructed mark, not a wordmark.
 - **Kip headshot.** `public/Kip.jpg` missing; About + founder block defaults to initials avatar until landed.
 - **Service pillar pages.** Currently single-page; pillar pages (Reviews / Relay / AI Visibility / Studio) may be added when content is ready. Same design tokens, no theme drift.
 - **Testimonial component.** Currently honest placeholder; will populate at Day 30 / Day 60 post-first-purchase. Collection SOP in vault.
@@ -147,8 +147,8 @@ If you add a new section or page, add the appropriate Schema.org block (e.g., `S
 ## Cross-refs
 
 - [`README.md`](./README.md) — repo overview, deploy, conventions
-- [`PRODUCT.md`](./PRODUCT.md) — what AOH sells, who it serves
+- [`PRODUCT.md`](./PRODUCT.md) — what GMF sells, who it serves
 - Memory: `project_aoh_website_design_foundation_2026-05-04.md` — research that drove these locks
 - Memory: `project_aoh_website_build_2026-05-02.md` — earlier locked decisions (V0 + Vercel, no AI-persona avatars)
-- Vault: `04 AI Outsource Hub/IT/Infrastructure/AOH Website Build Plan.md`
-- Vault: `04 AI Outsource Hub/HR/Training/playbooks/SEO-AEO-GEO Setup.md`
+- Vault: `04 GetMeFound/IT/Infrastructure/GMF Website Build Plan.md`
+- Vault: `04 GetMeFound/HR/Training/playbooks/SEO-AEO-GEO Setup.md`

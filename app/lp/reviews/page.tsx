@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { HeroEmailForm } from "@/components/hero/HeroEmailForm";
 
 export const metadata: Metadata = {
-  title: "Free Review Audit — AI Outsource Hub",
+  title: "Free Review Audit — GetMeFound",
   description: "See how your reviews stack up. Free audit in 10 minutes.",
   robots: { index: false, follow: false },
 };

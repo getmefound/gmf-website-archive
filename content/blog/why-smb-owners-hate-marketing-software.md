@@ -6,7 +6,7 @@ category: "Done-For-You"
 coverImage: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1600&q=80&auto=format&fit=crop"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["Software", "Done-For-You", "Operations"]
 ---
@@ -60,7 +60,7 @@ About 5 to 10 years ago, a handful of agencies started realizing that the way lo
 
 The pitch is different. Instead of "here's a dashboard," it's "we run this for you." Instead of "configure these settings," it's "tell us your business and we'll handle the rest." Instead of a monthly software fee plus your time, it's a monthly service fee and you don't think about it.
 
-This is what AI Outsource Hub does — we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a>, <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> (our AI voice agent), and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> as services, not software. You don't log into a dashboard. We run it. You hear about it when results land. Not because the software is bad — some of the software is excellent. It's because the *operating* of the software is the hard part for an owner who's also running a business.
+This is what GetMeFound does — we built <a href="/pricing#review-automation" target="_blank" rel="noopener noreferrer">Review Automation</a>, <a href="/pricing#relay" target="_blank" rel="noopener noreferrer">Relay</a> (our AI voice agent), and <a href="/pricing#ai-visibility" target="_blank" rel="noopener noreferrer">AI Visibility</a> as services, not software. You don't log into a dashboard. We run it. You hear about it when results land. Not because the software is bad — some of the software is excellent. It's because the *operating* of the software is the hard part for an owner who's also running a business.
 
 The trade-off is real:
 
@@ -86,4 +86,4 @@ If most of the answers are "I haven't logged in in a while," your operating capa
 
 That's the case for done-for-you. It's not better than software — for the right owner, it's just realistic about who's actually going to run this thing.
 
-That's what we do at AI Outsource Hub. [See our services](/pricing). Or just [contact us](/contact) and we'll talk through what you'd actually use.
+That's what we do at GetMeFound. [See our services](/pricing). Or just [contact us](/contact) and we'll talk through what you'd actually use.

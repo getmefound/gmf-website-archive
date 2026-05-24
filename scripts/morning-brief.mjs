@@ -189,7 +189,7 @@ async function fetchNewsItems(config) {
   const results = [];
   for (const source of activeFeeds.slice(0, 8)) {
     try {
-      const res = await fetch(source.feedUrl, { headers: { "User-Agent": "AOH-Morning-Brief/1.0" } });
+      const res = await fetch(source.feedUrl, { headers: { "User-Agent": "GMF-Morning-Brief/1.0" } });
       if (!res.ok) throw new Error(`${res.status}`);
       const xml = await res.text();
       results.push(...parseFeedItems(xml, source.name).slice(0, 1));
@@ -471,7 +471,7 @@ function today() {
 
 function printHelp() {
   console.log(`
-Generate Mike's Morning Brief from the local AOH ledger.
+Generate Mike's Morning Brief from the local GMF ledger.
 
 Examples:
   npm run morning:brief

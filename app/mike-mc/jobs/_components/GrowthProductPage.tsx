@@ -13,7 +13,7 @@ export function GrowthProductPage({ product }: { product: GrowthProduct }) {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH - Reach add-on
+            GMF - Reach add-on
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             {product.name}

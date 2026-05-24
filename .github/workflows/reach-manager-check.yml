@@ -31,7 +31,7 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL: ${{ vars.REACH_SLACK_CHANNEL || 'C0ATTA4NBR8' }}
       MANAGER_NOTIFY_TOKEN: ${{ secrets.MANAGER_NOTIFY_TOKEN || secrets.REPORT_TEST_BYPASS_TOKEN }}
-      MANAGER_NOTIFY_URL: ${{ vars.MANAGER_NOTIFY_URL || 'https://aioutsourcehub.com/api/agent/slack?manager_notify=1' }}
+      MANAGER_NOTIFY_URL: ${{ vars.MANAGER_NOTIFY_URL || 'https://getmefound.ai/api/agent/slack?manager_notify=1' }}
       AUTO_RETRY_RELAY: ${{ github.event.inputs.auto_retry_relay || 'true' }}
       REACH_ALLOW_OUTSCRAPER_SPEND: "true"
       TZ: America/New_York
@@ -68,7 +68,7 @@ jobs:
         if: always()
         shell: bash
         run: |
-          git config user.name "AOH Manager"
+          git config user.name "GMF Manager"
           git config user.email "actions@github.com"
           RUN_DATE="$(date +%F)"
           git add -f \

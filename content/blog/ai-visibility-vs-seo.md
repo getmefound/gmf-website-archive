@@ -6,7 +6,7 @@ category: "AI & Search"
 coverImage: "/api/blog-cover/ai-visibility-vs-seo"
 author:
   name: "Mike Egidio"
-  role: "Founder, AI Outsource Hub"
+  role: "Founder, GetMeFound"
   avatar: "/team/mike.jpg"
 tags: ["AI Visibility", "SEO", "Local Search"]
 ---

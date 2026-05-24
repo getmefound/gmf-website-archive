@@ -12,7 +12,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Campaign Launch - The Hub",
-  description: "AOH Reach campaign launch room.",
+  description: "GMF Reach campaign launch room.",
   robots: { index: false, follow: false },
 };
 
@@ -24,7 +24,7 @@ export default function CampaignLaunchPage() {
       <header className="mb-8 flex flex-col gap-3 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-emerald-400/70">
-            AOH - Reach
+            GMF - Reach
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Campaign Launch Room

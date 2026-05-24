@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const baseUrl = process.env.REPORT_SMOKE_BASE_URL || "https://aioutsourcehub.com";
+const baseUrl = process.env.REPORT_SMOKE_BASE_URL || "https://getmefound.ai";
 const token = process.env.REPORT_TEST_BYPASS_TOKEN;
 
 if (!token) {
@@ -11,8 +11,8 @@ if (!token) {
 const now = new Date();
 const suffix = now.toISOString().replace(/[:.]/g, "-");
 const body = {
-  email: `weekly-report-smoke+${suffix}@aioutsourcehub.com`,
-  businessName: `AOH Internal Weekly Report Smoke ${suffix}`,
+  email: `weekly-report-smoke+${suffix}@getmefound.ai`,
+  businessName: `GMF Internal Weekly Report Smoke ${suffix}`,
   campaign: "organic",
   visualVariant: "reviews",
   reportType: "marketing",

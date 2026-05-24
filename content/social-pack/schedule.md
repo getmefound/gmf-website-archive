@@ -1,4 +1,4 @@
-# AOH GHL Social Scheduler — Week 1 (Wed 2026-05-13 → Sun 2026-05-17)
+# GMF GHL Social Scheduler — Week 1 (Wed 2026-05-13 → Sun 2026-05-17)
 
 Copy-paste ready for GHL Social Planner. All times America/New_York.
 
@@ -39,7 +39,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 1 — Wed 5/13 · 1:00pm · LinkedIn + FB + IG · **PIN ON LINKEDIN**
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/ai-recommendation-vs-rank`
+**Image URL:** `https://getmefound.ai/api/social-card/ai-recommendation-vs-rank`
 
 ### LinkedIn caption (no link in body — link in first comment)
 
@@ -61,7 +61,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment (paste 30–60s after publish)
 
-> Free calculator runs the math on your business in 30 seconds → aioutsourcehub.com
+> Free calculator runs the math on your business in 30 seconds → getmefound.ai
 
 ### Facebook caption
 
@@ -71,7 +71,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 >
 > Conversion rates land 3–5× higher than Google clicks.
 >
-> aioutsourcehub.com
+> getmefound.ai
 
 ### Instagram caption
 
@@ -94,7 +94,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 2 — Wed 5/13 · 5:30pm · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/after-hours-payback`
+**Image URL:** `https://getmefound.ai/api/social-card/after-hours-payback`
 
 ### LinkedIn caption
 
@@ -120,7 +120,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> Run the numbers on your business → aioutsourcehub.com
+> Run the numbers on your business → getmefound.ai
 
 ### Facebook caption
 
@@ -144,7 +144,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 3 — Thu 5/14 · 8:30am · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/ai-search-share`
+**Image URL:** `https://getmefound.ai/api/social-card/ai-search-share`
 
 ### LinkedIn caption
 
@@ -166,7 +166,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> We handle the whole thing → aioutsourcehub.com
+> We handle the whole thing → getmefound.ai
 
 ### Facebook caption
 
@@ -190,7 +190,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 4 — Thu 5/14 · 4:00pm · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/med-spa-math`
+**Image URL:** `https://getmefound.ai/api/social-card/med-spa-math`
 
 ### LinkedIn caption
 
@@ -215,7 +215,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> See what stale reviews are costing your business → aioutsourcehub.com
+> See what stale reviews are costing your business → getmefound.ai
 
 ### Facebook caption
 
@@ -243,7 +243,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 5 — Fri 5/15 · 9:00am · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/diy-vs-dfy`
+**Image URL:** `https://getmefound.ai/api/social-card/diy-vs-dfy`
 
 ### LinkedIn caption
 
@@ -272,7 +272,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> See how it works → aioutsourcehub.com
+> See how it works → getmefound.ai
 
 ### Facebook caption
 
@@ -303,7 +303,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 6 — Fri 5/15 · 3:00pm · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/review-velocity-90-day`
+**Image URL:** `https://getmefound.ai/api/social-card/review-velocity-90-day`
 
 ### LinkedIn caption
 
@@ -321,7 +321,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> We run the cadence for you → aioutsourcehub.com
+> We run the cadence for you → getmefound.ai
 
 ### Facebook caption
 
@@ -345,7 +345,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 7 — Sat 5/16 · 10:00am · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/groomer-trust`
+**Image URL:** `https://getmefound.ai/api/social-card/groomer-trust`
 
 ### LinkedIn caption
 
@@ -367,7 +367,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> Same playbook, automated → aioutsourcehub.com
+> Same playbook, automated → getmefound.ai
 
 ### Facebook caption
 
@@ -391,7 +391,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## POST 8 — Sun 5/17 · 11:00am · LinkedIn + FB + IG
 
-**Image URL:** `https://aioutsourcehub.com/api/social-card/reviews-compound`
+**Image URL:** `https://getmefound.ai/api/social-card/reviews-compound`
 
 ### LinkedIn caption
 
@@ -411,7 +411,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ### LinkedIn first comment
 
-> We run the asking part → aioutsourcehub.com
+> We run the asking part → getmefound.ai
 
 ### Facebook caption
 
@@ -435,7 +435,7 @@ After all 8 are loaded, hit Bulk Publish (or let scheduler fire).
 
 ## Pin rotation plan (after week 1)
 
-Swap pinned post every 14 days to keep profile fresh. Always pin an AI Visibility / AI Search theme — that's the AOH differentiator.
+Swap pinned post every 14 days to keep profile fresh. Always pin an AI Visibility / AI Search theme — that's the GMF differentiator.
 
 | Week | Pinned theme | Image |
 |------|--------------|-------|

@@ -13,7 +13,7 @@ export function GhlContactEmbed({ src }: GhlContactEmbedProps) {
       </p>
       <div className="w-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-white">
         <iframe
-          title="AOH Contact Form"
+          title="GMF Contact Form"
           src={src}
           className="w-full min-h-[760px]"
           loading="lazy"

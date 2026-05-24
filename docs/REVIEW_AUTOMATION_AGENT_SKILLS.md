@@ -1,7 +1,7 @@
 # Review Automation Agent Skills
 
 Status: draft source of truth
-Scope: what each agent must know before AOH runs self-serve Review Automation onboarding for real clients.
+Scope: what each agent must know before GMF runs self-serve Review Automation onboarding for real clients.
 
 ## Service Principle
 
@@ -11,7 +11,7 @@ Default path:
 
 1. Client buys Review Automation.
 2. Client gets self-serve instructions with screenshots and video.
-3. Client fills out business info and invites AOH as Google Business Profile Manager.
+3. Client fills out business info and invites GMF as Google Business Profile Manager.
 4. Profile confirms access.
 5. GHL Expert connects GBP inside HighLevel and configures review automation.
 6. Sorter/GHL Expert handle customer list and POS/CRM connection as the next phase.
@@ -28,7 +28,7 @@ Scout must know how to research:
 - official HighLevel docs for Reputation, GBP integration, workflows, snapshots, custom values, widgets, webhooks, email sending, and CRM integrations
 - official HighLevel docs for Reviews AI, phone/SMS, and social planner as upgrade/service modules
 - official Google Business Profile docs for owners/managers, agency invites, verification, reviews, posts, photos, services, and profile edits
-- saved AOH Drive/Obsidian SOPs and checklist notes
+- saved GMF Drive/Obsidian SOPs and checklist notes
 - edge cases from client onboarding problems
 
 Scout output should be:
@@ -62,10 +62,10 @@ Purpose: own Google Business Profile access and profile readiness.
 
 Profile must know:
 
-- how a client adds AOH as a Google Business Profile Manager
+- how a client adds GMF as a Google Business Profile Manager
 - the difference between Owner and Manager
 - what Managers can do and cannot do
-- how AOH accepts manager invites
+- how GMF accepts manager invites
 - how to confirm the correct GBP location
 - how to check if GBP is verified
 - how to find or generate the Google review link
@@ -73,11 +73,11 @@ Profile must know:
 - how to check basic profile health: name, address, phone, website, hours, categories, services, photos, reviews, unanswered reviews
 - when to hand off to GHL Expert
 
-Profile should know that Manager access gives AOH authority over the profile, but does not automatically connect the profile to HighLevel. GHL Expert still needs to connect GBP inside the client subaccount using an AOH Google account with manager access.
+Profile should know that Manager access gives GMF authority over the profile, but does not automatically connect the profile to HighLevel. GHL Expert still needs to connect GBP inside the client subaccount using an GMF Google account with manager access.
 
 Profile "done" means:
 
-- AOH manager invite accepted
+- GMF manager invite accepted
 - correct business/location confirmed
 - GBP verified or verification blocker recorded
 - review link captured
@@ -195,7 +195,7 @@ Client-facing instructions should be built around these sections:
 
 1. Business information
 2. Review request/customer-flow preferences
-3. Google Business Profile manager invite to AOH
+3. Google Business Profile manager invite to GMF
 4. Customer list upload, optional at first
 5. POS/CRM information for later integration
 6. Upgrade-only reply/SMS/social details, only if included

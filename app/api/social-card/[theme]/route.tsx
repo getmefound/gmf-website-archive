@@ -252,7 +252,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ theme: 
               letterSpacing: 0.5,
             }}
           >
-            aioutsourcehub.com
+            getmefound.ai
           </div>
           <div
             style={{

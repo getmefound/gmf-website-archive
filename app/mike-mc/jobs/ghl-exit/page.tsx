@@ -12,7 +12,7 @@ import {
 
 export const metadata: Metadata = {
   title: "GHL Exit - The Hub",
-  description: "What is done, blocked, and next before AOH cancels GHL.",
+  description: "What is done, blocked, and next before GMF cancels GHL.",
   robots: { index: false, follow: false },
 };
 
@@ -50,7 +50,7 @@ export default function GhlExitPage() {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300">
-            AOH - GHL exit
+            GMF - GHL exit
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             {GHL_EXIT_SUMMARY.title}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
 import { checkEmailRate, checkReportDedupe } from "@/lib/rate-limit";
+import { saveReportFlowStatus } from "@/lib/report-flow-status";
 import { createReportRun, updateReportRun } from "@/lib/report-runs";
 import { verifyReportToken } from "@/lib/report-token";
 
@@ -192,7 +193,7 @@ export async function POST(req: NextRequest) {
   const normalizedSecondaryReport = Boolean(secondaryReport);
   const reportLane = tokenPayload ? "campaign_report" : "website_free_report";
 
-  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "aioutsourcehub.com";
+  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "getmefound.ai";
   const proto = req.headers.get("x-forwarded-proto") ?? "https";
   const reportPath: "/report/marketing" | "/report/ai-visibility" =
     normalizedReportType === "ai_visibility" ? "/report/ai-visibility" : "/report/marketing";
@@ -218,7 +219,7 @@ export async function POST(req: NextRequest) {
     visualVariant: normalizedVisual,
     reportType: normalizedReportType,
     runId,
-    source: reportLane === "website_free_report" ? "aioutsourcehub.com:homepage" : "aioutsourcehub.com:campaign",
+    source: reportLane === "website_free_report" ? "getmefound.ai:homepage" : "getmefound.ai:campaign",
     reportLane,
     auditUrl: reportUrl.toString(),
     businessWebsite: effectiveBusinessWebsite,
@@ -228,7 +229,7 @@ export async function POST(req: NextRequest) {
       visualVariant: normalizedVisual ?? "",
       reportType: normalizedReportType,
       secondaryReport: normalizedSecondaryReport,
-      source: reportLane === "website_free_report" ? "aioutsourcehub.com:homepage" : "aioutsourcehub.com:campaign",
+      source: reportLane === "website_free_report" ? "getmefound.ai:homepage" : "getmefound.ai:campaign",
       reportLane,
       runId,
       auditUrl: reportUrl.toString(),
@@ -239,6 +240,15 @@ export async function POST(req: NextRequest) {
   });
   const strictInternalTest =
     bypass && req.headers.get("x-report-test-strict")?.trim() === "1";
+  await recordReportFlowStatus({
+    runId,
+    reportLane,
+    reportType: normalizedReportType,
+    source: reportLane === "website_free_report" ? "api/report:website" : "api/report:campaign",
+    auditUrl: reportUrl.toString(),
+    status: ghlForward.ok ? "submitted" : "blocked",
+    blocker: ghlForward.ok ? "" : ghlForward.error || `GHL handoff failed${ghlForward.status ? ` (${ghlForward.status})` : ""}`,
+  });
   if (strictInternalTest && !ghlForward.ok) {
     return NextResponse.json(
       {
@@ -263,6 +273,33 @@ export async function POST(req: NextRequest) {
     runId,
     ...(bypass ? { ghlForward } : {}),
   });
+}
+
+async function recordReportFlowStatus(input: {
+  runId: string;
+  reportLane: "website_free_report" | "campaign_report";
+  reportType: "marketing" | "ai_visibility";
+  source: string;
+  auditUrl: string;
+  status: "submitted" | "blocked";
+  blocker: string;
+}) {
+  const saved = await saveReportFlowStatus({
+    clientSlug: "getmefound",
+    clientName: "GetMeFound",
+    reportLane: input.reportLane,
+    reportType: input.reportType,
+    source: input.source,
+    status: input.status,
+    runId: input.runId,
+    auditUrl: input.auditUrl,
+    heatmapUrl: "",
+    blocker: input.blocker,
+    timestamp: new Date().toISOString(),
+  });
+  if (!saved.ok) {
+    console.error("Report flow status save failed", saved.error);
+  }
 }
 
 type GHLPayload = {

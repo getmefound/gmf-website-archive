@@ -16,6 +16,7 @@ type CustomerUploadBody = {
   submittedEmail?: unknown;
   customerText?: unknown;
   doNotContactText?: unknown;
+  dryRun?: unknown;
   websiteTrap?: unknown;
 };
 
@@ -33,6 +34,7 @@ export async function POST(req: NextRequest) {
   const submittedBy = cleanText(body.submittedBy, 100);
   const customerText = cleanLongText(body.customerText, 40000);
   const doNotContactText = cleanLongText(body.doNotContactText, 8000);
+  const dryRun = body.dryRun === true;
 
   if (!clientSlug) {
     return NextResponse.json({ ok: false, error: "Missing client." }, { status: 400 });
@@ -67,6 +69,21 @@ export async function POST(req: NextRequest) {
     doNotContactText: [doNotContactText, storedDoNotContactText].filter(Boolean).join("\n"),
   });
 
+  if (dryRun) {
+    return NextResponse.json({
+      ok: true,
+      dryRun: true,
+      summary: packet.summary,
+      previewRows: packet.rows.slice(0, 20).map((row) => ({
+        name: row.name,
+        email: row.email,
+        suppressed: row.suppressed,
+        suppressReason: row.suppressReason,
+      })),
+      storageConfigured: true,
+    });
+  }
+
   const storageResult = await saveReviewAutomationEvent("customer_upload", packet);
   const webhookResult = await forwardReviewAutomationEvent("customer_upload", packet);
   await postReviewAutomationSlackSummary("customer_upload", packet, {
@@ -81,5 +98,6 @@ export async function POST(req: NextRequest) {
     stored: storageResult.ok || webhookResult.ok,
     storageConfigured: storageResult.configured || webhookResult.configured,
     storageId: storageResult.ok || storageResult.configured ? storageResult.id : "",
+    nextProofUrl: `/mike-mc/review-proof/${clientSlug}`,
   });
 }

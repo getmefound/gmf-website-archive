@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DownloadButton } from "./DownloadButton";
 
-const CHECKOUT_URL = "https://pay.aioutsourcehub.com/ai-visibility-page";
+const CHECKOUT_URL = "https://pay.getmefound.ai/ai-visibility-page";
 
 const BOOK_URL = "https://link.hub360ai.com/widget/booking/1Xq9XMNFjvxgxQj9kNLY";
 
@@ -235,10 +235,10 @@ export default function AIVisibilityDemoPage() {
             <div>
               <p className="text-sm font-semibold text-[var(--color-text-body)]">Mike Egidio</p>
               <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
-                AI Outsource Hub ·{" "}
+                GetMeFound ·{" "}
                 <a href="tel:+18775212224" className="hover:text-[var(--color-text-body)] transition">+1 877-521-2224</a>
                 {" "}·{" "}
-                <a href="mailto:support@aioutsourcehub.com" className="hover:text-[var(--color-text-body)] transition">support@aioutsourcehub.com</a>
+                <a href="mailto:support@getmefound.ai" className="hover:text-[var(--color-text-body)] transition">support@getmefound.ai</a>
               </p>
             </div>
             <DownloadButton />

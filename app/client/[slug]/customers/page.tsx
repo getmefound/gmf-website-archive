@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ReviewCustomerUploadForm } from "@/components/ReviewCustomerUploadForm";
-import { CLIENT_HUBS, getClientHub } from "@/lib/client-hub";
+import { CLIENT_HUBS } from "@/lib/client-hub";
+import { getClientHubProfile } from "@/lib/client-profile-store";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   return {
     title: client ? `${client.businessName} Customer Upload` : "Customer Upload",
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ReviewCustomerUploadPage({ params }: PageProps) {
   const { slug } = await params;
-  const client = getClientHub(slug);
+  const client = await getClientHubProfile(slug);
 
   if (!client) notFound();
 

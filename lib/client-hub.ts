@@ -37,6 +37,14 @@ export type ClientMonthlyRecap = {
   ownerNote: string;
 };
 
+export type ClientVoiceProfile = {
+  mode: "Draft only" | "Approval required" | "Safe auto-reply eligible";
+  tone: string;
+  favoritePhrases: string;
+  avoidPhrases: string;
+  escalationNotes: string;
+};
+
 export type ClientHubProfile = {
   slug: string;
   businessName: string;
@@ -59,6 +67,7 @@ export type ClientHubProfile = {
   uploadRequests: ClientUploadRequest[];
   reviews: ReviewAutomationStatus;
   monthlyRecap: ClientMonthlyRecap;
+  voiceProfile?: ClientVoiceProfile;
   aiVisibilityPreview: ClientMetric[];
 };
 
@@ -84,7 +93,7 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
     checklist: [
       {
         label: "Business info confirmed",
-        owner: "AOH",
+        owner: "GMF",
         status: "done",
         detail: "Name, website, phone, email, category, and service area are on file.",
       },
@@ -92,17 +101,17 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
         label: "Google Business Profile access",
         owner: "Client",
         status: "needed",
-        detail: "Client should add AOH as Manager under People and access. No password sharing.",
+        detail: "Client should add GMF as Manager under People and access. No password sharing.",
       },
       {
         label: "Logo and brand",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
-        detail: "AOH checks website favicon, metadata, and public brand assets first. Client can upload a better logo.",
+        detail: "GMF checks website favicon, metadata, and public brand assets first. Client can upload a better logo.",
       },
       {
         label: "Google review link",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "Review link is captured after profile access or public profile verification.",
       },
@@ -114,27 +123,27 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       },
       {
         label: "Review request message",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "Simple email request is drafted in the business voice before first send.",
       },
       {
         label: "Automation setup",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "The review request automation is prepared after contacts and review link are confirmed.",
       },
       {
         label: "Test request",
-        owner: "AOH",
+        owner: "GMF",
         status: "needed",
         detail: "One test review request is sent before the client is marked live.",
       },
       {
         label: "Client live",
-        owner: "AOH",
+        owner: "GMF",
         status: "needed",
-        detail: "AOH marks this green after the test request and proof checks pass.",
+        detail: "GMF marks this green after the test request and proof checks pass.",
       },
     ],
     metrics: [
@@ -161,7 +170,7 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       {
         label: "Best contact for approvals",
         status: "done",
-        detail: "AOH sends only setup blockers and final ready summaries.",
+        detail: "GMF sends only setup blockers and final ready summaries.",
       },
     ],
     reviews: {
@@ -193,18 +202,18 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
   },
   {
     slug: "ai-outsource-hub",
-    businessName: "AI Outsource Hub",
+    businessName: "GetMeFound",
     ownerName: "Mike Egidio",
     plan: "Review Automation",
     statusLabel: "Setting up",
-    website: "https://aioutsourcehub.com",
+    website: "https://getmefound.ai",
     phone: "(877) 521-2224",
-    email: "mike@aioutsourcehub.com",
+    email: "mike@getmefound.ai",
     googleReviewUrl: "https://g.page/r/CXoXmnbEDyX7EAE/review",
     location: "United States",
     category: "AI automation and growth services",
-    logoText: "AOH",
-    brandNote: "AOH logo is already available from the website assets.",
+    logoText: "GMF",
+    brandNote: "GMF logo is already available from the website assets.",
     protection: "Not enabled",
     statusSummary:
       "Review Automation is being set up so recent happy customers can be asked for Google reviews.",
@@ -212,25 +221,25 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
     checklist: [
       {
         label: "Business info confirmed",
-        owner: "AOH",
+        owner: "GMF",
         status: "done",
-        detail: "AOH identity, website, phone, and contact are known.",
+        detail: "GMF identity, website, phone, and contact are known.",
       },
       {
         label: "Google Business Profile access",
-        owner: "AOH",
+        owner: "GMF",
         status: "done",
         detail: "Google access is confirmed.",
       },
       {
         label: "Logo and brand",
-        owner: "AOH",
+        owner: "GMF",
         status: "done",
-        detail: "AOH logo files are in the website assets.",
+        detail: "GMF logo files are in the website assets.",
       },
       {
         label: "Google review link",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "Review link is being captured so requests point to the right place.",
       },
@@ -242,32 +251,32 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       },
       {
         label: "Review request message",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "Review request message is being prepared.",
       },
       {
         label: "Automation setup",
-        owner: "AOH",
+        owner: "GMF",
         status: "working",
         detail: "Review request automation is being prepared.",
       },
       {
         label: "Test request",
-        owner: "AOH",
+        owner: "GMF",
         status: "needed",
         detail: "First review request will be tested before launch.",
       },
       {
         label: "Client live",
-        owner: "AOH",
+        owner: "GMF",
         status: "needed",
-        detail: "AOH reports ready after the proof checks pass.",
+        detail: "GMF reports ready after the proof checks pass.",
       },
     ],
     metrics: [
       { label: "Review requests", value: "0", sub: "waiting on customer list" },
-      { label: "Google access", value: "Confirmed", sub: "AOH profile" },
+      { label: "Google access", value: "Confirmed", sub: "GMF profile" },
       { label: "Automation", value: "Checking", sub: "setup in progress" },
     ],
     uploadRequests: [
@@ -289,7 +298,7 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       {
         label: "Best contact for approvals",
         status: "done",
-        detail: "Mike receives final AOH summaries.",
+        detail: "Mike receives final GMF summaries.",
       },
     ],
     reviews: {
@@ -310,10 +319,10 @@ export const CLIENT_HUBS: ClientHubProfile[] = [
       requestsSent: 0,
       feedbackCaptured: 0,
       heldBack: 0,
-      ownerNote: "AOH recap appears here after the client-zero send test.",
+      ownerNote: "GMF recap appears here after the client-zero send test.",
     },
     aiVisibilityPreview: [
-      { label: "ChatGPT visibility", value: "Custom", sub: "AOH internal testing" },
+      { label: "ChatGPT visibility", value: "Custom", sub: "GMF internal testing" },
       { label: "Review replies", value: "Locked", sub: "manual approval only" },
       { label: "Local ranking gaps", value: "Pending", sub: "visibility scan next" },
       { label: "Competitor watch", value: "Pending", sub: "AI Visibility lane" },
