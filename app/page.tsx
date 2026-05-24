@@ -119,24 +119,38 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16 md:items-center">
               <div className="flex flex-col">
-                <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                  Google IO 2026 · AI search is live
-                </p>
+                <div className="mb-5 inline-flex w-fit items-center gap-2.5 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-4 py-2">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+                  </span>
+                  <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                    Google IO 2026 — biggest search change in 25 years
+                  </span>
+                </div>
+
                 <h1 className="font-semibold leading-[1.05] tracking-tight text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,5vw,4rem)]">
-                  Your next customer let AI pick a business.{" "}
-                  <span className="text-[var(--color-accent)]">Were you on the list?</span>
+                  Google changed how customers find local businesses.{" "}
+                  <span className="text-[var(--color-accent)]">Most owners don&apos;t know yet.</span>
                 </h1>
+
                 <p className="mt-6 max-w-xl text-lg text-[var(--color-hero-subtext)] md:text-xl leading-relaxed">
-                  Google&apos;s biggest search change in 25 years is live. AI now
-                  recommends local businesses before anyone clicks. We get you on
-                  that list — and keep you there.
+                  Google&apos;s AI now decides which local businesses to recommend —
+                  before anyone types a search. If you&apos;re not set up for it,
+                  your competitor is getting those customers instead.
+                </p>
+
+                <p className="mt-4 max-w-xl text-base text-[var(--color-hero-subtext)] leading-relaxed">
+                  We get you showing up in AI search results, keep your Google
+                  profile current, and build the reviews that make AI pick you.
+                  You don&apos;t touch a dashboard. We run it.
                 </p>
 
                 <ul className="mt-8 flex flex-wrap gap-3">
                   {[
+                    "Set up for AI search",
                     "Done for you — no dashboards",
-                    "No contracts, cancel anytime",
-                    "Live in 48 hours",
+                    "No contracts",
                   ].map((pill) => (
                     <li
                       key={pill}
