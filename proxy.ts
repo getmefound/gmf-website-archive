@@ -5,7 +5,6 @@ const MAX_PER_WINDOW = 3;
 
 const buckets = new Map<string, number[]>();
 const CANONICAL_INTERNAL_HOST = "mc.getmefound.ai";
-const LEGACY_INTERNAL_HOST = "mc.aioutsourcehub.com";
 
 const INTERNAL_SHORT_PATHS: Record<string, string> = {
   "/": "/mike-mc",
@@ -19,8 +18,8 @@ const INTERNAL_SHORT_PATHS: Record<string, string> = {
   "/ghl-exit-ops": "/mike-mc/ghl-exit-ops",
   "/morning-brief": "/mike-mc/morning-brief",
   "/report-flow": "/mike-mc/report-flow",
-  "/review-proof": "/mike-mc/review-proof/ai-outsource-hub",
-  "/review-replies": "/mike-mc/review-replies/ai-outsource-hub",
+  "/review-proof": "/mike-mc/review-proof/getmefound",
+  "/review-replies": "/mike-mc/review-replies/getmefound",
 };
 
 function clientIp(req: NextRequest): string {
@@ -42,13 +41,6 @@ export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const hostname = req.nextUrl.hostname.toLowerCase();
   const method = req.method.toUpperCase();
-
-  if (hostname === LEGACY_INTERNAL_HOST) {
-    const url = req.nextUrl.clone();
-    url.hostname = CANONICAL_INTERNAL_HOST;
-    url.protocol = "https:";
-    return NextResponse.redirect(url, 308);
-  }
 
   if (hostname === CANONICAL_INTERNAL_HOST && INTERNAL_SHORT_PATHS[pathname]) {
     const url = req.nextUrl.clone();
