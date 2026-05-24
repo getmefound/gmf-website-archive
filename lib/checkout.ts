@@ -6,8 +6,8 @@ export type CheckoutProduct = {
   setup: string;
   summary: string;
   whatYouGet: string[];
-  ctaUrl: string;
-  ctaKind: "subscribe" | "book";
+  stripePriceId: string;
+  stripeMode: "payment" | "subscription";
 };
 
 export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
@@ -26,8 +26,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "AI search visibility baseline report",
       "First email review request campaign setup after approval",
     ],
-    ctaUrl: "/contact",
-    ctaKind: "subscribe",
+    stripePriceId: "price_1TakBqLyThSzGsL4l30CMrei",
+    stripeMode: "payment",
   },
   {
     slug: "stay-found",
@@ -44,8 +44,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Review monitoring across platforms where available",
       "Monthly one-page visibility report",
     ],
-    ctaUrl: "/contact",
-    ctaKind: "subscribe",
+    stripePriceId: "price_1TakBrLyThSzGsL4ff5tDb4A",
+    stripeMode: "subscription",
   },
   {
     slug: "review-power",
@@ -62,8 +62,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "AI response drafts in the client's brand voice",
       "Monthly sentiment and AI citation check",
     ],
-    ctaUrl: "/contact",
-    ctaKind: "subscribe",
+    stripePriceId: "price_1TakBsLyThSzGsL4OgkjOATQ",
+    stripeMode: "subscription",
   },
   {
     slug: "ai-ready-bundle",
@@ -80,8 +80,8 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
       "Full GBP content management and local content planning",
       "Monthly 30-minute strategy call and AEO check",
     ],
-    ctaUrl: "/contact",
-    ctaKind: "subscribe",
+    stripePriceId: "price_1TakBsLyThSzGsL409oKbEZG",
+    stripeMode: "subscription",
   },
 ];
 

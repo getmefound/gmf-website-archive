@@ -6,6 +6,7 @@ import { PageBody, PageSection } from "@/components/PageBody";
 import { Reveal } from "@/components/Reveal";
 import { breadcrumbSchema } from "@/lib/seo";
 import { CHECKOUT_PRODUCTS, getCheckoutProduct } from "@/lib/checkout";
+import { CheckoutButton } from "@/components/checkout/CheckoutButton";
 
 export function generateStaticParams() {
   return CHECKOUT_PRODUCTS.map((p) => ({ product: p.slug }));
@@ -44,9 +45,9 @@ export default async function CheckoutPage({
   ]);
 
   const buttonLabel =
-    p.ctaKind === "subscribe"
-      ? `Subscribe — ${p.price}${p.cadence}`
-      : "Book a 15-min discovery call";
+    p.stripeMode === "payment"
+      ? `Pay ${p.price} — Get Started`
+      : `Subscribe — ${p.price}${p.cadence}`;
 
   return (
     <>
@@ -88,15 +89,7 @@ export default async function CheckoutPage({
                   ))}
                 </ul>
 
-                <a
-                  href={p.ctaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-6 py-4 text-base font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-[var(--color-accent)]/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-dark-card)]"
-                >
-                  {buttonLabel}
-                  <span aria-hidden="true">→</span>
-                </a>
+                <CheckoutButton slug={p.slug} label={buttonLabel} />
               </div>
             </Reveal>
 

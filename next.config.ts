@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-const MC_HOST = "mc.aioutsourcehub.com";
-const PUBLIC_HOSTS = ["aioutsourcehub.com", "www.aioutsourcehub.com"];
+const MC_HOST = "mc.getmefound.ai";
+const PUBLIC_HOSTS = ["getmefound.ai", "www.getmefound.ai"];
 
 const mcHostMatch = [{ type: "host" as const, value: MC_HOST }];
 
@@ -43,13 +43,13 @@ const nextConfig: NextConfig = {
         source: "/team",
         destination: "/about",
         permanent: true,
-        missing: [{ type: "host", value: "mc.aioutsourcehub.com" }],
+        missing: [{ type: "host", value: "mc.getmefound.ai" }],
       },
       {
         source: "/team/",
         destination: "/about",
         permanent: true,
-        missing: [{ type: "host", value: "mc.aioutsourcehub.com" }],
+        missing: [{ type: "host", value: "mc.getmefound.ai" }],
       },
       { source: "/why-ai", destination: "/pricing#ai-visibility", permanent: true },
       { source: "/why-ai/", destination: "/pricing#ai-visibility", permanent: true },
