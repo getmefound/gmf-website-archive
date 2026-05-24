@@ -4,6 +4,24 @@ const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 3;
 
 const buckets = new Map<string, number[]>();
+const CANONICAL_INTERNAL_HOST = "mc.getmefound.ai";
+const LEGACY_INTERNAL_HOST = "mc.aioutsourcehub.com";
+
+const INTERNAL_SHORT_PATHS: Record<string, string> = {
+  "/": "/mike-mc",
+  "/ops": "/mike-mc/ops",
+  "/jobs": "/mike-mc/jobs",
+  "/campaigns": "/mike-mc/campaigns",
+  "/team": "/mike-mc/team",
+  "/workflows": "/mike-mc/workflows",
+  "/clients": "/mike-mc/clients",
+  "/setup-jobs": "/mike-mc/setup-jobs",
+  "/ghl-exit-ops": "/mike-mc/ghl-exit-ops",
+  "/morning-brief": "/mike-mc/morning-brief",
+  "/report-flow": "/mike-mc/report-flow",
+  "/review-proof": "/mike-mc/review-proof/ai-outsource-hub",
+  "/review-replies": "/mike-mc/review-replies/ai-outsource-hub",
+};
 
 function clientIp(req: NextRequest): string {
   const fwd = req.headers.get("x-forwarded-for");
@@ -25,36 +43,17 @@ export function proxy(req: NextRequest) {
   const hostname = req.nextUrl.hostname.toLowerCase();
   const method = req.method.toUpperCase();
 
-  if (hostname === "mc.aioutsourcehub.com") {
-    if (pathname === "/") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/mike-mc";
-      return NextResponse.rewrite(url);
-    }
+  if (hostname === LEGACY_INTERNAL_HOST) {
+    const url = req.nextUrl.clone();
+    url.hostname = CANONICAL_INTERNAL_HOST;
+    url.protocol = "https:";
+    return NextResponse.redirect(url, 308);
+  }
 
-    if (pathname === "/ops") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/mike-mc/ops";
-      return NextResponse.rewrite(url);
-    }
-
-    if (pathname === "/jobs") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/mike-mc/jobs";
-      return NextResponse.rewrite(url);
-    }
-
-    if (pathname === "/campaigns") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/mike-mc/campaigns";
-      return NextResponse.rewrite(url);
-    }
-
-    if (pathname === "/team") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/mike-mc/team";
-      return NextResponse.rewrite(url);
-    }
+  if (hostname === CANONICAL_INTERNAL_HOST && INTERNAL_SHORT_PATHS[pathname]) {
+    const url = req.nextUrl.clone();
+    url.pathname = INTERNAL_SHORT_PATHS[pathname];
+    return NextResponse.rewrite(url);
   }
 
   // Only rate-limit form submissions.
@@ -100,6 +99,15 @@ export const config = {
     "/jobs",
     "/campaigns",
     "/team",
+    "/workflows",
+    "/clients",
+    "/setup-jobs",
+    "/ghl-exit-ops",
+    "/morning-brief",
+    "/report-flow",
+    "/review-proof",
+    "/review-replies",
+    "/mike-mc/:path*",
     "/api/report/:path*",
     "/api/contact/:path*",
   ],
