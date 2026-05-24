@@ -50,9 +50,8 @@ export async function saveSubscriptionToSupabase(subscription: Stripe.Subscripti
   const productSlug = subscription.metadata?.product_slug ?? "unknown";
   const productName = subscription.metadata?.product_name ?? "Unknown";
   const customerId = typeof subscription.customer === "string" ? subscription.customer : null;
-  const periodEnd = subscription.current_period_end
-    ? new Date(subscription.current_period_end * 1000).toISOString()
-    : null;
+  const rawPeriodEnd = subscription.items.data[0]?.current_period_end;
+  const periodEnd = rawPeriodEnd ? new Date(rawPeriodEnd * 1000).toISOString() : null;
 
   const result = await supabaseRest("stripe_subscriptions", {
     method: "POST",

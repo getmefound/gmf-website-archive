@@ -121,7 +121,8 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
   // Skip the first invoice — already handled by checkout.session.completed
   if (invoice.billing_reason === "subscription_create") return;
 
-  const sub = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+  const subRef = invoice.parent?.subscription_details?.subscription;
+  const sub = typeof subRef === "string" ? subRef : subRef?.id ?? null;
   const customerId = typeof invoice.customer === "string" ? invoice.customer : null;
   const customerEmail = invoice.customer_email;
   const amount = invoice.amount_paid / 100;
@@ -143,7 +144,8 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  const sub = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+  const subRef = invoice.parent?.subscription_details?.subscription;
+  const sub = typeof subRef === "string" ? subRef : subRef?.id ?? null;
   const customerId = typeof invoice.customer === "string" ? invoice.customer : null;
   const customerEmail = invoice.customer_email;
   const amount = invoice.amount_due / 100;
@@ -181,9 +183,8 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const customerId = typeof subscription.customer === "string" ? subscription.customer : null;
   const priceId = subscription.items.data[0]?.price?.id ?? null;
   const cancelAtPeriodEnd = subscription.cancel_at_period_end;
-  const periodEnd = subscription.current_period_end
-    ? new Date(subscription.current_period_end * 1000).toISOString()
-    : null;
+  const rawPeriodEnd = subscription.items.data[0]?.current_period_end;
+  const periodEnd = rawPeriodEnd ? new Date(rawPeriodEnd * 1000).toISOString() : null;
 
   await supabaseRest(`stripe_subscriptions?stripe_subscription_id=eq.${subscription.id}`, {
     method: "PATCH",
