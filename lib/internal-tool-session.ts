@@ -3,6 +3,7 @@ import { cookies, headers } from "next/headers";
 import { envValueAny } from "@/lib/getmefound-env";
 
 const INTERNAL_TOOL_COOKIE = "gmf_internal_tool";
+const INTERNAL_TOOL_SESSION_MAX_AGE = 60 * 60 * 24 * 180;
 
 export async function hasInternalToolSession() {
   const expected = expectedInternalToken();
@@ -27,7 +28,7 @@ export async function startInternalToolSession(token: string) {
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/mike-mc",
-    maxAge: 60 * 60 * 8,
+    maxAge: INTERNAL_TOOL_SESSION_MAX_AGE,
   });
   return true;
 }

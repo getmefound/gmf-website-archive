@@ -13,7 +13,7 @@ export function InternalAccessPrompt({ message = "Access required." }: { message
           Open The Hub
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-          Enter the internal API token to access Mike Command Center, workflows, agents, and client operations.
+          Enter the internal API token to access Mike Command Center, workflows, agents, and client operations. This browser stays trusted after login.
         </p>
         <form action={openMikeCommandCenter} className="mt-6 rounded-lg border border-zinc-800/70 bg-zinc-950 p-5">
           <label className="block">
