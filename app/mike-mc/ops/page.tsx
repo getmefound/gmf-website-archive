@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import { SERVICES } from "@/lib/control/mission";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "GMF Ops Index",
@@ -92,7 +94,10 @@ const HUMAN_CHECKS = [
   "No credentials, private keys, or secret values are stored on this webpage.",
 ];
 
-export default function OpsIndexPage() {
+export default async function OpsIndexPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   return (
     <ControlShell>
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">

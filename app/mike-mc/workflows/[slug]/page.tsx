@@ -3,7 +3,9 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import { getGmfWorkflow, WORKFLOW_DEFINITIONS, type WorkflowStatus } from "@/lib/gmf-workflows";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function WorkflowDetailPage({ params }: PageProps) {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const { slug } = await params;
   const workflow = await getGmfWorkflow(slug);
   if (!workflow) notFound();

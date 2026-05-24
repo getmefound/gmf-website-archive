@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import { getMorningBriefData, statTotals } from "@/lib/control/morning-brief";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 import { MorningBriefExperience } from "./MorningBriefExperience";
 
 export const metadata: Metadata = {
@@ -10,7 +12,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-export default function MorningBriefPage() {
+export default async function MorningBriefPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const brief = getMorningBriefData();
   const totals = statTotals(brief.stats);
 

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import { AGENT_TEAM, type AgentTeamMember } from "@/lib/control/team";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "GMF Agent Roster - The Hub",
@@ -9,7 +11,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AgentRosterPage() {
+export default async function AgentRosterPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const activeCount = AGENT_TEAM.filter((agent) => agent.status === "active").length;
   const buildingCount = AGENT_TEAM.filter((agent) => agent.status === "building").length;
   const plannedCount = AGENT_TEAM.filter((agent) => agent.status === "planned").length;

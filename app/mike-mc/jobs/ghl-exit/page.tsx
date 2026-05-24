@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import {
   GHL_EXIT_CHECKLIST,
   GHL_EXIT_COMMANDS,
@@ -9,6 +10,7 @@ import {
   type GhlExitChecklistItem,
   type GhlExitStatus,
 } from "@/lib/control/ghl-exit-checklist";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "GHL Exit - The Hub",
@@ -39,7 +41,10 @@ const sectionCopy: Record<GhlExitStatus, { title: string; sub: string }> = {
   },
 };
 
-export default function GhlExitPage() {
+export default async function GhlExitPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const grouped = statusOrder.map((status) => ({
     status,
     items: GHL_EXIT_CHECKLIST.filter((item) => item.status === status),

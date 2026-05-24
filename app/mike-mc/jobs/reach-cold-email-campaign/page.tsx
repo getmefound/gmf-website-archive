@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import {
   REACH_INTERNAL_JOB,
   MANAGER_OWNER_PEEK,
@@ -12,6 +13,7 @@ import {
   type ReachStep,
   type ReachTeamTraining,
 } from "@/lib/control/internal-jobs";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "Reach Cold Email Campaign - The Hub",
@@ -31,7 +33,10 @@ const RELAY_HELD_ROWS = [
   "Cornell University Veterinary Specialists | inez_earth@yahoo.com | personal email + duplicate business",
 ];
 
-export default function ReachColdEmailCampaignPage() {
+export default async function ReachColdEmailCampaignPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const job = REACH_INTERNAL_JOB;
 
   return (

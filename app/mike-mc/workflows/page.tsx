@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import { listGmfWorkflows, type GmfWorkflow, type WorkflowStatus } from "@/lib/gmf-workflows";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "GMF Workflows",
@@ -12,6 +14,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function WorkflowsPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const workflows = await listGmfWorkflows();
   const ready = workflows.filter((workflow) => workflow.status === "ready").length;
   const blocked = workflows.filter((workflow) => workflow.status === "blocked").length;

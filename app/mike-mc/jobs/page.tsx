@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import {
   REACH_COMMERCIAL_DEMO,
   REACH_INTERNAL_FLOW,
@@ -15,6 +16,7 @@ import {
   type ScheduledJobCost,
 } from "@/lib/control/job-costs";
 import { GROWTH_PRODUCTS, productStatusLabel } from "@/lib/control/growth-products";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "Agent Jobs - The Hub",
@@ -24,7 +26,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-export default function JobsPage() {
+export default async function JobsPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const now = new Date();
   const totalDaily = SCHEDULED_JOB_COSTS.reduce((sum, job) => sum + job.dailyCostUsd, 0);
   const totalToDate = SCHEDULED_JOB_COSTS.reduce((sum, job) => sum + totalCost(job, now), 0);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ControlShell, Pill } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import {
   CAMPAIGN_LANES,
   CAMPAIGN_SOURCE_DOCS,
@@ -9,6 +10,7 @@ import {
   MANUAL_LAUNCH_MODEL,
   ROUTER_BRANCHES,
 } from "@/lib/control/campaign-launch";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "Campaign Launch - The Hub",
@@ -18,7 +20,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-export default function CampaignLaunchPage() {
+export default async function CampaignLaunchPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   return (
     <ControlShell wide>
       <header className="mb-8 flex flex-col gap-3 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">

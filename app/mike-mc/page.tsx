@@ -8,6 +8,7 @@ import {
   type AgentStatus,
   type OwnedRow,
 } from "@/components/control/ControlPrimitives";
+import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
 import {
   BOARD_COLUMNS,
   BOARD_TASKS,
@@ -18,6 +19,7 @@ import {
   type MissionTone,
 } from "@/lib/control/mission";
 import { getControlData } from "@/lib/control/fetchers";
+import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
   title: "The Hub",
@@ -215,6 +217,9 @@ const AGENTS: {
 ];
 
 export default async function ControlPage() {
+  const auth = await hasInternalToolSession();
+  if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
+
   const data = await getControlData();
   const now = new Date();
   const dateLine = now.toLocaleDateString("en-US", {
