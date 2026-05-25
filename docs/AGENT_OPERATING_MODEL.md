@@ -16,7 +16,7 @@ GMF is focused on local-business visibility and trust as Google Search becomes m
 Active GMF offers:
 
 1. Get Found - $149 one-time visibility setup, baseline, and first review request setup.
-2. Stay Found - $59/mo email-only review requests, weekly GBP post, monitoring, and monthly report.
+2. Stay Found - $99/mo email review requests, weekly GBP post, included website hosting, monitoring, and monthly report.
 3. Review Power - $149/mo SMS + email review requests, A2P handled by GMF, AI reply drafts, alerts, and reporting.
 4. AI Ready Bundle - $299/mo full reputation, content, AI voice readiness, strategy, and AEO checks.
 

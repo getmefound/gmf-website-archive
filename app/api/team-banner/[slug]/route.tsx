@@ -177,7 +177,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
                 fontSize: Math.max(9, urlSize - 2),
               }}
             >
-              From $59/mo · No contract
+              From $99/mo · No contract
             </div>
           </div>
 

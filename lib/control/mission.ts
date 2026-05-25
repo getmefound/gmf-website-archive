@@ -66,7 +66,7 @@ export const SERVICES: ServiceWork[] = [
     slug: "stay-found",
     name: "Stay Found",
     job: "Stay found",
-    outcome: "$59/mo email-only upkeep: weekly GBP post, email review requests, monitoring, and monthly report.",
+    outcome: "$99/mo upkeep: weekly GBP post, email review requests, included website hosting, monitoring, and monthly report.",
     agents: ["Profile Manager", "Client Success", "Reviews Manager", "Auditor"],
     skills: ["monthly-visibility-check", "profile-drift", "review-status", "client-recap"],
     activeClients: 0,

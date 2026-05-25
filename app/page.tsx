@@ -53,12 +53,13 @@ const teaserCards: TeaserCard[] = [
   },
   {
     name: "Stay Found",
-    tagline: "Monthly upkeep so your profile stays current.",
-    price: "$59",
+    tagline: "Monthly upkeep plus free website hosting.",
+    price: "$99",
     cadence: "/month",
     bullets: [
       "Weekly review request emails to your customers",
       "Weekly Google Business Profile post",
+      "Free website hosting for your GMF-managed site",
       "Monthly one-page visibility report",
     ],
     href: "/pricing#stay-found",
@@ -155,7 +156,7 @@ export default function Home() {
                 </div>
 
                 <p className="mt-3 font-mono text-xs text-[var(--color-hero-subtext)]/60">
-                  Plans from $59/mo · no contract · cancel anytime
+                  Plans from $99/mo · no contract · cancel anytime
                 </p>
               </div>
 

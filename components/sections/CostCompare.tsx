@@ -400,7 +400,7 @@ export function CostCompare() {
             </span>
           </Link>
           <p className="text-xs text-[var(--color-text-muted)]">
-            No contract. Cancel anytime. Plans from $59/mo.
+            No contract. Cancel anytime. Plans from $99/mo.
           </p>
         </div>
 

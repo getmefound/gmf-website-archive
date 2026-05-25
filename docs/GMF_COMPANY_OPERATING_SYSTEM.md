@@ -11,7 +11,7 @@ GetMeFound helps local businesses stay visible and trusted as Google Search chan
 The company should not be positioned as a broad AI agency. GMF is the review, reputation, and AI visibility company. The public site stays GetMeFound, and the offer ladder uses this structure:
 
 1. Get Found - one-time cleanup, visibility baseline, and first review request setup.
-2. Stay Found - $59/mo email-only review requests, weekly GBP post, monitoring, and monthly report.
+2. Stay Found - $99/mo email review requests, weekly GBP post, included website hosting, monitoring, and monthly report.
 3. Review Power - $149/mo SMS + email review requests, A2P handled by GMF, AI reply drafts, alerts, and sentiment/citation checks.
 4. AI Ready Bundle - $299/mo full reputation, content, AI voice readiness, strategy, and AEO checks.
 
@@ -46,7 +46,7 @@ Core work:
 
 ### Stay Found
 
-Monthly service. Target price: $59/mo. No contract.
+Monthly service. Target price: $99/mo. No contract. Includes website hosting for GMF-managed sites so updates are easier to maintain.
 
 Purpose: keep the profile, review path, and visibility signals from going stale. Email-only at this tier; SMS is the Review Power upgrade.
 

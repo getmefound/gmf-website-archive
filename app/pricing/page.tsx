@@ -69,16 +69,17 @@ const products: ProductDetailData[] = [
     name: "Stay Found",
     outcome: "Keep your local visibility from going stale again.",
     story:
-      "Stay Found keeps the profile, review path, and local visibility signals moving without making the owner learn another platform. It is email-only at this tier, with SMS saved for Get Chosen.",
+      "Stay Found keeps the profile, review path, website, and local visibility signals moving without making the owner learn another platform. It includes free website hosting for GMF-managed sites so updates stay easier to maintain.",
     stats: [
       { label: "Channel", value: "Email" },
       { label: "GBP post", value: "Weekly" },
-      { label: "Report", value: "Monthly" },
+      { label: "Hosting", value: "Included" },
     ],
     whatYouGet: [
       "Weekly client list upload path for email review requests",
       "Automated email review requests after approval",
       "One weekly Google Business Profile post",
+      "Free website hosting for your GMF-managed site",
       "Review monitoring across platforms where available",
       "Monthly one-page visibility report",
       "No SMS or A2P setup at this tier",
@@ -86,19 +87,20 @@ const products: ProductDetailData[] = [
     useThisIf: [
       "You do not want your Google profile to decay after the first cleanup.",
       "You want a simple monthly visibility report without logging into a platform.",
+      "You want GMF to host the site so public updates do not depend on another vendor.",
       "You need an affordable maintenance plan before adding SMS review requests.",
     ],
     setupSteps: [
       { title: "Baseline", sub: "We start from Get Found or a fresh audit." },
-      { title: "Weekly upkeep", sub: "Profile content and email review requests keep moving." },
+      { title: "Weekly upkeep", sub: "Profile content, website updates, and email review requests keep moving." },
       { title: "Owner recap", sub: "You get the short monthly update and any recommended fix." },
     ],
-    cadence: "Weekly light upkeep with a monthly owner recap. Urgent profile issues escalate to Manager.",
+    cadence: "Weekly light upkeep with included website hosting and a monthly owner recap. Urgent profile issues escalate to Manager.",
     crossSell: { label: "Get Chosen - add SMS and AI reply drafts", href: "#get-chosen" },
-    price: "$59",
+    price: "$99",
     cadenceLabel: "/mo",
     setup: "No contract",
-    promoNote: "Designed to be easy to keep, even for small local businesses.",
+    promoNote: "Includes free website hosting when GMF maintains the site.",
     ctaLabel: "Stay Found monthly",
     ctaHref: "/contact",
     secondaryCtaHref: BOOKING_HREF,
@@ -254,10 +256,16 @@ export default function PricingPage() {
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
             Pricing
           </p>
-          <h1 className="font-semibold leading-[1.05] tracking-tight text-4xl md:text-6xl">
-            Google Search is changing. Staying visible should not be complicated.
+          <h1 className="max-w-[21.5rem] font-semibold leading-[1.05] tracking-tight text-[clamp(2.1rem,8vw,2.55rem)] sm:max-w-4xl sm:text-5xl md:text-6xl">
+            <span className="block sm:hidden">Google Search is changing.</span>
+            <span className="block sm:hidden">
+              Staying visible should not be complicated.
+            </span>
+            <span className="hidden sm:block">
+              Google Search is changing. Staying visible should not be complicated.
+            </span>
           </h1>
-          <p className="mt-5 max-w-2xl text-lg md:text-xl text-[var(--color-hero-subtext)] leading-relaxed">
+          <p className="mt-5 max-w-[21.5rem] text-lg leading-relaxed text-[var(--color-hero-subtext)] sm:max-w-2xl md:text-xl">
             GMF helps local businesses get found, stay current, and turn happy customers into stronger review proof. Start small. Add only what is worth keeping.
           </p>
 
@@ -279,7 +287,7 @@ export default function PricingPage() {
 
       <PageBody>
         <PageSection className="!max-w-6xl !py-12 md:!py-16 !pb-10 md:!pb-12">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-[21.5rem] sm:max-w-6xl">
             <Reveal delay={0.05}>
               <div className="mb-6 max-w-3xl">
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-body)] mb-3">
@@ -295,7 +303,7 @@ export default function PricingPage() {
               <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                   { value: "$149", label: "Get Found setup", border: "border-t-green-500", text: "text-green-500" },
-                  { value: "$59/mo", label: "Stay Found", border: "border-t-amber-500", text: "text-amber-500" },
+                  { value: "$99/mo", label: "Stay Found", border: "border-t-amber-500", text: "text-amber-500" },
                   { value: "$149/mo", label: "Get Chosen", border: "border-t-gray-900", text: "text-gray-900" },
                   { value: "$299/mo", label: "Always Ready", border: "border-t-sky-500", text: "text-sky-600" },
                 ].map((stat) => (

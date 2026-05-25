@@ -24,7 +24,7 @@ const DOCS = [
   {
     title: "Stay Found Monthly Recap Template",
     path: "docs/STAY_FOUND_MONTHLY_RECAP_TEMPLATE.md",
-    purpose: "The client-safe monthly note format for the $59/mo Stay Found service.",
+    purpose: "The client-safe monthly note format for the $99/mo Stay Found service.",
   },
   {
     title: "Legacy Operations Index",

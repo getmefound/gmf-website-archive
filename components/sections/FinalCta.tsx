@@ -75,7 +75,7 @@ export function FinalCta() {
           </div>
 
           <p className="mt-8 text-xs text-[var(--color-hero-subtext)]/70">
-            No contracts. Cancel anytime. Plans from $59/mo.
+            No contracts. Cancel anytime. Plans from $99/mo.
           </p>
         </motion.div>
       </div>

@@ -170,7 +170,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
                 fontSize: 13,
               }}
             >
-              From $59/mo · No contract
+              From $99/mo · No contract
             </div>
           </div>
         </div>

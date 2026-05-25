@@ -27,7 +27,7 @@ _Generated from strategy session May 2026. Load this at the start of every Claud
   - First review request campaign launched
   - 30-minute onboarding call
   - AI search visibility baseline report
-- **Conversion goal:** 25% convert to Stay Found $59/mo (based on industry data)
+- **Conversion goal:** 25% convert to Stay Found $99/mo (based on industry data)
 - **Pitch:** "Google just announced the biggest change to search in 25 years at IO 2026. AI now decides who to recommend before anyone clicks. We fix that in one setup."
 
 ---
@@ -35,17 +35,18 @@ _Generated from strategy session May 2026. Load this at the start of every Claud
 ## Recurring Tiers (GetMeFound.ai)
 
 ### Tier 1 — Stay Found
-- **Price:** $59/mo, no contract
+- **Price:** $99/mo, no contract
 - **Channel:** Email review requests only (no SMS at this tier)
 - **Why email only:** A2P SMS registration takes 1–4 weeks per client and costs $48+ setup per client. Email still generates 15 reviews per 100 requests. SMS is the upgrade incentive.
 - **Deliverables:**
   - Weekly client list upload → automated email review requests
   - 1 weekly GBP post (keeps AI search signal fresh)
+  - Free website hosting for GMF-managed sites
   - Review monitoring across platforms
   - Monthly 1-page visibility report
-- **Your hard cost:** ~$15–20/mo per client
-- **Gross margin:** ~65–70%
-- **Competitor anchor:** NiceJob charges $75/mo for software only. You do it for them at $59.
+- **Your hard cost:** ~$20–30/mo per client after hosting/tooling
+- **Gross margin:** ~60–70%
+- **Competitor anchor:** NiceJob charges $75/mo for software only. You do it for them at $99 and include website hosting.
 
 ### Tier 2 — Review Power
 - **Price:** $149/mo, no contract
@@ -82,7 +83,7 @@ _Generated from strategy session May 2026. Load this at the start of every Claud
 | Product | Price | Type | Margin |
 |---|---|---|---|
 | Get Found | $149 | One-time | ~$100 gross |
-| Stay Found | $59/mo | Recurring | ~65–70% |
+| Stay Found | $99/mo | Recurring | ~60–70% |
 | Review Power | $149/mo | Recurring | ~63–70% |
 | AI Ready Bundle | $299/mo | Recurring | ~63–70% |
 
@@ -96,7 +97,7 @@ _Generated from strategy session May 2026. Load this at the start of every Claud
 | Podium | $399–$599/mo, annual contract | D- BBB rating. Contract traps. AI responses cost extra $99/mo. |
 | NiceJob | $75–$125/mo, no contract | Software only. No done-for-you. No SMS A2P handling. No AI voice. |
 | TrueReview | $49–$299/mo, no contract | Pure software. No service layer. No voice readiness. |
-| **You** | $59–$299/mo, no contract | Done-for-you. No contracts. AI voice ready. Human layer. Best timing (Google IO). |
+| **You** | $99–$299/mo, no contract | Done-for-you. Website hosting included in Stay Found. No contracts. AI voice ready. Human layer. Best timing (Google IO). |
 
 ---
 

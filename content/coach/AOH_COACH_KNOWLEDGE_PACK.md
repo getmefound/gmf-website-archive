@@ -32,7 +32,7 @@ If sources conflict, Coach must:
 Use this until Mike changes pricing:
 
 - Get Found Refresh: one-time $149 target
-- Stay Found: $49/mo target
+- Stay Found: $99/mo target, includes website hosting for GMF-managed sites
 - Review Engine: $149/mo target
 - Review Voice: +$49/mo target
 - Call Protection: future/contact for pricing
@@ -63,6 +63,7 @@ Stay Found:
 
 - monthly visibility check
 - profile/review drift check
+- included website hosting for GMF-managed sites
 - simple monthly note
 - keeps the profile fresh
 
@@ -144,4 +145,3 @@ A: Reach is a separate prospecting brand. GMF focuses on getting found and trust
 - `What to say:` customer-safe script
 - `Internal note:` risk/source/conflict if relevant
 - `Next step:` concrete action
-

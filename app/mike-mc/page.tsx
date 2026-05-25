@@ -122,7 +122,7 @@ const AGENTS: {
     },
     rows: [
       { primary: "Get Found", secondary: "Profile, categories, services, hours, NAP, website, schema, review path.", badge: { tone: "accent", label: "$149" } },
-      { primary: "Stay Found", secondary: "Weekly GBP post, email review requests, monitoring, and owner recap.", badge: { tone: "warm", label: "$59/mo" } },
+      { primary: "Stay Found", secondary: "Weekly GBP post, email review requests, included website hosting, monitoring, and owner recap.", badge: { tone: "warm", label: "$99/mo" } },
       { primary: "Access rule", secondary: "Client grants access; no password sharing.", badge: { tone: "danger", label: "safe" } },
     ],
   },

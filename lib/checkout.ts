@@ -32,19 +32,20 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
   {
     slug: "stay-found",
     name: "Stay Found",
-    price: "$59",
+    price: "$99",
     cadence: "/month",
     setup: "No contract",
     summary:
-      "Email-only monthly visibility upkeep so the business does not go stale after the first setup.",
+      "Monthly visibility upkeep with free website hosting so the business does not go stale after the first setup.",
     whatYouGet: [
       "Weekly client list upload path for email review requests",
       "Automated email review requests after approval",
       "One weekly Google Business Profile post",
+      "Free website hosting for your GMF-managed site",
       "Review monitoring across platforms where available",
       "Monthly one-page visibility report",
     ],
-    stripePriceId: "price_1TakBrLyThSzGsL4ff5tDb4A",
+    stripePriceId: "price_1Tb0VDLyThSzGsL4BAWAI6sD",
     stripeMode: "subscription",
   },
   {
