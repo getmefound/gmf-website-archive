@@ -172,6 +172,26 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Trust bridge ── */}
+        <section className="bg-[var(--color-bg-elevated)] border-y border-[var(--color-border)] py-5">
+          <div className="mx-auto max-w-5xl px-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-sm text-[var(--color-text-body)] font-medium text-center md:text-left">
+                <span className="text-[var(--color-accent)] font-semibold">We audit your Google profile before you pay anything.</span>
+                {" "}Free report, same day, no card needed.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-[var(--color-text-muted)] shrink-0">
+                {["No credit card to start", "No contract ever", "Cancel anytime by email"].map((t) => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <span className="text-[var(--color-accent)]">✓</span>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Service tiers ── */}
         <section className="py-14 md:py-20 bg-[var(--color-bg-page)]">
           <div className="mx-auto max-w-6xl px-6">

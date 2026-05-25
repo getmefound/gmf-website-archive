@@ -33,6 +33,14 @@ export const FAQ_ITEMS: FaqItem[] = [
     q: "You're a new company - why should I trust you?",
     a: "We're new and we know it. That's exactly why we don't lock you into contracts, we give you a free audit before you pay anything, and we're transparent about our pricing. We have to earn your business - and we plan to.",
   },
+  {
+    q: "Will this hurt my existing Google Business Profile?",
+    a: "No. We work within Google's guidelines — optimizing what's already there, not replacing it. We never delete reviews, alter your category without approval, or make changes that could trigger a suspension. Everything we touch gets your sign-off first.",
+  },
+  {
+    q: "How do I cancel?",
+    a: "Email us anytime. No cancellation fee, no questions beyond what we need to wrap up your account cleanly. Monthly plans stop at the end of your current billing cycle. We don't make cancellation hard.",
+  },
 ];
 
 export const faqPageSchema = {
