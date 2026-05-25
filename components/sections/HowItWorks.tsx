@@ -118,55 +118,12 @@ function SetupTimeline() {
 }
 
 function ReviewFeed() {
-  const reviews = [
-    { name: "Sarah K.", text: "Great service! Quick response.", delay: 0.4 },
-    { name: "Mike T.", text: "Best in town. Will use again.", delay: 0.9 },
-    { name: "Jen W.", text: "Fast and professional.", delay: 1.4 },
-  ];
-
   return (
-    <div className="flex h-44 w-full flex-col justify-center gap-2">
-      {reviews.map((r) => (
-        <motion.div
-          key={r.name}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ delay: r.delay, duration: 0.5, ease: "easeOut" }}
-          className="flex items-start gap-2.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2"
-        >
-          <span className="font-mono text-[10px] text-amber-400/90">★★★★★</span>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs text-[var(--color-hero-text)] truncate">
-              {r.text}
-            </p>
-            <p className="text-[10px] text-[var(--color-hero-subtext)]/60">
-              — {r.name}
-            </p>
-          </div>
-          <motion.span
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ delay: r.delay + 0.4, duration: 0.3 }}
-            className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/20"
-            title="Reply sent in your voice"
-          >
-            <svg
-              width="9"
-              height="9"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#2D6A4F"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </motion.span>
-        </motion.div>
-      ))}
+    <div className="flex h-44 w-full flex-col items-center justify-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-5 text-center">
+      <span className="font-mono text-lg text-amber-400/60">★★★★★</span>
+      <p className="text-xs font-medium text-[var(--color-hero-subtext)]/80 leading-relaxed">
+        Reviews from our first clients coming soon.
+      </p>
     </div>
   );
 }
@@ -271,7 +228,7 @@ export function HowItWorks() {
             href="/contact"
             className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] px-8 py-4 text-base font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--color-accent)]/25"
           >
-            Talk to us
+            Get your free report
             <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
               →
             </span>

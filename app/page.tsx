@@ -165,7 +165,7 @@ export default function Home() {
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.06] px-7 py-4 text-base font-semibold text-[var(--color-hero-text)] ring-1 ring-white/[0.10] transition hover:bg-white/[0.10] hover:ring-white/20"
                   >
-                    Talk to us
+                    Get your free report
                   </Link>
                 </div>
 

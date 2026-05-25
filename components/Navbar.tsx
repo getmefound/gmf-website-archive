@@ -126,33 +126,16 @@ export function Navbar() {
 
             <div className={`hidden md:flex items-center gap-8 text-sm font-medium ${linkColor} transition-colors duration-500`}>
               <Link href={withLocale("/pricing")} className="transition-colors">
-                {isSpanish ? "Qué Hacemos" : "What We Do"}
+                {"What We Do"}
               </Link>
               <Link href={withLocale("/calculator")} className="transition-colors">
-                {isSpanish ? "Calculadora" : "Calculator"}
+                {"Calculator"}
               </Link>
               <Link href={withLocale("/blog")} className="transition-colors">
                 Blog
               </Link>
               <Link href={withLocale("/about")} className="transition-colors">
-                {isSpanish ? "Nosotros" : "About"}
-              </Link>
-            </div>
-
-            <div className={`hidden md:flex items-center gap-1 rounded-full border px-1 py-0.5 text-xs font-semibold ${scrolled ? "border-[var(--color-border)] bg-white/70" : "border-white/20 bg-white/5"}`}>
-              <Link
-                href={enHref}
-                className={`rounded-full px-2 py-1 transition-colors ${!isSpanish ? "bg-[var(--color-accent)] text-[var(--color-accent-text)]" : linkColor}`}
-                aria-label="Switch language to English"
-              >
-                EN
-              </Link>
-              <Link
-                href={esHref}
-                className={`rounded-full px-2 py-1 transition-colors ${isSpanish ? "bg-[var(--color-accent)] text-[var(--color-accent-text)]" : linkColor}`}
-                aria-label="Cambiar idioma a Español"
-              >
-                ES
+                {"About"}
               </Link>
             </div>
 
@@ -160,7 +143,7 @@ export function Navbar() {
               href={withLocale("/contact")}
               className="group hidden md:inline-flex items-center gap-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-5 py-2 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/30 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
-              {isSpanish ? "Solicitar Auditoria" : "Request an Audit"}
+              {"Request an Audit"}
               <span
                 aria-hidden="true"
                 className="transition-transform duration-200 group-hover:translate-x-0.5"
@@ -212,37 +195,19 @@ export function Navbar() {
                 className="md:hidden absolute left-0 right-0 top-full z-50 border-b border-[var(--color-hero-border)] bg-[var(--color-hero-bg)] shadow-2xl"
               >
                 <div className="mx-auto max-w-6xl px-6 py-4 space-y-1 text-sm">
-                  <div className="mb-2 flex items-center gap-2 px-3 py-1">
-                    <Link
-                      href={enHref}
-                      onClick={() => setMobileOpen(false)}
-                      className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${!isSpanish ? "bg-[var(--color-accent)] text-[var(--color-accent-text)]" : "bg-white/5 text-[var(--color-hero-subtext)]"}`}
-                      aria-label="Switch language to English"
-                    >
-                      EN
-                    </Link>
-                    <Link
-                      href={esHref}
-                      onClick={() => setMobileOpen(false)}
-                      className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${isSpanish ? "bg-[var(--color-accent)] text-[var(--color-accent-text)]" : "bg-white/5 text-[var(--color-hero-subtext)]"}`}
-                      aria-label="Cambiar idioma a Español"
-                    >
-                      ES
-                    </Link>
-                  </div>
                   <Link
                     href={withLocale("/pricing")}
                     onClick={() => setMobileOpen(false)}
                     className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                   >
-                    {isSpanish ? "Qué Hacemos" : "What We Do"}
+                    {"What We Do"}
                   </Link>
                   <Link
                     href={withLocale("/calculator")}
                     onClick={() => setMobileOpen(false)}
                     className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                   >
-                    {isSpanish ? "Calculadora" : "Calculator"}
+                    {"Calculator"}
                   </Link>
                   <Link
                     href={withLocale("/blog")}
@@ -256,14 +221,14 @@ export function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                   >
-                    {isSpanish ? "Nosotros" : "About"}
+                    {"About"}
                   </Link>
                   <Link
                     href={withLocale("/contact")}
                     onClick={() => setMobileOpen(false)}
                     className="mt-3 block w-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-4 py-3 rounded-lg font-semibold text-center transition-colors"
                   >
-                    {isSpanish ? "Solicitar Auditoria" : "Request an Audit"}
+                    {"Request an Audit"}
                   </Link>
                 </div>
               </motion.div>

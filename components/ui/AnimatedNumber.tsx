@@ -22,7 +22,7 @@ export function AnimatedNumber({
   thousandsSeparator = true,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const inView = useInView(ref, { once: true, amount: 0.1 });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -41,6 +41,12 @@ export function AnimatedNumber({
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, value, duration]);
+
+  // Fallback: if InView never fires (e.g. slow mobile, reduced-motion), show value after duration + 500ms
+  useEffect(() => {
+    const timer = setTimeout(() => setDisplay(value), duration + 500);
+    return () => clearTimeout(timer);
+  }, [value, duration]);
 
   const formatted = thousandsSeparator
     ? display.toLocaleString("en-US")
