@@ -191,7 +191,7 @@ function RevenueCalculatorInner() {
     } else if (reviewsPerMonth < target * 0.5) {
       insight = `<strong>Your review velocity is too low to keep ranking.</strong> The top ${ind.label} collect ${target}+ new reviews per month. At ${reviewsPerMonth}/month, Google reads your business as slowing down — your ranking starts decaying within 30 days regardless of how many older reviews you have. Velocity is the ranking signal; volume isn&apos;t.`;
     } else if (aiVisibility === "dont-know" && reviewsPerMonth >= target * 0.6 && ranking <= 5) {
-      insight = `<strong>Your Google game is decent — the AI gap is wide open.</strong> You&apos;re close on velocity (${reviewsPerMonth}/mo vs ${target}+) and rank #${ranking}. Unknown is AI search, where most local businesses score under 20/100. Free report includes a live ChatGPT and Claude check for your business.`;
+      insight = `<strong>Your Google game is decent — the AI gap is wide open.</strong> You&apos;re close on velocity (${reviewsPerMonth}/mo vs ${target}+) and rank #${ranking}. Unknown is AI search, where most local businesses have never checked whether they are recommended by name.`;
     } else if (ranking > 5) {
       insight = `<strong>Your ranking is costing you the most.</strong> Positions #1–3 capture ${Math.round(rankingTraffic[1] * 100)}% of local search clicks. At #${ranking}, you&apos;re getting roughly ${Math.round(currentTraffic * 100)}% of that traffic. Most customers never see you.`;
     } else if (stars < 4.0) {
@@ -497,8 +497,8 @@ function RevenueCalculatorInner() {
                 </select>
                 {(aiVisibility === "dont-know" || aiVisibility === "think-so") && !aiVisUrl && (
                   <p className="mt-3 text-xs text-[var(--color-accent)] leading-relaxed">
-                    We&apos;ll run a live ChatGPT + Claude + Google AI Overviews check for your
-                    business in your free report — see exactly what they say (or don&apos;t).
+                    We&apos;ll check what AI search tools can understand about your business during
+                    your audit, then show you what to fix first.
                   </p>
                 )}
                 {aiVisUrl && (
@@ -576,22 +576,21 @@ function RevenueCalculatorInner() {
                     {results.needsAiCheck && (
                       <div className="bg-[var(--color-accent)]/15 border border-[var(--color-accent)]/40 rounded-xl p-4 mb-6 text-sm text-white leading-relaxed">
                         <strong className="block mb-1 text-white">
-                          We&apos;ll run the AI check for you.
+                          We&apos;ll verify the AI gap with you.
                         </strong>
-                        Your free report includes live ChatGPT, Claude, and Google AI Overviews
-                        queries for your business + niche. See exactly who&apos;s being cited (and
-                        why it&apos;s not you).
+                        We look at what customers and AI search tools can see about your business,
+                        then turn the gaps into a plain before-and-after fix plan.
                       </div>
                     )}
 
                     <a
-                      href="/#hero-email"
+                      href="/pricing"
                       className="block w-full text-center bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white py-4 px-6 rounded-xl font-semibold transition-colors"
                     >
-                      Get My Free Reviews + AI Visibility Report
+                      See Plans That Fix This
                     </a>
                     <p className="text-xs text-white/35 text-center mt-3">
-                      No credit card. We&apos;ll show you exactly what to fix first.
+                      No contract. We&apos;ll show you exactly what to fix first.
                     </p>
                   </>
                 ) : (

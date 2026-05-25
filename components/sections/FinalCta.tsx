@@ -44,7 +44,7 @@ export function FinalCta() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
             </span>
-            Free AI visibility report
+            AI visibility refresh
           </p>
           <h2 className="text-3xl md:text-5xl font-bold text-[var(--color-hero-text)] leading-tight mb-5">
             Customers are choosing right now.

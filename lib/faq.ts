@@ -3,7 +3,7 @@ export type FaqItem = { q: string; a: string };
 export const FAQ_ITEMS: FaqItem[] = [
   {
     q: "How is GetMeFound different from other agencies?",
-    a: "No contract, cancel anytime. We give you a free report before you pay a single dollar. We have to earn your trust before we ask for anything.",
+    a: "No contract, cancel anytime. We show you the before-and-after visibility gap before you pay a single dollar. We have to earn your trust before we ask for anything.",
   },
   {
     q: "Will automated replies sound fake and hurt me with Google?",
@@ -31,7 +31,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "You're a new company - why should I trust you?",
-    a: "We're new and we know it. That's exactly why we don't lock you into contracts, we give you a free audit before you pay anything, and we're transparent about our pricing. We have to earn your business - and we plan to.",
+    a: "We're new and we know it. That's exactly why we don't lock you into contracts, we show you what we would fix before you pay anything, and we're transparent about our pricing. We have to earn your business - and we plan to.",
   },
   {
     q: "Will this hurt my existing Google Business Profile?",

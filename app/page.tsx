@@ -6,6 +6,7 @@ import { CostCompare } from "@/components/sections/CostCompare";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { FAQ } from "@/components/sections/FAQ";
+import { ReportTransformation } from "@/components/sections/ReportTransformation";
 import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
@@ -42,8 +43,8 @@ const teaserCards: TeaserCard[] = [
     cadence: "one-time",
     bullets: [
       "Google Business Profile audit and cleanup",
-      "Schema, categories, and review path set up",
-      "AI search visibility baseline report",
+      "Profile details, categories, and review path set up",
+      "Before-and-after visibility snapshot",
     ],
     href: "/pricing#get-found-refresh",
     cta: "See what's included",
@@ -114,18 +115,22 @@ export default function Home() {
         {/* ── Hero ── */}
         <section
           aria-label="Hero"
-          className="bg-[var(--color-hero-bg)] text-[var(--color-hero-text)]"
+          className="overflow-hidden bg-[var(--color-hero-bg)] text-[var(--color-hero-text)]"
         >
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16 md:items-center">
-              <div className="flex flex-col">
+            <div className="grid min-w-0 grid-cols-1 gap-10 md:grid-cols-2 md:gap-16 md:items-center">
+              <div className="flex min-w-0 flex-col">
                 <h1 className="font-semibold leading-[1.05] tracking-tight text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,5vw,4rem)]">
-                  If you&apos;re not on Google&apos;s short list,{" "}
-                  <span className="text-[var(--color-accent)]">you&apos;re not getting the call.</span>
+                  <span className="block">
+                    Your competitor is being recommended by Google&apos;s AI.
+                  </span>
+                  <span className="mt-2 block text-[var(--color-accent)]">
+                    You&apos;re not.
+                  </span>
                 </h1>
 
                 <p className="mt-6 max-w-xl text-lg text-[var(--color-hero-subtext)] md:text-xl leading-relaxed">
-                  We set up your Google profile, reviews, and AI search results in 48 hours — then run it every month so you stay found.
+                  Google just changed how customers find local businesses — and most haven&apos;t caught up. We fix your listing, reviews, and AI visibility in 48 hours, then keep it working every month.
                 </p>
 
                 <ul className="mt-8 flex flex-wrap gap-3">
@@ -165,32 +170,14 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="h-full">
+              <div className="h-full min-w-0">
                 <HeroVisualAI />
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Trust bridge ── */}
-        <section className="bg-[var(--color-bg-elevated)] border-y border-[var(--color-border)] py-5">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-[var(--color-text-body)] font-medium text-center md:text-left">
-                <span className="text-[var(--color-accent)] font-semibold">We audit your Google profile before you pay anything.</span>
-                {" "}Free report, same day, no card needed.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-[var(--color-text-muted)] shrink-0">
-                {["No credit card to start", "No contract ever", "Cancel anytime by email"].map((t) => (
-                  <span key={t} className="flex items-center gap-1.5">
-                    <span className="text-[var(--color-accent)]">✓</span>
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <ReportTransformation />
 
         {/* ── Service tiers ── */}
         <section className="py-14 md:py-20 bg-[var(--color-bg-page)]">

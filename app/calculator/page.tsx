@@ -47,7 +47,7 @@ export default function CalculatorPage() {
         <section className="bg-[var(--color-bg-page)] py-14 md:py-20">
           <div className="mx-auto max-w-3xl px-6 text-center">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] mb-3">
-              Now you've seen the leak
+              Now you&apos;ve seen the leak
             </p>
             <h2 className="text-2xl md:text-4xl font-bold text-[var(--color-text-body)] mb-4 leading-tight">
               Let&apos;s fix it for you.
@@ -76,19 +76,19 @@ export default function CalculatorPage() {
                 </p>
               </Link>
 
-              {/* Secondary — free AI Visibility report */}
+              {/* Secondary - plan details */}
               <Link
-                href="/#hero-email"
+                href="/pricing"
                 className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-6 py-6 text-center transition-all hover:border-[var(--color-accent)] hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
-                  30 sec · email only
+                  no contract
                 </p>
                 <p className="text-lg md:text-xl font-bold text-[var(--color-text-body)] mb-1">
-                  Get free AI Visibility report →
+                  See the fix plans →
                 </p>
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  Live ChatGPT + Claude + Google AI check for your business.
+                  Pick the level that fits the gap you just found.
                 </p>
               </Link>
             </div>
