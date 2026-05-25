@@ -120,28 +120,19 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16 md:items-center">
               <div className="flex flex-col">
                 <h1 className="font-semibold leading-[1.05] tracking-tight text-[clamp(2rem,8vw,3.5rem)] md:text-[clamp(2.5rem,5vw,4rem)]">
-                  Google now uses AI to pick which local businesses to recommend.{" "}
-                  <span className="text-[var(--color-accent)]">Most owners don&apos;t know it changed.</span>
+                  Google now picks who gets the call.{" "}
+                  <span className="text-[var(--color-accent)]">Are you on the list?</span>
                 </h1>
 
                 <p className="mt-6 max-w-xl text-lg text-[var(--color-hero-subtext)] md:text-xl leading-relaxed">
-                  When your next customer searches for a business like yours,
-                  AI picks the answer — based on your reviews, your Google profile,
-                  and your online presence. If you&apos;re not set up for it,
-                  your competitor gets the call.
-                </p>
-
-                <p className="mt-4 max-w-xl text-base text-[var(--color-hero-subtext)] leading-relaxed">
-                  We set you up so AI recommends you. Then we run it every month
-                  — reviews, profile, visibility — so you stay found while you
-                  stay focused on your business.
+                  We set up your Google profile, reviews, and AI visibility in 48 hours — then run it every month so you stay found.
                 </p>
 
                 <ul className="mt-8 flex flex-wrap gap-3">
                   {[
-                    "Set up for AI search",
-                    "Done for you — no dashboards",
-                    "No contracts",
+                    "More calls from Google",
+                    "We do everything",
+                    "No contract",
                   ].map((pill) => (
                     <li
                       key={pill}
