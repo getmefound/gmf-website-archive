@@ -11,7 +11,7 @@ import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 import { AnimatedIcon } from "@/components/ui/AnimatedIcon";
-import { CompetitorScoreCard } from "@/components/hero/CompetitorScoreCard";
+import { HeroVisualAI } from "@/components/hero/HeroVisualAI";
 import { ICON_PATHS } from "@/lib/icon-paths";
 import { faqPageSchema } from "@/lib/faq";
 
@@ -194,8 +194,8 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="hidden h-full min-w-0 md:flex md:items-center">
-                <CompetitorScoreCard />
+              <div className="hidden h-full min-w-0 md:block">
+                <HeroVisualAI />
               </div>
             </div>
 
