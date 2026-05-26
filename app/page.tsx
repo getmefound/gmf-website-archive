@@ -253,7 +253,7 @@ export default function Home() {
                   <div
                     className={`group relative flex h-full flex-col overflow-hidden rounded-2xl bg-[var(--color-bg-dark-card)] ring-1 transition-all hover:-translate-y-1 hover:shadow-2xl ${
                       p.highlight
-                        ? "ring-2 ring-[var(--color-accent)] shadow-lg shadow-[var(--color-accent)]/15"
+                        ? "md:-translate-y-1 ring-2 ring-[var(--color-accent)] shadow-xl shadow-[var(--color-accent)]/20"
                         : "ring-[var(--color-hero-border)] hover:ring-[var(--color-accent)]"
                     }`}
                   >
@@ -318,7 +318,7 @@ export default function Home() {
             </div>
 
             <Reveal delay={0.18}>
-              <div className="mx-auto mt-7 grid max-w-5xl gap-5 rounded-[2rem] bg-[#0f2430] p-6 text-white ring-1 ring-white/10 md:grid-cols-[1.1fr_0.9fr] md:p-8">
+              <div className="mx-auto mt-7 grid max-w-261 gap-5 rounded-4xl bg-[#0f2430] p-6 text-white ring-1 ring-white/10 md:grid-cols-[1.1fr_0.9fr] md:p-8">
                 <div>
                   <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-sky-300">
                     {alwaysReadyCard.jobLabel}
@@ -346,20 +346,26 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className="rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:self-start md:-rotate-1">
-                  <div className="flex items-start justify-between gap-3">
+                <div className="relative overflow-hidden rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:self-start md:-rotate-1">
+                  {/* Diagonal ADVANCED ribbon */}
+                  <div aria-hidden="true" className="pointer-events-none absolute right-0 top-0 h-16 w-16 overflow-hidden rounded-tr-[1.75rem]">
+                    <div
+                      className="absolute bg-white/10 py-1 text-center font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-hero-subtext/80"
+                      style={{ width: "90px", right: "-18px", top: "18px", transform: "rotate(45deg)" }}
+                    >
+                      Advanced
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
                     <div>
                       <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-hero-subtext/60">
                         AI readiness plan
                       </p>
                       <h4 className="mt-2 text-2xl font-black text-hero-text">{alwaysReadyCard.name}</h4>
                     </div>
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-hero-subtext">
-                      Advanced
-                    </span>
                   </div>
                   <div className="mt-5 flex items-end gap-1">
-                    <span className="text-5xl font-black text-accent">{alwaysReadyCard.price}</span>
+                    <span className="text-6xl font-black text-accent">{alwaysReadyCard.price}</span>
                     <span className="pb-1 text-base font-semibold text-hero-subtext/60">{alwaysReadyCard.cadence}</span>
                   </div>
                   <Link
