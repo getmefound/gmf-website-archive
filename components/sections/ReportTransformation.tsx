@@ -1,496 +1,236 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { AuditRequestForm } from "@/components/sections/AuditRequestForm";
 
 type Finding = {
   title: string;
   detail: string;
 };
 
-type TransformationCard = {
-  title: string;
-  before: string;
-  after: string;
-  proof?: {
-    text: string;
-    href: string;
-  };
-};
-
 const BEFORE_FINDINGS: Finding[] = [
-  {
-    title: "Business hours missing",
-    detail: "Customers and search tools see an incomplete profile.",
-  },
-  {
-    title: "Website info does not match",
-    detail: "The phone and service area tell a different story.",
-  },
-  {
-    title: "Reviews are too quiet",
-    detail: "Competitors look fresher when AI tools compare options.",
-  },
-  {
-    title: "Competitor gets recommended",
-    detail: "The public signals are easier to trust somewhere else.",
-  },
+  { title: "Customers can't see when you're open", detail: "Hours missing from Google" },
+  { title: "Not enough reviews to get picked", detail: "4 reviews · AI looks for 50+" },
+  { title: "Your website tells a different story", detail: "Phone and address don't match Google" },
+  { title: "Competitors look more trustworthy", detail: "Their profile is cleaner and more complete" },
 ];
 
 const AFTER_FINDINGS: Finding[] = [
-  {
-    title: "Google profile cleaned up",
-    detail: "Hours, service area, categories, and links line up.",
-  },
-  {
-    title: "Website matches everywhere",
-    detail: "Customers see the same phone, address, and offer.",
-  },
-  {
-    title: "Review engine running",
-    detail: "New requests go out so the profile keeps moving.",
-  },
-  {
-    title: "AI-ready presence live",
-    detail: "Search tools have a clearer reason to recommend you.",
-  },
+  { title: "Business hours synced everywhere", detail: "Google, AI, and your site show the same hours" },
+  { title: "Review engine running", detail: "New review requests go out weekly, automatically" },
+  { title: "Website facts matched", detail: "Phone, address, and categories consistent everywhere" },
+  { title: "AI-ready profile live", detail: "ChatGPT and Google have clear reasons to recommend you" },
 ];
 
-const TRANSFORMATION_CARDS: TransformationCard[] = [
-  {
-    title: "Google Profile",
-    before: "Wrong hours, thin services, old photos, weak categories.",
-    after: "Clean profile, clear services, stronger trust signals.",
-  },
-  {
-    title: "Reviews",
-    before: "Happy customers leave without being asked.",
-    after: "Text and email requests go out every week.",
-    proof: {
-      text: "Twilio reports 98% SMS open rates.",
-      href: "https://www.twilio.com/en-us/solutions/text-marketing",
-    },
-  },
-  {
-    title: "Website + AI Facts",
-    before: "Website, Google, and business info do not match.",
-    after: "Google, ChatGPT, Claude, and customers see the same facts.",
-  },
-];
-
-const SAVINGS_BEFORE = [
-  "Separate website hosting bill",
-  "Separate texting or review tool",
-  "Owner chasing small updates",
-];
-
-const SAVINGS_AFTER = [
-  "Hosting included in Stay Found",
-  "Review requests included",
-  "GMF keeps the system moving",
-];
-
-function StatusIcon({ tone }: { tone: "bad" | "good" }) {
-  if (tone === "good") {
-    return (
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/15 text-[var(--color-accent)] ring-1 ring-[var(--color-accent)]/35">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
-      </span>
-    );
-  }
-
+function CheckIcon() {
   return (
-    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-error)]/12 text-[var(--color-error)] ring-1 ring-[var(--color-error)]/35">
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      >
-        <path d="M6 6l12 12M18 6 6 18" />
-      </svg>
-    </span>
+    <svg
+      viewBox="0 0 24 24"
+      className="h-3.5 w-3.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
   );
 }
 
-function ReportLayer({
-  mode,
-  score,
-  label,
-  findings,
-}: {
-  mode: "before" | "after";
-  score: number;
-  label: string;
-  findings: Finding[];
-}) {
-  const isAfter = mode === "after";
-
+function XIcon() {
   return (
-    <div
-      className={`absolute inset-0 overflow-hidden ${
-        isAfter
-          ? "bg-[linear-gradient(135deg,#f8f6f1_0%,#eef7f2_100%)]"
-          : "bg-[linear-gradient(135deg,#fff7f4_0%,#f8f6f1_100%)]"
-      }`}
+    <svg
+      viewBox="0 0 24 24"
+      className="h-3.5 w-3.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      aria-hidden="true"
     >
-      <div className="flex h-full flex-col p-4 sm:p-5 md:p-6">
-        <div className={`mb-4 flex items-center gap-4 border-b border-border pb-4 ${isAfter ? "justify-between" : ""}`}>
-          {!isAfter && (
-            <div className="shrink-0">
-              <p className="font-mono text-4xl font-black leading-none text-text-body sm:text-5xl">
-                {score}
-                <span className="text-base text-text-muted">/100</span>
-              </p>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-error">
-                {label}
-              </p>
-            </div>
-          )}
-          <div className="min-w-0">
-            <p
-              className={`font-mono text-[10px] font-bold uppercase tracking-[0.2em] ${
-                isAfter ? "text-accent" : "text-error"
-              }`}
-            >
-              Sample {mode}
-            </p>
-            <h3 className="mt-1 text-lg font-bold text-text-body sm:text-xl">
-              Local visibility report
-            </h3>
-          </div>
-          {isAfter && (
-            <div className="shrink-0 text-right">
-              <p className="font-mono text-4xl font-black leading-none text-text-body sm:text-5xl">
-                {score}
-                <span className="text-base text-text-muted">/100</span>
-              </p>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-accent">
-                {label}
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="mb-4 grid grid-cols-3 gap-2">
-          {[
-            { label: "Profile", value: isAfter ? "Fixed" : "Weak" },
-            { label: "Reviews", value: isAfter ? "Active" : "Quiet" },
-            { label: "AI search", value: isAfter ? "Clear" : "Skipped" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className={`rounded-lg border px-2 py-2 ${
-                isAfter
-                  ? "border-[var(--color-accent)]/25 bg-[var(--color-accent)]/[0.06]"
-                  : "border-[var(--color-error)]/20 bg-[var(--color-error)]/[0.05]"
-              }`}
-            >
-              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
-                {item.label}
-              </p>
-              <p className="mt-1 text-sm font-bold text-[var(--color-text-body)]">
-                {item.value}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid flex-1 gap-2 sm:gap-3">
-          {findings.map((finding) => (
-            <div
-              key={finding.title}
-              className="flex items-start gap-3 rounded-lg border border-[var(--color-border)] bg-white/72 p-3 shadow-sm"
-            >
-              <StatusIcon tone={isAfter ? "good" : "bad"} />
-              <div className="min-w-0">
-                <p className="text-sm font-bold leading-snug text-[var(--color-text-body)]">
-                  {finding.title}
-                </p>
-                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--color-text-muted)]">
-                  {finding.detail}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const browserChrome = (
-  <div className="flex items-center justify-between border-b border-border bg-(--color-bg-dark-card) px-4 py-3 text-hero-subtext">
-    <div className="flex items-center gap-2" aria-hidden="true">
-      <span className="h-2.5 w-2.5 rounded-full bg-error/80" />
-      <span className="h-2.5 w-2.5 rounded-full bg-[#d9a441]/80" />
-      <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-    </div>
-    <p className="min-w-0 flex-1 truncate px-3 text-center font-mono text-[10px] uppercase tracking-[0.18em]">
-      getmefound.ai/sample
-    </p>
-    <a
-      href="#free-audit"
-      className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent transition-opacity hover:opacity-80"
-    >
-      Get yours free →
-    </a>
-  </div>
-);
-
-const labelRow = (
-  <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] font-bold uppercase tracking-[0.08em]">
-    <span className="min-w-0 text-error">Before: unclear</span>
-    <span className="min-w-0 text-right text-accent">After: AI-ready</span>
-  </div>
-);
-
-function ComparisonSlider() {
-  const reduce = useReducedMotion();
-  const [position, setPosition] = useState(40);
-  const [focused, setFocused] = useState(false);
-  const [activeTab, setActiveTab] = useState<"before" | "after">("before");
-  const afterClip = `inset(0 0 0 ${position}%)`;
-
-  return (
-    <div className="relative min-w-0">
-      {/* ── Mobile: tab buttons (< 768px) ── */}
-      <div className="md:hidden">
-        <div className="mb-3 grid grid-cols-2 gap-2">
-          <button
-            onClick={() => setActiveTab("before")}
-            className={`rounded-xl border py-3 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
-              activeTab === "before"
-                ? "border-error/40 bg-error/10 text-error"
-                : "border-border bg-transparent text-text-muted"
-            }`}
-          >
-            Before
-          </button>
-          <button
-            onClick={() => setActiveTab("after")}
-            className={`rounded-xl border py-3 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
-              activeTab === "after"
-                ? "border-accent/40 bg-accent/10 text-accent"
-                : "border-border bg-transparent text-text-muted"
-            }`}
-          >
-            After
-          </button>
-        </div>
-
-        <div className="mx-auto aspect-4/5 w-full max-w-86 overflow-hidden rounded-2xl border border-border bg-(--color-bg-elevated) shadow-2xl shadow-(--color-bg-dark-card)/15">
-          {browserChrome}
-          <div className="relative h-[calc(100%-45px)]">
-            {activeTab === "before" ? (
-              <ReportLayer mode="before" score={23} label="INVISIBLE" findings={BEFORE_FINDINGS} />
-            ) : (
-              <ReportLayer mode="after" score={84} label="AI-READY" findings={AFTER_FINDINGS} />
-            )}
-          </div>
-        </div>
-
-        {labelRow}
-      </div>
-
-      {/* ── Desktop: drag slider (≥ 768px) ── */}
-      <div className="hidden md:block">
-        <div className="relative mx-auto aspect-16/11 w-full overflow-hidden rounded-2xl border border-border bg-(--color-bg-elevated) shadow-2xl shadow-(--color-bg-dark-card)/15">
-          {browserChrome}
-
-          <div className="relative h-[calc(100%-45px)]">
-            <ReportLayer mode="before" score={23} label="INVISIBLE" findings={BEFORE_FINDINGS} />
-
-            <motion.div
-              className="absolute inset-0 overflow-hidden"
-              style={{ clipPath: afterClip }}
-              animate={reduce ? undefined : { clipPath: afterClip }}
-              transition={{ duration: 0.12, ease: "easeOut" }}
-            >
-              <ReportLayer mode="after" score={84} label="AI-READY" findings={AFTER_FINDINGS} />
-            </motion.div>
-
-            <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 z-20 flex -translate-x-1/2 items-center"
-              style={{ left: `${position}%` }}
-              animate={reduce ? undefined : { left: `${position}%` }}
-              transition={{ duration: 0.12, ease: "easeOut" }}
-            >
-              <span className="h-full w-px bg-white shadow-[0_0_0_1px_rgba(10,22,40,0.28),0_0_18px_rgba(10,22,40,0.18)]" />
-              <span
-                className={`absolute left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-(--color-bg-dark-card) text-(--color-hero-text) shadow-xl ring-1 ring-white/20 ${
-                  focused ? "outline-2 outline-offset-2 outline-accent" : ""
-                }`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
-                </svg>
-              </span>
-            </motion.div>
-
-            <input
-              type="range"
-              min={8}
-              max={92}
-              value={position}
-              onChange={(event) => setPosition(Number(event.target.value))}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              aria-label="Slide between the sample before report and after report"
-              className="absolute inset-0 z-30 h-full w-full cursor-ew-resize opacity-0"
-            />
-          </div>
-        </div>
-
-        {labelRow}
-      </div>
-    </div>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
   );
 }
 
 export function ReportTransformation() {
+  const [tab, setTab] = useState<"before" | "after">("before");
+  const isAfter = tab === "after";
+
+  const pct = isAfter ? 89 : 12;
+  const filledBars = isAfter ? 5 : 1;
+  const findings = isAfter ? AFTER_FINDINGS : BEFORE_FINDINGS;
+
   return (
     <section
-      aria-label="See how your local visibility changes before and after GetMeFound"
-      className="overflow-hidden border-y border-[var(--color-border)] bg-[var(--color-bg-elevated)] py-14 md:py-20"
+      aria-label="Sample visibility report"
+      className="overflow-hidden border-y border-border bg-(--color-bg-elevated) py-14 md:py-20"
     >
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:items-center md:gap-14">
-        <div className="min-w-0">
-          <ComparisonSlider />
-        </div>
-
-        <div id="free-audit" className="min-w-0 md:pl-2">
-          <AuditRequestForm />
-        </div>
-      </div>
-
-      <div className="mx-auto mt-14 w-full max-w-6xl px-6 md:mt-16">
-        <div className="mb-7 max-w-3xl">
-          <p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            What actually changes
+      <div className="mx-auto w-full max-w-xl px-6">
+        <div className="mb-8 text-center">
+          <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            Sample report
           </p>
-          <h3 className="text-2xl font-bold leading-tight text-[var(--color-text-body)] md:text-4xl">
-            From scattered online presence to a system that keeps you found.
-          </h3>
-          <p className="mt-4 text-base leading-relaxed text-[var(--color-text-muted)] md:text-lg">
-            Most local businesses do not need another dashboard. They need their Google profile, reviews, website, and business facts cleaned up, connected, and maintained.
-          </p>
+          <h2 className="text-2xl font-bold leading-tight text-text-body md:text-3xl">
+            See exactly what your visibility looks like — and what gets fixed.
+          </h2>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
-          {TRANSFORMATION_CARDS.map((card) => (
-            <div
-              key={card.title}
-              className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-page)] p-5 shadow-sm"
+        {/* Browser chrome card */}
+        <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+          {/* Browser bar */}
+          <div className="flex items-center justify-between border-b border-border bg-(--color-bg-dark-card) px-4 py-3">
+            <div className="flex items-center gap-2" aria-hidden="true">
+              <span className="h-2.5 w-2.5 rounded-full bg-error/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#d9a441]/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-accent" />
+            </div>
+            <p className="min-w-0 flex-1 truncate px-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-(--color-hero-text)">
+              getmefound.ai/sample
+            </p>
+            <a
+              href="/report/ai-visibility"
+              className="shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-accent transition-opacity hover:opacity-80"
             >
-              <h4 className="text-lg font-bold text-[var(--color-text-body)]">
-                {card.title}
-              </h4>
+              Get yours free →
+            </a>
+          </div>
 
-              <div className="mt-5 grid gap-3">
-                <div className="rounded-xl border border-[var(--color-error)]/20 bg-[var(--color-error)]/[0.04] p-4">
-                  <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--color-error)]">
-                    Before
-                  </p>
-                  <div className="flex gap-3">
-                    <StatusIcon tone="bad" />
-                    <p className="text-sm leading-relaxed text-[var(--color-text-body)]">
-                      {card.before}
-                    </p>
-                  </div>
-                </div>
+          {/* Report content — light background simulating a real report page */}
+          <div className="bg-[#f9f8f5] p-5 sm:p-6">
+            {/* Business header */}
+            <div className="mb-5 flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-[#111] sm:text-lg">
+                  Green Valley Lawn Care
+                </h3>
+                <p className="mt-0.5 text-xs text-[#666] sm:text-sm">
+                  Southington, CT 06489 · Lawn &amp; Landscape Services
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full border border-error/30 bg-error/10 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-error">
+                Sample
+              </span>
+            </div>
 
-                <div className="rounded-xl border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/[0.06] p-4">
-                  <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
-                    After
-                  </p>
-                  <div className="flex gap-3">
-                    <StatusIcon tone="good" />
-                    <div>
-                      <p className="text-sm leading-relaxed text-[var(--color-text-body)]">
-                        {card.after}
-                      </p>
-                      {card.proof && (
-                        <a
-                          href={card.proof.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-3 inline-flex text-xs font-semibold leading-5 text-[var(--color-accent)] underline decoration-[var(--color-accent)]/35 underline-offset-4 transition hover:text-[var(--color-accent-hover)]"
-                        >
-                          {card.proof.text}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
+            {/* BEFORE / AFTER tabs */}
+            <div className="mb-5 grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setTab("before")}
+                className={`rounded-xl border py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
+                  !isAfter
+                    ? "border-error/40 bg-error/10 text-error"
+                    : "border-black/10 bg-transparent text-[#888]"
+                }`}
+              >
+                Before
+              </button>
+              <button
+                onClick={() => setTab("after")}
+                className={`rounded-xl border py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
+                  isAfter
+                    ? "border-accent/40 bg-accent/10 text-accent"
+                    : "border-black/10 bg-transparent text-[#888]"
+                }`}
+              >
+                After
+              </button>
+            </div>
+
+            {/* Likelihood card */}
+            <div className="rounded-2xl border border-black/8 bg-white p-4 shadow-sm sm:p-5">
+              <p className="mb-3 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#999]">
+                Likelihood of being found by customers
+              </p>
+
+              <div className="mb-4 flex items-end gap-3">
+                <p
+                  className={`font-mono text-5xl font-black leading-none sm:text-6xl ${
+                    isAfter ? "text-accent" : "text-error"
+                  }`}
+                >
+                  {pct}%
+                </p>
+                <p className="mb-1 text-xs leading-relaxed text-[#555] sm:text-sm">
+                  {isAfter
+                    ? "Google and AI are actively recommending Green Valley Lawn Care to customers in Southington."
+                    : "Customers searching Southington are finding your competitors — not you."}
+                </p>
+              </div>
+
+              {/* Main progress bar */}
+              <div className="mb-2.5 h-2.5 overflow-hidden rounded-full bg-black/8">
+                <div
+                  className={`h-full rounded-full transition-all duration-700 ease-out ${
+                    isAfter ? "bg-accent" : "bg-error"
+                  }`}
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+
+              {/* 5 signal segment bars */}
+              <div className="mb-4 flex gap-1" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${
+                      i < filledBars
+                        ? isAfter
+                          ? "bg-accent"
+                          : "bg-error"
+                        : "bg-black/10"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Status pill */}
+              <div
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold ${
+                  isAfter ? "bg-accent/10 text-accent" : "bg-error/10 text-error"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${isAfter ? "bg-accent" : "bg-error"}`}
+                  aria-hidden="true"
+                />
+                {isAfter
+                  ? "Being recommended by Google and AI"
+                  : "Not being recommended by Google or AI"}
               </div>
             </div>
-          ))}
-        </div>
 
-        <div className="mt-5 grid gap-4 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-dark-card)] p-5 text-[var(--color-hero-text)] md:grid-cols-3 md:p-6">
-          <div className="md:pr-4">
-            <p className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-              Stay Found savings
-            </p>
-            <h4 className="text-xl font-bold leading-tight">
-              The $99/mo plan should remove friction, not add it.
-            </h4>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-            <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-red-200">
-              Before
-            </p>
-            <ul className="space-y-2">
-              {SAVINGS_BEFORE.map((item) => (
-                <li key={item} className="flex gap-2 text-sm leading-relaxed text-white/72">
-                  <span aria-hidden="true" className="mt-0.5 text-red-200">x</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-xl border border-[var(--color-accent)]/35 bg-[var(--color-accent)]/[0.10] p-4">
-            <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
-              After
-            </p>
-            <ul className="space-y-2">
-              {SAVINGS_AFTER.map((item) => (
-                <li key={item} className="flex gap-2 text-sm leading-relaxed text-white/82">
-                  <span aria-hidden="true" className="mt-0.5 text-[var(--color-accent)]">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 border-t border-white/10 pt-3 text-xs leading-5 text-white/58">
-              Hosting can replace a separate website bill after the GMF-hosted site is live and checked.
-            </p>
+            {/* Findings */}
+            <div className="mt-4">
+              <p className="mb-2.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#999]">
+                {isAfter ? "What we fixed" : "What's holding you back"}
+              </p>
+              <div className="space-y-2">
+                {findings.map((f) => (
+                  <div
+                    key={f.title}
+                    className="flex items-start gap-3 rounded-xl border border-black/8 bg-white p-3 shadow-sm"
+                  >
+                    <span
+                      className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+                        isAfter
+                          ? "bg-accent/10 text-accent ring-1 ring-accent/25"
+                          : "bg-error/10 text-error ring-1 ring-error/25"
+                      }`}
+                    >
+                      {isAfter ? <CheckIcon /> : <XIcon />}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-snug text-[#111]">
+                        {f.title}
+                      </p>
+                      <p className="mt-0.5 text-xs text-[#777]">{f.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
