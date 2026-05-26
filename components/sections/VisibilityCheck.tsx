@@ -293,10 +293,15 @@ export function VisibilityCheck() {
           >
             {/* Card top row */}
             <div className="mb-4 flex items-center justify-between">
-              <span
-                className="h-2 w-2 rounded-full shrink-0"
-                style={{ background: "#3fae7e", boxShadow: "0 0 6px #3fae7e80" }}
-              />
+              <div className="flex items-center gap-2">
+                <span
+                  className="h-2 w-2 rounded-full shrink-0"
+                  style={{ background: "#3fae7e", boxShadow: "0 0 6px #3fae7e80" }}
+                />
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#3fae7e" }}>
+                  Visibility Check
+                </span>
+              </div>
               <span className="font-mono text-[11px]" style={{ color: "#6b7f9a" }}>
                 {String(current + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
               </span>
