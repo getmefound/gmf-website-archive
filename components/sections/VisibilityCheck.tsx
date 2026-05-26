@@ -310,6 +310,10 @@ export function VisibilityCheck() {
               </span>
             </div>
 
+            <p className="truncate text-xs mb-1.5" style={{ color: "#6b7f9a" }}>
+              Miss any of these and AI skips you.
+            </p>
+
             {/* Slide area */}
             <div
               aria-live="polite"
