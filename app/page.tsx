@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { FAQ } from "@/components/sections/FAQ";
 import { ReportTransformation } from "@/components/sections/ReportTransformation";
+import { TrustCards } from "@/components/sections/TrustCards";
 import { VisibilityCheck } from "@/components/sections/VisibilityCheck";
 import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/ui/Spotlight";
@@ -224,6 +225,8 @@ export default function Home() {
         </section>
 
         <ReportTransformation />
+
+        <TrustCards />
 
         <VisibilityCheck />
 
