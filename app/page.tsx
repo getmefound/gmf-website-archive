@@ -354,20 +354,15 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className="relative overflow-hidden rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:self-start md:-rotate-1">
-                  {/* Diagonal ribbon */}
-                  <div aria-hidden="true" className="pointer-events-none absolute right-0 top-0 h-24 w-24 overflow-hidden rounded-tr-[1.75rem]">
-                    <div
-                      className="absolute bg-white/10 py-1 text-center font-mono text-[7px] font-bold uppercase tracking-widest text-hero-subtext/80"
-                      style={{ width: "100px", right: "-4px", top: "36px", transform: "rotate(45deg)" }}
-                    >
-                      Most Complete
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div>
-                      <h4 className="text-2xl font-black text-hero-text">{alwaysReadyCard.name}</h4>
-                    </div>
+                <div className="rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:self-start md:-rotate-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <h4 className="text-2xl font-black text-hero-text">{alwaysReadyCard.name}</h4>
+                    <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 ring-1 ring-accent/40">
+                      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                        Most Complete
+                      </span>
+                    </span>
                   </div>
                   <div className="mt-5 flex items-end gap-1">
                     <span className="text-6xl font-black text-accent">{alwaysReadyCard.price}</span>
