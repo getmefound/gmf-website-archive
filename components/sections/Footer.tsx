@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const services = [
-  { href: "/get-found", label: "Get Found" },
-  { href: "/stay-found", label: "Stay Found" },
-  { href: "/always-ready", label: "Always Ready" },
+  { href: "/pricing#get-found", label: "Get Found" },
+  { href: "/pricing#stay-found", label: "Stay Found" },
+  { href: "/pricing#always-ready", label: "Always Ready" },
   { href: "/calculator", label: "Revenue Potential" },
 ];
 
@@ -45,6 +45,7 @@ export function Footer() {
   ) return null;
   const isSpanish = pathname === "/es" || pathname.startsWith("/es/");
   const withLocale = (path: string) => {
+    if (path.startsWith("/pricing#")) return path;
     if (!isSpanish) return path;
     if (path === "/") return "/es";
     if (path === "/#faq") return "/es#faq";
