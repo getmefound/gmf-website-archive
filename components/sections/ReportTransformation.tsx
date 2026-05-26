@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AuditRequestForm } from "@/components/sections/AuditRequestForm";
 
 type Finding = {
   title: string;
@@ -67,15 +68,9 @@ export function ReportTransformation() {
       aria-label="Sample visibility report"
       className="overflow-hidden border-y border-border bg-(--color-bg-elevated) py-14 md:py-20"
     >
-      <div className="mx-auto w-full max-w-xl px-6">
-        <div className="mb-8 text-center">
-          <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent">
-            Sample report
-          </p>
-          <h2 className="text-2xl font-bold leading-tight text-text-body md:text-3xl">
-            See exactly what your visibility looks like — and what gets fixed.
-          </h2>
-        </div>
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:items-center md:gap-14">
+        {/* Left: sample report card */}
+        <div className="min-w-0">
 
         {/* Browser chrome card */}
         <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
@@ -90,7 +85,7 @@ export function ReportTransformation() {
               getmefound.ai/sample
             </p>
             <a
-              href="/report/ai-visibility"
+              href="#free-audit"
               className="shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-accent transition-opacity hover:opacity-80"
             >
               Get yours free →
@@ -232,6 +227,13 @@ export function ReportTransformation() {
               </div>
             </div>
           </div>
+        </div>
+
+        </div>{/* end left column */}
+
+        {/* Right: audit request form */}
+        <div id="free-audit" className="min-w-0 md:pl-2">
+          <AuditRequestForm />
         </div>
       </div>
     </section>
