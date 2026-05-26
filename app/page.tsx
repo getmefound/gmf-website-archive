@@ -51,8 +51,8 @@ const teaserCards: TeaserCard[] = [
       "Profile details, categories, and review path set up",
       "Before-and-after visibility snapshot",
     ],
-    href: "/pricing#get-found-refresh",
-    cta: "See what's included",
+    href: "/checkout/get-found-refresh",
+    cta: "Get Found for $149",
     iconPaths: ICON_PATHS.search,
     jobLabel: "Get Found",
   },
@@ -269,7 +269,7 @@ export default function Home() {
                             <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--color-accent)]/15 px-3 py-1 ring-1 ring-[var(--color-accent)]/40">
                               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
                               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                                Most popular
+                                Best Value
                               </span>
                             </span>
                           )}
@@ -346,25 +346,25 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className="rounded-[1.75rem] bg-amber-300 p-5 text-slate-950 shadow-2xl shadow-black/25 md:-rotate-1">
+                <div className="rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:-rotate-1">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-slate-700">
+                      <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-hero-subtext/60">
                         AI readiness plan
                       </p>
-                      <h4 className="mt-2 text-2xl font-black">{alwaysReadyCard.name}</h4>
+                      <h4 className="mt-2 text-2xl font-black text-hero-text">{alwaysReadyCard.name}</h4>
                     </div>
-                    <span className="rounded-full bg-slate-950 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-amber-200">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-hero-subtext">
                       Advanced
                     </span>
                   </div>
                   <div className="mt-5 flex items-end gap-1">
-                    <span className="text-5xl font-black">{alwaysReadyCard.price}</span>
-                    <span className="pb-1 text-base font-semibold text-slate-700">{alwaysReadyCard.cadence}</span>
+                    <span className="text-5xl font-black text-accent">{alwaysReadyCard.price}</span>
+                    <span className="pb-1 text-base font-semibold text-hero-subtext/60">{alwaysReadyCard.cadence}</span>
                   </div>
                   <Link
                     href={alwaysReadyCard.href}
-                    className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
+                    className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-accent px-5 py-3 text-sm font-bold text-(--color-accent-text) transition hover:bg-(--color-accent-hover)"
                   >
                     {alwaysReadyCard.cta}
                   </Link>
