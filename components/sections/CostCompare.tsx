@@ -8,29 +8,27 @@ type Row = {
   need: string;
   diyTool: string;
   diySub?: string;
-  diyCost: string;
+  diyCost?: string;
 };
 
 const ROWS: Row[] = [
   {
     need: "Get more reviews — automatic",
-    diyTool: "Birdeye",
-    diySub: "Standard plan",
+    diyTool: "Birdeye Growth plan",
+    diySub: "per location, annual contract required.",
     diyCost: "$349/mo",
   },
   {
-    need: "Rank higher in Google + Maps",
+    need: "Keep your listings consistent everywhere AI checks",
     diyTool: "Yext or BrightLocal",
     diyCost: "$37–$39/mo",
   },
   {
     need: "Get found in ChatGPT + AI search",
-    diyTool: "Profound Starter",
-    diySub: "ChatGPT only — Gemini & Claude cost more",
-    diyCost: "$99/mo",
+    diyTool: "No single tool handles this — requires separate setup and management, $200+/mo estimated.",
   },
   {
-    need: "Someone to run it all",
+    need: "Done for you — no hiring needed",
     diyTool: "Marketing assistant or VA",
     diyCost: "$1,000+/mo",
   },
@@ -182,9 +180,11 @@ export function CostCompare() {
                       {row.diySub}
                     </p>
                   )}
-                  <p className="mt-2 font-mono text-sm font-bold text-[var(--color-hero-text)]">
-                    {row.diyCost}
-                  </p>
+                  {row.diyCost && (
+                    <p className="mt-2 font-mono text-sm font-bold text-(--color-hero-text)">
+                      {row.diyCost}
+                    </p>
+                  )}
                 </div>
                 <div className="rounded-xl bg-[var(--color-accent)]/10 p-3 ring-1 ring-[var(--color-accent)]/30 flex flex-col items-center justify-center">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-hero-text)] mb-2">
@@ -321,9 +321,11 @@ export function CostCompare() {
                     {row.diySub}
                   </p>
                 )}
-                <p className="mt-1.5 font-mono text-sm font-bold text-[var(--color-hero-text)]">
-                  {row.diyCost}
-                </p>
+                {row.diyCost && (
+                  <p className="mt-1.5 font-mono text-sm font-bold text-(--color-hero-text)">
+                    {row.diyCost}
+                  </p>
+                )}
               </div>
               <div className="px-6 py-5 flex items-center justify-center border-l border-white/[0.06] bg-[var(--color-accent)]/[0.06]">
                 <AnimatedCheck delay={0.9 + i * 0.25} />

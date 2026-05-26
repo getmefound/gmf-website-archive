@@ -387,17 +387,26 @@ export default function Home() {
                 See full plan details
                 <span aria-hidden="true">→</span>
               </Link>
+              <p className="mt-2 text-xs text-[var(--color-text-muted)]">
+                Not sure what invisibility is costing you?{" "}
+                <Link
+                  href="/calculator"
+                  className="font-semibold text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+                >
+                  Calculate your monthly loss →
+                </Link>
+              </p>
             </div>
           </div>
         </section>
+
+        <CostCompare />
 
         <HomepageFAQ />
 
         <section id="calculator" className="scroll-mt-24">
           <RevenueCalculator />
         </section>
-
-        <CostCompare />
 
         <SocialProof />
 
