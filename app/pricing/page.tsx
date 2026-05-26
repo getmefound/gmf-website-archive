@@ -11,7 +11,7 @@ import { MockRelayPanel } from "@/components/ui/MockRelayPanel";
 import { pageBreadcrumbs } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Plans & Pricing — GetMeFound · From $149",
   description:
     "Done-for-you Google visibility, reviews, and AI search presence for local businesses. Get Found, Stay Found, and Always Ready.",
   alternates: { canonical: "/pricing" },
@@ -36,11 +36,10 @@ const products: ProductDetailData[] = [
       { label: "Contract", value: "None" },
     ],
     whatYouGet: [
-      "Full Google Business Profile audit and optimization plan",
-      "Name, address, phone, website, category, hours, and services checked",
-      "Website trust markup plan or developer handoff",
-      "AI search visibility baseline report",
-      "First email review request campaign setup after approval",
+      "We fix your Google listing — hours, services, photos, everything",
+      "We make your website match your Google listing exactly",
+      "Your first review requests go out to past customers automatically",
+      "Before/after snapshot showing how Google and AI see your business",
       "30-minute onboarding call",
     ],
     useThisIf: [
@@ -71,7 +70,7 @@ const products: ProductDetailData[] = [
     name: "Stay Found",
     outcome: "Keep your listing, reviews, and AI-ready business facts moving every month.",
     story:
-      "Stay Found is the preferred monthly plan. Everything in Get Found is included free, then GMF keeps the review request system, Google profile, and business facts current so Google, ChatGPT, Claude, and customers see the same clear story.",
+      "Stay Found is the preferred monthly plan. Everything in Get Found is included free, then GetMeFound keeps the review request system, Google profile, and business facts current so Google, ChatGPT, Claude, and customers see the same clear story.",
     stats: [
       { label: "Setup", value: "$199" },
       { label: "Reviews", value: "Text + email" },
@@ -81,12 +80,12 @@ const products: ProductDetailData[] = [
       "Everything in Get Found - free",
       "Weekly client list upload path for review requests",
       "Text and email review request campaigns after phone-number approval",
-      "Text-message setup handled by GMF so you do not need another review-text tool",
+      "Text-message setup handled by our team — no extra tool needed",
       "AI response drafts in the client's brand voice",
       "Negative review alert and suggested response target within 4 business hours",
       "One weekly Google Business Profile post",
       "Review monitoring across platforms where available",
-      "Monthly sentiment, citation, and visibility report",
+      "Monthly report showing your reviews, directory listings, and visibility progress",
     ],
     useThisIf: [
       "You do not want your Google profile to decay after the first cleanup.",
@@ -95,11 +94,11 @@ const products: ProductDetailData[] = [
       "You want AI reply drafts without risky auto-posting.",
     ],
     setupSteps: [
-      { title: "Baseline", sub: "We start from Get Found or a fresh audit." },
+      { title: "Baseline", sub: "We start from Get Found or a fresh profile review." },
       { title: "Texting setup", sub: "We handle phone-number approval, opt-out language, and the customer-list workflow before texts go live." },
       { title: "Keep moving", sub: "Requests, profile content, and owner recaps stay active." },
     ],
-    cadence: "Weekly upkeep with review request campaigns and a monthly owner recap. Urgent profile issues escalate to the GMF team.",
+    cadence: "Weekly upkeep with review request campaigns and a monthly owner recap. Urgent profile issues escalate to our team.",
     crossSell: { label: "Always Ready - add AI voice readiness", href: "#always-ready" },
     price: "$99",
     cadenceLabel: "/mo",
@@ -140,7 +139,7 @@ const jobGroupCopy: Record<JobKey, { index: string; label: string; intro: string
     index: "Step 1 of 3",
     label: "Get found.",
     intro:
-      "Google Search is changing. We clean up the public footprint first so customers, Google, and AI assistants see the right business.",
+      "Google Search is changing. We fix the public details first so customers, Google, and AI assistants see the right business.",
   },
   "stay-found": {
     index: "Step 2 of 3",
@@ -165,7 +164,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400 bg-gray-800 px-3 py-1 text-xs font-semibold text-white">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-            Launch pricing for local businesses
+            $149 one-time · No contract
           </div>
 
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
@@ -181,12 +180,12 @@ export default function PricingPage() {
             </span>
           </h1>
           <p className="mt-5 max-w-[21.5rem] text-lg leading-relaxed text-[var(--color-hero-subtext)] sm:max-w-2xl md:text-xl">
-            GMF helps local businesses get found on Google, stay current for AI assistants like ChatGPT and Claude, and turn happy customers into stronger review proof. Start small. Add only what is worth keeping.
+            GetMeFound helps local businesses get found on Google, stay current for AI assistants like ChatGPT and Claude, and turn happy customers into stronger review proof. Start small. Add only what is worth keeping.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
-              href="/contact"
+              href="/checkout/get-found-refresh"
               className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-colors"
             >
               Start with a refresh
@@ -194,7 +193,7 @@ export default function PricingPage() {
             </Link>
             <span className="inline-flex items-center gap-1.5 text-xs text-gray-400">
               <span aria-hidden="true" className="h-1 w-1 rounded-full bg-green-400" />
-              No long contract
+              No contract
             </span>
           </div>
         </div>
@@ -206,7 +205,7 @@ export default function PricingPage() {
             <Reveal delay={0.05}>
               <div className="mb-6 max-w-3xl">
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-body)] mb-3">
-                  Start with the lowest-risk fix.
+                  Pick the level that fits where you are.
                 </h2>
                 <p className="text-base md:text-lg text-[var(--color-text-muted)] leading-relaxed">
                   A local business does not need another complicated platform first. It needs the Google-facing basics right, the same facts ready for AI assistants, a review path that runs, and a clear owner recap.
@@ -218,14 +217,14 @@ export default function PricingPage() {
               <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { value: "$149", label: "Get Found setup", border: "border-t-green-500", text: "text-green-500" },
-                  { value: "$99/mo", label: "Stay Found", border: "border-t-amber-500", text: "text-amber-500" },
+                  { value: "$99/mo · $199 setup", label: "Stay Found", border: "border-t-amber-500", text: "text-amber-500" },
                   { value: "$299/mo", label: "Always Ready", border: "border-t-sky-500", text: "text-sky-600" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
                     className={`rounded-2xl border border-[var(--color-border)] border-t-[3px] ${stat.border} bg-[var(--color-bg-elevated)] px-5 py-5 text-center`}
                   >
-                    <p className={`font-mono text-xs uppercase tracking-[0.2em] mb-1 ${stat.text}`}>
+                    <p className={`font-mono text-xs mb-1 ${stat.text}`}>
                       {stat.value}
                     </p>
                     <p className="text-sm text-[var(--color-text-muted)]">{stat.label}</p>
@@ -255,11 +254,11 @@ export default function PricingPage() {
                 </div>
 
                 <p className="text-base md:text-lg text-white/80 leading-relaxed mb-7 max-w-2xl">
-                  We clean up the obvious visibility issues first. If Stay Found or Always Ready makes sense after that, you will know why.
+                  We fix the Google profile, website match, and review path first. Monthly plans add review management and AI visibility — you only add what you actually need.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <Link
-                    href="/contact"
+                    href="/checkout/get-found-refresh"
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 hover:bg-green-500 text-white px-6 py-3.5 text-sm font-semibold transition-all hover:gap-3 hover:shadow-lg hover:shadow-green-600/30"
                   >
                     Start Get Found
@@ -269,7 +268,7 @@ export default function PricingPage() {
                     href="#get-found-refresh"
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-white/80 transition-colors"
                   >
-                    See GMF services
+                    See how it works
                     <span aria-hidden="true">v</span>
                   </Link>
                 </div>
@@ -427,7 +426,7 @@ export default function PricingPage() {
                   </div>
 
                   <p className="mb-5 text-sm leading-6 text-slate-700">
-                    For owners who want GMF to manage reputation, visibility, content, and AI call readiness together.
+                    For owners who want our team to manage reputation, visibility, content, and AI call readiness together.
                   </p>
 
                   <div className="grid gap-2 text-sm">
@@ -458,6 +457,15 @@ export default function PricingPage() {
                 <div className="rounded-3xl bg-white/[0.05] p-5 ring-1 ring-white/10">
                   <MockRelayPanel />
                 </div>
+                <p className="text-center text-sm text-white/55">
+                  Not ready for Always Ready?{" "}
+                  <Link
+                    href="/checkout/get-found-refresh"
+                    className="font-semibold text-sky-200 underline decoration-sky-200/45 underline-offset-4 transition hover:text-white"
+                  >
+                    Start with Get Found for $149 -&gt;
+                  </Link>
+                </p>
               </div>
             </Reveal>
           </div>
@@ -466,6 +474,7 @@ export default function PricingPage() {
         <CtaBlock
           headline="Not sure where to start?"
           subline="Start with Get Found. It gives the business a clear visibility baseline before you add monthly upkeep, review requests, AI reply drafts, or voice readiness."
+          buttonHref="/report/ai-visibility"
         />
       </PageBody>
       <BackToTopButton />

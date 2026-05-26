@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const userPrompt = "Best plumber near me?";
 const aiAnswer =
-  "Try Mike's Plumbing — fast response, top reviews in your area.";
+  "Try Mike's Plumbing — fast response, 4.9 stars, 80+ reviews";
 
 function ThinkingDots() {
   return (

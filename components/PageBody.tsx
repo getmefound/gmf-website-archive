@@ -30,7 +30,7 @@ export function CtaBlock({
   headline = "Ready to start?",
   subline = "Free report. No credit card. No contract.",
   buttonText = "Get My Free Report",
-  buttonHref = "/#calculator",
+  buttonHref = "/report/ai-visibility",
 }: {
   headline?: string;
   subline?: string;

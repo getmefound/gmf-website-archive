@@ -62,11 +62,17 @@ export function ProductDetail({
   const cardBg = dark
     ? "bg-white/[0.04] ring-1 ring-white/10"
     : "bg-[var(--color-bg-elevated)] ring-1 ring-[var(--color-border)]";
+  const sectionPadding = dark
+    ? "pt-12 pb-8 md:pt-14 md:pb-10"
+    : "py-14 md:py-16";
+  const visualColumnClass = dark
+    ? "space-y-6 flex h-full flex-col lg:order-1 lg:self-stretch"
+    : "space-y-6 lg:sticky lg:top-32";
 
   return (
     <section
       id={data.slug}
-      className={`relative scroll-mt-32 overflow-hidden py-14 md:py-16 ${sectionBg}`}
+      className={`relative scroll-mt-32 overflow-hidden ${sectionPadding} ${sectionBg}`}
     >
       {dark && <BackgroundBeams />}
 
@@ -81,7 +87,7 @@ export function ProductDetail({
           {data.number}
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-stretch lg:gap-16">
           {/* Text content (order flips on dark variants → mock-left, text-right) */}
           <div className={dark ? "lg:order-2" : ""}>
             <div className="mb-5 flex items-center gap-3">
@@ -218,7 +224,7 @@ export function ProductDetail({
           </div>
 
           {/* Visual + setup + price recap (flips to lg:order-1 on dark variants → mock-left) */}
-          <div className={`space-y-6 lg:sticky lg:top-32 ${dark ? "lg:order-1" : ""}`}>
+          <div className={visualColumnClass}>
             {/* Visual panel */}
             <div className="relative rounded-2xl bg-[var(--color-bg-dark-card)] p-6 ring-1 ring-[var(--color-hero-border)] overflow-hidden">
               <div className="relative z-10">{data.mock}</div>
@@ -261,26 +267,26 @@ export function ProductDetail({
               <p className={`mt-4 border-t pt-3 text-xs ${subText} ${
                 dark ? "border-white/10" : "border-[var(--color-border)]"
               }`}>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent)] mr-1.5">Cadence</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent)] mr-1.5">TIMELINE</span>
                 {data.cadence}
               </p>
             </div>
 
             {/* Price recap */}
             <div
-              className={`rounded-2xl p-6 ${
+              className={`rounded-2xl p-6 pb-8 ${
                 dark
-                  ? "bg-[var(--color-accent)] text-[var(--color-accent-text)]"
+                  ? "bg-[var(--color-accent)] text-[var(--color-accent-text)] lg:flex-1"
                   : "bg-[var(--color-bg-dark-card)] text-[var(--color-hero-text)] ring-1 ring-[var(--color-hero-border)]"
               }`}
             >
-              <div className="mb-4 flex items-baseline gap-1">
+              <div className="mb-4 flex flex-wrap items-baseline gap-1">
                 <span className="text-4xl font-bold">{data.price}</span>
                 <span className={`text-base ${dark ? "" : "text-[var(--color-hero-subtext)]"}`}>
                   {data.cadenceLabel}
                 </span>
                 <span
-                  className={`ml-auto text-xs ${
+                  className={`ml-auto whitespace-nowrap text-xs ${
                     dark ? "text-[var(--color-accent-text)]/80" : "text-[var(--color-hero-subtext)]"
                   }`}
                 >
