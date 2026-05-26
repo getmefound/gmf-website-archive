@@ -227,7 +227,7 @@ function ReportLayer({
 
 function ComparisonSlider() {
   const reduce = useReducedMotion();
-  const [position, setPosition] = useState(54);
+  const [position, setPosition] = useState(40);
   const [focused, setFocused] = useState(false);
   const afterClip = `inset(0 0 0 ${position}%)`;
 
