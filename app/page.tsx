@@ -83,7 +83,7 @@ const teaserCards: TeaserCard[] = [
       "Monthly strategy call and AI answer visibility check",
     ],
     href: "/pricing#always-ready",
-    cta: "Always ready",
+    cta: "Get Always Ready",
     iconPaths: ICON_PATHS.phone,
     jobLabel: "Always Ready",
   },
@@ -355,11 +355,11 @@ export default function Home() {
                 </div>
 
                 <div className="relative overflow-hidden rounded-[1.75rem] bg-(--color-bg-dark-card) p-5 ring-1 ring-white/10 shadow-2xl shadow-black/25 md:self-start md:-rotate-1">
-                  {/* Diagonal ADVANCED ribbon */}
-                  <div aria-hidden="true" className="pointer-events-none absolute right-0 top-0 h-16 w-16 overflow-hidden rounded-tr-[1.75rem]">
+                  {/* Diagonal ribbon */}
+                  <div aria-hidden="true" className="pointer-events-none absolute right-0 top-0 h-24 w-24 overflow-hidden rounded-tr-[1.75rem]">
                     <div
-                      className="absolute bg-white/10 py-1 text-center font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-hero-subtext/80"
-                      style={{ width: "90px", right: "-18px", top: "18px", transform: "rotate(45deg)" }}
+                      className="absolute bg-white/10 py-1 text-center font-mono text-[7px] font-bold uppercase tracking-widest text-hero-subtext/80"
+                      style={{ width: "100px", right: "-4px", top: "36px", transform: "rotate(45deg)" }}
                     >
                       Most Complete
                     </div>
@@ -378,6 +378,7 @@ export default function Home() {
                     className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-accent px-5 py-3 text-sm font-bold text-(--color-accent-text) transition hover:bg-(--color-accent-hover)"
                   >
                     {alwaysReadyCard.cta}
+                    <span aria-hidden="true"> →</span>
                   </Link>
                 </div>
               </div>
