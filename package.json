@@ -32,6 +32,7 @@
     "smartlead:create-campaign-draft": "node scripts/smartlead-create-campaign-draft.mjs",
     "smartlead:readiness": "node scripts/smartlead-readiness.mjs",
     "smartlead:warmup-report": "node scripts/smartlead-warmup-report.mjs",
+    "prospecting:preflight": "node scripts/prospecting-smartlead-preflight.mjs",
     "ghl:smoke-97": "node scripts/ghl-post-downgrade-smoke.mjs",
     "review:storage-check": "node scripts/review-storage-check.mjs",
     "review:send-smoke": "node scripts/review-send-smoke.mjs",

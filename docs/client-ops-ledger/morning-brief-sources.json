@@ -4,7 +4,7 @@
     "owner": "Mike",
     "primaryChannel": "#04-aoh-ops",
     "targetTimeEastern": "7:45 AM",
-    "dmPolicy": "one short daily owner brief plus urgent exceptions only"
+    "dmPolicy": "no proactive Manager DM unless human approval, access, spend, risk, or an agent-unclearable blocker is required"
   },
   "newsSources": [
     {

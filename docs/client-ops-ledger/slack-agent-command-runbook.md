@@ -60,7 +60,17 @@ Use `Manager, owner peek` for the owner-level view:
 - GitHub/ledger/outbox are proof logs for audits and debugging.
 - Automatic Manager DMs are not wired yet.
 
-Recommended DM policy: one short daily owner brief plus urgent exceptions only. Do not DM every agent action.
+Recommended DM policy: no proactive Manager DM unless human involvement is required. Routine progress goes to Mission Control, Monday, proof reports, or on-demand Slack commands.
+
+Manager may interrupt Mike only for:
+
+- approval before live prospect/client action
+- spend or cap increase
+- broken account/API access
+- legal, billing, deliverability, reputation, or customer-facing risk
+- a blocker agents cannot clear themselves
+
+Do not DM every agent action.
 
 ## Reach Daily Schedule
 

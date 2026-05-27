@@ -309,13 +309,14 @@ Where to look:
 DM status:
 
 - Automatic Manager DMs are not wired yet.
-- Recommended DM policy: one short daily DM plus urgent exceptions only.
+- Manager should not proactively DM Mike unless human involvement is required.
+- Daily owner status belongs in Mission Control, Monday, or on-demand Slack commands.
 - Do not DM every agent action; that becomes noise fast.
 
 What I would expect Manager to send you:
 
 \`\`\`text
-Reach today: Reviews and AI running. Relay needs 5 more clean contacts. No action needed from Mike unless raising spend or overriding safety.
+Human needed: Smartlead API access is blocked, so agents cannot verify warmup or upload cold email leads safely. Please refresh the API key before live sends.
 \`\`\`
 
 Next useful command:
