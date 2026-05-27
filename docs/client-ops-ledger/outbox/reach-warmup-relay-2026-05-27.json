@@ -1,0 +1,99 @@
+{
+  "date": "2026-05-27",
+  "lane": "relay",
+  "label": "Relay",
+  "execute": "import",
+  "warmupDay": 8,
+  "quota": {
+    "name": "days_7_9",
+    "from_day": 7,
+    "to_day": 9,
+    "min": 80,
+    "target": 100,
+    "max": 100
+  },
+  "status": "blocked",
+  "selectedCount": 16,
+  "selectedCsv": "tmp-reach-warmup-relay-2026-05-27-selected-qa.csv",
+  "blockers": [
+    "Only 16 OK rows found; minimum is 80.",
+    "Selected rows below minimum 80."
+  ],
+  "attempts": [
+    {
+      "attempt": "cache",
+      "industry": "paid scrape inventory",
+      "area": "36 saved QA files",
+      "state": "",
+      "scrapeLimit": 0,
+      "qaRows": 125,
+      "okRows": 23,
+      "added": 13,
+      "poolSize": 13,
+      "qaCsv": "cached relay QA inventory",
+      "error": "reused_paid_scrape_inventory"
+    },
+    {
+      "attempt": 32,
+      "industry": "HVAC contractor",
+      "area": "Massachusetts",
+      "state": "Massachusetts",
+      "scrapeLimit": 20,
+      "qaRows": 11,
+      "okRows": 5,
+      "added": 3,
+      "poolSize": 16,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-27-a32-qa.csv"
+    },
+    {
+      "attempt": 33,
+      "industry": "veterinary",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 0,
+      "okRows": 0,
+      "added": 0,
+      "poolSize": 16,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-27-a33-qa.csv"
+    },
+    {
+      "attempt": 34,
+      "industry": "emergency veterinary",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 12,
+      "okRows": 0,
+      "added": 0,
+      "poolSize": 16,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-27-a34-qa.csv"
+    },
+    {
+      "attempt": 35,
+      "industry": "HVAC contractor",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 9,
+      "okRows": 0,
+      "added": 0,
+      "poolSize": 16,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-27-a35-qa.csv"
+    },
+    {
+      "attempt": 36,
+      "industry": "plumber",
+      "area": "Connecticut",
+      "state": "Connecticut",
+      "scrapeLimit": 20,
+      "qaRows": 8,
+      "okRows": 0,
+      "added": 0,
+      "poolSize": 16,
+      "qaCsv": "tmp-reach-warmup-relay-2026-05-27-a36-qa.csv"
+    }
+  ],
+  "verification": null,
+  "actionResults": []
+}

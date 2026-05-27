@@ -1,0 +1,210 @@
+[
+  {
+    "email": "jason@jnrplumbing.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@nwsewer.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "role_account",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jnrplumbingllc@gmail.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "azplumbers@aol.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "ncfazzinoplumbing@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "csr@bfplumbingct.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@pickwickpros.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "role_account",
+      "has_dns"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "allstateplumbingct@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "office@onzescph.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "role_account",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "escapeplumbing@optonline.net",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "escapeplumbing@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "jetplumbingct@gmail.com",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "info@jetplumbingct.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "unknown",
+    "flags": [
+      "smtp_connectable",
+      "role_account",
+      "has_dns",
+      "has_dns_mx",
+      "connect_fails"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "sdrplumbing@optonline.net",
+    "decision": "keep",
+    "provider": "neverbounce",
+    "status": "valid",
+    "flags": [
+      "free_email_host",
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "vanessa@sdrplumbing.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "lori@sdrplumbing.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "catchall",
+    "flags": [
+      "smtp_connectable",
+      "accepts_all",
+      "has_dns",
+      "has_dns_mx"
+    ],
+    "suggestedCorrection": ""
+  },
+  {
+    "email": "m.b@mrrootersea.com",
+    "decision": "remove",
+    "provider": "neverbounce",
+    "status": "invalid",
+    "flags": [
+      "has_dns",
+      "smtp_connectable"
+    ],
+    "suggestedCorrection": ""
+  }
+]
