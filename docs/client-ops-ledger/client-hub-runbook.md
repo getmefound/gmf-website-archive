@@ -22,6 +22,52 @@ only what matters to the business owner. Lead with `Needed from you`, then
 service status, then upgrade preview. Keep internal ownership, internal tools,
 and completed setup clutter off the first screen.
 
+## Custom Client Home Page Vision
+
+Every paid client should eventually have a custom interactive home page at:
+
+```text
+/client/[client-slug]
+```
+
+This page is the client's simple home base. It should feel like "GMF is handling
+it" rather than "log into another dashboard."
+
+First screen:
+
+- business name, logo, plan, and current status
+- one plain-English status sentence
+- the single next action needed from the client, if any
+- quick proof counters for the active service
+- a clear upload/update button when client input is needed
+
+Interactive sections:
+
+- `Today`: what changed recently and what is waiting
+- `Needed from you`: access, approvals, customer lists, missing business facts
+- `Visibility`: current visibility score, baseline, competitor gap, and latest report link
+- `Reviews`: review requests, new reviews, private feedback, held-back rows, and review link status
+- `Google profile`: access status, profile fixes, posts, photos, services, and drift checks
+- `Reports`: baseline, before/after proof, monthly recap, and downloadable/shareable report links
+- `Approvals`: reply drafts, SMS readiness, profile edits, or public-facing changes that need approval
+- `Uploads`: customer/job lists, logo/assets, do-not-contact notes, service updates
+- `Unlocked next`: greyed-out next capabilities available with Stay Found or Always Ready
+
+Interaction rules:
+
+- clients can upload, approve, update, and view proof
+- clients should not see internal agent names, internal queues, raw logs, private tool names, or debug status
+- the page should prefill everything GMF already knows
+- one client action per card; do not make the owner interpret workflow detail
+- full competitor and scoring details are client-only after signup, not in the free prospect report
+- upgrade previews should be useful but restrained; proof comes before upsell
+
+The custom page should be plan-aware:
+
+- Get Found: onboarding baseline, needed access, profile/fact cleanup, review link, first review path, before/after proof
+- Stay Found: recurring review requests, monthly visibility report, profile freshness, customer upload, review/feedback activity
+- Always Ready: deeper AI visibility, answer/readiness checks, content opportunities, guarded reply/voice readiness, strategy notes
+
 ## Live Routes
 
 Client-zero:

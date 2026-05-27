@@ -344,6 +344,35 @@ Client recurring reports show:
 - competitor gap
 - recommended next actions
 
+## Custom Client Home Page
+
+Every paid client should eventually get a custom interactive home page at `/client/[client-slug]`.
+
+This page is the client-facing home base, not a software dashboard. It should make the owner feel that GMF is handling the work and only needs them when a clear action is required.
+
+The page should show:
+
+- business name, logo, plan, and status
+- one plain-English current status sentence
+- the single next client action, if any
+- active service proof counters
+- customer/job upload path
+- baseline and report links
+- visibility score and competitor gap for paying clients
+- review requests, new reviews, private feedback, held-back rows, and review link status when included
+- Google profile access, profile fixes, posts, services, photos, and drift checks when included
+- approval queue for review replies, SMS readiness, profile edits, or public-facing changes
+- greyed-out next capabilities that can be unlocked with Stay Found or Always Ready
+
+Interaction rules:
+
+- clients can upload, approve, update, and view proof
+- do not show internal agent names, raw logs, internal tools, debug traces, or queue mechanics
+- prefill everything GMF already knows
+- one client action per card
+- full competitor/scoring detail is client-only after signup, not part of the free prospect report
+- upgrade previews should be useful but restrained; proof comes before upsell
+
 ## Orphaned Report Workflow
 
 An orphaned report is a free visibility report that was requested and delivered, but the prospect did not sign up.
