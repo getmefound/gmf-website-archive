@@ -69,9 +69,23 @@ First live item:
 - Item ID: `12115656169`
 - Group: Human Needed
 
+Current core setup items:
+
+- Refresh Smartlead API access: `12115656169`, Human Needed
+- Connect Monday API to agents: `12115707896`, Done
+- Build prospecting Mission Control reports: `12115719355`, Agent Working
+
 Fallback records:
 
 - `docs/client-ops-ledger/monday-prospecting-core-setup-import.csv`
 - `docs/client-ops-ledger/agent-jobs.csv`
 
-Do not expose the raw Monday token to agents. Manager, Systems Director, and Reporter may write to Monday only through an approved script or internal endpoint.
+Do not expose the raw Monday token to agents. Manager, Systems Director, and Reporter may write to Monday only through:
+
+```bash
+npm run monday:agent-job
+```
+
+or a future approved internal endpoint.
+
+Other agents must route owner-visible updates through Manager.

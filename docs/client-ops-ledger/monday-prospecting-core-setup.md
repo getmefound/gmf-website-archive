@@ -63,10 +63,58 @@ Next Action: Generate/confirm a valid Smartlead API key, store it securely, add 
 
 Notes: This is the first prospecting job because live Smartlead sends must not run until API access and warmup readiness are proven.
 
+## Current Core Setup Items
+
+| Item | Monday ID | Group | Status |
+|---|---:|---|---|
+| Refresh Smartlead API access | `12115656169` | Human Needed | Human Needed |
+| Connect Monday API to agents | `12115707896` | Done | Done |
+| Build prospecting Mission Control reports | `12115719355` | Agent Working | Agent Working |
+
 ## Current Integration Status
 
 `MONDAY_API_TOKEN` is configured locally in `.env.local` and was used to create the live `Agents Jobs` board and the first human-needed job.
 
-The token is not committed to git. Agents should use an approved local script or internal endpoint to write to Monday rather than carrying the raw token in prompts or notes.
+The token is not committed to git. Agents must use an approved local script or internal endpoint to write to Monday rather than carrying the raw token in prompts or notes.
+
+Approved local writer:
+
+```bash
+npm run monday:agent-job
+```
+
+Allowed writer roles:
+
+- Manager
+- Systems Director
+- Reporter
+
+Scout, Sender, Coach, Sorter, Booker, and other specialist agents must report through Manager or a controlled workflow. They should not carry `MONDAY_API_TOKEN`.
+
+Verified behavior:
+
+- `Manager` can create/update items.
+- `Reporter` can create/update items.
+- `Scout` is blocked from writing directly.
 
 The import-ready row remains saved in `docs/client-ops-ledger/monday-prospecting-core-setup-import.csv` as fallback documentation.
+
+## Script Examples
+
+List visible jobs:
+
+```bash
+npm run monday:agent-job -- --action list
+```
+
+Ensure groups and columns exist:
+
+```bash
+npm run monday:agent-job -- --action setup --role Manager
+```
+
+Create or update the first human-needed item:
+
+```bash
+npm run monday:agent-job -- --action create --role Manager --name "Refresh Smartlead API access" --group "Human Needed" --status "Human Needed" --owner Mike --agent-owner "Manager / Systems Director" --system Smartlead --human-needed yes --priority High --due 2026-05-27 --budget 0 --proof "https://github.com/mje-gmf/website/blob/main/docs/client-ops-ledger/prospecting-smartlead-preflight-current.md" --proof-text "Smartlead preflight report" --next-action "Refresh the Smartlead API key, add it locally and in production, then rerun npm run prospecting:preflight." --upsert
+```
