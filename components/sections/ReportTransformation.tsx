@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AuditRequestForm } from "@/components/sections/AuditRequestForm";
+import { trackBeforeAfterInteraction } from "@/lib/analytics";
 
 type Finding = {
   title: string;
@@ -57,11 +58,20 @@ function XIcon() {
 
 export function ReportTransformation() {
   const [tab, setTab] = useState<"before" | "after">("before");
+  const trackedInteraction = useRef(false);
   const isAfter = tab === "after";
 
   const pct = isAfter ? 89 : 12;
   const filledBars = isAfter ? 5 : 1;
   const findings = isAfter ? AFTER_FINDINGS : BEFORE_FINDINGS;
+
+  function handleTab(nextTab: "before" | "after") {
+    if (!trackedInteraction.current) {
+      trackBeforeAfterInteraction();
+      trackedInteraction.current = true;
+    }
+    setTab(nextTab);
+  }
 
   return (
     <section
@@ -112,7 +122,7 @@ export function ReportTransformation() {
             {/* BEFORE / AFTER tabs */}
             <div className="mb-5 grid grid-cols-2 gap-2">
               <button
-                onClick={() => setTab("before")}
+                onClick={() => handleTab("before")}
                 className={`rounded-xl border py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
                   !isAfter
                     ? "border-error/40 bg-error/10 text-error"
@@ -122,7 +132,7 @@ export function ReportTransformation() {
                 Before
               </button>
               <button
-                onClick={() => setTab("after")}
+                onClick={() => handleTab("after")}
                 className={`rounded-xl border py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
                   isAfter
                     ? "border-accent/40 bg-accent/10 text-accent"

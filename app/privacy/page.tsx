@@ -47,6 +47,10 @@ export default function PrivacyPage() {
                 Basic usage data through Vercel Analytics if enabled. This is page-view data only,
                 with no personal data collected by GetMeFound.
               </li>
+              <li>
+                Anonymous page view data via Google Analytics 4 — no personal information is
+                collected. See Google&apos;s privacy policy at policies.google.com/privacy for details.
+              </li>
             </ul>
           </PolicySection>
 

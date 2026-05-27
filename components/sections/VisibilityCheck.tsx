@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { trackVisibilityCheckSlide } from "@/lib/analytics";
 
 // ── Inline SVG icons (no icon package needed) ────────────────
 
@@ -231,8 +232,10 @@ export function VisibilityCheck() {
   const slide = SLIDES[current];
 
   function go(index: number) {
+    if (index === current) return;
     setDir(index > current ? 1 : -1);
     setCurrent(index);
+    trackVisibilityCheckSlide(index + 1);
   }
   const prev = () => { if (current > 0) go(current - 1); };
   const next = () => { if (current < SLIDES.length - 1) go(current + 1); };
@@ -263,10 +266,10 @@ export function VisibilityCheck() {
               What Google &amp; AI check
             </h2>
             <p className="mt-4 max-w-sm text-base leading-relaxed text-hero-subtext">
-              Google's AI decides who to recommend before anyone clicks. Most local businesses fail the basics — and never know it.
+              Google&apos;s AI decides who to recommend before anyone clicks. Most local businesses fail the basics — and never know it.
             </p>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-hero-subtext">
-              The businesses AI picks aren't the biggest. They're the most complete.
+              The businesses AI picks aren&apos;t the biggest. They&apos;re the most complete.
             </p>
             <Link
               href="/report/ai-visibility"
@@ -283,7 +286,7 @@ export function VisibilityCheck() {
                 rel="noopener noreferrer"
                 className="underline decoration-white/30 underline-offset-2 transition hover:text-hero-text"
               >
-                Google's own guidance
+                Google&apos;s own guidance
               </a>{" "}
               for local business visibility
             </p>

@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
+import { trackAuditFormSubmit } from "@/lib/analytics";
 import { validateEmail } from "@/lib/email-validation";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -75,6 +76,7 @@ export function AuditRequestForm() {
         setError(data.error ?? "Something went wrong. Try again.");
         return;
       }
+      trackAuditFormSubmit();
       setSubmitted(true);
     } catch {
       setError("Network error. Try again.");

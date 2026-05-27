@@ -1,12 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import {
+  trackAlwaysReadyCheckoutClick,
+  trackGetFoundCheckoutClick,
+  trackStayFoundCheckoutClick,
+} from "@/lib/analytics";
+
+const checkoutTrackers: Record<string, () => void> = {
+  "get-found-refresh": trackGetFoundCheckoutClick,
+  "stay-found": trackStayFoundCheckoutClick,
+  "always-ready": trackAlwaysReadyCheckoutClick,
+};
 
 export function CheckoutButton({ slug, label }: { slug: string; label: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleClick() {
+    checkoutTrackers[slug]?.();
     setLoading(true);
     setError(null);
     try {
