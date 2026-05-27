@@ -62,6 +62,23 @@ export default function ContactPage() {
                   </a>
                 </li>
               </ul>
+
+              <div className="mt-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5">
+                <span className="block text-xs uppercase tracking-wider text-[var(--color-text-muted)] font-semibold mb-2">
+                  Book a call
+                </span>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+                  Agency, reseller, or just want to talk through an idea? Grab 15 minutes — no deck, no pitch.
+                </p>
+                <a
+                  href="https://calendly.com/PLACEHOLDER"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent-text)] transition-all hover:bg-[var(--color-accent-hover)] hover:-translate-y-0.5"
+                >
+                  Pick a time →
+                </a>
+              </div>
             </div>
 
             {ghlEmbedSrc ? <GhlContactEmbed src={ghlEmbedSrc} /> : <ContactForm />}

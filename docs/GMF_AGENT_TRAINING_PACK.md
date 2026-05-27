@@ -12,10 +12,9 @@ Active offers:
 
 - Get Found - $149 one-time setup and visibility baseline
 - Stay Found - $99/mo email review requests, weekly GBP post, included website hosting, monitoring, and monthly report
-- Review Power - $149/mo SMS + email, A2P handled by GMF, AI reply drafts, alerts, and reporting
-- AI Ready Bundle - $299/mo reputation, content, AI voice readiness, strategy, and AEO checks
+- Always Ready - $299/mo reputation, content, AI visibility, guarded AI/reply/voice readiness, strategy, and deeper recurring checks
 
-Reach/prospecting services are not part of GMF's active operating model.
+Reach and cold outbound services are not part of GMF client delivery. Smartlead remains the cold outbound rail. Website free visibility checks are part of the GMF sales workflow.
 
 ## Agent Roster
 
@@ -30,6 +29,12 @@ Responsibilities:
 - ask Mike only for judgment, money, credentials, client-risk, or approval decisions
 - decide when Auditor must review
 - keep blocked work visible
+- check prerequisites before assigning execution work
+
+Rule:
+
+- do not assign GBP execution work until `admin@getmefound.ai` is accepted as Manager on the client Google Business Profile
+- safe setup work can begin before access: client ID, folder, hub shell, public baseline scan, and onboarding checklist
 
 Proof owed:
 
@@ -37,6 +42,70 @@ Proof owed:
 - next action visible
 - blocker visible
 - proof requirement named
+
+### Sales Manager
+
+Owns revenue strategy.
+
+Responsibilities:
+
+- offer fit
+- pricing logic
+- upgrade strategy
+- Sales Rep oversight
+- orphaned report recovery standards
+
+Proof owed:
+
+- sales stage clear
+- upgrade angle grounded in evidence
+- no custom promise without approval
+
+### Sales Rep
+
+Owns prospect communication before payment and approved upgrade conversations.
+
+Responsibilities:
+
+- free visibility check follow-up
+- prospect emails
+- report delivery after Auditor approval
+- plan questions
+- checkout links
+- closed-won/lost/nurture status
+- approved upgrade emails
+
+Proof owed:
+
+- email logged
+- report link logged
+- next sales action clear
+- handoff to Manager after payment
+
+### Account Manager
+
+Owns client communication after signup.
+
+This replaces the old Client Success operating name.
+
+Responsibilities:
+
+- welcome email
+- Google Business Profile access requests
+- customer list requests
+- blocker reminders until prerequisite is met
+- setup status updates
+- monthly recap delivery
+- client questions
+- retention risk notes
+- upgrade timing feedback to Sales Manager
+
+Proof owed:
+
+- client email logged
+- blocker status updated
+- next client ask clear
+- no specialist emailed the client directly
 
 ### Profile Manager
 
@@ -49,6 +118,10 @@ Responsibilities:
 - monthly profile drift checks
 - Get Found and Stay Found execution
 
+Rule:
+
+- if access is missing, record the blocker and exact needed action; Account Manager emails the client
+
 Proof owed:
 
 - correct business confirmed
@@ -58,7 +131,7 @@ Proof owed:
 
 ### Reviews Manager
 
-Owns Review Power.
+Owns review request setup and health.
 
 Responsibilities:
 
@@ -67,6 +140,7 @@ Responsibilities:
 - proof page review
 - email review request readiness
 - private feedback and monthly review summary
+- SMS readiness only after A2P/consent checks
 
 Proof owed:
 
@@ -161,23 +235,29 @@ Proof owed:
 - summary
 - recommendation or "no action"
 
-### Client Success
+### Reporter
 
-Owns retention communication.
+Owns proof, reports, dashboards, and Mission Control summaries.
 
 Responsibilities:
 
-- monthly client recap
-- upgrade opportunities
-- at-risk client notes
-- client-facing check-ins
+- free visibility reports
+- baseline reports
+- monthly client recaps
+- dashboard summaries
+- Mission Control summaries
+- upgrade evidence
 - use `docs/STAY_FOUND_MONTHLY_RECAP_TEMPLATE.md` for Stay Found monthly updates
 
 Proof owed:
 
-- recap sent/drafted
+- recap/report drafted
 - next recommendation listed
-- any client ask routed through Manager
+- client-safe proof linked
+
+Rule:
+
+- Reporter does not send reports directly. Sales Rep sends prospect reports. Account Manager sends client reports.
 
 ## Workflow Ownership
 
@@ -190,13 +270,13 @@ Get Found:
 Stay Found:
 
 - Owner: Profile Manager
-- Support: Client Success
+- Support: Account Manager, Reporter
 - Reviewer: Auditor
 
-Review Power:
+Always Ready:
 
 - Owner: Reviews Manager
-- Support: Systems Director
+- Support: Systems Director, Profile Manager, Reporter, Account Manager, Sales Manager
 - Reviewer: Auditor
 
 Review Replies:
@@ -211,12 +291,19 @@ Weekly Safety Audit:
 - Reviewer: Auditor
 - Manager role: receives exceptions only
 
-AI Ready Bundle:
+Sales 01 Free Visibility Check:
 
-- Owner: Manager
-- Support: Profile Manager, Reply Writer, Systems Director, Client Success
+- Owner: Sales Rep
+- Support: Scout, Reporter
 - Reviewer: Auditor
-- Status: building; sell only inside approved $299/mo scope and keep live voice behavior approval-gated
+- Manager role: receives call requests, custom promises, or unusual risk only
+
+Sales 02 Orphaned Report Recovery:
+
+- Owner: Sales Rep
+- Supervisor: Sales Manager
+- Reviewer: Auditor for any new claims
+- Manager role: sees status in Mission Control
 
 ## Escalation Rules
 
@@ -229,6 +316,7 @@ Ask Mike when:
 - review auto-post level changes
 - credentials, access, or billing is involved
 - an agent cannot resolve a blocker safely
+- prospect or client requests a phone call involving Mike
 
 Do not ask Mike when:
 
@@ -264,6 +352,7 @@ Premium:
 
 ## Source Docs
 
+- `docs/GMF_CLIENT_LIFECYCLE_OPERATING_MODEL.md`
 - `docs/GMF_COMPANY_OPERATING_SYSTEM.md`
 - `docs/AGENT_OPERATING_MODEL.md`
 - `docs/MANAGER_ROUTING_SKILL_PACK.md`

@@ -1,0 +1,516 @@
+# GMF Client Lifecycle Operating Model
+
+Status: active source of truth
+Owner: Mike Egidio
+Recorded: 2026-05-27
+Scope: free visibility checks, sales handoff, client onboarding, client correspondence, recurring service, and upgrade path.
+
+## Core Decision
+
+GMF runs like a normal service company with agent labor behind the scenes.
+
+The client or prospect should experience one clear front door:
+
+- prospects hear from Sales Rep
+- paying clients hear from Account Manager
+- specialists never email clients directly
+- Manager routes work only when prerequisites are met
+- Supabase stores lifecycle status and events
+- Monday shows agent jobs and blockers
+- Mission Control shows owner views
+- Resend sends relationship emails
+- Smartlead stays for cold outbound prospecting
+
+## Public Offer Ladder
+
+GMF public offers are:
+
+1. Get Found - $149 one-time setup, visibility baseline, and first review path.
+2. Stay Found - $99/mo ongoing review and Google visibility upkeep.
+3. Always Ready - $299/mo full reputation, AI visibility, content/readiness, and higher-touch strategy.
+
+Older internal names such as `Review Power` and `AI Ready Bundle` are now capabilities or historical labels, not the public ladder.
+
+## Company Roles
+
+### Manager
+
+Runs the operating system.
+
+Manager:
+
+- receives handoffs from Sales Rep, Sales Manager, Account Manager, and specialists
+- checks prerequisites before assigning execution work
+- assigns owner agent and reviewer
+- keeps blocked work visible
+- asks Mike only for owner-level decisions
+- keeps Monday and Mission Control aligned
+
+Manager should not assign GBP execution work until `admin@getmefound.ai` is added as Manager on the Google Business Profile. Manager may still assign safe setup work such as client ID, client folder, client hub, baseline scan, and onboarding checklist.
+
+### Sales Manager
+
+Owns revenue strategy.
+
+Sales Manager:
+
+- owns offer fit, pricing logic, upgrade strategy, and sales standards
+- manages Sales Rep work
+- decides upgrade angle
+- reviews sales performance and orphaned report recovery
+
+Sales Manager does not chase Google access, customer lists, or routine setup blockers.
+
+### Sales Rep
+
+Owns prospect communication before payment and approved upgrade conversations.
+
+Sales Rep:
+
+- handles free visibility check follow-up
+- emails prospects
+- sends free reports after Auditor approval
+- answers plan questions
+- sends checkout links
+- marks won/lost/nurture status
+- handles upgrade emails or calls when Sales Manager approves the angle
+
+Sales Rep exits day-to-day communication after payment. If a paying client asks a pricing or upgrade question, Account Manager routes it back to Sales Rep or Sales Manager.
+
+### Account Manager
+
+Owns client communication after signup.
+
+Account Manager is the new operating name for the old Client Success role.
+
+Account Manager:
+
+- sends welcome email
+- asks for Google Business Profile access
+- asks for customer lists
+- repeats blocker correspondence until prerequisites are met
+- sends setup status updates
+- sends monthly recaps
+- handles client questions
+- watches retention risk
+- tells Sales Manager when upgrade timing feels appropriate
+
+Account Manager does not decide pricing or custom scope without Sales Manager or Manager.
+
+### Profile Manager
+
+Owns Google Business Profile and local visibility work.
+
+Profile Manager:
+
+- checks GBP access
+- identifies missing access blockers
+- records exact client action needed
+- updates categories, services, hours, review link, profile facts, and drift checks after access is ready
+
+Profile Manager does not email the client.
+
+### Reviews Manager
+
+Owns review request setup and review-flow health.
+
+Reviews Manager:
+
+- manages customer upload path
+- checks clean/held rows
+- prepares review request readiness
+- handles suppressions and do-not-contact rules
+- blocks SMS until consent/A2P readiness is complete
+
+Reviews Manager does not email the client.
+
+### Systems Director
+
+Owns technical setup, dashboards, compliance, tools, and safety.
+
+Systems Director:
+
+- creates or validates client ID, client folder, client hub, Supabase rows, and tool health
+- checks Resend, Supabase, Vercel, Stripe, A2P, backups, and secrets
+- records technical blockers for Account Manager to translate to the client
+
+Systems Director does not email the client.
+
+### Scout
+
+Owns research and public visibility scans.
+
+Scout:
+
+- runs public free-check and baseline visibility research
+- checks Google/search/AI visibility observations
+- passes findings to Reporter, Profile Manager, Sales Rep, or Account Manager
+
+Scout does not email the prospect or client.
+
+### Reporter
+
+Owns proof, dashboards, reports, and Mission Control summaries.
+
+Reporter:
+
+- turns specialist work into client-safe proof
+- builds free visibility reports
+- builds baseline reports
+- builds monthly recaps
+- updates Mission Control summaries
+- prepares upgrade evidence
+
+Reporter does not send reports directly. Sales Rep sends prospect reports. Account Manager sends client reports.
+
+### Auditor
+
+Owns quality and risk gates.
+
+Auditor:
+
+- checks reports and client/prospect emails before send
+- blocks unsupported claims, ranking guarantees, risky SMS, unapproved public edits, and unclear asks
+- confirms proof exists before Manager marks work done
+
+### Coach
+
+Owns SOPs, training, offer language, and client-safe wording.
+
+Coach:
+
+- keeps source docs current
+- updates scripts and templates
+- turns research into agent instructions
+- keeps old AOH/GHL terms from leaking into GMF client language
+
+### Reply Writer
+
+Owns review reply drafts when included in scope.
+
+Reply Writer:
+
+- drafts replies in client voice
+- flags sensitive topics
+- records approve/reject/post decisions
+- does not auto-post by default
+
+## Free Visibility Check Workflow
+
+Trigger:
+
+- website CTA form submitted
+- manual lead asks for a free report
+- Sales Rep requests a report for a qualified prospect
+
+Workflow:
+
+1. Website or Sales Rep creates a Supabase lead/opportunity record.
+2. Monday item is created in `02 Sales & Signup`.
+3. Sales Rep sends confirmation email.
+4. Scout runs public visibility scan.
+5. Reporter builds the free visibility report.
+6. Auditor checks report claims and recommendation.
+7. Sales Rep emails the report.
+8. Sales Rep gives the next best action: Get Found checkout, Stay Found checkout, Always Ready fit call, or no-fit/nurture.
+
+Free visibility reports are sales assets. They do not go to Account Manager unless the prospect becomes a paying client.
+
+## Shared Visibility Report Engine
+
+GMF treats visibility reports as one reusable engine with different contexts.
+
+This matters because the report checks may be similar, but the owner, recipient, and next action are different.
+
+| Context | Audience | Front-office owner | Purpose | Next owner |
+|---|---|---|---|---|
+| `prospect_free_check` | Prospect | Sales Rep | Website CTA report used to start a sales conversation | Sales Rep |
+| `prospect_campaign_reply` | Prospect | Sales Rep | Warm prospect asked for a scan/report from outreach | Sales Rep |
+| `client_onboarding_baseline` | Client | Account Manager | Paid-client baseline used to prove starting point and guide launch work | Account Manager |
+| `client_recurring_check` | Client | Account Manager | Monthly/quarterly visibility drift check | Account Manager |
+
+Shared report records live in Supabase `visibility_reports`.
+
+Required fields:
+
+- `run_id`
+- `report_context`
+- `audience`
+- `report_status`
+- `lead_status`
+- `client_lifecycle`
+- `owner_role`
+- `business_name`
+- `contact_email`
+- `business_website`
+- `business_location`
+- `client_slug` when client exists
+- `report_type`
+- `source`
+- `audit_url`
+- `next_action`
+- `blocker`
+
+Shared report events live in Supabase `visibility_report_events`.
+
+The website free-check route now writes the same shared model as future onboarding baselines. That keeps prospecting and onboarding connected without confusing who owns the relationship.
+
+## Orphaned Report Workflow
+
+An orphaned report is a free visibility report that was requested and delivered, but the prospect did not sign up.
+
+Owner:
+
+- Sales Rep
+
+Supervisor:
+
+- Sales Manager
+
+Status:
+
+- `report_sent_no_signup`
+
+Follow-up cadence:
+
+- Day 0: send report
+- Day 2: one helpful follow-up
+- Day 7: one short reminder with the recommended next step
+- Day 14: final soft close
+- Day 30+: low-frequency nurture only if subscribed/appropriate
+
+Orphaned reports stay in the sales lane, not client onboarding.
+
+## Sales To Client Handoff
+
+Sales Rep secures the client when one of these happens:
+
+- Stripe payment completes
+- signed approval is received
+- Mike approves a manual start
+- client verbally agrees and Sales Manager approves next action
+
+Handoff:
+
+1. Sales Rep marks opportunity `closed_won` or `signup_started`.
+2. Manager checks plan, payment/approval, contact info, source, and next blocker.
+3. Manager opens client onboarding.
+4. Systems Director creates client ID/folder/hub shell.
+5. Account Manager sends welcome and access request.
+6. Specialists begin only the work whose prerequisites are satisfied.
+
+Sales Rep does not own routine client service after this point.
+
+## Client Onboarding Prerequisite Rules
+
+Manager may assign safe setup immediately:
+
+- client ID
+- client folder
+- Supabase client profile
+- client hub shell
+- public baseline scan
+- welcome email draft
+- onboarding checklist
+
+Manager should not assign execution work blocked by missing access:
+
+- no GBP edits until `admin@getmefound.ai` is accepted as Manager
+- no review request sends until review link, customer list, suppressions, and proof checks are ready
+- no SMS until A2P/consent/STOP/HELP readiness is confirmed
+- no public client claim or profile change without proof and approval path
+
+## Access Blocker Example
+
+If Google Business Profile manager access is missing:
+
+1. Profile Manager records blocker: `gbp_access`.
+2. Profile Manager records exact needed action: "Invite `admin@getmefound.ai` as Manager in Google Business Profile."
+3. Manager keeps GBP execution unassigned or blocked.
+4. Account Manager emails the client.
+5. Account Manager follows up every two business days while blocked, with no more than one ask per email.
+6. Once access is confirmed, Manager assigns Profile Manager execution.
+
+## Client Communication Rules
+
+Default communication is email.
+
+Phone calls happen only when the prospect or client requests one.
+
+Call-request trigger examples:
+
+- "Can you call me?"
+- "Let's talk."
+- "Can we schedule a call?"
+- "I'd rather discuss by phone."
+- "Have Mike call me."
+
+Call workflow:
+
+1. Sales Rep or Account Manager marks `call_requested`.
+2. Manager is notified.
+3. Manager notifies Mike if the call needs owner involvement.
+4. Mike decides whether to take the call or delegate it.
+
+No specialist agent emails prospects or clients directly.
+
+## Upgrade Workflow
+
+Upgrade opportunities work like a normal account expansion process.
+
+1. Specialist notices opportunity.
+2. Reporter turns it into proof.
+3. Auditor checks the claim.
+4. Account Manager judges relationship timing.
+5. Sales Manager decides upgrade angle.
+6. Sales Rep emails the upgrade recommendation or handles the requested call.
+7. If client upgrades, Manager opens Always Ready workflow.
+
+Always Ready upgrade messaging starts with evidence, not pressure.
+
+No upsell in the first 7 days unless the client asks.
+
+Recommended upgrade rhythm:
+
+- Day 14: education only if useful
+- Day 30: one specific opportunity in first monthly recap
+- Day 45-60: one strategy insight if data supports it
+- Day 75-90: Always Ready recommendation if proof and fit are strong
+
+## Supabase Status Model
+
+Supabase is the operating database.
+
+Use structured status fields instead of loose GHL-style tags.
+
+Recommended lead status values:
+
+```text
+free_check_requested
+report_building
+report_ready_for_audit
+report_sent_no_signup
+follow_up_day_2
+follow_up_day_7
+final_soft_close
+nurture
+closed_won
+closed_lost
+no_fit
+```
+
+Recommended client lifecycle values:
+
+```text
+paid_needs_onboarding
+waiting_gbp_access
+waiting_customer_list
+waiting_a2p_info
+launch_first_14_days
+live_recurring
+upgrade_candidate
+at_risk
+cancelled
+```
+
+Recommended blocker values:
+
+```text
+none
+gbp_access
+customer_list
+a2p_info
+billing
+client_approval
+tool_access
+custom_scope
+reputation_risk
+```
+
+Recommended communication status values:
+
+```text
+draft_needed
+draft_ready
+audit_needed
+approved_to_send
+sent
+reply_received
+call_requested
+waiting_response
+closed
+```
+
+Monday should mirror the important status, owner, next action, human-needed flag, due date, and proof link. Monday is not the data warehouse.
+
+## Data Ownership
+
+| Layer | Source of truth |
+|---|---|
+| Billing | Stripe |
+| Client profile/status/events | Supabase |
+| Agent jobs/blockers | Monday |
+| Owner dashboard | Mission Control reading Supabase/Monday |
+| Files/reports/screenshots | VPS/Drive/storage |
+| Relationship email sends/logs | Resend plus Supabase `email_events` |
+| Cold outbound | Smartlead |
+| Notifications | Slack |
+
+## Model Cost Policy
+
+Routine work should use low-cost models where quality is sufficient.
+
+Use low-cost models for:
+
+- classification
+- first-pass summaries
+- checklist updates
+- routine draft emails
+- internal handoff notes
+- basic report assembly
+
+Use stronger models for:
+
+- code changes
+- security/recovery
+- final client-facing claims
+- sensitive reputation issues
+- complex research
+- upgrade recommendations with risk
+
+Track costs per client in Supabase over time:
+
+- model tokens
+- search calls
+- browser/report runs
+- Resend emails
+- SMS sends
+- report generation
+- human-needed events
+
+## Owner Visibility
+
+Mike should be able to monitor without operating the system manually.
+
+Mission Control should show:
+
+- free visibility checks requested
+- reports being built
+- orphaned reports
+- new paying clients
+- waiting on GBP access
+- waiting on customer list
+- launch blocked
+- live recurring clients
+- upgrade candidates
+- at-risk clients
+- human-needed decisions
+
+Slack should show:
+
+- new paying client
+- job sent
+- human needed
+- call requested
+- report ready
+- payment/reputation/security issue

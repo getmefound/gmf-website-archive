@@ -60,6 +60,14 @@ const industries: Record<
   seniorliving:  { defaultValue: 4800,  vol: 40,  velocityTarget: 8,  valueLabel: "per resident/mo",label: "senior living facilities",valueMin: 1000,  valueMax: 12000,  valueStep: 250 },
   marketing:     { defaultValue: 3200,  vol: 8,   velocityTarget: 5,  valueLabel: "per engagement", label: "marketing consultants",   valueMin: 500,   valueMax: 10000,  valueStep: 250 },
   b2b:           { defaultValue: 2400,  vol: 15,  velocityTarget: 5,  valueLabel: "per engagement", label: "B2B service businesses",  valueMin: 500,   valueMax: 10000,  valueStep: 100 },
+  dental:        { defaultValue: 280,   vol: 120, velocityTarget: 15, valueLabel: "per patient visit", label: "dental practices",     valueMin: 100,   valueMax: 800,    valueStep: 10 },
+  legalfirm:     { defaultValue: 3500,  vol: 15,  velocityTarget: 5,  valueLabel: "per matter",     label: "law firms",              valueMin: 500,   valueMax: 15000,  valueStep: 250 },
+  therapist:     { defaultValue: 175,   vol: 80,  velocityTarget: 8,  valueLabel: "per session",    label: "therapy practices",      valueMin: 75,    valueMax: 400,    valueStep: 5 },
+  accountant:    { defaultValue: 1200,  vol: 20,  velocityTarget: 5,  valueLabel: "per engagement", label: "accounting firms",       valueMin: 200,   valueMax: 5000,   valueStep: 100 },
+  chiro:         { defaultValue: 75,    vol: 200, velocityTarget: 15, valueLabel: "per visit",      label: "chiropractic practices", valueMin: 40,    valueMax: 200,    valueStep: 5 },
+  salon:         { defaultValue: 95,    vol: 200, velocityTarget: 12, valueLabel: "per appointment", label: "salons and barbershops", valueMin: 30,   valueMax: 400,    valueStep: 5 },
+  spa:           { defaultValue: 130,   vol: 120, velocityTarget: 12, valueLabel: "per service",    label: "spas and massage practices", valueMin: 50, valueMax: 500,  valueStep: 10 },
+  realestate:    { defaultValue: 8500,  vol: 8,   velocityTarget: 6,  valueLabel: "per transaction", label: "real estate agents",   valueMin: 2000,  valueMax: 25000,  valueStep: 250 },
 };
 
 
@@ -284,6 +292,14 @@ function RevenueCalculatorInner() {
                   <option value="seniorliving">Senior Living Facility</option>
                   <option value="marketing">Marketing Consultant</option>
                   <option value="b2b">B2B Service Business</option>
+                  <option value="dental">Dental Practice</option>
+                  <option value="legalfirm">Law Firm / Attorney</option>
+                  <option value="therapist">Therapist / Counselor</option>
+                  <option value="accountant">Accountant / CPA</option>
+                  <option value="chiro">Chiropractor</option>
+                  <option value="salon">Salon / Barbershop</option>
+                  <option value="spa">Spa / Massage</option>
+                  <option value="realestate">Real Estate Agent</option>
                 </select>
               </div>
 

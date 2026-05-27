@@ -11,6 +11,8 @@ grant select on public.tooling_status to anon, authenticated;
 
 grant all privileges on public.contact_submissions to service_role;
 grant all privileges on public.agent_tasks to service_role;
+grant all privileges on public.visibility_reports to service_role;
+grant all privileges on public.visibility_report_events to service_role;
 grant all privileges on public.email_events to service_role;
 grant all privileges on public.tooling_status to service_role;
 grant all privileges on public.client_profiles to service_role;
@@ -30,6 +32,22 @@ create policy "allow agent tasks insert"
 on public.agent_tasks
 for insert
 to anon, authenticated
+with check (true);
+
+drop policy if exists "service role manages visibility reports" on public.visibility_reports;
+create policy "service role manages visibility reports"
+on public.visibility_reports
+for all
+to service_role
+using (true)
+with check (true);
+
+drop policy if exists "service role manages visibility report events" on public.visibility_report_events;
+create policy "service role manages visibility report events"
+on public.visibility_report_events
+for all
+to service_role
+using (true)
 with check (true);
 
 drop policy if exists "allow email events insert" on public.email_events;

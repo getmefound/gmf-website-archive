@@ -47,7 +47,11 @@ Sections that were REMOVED from homepage: stats row, trust cards, game changed, 
 
 ## Remaining Work
 
-Nothing critical outstanding. Optional future improvements:
+### 🔴 Needs Mike's input
+- **Calendly link** — Mike signed up for Calendly. Update `BOOK_URL` in `app/calculator/page.tsx` (currently set to `https://calendly.com/PLACEHOLDER`). One line change once the link is known.
+
+### Optional future improvements
+- **Industry dropdown cleanup** — Remove plumbing, HVAC, roofer (excluded target market). Add dental, chiro, salon, therapist, accountant, realestate, legalfirm. Curate to ~15 best options for mobile UX. No category/subcategory needed.
 - **VisibilityCheck section heading** — Currently "What Google & AI check". Could be made more specific to the "picks, not ranks" angle, but current copy is functional.
 - **Spanish page (app/es/)** — Homepage, pricing, and FAQ may still use old messaging. Low priority unless Spanish traffic matters.
 - **Blog posts** — Existing posts may predate the May 2026 messaging shift. Worth a content audit before running ads.

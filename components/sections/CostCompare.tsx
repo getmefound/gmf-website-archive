@@ -13,18 +13,19 @@ type Row = {
 
 const ROWS: Row[] = [
   {
-    need: "Get more reviews — automatic",
-    diyTool: "Birdeye Growth plan",
+    need: "Automated review requests after every visit",
+    diyTool: "Review platform (Podium, Weave, or similar)",
     diySub: "per location, annual contract required.",
-    diyCost: "$349/mo",
+    diyCost: "$299–$499/mo",
   },
   {
-    need: "Keep your listings consistent everywhere AI checks",
-    diyTool: "Yext or BrightLocal",
-    diyCost: "$37–$39/mo",
+    need: "Keep your info consistent everywhere AI checks",
+    diyTool: "Listings management tool",
+    diySub: "keeps your name, address, and hours synced across directories",
+    diyCost: "$37–$99/mo",
   },
   {
-    need: "Get found in ChatGPT + AI search",
+    need: "Be ready when ChatGPT or Google AI recommends you",
     diyTool: "No single tool handles this — requires separate setup and management, $200+/mo estimated.",
   },
   {
@@ -386,7 +387,7 @@ export function CostCompare() {
           <p className="text-base text-[var(--color-text-body)] leading-relaxed">
             <strong className="font-bold">The tools are the cheap part.</strong>{" "}
             <span className="text-[var(--color-text-muted)]">
-              Even the $37/mo ones need someone who knows how to use them — listings strategy, AI search signals, response timing. GetMeFound brings the tools AND the people who run them.
+              Even the cheap ones need someone who knows how to use them — listings strategy, AI search signals, response timing. GetMeFound brings the tools AND the people who run them.
             </span>
           </p>
         </div>
@@ -407,7 +408,7 @@ export function CostCompare() {
         </div>
 
         <p className="mt-6 text-center text-xs text-[var(--color-text-muted)] max-w-3xl mx-auto leading-relaxed">
-          Prices reflect publicly listed examples and can change: Birdeye Standard, Yext or BrightLocal, Profound Starter, and typical small-business marketing-assistant labor. Live voice behavior inside AI Ready stays approval-gated.
+          Prices reflect publicly listed examples and can change: Podium or Weave starter tiers, a typical listings-sync tool, and small-business marketing-assistant labor. Live voice behavior inside Always Ready stays approval-gated.
         </p>
       </div>
     </section>

@@ -30,6 +30,59 @@ create table if not exists public.agent_tasks (
   error text
 );
 
+create table if not exists public.visibility_reports (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  run_id text not null unique,
+  report_context text not null default 'prospect_free_check',
+  audience text not null default 'prospect',
+  report_status text not null default 'requested',
+  lead_status text not null default '',
+  client_lifecycle text not null default '',
+  owner_role text not null default '',
+  next_action text not null default '',
+  blocker text not null default '',
+  business_name text not null default '',
+  contact_name text not null default '',
+  contact_email text not null default '',
+  business_website text not null default '',
+  business_location text not null default '',
+  client_slug text not null default '',
+  client_id text not null default '',
+  report_type text not null default 'marketing',
+  source text not null default 'website',
+  campaign text not null default 'organic',
+  audit_url text not null default '',
+  heatmap_url text not null default '',
+  metadata jsonb not null default '{}'::jsonb
+);
+
+create index if not exists visibility_reports_context_idx
+on public.visibility_reports (report_context, report_status, created_at desc);
+
+create index if not exists visibility_reports_audience_idx
+on public.visibility_reports (audience, created_at desc);
+
+create index if not exists visibility_reports_client_slug_idx
+on public.visibility_reports (client_slug, created_at desc);
+
+create index if not exists visibility_reports_email_idx
+on public.visibility_reports (contact_email, created_at desc);
+
+create table if not exists public.visibility_report_events (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  run_id text not null,
+  event_type text not null,
+  actor_role text not null default '',
+  note text not null default '',
+  payload jsonb not null default '{}'::jsonb
+);
+
+create index if not exists visibility_report_events_run_idx
+on public.visibility_report_events (run_id, created_at desc);
+
 create table if not exists public.email_events (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
@@ -137,6 +190,8 @@ on public.review_automation_suppressions (client_slug);
 
 alter table public.contact_submissions enable row level security;
 alter table public.agent_tasks enable row level security;
+alter table public.visibility_reports enable row level security;
+alter table public.visibility_report_events enable row level security;
 alter table public.email_events enable row level security;
 alter table public.tooling_status enable row level security;
 alter table public.client_profiles enable row level security;
@@ -154,6 +209,8 @@ grant select on public.tooling_status to anon, authenticated;
 
 grant all privileges on public.contact_submissions to service_role;
 grant all privileges on public.agent_tasks to service_role;
+grant all privileges on public.visibility_reports to service_role;
+grant all privileges on public.visibility_report_events to service_role;
 grant all privileges on public.email_events to service_role;
 grant all privileges on public.tooling_status to service_role;
 grant all privileges on public.client_profiles to service_role;
@@ -173,6 +230,22 @@ create policy "allow agent tasks insert"
 on public.agent_tasks
 for insert
 to anon, authenticated
+with check (true);
+
+drop policy if exists "service role manages visibility reports" on public.visibility_reports;
+create policy "service role manages visibility reports"
+on public.visibility_reports
+for all
+to service_role
+using (true)
+with check (true);
+
+drop policy if exists "service role manages visibility report events" on public.visibility_report_events;
+create policy "service role manages visibility report events"
+on public.visibility_report_events
+for all
+to service_role
+using (true)
 with check (true);
 
 drop policy if exists "allow email events insert" on public.email_events;

@@ -108,10 +108,10 @@ export function ReportTransformation() {
             <div className="mb-5 flex items-start justify-between gap-3">
               <div>
                 <h3 className="text-base font-bold text-[#111] sm:text-lg">
-                  Green Valley Lawn Care
+                  Lakeside Family Dentistry
                 </h3>
                 <p className="mt-0.5 text-xs text-[#666] sm:text-sm">
-                  Southington, CT 06489 · Lawn &amp; Landscape Services
+                  Hartford, CT 06103 · General Dentistry
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-error/30 bg-error/10 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-error">
@@ -159,8 +159,8 @@ export function ReportTransformation() {
                 </p>
                 <p className="mb-1 text-xs leading-relaxed text-[#555] sm:text-sm">
                   {isAfter
-                    ? "Google and AI are actively recommending Green Valley Lawn Care to customers in Southington."
-                    : "Customers searching Southington are finding your competitors — not you."}
+                    ? "Google and AI are actively recommending Lakeside Family Dentistry to new patients in Hartford."
+                    : "Patients searching Hartford are finding competing practices — not you."}
                 </p>
               </div>
 

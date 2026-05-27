@@ -3,10 +3,12 @@ import Link from "next/link";
 import { RevenueCalculator } from "@/components/RevenueCalculator";
 import { pageBreadcrumbs } from "@/lib/seo";
 
-const BOOK_URL = "/contact";
+// TODO: Replace with your actual Calendly link once set up
+// e.g. "https://calendly.com/getmefound/15min"
+const BOOK_URL = "https://calendly.com/PLACEHOLDER";
 
 export const metadata: Metadata = {
-  title: "Lost-Revenue Calculator",
+  title: "Revenue Potential Calculator — GetMeFound",
   description:
     "See exactly how much revenue your current reviews, ranking, and AI search visibility are costing you every month. No card. Takes 30 seconds.",
   alternates: { canonical: "/calculator" },
@@ -53,42 +55,44 @@ export default function CalculatorPage() {
               Let&apos;s fix it for you.
             </h2>
             <p className="text-base md:text-lg text-[var(--color-text-muted)] leading-relaxed max-w-2xl mx-auto mb-8">
-              Pick your next move. 15 minutes on a call and you&apos;ll know exactly
-              what to fix first, in what order, at what cost.
+              Most businesses fix the foundation in one shot. Get Found covers
+              every signal Google and AI check — done in 48 hours, no subscription required.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-              {/* Primary — book a call */}
+              {/* Primary — buy */}
               <Link
-                href={BOOK_URL}
+                href="/checkout/get-found-refresh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group rounded-2xl border border-[var(--color-accent)] bg-[var(--color-accent)] px-6 py-6 text-center transition-all hover:bg-[var(--color-accent-hover)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--color-accent)]/25"
               >
                 <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent-text)]/70 mb-2">
-                  15 min · free · no pitch
+                  one-time · 48-hour delivery
                 </p>
                 <p className="text-lg md:text-xl font-bold text-[var(--color-accent-text)] mb-1">
-                  Book a call →
+                  Get Found for $149 →
                 </p>
                 <p className="text-xs text-[var(--color-accent-text)]/80">
-                  We walk you through exactly what to fix first.
+                  Fix every signal Google and AI check. No contract.
                 </p>
               </Link>
 
-              {/* Secondary - plan details */}
+              {/* Secondary — book a call */}
               <Link
-                href="/pricing"
+                href={BOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-6 py-6 text-center transition-all hover:border-[var(--color-accent)] hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
-                  no contract
+                  15 min · free · no pitch
                 </p>
                 <p className="text-lg md:text-xl font-bold text-[var(--color-text-body)] mb-1">
-                  See the fix plans →
+                  Book a call →
                 </p>
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  Pick the level that fits the gap you just found.
+                  We walk you through exactly what to fix first.
                 </p>
               </Link>
             </div>

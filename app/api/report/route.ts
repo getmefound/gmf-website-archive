@@ -4,6 +4,7 @@ import { checkEmailRate, checkReportDedupe } from "@/lib/rate-limit";
 import { saveReportFlowStatus } from "@/lib/report-flow-status";
 import { createReportRun, updateReportRun } from "@/lib/report-runs";
 import { verifyReportToken } from "@/lib/report-token";
+import { createVisibilityReportRequest } from "@/lib/visibility-reports";
 
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -187,6 +188,23 @@ export async function POST(req: NextRequest) {
     auditUrl: reportUrl.toString(),
     status: "submitted",
     blocker: "",
+  });
+  await createVisibilityReportRequest({
+    runId,
+    context: tokenPayload ? "prospect_campaign_reply" : "prospect_free_check",
+    businessName: effectiveBusinessName,
+    contactEmail: normalizedEmail,
+    businessWebsite: effectiveBusinessWebsite,
+    businessLocation: effectiveBusinessLocation,
+    reportType: normalizedReportType,
+    source: reportLane === "website_free_report" ? "api/report:website" : "api/report:campaign",
+    campaign: normalizedCampaign,
+    auditUrl: reportUrl.toString(),
+    metadata: {
+      secondaryReport: normalizedSecondaryReport,
+      reportLane,
+      tokenMode: Boolean(tokenPayload),
+    },
   });
   maybeSimulateReportLifecycle({
     runId,

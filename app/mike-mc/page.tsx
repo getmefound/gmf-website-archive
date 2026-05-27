@@ -38,6 +38,7 @@ const MC_BOOKMARKS = [
   { label: "GHL Exit Ops", href: "/mike-mc/ghl-exit-ops" },
   { label: "Ops Index", href: "/mike-mc/ops" },
   { label: "Morning Brief", href: "/mike-mc/morning-brief" },
+  { label: "Visibility Reports", href: "/mike-mc/visibility-reports" },
   { label: "Review Proof", href: "/mike-mc/review-proof/ai-outsource-hub" },
   { label: "Review Replies", href: "/mike-mc/review-replies/ai-outsource-hub" },
   { label: "Report Flow", href: "/mike-mc/report-flow" },
@@ -50,6 +51,12 @@ const OVERSIGHT_LINKS = [
     label: "Workflows",
     href: "/mike-mc/workflows",
     detail: "Every GMF workflow, status, agent chain, counters, and weekly check.",
+    tone: "accent" as const,
+  },
+  {
+    label: "Visibility Reports",
+    href: "/mike-mc/visibility-reports",
+    detail: "Prospect free checks and client onboarding baselines in one owner queue.",
     tone: "accent" as const,
   },
   {
@@ -217,12 +224,12 @@ const AGENTS: {
     ],
   },
   {
-    name: "Client Success",
+    name: "Account Manager",
     role: "Client communication and reports",
     status: "building",
     cadence: "monthly",
     activity: {
-      doingNow: "Turns agent work into simple client-facing recaps.",
+      doingNow: "Owns client communication after signup and turns agent work into simple client-facing recaps.",
       upNext: "Test the Stay Found recap template and finish the monthly review report format.",
     },
     rows: [
@@ -327,12 +334,12 @@ function OwnerCommandSection() {
             Manager is the right hand. Agents do the work. Mike approves exceptions.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-            GMF sells a simple ladder: Get Found, Stay Found, and Always Ready. Review replies and voice automation stay approval-gated. Reach/prospecting work is outside GMF and belongs to a future separate company.
+            GMF sells a simple ladder: Get Found, Stay Found, and Always Ready. Review replies and voice automation stay approval-gated. Cold outbound stays separate from client delivery.
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Metric label="Core offers" value="4" />
-          <Metric label="Future offer" value="1" />
+          <Metric label="Core offers" value="3" />
+          <Metric label="Upgrade target" value="$299" />
           <Metric label="Owner asks" value="exceptions" />
           <Metric label="Weekly check" value="required" />
         </div>

@@ -12,8 +12,9 @@ The company should not be positioned as a broad AI agency. GMF is the review, re
 
 1. Get Found - one-time cleanup, visibility baseline, and first review request setup.
 2. Stay Found - $99/mo email review requests, weekly GBP post, included website hosting, monitoring, and monthly report.
-3. Review Power - $149/mo SMS + email review requests, A2P handled by GMF, AI reply drafts, alerts, and sentiment/citation checks.
-4. AI Ready Bundle - $299/mo full reputation, content, AI voice readiness, strategy, and AEO checks.
+3. Always Ready - $299/mo full reputation, AI visibility, content/readiness, guarded AI/reply/voice capabilities, strategy, and deeper recurring checks.
+
+Older internal names such as `Review Power` and `AI Ready Bundle` are capabilities or historical labels, not the public ladder.
 
 Reach, outbound prospecting, and social selling belong in a separate company/brand.
 
@@ -48,36 +49,17 @@ Core work:
 
 Monthly service. Target price: $99/mo. No contract. Includes website hosting for GMF-managed sites so updates are easier to maintain.
 
-Purpose: keep the profile, review path, and visibility signals from going stale. Email-only at this tier; SMS is the Review Power upgrade.
+Purpose: keep the profile, review path, and visibility signals from going stale. Email is the default review-request channel. SMS, AI reply drafting, and deeper AI visibility work are guarded capabilities that move the client toward Always Ready when appropriate.
 
 Core work:
 
-- weekly client list upload path into email review requests
+- weekly client list upload path into review requests
 - one weekly Google Business Profile post
 - review monitoring across platforms where available
 - monthly one-page visibility report
 - client hub status
 
-### Review Power
-
-Monthly service. Target price: $149/mo.
-
-Purpose: generate stronger review proof with SMS + email, while keeping compliance and AI replies guarded.
-
-Core work:
-
-- everything in Stay Found
-- customer upload/manual import
-- POS-ready event path when available
-- email and SMS review requests after A2P readiness
-- A2P setup handled by GMF when SMS is approved
-- private feedback capture
-- suppression/do-not-contact handling
-- AI response drafted in the client's brand voice, approval-first
-- negative review alert and suggested response target within 4 business hours
-- monthly sentiment report and AI citation check
-
-### AI Ready Bundle
+### Always Ready
 
 Monthly service. Target price: $299/mo. No contract.
 
@@ -85,9 +67,12 @@ Purpose: package reputation, local content, AI voice readiness, and strategy int
 
 Core work:
 
-- everything in Review Power
-- AI voice agent trained on business, services, pricing, hours, and FAQs
-- voice/phone readiness for AI and customer inquiries
+- everything in Stay Found
+- stronger review management, including SMS only after A2P/consent readiness
+- AI reply drafts in the client's voice, approval-first
+- negative review alert and suggested response path
+- AI/local answer visibility checks
+- AI voice and lead-response readiness, approval-gated
 - full GBP content management and local content planning
 - FAQ schema and location-page recommendations
 - monthly 30-minute strategy call and AEO check
@@ -100,7 +85,9 @@ Mike is the owner. Manager runs the operating system.
 
 Manager assigns work, watches blockers, and only brings Mike decisions that need judgment, approval, money, or client risk.
 
-Specialist agents own narrow jobs. They do not all read everything. Each agent gets the company focus, the client profile, and the workflow it owns.
+Sales Rep owns prospect emails and free report follow-up before payment. Account Manager owns client communication after payment. Specialist agents own narrow jobs and do not email prospects or clients directly.
+
+Manager should not assign execution work until prerequisites are met. Example: Profile Manager should not be assigned Google Business Profile edits until `admin@getmefound.ai` is accepted as Manager on the client profile. Manager may still assign safe setup work such as client ID, client folder, client hub shell, and public baseline scan.
 
 Auditor checks quality and safety before work is marked done.
 
@@ -120,7 +107,7 @@ Mike should not need to inspect raw logs unless Manager or Auditor flags a probl
 
 - Agents do as much as they safely can before asking Mike.
 - Manager asks Mike only for approvals, client-risk decisions, pricing, tool spend, credentials, or unclear judgment calls.
-- Client emails drafted by agents require Manager review before Mike approval.
+- Prospect emails are sent by Sales Rep. Client emails are sent by Account Manager. Specialist agents provide internal blockers, proof, and drafts only.
 - Live sends, public profile edits, billing, and security-sensitive changes require proof.
 - No HighLevel AI feature may be enabled without Mike's explicit approval.
 - Supabase/app pages hold live status. Obsidian/docs hold knowledge and SOPs.
@@ -130,9 +117,9 @@ Mike should not need to inspect raw logs unless Manager or Auditor flags a probl
 No workflow is done until proof exists:
 
 - profile/access proof for Get Found and Stay Found
-- send proof for Review Power
+- send proof for review requests
 - draft/approval proof for review replies
-- voice/content proof for AI Ready Bundle
+- voice/content proof for Always Ready
 - health/safety proof for weekly audits
 - client-visible summary for monthly retention
 
@@ -151,5 +138,13 @@ Weekly:
 
 Monthly:
 
-- Client Success/Coach produces the client recap.
+- Reporter drafts client recap.
+- Auditor checks claims and proof.
+- Account Manager sends client recap.
 - Manager shows Mike clients at risk, renewals, upgrades, and blockers.
+
+## Required Source Docs
+
+- `docs/GMF_CLIENT_LIFECYCLE_OPERATING_MODEL.md`
+- `docs/AGENT_OPERATING_MODEL.md`
+- `docs/GMF_AGENT_TRAINING_PACK.md`
