@@ -39,8 +39,8 @@ export default function ReviewAutomationIntakePage() {
               settings under People and access. No password sharing.
             </div>
             <div className="text-slate-500">
-              After this form is submitted, our Manager routes the setup packet to Profile Manager,
-              Reviews Manager, and GHL Expert.
+              After this form is submitted, the setup packet is saved to GetMeFound&apos;s internal
+              workspace for Manager, Profile Manager, and Reviews Manager.
             </div>
           </div>
         </div>
@@ -60,7 +60,8 @@ export default function ReviewAutomationIntakePage() {
             <li>
               <span className="font-semibold text-slate-950">2. Setup routing</span>
               <br />
-              Reviews Manager prepares the review request flow. Systems Director keeps any legacy GHL handoff limited to export or bridge work.
+              Reviews Manager prepares the review request flow. Systems Director keeps the setup
+              moving inside the GetMeFound workspace.
             </li>
             <li>
               <span className="font-semibold text-slate-950">3. Manager summary</span>

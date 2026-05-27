@@ -1,109 +1,140 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/PageHeader";
 import { PageBody, PageSection } from "@/components/PageBody";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
+  title: { absolute: "Terms of Service — GetMeFound" },
   description:
-    "Terms of service for GetMeFound. No long-term contracts. Cancel anytime. Plain-language terms covering what you get and what we expect.",
+    "Plain-English terms of service for GetMeFound plans, billing, access, ownership, and cancellation.",
   alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
   return (
-    <>
-      <PageHeader
-        eyebrow="Legal"
-        title="Terms of Service"
-        subtitle="Plain-language terms covering GetMeFound services, billing, data access, and cancellation."
-      />
-      <PageBody>
-        <PageSection>
-          <div className="space-y-10">
-            <p className="text-sm text-[var(--color-text-muted)]">Last updated: May 22, 2026</p>
+    <PageBody>
+      <PageSection className="border-b border-[var(--color-border)] bg-[var(--color-bg-page)]">
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+              Legal
+            </p>
+            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-body)] md:text-6xl">
+              Terms of Service
+            </h1>
+            <div className="space-y-1 text-sm text-[var(--color-text-muted)]">
+              <p>Last updated: June 1, 2026</p>
+              <p>Effective date: June 1, 2026</p>
+              <p>Governing law: State of Connecticut</p>
+            </div>
+          </div>
 
-            <div>
-              <h2 className="text-2xl font-bold mb-3">No long-term contracts</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                GetMeFound services are month-to-month unless a separate written agreement says
-                otherwise. You can cancel by emailing{" "}
-                <a href="mailto:support@getmefound.ai" className="text-[var(--color-accent)] hover:underline">
+          <p className="max-w-3xl text-lg leading-relaxed text-[var(--color-text-muted)]">
+            These terms explain what GetMeFound provides, what we need from clients, how billing
+            works, and what we do not promise. They are written in plain English.
+          </p>
+        </div>
+      </PageSection>
+
+      <PageSection>
+        <div className="space-y-10 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 md:p-10">
+          <TermsSection title="The services">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>
+                <strong>Get Found:</strong> $149 one-time payment. Work begins within 48 hours of
+                purchase. Non-refundable once work has started. If we have not started yet, a full
+                refund is available.
+              </li>
+              <li>
+                <strong>Stay Found:</strong> $99/month plus $49 one-time setup fee. Month-to-month.
+                Cancel anytime, no notice required, no cancellation fee. Cancellation takes effect
+                at the end of the current billing period.
+              </li>
+              <li>
+                <strong>Always Ready:</strong> $299/month. Month-to-month. Cancel anytime, no
+                notice required, no cancellation fee.
+              </li>
+            </ul>
+          </TermsSection>
+
+          <TermsSection title="What the client provides">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Access to the client&apos;s Google Business Profile as a manager. The client keeps ownership.</li>
+              <li>Access to the website backend during setup work.</li>
+              <li>GetMeFound does not store client passwords beyond the duration of active work.</li>
+              <li>The client can revoke access at any time.</li>
+            </ul>
+          </TermsSection>
+
+          <TermsSection title="What GetMeFound delivers">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>All fixes described on the service page for the purchased plan.</li>
+              <li>Before/after report within 48 hours for Get Found.</li>
+              <li>Monthly deliverables as described for Stay Found and Always Ready.</li>
+              <li>If anything is done incorrectly, GetMeFound will fix it at no charge.</li>
+            </ul>
+          </TermsSection>
+
+          <TermsSection title="What GetMeFound does not guarantee">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Specific search positions or rankings.</li>
+              <li>Specific number of reviews.</li>
+              <li>Specific revenue outcomes.</li>
+              <li>
+                Results vary by business, market, and platform changes outside GetMeFound&apos;s
+                control.
+              </li>
+            </ul>
+          </TermsSection>
+
+          <TermsSection title="Ownership">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>The client owns their Google listing, website, reviews, and all data.</li>
+              <li>GetMeFound claims no ownership of any client asset.</li>
+              <li>Upon cancellation, the client retains everything. Nothing is held back.</li>
+            </ul>
+          </TermsSection>
+
+          <TermsSection title="Other terms">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>GetMeFound reserves the right to refuse service.</li>
+              <li>Acceptable use: the service may not be used for illegal businesses.</li>
+              <li>
+                Limitation of liability: GetMeFound&apos;s maximum liability is the amount paid for
+                the service in the prior 30 days.
+              </li>
+              <li>
+                Disputes should be resolved by email first at{" "}
+                <a className="text-[var(--color-accent)] hover:underline" href="mailto:support@getmefound.ai">
                   support@getmefound.ai
                 </a>
-                . When you cancel, we stop billing at the end of the current billing period and
-                wind down active services.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">What you get</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                You get the services described on the page, proposal, or checkout you approved.
-                Search systems, maps, AI answers, and review platforms change over time, so we do
-                not promise a specific ranking or recommendation outcome. We do promise to operate
-                the work competently, transparently, and consistently.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">What we expect from you</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                You agree to provide accurate business information and access to the accounts or
-                integrations needed to perform the service. You are responsible for following
-                platform rules, including review policies, messaging consent rules, and spam laws.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Billing and refunds</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                Plans are billed monthly in advance. Monthly fees are not refundable once the
-                billing period starts, but there are no cancellation penalties. One-time setup
-                fees are refundable only before setup work begins. If you believe there is a
-                billing mistake, email us and we will review it.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Communications</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                We may contact you by email, phone, or SMS for onboarding, service alerts, account
-                updates, and support. If a service includes outreach or customer messaging, you
-                confirm that any contact lists you provide have the required consent.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Liability</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                GetMeFound is not liable for losses caused by third-party platform changes,
-                account restrictions, customer behavior, inaccurate information you provide, or
-                factors outside our reasonable control. Our liability is capped at the amount you
-                paid us in the 90 days before the issue.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Changes to these terms</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                If we change these terms in a way that materially affects active clients, we will
-                provide notice before the change takes effect.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Contact</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                Questions? Email{" "}
-                <a href="mailto:support@getmefound.ai" className="text-[var(--color-accent)] hover:underline">
+                , then Connecticut courts.
+              </li>
+              <li>Terms may be updated with 30 days email notice to active clients.</li>
+              <li>
+                Questions:{" "}
+                <a className="text-[var(--color-accent)] hover:underline" href="mailto:support@getmefound.ai">
                   support@getmefound.ai
                 </a>
                 .
-              </p>
-            </div>
-          </div>
-        </PageSection>
-      </PageBody>
-    </>
+              </li>
+            </ul>
+          </TermsSection>
+        </div>
+      </PageSection>
+    </PageBody>
+  );
+}
+
+function TermsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="space-y-3">
+      <h2 className="text-2xl font-bold text-[var(--color-text-body)]">{title}</h2>
+      <div className="leading-relaxed text-[var(--color-text-muted)]">{children}</div>
+    </section>
   );
 }

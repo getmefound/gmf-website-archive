@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
 import { createAgentTask, saveContactSubmission } from "@/lib/ops-store";
 import { checkEmailRate } from "@/lib/rate-limit";
-import { postToSlack, GMF_MANAGER_CHANNEL } from "@/lib/slack";
 
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -117,29 +116,9 @@ export async function POST(req: NextRequest) {
     console.error("Supabase agent task save failed", taskResult.status, taskResult.error);
   }
 
-  const slackMessage = [
-    `*New contact from getmefound.ai*`,
-    ``,
-    `*Name:* ${contact.name}`,
-    `*Email:* ${contact.email}`,
-    `*Message:* ${contact.message}`,
-    ``,
-    `*Source:* ${contact.source}`,
-    `*Submitted:* ${submittedAt}`,
-    ``,
-    `Manager — review this. If they seem ready to move forward, draft a reply. Escalate to Mike only if they need a pricing decision or are ready to sign.`,
-  ].join("\n");
-
-  const slackResult = await postToSlack(GMF_MANAGER_CHANNEL, slackMessage);
-  if (!slackResult.ok) {
-    console.error("Slack contact post failed", slackResult.error);
-  }
-
   return NextResponse.json({
     ok: true,
     saved: contactResult.ok,
     taskCreated: taskResult.ok,
-    notified: slackResult.ok,
   });
 }
-

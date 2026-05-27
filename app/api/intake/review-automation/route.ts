@@ -3,7 +3,6 @@ import { validateEmail } from "@/lib/email-validation";
 import { checkEmailRate } from "@/lib/rate-limit";
 import { envValueAny } from "@/lib/getmefound-env";
 import { supabaseRest } from "@/lib/supabase-rest";
-import { postToSlack, GMF_MANAGER_CHANNEL } from "@/lib/slack";
 
 type IntakePayload = {
   businessName?: unknown;
@@ -108,15 +107,10 @@ export async function POST(req: NextRequest) {
     timestamp: new Date().toISOString(),
   };
 
-  await Promise.allSettled([
-    saveToSupabase(payload),
-    forwardToGmfIntakeWebhook(payload),
-    forwardToSlack(payload),
-  ]);
+  await saveToSupabase(payload);
 
   return NextResponse.json({ ok: true });
 }
-
 function cleanText(value: unknown, max: number) {
   if (typeof value !== "string") return "";
   return value.trim().replace(/\s+/g, " ").slice(0, max);
@@ -152,96 +146,4 @@ async function saveToSupabase(payload: CleanIntake) {
   if (!result.ok) {
     console.error("Intake Supabase save failed", result.error);
   }
-}
-
-async function forwardToGmfIntakeWebhook(payload: CleanIntake) {
-  const url =
-    envValueAny("GMF_CLIENT_INTAKE_WEBHOOK_URL", "GMF_INTAKE_WEBHOOK_URL", "AOH_CLIENT_INTAKE_WEBHOOK_URL", "AOH_INTAKE_WEBHOOK_URL");
-  if (!url) return;
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      ...payload,
-      taskPacket: buildTaskPacket(payload),
-      destination: "gmf_owned_intake",
-    }),
-  }).catch((error) => {
-    console.error("Client intake GMF webhook failed", error);
-    return null;
-  });
-
-  if (response && !response.ok) {
-    console.error("Client intake GMF webhook responded", response.status, await response.text().catch(() => ""));
-  }
-}
-
-async function forwardToSlack(payload: CleanIntake) {
-  const result = await postToSlack(GMF_MANAGER_CHANNEL, buildSlackMessage(payload));
-  if (!result.ok) {
-    console.error("Client intake Slack post failed", result.error);
-  }
-}
-
-function buildTaskPacket(payload: CleanIntake) {
-  return {
-    job: "Stay Found intake",
-    managerSummary: `${payload.businessName} submitted setup intake. GBP access status: ${statusLabel(payload.accessStatus)}. Role selected: ${roleLabel(payload.accessRole)}.`,
-    owners: {
-      manager: "route and brief",
-      localVisibilityManager: "verify Google Business Profile access and profile basics",
-      reviewsManager: "prepare review automation setup",
-      systemsDirector: "keep setup moving through GMF-owned intake and alert paths",
-    },
-    safety: [
-      "No password sharing.",
-      "Default GBP role is Manager.",
-      "Public GBP changes need client or Mike approval before publishing.",
-    ],
-  };
-}
-
-function buildSlackMessage(payload: CleanIntake) {
-  return `*Client intake received - Stay Found*
-
-*Business:* ${payload.businessName}
-*Contact:* ${payload.contactName} - ${payload.email}${payload.phone ? ` - ${payload.phone}` : ""}
-*Website:* ${payload.website || "not provided"}
-*Google profile:* ${payload.gbpLink || "not provided"}
-*GBP access:* ${statusLabel(payload.accessStatus)}
-*Role selected:* ${roleLabel(payload.accessRole)}
-*Setup requested:* ${serviceLabel(payload.serviceIntent)}
-*Customer system:* ${payload.customerSystem || "not provided"}
-
-*Routing:*
-- Profile Manager: verify GBP access and profile basics.
-- Reviews Manager: prepare review automation setup.
-- Systems Director: keep GMF-owned intake and alert paths healthy.
-
-*Safety:*
-- No password sharing.
-- Default GBP role is Manager.
-- Public GBP changes need client or Mike approval before publishing.
-
-*Notes:* ${payload.notes || "none"}`;
-}
-
-function statusLabel(status: string) {
-  if (status === "added") return "client says access was added";
-  if (status === "need_help") return "client needs help adding access";
-  return "client is not sure";
-}
-
-function roleLabel(role: string) {
-  if (role === "manager") return "Manager";
-  if (role === "owner") return "Owner - review why owner was selected";
-  return "Not sure";
-}
-
-function serviceLabel(intent: string) {
-  if (intent === "gbp_update") return "Google profile update";
-  if (intent === "ai_visibility") return "Always Ready";
-  if (intent === "not_sure") return "Not sure";
-  return "Stay Found";
 }

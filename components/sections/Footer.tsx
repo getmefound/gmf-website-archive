@@ -44,6 +44,11 @@ export function Footer() {
     pathname.startsWith("/control/")
   ) return null;
   const isSpanish = pathname === "/es" || pathname.startsWith("/es/");
+  const isLegalPage =
+    pathname === "/privacy" ||
+    pathname === "/terms" ||
+    pathname === "/es/privacy" ||
+    pathname === "/es/terms";
   const withLocale = (path: string) => {
     if (path.startsWith("/pricing#")) return path;
     if (!isSpanish) return path;
@@ -56,7 +61,8 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[var(--color-hero-bg)] text-[var(--color-hero-subtext)] border-t border-[var(--color-hero-border)]">
       {/* Secondary CTA */}
-      <div className="border-b border-[var(--color-hero-border)] px-6 py-12 text-center">
+      {!isLegalPage && (
+        <div className="border-b border-[var(--color-hero-border)] px-6 py-12 text-center">
         <p className="mb-5 text-xl font-bold text-[var(--color-hero-text)] md:text-2xl">
           Be the business AI recommends.
         </p>
@@ -66,7 +72,8 @@ export function Footer() {
         >
           See if AI recommends you →
         </Link>
-      </div>
+        </div>
+      )}
 
       {/* Columns */}
       <div className="relative mx-auto max-w-6xl px-6 py-12">

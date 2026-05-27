@@ -98,6 +98,7 @@ export function Navbar() {
     if (pathname.startsWith("/es/")) return pathname.replace(/^\/es/, "") || "/";
     return pathname;
   })();
+  const isLegalPage = normalizedPath === "/privacy" || normalizedPath === "/terms";
   const enHref = normalizedPath;
   const esHref = normalizedPath === "/" ? "/es" : `/es${normalizedPath}`;
 
@@ -142,6 +143,7 @@ export function Navbar() {
               </Link>
             </div>
 
+            {!isLegalPage && (
             <Link
               href={withLocale("/contact")}
               className="group hidden md:inline-flex items-center gap-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-5 py-2 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/30 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
@@ -154,6 +156,7 @@ export function Navbar() {
                 →
               </span>
             </Link>
+            )}
 
             <button
               type="button"
@@ -233,6 +236,7 @@ export function Navbar() {
                   >
                     {"About"}
                   </Link>
+                  {!isLegalPage && (
                   <Link
                     href={withLocale("/contact")}
                     onClick={() => setMobileOpen(false)}
@@ -240,6 +244,7 @@ export function Navbar() {
                   >
                     {"See if AI recommends you"}
                   </Link>
+                  )}
                 </div>
               </motion.div>
             </>

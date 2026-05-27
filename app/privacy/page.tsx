@@ -1,123 +1,131 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/PageHeader";
 import { PageBody, PageSection } from "@/components/PageBody";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: { absolute: "Privacy Policy — GetMeFound" },
   description:
-    "How GetMeFound collects, uses, and protects your information. We collect only what we need to deliver our services.",
+    "Plain-English privacy policy for GetMeFound forms, payments, analytics, and data storage.",
   alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
   return (
-    <>
-      <PageHeader
-        eyebrow="Legal"
-        title="Privacy Policy"
-        subtitle="How GetMeFound collects, uses, and protects your information. Plain language. No dark patterns."
-      />
-      <PageBody>
-        <PageSection>
-          <div className="prose-section space-y-10 text-[var(--color-text-body)]">
-            <p className="text-sm text-[var(--color-text-muted)]">Last updated: May 22, 2026</p>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">What we collect</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                When you request a report or contact us, we collect the information you submit,
-                such as your name, business email, business name, website, location, and message.
-                When you become a client, we collect the access and business details needed to
-                perform the service.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">How we use it</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                We use your information to deliver reports, respond to inquiries, onboard clients,
-                improve local visibility assets, operate approved integrations, and provide
-                support. We do not sell your data and we do not share it with third parties for
-                their advertising.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Customer and business data</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                If a service uses customer contact information, you are responsible for confirming
-                that you have permission to use that information. We use customer data only to
-                perform the service you approved and delete it on request when operationally
-                practical and legally permitted.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Payment information</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                Payment details are handled by our payment processor. We do not store full card
-                numbers on our servers. We may retain billing records for tax, accounting, and
-                dispute-resolution purposes.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Third parties we work with</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed mb-3">
-                We use vendors to host the website, process forms, send email, run AI workflows,
-                analyze site performance, and support client services. We share only what each
-                vendor needs to do its job.
-              </p>
-              <ul className="list-disc pl-6 space-y-2 text-[var(--color-text-muted)] leading-relaxed">
-                <li><strong>Vercel</strong> - website hosting</li>
-                <li><strong>Google Workspace</strong> - business email and files</li>
-                <li><strong>OpenAI and other AI providers</strong> - AI processing for approved workflows</li>
-                <li><strong>Payment processors</strong> - billing and receipts</li>
-                <li><strong>CRM, email, analytics, and automation tools</strong> - client communication and operations</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Cookies and analytics</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                We use minimal analytics to understand which pages perform and to improve the
-                site. We do not sell visitor data.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Your rights</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                You can request a copy of your data, correct inaccuracies, or ask us to delete
-                data by emailing{" "}
-                <a href="mailto:support@getmefound.ai" className="text-[var(--color-accent)] hover:underline">
-                  support@getmefound.ai
-                </a>
-                .
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Changes to this policy</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                If we change this policy in a way that materially affects active clients, we will
-                provide notice before the change takes effect.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Contact</h2>
-              <p className="text-[var(--color-text-muted)] leading-relaxed">
-                Questions about this policy? Email{" "}
-                <a href="mailto:support@getmefound.ai" className="text-[var(--color-accent)] hover:underline">
-                  support@getmefound.ai
-                </a>
-                .
-              </p>
+    <PageBody>
+      <PageSection className="border-b border-[var(--color-border)] bg-[var(--color-bg-page)]">
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+              Legal
+            </p>
+            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[var(--color-text-body)] md:text-6xl">
+              Privacy Policy
+            </h1>
+            <div className="space-y-1 text-sm text-[var(--color-text-muted)]">
+              <p>Last updated: June 1, 2026</p>
+              <p>Effective date: June 1, 2026</p>
             </div>
           </div>
-        </PageSection>
-      </PageBody>
-    </>
+
+          <p className="max-w-3xl text-lg leading-relaxed text-[var(--color-text-muted)]">
+            GetMeFound keeps privacy simple. We collect only what we need to answer your request,
+            run the service, protect the site from abuse, and keep basic business records.
+          </p>
+        </div>
+      </PageSection>
+
+      <PageSection>
+        <div className="space-y-10 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 md:p-10">
+          <PolicySection title="What we collect">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Name, business name, city, and email address when you submit the audit intake form or contact form.</li>
+              <li>
+                Payment information processed by Stripe. GetMeFound never sees or stores your card
+                number. Stripe handles all payment data.
+              </li>
+              <li>IP address, stored temporarily for rate limiting to prevent abuse. We do not use it for tracking.</li>
+              <li>
+                Basic usage data through Vercel Analytics if enabled. This is page-view data only,
+                with no personal data collected by GetMeFound.
+              </li>
+            </ul>
+          </PolicySection>
+
+          <PolicySection title="How we store it">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>
+                Form submissions are stored in Supabase, our database. This can include business
+                name, city, email, and audit results.
+              </li>
+              <li>Stripe stores payment records under Stripe&apos;s own privacy policy.</li>
+              <li>
+                Cloudflare Turnstile is used on forms for bot protection. It collects minimal
+                browser signals. GetMeFound does not store personal data from Turnstile.
+              </li>
+            </ul>
+          </PolicySection>
+
+          <PolicySection title="What we do with it">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Send you the visibility report or audit you requested.</li>
+              <li>Follow up about GetMeFound services if you opted in.</li>
+              <li>We never sell your data to anyone.</li>
+              <li>We never share your data with advertisers.</li>
+              <li>We do not use your data for any purpose other than providing the service you requested.</li>
+            </ul>
+          </PolicySection>
+
+          <PolicySection title="Your rights">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>
+                Request deletion of your data by emailing{" "}
+                <a className="text-[var(--color-accent)] hover:underline" href="mailto:support@getmefound.ai">
+                  support@getmefound.ai
+                </a>
+                .
+              </li>
+              <li>Unsubscribe from any email at any time using the unsubscribe link.</li>
+              <li>
+                EU visitors: GDPR rights apply. Contact{" "}
+                <a className="text-[var(--color-accent)] hover:underline" href="mailto:support@getmefound.ai">
+                  support@getmefound.ai
+                </a>
+                .
+              </li>
+            </ul>
+          </PolicySection>
+
+          <PolicySection title="Email, children, and updates">
+            <ul className="list-disc space-y-2 pl-6">
+              <li>GetMeFound follows CAN-SPAM requirements for all email.</li>
+              <li>This site is not directed at children under 13.</li>
+              <li>Policy updates will be posted here with a new effective date.</li>
+              <li>Company: GetMeFound, Connecticut, United States.</li>
+              <li>
+                Questions:{" "}
+                <a className="text-[var(--color-accent)] hover:underline" href="mailto:support@getmefound.ai">
+                  support@getmefound.ai
+                </a>
+                .
+              </li>
+            </ul>
+          </PolicySection>
+        </div>
+      </PageSection>
+    </PageBody>
+  );
+}
+
+function PolicySection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="space-y-3">
+      <h2 className="text-2xl font-bold text-[var(--color-text-body)]">{title}</h2>
+      <div className="leading-relaxed text-[var(--color-text-muted)]">{children}</div>
+    </section>
   );
 }

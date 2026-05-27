@@ -77,22 +77,6 @@ export async function POST(req: NextRequest) {
 
   const normalizedEmail = (email as string).trim().toLowerCase();
   const normalizedName = businessName.trim();
-  const timestamp = new Date().toISOString();
-
-  // Forward to GHL webhook
-  const webhookUrl = process.env.GHL_WEBSITE_REPORT_WEBHOOK_URL?.trim();
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        businessName: normalizedName,
-        email: normalizedEmail,
-        source: "getmefound.ai:audit-request",
-        timestamp,
-      }),
-    }).catch((err) => console.error("GHL audit-request webhook failed", err));
-  }
 
   // Save to Supabase — table: audit_requests (business_name, email, created_at, ip_address, status)
   const saved = await supabaseRest<null>("audit_requests", {
