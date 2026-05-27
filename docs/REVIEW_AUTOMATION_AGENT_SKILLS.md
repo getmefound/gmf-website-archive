@@ -98,6 +98,10 @@ Systems Director must know:
 - how to configure protected endpoints and webhooks
 - how to configure phone/voice basics for AI Ready only after approval
 - how to connect POS/CRM later through native integration, Zapier, CRM Connector, or manual CSV flow
+- how to decide when an agent job requires Langfuse tracing
+- how to write agent work, client status, approvals, incidents, recurring checks, and proof links into Monday through an approved GMF endpoint or integration
+- how to create a Mike approval item without performing the risky action
+- how to keep owner dashboards separate from debugging traces
 - how to test the setup before launch
 
 Systems Director "done" means:
@@ -107,6 +111,8 @@ Systems Director "done" means:
 - sender health passes
 - SMS readiness is blocked unless A2P/opt-in/STOP/sample approval are complete
 - review request workflow is protected by internal approval
+- agent-owned work has an owner-visible status or proof link when relevant
+- Langfuse trace exists when the job used LLM reasoning, tools/APIs, client data, recommendations, approvals, meaningful spend, outbound messaging, retries, escalations, or multi-step reasoning
 - launch test passed or blocker assigned
 - Auditor notified for verification
 

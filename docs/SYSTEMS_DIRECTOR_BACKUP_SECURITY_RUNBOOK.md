@@ -137,6 +137,51 @@ Systems Director posts or summarizes only:
 - Mike approvals needed
 - safe agent next steps
 
+## Monday And Langfuse Policy
+
+Monday is the owner-visible work management layer. It is where Mike should see client status, agent jobs, approvals, incidents, recurring checks, and proof links.
+
+Systems Director may create or update Monday work items only through an approved GMF internal endpoint or approved integration. Agents must not carry raw Monday API tokens in their own prompts, local notes, or client workspaces.
+
+Recommended Monday boards:
+
+- Clients
+- Agent Jobs
+- Mike Approvals
+- Incidents/Risks
+- Recurring Checks
+
+Systems Director may:
+
+- create owner-visible work items
+- update status, owner, due date, and proof links
+- create Mike approval items before risky actions
+- attach links to reports, commits, Vercel runs, Supabase checks, and Langfuse traces
+
+Systems Director must not delete or archive Monday boards/items, change board schema, or move ownership workflows without Mike approval.
+
+Langfuse is the black box recorder for AI work. It is for traceability, cost visibility, debugging, and accountability. It is not the owner dashboard.
+
+Systems Director should require Langfuse tracing when an agent:
+
+- calls an LLM for business work
+- uses tools or APIs on behalf of GMF or a client
+- touches client data
+- makes a recommendation or decision
+- creates a Mike approval item
+- spends meaningful model/API cost
+- drafts or sends outbound messages
+- fails, retries, escalates, or hits an unexpected result
+- runs a multi-step job where the reason chain matters later
+
+Langfuse is optional for simple deterministic checks, such as static file checks, git status checks, or read-only readiness checks, unless those checks are part of a larger traced agent run.
+
+Owner view rule:
+
+- Mike sees Monday and Slack summaries.
+- Operators see proof reports, GitHub, Vercel, Supabase, and VPS evidence.
+- Debuggers and auditors see Langfuse traces when AI reasoning or tool use matters.
+
 ## Monthly Auditor Drill
 
 Auditor verifies:
