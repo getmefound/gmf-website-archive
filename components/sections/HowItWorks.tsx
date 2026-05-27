@@ -16,14 +16,14 @@ const STEPS = [
         <path d="m21 21-4.3-4.3" />
       </svg>
     ),
-    accentColor: "text-amber-900",
-    iconBg: "bg-white/30",
-    iconRing: "ring-white/40",
-    borderColor: "#d97706",
-    cardBg: "bg-amber-300",
-    numberColor: "text-amber-400/30",
-    textColor: "text-amber-950",
-    mutedColor: "text-amber-900/70",
+    accentColor: "text-amber-400",
+    iconBg: "bg-amber-400/15",
+    iconRing: "ring-amber-400/25",
+    borderColor: "#f59e0b",
+    cardBg: "bg-[#1a2332]",
+    numberColor: "text-white/[0.06]",
+    textColor: "text-white",
+    mutedColor: "text-slate-300/70",
   },
   {
     number: "02",
@@ -34,14 +34,14 @@ const STEPS = [
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
       </svg>
     ),
-    accentColor: "text-green-900",
-    iconBg: "bg-white/30",
-    iconRing: "ring-white/40",
-    borderColor: "#15803d",
-    cardBg: "bg-green-400",
-    numberColor: "text-green-500/30",
-    textColor: "text-green-950",
-    mutedColor: "text-green-900/70",
+    accentColor: "text-[var(--color-accent)]",
+    iconBg: "bg-accent/15",
+    iconRing: "ring-accent/25",
+    borderColor: "var(--color-accent)",
+    cardBg: "bg-[#162420]",
+    numberColor: "text-white/[0.06]",
+    textColor: "text-white",
+    mutedColor: "text-slate-300/70",
   },
   {
     number: "03",
@@ -52,14 +52,14 @@ const STEPS = [
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
       </svg>
     ),
-    accentColor: "text-teal-900",
-    iconBg: "bg-white/30",
-    iconRing: "ring-white/40",
-    borderColor: "#0d9488",
-    cardBg: "bg-teal-300",
-    numberColor: "text-teal-400/30",
-    textColor: "text-teal-950",
-    mutedColor: "text-teal-900/70",
+    accentColor: "text-emerald-400",
+    iconBg: "bg-emerald-400/15",
+    iconRing: "ring-emerald-400/25",
+    borderColor: "#10b981",
+    cardBg: "bg-[#14262a]",
+    numberColor: "text-white/[0.06]",
+    textColor: "text-white",
+    mutedColor: "text-slate-300/70",
   },
 ];
 
@@ -131,20 +131,20 @@ function StepCard({
             <p className={`text-sm ${step.mutedColor} mb-2`}>
               Before/after report in 48 hours:
             </p>
-            <div className="flex items-center gap-3 rounded-lg bg-white/40 px-3 py-2">
+            <div className="flex items-center gap-3 rounded-lg bg-white/10 px-3 py-2">
               <div className="text-center">
-                <span className="block text-[10px] text-teal-900/60 mb-0.5">Before</span>
-                <span className="block text-xl font-black text-red-600/80">
+                <span className="block text-[10px] text-slate-400 mb-0.5">Before</span>
+                <span className="block text-xl font-black text-red-400/80">
                   <AnimatedNumber value={12} suffix="%" duration={800} />
                 </span>
               </div>
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-teal-900/40 shrink-0">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-slate-500 shrink-0">
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
               <div className="text-center">
-                <span className="block text-[10px] text-teal-900/60 mb-0.5">After</span>
-                <span className="block text-xl font-black text-teal-900">
+                <span className="block text-[10px] text-slate-400 mb-0.5">After</span>
+                <span className="block text-xl font-black text-emerald-400">
                   <AnimatedNumber value={89} suffix="%" duration={1200} />
                 </span>
               </div>
