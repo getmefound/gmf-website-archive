@@ -34,6 +34,10 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `ghl-exit-migration-plan.md` | Parallel plan to downgrade GHL to $97, freeze new GHL dependency, rebuild core services outside GHL, train agents, and cancel when safe. |
 | `mission-control-job-flow-index.md` | Mission Control job index links and the split between Commercial Reach and optional custom agent/CRM work. |
 | `slack-agent-command-runbook.md` | How Mike talks to Manager, GHL Expert, Sales Manager, and approval gates through Slack-ready commands. |
+| `prospecting-core-setup-memory.md` | Durable memory for Mike's prospecting operating preference: core setup first, Manager only interrupts for human-needed blockers. |
+| `prospecting-cold-email-operating-plan.md` | Current cold email prospecting plan and first Smartlead readiness gate. |
+| `monday-prospecting-core-setup.md` | Monday board shape and first human-needed prospecting job. |
+| `monday-prospecting-core-setup-import.csv` | Monday-ready first job import row for Smartlead API access. |
 | `agent-jobs-template.csv` | Starter job queue format for agent work, budgets, approvals, and next actions. |
 | `agent-jobs.csv` | Current working job queue for agent work. |
 | `daily-brief-template.md` | Manager daily brief format for Mike approvals and status. |

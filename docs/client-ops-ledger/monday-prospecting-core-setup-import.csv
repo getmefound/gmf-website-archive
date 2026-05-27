@@ -1,0 +1,2 @@
+Item,Group,Status,Owner,Priority,Due Date,Human Needed,System,Proof Link,Next Action,Notes
+Refresh Smartlead API access,Human Needed,Human Needed,Mike,High,2026-05-27,Yes,Smartlead,docs/client-ops-ledger/prospecting-smartlead-preflight-current.md,"Generate or confirm a valid Smartlead API key, store it securely, add it locally and in Vercel production, then re-run npm run prospecting:preflight.","First prospecting job. Live Smartlead sends must not run until API access and warmup readiness are proven."

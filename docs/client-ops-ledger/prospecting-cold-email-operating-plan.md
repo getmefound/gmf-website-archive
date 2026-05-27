@@ -16,6 +16,26 @@ Manager should not contact Mike for routine progress. Manager contacts Mike only
 
 Routine status belongs in Mission Control, Monday, proof reports, or on-demand Slack commands.
 
+## Core Setup First
+
+Before agents build lists, write copy, upload leads, or send anything, the core operating setup must exist:
+
+- Monday owner board is ready for prospecting jobs, approvals, blockers, and proof links
+- Manager contact rule is active: human-needed only
+- Smartlead API access is valid
+- Smartlead warmup/readiness report is current
+- Mission Control has the three owner reports planned
+- Langfuse policy is known for agent/tool/client-data traces
+- first seed campaign is blocked until preflight passes
+
+The first Monday-visible human job is:
+
+```text
+Refresh Smartlead API access so agents can run read-only warmup/readiness checks.
+```
+
+Current live Monday status: queued locally as a Monday-ready record. Direct Monday write is not available yet because no Monday connector or `MONDAY_API_TOKEN` is configured in this workspace.
+
 ## First Campaign Goal
 
 Launch a tiny, controlled cold email seed test after Smartlead readiness is proven.
