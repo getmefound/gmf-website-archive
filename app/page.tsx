@@ -232,9 +232,9 @@ export default function Home() {
 
         <ReportTransformation />
 
-        <TrustCards />
-
         <HowItWorks />
+
+        <TrustCards />
 
         <VisibilityCheck />
 
