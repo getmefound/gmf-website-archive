@@ -43,9 +43,9 @@ const teaserCards: TeaserCard[] = [
     price: "$149",
     cadence: "one-time",
     bullets: [
-      "Your Google profile becomes complete enough for AI to recommend",
-      "Your website and Google listing tell the same story — no conflicting info",
-      "Past customers get review requests so your ratings start climbing",
+      "Google and AI can find and recommend your business — done in 48 hours",
+      "Every search, every AI query, every directory shows the same business",
+      "Review requests go to past customers automatically. No follow-up needed.",
     ],
     href: "/checkout/get-found-refresh",
     cta: "Get Found for $149",
@@ -59,8 +59,8 @@ const teaserCards: TeaserCard[] = [
     cadence: "/month",
     bullets: [
       "Everything in Get Found — included free.",
-      "New review requests go out every month — AI reply drafts written for you.",
-      "Monthly report showing where you stand vs. local competitors.",
+      "Reviews keep coming every month. Every response drafted in your voice.",
+      "Monthly report shows where you stand and what to do next.",
     ],
     href: "/checkout/stay-found",
     cta: "Stay Found for $99/mo",
@@ -70,7 +70,7 @@ const teaserCards: TeaserCard[] = [
   },
   {
     name: "Always Ready",
-    tagline: "Reviews, content, and AI voice readiness in one plan.",
+    tagline: "Reviews, content, and AI readiness — handled.",
     price: "$299",
     cadence: "/month",
     bullets: [
@@ -297,6 +297,17 @@ export default function Home() {
                             {p.cta}
                             <span aria-hidden="true">→</span>
                           </Link>
+                          <p className="mt-2 text-center text-[11px] text-[var(--color-hero-subtext)]/50">
+                            {p.highlight ? "No contract · Cancel anytime" : "48-hour delivery · No contract"}
+                          </p>
+                          <div className="mt-3 text-center">
+                            <Link
+                              href={`/pricing#${p.name === "Get Found" ? "get-found-refresh" : "stay-found"}`}
+                              className="text-xs font-semibold text-[var(--color-accent)] opacity-70 hover:opacity-100 transition-opacity"
+                            >
+                              See what&apos;s included →
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </Spotlight>
@@ -316,7 +327,7 @@ export default function Home() {
                   <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-sky-300">
                     {alwaysReadyCard.jobLabel}
                   </p>
-                  <h3 className="text-3xl font-bold leading-tight">Are you ready?</h3>
+                  <h3 className="text-3xl font-bold leading-tight">Be the business AI finds, recommends, and calls.</h3>
                   <p className="mt-3 max-w-xl text-sm leading-7 text-white/72 md:text-base">
                     Google is already turning Search into an AI action layer. Always Ready prepares your facts, content, and phone readiness before Google, ChatGPT, Claude, and other AI systems recommend or call your business.
                   </p>
@@ -362,6 +373,17 @@ export default function Home() {
                     {alwaysReadyCard.cta}
                     <span aria-hidden="true"> →</span>
                   </Link>
+                  <p className="mt-2 text-center text-[11px] text-hero-subtext/45">
+                    No contract · Cancel anytime
+                  </p>
+                  <div className="mt-3 text-center">
+                    <Link
+                      href="/pricing#always-ready"
+                      className="text-xs font-semibold text-accent opacity-70 hover:opacity-100 transition-opacity"
+                    >
+                      See what&apos;s included →
+                    </Link>
+                  </div>
                 </div>
               </div>
             </Reveal>

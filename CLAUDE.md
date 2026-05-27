@@ -3,7 +3,7 @@
 ## Design & Messaging Rules (from Mike)
 
 - **Always research before making design decisions.** Never guess on colors, layouts, spacing, or animations. Search for expert best practices first — every time. If unsure, research it. Don't ask Mike for design opinions; he expects you to bring expert-backed recommendations.
-- **Target market:** Dentists, attorneys, therapists, accountants — professionals, not trades. Use deep grounded tones (blues, dark greens, slate) that communicate trust. Never use bright/playful colors.
+- **Target market:** Any local business owner who relies on Google to bring in customers. Exclude highly saturated, commoditized trades (HVAC, plumbing, roofing, etc.) — not because they can't use the product, but because they're oversaturated with marketing offers and harder to reach. Use deep grounded tones (blues, dark greens, slate) that communicate trust. Never use bright/playful colors.
 - **Color palette:** The site uses dark navy/green (#1a2332, #162420) and cream/light backgrounds. Accent is muted green. Stick to this palette.
 - **Section heights:** Keep sections compact. Use py-8 to py-12 on mobile, md:py-12 to md:py-16 on desktop. Never use py-20+ unless it's the hero.
 - **Alternating backgrounds:** Sections should alternate dark/light for visual rhythm.
@@ -19,7 +19,7 @@ The entire site messaging was rebuilt around Google I/O 2026 (announced May 19, 
 - **Core message:** "Google doesn't rank local businesses anymore. It picks one. If your profile isn't ready, AI skips you."
 - **The urgency is real:** AI Mode has 1B+ monthly users, queries doubling every quarter. The search box itself was replaced with AI. This happened 8 days before the messaging rewrite.
 - **The opportunity angle:** The old system (10 blue links, pages) was locked by SEO spend. The new system (AI recommends 1-2 businesses) rewards completeness, not budget. Businesses that act first get picked before competitors adapt.
-- **Target buyer:** Business owners (dentists, therapists, attorneys, accountants) who've passively gotten clients from Google for years and now face the ground shifting. NOT marketing-savvy people. NOT oversaturated trades (HVAC, plumbing).
+- **Target buyer:** Local business owners who've passively gotten customers from Google for years and now face the ground shifting. NOT marketing-savvy people. NOT oversaturated trades (HVAC, plumbing, roofing).
 - **No clients yet:** The site must do ALL the selling. No testimonials, no referral trust. Every word earns credibility from scratch.
 - **GetMeFound = "get found":** The word "found" should appear in key messaging. The brand name IS the value prop.
 
@@ -36,12 +36,18 @@ The homepage was restructured from 14 sections to 7:
 
 Sections that were REMOVED from homepage: stats row, trust cards, game changed, cost comparison (moved to pricing page), revenue calculator (has own /calculator page), social proof stats, extra footer CTA.
 
+## Completed (Session 2 — May 2026)
+
+- ✅ **Sample report changed to dental practice** — Now shows "Lakeside Family Dentistry, Hartford CT · General Dentistry". Score card copy updated ("new patients", "competing practices").
+- ✅ **FAQ copy updated** — Removed "You give us access, we handle everything." Q1 now uses "Google picks" language and ends with "Everything is done within 48 hours."
+- ✅ **Final CTA updated** — Headline is now "One business gets recommended in your area. / Make sure it's yours." (was the old hero line about "your competitor").
+- ✅ **CostCompare reworked for dentist buyers** — Replaced Birdeye/Yext/BrightLocal with Podium/Weave (tools dentists know) and generic descriptions. Footnote and callout updated to match.
+- ✅ **Visibility Check** — Already well-aligned with new messaging. No changes needed.
+- ✅ **Pricing page** — Hero, product sections, and Always Ready are already updated. No further changes needed.
+
 ## Remaining Work
 
-These tasks still need to be done:
-1. **Change sample report from lawn care to dentist** — The ReportTransformation component shows "Green Valley Lawn Care" but target market is dentists. Change to a dental practice.
-2. **Update visibility check section copy** — Thread the new "Google picks, not ranks" messaging through.
-3. **Update FAQ copy** — Match the new outcome-focused messaging. Remove "You give us access, we handle everything" language.
-4. **Update final CTA copy** — Currently "Your competitor is being recommended" is the old hero line. Should use new messaging.
-5. **Review and update pricing page** — Pricing page hero was updated but the rest of the page sections may need copy updates.
-6. **Cost comparison table on pricing page** — Was moved there from homepage. Consider whether it serves dentist buyers or should be reworked (compares to Birdeye/Yext which dentists don't know).
+Nothing critical outstanding. Optional future improvements:
+- **VisibilityCheck section heading** — Currently "What Google & AI check". Could be made more specific to the "picks, not ranks" angle, but current copy is functional.
+- **Spanish page (app/es/)** — Homepage, pricing, and FAQ may still use old messaging. Low priority unless Spanish traffic matters.
+- **Blog posts** — Existing posts may predate the May 2026 messaging shift. Worth a content audit before running ads.

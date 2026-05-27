@@ -30,7 +30,7 @@ const products: ProductDetailData[] = [
     name: "Get Found",
     outcome: "Fix the Google-facing basics before AI search decides who to recommend.",
     story:
-      "A one-time setup for local businesses that need to look current, accurate, and easy for Google, AI assistants, and customers to understand. It is the lowest-risk first step before a monthly plan.",
+      "A one-time setup for local businesses that need to look current, accurate, and trustworthy to Google, AI assistants, and customers. Fix it once, see the difference in 48 hours.",
     stats: [
       { label: "Type", value: "One-time" },
       { label: "Typical turn", value: "72h" },
@@ -58,7 +58,7 @@ const products: ProductDetailData[] = [
     price: "$149",
     cadenceLabel: " one-time",
     setup: "No contract",
-    promoNote: "Best first step for a business that wants proof before a monthly plan.",
+    promoNote: "Fix the foundation first. Results in 48 hours, no subscription required.",
     ctaLabel: "Start Get Found",
     ctaHref: "/checkout/get-found-refresh",
     secondaryCtaHref: BOOKING_HREF,
@@ -79,10 +79,10 @@ const products: ProductDetailData[] = [
     ],
     whatYouGet: [
       "Everything in Get Found - free",
-      "Weekly client list upload path for review requests",
+      "Weekly customer list upload for review requests",
       "Text and email review request campaigns after phone-number approval",
       "Text-message setup handled by our team — no extra tool needed",
-      "AI response drafts in the client's brand voice",
+      "AI response drafts in your brand voice",
       "Negative review alert and suggested response target within 4 business hours",
       "One weekly Google Business Profile post",
       "Review monitoring across platforms where available",
@@ -114,7 +114,7 @@ const products: ProductDetailData[] = [
     quickMath: {
       label: "Built-in savings",
       formula:
-        "Possible savings: $24–$39+/mo for a standalone review-text tool. Text-message setup is included in Stay Found, so there is no extra setup project just to request reviews.",
+        "Possible savings: $200–$400+/mo vs. a standalone review platform like Podium or Weave, which charge $299–$499/mo per location. Text-message setup is included — no extra platform needed.",
       note: "",
     },
   },
@@ -220,7 +220,7 @@ export default function PricingPage() {
               <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { value: "$149", label: "Get Found setup", border: "border-t-green-500", text: "text-green-500" },
-                  { value: "$99/mo · $49 one-time setup fee", label: "Stay Found", border: "border-t-amber-500", text: "text-amber-500" },
+                  { value: "$99/mo", label: "Stay Found · $49 setup", border: "border-t-amber-500", text: "text-amber-500" },
                   { value: "$299/mo", label: "Always Ready", border: "border-t-sky-500", text: "text-sky-600" },
                 ].map((stat) => (
                   <div
@@ -370,7 +370,7 @@ export default function PricingPage() {
                   03 - Always Ready
                 </p>
                 <h2 className="text-3xl font-bold leading-tight md:text-5xl">
-                  Are you ready?
+                  Be the business AI finds, recommends, and calls.
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-white/75 md:text-lg">
                   Google is moving from search results to AI-assisted actions. Always Ready prepares the business facts, content, phone readiness, and escalation rules Google, ChatGPT, Claude, and other AI systems need before they recommend or call on behalf of a customer.
@@ -458,6 +458,9 @@ export default function PricingPage() {
                     >
                       Book a Call
                     </Link>
+                    <p className="mt-1 text-center text-[11px] text-slate-600">
+                      No contract · Cancel anytime
+                    </p>
                   </div>
                 </div>
 
