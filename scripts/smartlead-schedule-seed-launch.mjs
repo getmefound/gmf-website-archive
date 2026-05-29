@@ -24,17 +24,78 @@ const SENDERS = [
   "mike@getmefoundlocal.com",
 ];
 
-const EMAIL_BODY = `Hi there,
+const FOOTER = `Mike Egidio · GetMeFound, a service of AI Outsource Hub LLC · 13727 SW 152nd St. #1236, Miami, FL 33177 · Not interested? Reply "STOP" and I'll remove you.`;
 
-I was checking how local med spas show up when people ask Google and AI tools who to trust near {{city}}.
+const SEQUENCE_STEPS = [
+  {
+    seq_number: 1,
+    subject_variants: [
+      "quick {{company_name}} note",
+      "{{first_name}}, quick one",
+    ],
+    email_body: `Hi {{first_name}},
 
-{{company_name}} looks like the kind of business that should be easier to recommend, but I noticed a few visibility gaps I would fix first.
+{{gap_hook}}
 
-Want me to send over the quick audit?
+Here's why it matters: Google and AI like ChatGPT now pick just one or two local {{category}}s to recommend — and it's the most complete, active profile that wins, not the biggest.
 
-If this is not useful, reply stop and I'll close the loop.
+I put together a free report showing exactly where {{company_name}} stands. Want it? Just reply "YES."
 
-Mike`;
+— Mike
+
+${FOOTER}`,
+    seq_delay_details: { delay_in_days: 0 },
+  },
+  {
+    seq_number: 2,
+    subject_variants: [
+      "{{company_name}} in {{city}}",
+      "who AI is picking",
+    ],
+    email_body: `Hi {{first_name}},
+
+Circling back on {{company_name}}. When someone in {{city}} asks Google or ChatGPT for a {{category}}, they get one or two names — and a few of your competitors are set up to be those names. The gap closes fast.
+
+Want the free report showing where you stand? Reply "YES."
+
+— Mike
+
+${FOOTER}`,
+    seq_delay_details: { delay_in_days: 3 },
+  },
+  {
+    seq_number: 3,
+    subject_variants: [
+      "is {{company_name}} invisible to AI?",
+      "best {{category}} in {{city}}?",
+    ],
+    email_body: `Hi {{first_name}},
+
+More people skip Google's list and just ask AI "best {{category}} in {{city}}?" It names one or two businesses based on signals most owners never see — and right now {{company_name}} likely isn't one of them.
+
+I'll show you what AI sees, free. Reply "YES."
+
+— Mike
+
+${FOOTER}`,
+    seq_delay_details: { delay_in_days: 7 },
+  },
+  {
+    seq_number: 4,
+    subject_variants: [
+      "closing this out",
+      "last one on {{company_name}}",
+    ],
+    email_body: `Hi {{first_name}},
+
+I've nudged a couple times about {{company_name}}'s visibility — I'll leave it here. If you ever want that free report, just reply "YES" and it's yours. Either way, all the best.
+
+— Mike
+
+${FOOTER}`,
+    seq_delay_details: { delay_in_days: 11 },
+  },
+];
 
 main().catch((error) => {
   console.error(error instanceof Error ? error.message : error);
@@ -135,11 +196,21 @@ async function main() {
       throw new Error(`Campaign status must be DRAFTED before launch setup. Current status: ${campaign.status}`);
     }
 
-    if (!existingSequences.length) {
-      actions.push({ step: "add_sequence", response: await smartleadPost(`/campaigns/${campaign.id}/sequences`, apiKey, sequencePayload) });
-    } else {
-      actions.push({ step: "add_sequence", skipped: true, reason: "sequence_already_exists" });
+    // REPLACE existing sequences with the new 4-step drip
+    if (existingSequences.length) {
+      for (const seq of existingSequences) {
+        const seqId = seq.id ?? seq.seq_id ?? seq.sequence_id;
+        if (seqId) {
+          try {
+            await smartleadDelete(`/campaigns/${campaign.id}/sequence/${seqId}`, apiKey);
+          } catch (err) {
+            console.warn(`[smartlead] could not delete sequence ${seqId}: ${err.message}`);
+          }
+        }
+      }
+      actions.push({ step: "delete_existing_sequences", count: existingSequences.length });
     }
+    actions.push({ step: "add_4_step_sequence", response: await smartleadPost(`/campaigns/${campaign.id}/sequences`, apiKey, sequencePayload) });
 
     actions.push({
       step: "link_sender_accounts",
@@ -227,14 +298,12 @@ async function main() {
 
 function buildSequencePayload() {
   return {
-    sequences: [
-      {
-        seq_number: 1,
-        subject: "quick visibility check for {{company_name}}",
-        email_body: EMAIL_BODY,
-        seq_delay_details: { delay_in_days: 0 },
-      },
-    ],
+    sequences: SEQUENCE_STEPS.map((step) => ({
+      seq_number: step.seq_number,
+      subject: step.subject_variants[0],
+      email_body: step.email_body,
+      seq_delay_details: step.seq_delay_details,
+    })),
   };
 }
 
@@ -242,19 +311,33 @@ function buildLeadsPayload({ leadRows, approvedBy }) {
   return {
     lead_list: leadRows.map((row) => ({
       email: row.email,
-      company_name: row.name,
+      first_name: row.ownerFirstName || row.owner_first_name || "there",
+      company_name: row.name || row.company_name,
       phone_number: row.phone,
       website: row.website,
       company_url: row.website,
       location: `${row.city}, ${row.state}`,
       custom_fields: {
-        city: row.city,
-        state: row.state,
-        niche: row.niche,
-        rating: row.rating,
-        review_count: row.reviewCount,
-        reviews_link: row.reviewsLink,
-        source_query: row.sourceQuery,
+        // Merge fields used in sequence templates
+        city: row.city || "",
+        state: row.state || "",
+        category: row.category || "",
+        // Gap personalization
+        gap_hook: row.gapHook || row.gap_hook || "",
+        worst_gap: row.worstGap || row.worst_gap || "",
+        visibility_score: String(row.visibilityScore ?? row.visibility_score ?? ""),
+        // Signal statuses (for pipeline/reporting)
+        signal_missing_hours: row.signalMissingHours || row.signal_missing_hours || "",
+        signal_no_website: row.signalNoWebsite || row.signal_no_website || "",
+        signal_thin_profile: row.signalThinProfile || row.signal_thin_profile || "",
+        signal_stale_reviews: row.signalStaleReviews || row.signal_stale_reviews || "",
+        signal_few_reviews: row.signalFewReviews || row.signal_few_reviews || "",
+        signal_few_photos: row.signalFewPhotos || row.signal_few_photos || "",
+        // Legacy / context
+        review_count: String(row.reviewCount ?? row.review_count ?? ""),
+        days_since_last_review: String(row.daysSinceLastReview ?? row.days_since_last_review ?? ""),
+        niche: row.sourceTier || row.niche_tier || "",
+        source_query: row.sourceQuery || row.source_query || "",
         launch_batch: `GMF Smartlead seed ${LAUNCH_DATE}`,
         approved_by: approvedBy,
       },
@@ -294,6 +377,16 @@ async function smartleadGet(path, apiKey) {
   const url = new URL(`${API_BASE}${path}`);
   url.searchParams.set("api_key", apiKey);
   const response = await fetch(url, { headers: { accept: "application/json" } });
+  return parseSmartleadResponse(path, response);
+}
+
+async function smartleadDelete(path, apiKey) {
+  const url = new URL(`${API_BASE}${path}`);
+  url.searchParams.set("api_key", apiKey);
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: { accept: "application/json" },
+  });
   return parseSmartleadResponse(path, response);
 }
 

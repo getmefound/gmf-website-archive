@@ -153,7 +153,7 @@
     "fields": ["name", "email", "phone", "website", "address", "category", "rating", "review_count", "photos_count", "hours_present", "latest_review_date", "business_status"]
   },
   "filters": {
-    "requireWebsite": true,
+    "requireWebsite": false,
     "requireValidEmail": true,
     "maxReviewCount": 25,
     "minCompetitorReviewGap": 25,
