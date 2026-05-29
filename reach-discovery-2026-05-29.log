@@ -1,0 +1,12 @@
+
+> getmefound-website@0.1.0 reach:discover
+> node scripts/reach-discovery-first.mjs --lane all --limit 20 --max-spend 5 --crawl-limit 60 --allow-spend
+
+
+Reviews discovery report: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-reviews-2026-05-29.md
+
+AI Visibility discovery report: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-ai-2026-05-29.md
+
+Relay discovery report: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-relay-2026-05-29.md
+
+Discovery summary: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-summary-2026-05-29.md
