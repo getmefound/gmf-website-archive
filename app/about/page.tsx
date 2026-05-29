@@ -126,7 +126,7 @@ export default function AboutPage() {
                 {/* Photo + name */}
                 <div className="flex flex-col items-start gap-3">
                   <div
-                    className="h-44 w-44 rounded-2xl ring-1 ring-border"
+                    className="h-44 w-44 rounded-full ring-2 ring-border"
                     role="img"
                     aria-label="Mike Egidio"
                     style={{
