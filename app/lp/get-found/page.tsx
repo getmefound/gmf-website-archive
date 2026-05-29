@@ -38,7 +38,7 @@ const SIGNALS = [
 const FAQ = [
   {
     q: "What do I get for $149?",
-    a: "A complete AI-visibility setup run through the Visibility Engine: your Google listing corrected, your website matched to it, the code that makes AI read you correctly, cross-web consistency fixed, and your first review path launched. Done in 48 hours. You get a before/after snapshot showing what changed.",
+    a: "AI crawlability + schema added so Google AI, ChatGPT, and Claude can read and trust your site. Your Google profile rebuilt for the signals AI checks first. Cross-web entity consistency fixed. Your review-velocity engine switched on. A before/after report scoring all 20 AI signals — delivered in 48 hours.",
   },
   {
     q: "Do you guarantee I'll be #1 on Google?",

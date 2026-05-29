@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const BULLETS = [
-  "Google listing corrected — hours, photos, services, description",
-  "Website matched to your Google listing exactly",
-  "First review requests sent to past customers",
-  "Before/after visibility report delivered in 48 hours",
+  "AI crawlability + schema added — Google AI, ChatGPT, and Claude can actually read and trust your business.",
+  "Google Business Profile rebuilt for the signals AI checks first — categories, services, hours, and entity consistency.",
+  "Review-velocity engine switched on — automated requests keep recent reviews flowing.",
+  "Before/after report scoring all 20 signals AI checks — in 48 hours.",
 ];
 
 interface GetFoundCloseBlockProps {

@@ -44,9 +44,9 @@ const teaserCards: TeaserCard[] = [
     price: "$149",
     cadence: "one-time",
     bullets: [
-      "We map every signal Google AI, ChatGPT, and Claude check before recommending a business",
-      "Profile, business facts across the web, and first review path — mapped and fixed",
-      "Conflicts that make them distrust you: resolved. Done in 48 hours.",
+      "AI crawlability + schema added — so Google AI, ChatGPT, and Claude can read and trust your business",
+      "Google profile rebuilt for the signals AI checks first + entity consistency across the web",
+      "Review-velocity engine switched on + before/after report scoring all 20 AI signals",
     ],
     href: "/checkout/get-found-refresh",
     cta: "Get Found for $149",
@@ -237,7 +237,7 @@ export default function Home() {
                 Pick the level that fits where you are.
               </h2>
               <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-                We run the Google profile, review path, and AI visibility basics. You stay focused on your business.
+                We engineer the signals AI checks — crawlability, schema, entity consistency, and review velocity. You stay focused on your business.
               </p>
             </div>
 

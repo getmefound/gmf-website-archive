@@ -19,12 +19,12 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
     cadence: "one-time",
     setup: "No contract",
     summary:
-      "Get Found — complete AI-visibility setup, delivered in 48 hours. We map, align, and amplify every signal Google AI, ChatGPT, and Claude check before recommending a business.",
+      "Get Found — AI crawlability, schema, entity consistency, and review-velocity engine. Every signal Google AI, ChatGPT, and Claude check before recommending a business — engineered in 48 hours.",
     whatYouGet: [
-      "We fix your Google listing — hours, services, photos, everything",
-      "We make your website match your Google listing exactly",
-      "Your first review requests go out to past customers automatically",
-      "Before/after snapshot showing how Google and AI see your business",
+      "AI crawlability + schema added — Google AI, ChatGPT, and Claude can read and trust your site",
+      "Google profile rebuilt for the signals AI checks first — categories, services, hours, entity consistency",
+      "Review-velocity engine switched on — automated requests keep recent reviews flowing",
+      "Before/after report scoring all 20 AI signals — delivered in 48 hours",
     ],
     stripePriceId: "price_1TakBqLyThSzGsL4l30CMrei",
     stripeMode: "payment",

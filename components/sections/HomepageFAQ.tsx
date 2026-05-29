@@ -3,7 +3,7 @@ import Link from "next/link";
 const ITEMS = [
   {
     q: "What exactly do you do for $149?",
-    a: "We fix everything Google AI, ChatGPT, and Claude check before recommending a local business. That means correcting your Google listing — hours, services, photos, service area, and description — making your website match it exactly, submitting your business to the top directories, and sending your first review request campaign to past customers. Everything is done within 48 hours. You get a before/after report showing exactly what changed.",
+    a: "We engineer the signals Google AI, ChatGPT, and Claude check before recommending a local business — AI crawlability and schema so they can read your site, your Google profile rebuilt for the signals AI checks first, cross-web entity consistency, your review-velocity engine switched on, and a before/after report scoring all 20 AI signals. Everything done within 48 hours.",
   },
   {
     q: "Will you break my email?",

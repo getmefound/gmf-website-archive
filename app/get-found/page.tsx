@@ -30,28 +30,28 @@ const BEFORE_SIGNALS = buildDemoSignals({
 
 const DELIVERABLES = [
   {
-    label: "Google Business Profile cleanup",
-    detail: "Hours, services, photos, primary + secondary categories, business description, and all relevant attributes — reviewed and corrected.",
+    label: "AI crawlability + schema added",
+    detail: "We add the code that lets Google AI, ChatGPT, and Claude actually parse and trust your site — structured data in the format AI systems read before recommending a business.",
   },
   {
-    label: "Website-to-listing match",
-    detail: "Your website's name, address, phone, hours, and service descriptions are aligned exactly with your Google listing so AI sees one consistent story.",
+    label: "Google Business Profile rebuilt for AI signals",
+    detail: "Primary + secondary categories, services, hours, attributes, and description — rebuilt for the signals AI checks first, including entity consistency for the knowledge graph.",
   },
   {
-    label: "Directory sync",
-    detail: "Your business facts submitted to the top directories (Apple Maps, Bing, Yelp, and others) that feed Google's knowledge graph.",
+    label: "Cross-web entity consistency",
+    detail: "Your name, address, phone, and business facts synced everywhere AI cross-checks: Apple Maps, Bing, Yelp, and the directories that feed Google's knowledge graph.",
   },
   {
-    label: "Schema + crawlability fixes",
-    detail: "We add the code behind your site that tells Google AI, ChatGPT, and Claude exactly who you are — in a format crawlers can parse.",
+    label: "Review-velocity engine switched on",
+    detail: "Automated review requests to past customers so recent reviews keep flowing. AI now weights recency over total count — a steady stream beats a burst from years ago.",
   },
   {
-    label: "First review-velocity path",
-    detail: "A clean review-request path set up and your first campaign sent to past customers — so AI sees fresh, real proof of activity.",
+    label: "Before/after report — all 20 AI signals scored",
+    detail: "Every signal we fixed, before and after, with scores — delivered within 48 hours of completing access and intake. See exactly what changed.",
   },
   {
-    label: "Before/after visibility report",
-    detail: "A snapshot of every signal checked — before and after — so you can see exactly what changed and what it means.",
+    label: "48-hour delivery",
+    detail: "Work begins within 24 hours of access. Before/after report delivered within 48 hours. One-time, no subscription needed.",
   },
 ];
 
@@ -71,7 +71,7 @@ const ACCESS_SAFETY = [
 const FAQ = [
   {
     q: "What exactly do you do for $149?",
-    a: "We fix everything Google AI, ChatGPT, and Claude check before recommending a local business. That means correcting your Google listing — hours, services, photos, service area, and description — making your website match it exactly, submitting your business to the top directories, and sending your first review request campaign to past customers. Everything is done within 48 hours. You get a before/after report showing exactly what changed.",
+    a: "We engineer the signals Google AI, ChatGPT, and Claude check before recommending a local business — AI crawlability and schema so they can read your site, your Google profile rebuilt for the signals AI checks first, cross-web entity consistency, your review-velocity engine switched on, and a before/after report scoring all 20 AI signals. Everything done within 48 hours.",
   },
   {
     q: "How long before I see results?",

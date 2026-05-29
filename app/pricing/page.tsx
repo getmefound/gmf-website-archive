@@ -32,19 +32,19 @@ const products: ProductDetailData[] = [
     name: "Get Found",
     outcome: "Your complete AI-visibility setup, run through the Visibility Engine.",
     story:
-      "We map every signal Google AI, ChatGPT, and Claude check before recommending a business — your profile, your business facts across the web, and your first review path — and fix the conflicts that make them distrust you. Done in 48 hours.",
+      "We engineer every signal Google AI, ChatGPT, and Claude check before recommending a business — crawlability, schema, entity consistency across the web, profile completeness, and your review-velocity engine — and fix the conflicts that make them distrust you. Done in 48 hours.",
     stats: [
       { label: "Type", value: "One-time" },
       { label: "Typical turn", value: "48–72h" },
       { label: "Contract", value: "None" },
     ],
     whatYouGet: [
-      "Full Signal Stack audit — every data point AI reads about your business",
-      "Google listing corrected — hours, services, photos, category, attributes",
-      "Website ↔ profile fact alignment so AI sees one consistent story",
-      "Structured data and entity signals reviewed for AI-readiness",
-      "First review-velocity path built — requests sent to past customers automatically",
-      "Before/after visibility snapshot showing what changed",
+      "AI crawlability + schema added — the code that lets Google AI, ChatGPT, and Claude read and trust your site",
+      "Google Business Profile rebuilt for the signals AI checks first — categories, services, hours, attributes, and entity consistency",
+      "Cross-web entity consistency fixed — your name, address, and facts synced everywhere AI cross-checks",
+      "Review-velocity engine switched on — automated requests to past customers so recent reviews keep flowing",
+      "Before/after report scoring all 20 signals AI checks — delivered in 48 hours",
+      "30-minute onboarding call",
     ],
     useThisIf: [
       "You want AI to be able to find and recommend your business.",
