@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { MondayAgentJobsOverview, MondayAgentJobRow } from "@/lib/control/monday-agent-jobs";
-import type { MorningBriefData, SlackOwnerSignals } from "@/lib/control/morning-brief";
+import type { MorningBriefData, MorningWeather, SlackOwnerSignals } from "@/lib/control/morning-brief";
 
 type Totals = {
   sent: number;
@@ -43,11 +43,13 @@ export function MorningBriefExperience({
   totals,
   mondayOverview,
   slackSignals,
+  weather,
 }: {
   brief: MorningBriefData;
   totals: Totals;
   mondayOverview: MondayAgentJobsOverview;
   slackSignals: SlackOwnerSignals;
+  weather: MorningWeather;
 }) {
   const [view, setView] = useState<ViewKey>("owner");
   const ownerActions = useMemo(
@@ -86,7 +88,7 @@ export function MorningBriefExperience({
             </span>
           </div>
 
-          <div className="grid min-w-0 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div className="grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-emerald-700">GMF owner brief</p>
               <h1 className="mt-2 text-4xl font-semibold text-slate-950 md:text-5xl">
@@ -96,7 +98,7 @@ export function MorningBriefExperience({
                 Owner actions first, agent work next, proof underneath.
               </p>
             </div>
-            <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+            <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
               <ScoreTile label="Owner actions" value={ownerActions.length.toString()} tone={ownerActions.length ? "danger" : "accent"} />
               <ScoreTile label="Agents active" value={mondayOverview.totals.inProgress.toString()} tone="accent" />
               <ScoreTile label="Human-needed Monday" value={mondayOverview.totals.humanNeeded.toString()} tone={mondayOverview.totals.humanNeeded ? "warm" : "muted"} />
@@ -106,9 +108,11 @@ export function MorningBriefExperience({
         </div>
       </header>
 
+      <OwnerContextStrip brief={brief} weather={weather} />
+
       <section className="border-b border-slate-200 bg-[#fffaf0]">
         <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
-          <div className="grid gap-4 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start">
             <p className="font-semibold text-amber-900">Start here</p>
             <p className="min-w-0 break-words text-sm leading-6 text-amber-950">
               {topAction
@@ -146,7 +150,7 @@ export function MorningBriefExperience({
         </div>
 
         {ownerActions.length ? (
-          <div className="grid min-w-0 gap-4 lg:grid-cols-3">
+          <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
             {ownerActions.map((action) => (
               <OwnerActionCard key={action.id} action={action} />
             ))}
@@ -160,7 +164,7 @@ export function MorningBriefExperience({
 
       <section className="border-y border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
             <LiveStateCard label="Smartlead campaign" value="Paused" detail="No prospect sends before approval." tone="warm" />
             <LiveStateCard label="Outreach inboxes" value="Healthy" detail="3 inboxes ready; 0 spam; 100 reputation." tone="accent" />
             <LiveStateCard label="Casey mailbox" value="Owner gate" detail="First-login and reply proof still needed." tone="danger" />
@@ -186,18 +190,54 @@ export function MorningBriefExperience({
         {view === "owner" ? <OwnerView brief={brief} slackSignals={slackSignals} /> : null}
         {view === "agents" ? <AgentsView brief={brief} mondayOverview={mondayOverview} activeRows={activeWithoutOwner} /> : null}
         {view === "prospecting" ? <ProspectingView totals={totals} /> : null}
-        {view === "sources" ? <SourcesView brief={brief} slackSignals={slackSignals} mondayOverview={mondayOverview} /> : null}
+        {view === "sources" ? <SourcesView brief={brief} slackSignals={slackSignals} mondayOverview={mondayOverview} weather={weather} /> : null}
       </section>
     </main>
   );
 }
 
+function OwnerContextStrip({ brief, weather }: { brief: MorningBriefData; weather: MorningWeather }) {
+  const email = brief.ownerContext.email;
+  const calendar = brief.ownerContext.calendar;
+
+  return (
+    <section className="border-b border-slate-200 bg-[#eef7f6]">
+      <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <ContextCard
+            label="Email"
+            value={`${email.focusedUnread24h} unread`}
+            detail={`${email.focused24h} focused inbox item(s) in 24h. ${email.summary}`}
+            tone="sky"
+          />
+          <ContextCard
+            label="Calendar"
+            value={calendar.todayEvents ? `${calendar.todayEvents} today` : calendar.status}
+            detail={calendar.summary}
+            tone="violet"
+          />
+          <ContextCard
+            label={`Weather - ${weather.location}`}
+            value={weather.ok ? `${formatWeatherNumber(weather.tempF)} F` : "Limited"}
+            detail={
+              weather.ok
+                ? `${weather.condition}. High ${formatWeatherNumber(weather.highF)} F, low ${formatWeatherNumber(weather.lowF)} F. Feels ${formatWeatherNumber(weather.feelsLikeF)} F.`
+                : weather.error || "Weather source unavailable."
+            }
+            tone="sun"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function OwnerView({ brief, slackSignals }: { brief: MorningBriefData; slackSignals: SlackOwnerSignals }) {
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
+    <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.05fr_0.95fr]">
       <section>
         <SectionTitle label="Today's read" title="What happened and what matters" />
-        <div className="mt-4 grid gap-3">
+        <div className="mt-4 grid grid-cols-1 gap-3">
           {brief.commercialBrief.map((item) => (
             <TextCard key={item} text={item} />
           ))}
@@ -209,7 +249,7 @@ function OwnerView({ brief, slackSignals }: { brief: MorningBriefData; slackSign
         <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
           <p className="text-base leading-7 text-slate-700">{brief.recommendedMove}</p>
         </div>
-        <div className="mt-4 grid gap-3">
+        <div className="mt-4 grid grid-cols-1 gap-3">
           <SignalCard label="Main constraint" value={brief.businessAudit.mainConstraint} />
           <SignalCard label="Slack owner asks" value={slackSignals.signals.length ? `${slackSignals.signals.length} recent ask(s) found` : slackSignals.error || "No recent owner-needed Slack asks found."} />
         </div>
@@ -229,7 +269,7 @@ function AgentsView({
 }) {
   return (
     <div className="space-y-7">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <ScoreTile label="Started" value={mondayOverview.totals.started.toString()} tone="accent" />
         <ScoreTile label="Review queue" value={mondayOverview.totals.review.toString()} tone="warm" />
         <ScoreTile label="True waiting" value={mondayOverview.totals.trueWaiting.toString()} tone={mondayOverview.totals.trueWaiting ? "warm" : "muted"} />
@@ -238,14 +278,14 @@ function AgentsView({
 
       <section>
         <SectionTitle label="Autonomous work" title="Agents running without Mike" />
-        <div className="mt-4 grid gap-3 lg:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
           {activeRows.length ? activeRows.map((row) => <JobCard key={row.id} row={row} />) : <TextCard text="No active agent rows returned from Monday." />}
         </div>
       </section>
 
       <section>
         <SectionTitle label="Sentinel" title="Process improvement queue" />
-        <div className="mt-4 grid gap-3 lg:grid-cols-5">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-5">
           {brief.businessAudit.processImprovements.map((item, index) => (
             <TextCard key={item} eyebrow={`Fix ${index + 1}`} text={item} />
           ))}
@@ -260,7 +300,7 @@ function ProspectingView({ totals }: { totals: Totals }) {
     <div className="space-y-7">
       <section>
         <SectionTitle label="Monday launch" title="Smartlead decision packet" />
-        <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
           <LiveStateCard label="Recommended niche" value="Med spas" detail="Single-niche launch; do not mix copy unless approved." tone="accent" />
           <LiveStateCard label="Recommended cap" value="30 total" detail="10 per warmed inbox; 45 is aggressive; 60 is not recommended." tone="warm" />
           <LiveStateCard label="Launch state" value="Paused" detail="Mike approval required before resume, cap change, or list expansion." tone="danger" />
@@ -269,7 +309,7 @@ function ProspectingView({ totals }: { totals: Totals }) {
 
       <section>
         <SectionTitle label="Five niches" title="Sales Manager ranking" />
-        <div className="mt-4 grid gap-3 lg:grid-cols-5">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-5">
           {nicheRanking.map(([name, note, fit], index) => (
             <article key={name} className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <p className="text-sm font-semibold text-slate-500">#{index + 1}</p>
@@ -283,7 +323,7 @@ function ProspectingView({ totals }: { totals: Totals }) {
 
       <section>
         <SectionTitle label="Outreach archive" title="Historical stats still visible" />
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <ScoreTile label="Sent" value={totals.sent.toString()} tone="muted" />
           <ScoreTile label="Delivered" value={`${totals.deliveredPct}%`} tone="muted" />
           <ScoreTile label="Opened" value={`${totals.openedPct}%`} tone="muted" />
@@ -299,28 +339,36 @@ function SourcesView({
   brief,
   slackSignals,
   mondayOverview,
+  weather,
 }: {
   brief: MorningBriefData;
   slackSignals: SlackOwnerSignals;
   mondayOverview: MondayAgentJobsOverview;
+  weather: MorningWeather;
 }) {
-  const proof = [brief.currentFile, brief.statsFile, brief.businessAudit.sourceFile, ...brief.proofUsed].filter(Boolean);
+  const proof = [
+    brief.currentFile,
+    brief.statsFile,
+    brief.businessAudit.sourceFile,
+    brief.ownerContext.sourceFile,
+    ...brief.proofUsed,
+  ].filter(Boolean);
 
   return (
     <div className="space-y-7">
       <section>
         <SectionTitle label="Source health" title="Where this page is reading from" />
-        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
           <LiveStateCard label="Monday" value={mondayOverview.ok ? "Live" : "Limited"} detail={mondayOverview.error || "Owner-needed rows and agent queue loaded."} tone={mondayOverview.ok ? "accent" : "danger"} />
           <LiveStateCard label="Slack DM" value={slackSignals.ok ? "Live" : "Limited"} detail={slackSignals.error || "Recent owner-needed DMs loaded."} tone={slackSignals.ok ? "accent" : "warm"} />
           <LiveStateCard label="Sentinel" value={brief.businessAudit.date || "Loaded"} detail={brief.businessAudit.mainConstraint} tone="warm" />
-          <LiveStateCard label="Brief file" value={brief.date} detail="Current generated owner brief." tone="muted" />
+          <LiveStateCard label="Weather" value={weather.ok ? "Live" : "Limited"} detail={weather.ok ? `${weather.location}; ${weather.condition}.` : weather.error || "Weather source unavailable."} tone={weather.ok ? "accent" : "warm"} />
         </div>
       </section>
 
       <section>
         <SectionTitle label="Proof" title="Files behind the brief" />
-        <div className="mt-4 grid gap-2 lg:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-2 lg:grid-cols-2">
           {proof.map((item) => (
             <code key={item} className="min-w-0 break-all rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600">
               {item}
@@ -331,7 +379,7 @@ function SourcesView({
 
       <section>
         <SectionTitle label="Archive" title="Recent morning briefs" />
-        <div className="mt-4 grid gap-3 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
           {brief.archive.slice(0, 6).map((item) => (
             <article key={item.file} className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <p className="text-sm font-semibold text-slate-950">{item.date}</p>
@@ -355,7 +403,7 @@ function OwnerActionCard({ action }: { action: OwnerAction }) {
         <span className={chipTone(action.tone)}>{action.status}</span>
       </div>
       <p className="mt-4 break-words text-sm leading-6 text-slate-700">{action.ask}</p>
-      <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+      <dl className="mt-5 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
         <div>
           <dt className="font-semibold text-slate-500">Owner</dt>
           <dd className="mt-1 break-words text-slate-900">{action.owner}</dd>
@@ -380,7 +428,7 @@ function JobCard({ row }: { row: MondayAgentJobRow }) {
         </div>
         <span className="status-chip">{row.status || row.runtimeState || "Active"}</span>
       </div>
-      <p className="mt-3 break-words text-sm leading-6 text-slate-600">{row.nextAction || row.unlockProof || "No next action recorded."}</p>
+      <p className="mt-3 break-words text-sm leading-6 text-slate-600">{row.nextAction || row.proofText || "No next action recorded."}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {row.expectedReceive ? <span className="custom-chip">Expected {shortDate(row.expectedReceive)}</span> : null}
         {row.escalateAt ? <span className="custom-chip">Escalate {shortDate(row.escalateAt)}</span> : null}
@@ -403,6 +451,37 @@ function SignalCard({ label, value }: { label: string; value: string }) {
     <article className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <p className="text-sm font-semibold text-slate-500">{label}</p>
       <p className="mt-2 break-words text-sm leading-6 text-slate-700">{value}</p>
+    </article>
+  );
+}
+
+function ContextCard({
+  label,
+  value,
+  detail,
+  tone,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  tone: "sky" | "violet" | "sun";
+}) {
+  const colors = {
+    sky: "border-sky-200 bg-sky-50 text-sky-950",
+    violet: "border-violet-200 bg-violet-50 text-violet-950",
+    sun: "border-yellow-200 bg-yellow-50 text-yellow-950",
+  };
+  const valueColors = {
+    sky: "text-sky-700",
+    violet: "text-violet-700",
+    sun: "text-yellow-700",
+  };
+
+  return (
+    <article className={`min-w-0 rounded-lg border p-4 shadow-sm ${colors[tone]}`}>
+      <p className="text-sm font-semibold opacity-75">{label}</p>
+      <p className={`mt-2 break-words text-2xl font-semibold ${valueColors[tone]}`}>{value}</p>
+      <p className="mt-2 break-words text-sm leading-6 opacity-80">{detail}</p>
     </article>
   );
 }
@@ -516,7 +595,7 @@ function buildOwnerActions({
     actions.push({
       id: `monday-${row.id}`,
       title: row.name,
-      ask: row.nextAction || row.unlockProof || "Review this Monday owner-needed row.",
+      ask: row.nextAction || row.proofText || "Review this Monday owner-needed row.",
       source: "Monday",
       owner: row.nextOwner || row.agentOwner || "Mike",
       due: shortDate(row.expectedReceive) || "Today",
@@ -565,6 +644,10 @@ function shortDate(value: string) {
   const suffix = hour >= 12 ? "PM" : "AM";
   const hour12 = hour % 12 || 12;
   return `May ${match[1]}, ${hour12}:${match[3]} ${suffix} ET`;
+}
+
+function formatWeatherNumber(value: number | undefined) {
+  return Number.isFinite(value) ? String(Math.round(value ?? 0)) : "--";
 }
 
 function borderTone(tone: "danger" | "warm" | "accent" | "muted") {

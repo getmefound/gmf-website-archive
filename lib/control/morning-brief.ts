@@ -6,7 +6,13 @@ const OUTBOX_DIR = `${LEDGER_DIR}/outbox`;
 const CURRENT_BRIEF_PATH = `${LEDGER_DIR}/morning-brief-current.md`;
 const OUTREACH_STATS_PATH = `${LEDGER_DIR}/outreach-email-stats-current.csv`;
 const BUSINESS_AUDIT_PATH = `${LEDGER_DIR}/business-improvement-audit-current.md`;
+const OWNER_CONTEXT_PATH = `${LEDGER_DIR}/owner-morning-context-current.md`;
 const DEFAULT_OWNER_DM_CHANNEL_ID = "D0ATLRTCP2P";
+const DEFAULT_WEATHER_LOCATION = {
+  label: "Madison, CT",
+  latitude: 41.27954,
+  longitude: -72.59843,
+};
 
 export type BriefArchiveItem = {
   date: string;
@@ -57,6 +63,37 @@ export type SlackOwnerSignals = {
   signals: SlackOwnerSignal[];
 };
 
+export type OwnerMorningContext = {
+  date: string;
+  email: {
+    inboxTotal: number;
+    inboxUnread: number;
+    focused24h: number;
+    focusedUnread24h: number;
+    summary: string;
+    source: string;
+  };
+  calendar: {
+    todayEvents: number;
+    status: string;
+    summary: string;
+    source: string;
+  };
+  sourceFile: string;
+};
+
+export type MorningWeather = {
+  ok: boolean;
+  location: string;
+  tempF?: number;
+  feelsLikeF?: number;
+  condition?: string;
+  highF?: number;
+  lowF?: number;
+  windMph?: number;
+  error?: string;
+};
+
 export type MorningBriefData = {
   date: string;
   commercialBrief: string[];
@@ -68,6 +105,7 @@ export type MorningBriefData = {
   proofUsed: string[];
   stats: OutreachEmailStat[];
   businessAudit: BusinessAuditSummary;
+  ownerContext: OwnerMorningContext;
   archive: BriefArchiveItem[];
   currentFile: string;
   statsFile: string;
@@ -77,6 +115,7 @@ export function getMorningBriefData(): MorningBriefData {
   const current = readText(CURRENT_BRIEF_PATH);
   const stats = readCsv(OUTREACH_STATS_PATH).map(toOutreachEmailStat);
   const businessAudit = readBusinessAudit();
+  const ownerContext = readOwnerMorningContext();
   const archive = getBriefArchive();
 
   return {
@@ -90,10 +129,65 @@ export function getMorningBriefData(): MorningBriefData {
     proofUsed: readBullets(readSection(current, "Proof Used")),
     stats,
     businessAudit,
+    ownerContext,
     archive,
     currentFile: CURRENT_BRIEF_PATH,
     statsFile: OUTREACH_STATS_PATH,
   };
+}
+
+export async function getMorningWeather(): Promise<MorningWeather> {
+  const latitude = Number(process.env.MORNING_BRIEF_WEATHER_LAT ?? DEFAULT_WEATHER_LOCATION.latitude);
+  const longitude = Number(process.env.MORNING_BRIEF_WEATHER_LON ?? DEFAULT_WEATHER_LOCATION.longitude);
+  const location = process.env.MORNING_BRIEF_WEATHER_LABEL?.trim() || DEFAULT_WEATHER_LOCATION.label;
+
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    return { ok: false, location, error: "Weather coordinates are invalid." };
+  }
+
+  try {
+    const url = new URL("https://api.open-meteo.com/v1/forecast");
+    url.searchParams.set("latitude", String(latitude));
+    url.searchParams.set("longitude", String(longitude));
+    url.searchParams.set("current", "temperature_2m,apparent_temperature,weather_code,wind_speed_10m");
+    url.searchParams.set("daily", "temperature_2m_max,temperature_2m_min");
+    url.searchParams.set("temperature_unit", "fahrenheit");
+    url.searchParams.set("wind_speed_unit", "mph");
+    url.searchParams.set("timezone", "America/New_York");
+    url.searchParams.set("forecast_days", "1");
+
+    const response = await fetch(url, { next: { revalidate: 900 } });
+    const body = (await response.json()) as {
+      current?: {
+        temperature_2m?: number;
+        apparent_temperature?: number;
+        weather_code?: number;
+        wind_speed_10m?: number;
+      };
+      daily?: {
+        temperature_2m_max?: number[];
+        temperature_2m_min?: number[];
+      };
+    };
+    if (!response.ok) return { ok: false, location, error: `Weather fetch failed with ${response.status}.` };
+
+    return {
+      ok: true,
+      location,
+      tempF: round(body.current?.temperature_2m ?? 0),
+      feelsLikeF: round(body.current?.apparent_temperature ?? 0),
+      condition: weatherCodeLabel(body.current?.weather_code),
+      highF: round(body.daily?.temperature_2m_max?.[0] ?? 0),
+      lowF: round(body.daily?.temperature_2m_min?.[0] ?? 0),
+      windMph: round(body.current?.wind_speed_10m ?? 0),
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      location,
+      error: error instanceof Error ? error.message : "Weather fetch failed.",
+    };
+  }
 }
 
 export async function getSlackOwnerSignals(): Promise<SlackOwnerSignals> {
@@ -223,6 +317,31 @@ function readBusinessAudit(): BusinessAuditSummary {
   };
 }
 
+function readOwnerMorningContext(): OwnerMorningContext {
+  const text = readText(OWNER_CONTEXT_PATH);
+  const emailSection = readSection(text, "Email");
+  const calendarSection = readSection(text, "Calendar");
+
+  return {
+    date: firstMatch(text, /^Date:\s*(.+)$/m),
+    email: {
+      inboxTotal: number(readBulletValue(emailSection, "Primary inbox total")),
+      inboxUnread: number(readBulletValue(emailSection, "Primary inbox unread")),
+      focused24h: number(readBulletValue(emailSection, "Last 24h focused inbox items")),
+      focusedUnread24h: number(readBulletValue(emailSection, "Last 24h focused unread")),
+      summary: readBulletValue(emailSection, "Summary") || "No email snapshot found yet.",
+      source: readBulletValue(emailSection, "Source") || "Owner morning context file.",
+    },
+    calendar: {
+      todayEvents: number(readBulletValue(calendarSection, "Today known events")),
+      status: readBulletValue(calendarSection, "Status") || "Calendar sync pending",
+      summary: readBulletValue(calendarSection, "Summary") || "No calendar snapshot found yet.",
+      source: readBulletValue(calendarSection, "Source") || "Owner morning context file.",
+    },
+    sourceFile: OWNER_CONTEXT_PATH,
+  };
+}
+
 function toSlackOwnerSignal(text: string, ts: string, source: string): SlackOwnerSignal | null {
   const clean = text.trim();
   if (!/\bowner-needed\b/i.test(clean)) return null;
@@ -274,6 +393,11 @@ function readNumberedItems(section: string): string[] {
     .filter((line) => /^\d+\.\s+/.test(line))
     .map((line) => line.replace(/^\d+\.\s+/, "").trim())
     .filter(Boolean);
+}
+
+function readBulletValue(section: string, label: string): string {
+  const pattern = new RegExp(`^-\\s+${escapeRegExp(label)}:\\s*(.+)$`, "im");
+  return section.match(pattern)?.[1]?.trim() ?? "";
 }
 
 function readCsv(path: string) {
@@ -342,6 +466,19 @@ function number(value: string | number | undefined): number {
 
 function round(value: number): number {
   return Math.round(value * 100) / 100;
+}
+
+function weatherCodeLabel(code: number | undefined): string {
+  if (code === undefined) return "Weather unavailable";
+  if (code === 0) return "Clear";
+  if ([1, 2].includes(code)) return "Partly cloudy";
+  if (code === 3) return "Cloudy";
+  if ([45, 48].includes(code)) return "Fog";
+  if ([51, 53, 55, 56, 57].includes(code)) return "Drizzle";
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "Rain";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "Snow";
+  if ([95, 96, 99].includes(code)) return "Thunderstorms";
+  return "Mixed";
 }
 
 function slackTimestamp(ts: string) {
