@@ -115,3 +115,5 @@ tmp-next-dev-*.log
 tmp-next-start-*.log
 tmp-morning-brief-inspo/
 *.txt
+
+tmp-gmf-prospecting-*.csv
