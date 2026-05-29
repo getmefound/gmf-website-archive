@@ -145,6 +145,7 @@ Monthly:
 
 ## Required Source Docs
 
+- `docs/GMF_SOP_MASTER_MAP.md`
 - `docs/GMF_CLIENT_LIFECYCLE_OPERATING_MODEL.md`
 - `docs/AGENT_OPERATING_MODEL.md`
 - `docs/GMF_AGENT_TRAINING_PACK.md`

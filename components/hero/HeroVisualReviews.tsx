@@ -91,7 +91,7 @@ function Step1SMS() {
             Hi Sarah, thanks for visiting! Mind leaving us a quick review?
           </p>
           <p className="mt-1 font-mono text-[11px] text-white/70">
-            review.aoh.link/mp
+            review.getmefound.ai/mp
           </p>
         </motion.div>
 
@@ -111,7 +111,7 @@ function Step1SMS() {
 
 function Step2Stars() {
   return (
-    <PhoneFrame header="review.aoh.link · Mike's Plumbing">
+    <PhoneFrame header="review.getmefound.ai · Mike's Plumbing">
       <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
         <motion.p
           initial={{ opacity: 0, y: 4 }}

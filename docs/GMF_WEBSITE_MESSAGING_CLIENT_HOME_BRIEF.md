@@ -43,6 +43,10 @@ The client home page answers those questions in plain English.
 Purpose: help the owner understand the gap and start Get Found.
 
 The free report should feel useful but not like a full paid audit.
+There should be two report experiences:
+
+- prospect report: short sales report with useful score, competitor benchmark, and greyed-out locked sections
+- client report: full private report inside the client dashboard with baseline, current movement, details, next actions, and download option
 
 What the prospect sees:
 
@@ -51,6 +55,7 @@ What the prospect sees:
 - 3-5 plain signals Google and AI can understand
 - one primary gap
 - locked fixes available with Get Found
+- greyed-out Stay Found items that show how monthly upkeep keeps the business from going stale
 
 Sample website wording:
 
@@ -82,7 +87,7 @@ Client page sections:
 
 - Today: what changed recently
 - Needed from you: access, approvals, uploads, missing business facts
-- Visibility: score, baseline, competitor gap, latest report
+- Visibility: custom report center with baseline, before/after proof, monthly recap, signal details, competitor gap, next actions, and download buttons
 - Reviews: requests sent, new reviews, private feedback, held-back rows
 - Google profile: access, fixes, posts, services, photos, drift checks
 - Reports: baseline, before/after proof, monthly recap
@@ -93,10 +98,12 @@ Client page sections:
 Website wording:
 
 ```text
-After signup, your business gets a private client home page.
+After signup, your business gets a private magic-link client home page.
 
 It shows what we are doing, what is finished, what is waiting on you, and the proof behind each monthly update. You can upload customer lists, approve changes, view reports, and see what is unlocked next without learning another marketing tool.
 ```
+
+Full client reports should live on the client dashboard, not as a separate primary destination. The owner opens the page through a magic link, can switch between report views, and can download the full report or a selected report copy to save or share internally. Do not describe client access as password-based.
 
 ## Offer-Specific What They Get
 
@@ -207,9 +214,10 @@ Avoid:
 ```text
 Your private client page
 
-After signup, you get a simple private page for your business. It shows what GMF is working on, what is already done, what we still need from you, and the reports that prove progress.
+After signup, you get a simple private magic-link page for your business. It shows what GMF is working on, what is already done, what we still need from you, and the reports that prove progress.
 
 You can upload customer lists, approve updates, view your visibility reports, and see the next useful opportunities without logging into another marketing dashboard.
+Each full visibility report can also be downloaded from the client page.
 
 Get Found clients see the baseline and before/after proof.
 Stay Found clients see monthly visibility and review activity.
@@ -217,4 +225,3 @@ Always Ready clients see deeper AI/search readiness and strategy notes.
 
 GMF does the work. Your page shows the proof.
 ```
-

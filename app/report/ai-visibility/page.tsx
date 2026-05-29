@@ -2,230 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PrintButton } from "@/components/ui/PrintButton";
 import { ReportTiming } from "@/components/report/ReportTiming";
+import { buildAIVisibilityReport } from "@/lib/ai-visibility";
 import {
-  buildAIVisibilityReport,
-  type AIVisibilityReport,
-  type ScoredBusiness,
-  type SchemaResult,
-} from "@/lib/ai-visibility";
+  buildFallbackProspectArtifact,
+  buildProspectVisibilityArtifact,
+  type ProspectVisibilityArtifact,
+  type ProspectVisibilitySignal,
+  type StatusLabel,
+} from "@/lib/visibility-report-artifacts";
 
 export const metadata: Metadata = {
   title: "AI Visibility Report",
-  description: "See how AI systems find — and recommend — your business.",
+  description: "See how Google and AI systems understand your business.",
   alternates: { canonical: "/report/ai-visibility" },
   robots: { index: false, follow: false },
 };
 
 const BOOK_URL = "/contact";
-
-function buildFallbackReport(businessName: string, city: string): AIVisibilityReport {
-  const prospect: ScoredBusiness = {
-    name: businessName || "Your Business",
-    rating: 0,
-    reviewCount: 0,
-    website: null,
-    phone: null,
-    googleMapsUrl: null,
-    city: city || "your area",
-    category: "local business",
-    schema: {
-      hasLocalBusiness: false,
-      hasRating: false,
-      hasHours: false,
-      hasSameAs: false,
-      hasFAQ: false,
-      hasNAP: false,
-      score: 15,
-      scanFailed: true,
-    },
-    scores: {
-      overall: 28,
-      reviewStrength: 20,
-      profileComplete: 25,
-      aiReadable: 15,
-    },
-  };
-
-  return {
-    prospect,
-    competitor: null,
-    scenario: "no_competitor",
-    verdicts: [
-      "We could not fully match this business in public data yet.",
-      "This report uses baseline estimates until we complete a direct profile scan.",
-      "Book a call and we will verify the business listing and deliver the full scored version.",
-    ],
-    city: city || "your area",
-    category: "local business",
-  };
-}
-
-function scoreColor(n: number) {
-  if (n >= 60) return "text-emerald-400";
-  if (n >= 35) return "text-amber-400";
-  return "text-red-400";
-}
-
-function ScoreCard({ label, score }: { label: string; score: number }) {
-  return (
-    <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5">
-      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] mb-2">
-        {label}
-      </p>
-      <p className={`text-4xl font-bold leading-none ${scoreColor(score)}`}>
-        {score}
-        <span className="text-base font-normal text-[var(--color-text-muted)]">/100</span>
-      </p>
-    </article>
-  );
-}
-
-const CHECK_LABELS: { key: keyof SchemaResult; label: string }[] = [
-  { key: "hasLocalBusiness", label: "Knows what type of business you are" },
-  { key: "hasRating",        label: "Can find your star rating" },
-  { key: "hasHours",         label: "Knows your hours" },
-  { key: "hasSameAs",        label: "Can connect your site to your Google listing" },
-  { key: "hasFAQ",           label: "Your site answers questions people ask AI" },
-  { key: "hasNAP",           label: "Has your phone and address on your site" },
-];
-
-function CompareTable({
-  prospect,
-  competitor,
-}: {
-  prospect: ScoredBusiness;
-  competitor: ScoredBusiness | null;
-}) {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-[var(--color-border)]">
-            <th className="py-3 pr-4 text-left font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
-              What AI systems check
-            </th>
-            <th className="py-3 px-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-muted)] max-w-[120px]">
-              {prospect.name.length > 22
-                ? prospect.name.slice(0, 20) + "…"
-                : prospect.name}
-            </th>
-            {competitor && (
-              <th className="py-3 pl-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-muted)] max-w-[120px]">
-                {competitor.name.length > 22
-                  ? competitor.name.slice(0, 20) + "…"
-                  : competitor.name}
-              </th>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {CHECK_LABELS.map(({ key, label }) => {
-            const prospectVal = prospect.schema[key] as boolean;
-            const competitorVal = competitor
-              ? (competitor.schema[key] as boolean)
-              : null;
-            const isWarning =
-              !prospectVal && (competitorVal === true || competitorVal === null);
-            return (
-              <tr
-                key={key}
-                className={`border-b border-[var(--color-border)]/40 last:border-0 ${isWarning ? "bg-red-500/5" : ""}`}
-              >
-                <td className="py-3 pr-4 text-[var(--color-text-body)]">
-                  {label}
-                </td>
-                <td className="py-3 px-4 text-center text-base">
-                  {prospectVal ? "✅" : "❌"}
-                </td>
-                {competitor && (
-                  <td className="py-3 pl-4 text-center text-base">
-                    {competitorVal ? "✅" : "❌"}
-                  </td>
-                )}
-              </tr>
-            );
-          })}
-          {/* Review row */}
-          <tr className="border-t-2 border-[var(--color-border)]">
-            <td className="py-3 pr-4 text-[var(--color-text-body)]">
-              Google reviews
-            </td>
-            <td className="py-3 px-4 text-center font-mono text-sm font-bold text-[var(--color-text-body)]">
-              {prospect.reviewCount > 0
-                ? `${prospect.reviewCount} ★${prospect.rating.toFixed(1)}`
-                : "—"}
-            </td>
-            {competitor && (
-              <td className="py-3 pl-4 text-center font-mono text-sm font-bold text-[var(--color-text-body)]">
-                {competitor.reviewCount > 0
-                  ? `${competitor.reviewCount} ★${competitor.rating.toFixed(1)}`
-                  : "—"}
-              </td>
-            )}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function ScenarioBanner({
-  scenario,
-  competitor,
-  city,
-  category,
-}: {
-  scenario: string;
-  competitor: ScoredBusiness | null;
-  city: string;
-  category: string;
-}) {
-  if (scenario === "nobody_optimized") {
-    return (
-      <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-4">
-        <p className="font-semibold text-amber-300 mb-1">
-          No one in {city || "your area"} owns this yet.
-        </p>
-        <p className="text-sm text-[var(--color-text-muted)]">
-          No local {category || "business"} is fully set up for AI search.
-          First one to fix this wins the category.
-        </p>
-      </div>
-    );
-  }
-
-  if (scenario === "competitor_ahead" && competitor) {
-    return (
-      <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-5 py-4">
-        <p className="font-semibold text-red-300 mb-1">
-          {competitor.name} is ahead of you.
-        </p>
-        <p className="text-sm text-[var(--color-text-muted)]">
-          They have {competitor.reviewCount} reviews and stronger AI signals on
-          their site. When someone asks ChatGPT or Google AI for a{" "}
-          {category || "business"} in {city || "your area"}, they get
-          recommended first.
-        </p>
-      </div>
-    );
-  }
-
-  if (scenario === "prospect_ahead" && competitor) {
-    return (
-      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4">
-        <p className="font-semibold text-emerald-300 mb-1">
-          You&apos;re ahead of {competitor.name} right now.
-        </p>
-        <p className="text-sm text-[var(--color-text-muted)]">
-          Your AI visibility is stronger — but the gap is small. Lock it in
-          before they catch up.
-        </p>
-      </div>
-    );
-  }
-
-  return null;
-}
+const GET_FOUND_URL = "/checkout/get-found-refresh";
 
 export default async function AIVisibilityReportPage({
   searchParams,
@@ -233,187 +27,261 @@ export default async function AIVisibilityReportPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-
-  const str = (k: string) =>
-    typeof params[k] === "string" ? (params[k] as string).trim() : "";
-
+  const str = (key: string) => (typeof params[key] === "string" ? (params[key] as string).trim() : "");
   const runId = str("runId");
-  const email = str("email") || "owner@business.com";
+  const email = str("email");
   const businessRaw = str("business");
   const cityRaw = str("city");
-
-  let report: AIVisibilityReport | null = null;
-  if (businessRaw) {
-    report = await buildAIVisibilityReport(businessRaw, cityRaw || undefined);
-    if (!report) {
-      report = buildFallbackReport(businessRaw, cityRaw || "");
-    }
-  }
-
-  const business = report?.prospect.name || businessRaw || "Your Business";
+  const report = businessRaw ? await buildAIVisibilityReport(businessRaw, cityRaw || undefined) : null;
+  const artifact = report
+    ? buildProspectVisibilityArtifact(report)
+    : buildFallbackProspectArtifact({ businessName: businessRaw || "Your Business", location: cityRaw });
 
   return (
-    <main
-      id="main-content"
-      className="min-h-screen bg-[var(--color-bg-page)] text-[var(--color-text-body)]"
-    >
-      {/* Header */}
+    <main id="main-content" className="min-h-screen bg-[var(--color-bg-page)] text-[var(--color-text-body)]">
       <section className="bg-[var(--color-hero-bg)] text-[var(--color-hero-text)]">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
-            AI Visibility Report
+            AI/Search Visibility Check
           </p>
-          <h1 className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-tight mb-4">
-            {report
-              ? `Here's how AI systems see ${business}.`
-              : "Your AI Visibility Report"}
+          <h1 className="max-w-4xl text-3xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
+            Here is what Google and AI can understand about {artifact.businessName}.
           </h1>
-          <p className="text-base text-[var(--color-hero-subtext)]">
-            Business:{" "}
-            <span className="font-semibold text-[var(--color-hero-text)]">
-              {business}
-            </span>
-            {email !== "owner@business.com" && (
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-hero-subtext)]">
+            {artifact.location}
+            {email ? (
               <>
                 {" "}
-                · Built for:{" "}
-                <span className="font-semibold text-[var(--color-hero-text)]">
-                  {email}
-                </span>
+                - Built for <span className="font-semibold text-[var(--color-hero-text)]">{email}</span>
               </>
-            )}
+            ) : null}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <PrintButton />
             <Link
-              href={BOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border border-[var(--color-hero-border)] px-5 py-3 text-sm font-semibold text-[var(--color-hero-subtext)] hover:bg-white/5 transition"
+              href={GET_FOUND_URL}
+              className="rounded-xl bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)]"
             >
-              Book a Call
+              Start Get Found
+            </Link>
+            <Link
+              href={BOOK_URL}
+              className="rounded-xl border border-[var(--color-hero-border)] px-5 py-3 text-sm font-semibold text-[var(--color-hero-subtext)] transition hover:bg-white/5"
+            >
+              Ask a question
             </Link>
           </div>
-          {runId && <ReportTiming runId={runId} email={email} />}
+          {runId ? <ReportTiming runId={runId} email={email} /> : null}
         </div>
       </section>
 
-      {report ? (
-        <>
-          {/* Score cards */}
-          <section className="mx-auto max-w-6xl px-6 pt-10 pb-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <ScoreCard
-                label="Overall AI Score"
-                score={report.prospect.scores.overall}
-              />
-              <ScoreCard
-                label="Review Strength"
-                score={report.prospect.scores.reviewStrength}
-              />
-              <ScoreCard
-                label="Profile Complete"
-                score={report.prospect.scores.profileComplete}
-              />
-              <ScoreCard
-                label="AI Can Read Your Site"
-                score={report.prospect.scores.aiReadable}
-              />
-            </div>
-          </section>
+      <section className="mx-auto max-w-6xl px-6 py-10 md:py-12">
+        <div className="grid gap-4 md:grid-cols-[1.05fr_0.95fr]">
+          <ScoreSummary artifact={artifact} />
+          <QuickRead artifact={artifact} />
+        </div>
+      </section>
 
-          {/* Scenario banner */}
-          {report.scenario !== "no_competitor" && (
-            <section className="mx-auto max-w-6xl px-6 py-4">
-              <ScenarioBanner
-                scenario={report.scenario}
-                competitor={report.competitor}
-                city={report.city}
-                category={report.category}
-              />
-            </section>
-          )}
-
-          {/* Comparison table */}
-          <section className="mx-auto max-w-6xl px-6 py-4">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6">
-              <h2 className="text-xl font-bold text-[var(--color-text-body)] mb-1">
-                {report.competitor
-                  ? `You vs ${report.competitor.name}`
-                  : "What AI systems check"}
-              </h2>
-              <p className="text-sm text-[var(--color-text-muted)] mb-5">
-                These are the signals AI systems read before recommending a
-                local business.
+      <section className="mx-auto max-w-6xl px-6 pb-10">
+        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 md:p-6">
+          <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                What we checked
               </p>
-              <CompareTable
-                prospect={report.prospect}
-                competitor={report.competitor}
-              />
-            </div>
-          </section>
-
-          {/* Verdicts */}
-          <section className="mx-auto max-w-6xl px-6 py-4">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6">
-              <h2 className="text-xl font-bold text-[var(--color-text-body)] mb-4">
-                What this means for {business}
+              <h2 className="mt-2 text-2xl font-semibold text-[var(--color-text-body)]">
+                The five public signals that matter first
               </h2>
-              <ul className="space-y-3">
-                {report.verdicts.map((v, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="mt-1 flex-shrink-0 h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">
-                      {v}
-                    </p>
-                  </li>
-                ))}
-              </ul>
             </div>
-          </section>
-
-          {/* CTA */}
-          <section className="mx-auto max-w-6xl px-6 py-8 md:py-10">
-            <div className="rounded-2xl border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/[0.06] p-8 text-center">
-              <h2 className="text-2xl font-bold text-[var(--color-text-body)] mb-2">
-                We fix this in 48 hours.
-              </h2>
-              <p className="text-[var(--color-text-muted)] mb-6 max-w-md mx-auto">
-                We set up every AI signal your site is missing, optimize your
-                review presence, and monitor it monthly. Cancel anytime.
-              </p>
-              <Link
-                href={BOOK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-accent)] px-8 py-4 text-base font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--color-accent)]/25"
-              >
-                Book a free call
-                <span aria-hidden="true">→</span>
-              </Link>
-              <p className="mt-4 text-xs text-[var(--color-text-muted)]">
-                No pressure. 15 minutes. We walk you through exactly what to
-                fix.
-              </p>
-            </div>
-          </section>
-        </>
-      ) : (
-        /* No business param — show placeholder */
-        <section className="mx-auto max-w-6xl px-6 py-12">
-          <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-8 text-center">
-            <p className="text-[var(--color-text-muted)] mb-4">
-              No business found. Return to the homepage to generate your report.
+            <p className="max-w-md text-sm leading-6 text-[var(--color-text-muted)]">
+              This is a short free check. The full baseline and before/after proof unlock after signup.
             </p>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)]"
-            >
-              Get my free report
-            </Link>
           </div>
-        </section>
-      )}
+          <div className="grid gap-3">
+            {artifact.signals.map((signal) => (
+              <SignalRow key={signal.signal} signal={signal} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-12">
+        <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <LockedRoadmap artifact={artifact} />
+          <NextStep />
+        </div>
+      </section>
     </main>
   );
+}
+
+function ScoreSummary({ artifact }: { artifact: ProspectVisibilityArtifact }) {
+  const gap =
+    artifact.topCompetitorScore !== null
+      ? artifact.topCompetitorScore - artifact.score
+      : null;
+
+  return (
+    <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6">
+      <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+        Visibility score
+      </p>
+      <div className="mt-4 flex flex-wrap items-end gap-4">
+        <p className={`text-7xl font-bold leading-none ${scoreColor(artifact.score)}`}>
+          {artifact.score}
+          <span className="text-xl font-normal text-[var(--color-text-muted)]">/100</span>
+        </p>
+        <p className="max-w-xs pb-2 text-sm leading-6 text-[var(--color-text-muted)]">
+          {gap !== null && gap > 0
+            ? `${gap} points behind the top visible competitor.`
+            : "Competitor benchmark is still being verified."}
+        </p>
+      </div>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <SmallScore
+          label="Local competitor benchmark"
+          value={artifact.competitorAverageScore !== null ? `${artifact.competitorAverageScore}/100` : "Pending"}
+        />
+        <SmallScore
+          label={artifact.topCompetitorName}
+          value={artifact.topCompetitorScore !== null ? `${artifact.topCompetitorScore}/100` : "Pending"}
+        />
+      </div>
+    </article>
+  );
+}
+
+function QuickRead({ artifact }: { artifact: ProspectVisibilityArtifact }) {
+  return (
+    <article className="rounded-2xl border border-amber-500/25 bg-amber-500/10 p-6">
+      <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700">
+        Quick read
+      </p>
+      <h2 className="mt-3 text-2xl font-semibold text-[var(--color-text-body)]">
+        {artifact.primaryGap}
+      </h2>
+      <p className="mt-4 text-sm leading-6 text-[var(--color-text-muted)]">
+        {artifact.quickRead}
+      </p>
+      <p className="mt-4 text-sm leading-6 text-[var(--color-text-muted)]">
+        These are fixable foundation issues, not a months-long SEO campaign. Get Found cleans up the signals first.
+      </p>
+    </article>
+  );
+}
+
+function SignalRow({ signal }: { signal: ProspectVisibilitySignal }) {
+  return (
+    <article className="grid gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] p-4 md:grid-cols-[1fr_110px_1fr_150px] md:items-center">
+      <div>
+        <h3 className="font-semibold text-[var(--color-text-body)]">{signal.signal}</h3>
+        <p className="mt-1 text-sm leading-6 text-[var(--color-text-muted)]">{signal.why}</p>
+      </div>
+      <StatusBadge status={signal.status} />
+      <p className="text-sm leading-6 text-[var(--color-text-muted)]">{signal.competitorClue}</p>
+      <p className="rounded-lg border border-slate-300 bg-white/50 px-3 py-2 text-xs font-semibold text-[var(--color-text-body)]">
+        {signal.unlock}
+      </p>
+    </article>
+  );
+}
+
+function LockedRoadmap({ artifact }: { artifact: ProspectVisibilityArtifact }) {
+  return (
+    <article className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6">
+      <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+        Locked until signup
+      </p>
+      <h2 className="mt-3 text-2xl font-semibold text-[var(--color-text-body)]">
+        What Get Found unlocks first
+      </h2>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        {artifact.lockedNow.map((item) => (
+          <LockedCard key={item} label={item} tag="Get Found" />
+        ))}
+      </div>
+      <div className="mt-5 border-t border-[var(--color-border)] pt-5">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+          Available with Stay Found after the foundation is clean
+        </p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {artifact.lockedLater.map((item) => (
+            <LockedCard key={item} label={item} tag="Stay Found" muted />
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function NextStep() {
+  return (
+    <article className="rounded-2xl border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/[0.06] p-6">
+      <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+        Recommended next step
+      </p>
+      <h2 className="mt-3 text-3xl font-semibold text-[var(--color-text-body)]">
+        Start with Get Found.
+      </h2>
+      <p className="mt-4 text-sm leading-6 text-[var(--color-text-muted)]">
+        We clean up the public signals Google and AI already look at, capture the review path, and show the before/after proof.
+        Stay Found keeps the report current after the foundation is fixed.
+      </p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Link
+          href={GET_FOUND_URL}
+          className="rounded-xl bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-accent-text)] transition hover:bg-[var(--color-accent-hover)]"
+        >
+          Start Get Found
+        </Link>
+        <Link
+          href={BOOK_URL}
+          className="rounded-xl border border-[var(--color-border)] px-6 py-3 text-sm font-semibold text-[var(--color-text-body)] transition hover:bg-[var(--color-bg-elevated)]"
+        >
+          Ask a question
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function SmallScore({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] p-4">
+      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-text-muted)]">{label}</p>
+      <p className="mt-2 text-xl font-semibold text-[var(--color-text-body)]">{value}</p>
+    </div>
+  );
+}
+
+function StatusBadge({ status }: { status: StatusLabel }) {
+  const classes = {
+    Strong: "border-emerald-500/30 bg-emerald-500/10 text-emerald-700",
+    Fair: "border-amber-500/30 bg-amber-500/10 text-amber-700",
+    Weak: "border-red-500/30 bg-red-500/10 text-red-700",
+    Missing: "border-slate-400/40 bg-slate-200 text-slate-700",
+  }[status];
+
+  return (
+    <span className={`inline-flex w-fit rounded-md border px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] ${classes}`}>
+      {status}
+    </span>
+  );
+}
+
+function LockedCard({ label, tag, muted = false }: { label: string; tag: string; muted?: boolean }) {
+  return (
+    <div className={`rounded-xl border p-4 ${muted ? "border-slate-200 bg-slate-100 text-slate-600" : "border-slate-300 bg-white text-slate-900"}`}>
+      <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
+        Locked - {tag}
+      </p>
+      <p className="mt-2 text-sm font-semibold">{label}</p>
+    </div>
+  );
+}
+
+function scoreColor(score: number) {
+  if (score >= 70) return "text-emerald-600";
+  if (score >= 45) return "text-amber-600";
+  return "text-red-600";
 }

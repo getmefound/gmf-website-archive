@@ -27,6 +27,7 @@ create table if not exists public.agent_tasks (
   source text not null default 'website',
   payload jsonb not null default '{}'::jsonb,
   result jsonb,
+  notes text,
   error text
 );
 
@@ -69,6 +70,9 @@ on public.visibility_reports (client_slug, created_at desc);
 
 create index if not exists visibility_reports_email_idx
 on public.visibility_reports (contact_email, created_at desc);
+
+alter table public.agent_tasks
+add column if not exists notes text;
 
 create table if not exists public.visibility_report_events (
   id uuid primary key default gen_random_uuid(),

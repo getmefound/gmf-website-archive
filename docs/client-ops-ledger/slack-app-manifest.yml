@@ -1,12 +1,16 @@
 display_information:
   name: AOH Agents
 features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
   bot_user:
     display_name: Manager
     always_online: true
   slash_commands:
     - command: /manager
-      url: https://aioutsourcehub.com/api/agent/slack
+      url: https://getmefound.ai/api/agent/slack
       description: Talk to the AOH Manager and agent team
       usage_hint: what is status of Reach Cold Email Campaign
       should_escape: false
@@ -37,11 +41,12 @@ oauth_config:
       - users:read
 settings:
   event_subscriptions:
-    request_url: https://aioutsourcehub.com/api/agent/slack
+    request_url: https://getmefound.ai/api/agent/slack
     bot_events:
       - app_mention
       - message.channels
       - message.groups
+      - message.im
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false

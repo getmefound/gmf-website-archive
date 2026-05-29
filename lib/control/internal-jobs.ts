@@ -168,24 +168,24 @@ export const REACH_STEPS: ReachStep[] = [
   },
   {
     order: 5,
-    agent: "GHL Expert",
-    title: "Run read-only GHL readiness",
+    agent: "Systems Director",
+    title: "Run sender readiness",
     status: "Passed",
     tone: "accent",
     whatHappened:
-      "The API check confirmed the pipelines, cold workflows, and reply workflows exist for all three lanes.",
+      "The readiness check confirmed lane setup, cold workflow state, and reply-routing requirements for all three lanes.",
     leftToDo:
-      "Remember this is structure only. It does not prove sender-domain screens or AI toggles are visually safe.",
-    evidence: "Read-only GHL check passed without changing contacts, tags, workflows, or settings.",
+      "Remember this is structure only. It does not prove sender-domain screens or vendor AI toggles are visually safe.",
+    evidence: "Read-only readiness check passed without changing contacts, tags, workflows, or settings.",
   },
   {
     order: 6,
-    agent: "GHL Expert + Mike",
+    agent: "Systems Director + Mike",
     title: "Visual safety check",
     status: "Relay confirmed",
     tone: "warm",
     whatHappened:
-      "Relay was visually confirmed for sender domain, warmup status, sender nodes, and HighLevel AI toggles OFF.",
+      "Relay was visually confirmed for sender domain, warmup status, sender nodes, and paid AI toggles OFF.",
     leftToDo:
       "Keep readiness switches accurate. Auto can start a lane only after drip readiness is proven.",
     evidence: "Mike included the Relay visual confirmation in the approval command.",
@@ -204,19 +204,19 @@ export const REACH_STEPS: ReachStep[] = [
   },
   {
     order: 8,
-    agent: "GHL Expert",
-    title: "Import-only into GHL",
+    agent: "Sender",
+    title: "Import-only into sender",
     status: "Done for Relay",
     tone: "accent",
     whatHappened:
-      "The 2 Relay OK contacts were imported/tagged in GHL. No emails were sent.",
+      "The 2 Relay OK contacts were imported/tagged in the sender queue. No emails were sent.",
     leftToDo:
       "Avoid importing Relay again. Continue only with drip readiness or the other lanes.",
     evidence: "Relay is now import_only_completed_waiting_drip_readiness.",
   },
   {
     order: 9,
-    agent: "GHL Expert + Systems Director",
+    agent: "Sender + Systems Director",
     title: "Auto start readiness",
     status: "Waiting",
     tone: "warm",
@@ -244,17 +244,17 @@ export const REACH_PROCESS_FACTS = [
   {
     label: "Not wiring failure",
     detail:
-      "Slack, the Manager command, and the read-only GHL check are working. The job is stopping because the safety gates are doing their job.",
+      "Slack, the Manager command, and the read-only readiness check are working. The job is stopping because the safety gates are doing their job.",
   },
   {
     label: "Not rescraping every time",
     detail:
-      "Asking for status reads the ledger, CSVs, and GHL readiness. Google Maps/Outscraper should only run again when a new/fresh batch is requested.",
+      "Asking for status reads the ledger, CSVs, and sender readiness. Google Maps/Outscraper should only run again when a new/fresh batch is requested.",
   },
   {
     label: "Bad emails were handled",
     detail:
-      "The questionable Relay personal-email rows were held out. Only the 2 QA OK Relay contacts were imported/tagged.",
+      "The questionable Relay personal-email rows were held out. Only the 2 QA OK Relay contacts were queued.",
   },
   {
     label: "Main handoff issue",
@@ -302,7 +302,7 @@ export const REACH_WARMUP_AUTOPILOT: ReachWarmupAutopilot = {
     "weak lanes rotate through the next configured searches",
     "bad/risky emails are removed and replaced",
     "already imported or started contacts are not reused",
-    "HighLevel AI features stay OFF",
+    "Paid vendor AI features stay OFF unless Mike approves",
   ],
   visibility: [
     "Mission Control now shows auto warmup status by lane.",
@@ -336,7 +336,7 @@ export const REACH_TEAM_TRAINING: ReachTeamTraining[] = [
   },
   {
     agent: "Sender + verifier",
-    owns: "Email quality before GHL action.",
+    owns: "Email quality before sender action.",
     trainedToDo:
       "Verify emails before import/start, remove bad/unknown/catchall/personal-risk rows, and keep selected CSVs clean.",
     escalates:
@@ -357,13 +357,13 @@ export const REACH_TEAM_TRAINING: ReachTeamTraining[] = [
     tone: "warm",
   },
   {
-    agent: "GHL Expert",
-    owns: "GHL readiness and send safety.",
+    agent: "Systems Director",
+    owns: "Sender readiness and send safety.",
     trainedToDo:
-      "Confirm sender domain, workflow sender nodes, tags, warmup status, and HighLevel AI toggles OFF.",
+      "Confirm sender domain, workflow sender nodes, tags, warmup status, and paid AI toggles OFF.",
     escalates:
       "Keeps ready_for_drip=no until the sending setup is proven safe.",
-    proof: "Command: GHL Expert, check Reach readiness",
+    proof: "Command: Systems Director, check Reach readiness",
     status: "trained",
     tone: "warm",
   },

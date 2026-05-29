@@ -70,6 +70,7 @@ tmp-getmefound-*
 !/scripts/smartlead-check.mjs
 !/scripts/smartlead-create-campaign-draft.mjs
 !/scripts/smartlead-readiness.mjs
+!/scripts/smartlead-schedule-seed-launch.mjs
 !/scripts/smartlead-warmup-report.mjs
 !/scripts/prospecting-smartlead-preflight.mjs
 !/scripts/monday-agent-jobs.mjs
@@ -78,6 +79,9 @@ tmp-getmefound-*
 !/scripts/manager-slack-training-candidates.mjs
 !/scripts/auditor-security-sweep.mjs
 !/scripts/systems-director-readiness.mjs
+!/scripts/api-key-rotation-smoke.mjs
+!/scripts/slack-key-rotation-smoke.mjs
+!/scripts/stripe-resend-key-rotation-smoke.mjs
 !/scripts/sync-coach-obsidian.ps1
 /data/
 
@@ -102,3 +106,7 @@ cbc-next-start-*.log
 cbc-edge-profile/
 .cbc/*
 !.cbc/mark-egidio-extraction.json
+
+tmp-morning-brief-*.png
+tmp-next-dev-*.log
+tmp-next-start-*.log

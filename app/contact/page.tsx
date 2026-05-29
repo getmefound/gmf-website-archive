@@ -71,7 +71,7 @@ export default function ContactPage() {
                   Agency, reseller, or just want to talk through an idea? Grab 15 minutes — no deck, no pitch.
                 </p>
                 <a
-                  href="https://calendly.com/PLACEHOLDER"
+                  href="https://calendly.com/mike-getmefound/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent-text)] transition-all hover:bg-[var(--color-accent-hover)] hover:-translate-y-0.5"

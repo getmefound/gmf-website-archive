@@ -397,60 +397,21 @@ function getUtcTimeForNewYorkDay(
 }
 
 export async function getControlData(): Promise<ControlData> {
-  const [deploy, commitsWebsite, commitsTooling, pipelines, calendars] = await Promise.all([
+  const [deploy, commitsWebsite, commitsTooling] = await Promise.all([
     getLatestDeploy(),
     getRecentCommits("website", 3),
     getRecentCommits("aoh-tooling", 3),
-    getPipelines(),
-    getCalendars(),
   ]);
-
-  const reviewsPipeline = pickPipelineByName(pipelines, "review");
-  const aiVisPipeline = pickPipelineByName(pipelines, "ai visibility");
-  const discoveryCalendar = pickDiscoveryCalendar(calendars);
-
-  const now = new Date();
-  const startOfDay = getUtcTimeForNewYorkDay(now, 0, 0, 0, 0);
-  const endOfDay = getUtcTimeForNewYorkDay(now, 23, 59, 59, 999);
-
-  const [reviewsOpps, aiVisOpps, appointments, blockedSlots] = await Promise.all([
-    reviewsPipeline
-      ? searchOpportunities(reviewsPipeline.id, 100)
-      : Promise.resolve(null),
-    aiVisPipeline
-      ? searchOpportunities(aiVisPipeline.id, 100)
-      : Promise.resolve(null),
-    discoveryCalendar
-      ? getCalendarEventsRange(
-          startOfDay.toISOString(),
-          endOfDay.toISOString(),
-          discoveryCalendar.id,
-        )
-      : Promise.resolve(null),
-    discoveryCalendar
-      ? getBlockedSlotsRange(
-          startOfDay.toISOString(),
-          endOfDay.toISOString(),
-          discoveryCalendar.id,
-        )
-      : Promise.resolve(null),
-  ]);
-  const todaysEvents =
-    appointments || blockedSlots
-      ? [...(appointments ?? []), ...(blockedSlots ?? [])].sort(
-          (a, b) => new Date(a.startTimeIso).getTime() - new Date(b.startTimeIso).getTime(),
-        )
-      : null;
 
   return {
     deploy,
     commitsWebsite,
     commitsTooling,
-    pipelines,
-    todaysEvents,
-    discoveryCalendar,
-    reviewsOutreach: { pipeline: reviewsPipeline, opportunities: reviewsOpps },
-    aiVisOutreach: { pipeline: aiVisPipeline, opportunities: aiVisOpps },
+    pipelines: null,
+    todaysEvents: null,
+    discoveryCalendar: null,
+    reviewsOutreach: { pipeline: null, opportunities: null },
+    aiVisOutreach: { pipeline: null, opportunities: null },
   };
 }
 

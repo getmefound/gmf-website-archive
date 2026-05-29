@@ -1,6 +1,6 @@
-# AOH Client Ops Ledger
+# GMF Client Ops Ledger
 
-This folder contains the v1 operating ledger for running AOH clients with agents.
+This folder contains the v1 operating ledger for running GMF clients with agents.
 
 The ledger is intentionally spreadsheet-first. Mike should be able to open it, scan every client, and know:
 
@@ -30,7 +30,7 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 | `reach-campaign-agent-runbook.md` | Safe agent workflow for Reach email campaign prep, approval, import, drip start, and logging. |
 | `presence-refresh-product-runbook.md` | One-time setup add-on for stale social/website presence before Reach campaigns. |
 | `social-reach-pilot-runbook.md` | Guarded Social Reach pilot: listening, opportunity scoring, helpful drafts, and human-approved posting. |
-| `ghl-replacement-cost-plan.md` | Planning map for what AOH uses GHL for, what each area costs, and what to keep, replace, or avoid at 50+ clients. |
+| `ghl-replacement-cost-plan.md` | Planning map for what GMF uses GHL for, what each area costs, and what to keep, replace, or avoid at 50+ clients. |
 | `ghl-exit-migration-plan.md` | Parallel plan to downgrade GHL to $97, freeze new GHL dependency, rebuild core services outside GHL, train agents, and cancel when safe. |
 | `mission-control-job-flow-index.md` | Mission Control job index links and the split between Commercial Reach and optional custom agent/CRM work. |
 | `slack-agent-command-runbook.md` | How Mike talks to Manager, GHL Expert, Sales Manager, and approval gates through Slack-ready commands. |
@@ -48,17 +48,17 @@ The ledger is intentionally spreadsheet-first. Mike should be able to open it, s
 
 ## Recommended Workflow
 
-1. Keep `client-ops-ledger.csv` as the human-readable source of truth until AOH has enough clients to justify Postgres.
+1. Keep `client-ops-ledger.csv` as the human-readable source of truth until GMF has enough clients to justify Postgres.
 2. Create one Obsidian client profile note per paying client using `client-profile-template.md`.
 3. Give every client a stable `client_id` before any agent touches the account.
 4. Require all agent runs to write back to the ledger through a controlled workflow, not by freeform editing.
 5. Route every agent job through `agent-model-routing-policy.md` so cheap/no-LLM steps stay cheap.
 6. Use `reach-campaign-agent-runbook.md` before any agent prepares, imports, or starts a Reach email campaign.
 7. Use `presence-refresh-product-runbook.md` and `/lp/presence-refresh` for the 10 social post + 5 blog launch special before selling it live.
-8. Use `ghl-replacement-cost-plan.md` before changing GHL plans, enabling GHL add-ons, or deciding whether to build an AOH-owned replacement.
+8. Use `ghl-replacement-cost-plan.md` before changing GHL plans, enabling GHL add-ons, or deciding whether to build a GMF-owned replacement.
 9. Use `ghl-exit-migration-plan.md` as the source of truth for downgrading to $97, exporting GHL, rebuilding Review Automation/AI Visibility/Reach outside GHL, and cancellation gates.
 10. Use `mike-daily-agent-quickstart.md` for daily Slack usage, then `slack-agent-command-runbook.md`, `npm run agent:brief`, and `npm run morning:brief` for deeper setup and command details.
-11. Keep the Obsidian synced note `AOH Agent Model Routing and Morning Brief.md` current when model/provider or Morning Brief ownership changes.
+11. Keep the legacy Obsidian synced routing note current when model/provider or Morning Brief ownership changes until the Obsidian rename pass is complete.
 12. Use `agent-jobs-operating-structure.md` before adding more Monday boards, groups, or recurring agent jobs.
 13. Move to a real database only after the spreadsheet becomes painful, likely around 15-25 active clients.
 

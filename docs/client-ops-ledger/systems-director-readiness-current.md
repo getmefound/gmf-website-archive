@@ -1,20 +1,21 @@
 # Systems Director Readiness Check
 
-Generated: 2026-05-27T11:07:14.105Z
+Generated: 2026-05-28T15:51:53.653Z
 Owner agent: Systems Director
 Reviewer: Auditor
 Human approver: Mike
 
 ## Summary
 
-- Pass: 10
-- Warn: 4
+- Pass: 9
+- Warn: 5
 - Fail: 0
 - Skipped: 0
 
 
 ## Watch Items
 
+- GitHub: Repo needs attention: local working tree has uncommitted changes.
 - Vercel domains: Production and legacy domains are both still present in the Vercel team.
 - Supabase backups: Supabase backup/PITR status cannot be proven from this repo alone.
 - VPS backups: Hostinger VPS backup/snapshot status cannot be proven from this repo alone.
@@ -23,7 +24,7 @@ Human approver: Mike
 
 | Area | Status | Finding | Proof | Next action |
 |---|---|---|---|---|
-| GitHub | PASS | Local repo is on main, points at the GMF GitHub repo, and has no local-only changes. | ## main...origin/main |  |
+| GitHub | WARN | Repo needs attention: local working tree has uncommitted changes. | ## main...origin/main<br> M .gitignore<br> M AGENTS.md<br>D  C:Tempcustomfields.json<br>M  CLAUDE.md<br>M  app/about/page.tsx<br> M app/api/agent/slack/route.ts<br>M  app/api/motto-banner/[slug]/route.tsx<br>A  app/api/partners/route.ts<br>M  app/api/team-banner/[slug]/route.tsx<br>M  app/calculator/page.tsx<br>M  app/client/[slug]/page.tsx<br>A  app/client/[slug]/visibility-report/download/route.ts<br>A  app/client/[slug]/visibility-report/page.tsx<br>M  app/contact/page.tsx<br>A  app/partners/page.tsx<br>A  app/ref/[code]/page.tsx<br>M  app/report/ai-visibility/page.tsx<br>M  app/terms/page.tsx<br>M  components/Navbar.tsx<br>A  components/client/ClientReportCenter.tsx<br>M  components/hero/HeroVisualReviews.tsx<br>M  content/blog/46-beats-50-star-rating-sweet-spot.md<br>MM docs/AGENT_OPERATING_MODEL.md<br>M  docs/AOH_OPERATIONS_INDEX.md<br>MM docs/GMF_AGENT_TRAINING_PACK.md<br>M  docs/GMF_CLIENT_LIFECYCLE_OPERATING_MODEL.md<br> M docs/GMF_COMPANY_OPERATING_SYSTEM.md<br>M  docs/GMF_MOCK_CLIENT_SIGNUP_TO_UPGRADE_DRAFT.md<br>A  docs/GMF_PARTNER_PROGRAM.md<br>M  docs/GMF_REBRAND_AUDIT.md<br>M  docs/GMF_WEBSITE_MESSAGING_CLIENT_HOME_BRIEF.md<br>MM docs/MANAGER_ROUTING_SKILL_PACK.md<br>M  docs/client-ops-ledger/README.md<br>M  docs/client-ops-ledger/client-hub-runbook.md<br> M docs/client-ops-ledger/client-ops-ledger-data-dictionary.md<br> M docs/client-ops-ledger/client-ops-ledger.csv<br>M  docs/client-ops-ledger/ghl-replacement-cost-plan.md<br> M docs/client-ops-ledger/prospecting-smartlead-preflight-current.md<br>M  docs/client-ops-ledger/review-automation-client-intake.md<br> M docs/client-ops-ledger/slack-agent-command-runbook.md<br> M docs/client-ops-ledger/slack-app-manifest.yml<br> M docs/client-ops-ledger/smartlead-warmup-current.csv<br> M docs/client-ops-ledger/systems-director-readiness-current.md<br>A  lib/visibility-report-artifacts.ts<br> M package-lock.json<br> M package.json<br>M  public/llms.txt<br> M scripts/monday-agent-jobs.mjs<br>M  supabase/schema.sql<br>?? docs/GMF_AGENT_TRAINING_ESCALATION_PROTOCOL.md<br>?? docs/GMF_OWNER_COMMAND_PLAN.md<br>?? docs/GMF_SOP_MASTER_MAP.md<br>?? docs/GMF_SOP_VISUAL_MAP.md<br>?? docs/GMF_TOMORROW_START_PROMPT.md<br>?? docs/client-ops-ledger/api-key-rotation-smoke-current.md<br>?? docs/client-ops-ledger/gmf-testing-status-current.md<br>?? docs/client-ops-ledger/security-sweep-and-update-proof-current.md<br>?? docs/client-ops-ledger/slack-key-rotation-smoke-current.md<br>?? docs/client-ops-ledger/stripe-resend-key-rotation-smoke-current.md<br>?? docs/sops/<br>?? scripts/api-key-rotation-smoke.mjs<br>?? scripts/slack-key-rotation-smoke.mjs<br>?? scripts/stripe-resend-key-rotation-smoke.mjs<br>?? tmp-next-start-3017.err.log<br>?? tmp-next-start-3017.out.log | Codex should separate intentional work from scratch files, then commit/push finished changes. |
 | GitHub archive | PASS | Old AOH repo is still present as an archive remote. | Remote: aoh-archive |  |
 | Runbooks | PASS | Recovery docs are present and point at the current GMF repo/docs path. | docs/SYSTEMS_DIRECTOR_BACKUP_SECURITY_RUNBOOK.md<br>docs/BACKUP_READINESS_CHECKLIST.md<br>docs/LAPTOP_DEATH_RECOVERY.md<br>docs/GETMEFOUND_STACK_STATUS.md |  |
 | Vercel link | PASS | Local project is linked to the active GetMeFound Vercel project. | project=getmefound; projectId=prj_NyxkjegahECBSR2MYZ4wTGVG0tMb; orgId=team_3K7fCmjAF4RxcNGqxfDgoY53 |  |

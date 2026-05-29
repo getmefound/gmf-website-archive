@@ -99,8 +99,6 @@ export function Navbar() {
     return pathname;
   })();
   const isLegalPage = normalizedPath === "/privacy" || normalizedPath === "/terms";
-  const enHref = normalizedPath;
-  const esHref = normalizedPath === "/" ? "/es" : `/es${normalizedPath}`;
 
   return (
     <>
@@ -141,22 +139,25 @@ export function Navbar() {
               <Link href={withLocale("/about")} className="transition-colors">
                 {"About"}
               </Link>
+              <Link href={withLocale("/partners")} className="transition-colors">
+                {"Partners"}
+              </Link>
             </div>
 
-            {!isLegalPage && (
-            <Link
-              href={withLocale("/contact")}
-              className="group hidden md:inline-flex items-center gap-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-5 py-2 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/30 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-            >
-              {"See if AI recommends you"}
-              <span
-                aria-hidden="true"
-                className="transition-transform duration-200 group-hover:translate-x-0.5"
+            {!isLegalPage ? (
+              <Link
+                href={withLocale("/contact")}
+                className="group hidden md:inline-flex items-center gap-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-5 py-2 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/30 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
-                →
-              </span>
-            </Link>
-            )}
+                {"See if AI recommends you"}
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
+              </Link>
+            ) : null}
 
             <button
               type="button"
@@ -236,15 +237,22 @@ export function Navbar() {
                   >
                     {"About"}
                   </Link>
-                  {!isLegalPage && (
                   <Link
-                    href={withLocale("/contact")}
+                    href={withLocale("/partners")}
                     onClick={() => setMobileOpen(false)}
-                    className="mt-3 block w-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-4 py-3 rounded-lg font-semibold text-center transition-colors"
+                    className="block px-3 py-2 rounded-lg text-[var(--color-hero-subtext)] hover:bg-white/5 hover:text-[var(--color-hero-text)] transition-colors"
                   >
-                    {"See if AI recommends you"}
+                    {"Partners"}
                   </Link>
-                  )}
+                  {!isLegalPage ? (
+                    <Link
+                      href={withLocale("/contact")}
+                      onClick={() => setMobileOpen(false)}
+                      className="mt-3 block w-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-text)] px-4 py-3 rounded-lg font-semibold text-center transition-colors"
+                    >
+                      {"See if AI recommends you"}
+                    </Link>
+                  ) : null}
                 </div>
               </motion.div>
             </>

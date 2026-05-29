@@ -8,33 +8,33 @@ export type GhlExitChecklistItem = {
 };
 
 export const GHL_EXIT_SUMMARY = {
-  title: "GHL Exit + Review Automation",
+  title: "Legacy Platform Archive + Review Automation",
   ownerNote:
-    "GHL is now only a $97 bridge. The GMF stack can handle contact intake, review storage, review email, client records, POS/CRM health checks, and internal report status without GHL.",
+    "Archived transition proof for the old platform. The GMF-owned stack now handles contact intake, review storage, review email, client records, POS/CRM health checks, and internal report status.",
   cancelGate:
-    "Cash-first cancel path: export GHL data, replace any public booking/report links still relying on GHL, pause outreach until Smartlead clears warmup, then cancel.",
+    "Owner-approved cancel and export proof stays here for history. Current operating work belongs in Clients, Setup Jobs, Report Flow, and SOP proof.",
 };
 
 export const GHL_EXIT_METRICS = [
-  { label: "GHL plan", value: "$97", tone: "warm" as const },
+  { label: "Legacy mode", value: "Archive", tone: "warm" as const },
   { label: "Storage", value: "Ready", tone: "accent" as const },
   { label: "Email", value: "Ready", tone: "accent" as const },
   { label: "Blockers", value: "1", tone: "danger" as const },
-  { label: "Cancel GHL", value: "Close", tone: "warm" as const },
+  { label: "Current stack", value: "GMF", tone: "accent" as const },
 ];
 
 export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
   {
-    title: "Downgrade GHL",
+    title: "Downgrade legacy platform",
     owner: "Mike",
     status: "done",
-    detail: "GHL is downgraded to the $97 bridge plan.",
+    detail: "The old platform was downgraded during the transition window.",
   },
   {
-    title: "Check GHL after downgrade",
-    owner: "GHL Expert",
+    title: "Check legacy platform after downgrade",
+    owner: "Systems Director",
     status: "done",
-    detail: "Smoke check passed for the pieces we still need during the bridge.",
+    detail: "Smoke check passed for the pieces needed during the transition bridge.",
   },
   {
     title: "Customer upload page",
@@ -112,25 +112,25 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     title: "Booking fallback",
     owner: "Scheduler",
     status: "done",
-    detail: "Public report and landing page booking links now route to the GMF contact page instead of the old GHL calendar. A proper Google Calendar appointment page can replace this later.",
+    detail: "Public report and landing page booking links now route to the GMF contact page instead of the old legacy calendar. A proper Google Calendar appointment page can replace this later.",
   },
   {
-    title: "Export GHL data",
+    title: "Export legacy platform data",
     owner: "Manager + Mike",
     status: "blocked",
-    detail: "Export contacts, conversations, appointments, workflows, forms, funnels/pages, templates, pipelines, custom fields, and reports before access is removed.",
+    detail: "Export contacts, conversations, appointments, workflows, forms, funnels/pages, templates, pipelines, custom fields, and reports before legacy access is removed.",
   },
   {
-    title: "Production GHL env check",
+    title: "Production legacy env check",
     owner: "Systems Director",
     status: "done",
-    detail: "Vercel production env no longer lists GHL API or webhook keys. Local old GHL keys should be archived or removed after export.",
+    detail: "Vercel production env no longer lists old platform API or webhook keys. Local old keys should be archived or removed after export approval.",
   },
   {
     title: "Report request fallback",
     owner: "Manager + Reporter",
     status: "next",
-    detail: "Keep report requests as GMF-owned manual/internal work or hide the public report flow until automated report fulfillment is fully off GHL.",
+    detail: "Keep report requests as GMF-owned manual/internal work or hide the public report flow until automated report fulfillment is fully native.",
   },
   {
     title: "Reach replacement",
@@ -145,15 +145,15 @@ export const GHL_EXIT_CHECKLIST: GhlExitChecklistItem[] = [
     detail: "Use GMF-owned profile checks, notes, screenshots, and monthly proof for Stay Found while automated ranking reports mature.",
   },
   {
-    title: "Final GHL cancel gate",
+    title: "Final legacy cancel gate",
     owner: "Manager",
     status: "next",
-    detail: "Cancel is reasonable once exports are saved and non-GHL booking/report paths are confirmed. Outreach can stay paused rather than keeping GHL.",
+    detail: "Cancel is reasonable once exports are saved and owned booking/report paths are confirmed. Outreach can stay paused rather than keeping legacy dependencies.",
   },
 ];
 
 export const GHL_EXIT_COMMANDS = [
-  "GHL Expert, run $97 smoke check",
+  "Systems Director, run legacy archive smoke check",
   "Reviews Manager, storage check",
   "Reviews Manager, status",
 ];

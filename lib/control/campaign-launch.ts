@@ -14,7 +14,7 @@ export type RouterBranch = {
   branch: string;
   keywordExamples: string[];
   actions: string[];
-  status: "Needs GHL build" | "Needs QA" | "Blocked" | "Ready";
+  status: "Needs native QA" | "Needs QA" | "Blocked" | "Ready";
 };
 
 export const CAMPAIGN_LANES: CampaignLane[] = [
@@ -77,7 +77,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Move opportunity to Nurture / Closed",
       "Do not generate report or send booking link",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
   {
     branch: "Duplicate guard",
@@ -88,7 +88,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Add aoh_campaign_duplicate_blocked",
       "Do not generate duplicate reports",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
   {
     branch: "Booking intent",
@@ -99,7 +99,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Move opportunity to Warm Leads",
       "Do not generate report unless separately approved",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
   {
     branch: "Relay details intent",
@@ -110,7 +110,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Move opportunity to Warm Leads",
       "Do not generate full report by default",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
   {
     branch: "Report/details intent",
@@ -121,7 +121,7 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Add correct report generator tag for lane",
       "Let approved delivery workflow send the report",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
   {
     branch: "Unclear positive",
@@ -132,16 +132,16 @@ export const ROUTER_BRANCHES: RouterBranch[] = [
       "Do not generate report",
       "Do not send booking link automatically",
     ],
-    status: "Needs GHL build",
+    status: "Needs native QA",
   },
 ];
 
 export const LAUNCH_GATES = [
   "Reviews, AI Visibility, and Relay are kept as separate sender lanes.",
   "Dedicated domain warmup ladder is followed per domain: 10-20/day for 3 days, 40-50/day for 3 days, 80-100/day for 3 days, then status check after Day 9.",
-  "Vercel has CAMPAIGN_REPLY_ROUTER_TOKEN and GHL workflow sends it as x-campaign-reply-router-token.",
-  "GHL Customer Replied action POSTs contactId, replyText, and campaignLane to /api/campaign/reply-router.",
-  "GHL Campaign Reply Router is built in production location tRbczwt6oJsXK4tjuzOI.",
+  "Vercel has CAMPAIGN_REPLY_ROUTER_TOKEN and the signed reply intake sends it as x-campaign-reply-router-token.",
+  "Smartlead or the approved inbox intake POSTs contactId, replyText, and campaignLane to /api/campaign/reply-router.",
+  "The native campaign reply router is verified in production before scaled sends resume.",
   "Reply send generates or queues exactly one correct report path.",
   "Reply book sends GMF Talk and does not accidentally generate a report.",
   "Relay reply send sends missed-call details without default report generation.",
@@ -153,9 +153,9 @@ export const LAUNCH_GATES = [
 ];
 
 export const CAMPAIGN_SOURCE_DOCS = [
-  "docs/AOH_REACH_LAUNCH_RUNBOOK.md",
-  "docs/AOH_REACH_CAMPAIGN_OFFERS.md",
-  "docs/AOH_REACH_CAMPAIGN_COPY.md",
-  "docs/AOH_CAMPAIGN_REPLY_ROUTER.md",
-  "docs/AOH_REPORT_FLOW_MAP.md",
+  "docs/GETMEFOUND_FIRST_SMARTLEAD_CAMPAIGN.md",
+  "docs/GETMEFOUND_OUTREACH_SENDER_PLAN.md",
+  "docs/client-ops-ledger/prospecting-smartlead-preflight-current.md",
+  "docs/client-ops-ledger/reach-campaign-agent-runbook.md",
+  "docs/GMF_POST_PROSPECTING_WORKFLOW_DRAFT.md",
 ];

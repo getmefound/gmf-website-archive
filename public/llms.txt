@@ -1,38 +1,30 @@
-# AI Outsource Hub
+# GetMeFound
 
-AI Outsource Hub (AOH) is a service business that runs AI tools for local small businesses.
-Clients outsource the operation of AI to AOH — they never have to learn the tools themselves.
+GetMeFound (GMF) is a done-for-you visibility service for local businesses.
+Clients use GMF to keep their Google profile, reviews, business facts, and AI/search visibility current without learning another marketing tool.
 
 ## What we do
 
-### Reviews
-Automated review request campaigns sent via SMS and email to customers after service.
-AI-drafted replies in the business owner's voice — included with the standard plan, not the 30-day intro.
-Google Business Profile audit and fix during the 30-day intro; deeper optimization at standard plan.
-Starting at $1/day for first 30 days, then $99/month + $99 setup at renewal.
+### Get Found
+A one-time Google-facing setup for local businesses that need to look current, trustworthy, and easy for AI search to understand.
+Includes business fact cleanup, profile/website consistency checks, review path setup, and a before/after visibility snapshot.
 
-### AI Visibility
-Gets local businesses recommended by name when customers ask ChatGPT, Google AI, or Claude
-for a recommendation. Includes structured data implementation, AI search presence audit, and
-ongoing optimization. Starting at $3/day, no contract.
+### Stay Found
+Monthly visibility upkeep with review requests, profile freshness checks, public proof monitoring, and a plain-English report.
+Keeps the business from going stale after the first setup.
 
-### Relay — AI Voice Agent
-Multilingual AI receptionist that answers calls, books appointments, and handles customer
-inquiries 24/7 in 27+ languages. Fully managed — AOH handles setup, training, and operation.
+### Always Ready
+The deeper readiness layer for businesses that want recurring AI/search checks, answer-ready content opportunities, guarded review reply drafts, and voice/readiness preparation when approved.
 
-### Custom AI Agents
-Custom-built AI agents for business owners. Example: Business Owner Briefing — a daily AI
-digest of business performance, leads, and alerts delivered automatically each morning.
+## Client experience
+Paid clients get a private magic-link client page where they can see setup status, needed actions, visibility reports, review activity, proof, and downloadable report copies.
 
 ## Who we serve
 Local and small service businesses where reputation directly drives new customers.
-Typically: businesses where customers check reviews before choosing, service providers who
-book appointments, businesses with repeat customers, and owner-operated businesses without
-a dedicated marketing team.
+Typically: businesses where customers check reviews before choosing, service providers who book appointments, businesses with repeat customers, and owner-operated businesses without a dedicated marketing team.
 
-Examples include pet groomers, veterinary practices, auto repair shops, moving companies,
-funeral homes, senior living facilities, marketing consultants, and B2B service businesses.
+Examples include dental practices, salons, med spas, clinics, accountants, attorneys, local service businesses, and other owner-operated businesses that rely on Google visibility and reputation.
 
 ## Contact
-Website: https://aioutsourcehub.com
-Email: support@aioutsourcehub.com
+Website: https://getmefound.ai
+Email: mike@getmefound.ai

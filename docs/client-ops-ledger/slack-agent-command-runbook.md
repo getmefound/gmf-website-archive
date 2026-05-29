@@ -14,6 +14,7 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 |---|---|---|
 | Manager status brief | Wired | `npm run agent:brief` reads the current job queue, domain readiness, QA counts, and daily brief. |
 | Morning Brief command | Wired | `npm run morning:brief` generates the current owner brief. `Manager, morning brief` gives the owner view and shows which agent feeds each part of the brief. |
+| Business Improvement Auditor command | Wired | `npm run agent:business-audit` generates the independent daily business improvement report. `Manager, business improvement audit` returns the current report. |
 | Reach Cold Email Campaign command | Wired | `Manager, run Reach Cold Email Campaign` runs today's safe QA/readiness routine and reports approval needs. |
 | Owner Reach status question | Wired | `Manager, is Reach set to run today, and do I need anything?` gives Mike the short owner answer without a role-card intro. |
 | Reach team training command | Wired | `Manager, train Reach team` reminds each agent what it owns for discovery, QA, GHL readiness, sending, cost, replies, and booking. |
@@ -33,8 +34,8 @@ For Mike's plain daily workflow, use `mike-daily-agent-quickstart.md` first. Thi
 | Approval command parsing | Wired with gates | Approval commands generate the exact live command, but live execution stays blocked while agent gates are unresolved. |
 | Production listener secrets | Wired | Production has the Slack signing secret and bot token configured in Vercel. |
 | Slack posting | Env-gated | `npm run agent:slack` posts only if `SLACK_MISSION_CONTROL_WEBHOOK_URL` or `SLACK_WEBHOOK_URL` is set. |
-| Slack HTTP listener | Wired in code | `/api/agent/slack` verifies Slack requests and routes `Manager, ...` commands. Normal channel commands answer in the channel; threaded commands answer in the thread. |
-| `/manager` slash command | Wired in code | Slack should point `/manager` to `https://aioutsourcehub.com/api/agent/slack` for near-instant replies. |
+| Slack HTTP listener | Wired in code | `/api/agent/slack` verifies Slack requests and routes `Manager, ...` commands. Owner DMs from Mike are allowed, plain owner DM questions are normalized to Manager, and the common `Manger` typo is accepted. |
+| `/manager` slash command | Wired in code | Slack should point `/manager` to `https://getmefound.ai/api/agent/slack` for near-instant replies. |
 | Slack polling fallback | Wired | `/api/agent/slack?poll=1` lets Vercel Cron scan `#04-aoh-ops` once per minute and catch commands if Slack Events are not delivering. |
 | `#04-aoh-ops` bot membership | Done | Manager is in `#04-aoh-ops` and can post replies. |
 
@@ -44,7 +45,8 @@ Use these channels as the first operating split:
 
 | Channel | Role |
 |---|---|
-| `#04-aoh-ops` | Primary Manager command channel for briefs, approvals, blockers, and status. |
+| Mike DM with Manager | Primary Manager command surface for owner-needed briefs, approvals, blockers, and status. |
+| `#04-aoh-ops` | Legacy/shared ops channel. Do not use for Manager-to-Mike owner-needed alerts unless Mike explicitly approves a channel exception. |
 | `#04-aoh-ghl-feed` | GHL feed and system-event channel. Keep noisy automation proof here instead of the approval channel. |
 | `#04-aoh-prospects` | Prospect and campaign-list work. Keep raw prospect discussion out of the main ops brief. |
 
@@ -54,13 +56,14 @@ Mike should not need to watch every agent message.
 
 Use `Manager, owner peek` for the owner-level view:
 
-- Slack `#04-aoh-ops` is where Mike talks to Manager.
+- Slack DM is where Mike talks to Manager.
 - Mission Control is where Mike peeks at jobs, blockers, agents, and spend.
 - Reach job room shows campaign-specific handoff and blocker status.
 - GitHub/ledger/outbox are proof logs for audits and debugging.
-- Automatic Manager DMs are not wired yet.
+- Manager owner-needed DMs are the required path.
+- Current delivery status: true Manager/openclaw DM works. Mike's DM command was received and answered; the `Manger` typo/plain-question path is now patched.
 
-Recommended DM policy: no proactive Manager DM unless human involvement is required. Routine progress goes to Mission Control, Monday, proof reports, or on-demand Slack commands.
+DM policy: no proactive Manager DM unless human involvement is required. Routine progress goes to Mission Control, Monday, proof reports, or on-demand Slack commands.
 
 Manager may interrupt Mike only for:
 
@@ -94,6 +97,7 @@ Manager, train Reach team
 Manager, owner peek
 Manager, brief
 Manager, morning brief
+Manager, business improvement audit
 Manager, model routing
 Profile Manager, prepare GBP access test
 GHL Expert, check Reach readiness
@@ -257,18 +261,26 @@ Fast path:
 
 Plain-message path:
 
-1. Mike types a channel message such as `manager what is status of Reach Cold Email Campaign`.
+1. Mike types a DM to Manager such as `manager what is status of Reach Cold Email Campaign`.
 2. Slack Events sends the message to `/api/agent/slack`.
-3. The command center answers in the channel.
-4. If Slack Events is not delivering, the Vercel Cron fallback catches the message within about one minute.
+3. The command center answers in DM.
+4. If Slack Events is not delivering, the Vercel Cron fallback may catch configured legacy ops-channel messages, but owner-needed Manager communication should remain DM-first.
 
 Live GHL execution only happens after the separate live-action guard is intentionally opened.
 
 ## One-Time Slack Step For Mike
 
-The production listener is wired, but Slack will not let the bot answer in `#04-aoh-ops` until the bot is a member of that channel.
+The production listener is wired. Manager-to-Mike communication should use DM. Legacy channel command support only matters if Mike explicitly wants a shared-channel exception.
 
-In Slack:
+If Manager/openclaw DMs return `messages_tab_disabled`, enable direct messages for the Slack app before treating DM delivery as working:
+
+1. Open the Slack API app configuration for the Manager/openclaw app.
+2. Go to **App Home**.
+3. Enable the Messages Tab / allow users to send messages to the app.
+4. Reinstall or refresh the app if Slack asks.
+5. Rerun the Manager DM smoke test.
+
+Legacy channel invite path, only if Mike approves a channel fallback:
 
 ```text
 /invite @openclaw
@@ -292,7 +304,7 @@ If Slack says `openclaw` cannot be invited, update the Slack app scopes with eit
 The code endpoint is:
 
 ```text
-https://aioutsourcehub.com/api/agent/slack
+https://getmefound.ai/api/agent/slack
 ```
 
 Required environment variables:
@@ -304,6 +316,9 @@ Required environment variables:
 | `MANAGER_NOTIFY_TOKEN` or `REPORT_TEST_BYPASS_TOKEN` | Lets GitHub Manager checks call the live Vercel Slack endpoint without storing a Slack bot token in GitHub. |
 | `SLACK_AGENT_ALLOWED_CHANNEL_IDS` | Comma-separated channel IDs allowed to trigger the listener. Default includes `C0ATTA4NBR8` for `#04-aoh-ops`. |
 | `AOH_OWNER_SLACK_USER_ID` | Slack user ID for Mike so agents know who is speaking. Default: `U0ATPQYFA85`. |
+| `MANAGER_OWNER_SLACK_USER_ID` | Optional override for the Slack DM target for Manager owner-needed alerts. Defaults to `AOH_OWNER_SLACK_USER_ID`, then `U0ATPQYFA85`. |
+| `MANAGER_OWNER_DM_CHANNEL_ID` | Optional Slack IM channel ID override if a stable DM channel is preferred. |
+| `MANAGER_ALLOW_ROUTINE_DM` | Set to `true` only if Mike explicitly wants routine non-human-needed Monday writes sent by DM. Default: off. |
 | `AOH_OWNER_FIRST_NAME` | First-name address for Mike. Default: `Mike`. |
 | `AOH_OWNER_FORMAL_NAME` | Formal address for Mike. Default: `Mr. Egidio`. |
 | `GHL_READINESS_CACHE_TTL_MS` | Optional GHL readiness cache duration. Default: `300000` ms, or 5 minutes. |
@@ -317,14 +332,16 @@ Slack app configuration:
 
 - Add a slash command:
   - Command: `/manager`
-  - Request URL: `https://aioutsourcehub.com/api/agent/slack`
+  - Request URL: `https://getmefound.ai/api/agent/slack`
   - Short description: `Talk to the AOH Manager and agent team`
   - Usage hint: `what is status of Reach Cold Email Campaign`
-- Set the Events API Request URL to `https://aioutsourcehub.com/api/agent/slack`.
+- Set the Events API Request URL to `https://getmefound.ai/api/agent/slack`.
 - Subscribe to bot message events:
   - `message.channels`
   - `message.groups` if private channels are used
+  - `message.im` for Mike's direct Manager DM
 - Add bot scopes needed to read channel messages and post replies, such as `channels:history` and `chat:write`.
+- Add DM scopes for owner DM support, including `im:history`, `im:read`, and `im:write`.
 - Confirm Manager is present in `#04-aoh-ops`, or invite it if a new channel is added.
 - Keep the app limited to AOH internal channels.
 
@@ -339,7 +356,7 @@ If `/manager` says the app did not respond and Vercel logs show no POST to `/api
 Fallback polling:
 
 - Vercel Cron calls `/api/agent/slack?poll=1` every minute.
-- The route checks `CRON_SECRET`, reads recent `#04-aoh-ops` messages, and posts Manager responses for commands that do not already have a later bot reply.
+- The route checks `CRON_SECRET`, reads configured legacy ops-channel messages, and posts Manager responses for commands that do not already have a later bot reply.
 - The fallback ignores slash commands because `/manager` already gets an immediate Slack response.
 - This is a backup for Slack Event Subscription gaps. Slack Events should still be configured for instant responses.
 
@@ -356,6 +373,7 @@ Slash-command style:
 /manager are we ready to send?
 /manager I want to send warmup emails today. What has to happen first?
 /manager list agents
+/manager business improvement audit
 /manager Sales Manager, review Reach QA
 /manager GHL Expert, check Reach readiness
 ```

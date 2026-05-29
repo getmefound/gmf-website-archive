@@ -133,7 +133,7 @@ export default function AboutPage() {
                       className="h-full w-full object-cover object-top"
                     />
                   </div>
-                  <div>
+                  <div className="flex flex-col gap-1">
                     <p className="font-bold text-text-body">Mike Egidio</p>
                     <Link
                       href={MIKE_LINKEDIN}
@@ -143,6 +143,14 @@ export default function AboutPage() {
                     >
                       LinkedIn →
                     </Link>
+                    <a
+                      href="https://calendly.com/mike-getmefound/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-accent transition-colors hover:underline"
+                    >
+                      Book a call →
+                    </a>
                   </div>
                 </div>
 
@@ -347,7 +355,7 @@ export default function AboutPage() {
                 Partnerships, curiosity, or want to know if GetMeFound makes sense for your
                 business — we answer within a few hours.
               </p>
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row flex-wrap">
                 <Link
                   href="/contact"
                   className="group inline-flex items-center gap-2 rounded-xl bg-(--color-accent) px-8 py-4 text-base font-semibold text-(--color-accent-text) transition-all hover:bg-(--color-accent-hover) hover:-translate-y-0.5 hover:shadow-xl hover:shadow-(--color-accent)/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
@@ -360,6 +368,14 @@ export default function AboutPage() {
                     →
                   </span>
                 </Link>
+                <a
+                  href="https://calendly.com/mike-getmefound/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white/[0.06] px-6 py-4 text-base font-semibold text-hero-text ring-1 ring-white/10 transition-all hover:bg-white/10 hover:ring-white/20"
+                >
+                  Book a call →
+                </a>
                 <Link
                   href={AUDIT_HREF}
                   className="inline-flex items-center gap-2 rounded-xl bg-white/[0.06] px-6 py-4 text-base font-semibold text-hero-text ring-1 ring-white/10 transition-all hover:bg-white/10 hover:ring-white/20"

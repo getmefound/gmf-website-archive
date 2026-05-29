@@ -18,8 +18,8 @@ import { cleanClientSlug } from "@/lib/review-send-candidates";
 import { getReportFlowStatus, reportFlowOwnerSummary } from "@/lib/report-flow-status";
 
 export const metadata: Metadata = {
-  title: "GHL Exit Ops",
-  description: "Internal GetMeFound GHL replacement operations.",
+  title: "Legacy Ops Archive",
+  description: "Internal GetMeFound legacy replacement and proof archive.",
   robots: { index: false, follow: false },
 };
 
@@ -72,13 +72,13 @@ export default async function GhlExitOpsPage({ searchParams }: PageProps) {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            GMF - GHL exit
+            GMF - Legacy archive
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
-            Ops replacements
+            Ops archive
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-            POS/CRM intake, SMS compliance readiness, and report-flow status. These tools record proof and readiness only; they do not send SMS, start campaigns, or trigger GHL workflows.
+            POS/CRM intake, SMS compliance readiness, and report-flow proof retained for history. Current client work should start from Clients, Setup Jobs, Report Flow, and SOP proof.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -146,7 +146,7 @@ export default async function GhlExitOpsPage({ searchParams }: PageProps) {
         <OpsPanel title="SMS readiness" badge="blocked until compliant">
           <SmsReadinessForm clients={clientOptions} defaultClient={defaultClient} />
         </OpsPanel>
-        <OpsPanel title="Report flow" badge="GHL-free status">
+        <OpsPanel title="Report flow" badge="owned status">
           <ReportFlowForm />
         </OpsPanel>
       </section>
@@ -333,7 +333,7 @@ function AccessForm({ message }: { message: string }) {
     <section className="max-w-xl">
       <header className="mb-8 border-b border-zinc-800/60 pb-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">GMF - Internal</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">GHL Exit Ops</h1>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">Legacy Ops Archive</h1>
         <p className="mt-2 text-sm leading-relaxed text-zinc-400">Enter the internal API token to open replacement operation tools.</p>
       </header>
       <form action={openOps} className="rounded-lg border border-zinc-800/70 bg-zinc-950 p-5">

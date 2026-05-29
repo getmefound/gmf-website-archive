@@ -86,12 +86,20 @@ function routeCommand(command, args) {
     return buildReachTeamTrainingResponse();
   }
 
+  if (mentionsOwnerNeededQuestion(normalized)) {
+    return buildOwnerNeededResponse();
+  }
+
   if (mentionsOwnerPeek(normalized)) {
     return buildOwnerPeekResponse();
   }
 
   if (mentionsMorningBrief(normalized)) {
     return buildMorningBriefResult();
+  }
+
+  if (mentionsBusinessImprovementAudit(normalized)) {
+    return buildBusinessImprovementAuditResult();
   }
 
   if (mentionsModelRouting(normalized)) {
@@ -183,12 +191,14 @@ ${command}
 Supported commands:
 
 - \`Manager, status\`
+- \`Manager, what needs Mike today?\`
 - \`Manager, is Reach set to run today, and do I need anything?\`
 - \`Manager, list agents\`
 - \`Manager, start cold reach campaign\`
 - \`Manager, train Reach team\`
 - \`Manager, owner peek\`
 - \`Manager, morning brief\`
+- \`Manager, business improvement audit\`
 - \`Manager, model routing\`
 - \`Manager, GHL exit status\`
 - \`GHL Expert, run $97 smoke check\`
@@ -439,6 +449,61 @@ ${dailySignals.recommendation || "Keep auto on. Let agents handle routine refill
 Knowledge note:
 
 - Today the agents read local ledgers/runbooks and run scoped checks. The Morning Brief skill pack now records the upgrade path for a searchable GHL/document knowledge base.`,
+  };
+}
+
+function buildOwnerNeededResponse() {
+  const audit = readText("docs/client-ops-ledger/business-improvement-audit-current.md");
+  const decisions = readBullets(readSection(audit, "Owner Decisions")).filter(
+    (item) => !/^no owner decision/i.test(item),
+  );
+  const decisionText = decisions.length
+    ? decisions.map((item) => `- ${item}`).join("\n")
+    : "- No owner-needed rows found in the latest audit.";
+
+  return {
+    kind: "owner-needed-list",
+    text: `*Manager owner-needed list - ${today()}*
+
+What I need from Mike right now:
+
+- Casey mailbox: finish first-login/security/reply proof for \`casey@getmefound.ai\`, or approve a monitored fallback reply path for Monday.
+- Smartlead launch: review the five-niche packet and decide whether Monday is med-spa-only, another niche, split test, or hold.
+
+Latest Sentinel owner-needed rows:
+
+${decisionText}
+
+What agents are still handling without you:
+
+- Southington GBP authenticated proof path stays with Profile Manager / Systems Director until the access timer proves a true blocker.
+- Routine SOP/testing/proof work stays in Monday and Mission Control.
+- No live send, public edit, spend/cap change, client-facing message, or credential action happens without the matching approval.`,
+  };
+}
+
+function buildBusinessImprovementAuditResult() {
+  const currentAudit = readText("docs/client-ops-ledger/business-improvement-audit-current.md").trim();
+  if (currentAudit) {
+    return {
+      kind: "agent-business-improvement-audit",
+      text: currentAudit,
+    };
+  }
+
+  return {
+    kind: "agent-business-improvement-audit",
+    text: `*Business Improvement Auditor - ${today()}*
+
+No current audit report exists yet.
+
+Manager should run:
+
+\`\`\`text
+npm run agent:business-audit
+\`\`\`
+
+The daily workflow is \`.github/workflows/business-improvement-audit.yml\`.`,
   };
 }
 
@@ -1727,6 +1792,16 @@ function mentionsMorningBrief(normalized) {
   );
 }
 
+function mentionsBusinessImprovementAudit(normalized) {
+  return (
+    normalized.includes("business improvement audit") ||
+    normalized.includes("improvement auditor") ||
+    normalized.includes("business auditor") ||
+    normalized.includes("agent efficiency report") ||
+    normalized.includes("agent audit report")
+  );
+}
+
 function mentionsModelRouting(normalized) {
   return (
     normalized.includes("model routing") ||
@@ -1867,6 +1942,12 @@ function mentionsTeamTraining(normalized) {
   );
 }
 
+function mentionsOwnerNeededQuestion(normalized) {
+  return /\b(what do you need from me|what do you need|need from me|do you need anything from me|what is needed from me|what do i need to do|what should i do next|what do you need mike|needs mike|what needs mike)\b/.test(
+    normalized,
+  );
+}
+
 function mentionsOwnerPeek(normalized) {
   return (
     normalized.includes("owner peek") ||
@@ -1978,6 +2059,7 @@ function mentionsQaReview(normalized) {
 function normalizeCommand(command) {
   return command
     .toLowerCase()
+    .replace(/\belon\b/g, "manager")
     .replace(/[.,:;|]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -1998,6 +2080,30 @@ function readCsv(path) {
 function readText(path) {
   const absolute = resolve(path);
   return existsSync(absolute) ? readFileSync(absolute, "utf8") : "";
+}
+
+function readSection(text, title) {
+  const heading = new RegExp(`^## ${escapeRegExp(title)}\\s*$`, "m");
+  const match = heading.exec(text);
+  if (!match) return "";
+
+  const sectionStart = match.index + match[0].length;
+  const afterHeading = text.slice(sectionStart);
+  const nextHeading = afterHeading.search(/\r?\n##\s+/);
+  return (nextHeading === -1 ? afterHeading : afterHeading.slice(0, nextHeading)).trim();
+}
+
+function readBullets(section) {
+  return section
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith("- "))
+    .map((line) => line.slice(2).trim())
+    .filter(Boolean);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function parseCsv(raw) {

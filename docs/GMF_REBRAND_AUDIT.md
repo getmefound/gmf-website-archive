@@ -11,6 +11,7 @@ This audit separates safe brand cleanup from identifiers that still need a plann
 - Review automation env reads now prefer `GMF_*` names for webhook, sender, reply-to, model, TTL, GBP invite, and ops alert settings while keeping old `AOH_*` fallbacks.
 - GitHub smoke and automation metadata now uses GetMeFound / GMF where it is only a label or public base URL.
 - The workflow library now uses business-family names such as `Launch 01: Client Setup` and `Serve 01: Review Launch` instead of `GMF-WF-*`.
+- Follow-up pass updated `public/llms.txt`, visible review-demo copy, current client hub/intake docs, and the GHL replacement plan to use GetMeFound / GMF.
 
 ## Kept on purpose for now
 

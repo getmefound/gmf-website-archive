@@ -62,18 +62,24 @@ Current Smartlead warmup settings:
 - Account max send cap from creation: 20/day
 - Minimum wait between sends from account creation: 15 minutes
 
-Smartlead draft campaign was created on 2026-05-23:
+Smartlead draft campaign was created on 2026-05-23 and configured for the first approved seed launch on 2026-05-29. It is now paused while the expanded max-safe Monday send approval packet is built:
 
 - `GetMeFound - AI Visibility Audit - Warmup Draft`
 - Campaign ID: `3379589`
-- No leads, sequences, schedule, or live sending are active yet.
+- Current Smartlead name: `GetMeFound - CT Med Spa Visibility Seed - 2026-06-01`
+- Status: paused pending Mike approval of expanded send packet
+- Send window: Monday 2026-06-01, 10:15-11:30 ET
+- Seed cap: 3 leads total
+- Sequence: one initial email only
+- Superseding approval packet: `docs/client-ops-ledger/smartlead-monday-max-send-approval-packet.md`
+- Prior proof: `docs/client-ops-ledger/smartlead-seed-launch-current.md`
 
-First seed list was prepared from existing inventory on 2026-05-23:
+First seed list was prepared from existing inventory on 2026-05-23 and imported for the approved 2026-06-01 seed launch:
 
 - 3 med-spa prospects
 - 3 valid emails after NeverBounce verification
 - 3 QA OK rows
-- Not imported into Smartlead yet
+- Imported into Smartlead after readiness and owner approval
 
 ## Sending Boundary
 
@@ -138,25 +144,32 @@ Before increasing volume, check:
 - No old AOH/GHL warmup lane should be resumed while `docs/client-ops-ledger/reach-warmup-autopilot.json` is paused.
 - Do not import contacts into GHL or add start-drip tags during the GetMeFound/GHL-exit transition.
 
-## Current Blocker
+## Current Live Seed State
 
-The next action is to let Smartlead warm the three accounts before adding live prospect campaigns.
+The three outreach accounts passed the tiny-seed readiness gate on 2026-05-29:
 
-Current readiness gate:
+- SMTP and IMAP OK
+- Smartlead warmup status ACTIVE
+- Smartlead warmup reputation 100
+- Warmup sent count above the 10-message seed threshold
+- Spam count 0
+
+Current readiness command:
 
 ```powershell
 npm run smartlead:readiness
 ```
 
-The campaign should stay inactive until every active inbox passes this gate:
+The campaign is paused. It should not send or be expanded until Mike approves the max-safe Monday send packet:
 
-- SMTP and IMAP are OK
-- Smartlead warmup status is `ACTIVE`
-- Smartlead warmup reputation is at least 95
-- each inbox has at least 10 warmup emails sent
-- spam count is 0
+- sent count
+- failures
+- bounces
+- replies
+- complaints
+- no unexpected extra sends
 
-As of 2026-05-23, all three inboxes are healthy but still below the minimum activity threshold. They have only 1 warmup sent each, so live prospect sends are intentionally on hold.
+Any future list expansion, follow-up sequence, new niche, new sender, or volume increase requires a fresh launch packet or an approved boundary.
 
 Codex can verify Smartlead API access with:
 

@@ -58,8 +58,8 @@ export default function TermsPage() {
           <TermsSection title="What the client provides">
             <ul className="list-disc space-y-2 pl-6">
               <li>Access to the client&apos;s Google Business Profile as a manager. The client keeps ownership.</li>
-              <li>Access to the website backend during setup work.</li>
-              <li>GetMeFound does not store client passwords beyond the duration of active work.</li>
+              <li>Access to the website backend during setup work when needed, using revocable user access where available.</li>
+              <li>GetMeFound does not need client passwords for client hub access; client hubs use magic links.</li>
               <li>The client can revoke access at any time.</li>
             </ul>
           </TermsSection>

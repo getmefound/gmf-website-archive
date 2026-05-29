@@ -4,7 +4,9 @@ import { basename, join, resolve } from "node:path";
 const LEDGER_DIR = "docs/client-ops-ledger";
 const OUTBOX_DIR = `${LEDGER_DIR}/outbox`;
 const CURRENT_BRIEF_PATH = `${LEDGER_DIR}/morning-brief-current.md`;
-const GHL_STATS_PATH = `${LEDGER_DIR}/ghl-email-stats-current.csv`;
+const OUTREACH_STATS_PATH = `${LEDGER_DIR}/outreach-email-stats-current.csv`;
+const BUSINESS_AUDIT_PATH = `${LEDGER_DIR}/business-improvement-audit-current.md`;
+const DEFAULT_OWNER_DM_CHANNEL_ID = "D0ATLRTCP2P";
 
 export type BriefArchiveItem = {
   date: string;
@@ -13,7 +15,7 @@ export type BriefArchiveItem = {
   summary: string;
 };
 
-export type GhlEmailStat = {
+export type OutreachEmailStat = {
   lane: string;
   workflow: string;
   sent: number;
@@ -27,6 +29,34 @@ export type GhlEmailStat = {
   unsubscribed: number;
 };
 
+export type BusinessAuditSummary = {
+  date: string;
+  efficiencyScore: string;
+  ownerNeededJobs: number;
+  watchedActiveJobs: number;
+  timerOverdueJobs: number;
+  manualAuditQueue: number;
+  systemsBuildQueue: number;
+  mainConstraint: string;
+  processImprovements: string[];
+  ownerDecisions: string[];
+  sourceFile: string;
+};
+
+export type SlackOwnerSignal = {
+  title: string;
+  action: string;
+  timestamp: string;
+  source: string;
+};
+
+export type SlackOwnerSignals = {
+  ok: boolean;
+  source: string;
+  error?: string;
+  signals: SlackOwnerSignal[];
+};
+
 export type MorningBriefData = {
   date: string;
   commercialBrief: string[];
@@ -36,7 +66,8 @@ export type MorningBriefData = {
   recommendedMove: string;
   sourceStatus: string[];
   proofUsed: string[];
-  stats: GhlEmailStat[];
+  stats: OutreachEmailStat[];
+  businessAudit: BusinessAuditSummary;
   archive: BriefArchiveItem[];
   currentFile: string;
   statsFile: string;
@@ -44,7 +75,8 @@ export type MorningBriefData = {
 
 export function getMorningBriefData(): MorningBriefData {
   const current = readText(CURRENT_BRIEF_PATH);
-  const stats = readCsv(GHL_STATS_PATH).map(toGhlEmailStat);
+  const stats = readCsv(OUTREACH_STATS_PATH).map(toOutreachEmailStat);
+  const businessAudit = readBusinessAudit();
   const archive = getBriefArchive();
 
   return {
@@ -57,13 +89,65 @@ export function getMorningBriefData(): MorningBriefData {
     sourceStatus: readBullets(readSection(current, "Source Status")),
     proofUsed: readBullets(readSection(current, "Proof Used")),
     stats,
+    businessAudit,
     archive,
     currentFile: CURRENT_BRIEF_PATH,
-    statsFile: GHL_STATS_PATH,
+    statsFile: OUTREACH_STATS_PATH,
   };
 }
 
-export function statTotals(stats: GhlEmailStat[]) {
+export async function getSlackOwnerSignals(): Promise<SlackOwnerSignals> {
+  const token = process.env.SLACK_BOT_TOKEN?.trim();
+  const channel = process.env.MANAGER_OWNER_DM_CHANNEL_ID?.trim() || DEFAULT_OWNER_DM_CHANNEL_ID;
+  const source = "Manager Slack DM";
+  if (!token) {
+    return {
+      ok: false,
+      source,
+      error: "SLACK_BOT_TOKEN is not configured for this runtime.",
+      signals: [],
+    };
+  }
+
+  try {
+    const url = new URL("https://slack.com/api/conversations.history");
+    url.searchParams.set("channel", channel);
+    url.searchParams.set("limit", "20");
+    const response = await fetch(url, {
+      headers: { authorization: `Bearer ${token}` },
+      next: { revalidate: 60 },
+    });
+    const body = (await response.json()) as {
+      ok?: boolean;
+      error?: string;
+      messages?: Array<{ text?: string; ts?: string }>;
+    };
+    if (!response.ok || !body.ok) {
+      return {
+        ok: false,
+        source,
+        error: body.error || `Slack API failed with ${response.status}`,
+        signals: [],
+      };
+    }
+
+    const signals = (body.messages ?? [])
+      .map((message) => toSlackOwnerSignal(message.text ?? "", message.ts ?? "", source))
+      .filter((signal): signal is SlackOwnerSignal => Boolean(signal))
+      .slice(0, 5);
+
+    return { ok: true, source, signals };
+  } catch (error) {
+    return {
+      ok: false,
+      source,
+      error: error instanceof Error ? error.message : "Slack signal fetch failed.",
+      signals: [],
+    };
+  }
+}
+
+export function statTotals(stats: OutreachEmailStat[]) {
   const sent = stats.reduce((sum, item) => sum + item.sent, 0);
   const delivered = stats.reduce((sum, item) => sum + item.delivered, 0);
   const opened = stats.reduce((sum, item) => sum + item.opened, 0);
@@ -106,7 +190,7 @@ function getBriefArchive(): BriefArchiveItem[] {
     });
 }
 
-function toGhlEmailStat(row: Record<string, string>): GhlEmailStat {
+function toOutreachEmailStat(row: Record<string, string>): OutreachEmailStat {
   return {
     lane: row.lane || "unknown",
     workflow: row.workflow || "unknown",
@@ -119,6 +203,47 @@ function toGhlEmailStat(row: Record<string, string>): GhlEmailStat {
     bounced: number(row.bounced),
     bouncePct: number(row.bounce_pct),
     unsubscribed: number(row.unsubscribed),
+  };
+}
+
+function readBusinessAudit(): BusinessAuditSummary {
+  const text = readText(BUSINESS_AUDIT_PATH);
+  return {
+    date: firstMatch(text, /^Date:\s*(.+)$/m),
+    efficiencyScore: firstMatch(text, /^- Agent efficiency score:\s*(.+)$/m) || "n/a",
+    ownerNeededJobs: number(firstMatch(text, /^- Owner-needed jobs:\s*(.+)$/m)),
+    watchedActiveJobs: number(firstMatch(text, /^- Watched active jobs:\s*(.+)$/m)),
+    timerOverdueJobs: number(firstMatch(text, /^- Timer overdue jobs:\s*(.+)$/m)),
+    manualAuditQueue: number(firstMatch(text, /^- Manual audit queue:\s*(.+)$/m)),
+    systemsBuildQueue: number(firstMatch(text, /^- Systems build queue:\s*(.+)$/m)),
+    mainConstraint: firstMatch(text, /^- Main constraint:\s*(.+)$/m) || "No current audit constraint found.",
+    processImprovements: readNumberedItems(readSection(text, "Process Improvements")).slice(0, 5),
+    ownerDecisions: readBullets(readSection(text, "Owner Decisions")),
+    sourceFile: BUSINESS_AUDIT_PATH,
+  };
+}
+
+function toSlackOwnerSignal(text: string, ts: string, source: string): SlackOwnerSignal | null {
+  const clean = text.trim();
+  if (!/\bowner-needed\b/i.test(clean)) return null;
+  if (/temporary password/i.test(clean) && /SN>|password is/i.test(clean)) return null;
+
+  const title = firstMatch(clean, /^\*([^*]+)\*/m) || "Owner-needed Slack ask";
+  const remaining = clean
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => !line.startsWith("*Sent using*"));
+  const actionStart = remaining.findIndex((line) => /^1\.|^Remaining step|^Please|^What I need/i.test(line));
+  const actionLines = (actionStart >= 0 ? remaining.slice(actionStart) : remaining.slice(1))
+    .filter((line) => !/^Systems Director handled/i.test(line))
+    .slice(0, 5);
+
+  return {
+    title,
+    action: actionLines.join(" ").replace(/\s+/g, " ").trim() || "Review the Slack DM and complete the owner-needed step.",
+    timestamp: slackTimestamp(ts),
+    source,
   };
 }
 
@@ -139,6 +264,15 @@ function readBullets(section: string): string[] {
     .map((line) => line.trim())
     .filter((line) => line.startsWith("- "))
     .map((line) => line.slice(2).trim())
+    .filter(Boolean);
+}
+
+function readNumberedItems(section: string): string[] {
+  return section
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^\d+\.\s+/.test(line))
+    .map((line) => line.replace(/^\d+\.\s+/, "").trim())
     .filter(Boolean);
 }
 
@@ -208,6 +342,18 @@ function number(value: string | number | undefined): number {
 
 function round(value: number): number {
   return Math.round(value * 100) / 100;
+}
+
+function slackTimestamp(ts: string) {
+  const seconds = Number(String(ts).split(".")[0]);
+  if (!Number.isFinite(seconds) || seconds <= 0) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(seconds * 1000));
 }
 
 function todayEastern() {

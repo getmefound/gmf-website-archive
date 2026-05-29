@@ -67,9 +67,24 @@ const DOCS = [
     purpose: "Google Business Profile access, verification, review links, and handoffs.",
   },
   {
-    title: "GHL Bridge Knowledge",
-    path: "docs/GHL_EXPERT_KNOWLEDGE_PACK.md",
-    purpose: "Legacy GHL bridge setup, reputation management, workflows, and troubleshooting map while exiting GHL.",
+    title: "Owner Command Plan",
+    path: "docs/GMF_OWNER_COMMAND_PLAN.md",
+    purpose: "How Mike commands the business, how Manager routes work, and what must be owner-visible.",
+  },
+  {
+    title: "SOP Master Map",
+    path: "docs/GMF_SOP_MASTER_MAP.md",
+    purpose: "Master list of prospecting, sales, onboarding, fulfillment, reporting, security, and queue-control SOPs.",
+  },
+  {
+    title: "Owned Presence Launch Plan",
+    path: "docs/GMF_OWNED_PRESENCE_LAUNCH_PLAN.md",
+    purpose: "GMF's own Google Business Profile, website, and social presence setup plan.",
+  },
+  {
+    title: "Security Sweep Proof",
+    path: "docs/client-ops-ledger/security-sweep-and-update-proof-current.md",
+    purpose: "Current credential, exposed-secret, and environment safety evidence.",
   },
   {
     title: "Morning Brief Skill Pack",
@@ -85,10 +100,10 @@ const DOCS = [
 
 const RECOVERY_STEPS = [
   "Open the password manager and confirm the core business accounts are reachable.",
-  "Get GitHub, Vercel, Stripe, GHL/Hub360AI, DNS, Slack, Obsidian, Google, and the VPS provider back online.",
+  "Get GitHub, Vercel, Supabase, Stripe, Resend, Smartlead, DNS, Slack, Obsidian, Google, and the VPS provider back online.",
   "Clone the website and tooling repos, install dependencies, and run a clean build.",
   "Restore environment variables from the hosting account instead of storing secrets in docs.",
-  "Verify Mission Control, OpenClaw, GHL access, Slack, and the document vault.",
+  "Verify Mission Control, OpenClaw, Supabase, Resend, Smartlead, Monday, Slack, and the document vault.",
 ];
 
 const HUMAN_CHECKS = [

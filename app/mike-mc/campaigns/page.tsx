@@ -133,13 +133,13 @@ export default async function CampaignLaunchPage() {
         <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-sky-300">
-              GHL router
+              Reply router
             </p>
             <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
               Branch order and required proof
             </h2>
           </div>
-          <Pill tone="warn">needs GHL build</Pill>
+          <Pill tone="warn">needs native QA</Pill>
         </div>
         <div className="grid gap-3 xl:grid-cols-2">
           {ROUTER_BRANCHES.map((branch, index) => (
@@ -205,7 +205,7 @@ export default async function CampaignLaunchPage() {
             ))}
           </div>
           <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-            These docs are the operating source for Sender, Coach, GHL Expert, Sorter, Booker, and Auditor.
+            These docs are the operating source for Sender, Coach, Systems Director, Sorter, Booker, and Auditor.
           </p>
         </div>
       </section>

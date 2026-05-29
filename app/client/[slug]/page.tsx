@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ClientReportCenter } from "@/components/client/ClientReportCenter";
 import { getClientHubActivity } from "@/lib/client-hub-activity";
 import { getClientHubProfile, getClientIntegrationSettings } from "@/lib/client-profile-store";
 import { summarizeIntegrationEventHealth } from "@/lib/review-integration-events";
 import { listReviewAutomationRecords } from "@/lib/review-automation-store";
 import { getReviewReplyDigest } from "@/lib/review-reply-digest";
 import { getSmsReadiness } from "@/lib/review-sms-readiness";
+import { buildClientVisibilityReportArtifact } from "@/lib/visibility-report-artifacts";
 import {
   CLIENT_HUBS,
   statusClasses,
@@ -56,6 +58,7 @@ export default async function ClientHubPage({ params }: PageProps) {
   const smsReadiness = await getSmsReadiness(client.slug);
   const smsDoneCount = smsReadiness.checklist.filter((item) => item.done).length;
   const replyDigest = await getReviewReplyDigest({ clientSlug: client.slug, days: 30 });
+  const visibilityReport = buildClientVisibilityReportArtifact({ client, activity });
   const clientNeeds = client.checklist.filter((item) => item.owner === "Client" && item.status !== "done");
   const weeklyReviews = activity.ok ? activity.weekly.feedback : client.reviews.weeklyReviews;
   const requestsSent = activity.ok ? activity.monthly.sent : client.reviews.requestsSent;
@@ -183,6 +186,30 @@ export default async function ClientHubPage({ params }: PageProps) {
               </div>
             ) : null}
           </div>
+        </div>
+      </section>
+
+      <section id="visibility-report" className="border-b border-slate-200 bg-[#f7f8f4]">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[320px_1fr]">
+          <SectionHeader
+            eyebrow="Visibility report"
+            title="Your report center"
+            sub="Baseline, before/after proof, monthly recap, signal evidence, competitor gap, next actions, and downloads."
+          />
+
+          <ClientReportCenter
+            report={visibilityReport}
+            client={{
+              businessName: client.businessName,
+              plan: client.plan,
+              statusLabel: client.statusLabel,
+              location: client.location,
+              category: client.category,
+              logoText: client.logoText,
+            }}
+            clientActionCount={clientNeeds.length}
+            downloadHref={`/client/${client.slug}/visibility-report/download`}
+          />
         </div>
       </section>
 

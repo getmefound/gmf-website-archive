@@ -135,11 +135,11 @@ function JobIndexSection() {
       detail: "Your internal room for whether emails are ready to send or still blocked.",
     },
     {
-      title: "GHL Exit",
-      label: "$97 bridge",
+      title: "Setup Jobs",
+      label: "client ops",
       tone: "warm" as const,
-      href: "/mike-mc/jobs/ghl-exit",
-      detail: "What is done, blocked, and next before GMF can cancel GHL.",
+      href: "/mike-mc/setup-jobs",
+      detail: "Access, onboarding, Google Business Profile work, client intake, and launch tasks.",
     },
     {
       title: "Presence Refresh",

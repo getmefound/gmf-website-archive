@@ -58,7 +58,7 @@ export default function Image() {
               maxWidth: 960,
             }}
           >
-            Be the local business AI recommends.
+            Google doesn&apos;t rank you anymore. It picks you — or it doesn&apos;t.
           </div>
         </div>
 
@@ -72,7 +72,7 @@ export default function Image() {
           }}
         >
           <div style={{ display: "flex", maxWidth: 760 }}>
-            Reviews, rankings, and AI visibility for local businesses.
+            Done-for-you Google visibility and AI search presence. Starting at $149.
           </div>
           <div style={{ display: "flex", color: "#3D7A65", fontWeight: 600 }}>
             getmefound.ai

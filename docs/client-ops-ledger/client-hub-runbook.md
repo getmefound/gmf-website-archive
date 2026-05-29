@@ -45,10 +45,10 @@ Interactive sections:
 
 - `Today`: what changed recently and what is waiting
 - `Needed from you`: access, approvals, customer lists, missing business facts
-- `Visibility`: current visibility score, baseline, competitor gap, and latest report link
+- `Visibility`: custom report center with score, baseline, before/after proof, monthly recap, signal detail, competitor gap, next actions, and download buttons
 - `Reviews`: review requests, new reviews, private feedback, held-back rows, and review link status
 - `Google profile`: access status, profile fixes, posts, photos, services, and drift checks
-- `Reports`: baseline, before/after proof, monthly recap, and downloadable/shareable report links
+- `Reports`: baseline, before/after proof, monthly recap, and downloadable/shareable report copies
 - `Approvals`: reply drafts, SMS readiness, profile edits, or public-facing changes that need approval
 - `Uploads`: customer/job lists, logo/assets, do-not-contact notes, service updates
 - `Unlocked next`: greyed-out next capabilities available with Stay Found or Always Ready
@@ -59,7 +59,7 @@ Interaction rules:
 - clients should not see internal agent names, internal queues, raw logs, private tool names, or debug status
 - the page should prefill everything GMF already knows
 - one client action per card; do not make the owner interpret workflow detail
-- full competitor and scoring details are client-only after signup, not in the free prospect report
+- full competitor and scoring details are client-only after signup, not in the free prospect report, and should live inside the client dashboard instead of a separate primary report destination
 - upgrade previews should be useful but restrained; proof comes before upsell
 
 The custom page should be plan-aware:
@@ -199,7 +199,7 @@ GHL Expert owns:
 - workflow logs needed for proof/history
 - HighLevel AI features OFF unless Mike manually authorizes otherwise
 
-As AOH exits GHL, Systems Director and Website/Codex take over the AOH-owned
+As GMF exits GHL, Systems Director and Website/Codex take over the GMF-owned
 client record, intake packet, send log, suppression list, and recap path.
 
 Systems Director owns:
@@ -215,7 +215,8 @@ The v1 page is safe only because it uses sample/client-zero data.
 
 Before real private client data goes on a hub:
 
-- enable owner password or magic-link access
+- enable owner magic-link access
+- do not use client passwords for client hub access
 - do not expose customer lists publicly
 - keep upload links secure
 - keep GHL/webhook tokens out of the page
@@ -227,11 +228,11 @@ Customer uploads:
   `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are configured
 - if Redis is not configured, full customer rows must go only to
   `AOH_REVIEW_AUTOMATION_WEBHOOK_URL`, `AOH_CLIENT_INTAKE_WEBHOOK_URL`, or
-  another AOH-owned secure intake path
+  another GMF-owned secure intake path
 - Slack receives only counts and summary, not the full customer list
 - rows missing email, duplicates, and do-not-contact matches are held back before
   Sender gets a sendable list
-- if no AOH webhook is configured, the page may show a summary, but real customer
+- if no GMF webhook is configured, the page may show a summary, but real customer
   outreach should wait until secure storage/intake is connected
 - default event retention is 90 days; override with
   `AOH_REVIEW_AUTOMATION_STORAGE_TTL_DAYS`

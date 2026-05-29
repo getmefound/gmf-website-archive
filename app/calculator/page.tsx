@@ -3,9 +3,7 @@ import Link from "next/link";
 import { RevenueCalculator } from "@/components/RevenueCalculator";
 import { pageBreadcrumbs } from "@/lib/seo";
 
-// TODO: Replace with your actual Calendly link once set up
-// e.g. "https://calendly.com/getmefound/15min"
-const BOOK_URL = "https://calendly.com/PLACEHOLDER";
+const BOOK_URL = "https://calendly.com/mike-getmefound/30min";
 
 export const metadata: Metadata = {
   title: "Revenue Potential Calculator — GetMeFound",

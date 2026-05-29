@@ -7,16 +7,16 @@ Last updated: 2026-05-21
 
 ## Purpose
 
-This form lets a client tell AOH they are ready for setup.
+This form lets a client tell GMF they are ready for setup.
 
 The important trigger is Google Business Profile access:
 
-- client adds the AOH business-domain Google login as Manager
+- client adds the GMF business-domain Google login as Manager
 - client submits the intake form
 - Manager routes the setup packet to the right agents
 - Profile Manager verifies access
 - Reviews Manager prepares the review automation flow
-- Systems Director keeps the AOH-owned intake/alert path healthy
+- Systems Director keeps the GMF-owned intake/alert path healthy
 - GHL Expert handles HighLevel only as a bridge while the GHL exit is in progress
 
 ## Live Form
@@ -29,8 +29,9 @@ The important trigger is Google Business Profile access:
 
 When the form is submitted, the API forwards a setup packet to:
 
-- `AOH_CLIENT_INTAKE_WEBHOOK_URL`, if set
-- otherwise `AOH_INTAKE_WEBHOOK_URL`, if set
+- `GMF_CLIENT_INTAKE_WEBHOOK_URL`, if set
+- otherwise `GMF_INTAKE_WEBHOOK_URL`, if set
+- legacy `AOH_CLIENT_INTAKE_WEBHOOK_URL` / `AOH_INTAKE_WEBHOOK_URL` only as fallbacks during migration
 - `SLACK_CLIENT_INTAKE_WEBHOOK_URL`, if set
 - otherwise `SLACK_MISSION_CONTROL_WEBHOOK_URL` or `SLACK_WEBHOOK_URL`
 - `GHL_CLIENT_INTAKE_WEBHOOK_URL`, `GHL_CONTACT_WEBHOOK_URL`, or
@@ -39,10 +40,10 @@ When the form is submitted, the API forwards a setup packet to:
 Bridge control:
 
 ```text
-AOH_DISABLE_GHL_FORWARDING=yes
+GMF_DISABLE_GHL_FORWARDING=yes
 ```
 
-Use that when AOH is ready to stop sending new intake packets into GHL.
+Use that when GMF is ready to stop sending new intake packets into GHL. Legacy `AOH_DISABLE_GHL_FORWARDING` may remain only as a fallback until env values are migrated.
 
 ## Client Access Language
 
@@ -62,7 +63,7 @@ Owner access is not the default. If a client selects Owner, Manager should flag 
 2. Manager receives setup packet.
 3. Profile Manager checks GBP access and profile basics.
 4. Reviews Manager prepares review automation setup.
-5. Systems Director confirms the AOH-owned intake/alert path received the packet.
+5. Systems Director confirms the GMF-owned intake/alert path received the packet.
 6. GHL Expert prepares HighLevel setup only if the GHL bridge is still active.
 7. Manager reports ready, blocked, or needs client help.
 

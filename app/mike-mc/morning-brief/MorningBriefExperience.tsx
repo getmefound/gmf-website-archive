@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { MorningBriefData } from "@/lib/control/morning-brief";
+import type { MondayAgentJobsOverview, MondayAgentJobRow } from "@/lib/control/monday-agent-jobs";
+import type { MorningBriefData, SlackOwnerSignals } from "@/lib/control/morning-brief";
 
 type Totals = {
   sent: number;
@@ -15,336 +16,326 @@ type Totals = {
   unsubscribed: number;
 };
 
-type ViewKey = "today" | "sources" | "custom" | "pricing";
+type ViewKey = "owner" | "agents" | "prospecting" | "sources";
 
-const standardIncludes = [
-  "Reach campaign results",
-  "News and market signals",
-  "What needs Mike",
-  "Agents working today",
-  "Recommended next move",
-  "Running archive",
-];
+type OwnerAction = {
+  id: string;
+  title: string;
+  ask: string;
+  source: string;
+  owner: string;
+  due: string;
+  status: string;
+  proof?: string;
+  tone: "danger" | "warm" | "accent" | "muted";
+};
 
-const customConnectors = [
-  "Email inbox triage",
-  "Calendar and booking checks",
-  "Deeper GHL pipeline detail",
-  "Google Business Profile updates",
-  "Missed calls or call tracking",
-  "Ads, payments, or other private systems",
-];
-
-const agentOwners = [
-  {
-    agent: "General Manager",
-    job: "Turns everything into the short owner read and flags anything that needs Mike.",
-  },
-  {
-    agent: "GHL Expert",
-    job: "Pulls Reach email stats, workflow proof, sender checks, and GHL readiness.",
-  },
-  {
-    agent: "Scout",
-    job: "Finds useful news, market shifts, competitor angles, and offer ideas.",
-  },
-  {
-    agent: "Systems Director",
-    job: "Watches source health, cron jobs, failures, and cost risk.",
-  },
-];
-
-const sourceCards = [
-  {
-    name: "Reach / GHL outreach",
-    state: "Live",
-    owner: "GHL Expert",
-    shows: "Sent, delivered, opened, replies, bounces, and unsubscribes.",
-    where: "HighLevel read-only email stats API, current CSV, and this page.",
-  },
-  {
-    name: "News and market signals",
-    state: "Started",
-    owner: "Scout",
-    shows: "AI automation, GoHighLevel, Google Business Profile, and AI receptionist signals.",
-    where: "Google News RSS starter feeds now. Google Alerts or n8n can broaden it next.",
-  },
-  {
-    name: "Calendar",
-    state: "Custom next",
-    owner: "Scheduler + Systems Director",
-    shows: "Booked work, open spots, missed appointments, and follow-up needs.",
-    where: "Not connected to this brief yet. This should be a read-only custom connector.",
-  },
-  {
-    name: "Email inbox",
-    state: "Custom next",
-    owner: "Manager + Systems Director",
-    shows: "Important customer messages, owner tasks, sales replies, and follow-up risk.",
-    where: "Not connected to this brief yet. Add Gmail/Outlook read-only access when ready.",
-  },
-  {
-    name: "Archive and proof",
-    state: "Live",
-    owner: "Systems Director",
-    shows: "Daily briefs, source files, GHL stats files, and proof used.",
-    where: "Ledger docs, outbox files, and this running page.",
-  },
-  {
-    name: "Slack delivery",
-    state: "Ready path",
-    owner: "General Manager",
-    shows: "Short daily owner message and urgent exceptions.",
-    where: "#04-aoh-ops now, then Mike DM if you want that delivery style.",
-  },
-];
-
-const pricingAnchors = [
-  {
-    vendor: "AgencyAnalytics",
-    price: "$20/client/mo",
-    detail: "Automated reports, AI insights, white-label branding, and client portal. Billed annually.",
-    source: "https://agencyanalytics.com/pricing",
-  },
-  {
-    vendor: "DashThis",
-    price: "$44-$54/mo",
-    detail: "Starter dashboard plan with 3 dashboards and 15 sources.",
-    source: "https://dashthis.com/pricing",
-  },
-  {
-    vendor: "Databox",
-    price: "$159/mo",
-    detail: "Pro reporting plan for dashboards, reports, goals, shared updates, and team visibility.",
-    source: "https://databox.com/pricing",
-  },
-  {
-    vendor: "Whatagraph",
-    price: "199 euros/mo",
-    detail: "Start plan billed annually, with automated emails, reports, AI summaries, and data credits.",
-    source: "https://whatagraph.com/pricing",
-  },
-];
-
-const packaging = [
-  {
-    tier: "Standard Owner Brief",
-    price: "$149-$299/mo",
-    setup: "$0-$500 setup",
-    body: "Daily owner read, outreach results, market signal, archive, and one recommended move.",
-  },
-  {
-    tier: "Custom Owner Layer",
-    price: "$399-$1,500+/mo",
-    setup: "$750-$3,000 setup",
-    body: "Private systems connected: email, calendar, GHL/CRM, GBP, calls, ads, payments, or custom agent jobs.",
-  },
-];
-
-const retention = [
-  ["Daily briefs", "13 months", "Your useful owner history without making the page feel endless."],
-  ["Raw proof", "90 days", "Enough to debug sources, exports, and campaign questions."],
-  ["Monthly rollups", "24 months", "Best for annual review, renewal, and offer proof."],
+const nicheRanking = [
+  ["Medical spas / aesthetic clinics", "Primary Monday recommendation", "30 max if QA supports it"],
+  ["Dentists / cosmetic and implant dental", "Strong second test", "More compliance review"],
+  ["Pet grooming / boarding / daycare", "Reply-friendly fallback", "Lower ticket"],
+  ["HVAC / plumbing / roofing", "High-value future lane", "Needs fresh QA batch"],
+  ["Assisted living / senior living", "High value, sensitive", "Dedicated careful copy"],
 ];
 
 export function MorningBriefExperience({
   brief,
   totals,
+  mondayOverview,
+  slackSignals,
 }: {
   brief: MorningBriefData;
   totals: Totals;
+  mondayOverview: MondayAgentJobsOverview;
+  slackSignals: SlackOwnerSignals;
 }) {
-  const [view, setView] = useState<ViewKey>("today");
-  const [proofOpen, setProofOpen] = useState(false);
-  const primarySignal = brief.marketSignals[0] ?? "Scout brings one useful market signal each morning.";
-
-  const selectedContent = useMemo(() => {
-    if (view === "sources") return <SourcesView brief={brief} />;
-    if (view === "custom") return <CustomView />;
-    if (view === "pricing") return <PricingView />;
-    return <TodayView brief={brief} totals={totals} />;
-  }, [view, brief, totals]);
+  const [view, setView] = useState<ViewKey>("owner");
+  const ownerActions = useMemo(
+    () => buildOwnerActions({ brief, mondayOverview, slackSignals }),
+    [brief, mondayOverview, slackSignals],
+  );
+  const activeWithoutOwner = mondayOverview.activeRows.filter((row) => row.humanNeeded !== "Yes");
+  const topAction = ownerActions[0];
+  const currentTime = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date());
 
   return (
-    <main className="min-h-screen bg-[#f7f5ef] text-slate-900">
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-8 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-12">
-          <div className="flex min-w-0 flex-col justify-between gap-8">
-            <div>
-              <div className="mb-5 flex flex-wrap items-center gap-2">
-                <a href="/mike-mc" className="nav-chip">
-                  Mission Control
-                </a>
-                <a href="/mike-mc/jobs" className="nav-chip">
-                  Jobs
-                </a>
-                <span className="status-chip">Mike view</span>
-              </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                GMF Owner Brief
-              </p>
-              <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 md:text-6xl">
-                Mike&apos;s Morning Brief
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                Your daily operating page for Reach results, market signals, owner decisions, and the custom sources still waiting to be connected.
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              <HeroMetric label="Cold Emails Sent" value={totals.sent.toString()} />
-              <HeroMetric label="Delivery rate" value={`${totals.deliveredPct}%`} tone="green" />
-              <HeroMetric label="Open rate" value={`${totals.openedPct}%`} tone="amber" />
-            </div>
+    <main className="min-h-screen overflow-x-hidden bg-[#f4f7fb] text-slate-950">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-6 md:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <nav className="flex flex-wrap gap-2" aria-label="Mission Control">
+              <a href="/mike-mc" className="nav-chip">
+                Mission Control
+              </a>
+              <a href="/mike-mc/jobs" className="nav-chip">
+                Jobs
+              </a>
+              <a href="/mike-mc/sentinel" className="nav-chip">
+                Sentinel
+              </a>
+            </nav>
+            <span className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600">
+              {currentTime} ET
+            </span>
           </div>
 
-          <BriefGraphic brief={brief} totals={totals} />
+          <div className="grid min-w-0 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-emerald-700">GMF owner brief</p>
+              <h1 className="mt-2 text-4xl font-semibold text-slate-950 md:text-5xl">
+                Mike&apos;s Morning Brief
+              </h1>
+              <p className="mt-4 max-w-3xl break-words text-base leading-7 text-slate-600">
+                Owner actions first, agent work next, proof underneath.
+              </p>
+            </div>
+            <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+              <ScoreTile label="Owner actions" value={ownerActions.length.toString()} tone={ownerActions.length ? "danger" : "accent"} />
+              <ScoreTile label="Agents active" value={mondayOverview.totals.inProgress.toString()} tone="accent" />
+              <ScoreTile label="Human-needed Monday" value={mondayOverview.totals.humanNeeded.toString()} tone={mondayOverview.totals.humanNeeded ? "warm" : "muted"} />
+              <ScoreTile label="Sentinel grade" value={brief.businessAudit.efficiencyScore} tone="warm" />
+            </div>
+          </div>
         </div>
-      </section>
+      </header>
 
-      <section className="border-b border-slate-200 bg-[#eef6f2]">
+      <section className="border-b border-slate-200 bg-[#fffaf0]">
         <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
-          <div className="grid gap-3 lg:grid-cols-[220px_1fr] lg:items-center">
-            <p className="text-sm font-semibold text-emerald-900">News / market signal</p>
-            <p className="text-sm leading-6 text-slate-700">{primarySignal}</p>
+          <div className="grid gap-4 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start">
+            <p className="font-semibold text-amber-900">Start here</p>
+            <p className="min-w-0 break-words text-sm leading-6 text-amber-950">
+              {topAction
+                ? `${topAction.title}: ${topAction.ask}`
+                : "No owner action is currently marked as required. Agents continue the queue and escalate only true decisions."}
+            </p>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-        <SourceStrip brief={brief} />
-
-        <div className="mb-7 mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              My operating page
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
-              Today, sources, and my custom layer
-            </h2>
+            <p className="text-sm font-semibold text-slate-500">Owner action queue</p>
+            <h2 className="mt-1 text-2xl font-semibold text-slate-950">What Mike needs to do</h2>
           </div>
-          <div className="inline-grid grid-cols-2 gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-sm md:grid-cols-4">
-            <TabButton active={view === "today"} onClick={() => setView("today")} label="Today" />
-            <TabButton active={view === "sources"} onClick={() => setView("sources")} label="Sources" />
-            <TabButton active={view === "custom"} onClick={() => setView("custom")} label="My Custom" />
-            <TabButton active={view === "pricing"} onClick={() => setView("pricing")} label="Pricing Later" />
+          <div className="flex min-w-0 flex-wrap gap-2">
+            {mondayOverview.boardUrl ? (
+              <a
+                href={mondayOverview.boardUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400"
+              >
+                Open Monday
+              </a>
+            ) : null}
+            <span className={slackSignals.ok ? "status-chip" : "custom-chip"}>
+              Slack {slackSignals.ok ? "read" : "limited"}
+            </span>
+            <span className={mondayOverview.ok ? "status-chip" : "custom-chip"}>
+              Monday {mondayOverview.ok ? "live" : "limited"}
+            </span>
           </div>
         </div>
 
-        {selectedContent}
+        {ownerActions.length ? (
+          <div className="grid min-w-0 gap-4 lg:grid-cols-3">
+            {ownerActions.map((action) => (
+              <OwnerActionCard key={action.id} action={action} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-5 text-sm leading-6 text-emerald-950">
+            No owner action is marked as required. Manager and agents continue working from Monday, Mission Control, and proof docs.
+          </div>
+        )}
       </section>
 
       <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
-          <div className="mb-6 grid gap-4 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                My archive
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
-                Running brief history
-              </h2>
-            </div>
-            <p className="text-sm leading-6 text-slate-600">
-              Keep daily briefs for 13 months, raw proof for 90 days, and monthly rollups for 24 months.
-            </p>
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-3">
-            {retention.map(([label, value, note]) => (
-              <article key={label} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{label}</p>
-                <p className="mt-2 text-3xl font-semibold text-slate-950">{value}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{note}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-6 grid gap-3 lg:grid-cols-2">
-            {brief.archive.slice(0, 6).map((item) => (
-              <article key={item.file} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-semibold text-slate-950">{item.date}</h3>
-                  <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-500">
-                    saved
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{item.summary}</p>
-              </article>
-            ))}
+        <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            <LiveStateCard label="Smartlead campaign" value="Paused" detail="No prospect sends before approval." tone="warm" />
+            <LiveStateCard label="Outreach inboxes" value="Healthy" detail="3 inboxes ready; 0 spam; 100 reputation." tone="accent" />
+            <LiveStateCard label="Casey mailbox" value="Owner gate" detail="First-login and reply proof still needed." tone="danger" />
+            <LiveStateCard label="Southington GBP" value="Agent working" detail="Profile Manager timer due today at noon ET." tone="muted" />
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-        <button
-          type="button"
-          onClick={() => setProofOpen((value) => !value)}
-          className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
-        >
-          {proofOpen ? "Hide proof files" : "Show proof files"}
-        </button>
-        {proofOpen ? (
-          <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3">
-            {[brief.currentFile, brief.statsFile, ...brief.proofUsed].filter(Boolean).map((item) => (
-              <code key={item} className="truncate rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-500">
-                {item}
-              </code>
-            ))}
+        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-slate-500">Operating view</p>
+            <h2 className="mt-1 text-2xl font-semibold text-slate-950">Morning control surface</h2>
           </div>
-        ) : null}
+          <div className="grid grid-cols-2 gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-sm md:grid-cols-4">
+            <TabButton active={view === "owner"} onClick={() => setView("owner")} label="Owner" />
+            <TabButton active={view === "agents"} onClick={() => setView("agents")} label="Agents" />
+            <TabButton active={view === "prospecting"} onClick={() => setView("prospecting")} label="Prospecting" />
+            <TabButton active={view === "sources"} onClick={() => setView("sources")} label="Sources" />
+          </div>
+        </div>
+
+        {view === "owner" ? <OwnerView brief={brief} slackSignals={slackSignals} /> : null}
+        {view === "agents" ? <AgentsView brief={brief} mondayOverview={mondayOverview} activeRows={activeWithoutOwner} /> : null}
+        {view === "prospecting" ? <ProspectingView totals={totals} /> : null}
+        {view === "sources" ? <SourcesView brief={brief} slackSignals={slackSignals} mondayOverview={mondayOverview} /> : null}
       </section>
     </main>
   );
 }
 
-function TodayView({ brief, totals }: { brief: MorningBriefData; totals: Totals }) {
+function OwnerView({ brief, slackSignals }: { brief: MorningBriefData; slackSignals: SlackOwnerSignals }) {
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-5 flex flex-wrap items-center gap-2">
-          <span className="status-chip">Today&apos;s owner read</span>
-          <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
-            {brief.date}
-          </span>
-        </div>
-        <h3 className="text-2xl font-semibold text-slate-950">What happened and what matters</h3>
-        <div className="mt-4 space-y-3">
+    <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
+      <section>
+        <SectionTitle label="Today's read" title="What happened and what matters" />
+        <div className="mt-4 grid gap-3">
           {brief.commercialBrief.map((item) => (
-            <BriefLine key={item} text={item} />
+            <TextCard key={item} text={item} />
           ))}
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-        <h3 className="text-2xl font-semibold text-slate-950">Needs Mike</h3>
-        <div className="mt-4 space-y-3">
-          {brief.needsMike.length ? (
-            brief.needsMike.map((item) => <BriefLine key={item} text={item} tone="amber" />)
-          ) : (
-            <p className="text-sm text-slate-600">No owner action listed.</p>
-          )}
+      <section>
+        <SectionTitle label="Recommended move" title="Best next decision" />
+        <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="text-base leading-7 text-slate-700">{brief.recommendedMove}</p>
         </div>
-        <div className="mt-5 border-t border-slate-200 pt-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            Recommended move
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-700">{brief.recommendedMove}</p>
+        <div className="mt-4 grid gap-3">
+          <SignalCard label="Main constraint" value={brief.businessAudit.mainConstraint} />
+          <SignalCard label="Slack owner asks" value={slackSignals.signals.length ? `${slackSignals.signals.length} recent ask(s) found` : slackSignals.error || "No recent owner-needed Slack asks found."} />
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          <SmallMetric label="Replies" value={totals.replied.toString()} />
-          <SmallMetric label="Bounces" value={totals.bounced.toString()} />
-          <SmallMetric label="Unsubs" value={totals.unsubscribed.toString()} />
+      </section>
+    </div>
+  );
+}
+
+function AgentsView({
+  brief,
+  mondayOverview,
+  activeRows,
+}: {
+  brief: MorningBriefData;
+  mondayOverview: MondayAgentJobsOverview;
+  activeRows: MondayAgentJobRow[];
+}) {
+  return (
+    <div className="space-y-7">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ScoreTile label="Started" value={mondayOverview.totals.started.toString()} tone="accent" />
+        <ScoreTile label="Review queue" value={mondayOverview.totals.review.toString()} tone="warm" />
+        <ScoreTile label="True waiting" value={mondayOverview.totals.trueWaiting.toString()} tone={mondayOverview.totals.trueWaiting ? "warm" : "muted"} />
+        <ScoreTile label="Needs rescue" value={mondayOverview.totals.needsRescue.toString()} tone={mondayOverview.totals.needsRescue ? "danger" : "muted"} />
+      </div>
+
+      <section>
+        <SectionTitle label="Autonomous work" title="Agents running without Mike" />
+        <div className="mt-4 grid gap-3 lg:grid-cols-2">
+          {activeRows.length ? activeRows.map((row) => <JobCard key={row.id} row={row} />) : <TextCard text="No active agent rows returned from Monday." />}
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm xl:col-span-2">
-        <h3 className="text-2xl font-semibold text-slate-950">Agents working this brief</h3>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {agentOwners.map((item) => (
-            <article key={item.agent} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <p className="font-semibold text-slate-950">{item.agent}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{item.job}</p>
+      <section>
+        <SectionTitle label="Sentinel" title="Process improvement queue" />
+        <div className="mt-4 grid gap-3 lg:grid-cols-5">
+          {brief.businessAudit.processImprovements.map((item, index) => (
+            <TextCard key={item} eyebrow={`Fix ${index + 1}`} text={item} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ProspectingView({ totals }: { totals: Totals }) {
+  return (
+    <div className="space-y-7">
+      <section>
+        <SectionTitle label="Monday launch" title="Smartlead decision packet" />
+        <div className="mt-4 grid gap-4 lg:grid-cols-3">
+          <LiveStateCard label="Recommended niche" value="Med spas" detail="Single-niche launch; do not mix copy unless approved." tone="accent" />
+          <LiveStateCard label="Recommended cap" value="30 total" detail="10 per warmed inbox; 45 is aggressive; 60 is not recommended." tone="warm" />
+          <LiveStateCard label="Launch state" value="Paused" detail="Mike approval required before resume, cap change, or list expansion." tone="danger" />
+        </div>
+      </section>
+
+      <section>
+        <SectionTitle label="Five niches" title="Sales Manager ranking" />
+        <div className="mt-4 grid gap-3 lg:grid-cols-5">
+          {nicheRanking.map(([name, note, fit], index) => (
+            <article key={name} className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-sm font-semibold text-slate-500">#{index + 1}</p>
+              <h3 className="mt-2 text-base font-semibold text-slate-950">{name}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{note}</p>
+              <p className="mt-3 text-sm font-semibold text-emerald-700">{fit}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <SectionTitle label="Outreach archive" title="Historical stats still visible" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <ScoreTile label="Sent" value={totals.sent.toString()} tone="muted" />
+          <ScoreTile label="Delivered" value={`${totals.deliveredPct}%`} tone="muted" />
+          <ScoreTile label="Opened" value={`${totals.openedPct}%`} tone="muted" />
+          <ScoreTile label="Replies" value={totals.replied.toString()} tone="muted" />
+          <ScoreTile label="Bounces" value={totals.bounced.toString()} tone={totals.bounced ? "warm" : "muted"} />
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function SourcesView({
+  brief,
+  slackSignals,
+  mondayOverview,
+}: {
+  brief: MorningBriefData;
+  slackSignals: SlackOwnerSignals;
+  mondayOverview: MondayAgentJobsOverview;
+}) {
+  const proof = [brief.currentFile, brief.statsFile, brief.businessAudit.sourceFile, ...brief.proofUsed].filter(Boolean);
+
+  return (
+    <div className="space-y-7">
+      <section>
+        <SectionTitle label="Source health" title="Where this page is reading from" />
+        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <LiveStateCard label="Monday" value={mondayOverview.ok ? "Live" : "Limited"} detail={mondayOverview.error || "Owner-needed rows and agent queue loaded."} tone={mondayOverview.ok ? "accent" : "danger"} />
+          <LiveStateCard label="Slack DM" value={slackSignals.ok ? "Live" : "Limited"} detail={slackSignals.error || "Recent owner-needed DMs loaded."} tone={slackSignals.ok ? "accent" : "warm"} />
+          <LiveStateCard label="Sentinel" value={brief.businessAudit.date || "Loaded"} detail={brief.businessAudit.mainConstraint} tone="warm" />
+          <LiveStateCard label="Brief file" value={brief.date} detail="Current generated owner brief." tone="muted" />
+        </div>
+      </section>
+
+      <section>
+        <SectionTitle label="Proof" title="Files behind the brief" />
+        <div className="mt-4 grid gap-2 lg:grid-cols-2">
+          {proof.map((item) => (
+            <code key={item} className="min-w-0 break-all rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600">
+              {item}
+            </code>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <SectionTitle label="Archive" title="Recent morning briefs" />
+        <div className="mt-4 grid gap-3 lg:grid-cols-3">
+          {brief.archive.slice(0, 6).map((item) => (
+            <article key={item.file} className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-sm font-semibold text-slate-950">{item.date}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{item.summary}</p>
             </article>
           ))}
         </div>
@@ -353,208 +344,111 @@ function TodayView({ brief, totals }: { brief: MorningBriefData; totals: Totals 
   );
 }
 
-function SourcesView({ brief }: { brief: MorningBriefData }) {
+function OwnerActionCard({ action }: { action: OwnerAction }) {
   return (
-    <div className="space-y-4">
-      <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-        {sourceCards.map((item) => (
-          <article key={item.name} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-lg font-semibold text-slate-950">{item.name}</h3>
-              <span className={item.state === "Live" ? "status-chip" : item.state === "Started" ? "rounded-md bg-blue-50 px-2 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700" : "custom-chip"}>
-                {item.state}
-              </span>
-            </div>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{item.shows}</p>
-            <div className="mt-4 border-t border-slate-200 pt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Owner</p>
-              <p className="mt-1 text-sm font-semibold text-slate-800">{item.owner}</p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Where it is</p>
-              <p className="mt-1 text-sm leading-6 text-slate-600">{item.where}</p>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-        <h3 className="text-2xl font-semibold text-slate-950">Current source check</h3>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {brief.sourceStatus.map((item) => (
-            <BriefLine key={item} text={item} />
-          ))}
+    <article className={`min-w-0 rounded-lg border bg-white p-5 shadow-sm ${borderTone(action.tone)}`}>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className={`text-sm font-semibold ${textTone(action.tone)}`}>{action.source}</p>
+          <h3 className="mt-2 break-words text-xl font-semibold text-slate-950">{action.title}</h3>
         </div>
-      </section>
-    </div>
-  );
-}
-
-function CustomView() {
-  return (
-    <div className="grid gap-4 lg:grid-cols-2">
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-4 flex flex-wrap gap-2">
-          <span className="status-chip">Standard in my brief</span>
-        </div>
-        <h3 className="text-2xl font-semibold text-slate-950">Already part of Mike&apos;s daily view</h3>
-        <div className="mt-5 grid gap-2 sm:grid-cols-2">
-          {standardIncludes.map((item) => (
-            <FeaturePill key={item} label={item} />
-          ))}
-        </div>
-      </section>
-      <section className="rounded-lg border border-amber-200 bg-amber-50 p-5 shadow-sm">
-        <div className="mb-4 flex flex-wrap gap-2">
-          <span className="custom-chip">My custom layer</span>
-        </div>
-        <h3 className="text-2xl font-semibold text-slate-950">Connect only when I approve access</h3>
-        <div className="mt-5 grid gap-2 sm:grid-cols-2">
-          {customConnectors.map((item) => (
-            <FeaturePill key={item} label={item} custom />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function PricingView() {
-  return (
-    <div className="space-y-4">
-      <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-        <h3 className="text-2xl font-semibold text-slate-950">How I would sell this later</h3>
-        <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">
-          Lead with owner clarity, not dashboards. Standard is the daily brief and running page. Custom is paid setup when agents connect to private systems.
-        </p>
-      </section>
-      <div className="grid gap-4 lg:grid-cols-2">
-        {packaging.map((item) => (
-          <article key={item.tier} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="mb-4 flex flex-wrap gap-2">
-              <span className={item.tier.includes("Custom") ? "custom-chip" : "status-chip"}>{item.tier}</span>
-              <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
-                {item.setup}
-              </span>
-            </div>
-            <p className="text-4xl font-semibold tracking-tight text-slate-950">{item.price}</p>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{item.body}</p>
-          </article>
-        ))}
+        <span className={chipTone(action.tone)}>{action.status}</span>
       </div>
-      <div className="grid gap-3 lg:grid-cols-4">
-        {pricingAnchors.map((item) => (
-          <a
-            key={item.vendor}
-            href={item.source}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-emerald-300"
-          >
-            <p className="font-semibold text-slate-950">{item.vendor}</p>
-            <p className="mt-2 font-mono text-sm font-semibold text-emerald-700">{item.price}</p>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{item.detail}</p>
-          </a>
-        ))}
+      <p className="mt-4 break-words text-sm leading-6 text-slate-700">{action.ask}</p>
+      <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+        <div>
+          <dt className="font-semibold text-slate-500">Owner</dt>
+          <dd className="mt-1 break-words text-slate-900">{action.owner}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-slate-500">Due</dt>
+          <dd className="mt-1 break-words text-slate-900">{action.due}</dd>
+        </div>
+      </dl>
+      {action.proof ? <p className="mt-4 break-all text-xs leading-5 text-slate-500">{action.proof}</p> : null}
+    </article>
+  );
+}
+
+function JobCard({ row }: { row: MondayAgentJobRow }) {
+  return (
+    <article className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="break-words text-base font-semibold text-slate-950">{row.name}</h3>
+          <p className="mt-1 break-words text-sm text-slate-500">{row.agentOwner || row.nextOwner || "Agent owner not recorded"}</p>
+        </div>
+        <span className="status-chip">{row.status || row.runtimeState || "Active"}</span>
       </div>
-    </div>
-  );
-}
-
-function SourceStrip({ brief }: { brief: MorningBriefData }) {
-  const items = [
-    ["Outreach stats", brief.stats.length ? "Live from HighLevel" : "Waiting on stats"],
-    ["News", brief.marketSignals.length ? "Starter feeds live" : "Waiting on signal"],
-    ["Calendar", "Custom connector next"],
-    ["Email", "Custom connector next"],
-  ];
-
-  return (
-    <div className="grid gap-3 md:grid-cols-4">
-      {items.map(([label, value]) => (
-        <article key={label} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{label}</p>
-          <p className="mt-2 text-sm font-semibold text-slate-950">{value}</p>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function BriefGraphic({ brief, totals }: { brief: MorningBriefData; totals: Totals }) {
-  return (
-    <div className="relative min-w-0">
-      <div className="absolute -right-4 top-6 hidden h-52 w-24 rounded-lg bg-amber-100 md:block" />
-      <div className="relative min-w-0 overflow-hidden rounded-lg border border-slate-200 bg-[#fbfaf6] p-5 shadow-2xl shadow-slate-200">
-        <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Mike view</p>
-            <p className="mt-1 text-xl font-semibold text-slate-950">{brief.date}</p>
-          </div>
-          <span className="status-chip">Owner page</span>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2">
-          <SmallMetric label="Sent" value={totals.sent.toString()} />
-          <SmallMetric label="Delivery" value={`${totals.deliveredPct}%`} />
-          <SmallMetric label="Open" value={`${totals.openedPct}%`} />
-        </div>
-
-        <div className="mt-5 space-y-3">
-          {brief.stats.map((stat) => (
-            <div key={stat.lane} className="grid grid-cols-[64px_minmax(0,1fr)_44px] items-center gap-3 sm:grid-cols-[96px_minmax(0,1fr)_54px]">
-              <p className="text-sm font-semibold text-slate-700">{laneLabel(stat.lane)}</p>
-              <div className="h-2 overflow-hidden rounded-full bg-slate-200">
-                <div className="h-full rounded-full bg-emerald-500" style={{ width: `${Math.min(100, stat.openedPct)}%` }} />
-              </div>
-              <p className="text-right font-mono text-sm text-slate-600">{stat.openedPct}%</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 rounded-lg border border-emerald-200 bg-white p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
-            Next move
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-700">{brief.recommendedMove}</p>
-        </div>
+      <p className="mt-3 break-words text-sm leading-6 text-slate-600">{row.nextAction || row.unlockProof || "No next action recorded."}</p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {row.expectedReceive ? <span className="custom-chip">Expected {shortDate(row.expectedReceive)}</span> : null}
+        {row.escalateAt ? <span className="custom-chip">Escalate {shortDate(row.escalateAt)}</span> : null}
       </div>
-    </div>
+    </article>
   );
 }
 
-function HeroMetric({ label, value, tone = "slate" }: { label: string; value: string; tone?: "slate" | "green" | "amber" }) {
-  const color = tone === "green" ? "text-emerald-700" : tone === "amber" ? "text-amber-700" : "text-slate-950";
+function TextCard({ text, eyebrow }: { text: string; eyebrow?: string }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-[#fbfaf6] p-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{label}</p>
-      <p className={`mt-2 text-3xl font-semibold ${color}`}>{value}</p>
-    </div>
+    <article className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      {eyebrow ? <p className="mb-2 text-sm font-semibold text-slate-500">{eyebrow}</p> : null}
+      <p className="break-words text-sm leading-6 text-slate-700">{text}</p>
+    </article>
   );
 }
 
-function SmallMetric({ label, value }: { label: string; value: string }) {
+function SignalCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-3">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{label}</p>
-      <p className="mt-1 font-mono text-lg font-semibold text-slate-950">{value}</p>
-    </div>
+    <article className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <p className="text-sm font-semibold text-slate-500">{label}</p>
+      <p className="mt-2 break-words text-sm leading-6 text-slate-700">{value}</p>
+    </article>
   );
 }
 
-function BriefLine({ text, tone = "green" }: { text: string; tone?: "green" | "amber" }) {
-  const dot = tone === "amber" ? "bg-amber-500" : "bg-emerald-500";
+function LiveStateCard({
+  label,
+  value,
+  detail,
+  tone,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  tone: "danger" | "warm" | "accent" | "muted";
+}) {
   return (
-    <div className="flex gap-3">
-      <span className={`mt-2 h-2 w-2 flex-shrink-0 rounded-full ${dot}`} />
-      <p className="text-base leading-7 text-slate-700">{text}</p>
-    </div>
+    <article className={`min-w-0 rounded-lg border bg-white p-4 shadow-sm ${borderTone(tone)}`}>
+      <p className="text-sm font-semibold text-slate-500">{label}</p>
+      <p className={`mt-2 break-words text-2xl font-semibold ${textTone(tone)}`}>{value}</p>
+      <p className="mt-2 break-words text-sm leading-6 text-slate-600">{detail}</p>
+    </article>
   );
 }
 
-function FeaturePill({ label, custom }: { label: string; custom?: boolean }) {
+function ScoreTile({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone: "danger" | "warm" | "accent" | "muted";
+}) {
   return (
-    <div className={`rounded-lg border px-3 py-2 text-sm font-medium ${custom ? "border-amber-200 bg-white text-amber-950" : "border-slate-200 bg-slate-50 text-slate-700"}`}>
-      {custom ? "Custom: " : ""}
-      {label}
+    <article className={`min-w-0 rounded-lg border bg-white p-4 shadow-sm ${borderTone(tone)}`}>
+      <p className="text-sm font-semibold text-slate-500">{label}</p>
+      <p className={`mt-2 break-words text-3xl font-semibold ${textTone(tone)}`}>{value}</p>
+    </article>
+  );
+}
+
+function SectionTitle({ label, title }: { label: string; title: string }) {
+  return (
+    <div>
+      <p className="text-sm font-semibold text-slate-500">{label}</p>
+      <h2 className="mt-1 text-2xl font-semibold text-slate-950">{title}</h2>
     </div>
   );
 }
@@ -573,7 +467,123 @@ function TabButton({ active, onClick, label }: { active: boolean; onClick: () =>
   );
 }
 
-function laneLabel(lane: string) {
-  if (lane === "ai") return "AI";
-  return lane.charAt(0).toUpperCase() + lane.slice(1);
+function buildOwnerActions({
+  brief,
+  mondayOverview,
+  slackSignals,
+}: {
+  brief: MorningBriefData;
+  mondayOverview: MondayAgentJobsOverview;
+  slackSignals: SlackOwnerSignals;
+}): OwnerAction[] {
+  const rows = mondayOverview.humanRows;
+  const actions: OwnerAction[] = [];
+  const caseyRow = rows.find((row) => /email identity|sender routing|casey/i.test(row.name));
+  const caseySignal = slackSignals.signals.find((signal) => /casey/i.test(`${signal.title} ${signal.action}`));
+  if (caseyRow || caseySignal) {
+    actions.push({
+      id: "casey-mailbox",
+      title: "Secure Casey mailbox",
+      ask:
+        caseySignal?.action ||
+        "Complete Casey first-login security/reply proof, or approve a monitored fallback reply path for Monday launch.",
+      source: caseySignal ? "Slack DM + Monday" : "Monday",
+      owner: "Mike, then Systems Director",
+      due: caseyRow?.expectedReceive ? shortDate(caseyRow.expectedReceive) : "Today",
+      status: "Owner gate",
+      proof: caseyRow?.proofText,
+      tone: "danger",
+    });
+  }
+
+  const smartleadRows = rows.filter((row) => /smartlead/i.test(row.name));
+  if (smartleadRows.length) {
+    actions.push({
+      id: "smartlead-approval",
+      title: "Decide Monday prospecting launch",
+      ask: "Review the five-niche packet, then approve med-spa-only, choose another niche, approve a split test, or hold. Campaign stays paused until this decision.",
+      source: "Monday",
+      owner: "Mike + Elon",
+      due: shortDate(smartleadRows[0].expectedReceive) || "Today",
+      status: "Approval needed",
+      proof: smartleadRows[0].proofText,
+      tone: "warm",
+    });
+  }
+
+  for (const row of rows) {
+    if (/smartlead|email identity|sender routing|casey/i.test(row.name)) continue;
+    actions.push({
+      id: `monday-${row.id}`,
+      title: row.name,
+      ask: row.nextAction || row.unlockProof || "Review this Monday owner-needed row.",
+      source: "Monday",
+      owner: row.nextOwner || row.agentOwner || "Mike",
+      due: shortDate(row.expectedReceive) || "Today",
+      status: row.status || "Human Needed",
+      proof: row.proofText,
+      tone: "warm",
+    });
+  }
+
+  for (const signal of slackSignals.signals) {
+    if (/casey/i.test(`${signal.title} ${signal.action}`)) continue;
+    actions.push({
+      id: `slack-${signal.title}`,
+      title: signal.title,
+      ask: signal.action,
+      source: signal.source,
+      owner: "Mike",
+      due: signal.timestamp || "Today",
+      status: "Slack ask",
+      tone: "warm",
+    });
+  }
+
+  for (const item of brief.needsMike) {
+    if (/^no mike action|no routine owner action/i.test(item)) continue;
+    if (/smartlead|sender|casey|mailbox/i.test(item)) continue;
+    actions.push({
+      id: `brief-${item}`,
+      title: "Morning brief ask",
+      ask: item,
+      source: "Morning brief",
+      owner: "Mike",
+      due: "Today",
+      status: "Review",
+      tone: "muted",
+    });
+  }
+
+  return actions.slice(0, 6);
+}
+
+function shortDate(value: string) {
+  const match = value.match(/^\d{4}-\d{2}-(\d{2})T(\d{2}):(\d{2})/);
+  if (!match) return value;
+  const hour = Number(match[2]);
+  const suffix = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return `May ${match[1]}, ${hour12}:${match[3]} ${suffix} ET`;
+}
+
+function borderTone(tone: "danger" | "warm" | "accent" | "muted") {
+  if (tone === "danger") return "border-rose-200";
+  if (tone === "warm") return "border-amber-200";
+  if (tone === "accent") return "border-emerald-200";
+  return "border-slate-200";
+}
+
+function textTone(tone: "danger" | "warm" | "accent" | "muted") {
+  if (tone === "danger") return "text-rose-700";
+  if (tone === "warm") return "text-amber-700";
+  if (tone === "accent") return "text-emerald-700";
+  return "text-slate-700";
+}
+
+function chipTone(tone: "danger" | "warm" | "accent" | "muted") {
+  if (tone === "danger") return "rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700";
+  if (tone === "warm") return "rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700";
+  if (tone === "accent") return "status-chip";
+  return "rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-xs font-semibold text-slate-600";
 }

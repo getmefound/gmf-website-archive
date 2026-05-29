@@ -19,6 +19,11 @@ import {
   type MissionTone,
 } from "@/lib/control/mission";
 import { getControlData } from "@/lib/control/fetchers";
+import {
+  getMondayAgentJobsOverview,
+  type MondayAgentJobsOverview,
+  type MondayAgentJobRow,
+} from "@/lib/control/monday-agent-jobs";
 import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
@@ -35,8 +40,9 @@ const MC_BOOKMARKS = [
   { label: "Team", href: "/mike-mc/team" },
   { label: "Clients", href: "/mike-mc/clients" },
   { label: "Setup Jobs", href: "/mike-mc/setup-jobs" },
-  { label: "GHL Exit Ops", href: "/mike-mc/ghl-exit-ops" },
+  { label: "Sentinel", href: "/mike-mc/sentinel" },
   { label: "Ops Index", href: "/mike-mc/ops" },
+  { label: "Agent Jobs", href: "/mike-mc/jobs" },
   { label: "Morning Brief", href: "/mike-mc/morning-brief" },
   { label: "Visibility Reports", href: "/mike-mc/visibility-reports" },
   { label: "Review Proof", href: "/mike-mc/review-proof/ai-outsource-hub" },
@@ -47,6 +53,12 @@ const MC_BOOKMARKS = [
 ];
 
 const OVERSIGHT_LINKS = [
+  {
+    label: "Sentinel",
+    href: "/mike-mc/sentinel",
+    detail: "Independent daily audit of agent efficiency, stuck work, prospecting, retention, and next improvements.",
+    tone: "hot" as const,
+  },
   {
     label: "Workflows",
     href: "/mike-mc/workflows",
@@ -141,7 +153,7 @@ const AGENTS: {
     cadence: "per client",
     activity: {
       doingNow: "Owns email and compliant SMS review request flow after POS, upload, or job-complete events.",
-      upNext: "Move proof into Supabase-backed client records as GHL is replaced.",
+      upNext: "Move proof into GMF-owned Supabase client records and monthly reports.",
     },
     rows: [
       { primary: "Stay Found", secondary: "SMS/email requests, suppressions, review link, AI reply drafts, included hosting, and proof report.", badge: { tone: "accent", label: "$99/mo" } },
@@ -171,12 +183,12 @@ const AGENTS: {
     cadence: "weekly",
     activity: {
       doingNow: "Keeps Supabase, Vercel, docs, email tools, and recovery paths aligned.",
-      upNext: "Replace remaining GHL dependencies where practical.",
+      upNext: "Keep the GMF-owned stack clean and archive legacy dependencies.",
     },
     rows: [
       { primary: "Stack health", secondary: "Supabase, Vercel, GitHub, Google, Smartlead, Namecheap, Obsidian.", badge: { tone: "accent", label: "watch" } },
       { primary: "Cost watch", secondary: "Prevent surprise charges and dead subscriptions.", badge: { tone: "warm", label: "weekly" } },
-      { primary: "No GHL AI", secondary: "HighLevel AI features stay off unless Mike explicitly approves.", badge: { tone: "danger", label: "rule" } },
+      { primary: "Paid AI controls", secondary: "Legacy or vendor AI features stay off unless Mike explicitly approves.", badge: { tone: "danger", label: "rule" } },
     ],
   },
   {
@@ -192,6 +204,22 @@ const AGENTS: {
       { primary: "Workflow check", secondary: "Every workflow gets a weekly readiness check.", badge: { tone: "accent", label: "weekly" } },
       { primary: "Loop detection", secondary: "If an agent is stuck, Auditor names the problem and next fix.", badge: { tone: "warn", label: "stop" } },
       { primary: "Human ask", secondary: "If Mike or client is needed, Manager approves the message.", badge: { tone: "warm", label: "approve" } },
+    ],
+  },
+  {
+    name: "Sentinel",
+    role: "Independent business improvement auditor",
+    status: "live",
+    cadence: "daily",
+    activity: {
+      lastDone: "Generated the first business improvement audit and watchdog-linked operating score.",
+      doingNow: "Grades operations, prospecting, and client success while surfacing improvement decisions for Mike.",
+      upNext: "Send a compact morning report with up to five useful links and the hottest opportunities.",
+    },
+    rows: [
+      { primary: "Efficiency audit", secondary: "Agent work, timers, blockers, queues, and proof gaps.", badge: { tone: "hot", label: "daily" } },
+      { primary: "Growth watch", secondary: "Prospecting, retention, and process improvement suggestions.", badge: { tone: "accent", label: "daily" } },
+      { primary: "Owner decision queue", secondary: "Suggestions Mike can approve, reject, or ask Elon to route.", badge: { tone: "warm", label: "decide" } },
     ],
   },
   {
@@ -243,7 +271,10 @@ export default async function ControlPage() {
   const auth = await hasInternalToolSession();
   if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
 
-  const data = await getControlData();
+  const [data, mondayOverview] = await Promise.all([
+    getControlData(),
+    getMondayAgentJobsOverview(),
+  ]);
   const now = new Date();
   const dateLine = now.toLocaleDateString("en-US", {
     weekday: "long",
@@ -255,7 +286,8 @@ export default async function ControlPage() {
     vercel: !!data.deploy,
     githubWebsite: !!data.commitsWebsite,
     githubTooling: !!data.commitsTooling,
-    ghlBridge: !!data.pipelines,
+    mondayJobs: mondayOverview.ok,
+    missionData: Boolean(BOARD_TASKS.length || SCHEDULED_WORK.length),
   };
   const liveSources = Object.values(dataSources).filter(Boolean).length;
 
@@ -274,20 +306,26 @@ export default async function ControlPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Pill tone={liveSources === 4 ? "accent" : liveSources > 0 ? "warm" : "warn"}>
-            {liveSources}/4 sources live
+          <Pill tone={liveSources === 5 ? "accent" : liveSources > 0 ? "warm" : "warn"}>
+            {liveSources}/5 sources live
           </Pill>
           <Pill tone="accent">GMF-only</Pill>
-          <Pill tone="warn">GHL exit in progress</Pill>
+          <Pill tone="warm">legacy archived</Pill>
         </div>
       </header>
 
       <BookmarkSection />
 
       <section className="mb-8">
-        <FleetStrip active={6} total={AGENTS.length} doneToday={BOARD_TASKS.length} queued={SCHEDULED_WORK.length} />
+        <FleetStrip
+          active={7}
+          total={AGENTS.length}
+          doneToday={mondayOverview.totals.completed || BOARD_TASKS.length}
+          queued={mondayOverview.totals.started || SCHEDULED_WORK.length}
+        />
       </section>
 
+      <LiveJobOverviewSection overview={mondayOverview} />
       <OwnerCommandSection />
       <OversightLinksSection />
       <AgentFleetSection />
@@ -297,10 +335,103 @@ export default async function ControlPage() {
 
       <footer className="mt-12 border-t border-zinc-800/60 pt-5 text-center">
         <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">
-          GMF - autonomous operating system - Vercel / GitHub / Supabase / current GHL bridge
+          GMF - autonomous operating system - Vercel / GitHub / Supabase / Monday / Google
         </p>
       </footer>
     </ControlShell>
+  );
+}
+
+function LiveJobOverviewSection({ overview }: { overview: MondayAgentJobsOverview }) {
+  const totals = overview.totals;
+
+  return (
+    <section className="mb-8 rounded-2xl border border-sky-500/25 bg-sky-500/5 p-5 md:p-6">
+      <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">
+            Monday live queue
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
+            Jobs started, moving, waiting, and completed
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            Waiting is external only. Agent handoffs stay active as Agent Working or Ready For Review.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {overview.boardUrl ? (
+            <Link
+              href={overview.boardUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
+            >
+              Open Monday
+            </Link>
+          ) : null}
+          <Pill tone={overview.ok ? "accent" : "danger"}>{overview.ok ? "live" : "offline"}</Pill>
+        </div>
+      </div>
+
+      {!overview.ok ? (
+        <div className="mb-5 rounded-lg border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
+          {overview.error}
+        </div>
+      ) : null}
+
+      <div className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+        <QueueMetric label="Started" value={totals.started} tone="accent" />
+        <QueueMetric label="In progress" value={totals.inProgress} tone="accent" />
+        <QueueMetric label="Review" value={totals.review} tone="warm" />
+        <QueueMetric label="True waiting" value={totals.trueWaiting} tone={totals.trueWaiting ? "warm" : "muted"} />
+        <QueueMetric label="Human needed" value={totals.humanNeeded} tone={totals.humanNeeded ? "danger" : "muted"} />
+        <QueueMetric label="Completed" value={totals.completed} tone="accent" />
+        <QueueMetric label="Rescue" value={totals.needsRescue} tone={totals.needsRescue ? "danger" : "muted"} />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+        <QueueList
+          title="Active now"
+          empty="No active agent jobs found."
+          rows={overview.activeRows}
+        />
+        <div className="grid gap-4">
+          <QueueList
+            title="Ready for review"
+            empty="No review queue."
+            rows={overview.reviewRows}
+            compact
+          />
+          <QueueList
+            title="True waiting"
+            empty="No external/client/owner waiting rows."
+            rows={overview.waitingRows}
+            compact
+          />
+          <QueueList
+            title="Completed"
+            empty="No completed rows returned."
+            rows={overview.completedRows}
+            compact
+          />
+        </div>
+      </div>
+
+      {overview.rescueRows.length ? (
+        <div className="mt-4 rounded-xl border border-rose-500/25 bg-rose-500/10 p-4">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h3 className="text-base font-semibold text-rose-100">Needs rescue</h3>
+            <Pill tone="danger">{overview.rescueRows.length}</Pill>
+          </div>
+          <div className="grid gap-2 lg:grid-cols-2">
+            {overview.rescueRows.map((row) => (
+              <QueueRow key={row.id} row={row} compact />
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </section>
   );
 }
 
@@ -515,6 +646,113 @@ function ScheduledWorkSection() {
       </div>
     </section>
   );
+}
+
+function QueueMetric({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number;
+  tone: MissionTone;
+}) {
+  const color = {
+    default: "text-zinc-50",
+    accent: "text-emerald-300",
+    warm: "text-amber-300",
+    hot: "text-rose-300",
+    warn: "text-amber-300",
+    ok: "text-emerald-300",
+    muted: "text-zinc-500",
+    danger: "text-rose-300",
+  }[tone];
+
+  return (
+    <div className="rounded-xl border border-zinc-800/70 bg-zinc-950/70 p-4">
+      <p className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+        {label}
+      </p>
+      <p className={`mt-1 font-mono text-3xl font-bold leading-none ${color}`}>
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function QueueList({
+  title,
+  empty,
+  rows,
+  compact = false,
+}: {
+  title: string;
+  empty: string;
+  rows: MondayAgentJobRow[];
+  compact?: boolean;
+}) {
+  return (
+    <section className="rounded-xl border border-zinc-800/70 bg-zinc-950/70 p-4">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <h3 className="text-base font-semibold tracking-tight text-zinc-50">{title}</h3>
+        <Pill tone="muted">{rows.length}</Pill>
+      </div>
+      <div className="space-y-2">
+        {rows.length ? (
+          rows.map((row) => <QueueRow key={row.id} row={row} compact={compact} />)
+        ) : (
+          <p className="rounded-lg border border-zinc-800 bg-black/20 px-3 py-2 text-sm text-zinc-500">
+            {empty}
+          </p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function QueueRow({ row, compact = false }: { row: MondayAgentJobRow; compact?: boolean }) {
+  return (
+    <article className="rounded-lg border border-zinc-800 bg-black/20 p-3">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="truncate text-sm font-medium text-zinc-100">{row.name}</p>
+          <p className="mt-1 truncate text-xs text-zinc-500">
+            {row.agentOwner || row.nextOwner || "Unassigned"} {row.group ? `- ${row.group}` : ""}
+          </p>
+        </div>
+        <Pill tone={queueStatusTone(row)}>{row.status || row.runtimeState || "open"}</Pill>
+      </div>
+      {!compact ? (
+        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-zinc-400">
+          {row.nextAction || row.waitingState || "No next action recorded."}
+        </p>
+      ) : null}
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {row.runtimeState ? <Pill tone="muted">{row.runtimeState}</Pill> : null}
+        {row.waitingState ? <Pill tone="muted">{row.waitingState}</Pill> : null}
+        {row.handoffAck ? <Pill tone="accent">{row.handoffAck}</Pill> : null}
+        {row.expectedReceive ? <Pill tone="warm">{shortTimestamp(row.expectedReceive)}</Pill> : null}
+      </div>
+    </article>
+  );
+}
+
+function queueStatusTone(row: MondayAgentJobRow): MissionTone {
+  if (row.status === "Done") return "accent";
+  if (row.humanNeeded === "Yes" || row.status === "Human Needed") return "danger";
+  if (row.status === "Ready For Review") return "warm";
+  if (row.status.startsWith("Waiting")) return "warn";
+  if (row.status === "Agent Working") return "accent";
+  return "muted";
+}
+
+function shortTimestamp(value: string) {
+  const match = value.match(/^\d{4}-\d{2}-(\d{2})T(\d{2}):(\d{2})/);
+  if (!match) return value;
+  const hour = Number(match[2]);
+  const suffix = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return `${match[1]} ${hour12}:${match[3]} ${suffix}`;
 }
 
 function Metric({ label, value }: { label: string; value: string }) {

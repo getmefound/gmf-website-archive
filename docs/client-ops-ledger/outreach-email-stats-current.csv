@@ -1,0 +1,4 @@
+date,lane,workflow,total,sent,accepted,delivered,delivered_pct,opened,opened_pct,clicked,clicked_pct,replied,reply_pct,bounced,bounce_pct,unsubscribed,complained,source,source_id,status,notes
+2026-05-23,reviews,Reviews Special - Pilot Drip,20,20,20,18,90,7,38.89,0,0,0,0,2,10,0,0,outreach_stats_archive,5134e251-9a23-4acf-b732-e52b404c4d93,draft,Archived read-only outreach statistics.
+2026-05-23,ai,AI Visibility - Pilot Drip,26,26,26,22,84.62,13,59.09,0,0,0,0,4,15.38,0,0,outreach_stats_archive,452879bb-f300-4fbb-836f-581e479e1be2,draft,Archived read-only outreach statistics.
+2026-05-23,relay,Relay - Pilot Drip,5,5,5,5,100,4,80,0,0,0,0,0,0,0,0,outreach_stats_archive,f83036a9-0d58-4722-9254-c829200b38d3,draft,Archived read-only outreach statistics.

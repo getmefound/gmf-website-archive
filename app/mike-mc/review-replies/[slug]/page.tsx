@@ -65,7 +65,7 @@ export default async function ReviewRepliesPage({ params, searchParams }: PagePr
             {client?.businessName ?? "Review reply workspace"}
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-            Draft replies in the client&apos;s saved voice, then approve, reject, or mark posted without turning on any GHL AI automation.
+            Draft replies in the client&apos;s saved voice, then approve, reject, or mark posted without turning on any auto-posting or legacy AI automation.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

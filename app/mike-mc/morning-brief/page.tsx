@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InternalAccessPrompt } from "@/components/control/InternalAccessPrompt";
-import { getMorningBriefData, statTotals } from "@/lib/control/morning-brief";
+import { getMondayAgentJobsOverview } from "@/lib/control/monday-agent-jobs";
+import { getMorningBriefData, getSlackOwnerSignals, statTotals } from "@/lib/control/morning-brief";
 import { hasInternalToolSession } from "@/lib/internal-tool-session";
 import { MorningBriefExperience } from "./MorningBriefExperience";
 
@@ -16,8 +17,12 @@ export default async function MorningBriefPage() {
   const auth = await hasInternalToolSession();
   if (!auth.ok) return <InternalAccessPrompt message={auth.message} />;
 
-  const brief = getMorningBriefData();
+  const [brief, mondayOverview, slackSignals] = await Promise.all([
+    Promise.resolve(getMorningBriefData()),
+    getMondayAgentJobsOverview(),
+    getSlackOwnerSignals(),
+  ]);
   const totals = statTotals(brief.stats);
 
-  return <MorningBriefExperience brief={brief} totals={totals} />;
+  return <MorningBriefExperience brief={brief} totals={totals} mondayOverview={mondayOverview} slackSignals={slackSignals} />;
 }

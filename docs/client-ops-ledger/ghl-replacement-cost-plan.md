@@ -7,22 +7,22 @@ Last updated: 2026-05-21
 
 ## Owner Summary
 
-GHL should not be the long-term center of AOH if clients are going to use AOH client pages instead of GHL subaccounts.
+GHL should not be the long-term center of GMF if clients are going to use GMF client pages instead of GHL subaccounts.
 
 Best path:
 
 1. Downgrade from the $497 plan as soon as no active feature requires it. Done on 2026-05-21.
-2. Keep the cheapest useful GHL plan while AOH proves Review Automation and Reach.
-3. Build the AOH-owned replacement in phases.
+2. Keep the cheapest useful GHL plan while GMF proves Review Automation and Reach.
+3. Build the GMF-owned replacement in phases.
 4. Do not buy per-client GHL AI, SEO heatmaps, or SaaS features unless a client is paying enough to justify that exact add-on.
 
 Recommended current decision:
 
-- Use $97 Starter while AOH has 1-3 GHL-backed locations. This is now active.
+- Use $97 Starter while GMF has 1-3 GHL-backed locations. This is now active.
 - While $97 works, do not buy Calendly, Smartlead/Instantly, or a separate
   review-request email sender.
-- Use $297 Unlimited only if AOH needs more GHL locations before the AOH-built backend is ready.
-- Avoid $497 Agency Pro unless AOH is reselling GHL as software or needs marked-up rebilling/SaaS Mode.
+- Use $297 Unlimited only if GMF needs more GHL locations before the GMF-built backend is ready.
+- Avoid $497 Agency Pro unless GMF is reselling GHL as software or needs marked-up rebilling/SaaS Mode.
 
 Cheapest short-term stack:
 
@@ -30,8 +30,8 @@ Cheapest short-term stack:
 | --- | --- | ---: |
 | Booking | GHL calendar/booking if it survives downgrade | $0 beyond GHL |
 | Reach cold email drips | Current GHL workflows | $0 beyond GHL + usage |
-| Review request email | LC Email/GHL bridge while AOH tests | usage only |
-| Client page/status | AOH website | $0 beyond current hosting |
+| Review request email | LC Email/GHL bridge while GMF tests | usage only |
+| Client page/status | GMF website | $0 beyond current hosting |
 
 Tools to defer:
 
@@ -39,32 +39,32 @@ Tools to defer:
 | --- | --- |
 | Calendly | Not needed if GHL $97 booking works. |
 | Smartlead/Instantly | Not needed until GHL cold email becomes a deliverability/reporting/scaling blocker. |
-| Separate review email sender | Not needed until AOH Review Automation needs better logs, bounce events, or independence from GHL. |
+| Separate review email sender | Not needed until GMF Review Automation needs better logs, bounce events, or independence from GHL. |
 
 ## Review Automation Promise
 
-This is the promise AOH needs to fulfill for the base Review Automation offer before deciding what GHL can be replaced with.
+This is the promise GMF needs to fulfill for the base Review Automation offer before deciding what GHL can be replaced with.
 
 Current public promise from pricing, checkout, onboarding, and agent docs:
 
 | Promise | What it means operationally | Base or upgrade? |
 | --- | --- | --- |
 | Automated email review requests after every job | A completed customer/job should trigger an email asking for a Google review. | Base |
-| Google Business Profile audit + fix | AOH checks the client's GBP basics and fixes/flags profile gaps in week 1. | Base |
-| Google Business Profile connection/access | Client adds AOH as GBP Manager; AOH captures the correct review link and can help with profile work. | Base |
+| Google Business Profile audit + fix | GMF checks the client's GBP basics and fixes/flags profile gaps in week 1. | Base |
+| Google Business Profile connection/access | Client adds GMF as GBP Manager; GMF captures the correct review link and can help with profile work. | Base |
 | Monthly recap | Client gets a simple summary of what went out, what came in, and what needs attention. | Base |
-| Client does not learn software | Client uses AOH page/email/text, not GHL dashboards. | Base |
+| Client does not learn software | Client uses GMF page/email/text, not GHL dashboards. | Base |
 | Cancel anytime/no contract | Operationally means no long onboarding lock-in and easy offboarding. | Base |
-| Replies in client's voice | AI or AOH-drafted public review replies. | AI Visibility/upgrade |
+| Replies in client's voice | AI or GMF-drafted public review replies. | AI Visibility/upgrade |
 | SMS review requests | Text-message review requests, A2P/10DLC registration, opt-out handling, and compliance setup. | Upgrade/add-on |
 | Social review posting | Turning reviews into social/GBP posts. | Upgrade/custom |
 | AI Visibility/rankings/heatmaps | AI search, local ranking, competitor monitoring. | Upgrade/custom |
 
 Copy alignment note:
 
-- Some social/blog copy says AOH "filters unhappy customers privately" before sending the rest to Google.
-- If AOH keeps saying that publicly, the base product needs a private feedback step before the Google link, such as "How did we do?" with happy customers routed to Google and unhappy customers routed to the owner.
-- If AOH wants the simplest $49/mo product, public copy should say "email review requests and follow-up" instead of promising advanced filtering.
+- Some social/blog copy says GMF "filters unhappy customers privately" before sending the rest to Google.
+- If GMF keeps saying that publicly, the base product needs a private feedback step before the Google link, such as "How did we do?" with happy customers routed to Google and unhappy customers routed to the owner.
+- If GMF wants the simplest $49/mo product, public copy should say "email review requests and follow-up" instead of promising advanced filtering.
 
 Recommended product boundary:
 
@@ -80,25 +80,25 @@ Recommended stack:
 
 | Job | Best non-GHL fulfillment | Estimated cost profile | Notes |
 | --- | --- | --- | --- |
-| Client page | AOH website route like `/client/[slug]`, protected by magic link/password before real data. | Mostly existing website cost. | This becomes the client's "dashboard" without calling it software. |
-| Intake/setup form | AOH form/API writes to database and alerts Manager. | Mostly existing website cost. | Pre-fill from signup/order data where possible. |
-| Client/customer database | Postgres/Supabase/Neon tables for clients, jobs/customers, exclusions, review links, sends, events. | About $25-$100/mo early stage depending on provider/usage. | One shared AOH database is cheaper than one GHL subaccount per client. |
-| Customer/job upload | CSV upload to AOH page, plus manual paste/list option. | Low. Storage may be pennies to low dollars at first. | Must include do-not-contact and bad-fit exclusions. |
+| Client page | GMF website route like `/client/[slug]`, protected by magic link before real data. | Mostly existing website cost. | This becomes the client's "dashboard" without calling it software. Do not use password-based client hub access. |
+| Intake/setup form | GMF form/API writes to database and alerts Manager. | Mostly existing website cost. | Pre-fill from signup/order data where possible. |
+| Client/customer database | Postgres/Supabase/Neon tables for clients, jobs/customers, exclusions, review links, sends, events. | About $25-$100/mo early stage depending on provider/usage. | One shared GMF database is cheaper than one GHL subaccount per client. |
+| Customer/job upload | CSV upload to GMF page, plus manual paste/list option. | Low. Storage may be pennies to low dollars at first. | Must include do-not-contact and bad-fit exclusions. |
 | Google review link | Store URL captured from GBP or public profile. | Free. | The review link is enough to send email requests without GHL. |
 | GBP audit/fix | Profile Manager checklist, screenshots, and manual profile updates through Google access. | Labor/agent time, not platform-heavy. | This does not require GHL. |
 | Review request email | Use GHL/LC Email as bridge, then move to transactional/email API only when needed. | Low at review volume. GHL LC Email is $0.675/1,000, external email APIs are also low. | Needs unsubscribe, bounce tracking, templates, and sender domain setup before full GHL exit. |
-| Private feedback filter | AOH-hosted landing page asks for rating/feedback before showing Google link to happy customers. | Mostly existing website cost. | This supports the "filter unhappy privately" promise without GHL. |
-| Follow-up cadence | AOH cron/workflow sends a gentle follow-up if no click/review after X days. | Low. | Start simple: one follow-up. |
-| Send windows | AOH scheduler respects timezone and business hours. | Low. | Prevents awkward sends. |
-| Suppression/DND | AOH database stores unsubscribed, excluded, bounced, complaint, and do-not-contact statuses. | Low. | Required before replacing GHL safely. |
-| Monthly recap | AOH generates an email/client-page summary. | Low. | Start with "requests sent, clicks, reviews reported, issues, next action." |
+| Private feedback filter | GMF-hosted landing page asks for rating/feedback before showing Google link to happy customers. | Mostly existing website cost. | This supports the "filter unhappy privately" promise without GHL. |
+| Follow-up cadence | GMF cron/workflow sends a gentle follow-up if no click/review after X days. | Low. | Start simple: one follow-up. |
+| Send windows | GMF scheduler respects timezone and business hours. | Low. | Prevents awkward sends. |
+| Suppression/DND | GMF database stores unsubscribed, excluded, bounced, complaint, and do-not-contact statuses. | Low. | Required before replacing GHL safely. |
+| Monthly recap | GMF generates an email/client-page summary. | Low. | Start with "requests sent, clicks, reviews reported, issues, next action." |
 | Low-review tips | Rule-based tips on client page when weekly/monthly review goal is low. | Free/low. | Already started on client page. |
 | Manager alerts | Slack/email alert when setup is blocked, review count is low, or sends fail. | Low. | Keeps Mike from babysitting. |
 | AI response drafts | OpenAI/Gemini draft reply on demand, approval required. | Usage-based and likely low. | Upgrade feature; do not auto-publish at first. |
 | SMS | Twilio directly if/when sold. | Usage-based plus A2P/10DLC registration and compliance/admin. | Upgrade only. Do not add to the base plan. |
 | Heatmaps/rankings | Vendor/export/manual report only for AI Visibility clients. | Per report or paid plan. | Do not pay per-client GHL/Search Atlas for base reviews. |
 
-Minimum AOH-owned Review Automation v1:
+Minimum GMF-owned Review Automation v1:
 
 1. Client record and client page.
 2. Intake form with GBP access confirmation and customer upload.
@@ -124,7 +124,7 @@ Build status:
   Stored suppressions are applied to future customer uploads when Redis is
   configured.
 - Internal send-log v1 exists at `/api/review-automation/send-log`.
-  GHL exports/webhooks or the future AOH sender can record sent, failed,
+  GHL exports/webhooks or the future GMF sender can record sent, failed,
   bounced, clicked, and follow-up events there.
 - Bounced send logs automatically add the email to the client suppression list
   when Redis is configured.
@@ -136,7 +136,7 @@ Build status:
 - Manager/internal summary status exists at `/api/review-automation/status`.
   It returns summary records only by default and requires an internal token.
   Use `AOH_INTERNAL_API_TOKEN`, or the existing report bypass token as the
-  bridge token while AOH is consolidating infrastructure.
+  bridge token while GMF is consolidating infrastructure.
 - Google routing waits for a verified per-client review link.
 
 This v1 fulfills the actual $49/mo promise without GHL.
@@ -197,7 +197,7 @@ Label locked modules as one of:
 - Coming soon
 - Custom
 
-Do not label a module as available until AOH/GMF can actually fulfill it.
+Do not label a module as available until GMF can actually fulfill it.
 
 ## POS/CRM Connection Strategy
 
@@ -273,14 +273,14 @@ Build requirements before any direct connector goes live:
 
 ## Review Automation Fulfillment Jobs Outside GHL
 
-| Fulfillment job | Owner | AOH-built process | Done means |
+| Fulfillment job | Owner | GMF-built process | Done means |
 | --- | --- | --- | --- |
-| Payment/order confirmed | Manager | Stripe/checkout event creates client record and setup status. | Client exists in AOH system with plan, owner, email, and status. |
+| Payment/order confirmed | Manager | Stripe/checkout event creates client record and setup status. | Client exists in GMF system with plan, owner, email, and status. |
 | Client setup page created | Website/Codex | Generate `/client/[slug]` page from client record. | Client sees service status and what is needed. |
-| Intake collected | Manager/Coach | AOH form collects business info, review flow, exclusions, customer source, GBP invite confirmation. | Required setup fields complete or blockers shown. |
+| Intake collected | Manager/Coach | GMF form collects business info, review flow, exclusions, customer source, GBP invite confirmation. | Required setup fields complete or blockers shown. |
 | GBP access accepted | Profile Manager | Accept/check Manager access in Google; capture proof. | Correct profile/location confirmed. |
 | GBP audit/fix | Profile Manager | Run profile checklist: name, category, services, hours, phone, site, photos, posts, review link, unanswered reviews. | Fixes made or client/Mike blockers listed. |
-| Review link captured | Profile Manager | Store Google review URL in AOH client record. | Test link opens the correct review destination. |
+| Review link captured | Profile Manager | Store Google review URL in GMF client record. | Test link opens the correct review destination. |
 | Customer list cleaned | Sorter | Normalize CSV/list, dedupe, remove exclusions, flag missing email. | Clean sendable customer list exists. |
 | Review email written | Coach/Sender | Use approved template with business name, customer name, and review link/private feedback link. | Test email renders cleanly. |
 | Email sender configured | Systems Director/Sender | Configure domain/sender in chosen email provider. | SPF/DKIM/DMARC pass, test email delivered. |
@@ -299,7 +299,7 @@ Manager should not ask Mike to babysit review jobs.
 Current v1 loop:
 
 1. Client uploads customers at `/client/[slug]/customers`.
-2. AOH stores the full packet in Redis if configured.
+2. GMF stores the full packet in Redis if configured.
 3. Slack receives only a short summary.
 4. Client feedback lands at `/review/[slug]`.
 5. Customer unsubscribe requests land at `/review/[slug]/unsubscribe`.
@@ -347,7 +347,7 @@ Business conclusion:
 
 - GHL is convenient, but not economically required for base Review Automation.
 - The hard parts are not expensive software; they are workflow reliability, deliverability, suppression, proof, and GBP/review tracking.
-- Build AOH Review Automation around those jobs first.
+- Build GMF Review Automation around those jobs first.
 
 ## Known GHL Cost Points
 
@@ -355,8 +355,8 @@ As of 2026-05-21, based on HighLevel official docs:
 
 | Item | GHL cost | Notes |
 | --- | ---: | --- |
-| Starter plan | $97/mo | Best for AOH/pilot use if location limit is enough. |
-| Unlimited plan | $297/mo | Use only if AOH needs more locations before our backend is ready. |
+| Starter plan | $97/mo | Best for GMF/pilot use if location limit is enough. |
+| Unlimited plan | $297/mo | Use only if GMF needs more locations before our backend is ready. |
 | Agency Pro/SaaS plan | $497/mo | Not needed unless selling GHL as software/subaccounts. |
 | LC Email | $0.675 per 1,000 emails | Cheap enough. Not a major reason to leave GHL. |
 | Email validation | $2.50 per 1,000 validations | Use sparingly; NeverBounce/other verifiers may still be better for Reach. |
@@ -371,35 +371,35 @@ External replacement cost references:
 | Item | Outside option | Cost signal |
 | --- | --- | --- |
 | SMS | Twilio directly | US SMS listed at $0.0083 outbound/inbound before carrier fees. |
-| Email API | SendGrid/Twilio SendGrid, Postmark, Resend, SES | Usually cheap at AOH volume; choose after deliverability testing. |
-| Database/client hub | Supabase/Neon/Postgres | Supabase Pro starts at $25/mo; AOH may already cover website hosting separately. |
+| Email API | SendGrid/Twilio SendGrid, Postmark, Resend, SES | Usually cheap at GMF volume; choose after deliverability testing. |
+| Database/client hub | Supabase/Neon/Postgres | Supabase Pro starts at $25/mo; GMF may already cover website hosting separately. |
 | Heatmaps/local rankings | BrightLocal, Local Falcon, Places Scout, outsourced reporting | Buy only for paid AI Visibility clients or monthly reporting clients. |
 
 ## GHL Task Map
 
-| Current GHL job | Why AOH uses it | Current cost risk | Build elsewhere? | Recommendation |
+| Current GHL job | Why GMF uses it | Current cost risk | Build elsewhere? | Recommendation |
 | --- | --- | --- | --- | --- |
-| Client subaccounts | Separates settings, contacts, reputation, workflows by client. | Starter is limited; Unlimited may be needed if we keep this model. | Yes. Store clients, contacts, jobs, review links, sends, and stats in AOH database. | Replace over time. Do not make subaccounts the client product. |
-| Contact database | Stores leads/customers, tags, DND, history. | Low direct cost, but locks us into GHL workflows. | Yes. Build AOH contacts table with tags, status, consent, DND, source, and client ID. | Replace for Review Automation first. |
-| Email review requests | Sends review request emails. | LC Email is cheap. Main risk is dependency and workflow complexity. | Yes, later. Use an email API with templates, unsubscribe handling, logs, and retries only when needed. | Keep GHL $97 bridge first. Build AOH sender only when deliverability/logging or cancellation requires it. |
+| Client subaccounts | Separates settings, contacts, reputation, workflows by client. | Starter is limited; Unlimited may be needed if we keep this model. | Yes. Store clients, contacts, jobs, review links, sends, and stats in GMF database. | Replace over time. Do not make subaccounts the client product. |
+| Contact database | Stores leads/customers, tags, DND, history. | Low direct cost, but locks us into GHL workflows. | Yes. Build GMF contacts table with tags, status, consent, DND, source, and client ID. | Replace for Review Automation first. |
+| Email review requests | Sends review request emails. | LC Email is cheap. Main risk is dependency and workflow complexity. | Yes, later. Use an email API with templates, unsubscribe handling, logs, and retries only when needed. | Keep GHL $97 bridge first. Build GMF sender only when deliverability/logging or cancellation requires it. |
 | SMS review requests | Upgrade feature, not base Review Automation. | SMS usage plus compliance/A2P complexity. | Yes, but needs Twilio, opt-out handling, A2P, logs. | Delay. Add only for higher-priced plans. |
-| Review link storage | Stores and injects Google review links. | Low. | Yes. Store per client in AOH. | Replace immediately in AOH client hub. |
+| Review link storage | Stores and injects Google review links. | Low. | Yes. Store per client in GMF. | Replace immediately in GMF client hub. |
 | Google Business Profile connection | Pulls/replies to reviews through reputation tools. | Valuable, but tied to subaccount model. | Possibly. Use Google Business Profile APIs where available and/or manual first. | Research/build carefully. This is the hardest replacement piece. |
-| Reputation/review dashboard | Shows review count, requests, responses, status. | Low direct cost, but clients will not use GHL dashboard. | Yes. This belongs on the AOH client page. | Replace. Already started with client hub. |
+| Reputation/review dashboard | Shows review count, requests, responses, status. | Low direct cost, but clients will not use GHL dashboard. | Yes. This belongs on the GMF client page. | Replace. Already started with client hub. |
 | Reviews AI suggestive replies | Drafts review replies. | Pay-per-use is cheap; AI Employee $97/subaccount is expensive. | Yes. Use OpenAI/Gemini to draft replies with approval gates. | Replace. Do not enable GHL AI Employee by default. |
 | Reviews AI auto-pilot | Auto-replies to reviews. | Brand and cost risk. | Yes, but should still require approval at first. | Do not sell autopilot until manual approval flow works. |
-| Review widget | Embeds reviews on website. | Low value unless included in package. | Yes. Build simple AOH widget or use Google embeds/manual highlights. | Replace later. Not urgent. |
-| Reach cold email contact import | Imports verified cold prospects into GHL. | Low platform cost, but workflow lock-in. | Yes. Build AOH campaign database and sender integration. | Keep short term. Replace after Review Automation core. |
+| Review widget | Embeds reviews on website. | Low value unless included in package. | Yes. Build simple GMF widget or use Google embeds/manual highlights. | Replace later. Not urgent. |
+| Reach cold email contact import | Imports verified cold prospects into GHL. | Low platform cost, but workflow lock-in. | Yes. Build GMF campaign database and sender integration. | Keep short term. Replace after Review Automation core. |
 | Reach drip workflows | Sends cold emails, waits, stops on replies. | GHL does this well today. | Yes, but requires careful unsubscribe, reply detection, suppression, and warmup logic. | Keep on GHL $97 for now unless cost, reporting, or deliverability blocks us. Replace later with Smartlead/Instantly only if needed. |
-| Reach reply routing | Tags warm replies, routes report/book requests. | Low cost but workflow complexity. | Yes. Use inbound email parser/webhook + AOH routing. | Replace after first real campaign proof. |
+| Reach reply routing | Tags warm replies, routes report/book requests. | Low cost but workflow complexity. | Yes. Use inbound email parser/webhook + GMF routing. | Replace after first real campaign proof. |
 | Email campaign stats | Reads GHL email stats for morning brief. | Low. | Yes. Email providers expose events/stats. | Replace when email sending moves off GHL. |
-| Report flow/opportunities | Website adds contacts/tags; GHL workflows deliver report and track opportunity. | Low to medium; premium webhook actions can add cost. | Yes. AOH already owns website/API. Store report request state in AOH. | Replace. GHL can remain temporary tracker. |
+| Report flow/opportunities | Website adds contacts/tags; GHL workflows deliver report and track opportunity. | Low to medium; premium webhook actions can add cost. | Yes. GMF already owns website/API. Store report request state in GMF. | Replace. GHL can remain temporary tracker. |
 | Calendar booking | Booking link/calendar routing. | Low. | Yes, later. Use Calendly with Google Calendar only if GHL $97 booking is not good enough. | Keep GHL booking short term if it works. Do not buy Calendly yet. |
 | Conversations/inbox | Central reply inbox. | Useful if all channels live in GHL. | Partly. Use email inbox + Slack summaries first. | Keep only while using GHL sending. |
 | Missed-call/Relay phone flows | Possible future Relay product. | Phone/SMS usage and AI can add up. | Yes with Twilio, but operationally more sensitive. | Keep separate from Review Automation decision. |
 | Heatmaps/local SEO | AI Visibility reports and sales proof. | Search Atlas at $79/subaccount becomes too expensive at 50 clients. | Yes. Use external reports only for paid scans or monthly clients. | Do not keep GHL for heatmaps. Outsource or replace. |
 | Online listings | Citation/listing service. | $30/mo if enabled. | Yes, via BrightLocal/Whitespark/manual VA process. | Do not enable broadly. Sell separately. |
-| Premium prospecting | Prospecting reports, widgets, audits. | $29/subaccount. | Yes. AOH discovery pipeline already exists. | Avoid. |
+| Premium prospecting | Prospecting reports, widgets, audits. | $29/subaccount. | Yes. GMF discovery pipeline already exists. | Avoid. |
 
 ## 50 Client Scenarios
 
@@ -420,7 +420,7 @@ Good:
 
 Bad:
 
-- AOH becomes dependent on GHL subaccounts and workflows.
+- GMF becomes dependent on GHL subaccounts and workflows.
 - Client pages become a front-end over a hidden GHL system.
 - Add-ons can explode cost if enabled per client.
 
@@ -435,14 +435,14 @@ Likely monthly platform cost:
 
 - Database/app: about $25-$100+/mo depending on stack and usage.
 - Email API: likely low at review-request volume.
-- SMS: usage-based if AOH sells SMS review requests.
+- SMS: usage-based if GMF sells SMS review requests.
 - AI reply drafts: usage-based and likely low if using OpenAI/Gemini directly.
 - Heatmaps: outsourced or bought only when needed.
 
 Good:
 
-- AOH owns the product.
-- Client experience stays on AOH pages.
+- GMF owns the product.
+- Client experience stays on GMF pages.
 - Cleaner margins at 50+ clients.
 
 Bad:
@@ -457,12 +457,12 @@ Verdict:
 
 ### Scenario C: Hybrid
 
-Use GHL only as a temporary backend while AOH owns the client page, intake, status, and reporting.
+Use GHL only as a temporary backend while GMF owns the client page, intake, status, and reporting.
 
 Good:
 
 - Lowest risk right now.
-- Lets AOH sell while building.
+- Lets GMF sell while building.
 - Lets agents learn the process with real client data.
 
 Bad:
@@ -476,14 +476,14 @@ Verdict:
 ### Scenario D: Cheapest $97 Bridge
 
 Use GHL $97 for booking, current Reach drips, current Review Automation email
-sends, and email stats while AOH owns client pages, intake, private feedback,
+sends, and email stats while GMF owns client pages, intake, private feedback,
 customer upload, and reporting.
 
 Good:
 
 - avoids Calendly, Smartlead/Instantly, and separate email sender cost for now
 - keeps active campaigns moving
-- lets AOH keep building without rushing the cutover
+- lets GMF keep building without rushing the cutover
 
 Bad:
 
@@ -498,9 +498,9 @@ Verdict:
 
 ## Replacement Build Plan
 
-### Phase 1: AOH Review Core
+### Phase 1: GMF Review Core
 
-Goal: replace enough GHL work that Review Automation can run from AOH.
+Goal: replace enough GHL work that Review Automation can run from GMF.
 
 Build:
 
@@ -520,10 +520,10 @@ Keep GHL for:
 
 - Existing cold email Reach workflows
 - Temporary review backend if needed
-- Existing email stats until AOH sender is live
+- Existing email stats until GMF sender is live
 - Calendars/booking if $97 keeps them working
 
-### Phase 2: AOH Review Automation Sender
+### Phase 2: GMF Review Automation Sender
 
 Build:
 
@@ -538,11 +538,11 @@ Build:
 
 Cutover test:
 
-- AOH runs itself first.
+- GMF runs itself first.
 - Then 1 pilot client.
 - Then 3-5 clients for 30 days.
 
-### Phase 3: AOH Review Intelligence
+### Phase 3: GMF Review Intelligence
 
 Build:
 
@@ -605,14 +605,14 @@ Downgrade to $97:
 
 Move to $297 when:
 
-- AOH needs more GHL-backed locations before the AOH replacement is ready.
+- GMF needs more GHL-backed locations before the GMF replacement is ready.
 - The added client revenue clearly covers the $200/mo difference.
 
 Stay away from $497 unless:
 
-- AOH sells GHL as a client software portal.
-- AOH needs marked-up rebilling inside GHL.
-- AOH needs SaaS Mode as the product.
+- GMF sells GHL as a client software portal.
+- GMF needs marked-up rebilling inside GHL.
+- GMF needs SaaS Mode as the product.
 
 Enable AI Employee Unlimited only when:
 
@@ -623,14 +623,14 @@ Enable AI Employee Unlimited only when:
 Enable SEO/Search Atlas only when:
 
 - The client pays for AI Visibility or a local SEO plan that covers it.
-- AOH has a reporting reason that cannot be handled cheaper elsewhere.
+- GMF has a reporting reason that cannot be handled cheaper elsewhere.
 
 ## Immediate Action List
 
 1. Systems Director checks current GHL plan and all enabled add-ons.
 2. GHL Expert lists which subaccounts/locations exist and what each one is used for.
 3. GHL Expert confirms whether any live workflow requires $297 or $497 features.
-4. Website/Codex scopes AOH Review Core tables and API routes.
+4. Website/Codex scopes GMF Review Core tables and API routes.
 5. Manager records $97 downgrade done.
 6. GHL Expert and Systems Director run post-downgrade smoke checks: booking, workflows, contacts, stats, API access, and current drips.
 7. Auditor creates a monthly GHL cost report: base plan, wallet usage, AI, SEO, phone, email, validation, premium workflow actions.
@@ -647,7 +647,7 @@ This gives Manager one pass/watch/blocker report for the $97 bridge.
 Latest result:
 
 - 2026-05-22: pass. The checked GHL bridge surfaces still worked after the
-  downgrade. Keep GHL at $97 while AOH Review Automation and Reach replacements
+  downgrade. Keep GHL at $97 while GMF Review Automation and Reach replacements
   are tested.
 
 Review storage check:

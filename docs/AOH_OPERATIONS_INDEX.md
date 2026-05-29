@@ -304,7 +304,7 @@ The client hub is the client-facing status page after signup:
 - shows locked AI Visibility preview as the custom/upgrade area
 - hides internal agent names from the client-facing page
 - keeps GHL as the backend while giving clients a simpler page
-- should be password or magic-link protected before real private client data is shown
+- should be magic-link protected before real private client data is shown; do not use password-based client hub access
 
 GHL replacement and cost planning:
 

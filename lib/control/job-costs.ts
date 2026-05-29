@@ -118,11 +118,11 @@ export const REACH_INTERNAL_FLOW: ReachInternalStep[] = [
     status: "partial",
     description:
       "Agents look for real business emails and remove risky personal or duplicate emails.",
-    verification: "The Relay batch proved risky rows can be held out. Live NoBounce/NeverBounce/GHL validation telemetry is not yet shown directly in Mission Control.",
+    verification: "The Relay batch proved risky rows can be held out. Live verifier and sender telemetry is not yet shown directly in Mission Control.",
   },
   {
     title: "Add clean leads",
-    owner: "GHL Expert",
+    owner: "Sender",
     status: "partial",
     description:
       "Clean leads are added to the right list. Adding leads does not mean emails are sending yet.",
@@ -173,7 +173,7 @@ export const REACH_OPTIONAL_AGENT_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Collect access",
-    owner: "Manager + GHL Expert",
+    owner: "Manager + Systems Director",
     status: "manual",
     description:
       "The client gives the business info, software access path, message preferences, and approval contact.",
@@ -181,7 +181,7 @@ export const REACH_OPTIONAL_AGENT_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Connect their software",
-    owner: "GHL Expert + Systems Director",
+    owner: "Systems Director",
     status: "manual",
     description:
       "Agents connect the CRM or business system that should start follow-ups.",
@@ -197,7 +197,7 @@ export const REACH_OPTIONAL_AGENT_FLOW: ReachInternalStep[] = [
   },
   {
     title: "Start jobs from real events",
-    owner: "GHL Expert + Custom Agent",
+    owner: "Systems Director + Custom Agent",
     status: "manual",
     description:
       "Closed jobs, missed calls, new leads, or completed appointments can start the right follow-up.",
@@ -219,28 +219,28 @@ export const REACH_TOMORROW_BLOCKERS: ReachInternalStep[] = [
     owner: "Sender + Coach",
     status: "partial",
     description:
-      "Draft first-touch/follow-up copy exists in docs/AOH_REACH_CAMPAIGN_COPY.md. The approved strategy separates three lanes: Reviews $1 first month, AI Visibility free snapshot/report, and Relay missed-call details. Each lane still needs final GHL merge-field validation, real footer values, unsubscribe proof, daily cap, and Systems Director approval before any scaled send.",
+      "Draft first-touch/follow-up copy exists in docs/AOH_REACH_CAMPAIGN_COPY.md. The approved strategy separates three lanes: Reviews $1 first month, AI Visibility free snapshot/report, and Relay missed-call details. Each lane still needs final merge-field validation, real footer values, unsubscribe proof, daily cap, and Systems Director approval before any scaled send.",
     verification: "Sender, Coach, and Systems Director pressure-tested the offer structure on 2026-05-18; copy is drafted but not approved for scaled live send nodes until reply router QA passes.",
   },
   {
-    title: "Live GHL report + heatmap workflow",
-    owner: "GHL Expert",
+    title: "Live report + heatmap workflow",
+    owner: "Reporter + Systems Director",
     status: "verified",
     description:
-      "Active GMF/Hub360AI production workflows generate/store report URLs, call the website callback, and use a single combined delivery workflow to avoid duplicate customer emails.",
-    verification: "Verified 2026-05-18 in active production location: Website Visitor Free Marketing Report Intake, Website Visitor Free AI Visibility Report Intake, and Website Visitor Report Delivery are published; delivery execution completed successfully.",
+      "GMF-owned report handling stores report URLs, calls the website callback, and uses a single delivery path to avoid duplicate customer emails.",
+    verification: "Verified 2026-05-18: Website Visitor Free Marketing Report Intake, Website Visitor Free AI Visibility Report Intake, and Website Visitor Report Delivery completed successfully. Keep this as legacy proof while the native delivery path matures.",
   },
   {
     title: "Campaign reply-to-report automation",
-    owner: "GHL Expert + Website",
+    owner: "Systems Director + Website",
     status: "partial",
     description:
       "Need reliable campaign reply automations: Reviews/AI `send` replies trigger the correct report generation/delivery, Relay `send` replies send missed-call details, `book` replies trigger GMF Talk booking handoff, unclear replies become tasks, and unsubscribe/not-interested replies stop safely.",
-    verification: "Website/report delivery flow is live. Live MC diagnostics see production GHL location tRbczwt6oJsXK4tjuzOI and the Reach - Reviews / Reach - AI pipelines. docs/AOH_CAMPAIGN_REPLY_ROUTER.md now defines the exact router blueprint. GHL UI build and QA still need to pass before scaled sends.",
+    verification: "Website/report delivery flow is live. docs/AOH_CAMPAIGN_REPLY_ROUTER.md defines the archived router blueprint; the native reply router still needs production QA before scaled sends.",
   },
   {
     title: "GMF Client Template Lab template check",
-    owner: "GHL Expert + Systems Director",
+    owner: "Systems Director",
     status: "partial",
     description:
       "Fields, values, tags, and a Draft-only Reach workflow skeleton exist in the template lab. This is reusable setup only, not proof that live GMF campaigns/report workflows are wired.",
@@ -420,30 +420,30 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     checks: ["Niche fit", "Prospects found", "Messages sent", "Replies", "Booked audits"],
   },
   {
-    slug: "ghl-workflow-heartbeat",
-    name: "GHL workflow heartbeat",
+    slug: "native-workflow-heartbeat",
+    name: "Native workflow heartbeat",
     service: "Mission Control",
-    owner: "GHL Expert",
+    owner: "Systems Director",
     overview:
-      "Check the HighLevel systems that make bookings, workflows, and pipeline movement work before failures reach Mike or a client.",
+      "Check the owned systems that make bookings, workflows, reporting, and pipeline movement work before failures reach Mike or a client.",
     salesAgentTasks: [
       {
         title: "Protect booked-call flow",
-        description: "GHL Expert checks the calendar, workflow, and pipeline pieces that convert interest into a real appointment.",
-        owner: "GHL Expert",
+        description: "Systems Director checks the calendar, workflow, and pipeline pieces that convert interest into a real appointment.",
+        owner: "Systems Director",
       },
     ],
     internalTasks: [
       {
         title: "Run website report smoke test",
         description:
-          "Systems Director submits one homepage report request, then confirms GHL tags, both report workflows, Website Leads opportunity creation, callbacks, and usable report links.",
+          "Systems Director submits one homepage report request, then confirms the intake record, report workflow, callback, and usable report links.",
         owner: "Systems Director",
       },
       {
         title: "Catch broken automations",
-        description: "GHL Expert checks workflow errors, missed handoffs, calendar sync, and stuck pipeline movement.",
-        owner: "GHL Expert",
+        description: "Systems Director checks workflow errors, missed handoffs, calendar sync, and stuck pipeline movement.",
+        owner: "Systems Director",
       },
       {
         title: "Escalate failures",
@@ -457,7 +457,6 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
     ],
     agentRoles: [
-      { agent: "GHL Expert", role: "Checks workflow errors, calendar sync, report tags, Website Leads pipeline movement, and webhook health." },
       { agent: "Manager", role: "Turns any failure into a visible Mission Control task or blocker." },
       { agent: "Systems Director", role: "Runs the homepage report smoke test, reviews recurring failures, and decides whether the system is drifting." },
       { agent: "Reporter", role: "Confirms generated marketing and AI visibility report links are usable." },
@@ -474,11 +473,11 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     nextRun: "Tomorrow",
     notes: "Cheap insurance. Keep this even before client volume grows.",
     costBreakdown: [
-      { label: "GHL API checks", amountUsd: 0.04 },
+      { label: "Workflow/API checks", amountUsd: 0.04 },
       { label: "Workflow/status summary", amountUsd: 0.1 },
       { label: "Alert routing", amountUsd: 0.04 },
     ],
-    checks: ["Homepage report smoke test", "Report tags", "Workflow errors", "Website Leads pipeline", "Callbacks", "Report links", "Calendar sync"],
+    checks: ["Homepage report smoke test", "Report intake", "Workflow errors", "Pipeline handoff", "Callbacks", "Report links", "Calendar sync"],
   },
   {
     slug: "secret-exposure-sweep",
@@ -507,14 +506,14 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
       },
       {
         title: "Review connected apps",
-        description: "GHL Expert helps if the risk touches HighLevel credentials, webhooks, or connected workflows.",
-        owner: "GHL Expert",
+        description: "Systems Director helps if the risk touches connected-app credentials, webhooks, or workflows.",
+        owner: "Systems Director",
       },
     ],
     agentRoles: [
       { agent: "Systems Director", role: "Runs the sweep, flags exposures, and blocks risky deploys." },
       { agent: "Manager", role: "Routes any security fix to the right owner and keeps it visible." },
-      { agent: "GHL Expert", role: "Helps when leaked or unsafe credentials touch HighLevel integrations." },
+      { agent: "Systems Director", role: "Helps when leaked or unsafe credentials touch connected integrations." },
     ],
     cadence: "Daily",
     status: "worth-it",
@@ -554,9 +553,9 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
         owner: "Profile Manager",
       },
       {
-        title: "Confirm GHL connection health",
-        description: "GHL Expert verifies connected GBP or reputation pieces still sync where needed.",
-        owner: "GHL Expert",
+        title: "Confirm profile connection health",
+        description: "Profile Manager verifies GBP, reputation, and client records still sync where needed.",
+        owner: "Profile Manager",
       },
       {
         title: "Turn findings into reporting",
@@ -566,7 +565,6 @@ export const SCHEDULED_JOB_COSTS: ScheduledJobCost[] = [
     ],
     agentRoles: [
       { agent: "Profile Manager", role: "Checks GBP access, completeness, reviews, photos, services, categories, and NAP consistency." },
-      { agent: "GHL Expert", role: "Confirms connected HighLevel/GBP pieces still sync where needed." },
       { agent: "Systems Director", role: "Confirms recurring profile issues are not being ignored." },
       { agent: "Coach", role: "Turns findings into client-facing explanations or monthly report language." },
     ],

@@ -11,7 +11,7 @@ The Client Ops Ledger is AOH's account control table. It is not a CRM replacemen
 | `client_id` | Stable internal ID. Never reuse. | `AOH-001`, `REV-001`, `RELAY-001` |
 | `client_name` | Public business/client name. | Plain business name |
 | `status` | Current account state. | `prospect`, `onboarding`, `active`, `paused`, `at_risk`, `churned`, `internal` |
-| `client_type` | Whether this is a paying client, prospect, or internal account. | `client`, `prospect`, `internal`, `partner` |
+| `client_type` | Whether this is a paying client, test client, prospect, or internal account. | `client`, `test_client`, `prospect`, `internal`, `partner` |
 | `primary_contact` | Main human contact. | Name |
 | `primary_email` | Main email. | Email |
 | `primary_phone` | Main phone. | Phone |
@@ -54,4 +54,3 @@ The Client Ops Ledger is AOH's account control table. It is not a CRM replacemen
 - Every client must have a `client_id` before agents work the account.
 - Every agent should update `last_agent_run`, `next_action`, and `risk_status` when it performs meaningful work.
 - `human_approval_required=yes` blocks live customer-facing actions until Mike or the assigned human owner approves.
-

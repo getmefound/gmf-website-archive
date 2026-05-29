@@ -13,8 +13,8 @@ import {
 import { hasInternalToolSession } from "@/lib/internal-tool-session";
 
 export const metadata: Metadata = {
-  title: "GHL Exit - The Hub",
-  description: "What is done, blocked, and next before GMF cancels GHL.",
+  title: "Legacy Platform Archive - The Hub",
+  description: "Archived transition checklist and proof for old platform replacement work.",
   robots: { index: false, follow: false },
 };
 
@@ -37,7 +37,7 @@ const sectionCopy: Record<GhlExitStatus, { title: string; sub: string }> = {
   },
   later: {
     title: "After Review Automation works",
-    sub: "Bigger GHL replacements that should wait until the first service is stable.",
+    sub: "Bigger legacy replacements that should wait until the first service is stable.",
   },
 };
 
@@ -55,7 +55,7 @@ export default async function GhlExitPage() {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300">
-            GMF - GHL exit
+            GMF - Legacy archive
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             {GHL_EXIT_SUMMARY.title}
@@ -77,7 +77,7 @@ export default async function GhlExitPage() {
           >
             Job index
           </Link>
-          <Pill tone="warm">$97 bridge</Pill>
+          <Pill tone="warm">archive</Pill>
         </div>
       </header>
 
@@ -104,13 +104,13 @@ export default async function GhlExitPage() {
               Owner rule
             </p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
-              Do not cancel GHL yet
+              Legacy cancel proof stays archived
             </h2>
             <p className="mt-2 max-w-4xl text-base leading-relaxed text-zinc-400">
               {GHL_EXIT_SUMMARY.cancelGate}
             </p>
           </div>
-          <Pill tone="warn">bridge mode</Pill>
+          <Pill tone="warn">legacy</Pill>
         </div>
       </section>
 

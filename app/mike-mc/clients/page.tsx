@@ -75,13 +75,13 @@ export default async function ClientProfilesAdminPage({ searchParams }: PageProp
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            GMF - GHL Exit
+            GMF - Clients
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Client Profiles
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-            Supabase-backed client setup, review automation, and POS connection records. This is the first internal editor so we can manage clients without logging into GHL.
+            GMF-owned client setup, review automation, voice profile, POS notes, and status records used by setup jobs, reports, and the client dashboard.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -92,10 +92,10 @@ export default async function ClientProfilesAdminPage({ searchParams }: PageProp
             Back to Hub
           </Link>
           <Link
-            href="/mike-mc/ghl-exit-ops"
+            href="/mike-mc/report-flow"
             className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100"
           >
-            GHL Exit Ops
+            Report Flow
           </Link>
           <Link
             href="/mike-mc/setup-jobs"
@@ -103,7 +103,7 @@ export default async function ClientProfilesAdminPage({ searchParams }: PageProp
           >
             Setup Jobs
           </Link>
-          <Pill tone="accent">token gated</Pill>
+          <Pill tone="accent">protected</Pill>
           <Pill tone={result.ok ? "ok" : "danger"}>{result.ok ? `${records.length} profiles` : "supabase issue"}</Pill>
         </div>
       </header>

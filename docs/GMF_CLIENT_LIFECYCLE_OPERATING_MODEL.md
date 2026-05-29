@@ -399,6 +399,16 @@ Follow-up cadence:
 
 Orphaned reports stay in the sales lane, not client onboarding.
 
+Detailed requested-report nurture rules live in `docs/sops/SOP-031-prospect-follow-up-cadence.md`.
+
+Operating defaults:
+
+- Sales Rep owns all prospect report delivery and nurture emails.
+- Scout researches, Reporter builds, Auditor approves, and Sales Manager reviews offer angle.
+- Emails use the GMF role/Resend lane, not Mike's owner email and not cold-outreach mailboxes.
+- Default cadence after report delivery: Day 2 helpful check-in, Day 7 one recommended next step, Day 14 final soft close, Day 30+ low-frequency nurture only if there is real value.
+- Pipeline status stays in Supabase `visibility_reports.lead_status`; events go in `visibility_report_events`; sends go in `email_events`; Monday mirrors active jobs/blockers; Mission Control shows `/mike-mc/visibility-reports`.
+
 ## Sales To Client Handoff
 
 Sales Rep secures the client when one of these happens:
@@ -413,8 +423,8 @@ Handoff:
 1. Sales Rep marks opportunity `closed_won` or `signup_started`.
 2. Manager checks plan, payment/approval, contact info, source, and next blocker.
 3. Manager opens client onboarding.
-4. Systems Director creates client ID/folder/hub shell.
-5. Account Manager sends welcome and access request.
+4. Systems Director creates client ID/folder/hub shell and magic-link access.
+5. Account Manager sends welcome, dashboard magic link, and access request.
 6. Specialists begin only the work whose prerequisites are satisfied.
 
 Sales Rep does not own routine client service after this point.
@@ -426,7 +436,7 @@ Manager may assign safe setup immediately:
 - client ID
 - client folder
 - Supabase client profile
-- client hub shell
+- client hub shell and magic-link access
 - public baseline scan
 - welcome email draft
 - onboarding checklist

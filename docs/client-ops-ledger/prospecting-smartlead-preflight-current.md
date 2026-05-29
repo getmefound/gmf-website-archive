@@ -1,27 +1,27 @@
 # Prospecting Smartlead Preflight
 
-Date: 2026-05-27
+Date: 2026-05-28
 Mode: read-only
 
 ## Summary
 
-NOT READY for Smartlead live prospect sends.
-Human needed: yes
+READY for a tiny Smartlead seed test.
+Human needed: no
 
 ## Checks
 
 | Check | Status | Detail |
 |---|---|---|
-| Smartlead API access | FAIL | /email-accounts/: 401 {"message":"Invalid API Key"} |
-| Warmup snapshot | WARN | Warmup snapshot is from 2026-05-24, not 2026-05-27. |
+| Smartlead API access | PASS | Smartlead API accepted the configured key. |
+| Warmup snapshot | PASS | Warmup snapshot is current. |
 
 ## Mailboxes
 
 | Email | Status | Warmup Sent | Spam | Reputation | Blockers |
 |---|---|---:|---:|---:|---|
-| mike@getmefoundnow.com | hold | 9 | 0 | 100 | needs at least 10 warmup sent |
-| mike@trygetmefound.com | hold | 9 | 0 | 100 | needs at least 10 warmup sent |
-| mike@getmefoundlocal.com | hold | 9 | 0 | 100 | needs at least 10 warmup sent |
+| mike@getmefoundnow.com | ready | 38 | 0 | 100 | none |
+| mike@trygetmefound.com | ready | 36 | 0 | 100 | none |
+| mike@getmefoundlocal.com | ready | 38 | 0 | 100 | none |
 
 ## Manager Contact Rule
 
@@ -29,4 +29,4 @@ Manager should contact Mike only if human involvement is required. This prefligh
 
 ## Next Action
 
-Refresh Smartlead API access, store the key locally and in production, then re-run this preflight.
+Run a fresh warmup report, then re-run this preflight before building or uploading a seed list.

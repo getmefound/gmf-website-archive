@@ -11,13 +11,19 @@ const DOMAINS_PATH = "docs/client-ops-ledger/sending-domain-readiness.csv";
 const WARMUP_CONFIG_PATH = "docs/client-ops-ledger/reach-warmup-autopilot.json";
 const DAILY_BRIEF_PATH = "docs/client-ops-ledger/daily-brief-current.md";
 const MORNING_BRIEF_CURRENT_PATH = "docs/client-ops-ledger/morning-brief-current.md";
+const BUSINESS_IMPROVEMENT_AUDIT_CURRENT_PATH = "docs/client-ops-ledger/business-improvement-audit-current.md";
 const OUTBOX_DIR = "docs/client-ops-ledger/outbox";
 const GHL_API_BASE = "https://services.leadconnectorhq.com";
 const GHL_API_VERSION = "2021-07-28";
 const DEFAULT_AGENT_CHANNEL_ID = "C0ATTA4NBR8";
-const OWNER_SLACK_USER_ID = process.env.GMF_OWNER_SLACK_USER_ID?.trim() || process.env.GMF_OWNER_SLACK_USER_ID?.trim() || "U0ATPQYFA85";
-const OWNER_FIRST_NAME = process.env.GMF_OWNER_FIRST_NAME?.trim() || process.env.GMF_OWNER_FIRST_NAME?.trim() || "Mike";
-const OWNER_FORMAL_NAME = process.env.GMF_OWNER_FORMAL_NAME?.trim() || process.env.GMF_OWNER_FORMAL_NAME?.trim() || "Mr. Egidio";
+const OWNER_SLACK_USER_ID =
+  process.env.MANAGER_OWNER_SLACK_USER_ID?.trim() ||
+  process.env.AOH_OWNER_SLACK_USER_ID?.trim() ||
+  process.env.GMF_OWNER_SLACK_USER_ID?.trim() ||
+  process.env.SLACK_OWNER_USER_ID?.trim() ||
+  "U0ATPQYFA85";
+const OWNER_FIRST_NAME = process.env.GMF_OWNER_FIRST_NAME?.trim() || process.env.AOH_OWNER_FIRST_NAME?.trim() || "Mike";
+const OWNER_FORMAL_NAME = process.env.GMF_OWNER_FORMAL_NAME?.trim() || process.env.AOH_OWNER_FORMAL_NAME?.trim() || "Mr. Egidio";
 const configuredGhlCacheTtlMs = Number(process.env.GHL_READINESS_CACHE_TTL_MS ?? 5 * 60 * 1000);
 const GHL_READINESS_CACHE_TTL_MS = Number.isFinite(configuredGhlCacheTtlMs) ? configuredGhlCacheTtlMs : 5 * 60 * 1000;
 
@@ -141,7 +147,7 @@ const AGENTS: Record<
   "general-manager": {
     title: "General Manager",
     persona: "Elon Musk",
-    aliases: ["general manager", "manager", "gm", "elon"],
+    aliases: ["general manager", "manager", "manger", "gm", "elon"],
     reportsTo: "President",
     job: "Runs the agent company day to day, prepares the brief, filters noise, owns the approval queue, assigns owners, tracks blockers, and escalates to Mike.",
     canDo: ["prepare the morning brief", "run Reach Cold Email Campaign", "explain warmup autopilot", "route work to agents", "show status", "explain blockers"],
@@ -399,14 +405,16 @@ async function handleJsonEvent(req: NextRequest, rawBody: string) {
     commandText: text,
   });
 
-  if (!text || !channel || !isSupportedCommand(text)) {
+  const command = isOwnerDmChannel(channel, actor) ? normalizeOwnerDmCommand(text) : text;
+
+  if (!text || !channel || !isSupportedCommand(command)) {
     return NextResponse.json({ ok: true, ignored: "not_agent_command" });
   }
-  if (!isAllowedChannel(channel)) {
+  if (!isAllowedEventChannel(channel, actor)) {
     return NextResponse.json({ ok: true, ignored: "not_allowed_channel" });
   }
 
-  scheduleSlackEventResponse({ channel, command: text, actor, threadTs });
+  scheduleSlackEventResponse({ channel, command, actor, threadTs });
 
   return NextResponse.json({ ok: true, queued: true });
 }
@@ -462,9 +470,15 @@ ${address(actor)}, all campaign live actions are blocked.
 
   if (mentionsTeamTraining(normalized)) return buildReachTeamTrainingResponse(actor);
 
+  if (mentionsOwnerNeededQuestion(normalized)) return buildOwnerNeededResponse(actor);
+
+  if (mentionsGbpAccessEmailAnswer(normalized)) return buildGbpAccessEmailAnswerResponse(actor, normalized);
+
   if (mentionsOwnerPeek(normalized)) return buildOwnerPeekResponse(actor);
 
   if (mentionsMorningBrief(normalized)) return buildMorningBriefResponse(actor);
+
+  if (mentionsBusinessImprovementAudit(normalized)) return buildBusinessImprovementAuditResponse(actor);
 
   if (mentionsModelRouting(normalized)) return buildModelRoutingResponse(actor);
 
@@ -516,11 +530,13 @@ Supported examples:
 
 \`\`\`text
 Manager, status
+Manager, what needs Mike today?
 Manager, is Reach set to run today, and do I need anything?
 Manager, start cold reach campaign
 Manager, train Reach team
 Manager, owner peek
 Manager, morning brief
+Manager, business improvement audit
 Manager, model routing
 Profile Manager, prepare GBP access test
 Profile Manager, get GMF Google review link
@@ -700,6 +716,23 @@ ${recommendation}
 Knowledge note:
 
 - Today the agents read local ledgers/runbooks and run scoped checks. The Morning Brief skill pack now records the upgrade path for a searchable GHL/document knowledge base.`;
+}
+
+function buildBusinessImprovementAuditResponse(actor: UserContext) {
+  const currentAudit = readText(BUSINESS_IMPROVEMENT_AUDIT_CURRENT_PATH).trim();
+  if (currentAudit) return currentAudit;
+
+  return `*Business Improvement Auditor - ${today()}*
+
+${address(actor)}, no current audit report exists yet.
+
+Manager should run:
+
+\`\`\`text
+npm run agent:business-audit
+\`\`\`
+
+The daily workflow is \`.github/workflows/business-improvement-audit.yml\`.`;
 }
 
 function buildModelRoutingResponse(actor: UserContext) {
@@ -1181,28 +1214,69 @@ ${address(actor)}, you do not need to read every agent conversation.
 
 Where to look:
 
-- *Manager conversation*: Slack #04-aoh-ops is where you talk to Manager and see brief answers, blockers, and follow-ups.
+- *Manager conversation*: your Slack DM with Manager is where owner-needed briefs, blockers, and approvals belong.
+- *Legacy ops channel*: #04-aoh-ops can stay as a shared fallback only if you approve that exception.
 - *Mission Control front page*: owner view of active jobs, blockers, agents, and spend.
 - *Reach job room*: cold email lane status, agent handoff, and next blocker.
 - *GitHub/ledger/outbox*: proof logs only; use these when something looks wrong.
 
 DM status:
 
-- Automatic Manager DMs are not wired yet.
-- Recommended DM policy: one short daily DM plus urgent exceptions only.
+- Manager DMs are the required owner-needed path.
+- Recommended DM policy: human-needed decisions and urgent exceptions only.
 - Do not DM every agent action; that becomes noise fast.
 
 What Manager should send you:
-
 \`\`\`text
 Reach today: Reviews and AI running. Relay needs 5 more clean contacts. No action needed from Mike unless raising spend or overriding safety.
 \`\`\`
+
+Owner-ask rule:
+
+- Manager asks Mike only after the assigned agent exhausts access, tools, docs, Slack history, Monday, Mission Control, proof artifacts, safe checks, and Coach/Trainer help.
+- If an agent can inspect, verify, draft, document, test, research, or route the next step, Mike is not needed yet.
 
 Next useful command:
 
 \`\`\`text
 Manager, status
 \`\`\``;
+}
+
+function buildOwnerNeededResponse(actor: UserContext) {
+  return `*Manager owner-needed list - ${today()}*
+
+${address(actor)}, what I need from you right now:
+
+- Casey mailbox: finish first-login/security/reply proof for \`casey@getmefound.ai\`, or approve a monitored fallback reply path for Monday.
+- Smartlead launch: review the five-niche packet and decide whether Monday is med-spa-only, another niche, split test, or hold.
+
+What I do not need from you:
+
+- Southington GBP proof path until Profile Manager / Systems Director exhaust access.
+- SOP mapping, testing, documentation, or training work.
+- Routine Monday updates. Those stay in Monday, Mission Control, and proof docs.
+
+No live send, public edit, spend/cap change, client-facing message, billing/legal/reputation decision, or credential action happens without the exact approval.`;
+}
+
+function buildGbpAccessEmailAnswerResponse(actor: UserContext, normalized: string) {
+  const account = normalized.includes("admin@getmefound") ? "admin@getmefound.ai" : "mike@getmefound.ai";
+  return `*Manager recorded partial answer - ${today()}*
+
+${address(actor)}, recorded: GBP access account candidate is \`${account}\`.
+
+Next move is not on you:
+
+Profile Manager must use existing Southington GBP access first and verify:
+
+- clean profile URL
+- accepted role for \`${account}\`
+- review count/rating
+- review link
+- website, hours, address/service-area setting, category, and services
+
+I will ask you only if Profile Manager cannot access the profile, finds the wrong profile, or needs public edit/client-facing approval.`;
 }
 
 function buildAgentRoleResponse(agentKey: AgentKey, actor: UserContext) {
@@ -1905,6 +1979,14 @@ function isAllowedChannel(channel: string) {
   return allowedChannels().includes(channel);
 }
 
+function isAllowedEventChannel(channel: string, actor: UserContext) {
+  return isAllowedChannel(channel) || isOwnerDmChannel(channel, actor);
+}
+
+function isOwnerDmChannel(channel: string, actor: UserContext) {
+  return channel.startsWith("D") && actor.isMike;
+}
+
 function firstAllowedChannel() {
   return allowedChannels()[0] ?? DEFAULT_AGENT_CHANNEL_ID;
 }
@@ -2183,6 +2265,16 @@ function mentionsMorningBrief(normalized: string) {
   );
 }
 
+function mentionsBusinessImprovementAudit(normalized: string) {
+  return (
+    normalized.includes("business improvement audit") ||
+    normalized.includes("improvement auditor") ||
+    normalized.includes("business auditor") ||
+    normalized.includes("agent efficiency report") ||
+    normalized.includes("agent audit report")
+  );
+}
+
 function mentionsModelRouting(normalized: string) {
   return (
     normalized.includes("model routing") ||
@@ -2314,6 +2406,16 @@ function mentionsTeamTraining(normalized: string) {
   );
 }
 
+function mentionsOwnerNeededQuestion(normalized: string) {
+  return /\b(what do you need from me|what do you need|need from me|do you need anything from me|what is needed from me|what do i need to do|what should i do next|what do you need mike)\b/.test(
+    normalized,
+  );
+}
+
+function mentionsGbpAccessEmailAnswer(normalized: string) {
+  return /\b(admin|mike)@getmefound\s+ai\b/.test(normalized) || /\b(admin|mike)@getmefound\.ai\b/.test(normalized);
+}
+
 function mentionsOwnerPeek(normalized: string) {
   return (
     normalized.includes("owner peek") ||
@@ -2381,7 +2483,7 @@ function mentionsQaReview(normalized: string) {
 }
 
 function normalizeCommand(command: string) {
-  return command.toLowerCase().replace(/[.,:;|]/g, " ").replace(/\s+/g, " ").trim();
+  return command.toLowerCase().replace(/\belon\b/g, "manager").replace(/[.,:;|]/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function wantsFreshCheck(normalized: string) {
@@ -2439,6 +2541,14 @@ function wantsFormalTone(commandText: string) {
   const lowered = commandText.toLowerCase();
   if (/\b(first[-\s]?name|casual|informal)\b/.test(lowered)) return false;
   return /\b(formal|formally|mr\.?\s+egidio|mister\s+egidio)\b/.test(lowered);
+}
+
+function normalizeOwnerDmCommand(text: string) {
+  const trimmed = text.trim();
+  if (!trimmed) return trimmed;
+  if (startsWithKnownAgent(trimmed) || /^(approve|pause)\b/i.test(trimmed)) return trimmed;
+  if (/^\s*manger\b/i.test(trimmed)) return trimmed.replace(/^\s*manger\b\s*[,:\-]?\s*/i, "Manager, ");
+  return `Manager, ${trimmed}`;
 }
 
 function startsWithKnownAgent(text: string) {

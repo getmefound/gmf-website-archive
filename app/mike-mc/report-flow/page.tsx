@@ -48,21 +48,21 @@ export default async function ReportFlowPage({ searchParams }: PageProps) {
       <header className="mb-8 flex flex-col gap-4 border-b border-zinc-800/60 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400/70">
-            GMF - GHL exit
+            GMF - Reports
           </p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
             Report flow
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-            A GHL-free owner view for report requests, audit links, heatmap links, and blocked handoffs.
+            GMF-owned owner view for report requests, audit links, heatmap links, and blocked handoffs.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href="/mike-mc" className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100">
             Hub
           </Link>
-          <Link href="/mike-mc/ghl-exit-ops" className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100">
-            Log Status
+          <Link href="/mike-mc/clients" className="rounded-md border border-zinc-700/70 bg-zinc-900/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:bg-zinc-800 hover:text-zinc-100">
+            Clients
           </Link>
           <Pill tone={status.ok ? "accent" : "danger"}>{status.ok ? "supabase live" : "storage issue"}</Pill>
         </div>
@@ -89,7 +89,7 @@ export default async function ReportFlowPage({ searchParams }: PageProps) {
           {reportFlowOwnerSummary(counts).join(" ")}
         </p>
         <p className="mt-2 text-xs leading-relaxed text-zinc-500">
-          Use GHL Exit Ops to log a report status. This page is the cleaner read-only delivery view.
+          Client Profiles and Setup Jobs feed this delivery view; blocked or ready reports stay visible here until closed.
         </p>
       </section>
 

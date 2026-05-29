@@ -45,13 +45,33 @@ Sections that were REMOVED from homepage: stats row, trust cards, game changed, 
 - ✅ **Visibility Check** — Already well-aligned with new messaging. No changes needed.
 - ✅ **Pricing page** — Hero, product sections, and Always Ready are already updated. No further changes needed.
 
-## Remaining Work
+## Completed (Session 3 — May 2026)
 
-### 🔴 Needs Mike's input
-- **Calendly link** — Mike signed up for Calendly. Update `BOOK_URL` in `app/calculator/page.tsx` (currently set to `https://calendly.com/PLACEHOLDER`). One line change once the link is known.
+- ✅ **Calendly link** — Set to `https://calendly.com/mike-getmefound/30min` in `app/calculator/page.tsx`, `app/contact/page.tsx`, and `app/about/page.tsx`.
+- ✅ **About page Book a Call** — Added "Book a call →" link under Mike's photo (alongside LinkedIn) and as a third button in the §05 CTA section.
+- ✅ **Partners nav link** — Added "Partners" to desktop and mobile navbar (after "About").
+- ✅ **Partner program built** — Full referral system:
+  - `app/partners/page.tsx` — Public-facing partner page. Hero: "One referral a day. $1,500 a month." Sections: What your referral gets (4 cards with SVG icons), How it works (4 steps), Who it's for (6 dark cards with SVG icons + color tags), Ready-to-use copy (2 blurbs), Commission math (side-by-side table, highlighted 1/day row), Application form.
+  - `app/api/partners/route.ts` — POST handler. Honeypot spam filter, email validation, rate limiting. Creates `agent_tasks` row in Supabase (`kind: "partner_application"`, `status: "new"`), sends applicant confirmation email, notifies mike@getmefound.ai internally.
+  - `app/ref/[code]/page.tsx` — Referral landing page (dark, no nav, noindex). Checkout URL passes `ref=PARTNERCODE` + UTM params for tracking.
+  - `docs/GMF_PARTNER_PROGRAM.md` — Agent operating guide for OpenClaw agents. Full approval criteria (auto-approve / flag / decline), email templates, partner code format, task update contract.
+- ✅ **Partner page design** — All sections dark navy. No emoji — replaced with clean 16px stroke SVG icons. Commission copy says "weekly" (not monthly). Dropdowns use explicit `backgroundColor: "#0f1a24"` to fix Windows browser white-background issue.
+- ✅ **Commission structure** — $50 per Get Found ($149) conversion. Paid weekly. No cap, no minimum. Highlighted row: 1 referral/day = $1,500/mo = $18,000/yr.
+- ✅ **Who we want as partners** — Content creators & influencers (top), podcast hosts, bookkeepers, virtual assistants, business coaches, newsletter writers. Web designers intentionally excluded (compete on services). HVAC/plumbing/roofing not targeted.
+
+## Technical Notes
+
+- **CSS vars in JSX** — Never use `border-[var(--color-x)]` or `bg-[var(--color-x)]` in Tailwind className strings — causes TypeScript "Unterminated string literal" JSX parser errors. Always use `style={{ borderColor: "var(--color-x)" }}` instead.
+- **Write/Edit tool truncation** — The file tools truncate large files. For files >400 lines or with long lines, use `bash` with a Python heredoc or `cat` to write. Never use the Write tool on the partners page — use Python script.
+- **Select dropdown background on Windows** — Native `<select>` ignores Tailwind bg utilities on Windows. Always add `style={{ backgroundColor: "#0f1a24" }}` explicitly to select elements in dark sections.
+- **Pre-existing TS errors** — `app/api/motto-banner/`, `app/api/team-banner/`, and `app/calculator/page.tsx` have pre-existing TypeScript errors (invalid characters). These do not block Vercel builds and are not from our changes.
+
+## Remaining Work
 
 ### Optional future improvements
 - **Industry dropdown cleanup** — Remove plumbing, HVAC, roofer (excluded target market). Add dental, chiro, salon, therapist, accountant, realestate, legalfirm. Curate to ~15 best options for mobile UX. No category/subcategory needed.
 - **VisibilityCheck section heading** — Currently "What Google & AI check". Could be made more specific to the "picks, not ranks" angle, but current copy is functional.
 - **Spanish page (app/es/)** — Homepage, pricing, and FAQ may still use old messaging. Low priority unless Spanish traffic matters.
 - **Blog posts** — Existing posts may predate the May 2026 messaging shift. Worth a content audit before running ads.
+- **Calculator page** — Pending audit (pre-existing TS errors). Low priority.
+- **Partner payout method** — No PayPal account set up yet. Commission copy says "sent directly to you each week" — need to decide on actual payout method (bank transfer, Venmo, etc.) before first partner earns.

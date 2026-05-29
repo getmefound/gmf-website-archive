@@ -1,66 +1,56 @@
 # Morning Brief
 
-Date: 2026-05-22
-Prepared by: General Manager
+Date: 2026-05-29
+Prepared by: Elon / Manager
 
 ## Commercial Brief
 
-- Reach: all GHL campaign live actions paused for the NearMeReady rebrand, GHL exit, and sending-domain migration. Do not warm or send from old GHL campaign domains.
-- Market: AI automation: AI Business Automation Tools - Trend Hunter
-- Mike today: visually turn the six Reach workflows to Draft/Off in GHL if not already done.
+- GMF launch work is focused on Monday prospecting, owned presence, Southington test-client proof, and sender identity readiness.
+- Smartlead campaign `3379589` is paused; all three outreach inboxes are healthy, but no expanded send is approved.
+- Mike today: review the Smartlead five-niche packet and finish or decide the Casey mailbox reply path.
 
 ## Custom Layer
 
-- GHL stats: historical only during pause.
-- Email/calendar: rebuild outside GHL after NearMeReady sending domains are chosen.
-- Safety: HighLevel AI stays OFF. GHL Expert owns sender/domain proof before start-drip.
-
-## Reach Results
-
-| Lane | Current action | Clean/selected | Email performance | Drip ready |
-|---|---|---|---|---|
-| Reviews | start | 12 selected | GHL total: 20 sent, 90% delivered, 38.89% opened, 0 replies, 1 bounces, 0 unsubscribes | yes |
-| AI Visibility | start | 20 selected | GHL total: 26 sent, 84.62% delivered, 59.09% opened, 0 replies, 4 bounces, 0 unsubscribes | yes |
-| Relay | import | 10/10 verified | GHL total: 5 sent, 100% delivered, 80% opened, 0 replies, 0 bounces, 0 unsubscribes | no |
+- Monday is the owner-visible action queue for human-needed work, active agents, timers, handoffs, and proof.
+- Slack DM is the Manager owner-needed channel; routine progress stays in Monday, Mission Control, and proof reports.
+- Email/calendar access remains approval-gated; do not use Casey for live prospect or client communication until proof gates pass.
 
 ## Needs Mike Today
 
-- Local automation is paused and GHL contacts were removed from Reach workflows/campaigns by API.
-- GHL UI visual check still needed: set the six Reach workflows to Draft/Off.
+- Casey mailbox: sign into `casey@getmefound.ai`, secure or change the temporary password, confirm recovery/admin control, and reply from Casey to the internal test email; or approve a monitored fallback reply path.
+- Smartlead Monday launch: review the five-niche packet and decide whether to approve med-spa-only, choose another niche, split test, or hold.
+- No public profile edits, live prospect sends, client-facing messages, spend/cap changes, or credential actions proceed without the matching approval.
 
 ## Market Signal
 
-- AI automation: AI Business Automation Tools - Trend Hunter
-- GoHighLevel: GO HIGH LEVEL?: Las Vegas Realtor Britney Gaitan Facing Massive Exposure in Robocall TCPA Class Action After Using GoHighLevel to Send Ringless Voicemails to Expired Listings - TCPAWorld
-- Google Business Profile: 50-Year Marketing Expertise Backs New AI Platform for Local Search - USA Today
-- AI receptionist: Your favorite Texas restaurant may soon let AI answer the phone - Austin American-Statesman
+- Multi-agent business dashboards should show decision queues first, then agent work, then proof; owners should not have to hunt through logs.
+- Human-in-the-loop agent dashboards commonly center approval queues, audit trails, scheduling, and constraint enforcement.
+- Dashboard research points to action-first hierarchy: top-left should answer what needs attention now, with supporting context below.
 
 ## Agents Feeding This Brief
 
-- GHL Expert: GHL campaign stats, workflow proof, exports, and readiness checks.
-- Sales Manager: what the campaign numbers mean and what to do next.
-- Scout / Market Watcher: industry news, competitor signals, and offer ideas.
-- Systems Director: cron reliability, source health, and cost risk.
-- Manager: final owner summary.
+- Elon / Manager: owner action queue, Slack DM asks, Monday routing, and final decisions needed.
+- Sales Manager: niche targeting, send cap, offer angle, and Monday prospecting recommendation.
+- Systems Director: Smartlead readiness, Casey mailbox proof gates, Slack/Monday source health, and key rotation smoke checks.
+- Scout: lead inventory, niche quality, and prospect targeting research.
+- Auditor / Sentinel: proof gates, process score, stuck work, and improvement queue.
 
 ## Recommended Move
 
-Keep auto off. Do not resume GHL warmup or sending on the old domains.
+Do not resume Smartlead yet. First review the five-niche plan, choose the Monday launch lane/cap, then finish Casey or approve the fallback reply path so replies are not lost.
 
 ## Source Status
 
-- News feeds active: 4; waiting for URLs: 0.
-- GHL email stats: 3 lanes from ghl-email-stats-current.csv.
+- Monday owner-needed rows: live.
+- Slack DM owner-needed messages: available when Slack token and DM channel are configured.
+- Smartlead readiness: current read-only proof says all three inboxes are healthy for a tiny seed-list test.
+- Sentinel report: current for 2026-05-29.
 
 ## Proof Used
 
-- docs/client-ops-ledger/agent-jobs.csv
-- docs/client-ops-ledger/sending-domain-readiness.csv
-- docs/client-ops-ledger/daily-brief-current.md
-- docs/client-ops-ledger/ghl-email-stats-current.csv
-- docs/client-ops-ledger/outbox/reach-warmup-reviews-2026-05-21.json
-- tmp-reach-warmup-reviews-2026-05-21-start-ghl-results.json
-- docs/client-ops-ledger/outbox/reach-warmup-ai-2026-05-21.json
-- tmp-reach-warmup-ai-2026-05-21-start-ghl-results.json
-- docs/client-ops-ledger/outbox/reach-warmup-relay-2026-05-21.json
-- tmp-reach-warmup-relay-2026-05-21-import-ghl-results.json
+- docs/client-ops-ledger/smartlead-five-niche-targeting-research-2026-05-28.md
+- docs/client-ops-ledger/smartlead-monday-max-send-approval-packet.md
+- docs/client-ops-ledger/casey-mailbox-setup-current.md
+- docs/client-ops-ledger/business-improvement-audit-current.md
+- docs/client-ops-ledger/prospecting-smartlead-preflight-current.md
+- docs/client-ops-ledger/smartlead-warmup-current.csv

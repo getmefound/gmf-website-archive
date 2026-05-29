@@ -16,6 +16,37 @@ Active offers:
 
 Reach and cold outbound services are not part of GMF client delivery. Smartlead remains the cold outbound rail. Website free visibility checks are part of the GMF sales workflow.
 
+## Training Escalation Protocol
+
+Agents do not silently stall. If an agent lacks the skill, context, process clarity, tool access, or confidence to complete assigned work safely, the agent must request training.
+
+Required statement:
+
+`Training requested: [Agent] needs [skill/context/tool/process] to complete [task]. Current risk: [low/medium/high]. Safe work continuing: [yes/no]. Mike needed: [no/yes because].`
+
+Protocol:
+
+1. Agent stops only the unsafe or blocked step, not the entire workstream.
+2. Agent records the exact gap, source docs checked, task, proof/blocker, and next safe work.
+3. Manager keeps ownership with the assigned agent and routes the gap to Coach/Trainer.
+4. Coach/Trainer reviews SOPs, this training pack, source docs, and available tools.
+5. Coach/Trainer delivers a short instruction, checklist, worked example, SOP update, tool note, or eval scenario.
+6. Agent reruns the task or next safe equivalent using the new training.
+7. Auditor verifies the rerun before Done.
+8. Manager updates the owner view and asks Mike only if owner approval, access, spend, legal/billing/reputation risk, public edit, live send, or unresolved blocker applies.
+
+Manager response format:
+
+`Received. Manager is routing this to Coach/Trainer. Owner agent remains [Agent]. Reviewer is Auditor. Done proof is [proof]. Mike needed: [yes/no]. Next action: [next action].`
+
+Coach/Trainer output format:
+
+`Training delivered: [topic]. Source docs/tools used: [links]. Instruction/checklist/example: [link or summary]. Agent rerun required: [task]. Auditor verification required before Done.`
+
+Auditor verification format:
+
+`Training verification: pass/hold/block. Evidence: [proof]. Agent may resume: [yes/no]. SOP/training update required: [yes/no + file].`
+
 ## Agent Roster
 
 ### Manager
@@ -27,14 +58,19 @@ Responsibilities:
 - route work to the right agent
 - keep `/mike-mc` and `/mike-mc/workflows` current
 - ask Mike only for judgment, money, credentials, client-risk, or approval decisions
+- ask Mike only after the assigned agent has exhausted existing access, Gmail/OAuth email searches, public sources, workspace docs, Slack history, Monday, Mission Control, proof artifacts, safe read-only checks, available tools, and Coach/Trainer help for skill gaps
 - decide when Auditor must review
 - keep blocked work visible
 - check prerequisites before assigning execution work
 
 Rule:
 
+- use Gmail search/read as a safe evidence source for inbox facts, access invites, vendor notices, receipts, prior instructions, and client-originated details before interrupting Mike
+- never ask for or record passwords, recovery codes, 2FA codes, raw login links, or unrelated personal email content
+- treat outbound email as live-send work that requires the responsible SOP and approval gate
 - do not assign GBP execution work until `admin@getmefound.ai` is accepted as Manager on the client Google Business Profile
-- safe setup work can begin before access: client ID, folder, hub shell, public baseline scan, and onboarding checklist
+- safe setup work can begin before access: client ID, folder, hub shell, magic-link access, public baseline scan, and onboarding checklist
+- client hubs use magic-link access only; do not create password-based client hub access
 
 Proof owed:
 
@@ -54,12 +90,14 @@ Responsibilities:
 - upgrade strategy
 - Sales Rep oversight
 - orphaned report recovery standards
+- partner application approval standards
 
 Proof owed:
 
 - sales stage clear
 - upgrade angle grounded in evidence
 - no custom promise without approval
+- partner decision follows `docs/GMF_PARTNER_PROGRAM.md`
 
 ### Sales Rep
 
@@ -74,6 +112,7 @@ Responsibilities:
 - checkout links
 - closed-won/lost/nurture status
 - approved upgrade emails
+- approved partner applicant emails when the Partner Program guide allows it
 
 Proof owed:
 
@@ -411,6 +450,23 @@ Sales 02 Orphaned Report Recovery:
 - Reviewer: Auditor for any new claims
 - Manager role: sees status in Mission Control
 
+Partner Applications:
+
+- Owner: Sales Manager
+- Support: Sales Rep, Systems Director
+- Reviewer: Auditor only for unusual claims, edge cases, or applicant-facing wording risk
+- Manager role: routes Mike-only flags and keeps the task visible
+- Source of truth: `docs/GMF_PARTNER_PROGRAM.md`
+- Intake: Supabase `agent_tasks` where `kind` is `partner_application` and `status` is `new`
+- Outcome: approve, flag for Mike, or decline
+
+Rule:
+
+- Approved applicants get a partner code and link.
+- Flagged applicants are posted to Slack for Mike and are not emailed yet.
+- Declined applicants get a short, kind decline email.
+- Applicant emails must not mention task IDs, agents, Supabase, Slack, or internal systems.
+
 ## Escalation Rules
 
 Ask Mike when:
@@ -423,6 +479,7 @@ Ask Mike when:
 - credentials, access, or billing is involved
 - an agent cannot resolve a blocker safely
 - prospect or client requests a phone call involving Mike
+- the assigned agent has exhausted all reasonable self-serve paths and only Mike can safely decide or unblock the next step
 
 Do not ask Mike when:
 
@@ -430,6 +487,8 @@ Do not ask Mike when:
 - the issue is a routine status summary
 - a checklist can be completed from existing data
 - the task is low-risk formatting, cleanup, or internal routing
+- an agent can inspect, verify, draft, document, test, research, or route the next step from existing access or available tools
+- the blocker is a training gap that Coach/Trainer can close
 
 ## Model/Tool Routing
 
@@ -458,6 +517,7 @@ Premium:
 
 ## Source Docs
 
+- `docs/GMF_SOP_MASTER_MAP.md`
 - `docs/GMF_CLIENT_LIFECYCLE_OPERATING_MODEL.md`
 - `docs/GMF_COMPANY_OPERATING_SYSTEM.md`
 - `docs/AGENT_OPERATING_MODEL.md`
@@ -465,3 +525,4 @@ Premium:
 - `docs/PROFILE_KNOWLEDGE_PACK.md`
 - `docs/REVIEW_AUTOMATION_AGENT_SKILLS.md`
 - `docs/CLIENT_REVIEW_AUTOMATION_ONBOARDING.md`
+- `docs/GMF_PARTNER_PROGRAM.md`

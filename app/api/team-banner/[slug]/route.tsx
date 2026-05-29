@@ -188,7 +188,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
       width: cfg.width * SCALE,
       height: cfg.height * SCALE,
       headers: {
-        "Content-Disposition": `inline; filename="aoh-${slug}.png"`,
+        "Content-Disposition": `inline; filename="gmf-${slug}.png"`,
       },
     }
   );

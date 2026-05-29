@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from "node:fs";
 const API_URL = "https://api.monday.com/v2";
 const ALLOWED_ROLES = new Set(["Manager", "Systems Director", "Reporter"]);
 const DEFAULT_BOARD_NAME = "Agents Jobs";
-const DEFAULT_SLACK_JOB_CHANNEL_ID = "C0ATTA4NBR8"; // #04-gmf-ops
+const DEFAULT_OWNER_SLACK_USER_ID = "U0ATPQYFA85"; // Mike
 
 const GROUPS = [
   "Human Needed",
@@ -45,6 +45,15 @@ const COLUMNS = [
   ["sourceTrigger", "Source / Trigger", "text"],
   ["missionControl", "Mission Control", "link"],
   ["langfuseTrace", "Langfuse Trace", "link"],
+  ["waitingState", "Waiting State", "status"],
+  ["expectedReceive", "Expected Receive", "text"],
+  ["escalateAt", "Escalate At", "text"],
+  ["nextOwner", "Next Owner", "text"],
+  ["handoffAck", "Handoff Ack", "status"],
+  ["ackAt", "Ack At", "text"],
+  ["unlockProof", "Unlock Proof", "long_text"],
+  ["runtimeState", "Runtime State", "status"],
+  ["lastWatchdog", "Last Watchdog", "text"],
 ];
 
 main().catch((error) => {
@@ -64,6 +73,7 @@ async function main() {
 
   const action = String(args.action ?? "list").toLowerCase();
   const role = normalizeRole(args.role);
+  validateQueueStateArgs(args);
   if (action !== "list" && !ALLOWED_ROLES.has(role)) {
     throw new Error(`Monday write blocked. Allowed writer roles: ${[...ALLOWED_ROLES].join(", ")}.`);
   }
@@ -95,6 +105,7 @@ async function main() {
 
   if (action === "list") {
     const detail = await getBoardDetail({ token, boardId: board.id });
+    const columnKeysById = buildColumnKeysById(detail.columns);
     console.log(
       JSON.stringify(
         {
@@ -105,7 +116,7 @@ async function main() {
             id: item.id,
             name: item.name,
             group: item.group?.title ?? "",
-            values: Object.fromEntries(item.column_values.map((value) => [value.id, value.text ?? ""])),
+            values: buildItemValues({ item, columnKeysById }),
           })),
         },
         null,
@@ -323,6 +334,58 @@ function buildColumnValues({ columns, args }) {
   if (args["source-trigger"]) values[columns.sourceTrigger.id] = String(args["source-trigger"]);
   if (args["mission-control"]) values[columns.missionControl.id] = linkValue(args["mission-control"], args["mission-control-text"] || "Mission Control");
   if (args["langfuse-trace"]) values[columns.langfuseTrace.id] = linkValue(args["langfuse-trace"], args["langfuse-trace-text"] || "Langfuse trace");
+  if (args["waiting-state"]) values[columns.waitingState.id] = { label: String(args["waiting-state"]) };
+  if (args["expected-receive"]) values[columns.expectedReceive.id] = String(args["expected-receive"]);
+  if (args["escalate-at"]) values[columns.escalateAt.id] = String(args["escalate-at"]);
+  if (args["next-owner"]) values[columns.nextOwner.id] = String(args["next-owner"]);
+  if (args["handoff-ack"]) values[columns.handoffAck.id] = { label: String(args["handoff-ack"]) };
+  if (args["ack-at"]) values[columns.ackAt.id] = String(args["ack-at"]);
+  if (args["unlock-proof"]) values[columns.unlockProof.id] = String(args["unlock-proof"]);
+  if (args["runtime-state"]) values[columns.runtimeState.id] = { label: String(args["runtime-state"]) };
+  if (args["last-watchdog"]) values[columns.lastWatchdog.id] = String(args["last-watchdog"]);
+  return values;
+}
+
+function validateQueueStateArgs(args) {
+  const status = String(args.status ?? "").trim();
+  const waitingState = String(args["waiting-state"] ?? "").trim();
+  const combined = `${status} ${waitingState}`.toLowerCase();
+  const humanNeeded = args["human-needed"] === undefined ? "" : booleanLabel(args["human-needed"]);
+
+  if (/waiting on agent|waiting on proof review/.test(combined)) {
+    throw new Error(
+      "Invalid queue state: internal agent/reviewer work must use Agent Working or Ready For Review with Handoff Ack, not Waiting.",
+    );
+  }
+
+  if (humanNeeded === "No" && /^waiting on access$/i.test(status)) {
+    throw new Error(
+      "Invalid queue state: use Agent Working + Access Investigation while agents are still exhausting access paths. Use Waiting on Client/Owner only after a true human ask is proven.",
+    );
+  }
+
+  if (/waiting on authenticated access path/.test(combined) && humanNeeded === "No") {
+    throw new Error(
+      "Invalid queue state: authenticated access path work is Agent Working / Access Investigation until a client, owner, or vendor must act.",
+    );
+  }
+}
+
+function buildColumnKeysById(columns) {
+  const keysByTitle = new Map(COLUMNS.map(([key, title]) => [normalizeTitle(title), key]));
+  return Object.fromEntries(
+    columns.map((column) => [column.id, keysByTitle.get(normalizeTitle(column.title))]).filter(([, key]) => Boolean(key)),
+  );
+}
+
+function buildItemValues({ item, columnKeysById }) {
+  const values = {};
+  for (const columnValue of item.column_values) {
+    const text = columnValue.text ?? "";
+    values[columnValue.id] = text;
+    const key = columnKeysById[columnValue.id];
+    if (key) values[key] = text;
+  }
   return values;
 }
 
@@ -410,6 +473,10 @@ function same(a, b) {
   return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
 }
 
+function normalizeTitle(value) {
+  return String(value ?? "").trim().toLowerCase();
+}
+
 function required(value, message) {
   if (!value) throw new Error(message);
   return String(value);
@@ -440,13 +507,18 @@ Examples:
   npm run monday:agent-job -- --action setup --role Manager
   npm run monday:agent-job -- --action list
   npm run monday:agent-job -- --action create --role Manager --name "Refresh Smartlead API access" --group "Human Needed" --status "Human Needed" --owner Mike --agent-owner "Manager / Systems Director" --system Smartlead --human-needed yes --priority High --due 2026-05-27 --budget 0 --proof "https://github.com/mje-gmf/website/blob/main/docs/client-ops-ledger/prospecting-smartlead-preflight-current.md" --proof-text "Smartlead preflight report" --next-action "Refresh the Smartlead API key, add it locally and in production, then rerun npm run prospecting:preflight." --upsert
-  npm run monday:agent-job -- --action create --role Manager --name "Build prospecting Mission Control reports" --group "01 Prospecting - Cold Email" --status "Agent Working" --agent-owner "Reporter / Systems Director" --system "Mission Control" --lifecycle "01 Prospecting - Cold Email" --service-line "Prospecting" --job-type "Reporting" --human-needed no --notify-slack --upsert
+  npm run monday:agent-job -- --action update --role Manager --item-id 123 --status "Agent Working" --waiting-state "Agent-owned access investigation" --runtime-state "Access Investigation" --expected-receive "2026-05-29T12:00:00-04:00" --escalate-at "2026-05-29T15:00:00-04:00" --next-owner "Profile Manager / Systems Director" --unlock-proof "Authenticated read-only proof or documented access-path exhaustion"
+  npm run monday:agent-job -- --action create --role Manager --name "Build prospecting Mission Control reports" --group "01 Prospecting - Cold Email" --status "Agent Working" --agent-owner "Reporter / Systems Director" --system "Mission Control" --lifecycle "01 Prospecting - Cold Email" --service-line "Prospecting" --job-type "Reporting" --human-needed no --upsert
   npm run monday:agent-job -- --action update --role Reporter --item-id 123 --status Done --human-needed no --notes "Proof attached."
 `);
 }
 
 async function maybeNotifySlack({ args, action, role, board, item }) {
-  const shouldNotify = Boolean(args["notify-slack"]) || process.env.MONDAY_NOTIFY_SLACK_ON_JOB_WRITE === "true";
+  const humanNeeded = args["human-needed"] ? booleanLabel(args["human-needed"]) : "No";
+  const routineDmAllowed = process.env.MANAGER_ALLOW_ROUTINE_DM === "true";
+  const shouldNotify =
+    humanNeeded === "Yes" ||
+    ((Boolean(args["notify-slack"]) || process.env.MONDAY_NOTIFY_SLACK_ON_JOB_WRITE === "true") && routineDmAllowed);
   if (!shouldNotify) return;
 
   const botToken = process.env.SLACK_BOT_TOKEN?.trim();
@@ -455,15 +527,19 @@ async function maybeNotifySlack({ args, action, role, board, item }) {
     return;
   }
 
-  const channel = process.env.SLACK_AGENT_JOBS_CHANNEL_ID?.trim() || DEFAULT_SLACK_JOB_CHANNEL_ID;
-  const humanNeeded = args["human-needed"] ? booleanLabel(args["human-needed"]) : "No";
+  const channel =
+    process.env.MANAGER_OWNER_DM_CHANNEL_ID?.trim() ||
+    process.env.MANAGER_OWNER_SLACK_USER_ID?.trim() ||
+    process.env.AOH_OWNER_SLACK_USER_ID?.trim() ||
+    process.env.SLACK_OWNER_USER_ID?.trim() ||
+    DEFAULT_OWNER_SLACK_USER_ID;
   const owner = args["agent-owner"] || role;
   const system = args.system || "Agent Jobs";
   const status = args.status || (action === "create" ? "Sent" : "Updated");
   const mondayBoardUrl = `https://monday.com/boards/${board.id}`;
 
   const message = [
-    `*Manager job ${action === "create" ? "sent" : "updated"}*`,
+    `*Manager ${humanNeeded === "Yes" ? "human-needed" : "routine"} job ${action === "create" ? "sent" : "updated"}*`,
     `- Job: ${item.name}`,
     `- Status: ${status}`,
     `- Agent owner: ${owner}`,
@@ -482,6 +558,10 @@ async function maybeNotifySlack({ args, action, role, board, item }) {
   });
   const body = await response.json().catch(async () => ({ ok: false, error: await response.text() }));
   if (!response.ok || !body.ok) {
-    console.warn(`Slack notification skipped: ${body.error || response.status}`);
+    const reason = body.error || response.status;
+    console.warn(`Slack notification skipped: ${reason}`);
+    if (reason === "messages_tab_disabled") {
+      console.warn("Manager DM blocked: enable the Slack app App Home Messages Tab / DM capability, then rerun the DM smoke test.");
+    }
   }
 }

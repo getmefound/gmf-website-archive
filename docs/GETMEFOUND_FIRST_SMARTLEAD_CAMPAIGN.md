@@ -4,13 +4,19 @@ Last updated: 2026-05-23
 
 ## Status
 
-Smartlead draft campaign created:
+Smartlead seed campaign is configured but paused while the expanded max-safe Monday send approval packet is built:
 
 - Name: `GetMeFound - AI Visibility Audit - Warmup Draft`
 - ID: `3379589`
-- Status: draft
+- Current name in Smartlead: `GetMeFound - CT Med Spa Visibility Seed - 2026-06-01`
+- Status: paused pending Mike approval of expanded send packet
+- Send window: Monday 2026-06-01, 10:15-11:30 ET
+- Live cap: 3 seed leads total
+- Sequence: one initial email only; no follow-up steps in this first seed launch
+- Superseding approval packet: `docs/client-ops-ledger/smartlead-monday-max-send-approval-packet.md`
+- Prior proof: `docs/client-ops-ledger/smartlead-seed-launch-current.md`
 
-Do not activate this campaign until sender warmup is healthy and the first lead list passes QA.
+Owner approval for the first live send direction was given by Mike in chat, then Mike clarified that he wants the maximum safe per-inbox plan reported before anything sends. Do not resume the campaign until the expanded approval packet is approved.
 
 Readiness command:
 
@@ -18,7 +24,7 @@ Readiness command:
 npm run smartlead:readiness
 ```
 
-As of 2026-05-23, the draft is not ready for live prospect sending yet because each inbox has only 1 Smartlead warmup send. DNS, SMTP, IMAP, Smartlead status, and reputation are healthy.
+As of 2026-05-29, the three outreach inboxes passed readiness: SMTP/IMAP OK, active warmup, reputation 100, and 0 spam.
 
 First no-spend seed list prepared on 2026-05-23 from existing local inventory:
 
@@ -28,7 +34,7 @@ First no-spend seed list prepared on 2026-05-23 from existing local inventory:
 - Verification: 3 input, 3 valid, 0 removed
 - QA: 3 OK, 0 review rows
 
-Do not import these leads into Smartlead until warmup has more activity and the send test is approved.
+These three leads were imported into Smartlead for the approved Monday seed send. Do not add additional leads until the Monday first-window stats and reply/risk review are complete.
 
 ## Goal
 
@@ -129,11 +135,10 @@ Mike
 
 ## Next Build Steps
 
-1. Let Smartlead warmup reach at least 10 sent emails per inbox with 0 spam.
-2. Re-run `npm run smartlead:readiness`.
-3. Build or expand the 15-30 lead med-spa test list.
-4. Run email verification and QA.
-5. Add sequence and sender accounts to the draft campaign.
-6. Import only the QA-approved leads.
-7. Send one Smartlead test email to Mike before activation.
-8. Activate only after warmup and test email checks are clean.
+1. Monitor Monday first-window stats after 12:00 ET.
+2. Confirm sent count, failures, bounces, replies, complaints, and no unexpected extra sends.
+3. Sorter/Sales Rep classify replies and stop manual action on reply, bounce, unsubscribe, complaint, or risk.
+4. Auditor reviews first-window proof before any list expansion.
+5. Build or expand the 15-30 lead med-spa test list only after the seed review passes.
+6. Run email verification and QA for any expanded list.
+7. Create a fresh launch packet for any follow-up sequence, volume increase, new niche, or additional senders.

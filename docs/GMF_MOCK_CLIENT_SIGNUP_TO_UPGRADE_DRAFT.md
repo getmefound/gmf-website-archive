@@ -68,7 +68,7 @@ These are still operating/documentation gaps:
 - Automatic client folder creation.
 - Automatic Monday item creation from Stripe checkout.
 - Automatic client hub creation for every new paying client.
-- Automatic welcome email with the correct dashboard link.
+- Automatic welcome email with the correct magic-link dashboard link.
 - Automatic "first 14 days" launch checklist.
 - Formal client communication cadence.
 - Formal upgrade readiness score.
@@ -93,7 +93,7 @@ The correct client experience should feel simple:
 
 1. Client pays.
 2. Client receives confirmation.
-3. Client receives a short welcome email with a dashboard link and only the actions needed now.
+3. Client receives a short welcome email with a magic-link dashboard link and only the actions needed now.
 4. GMF builds the behind-the-scenes account shell.
 5. Client gives Google access and customer list or upload path.
 6. GMF launches first value.
@@ -117,7 +117,7 @@ Current client-facing page:
 
 Recommended improvement later:
 
-- add client dashboard link when the client hub exists
+- add client dashboard magic link when the client hub exists
 - add "what we need next" in 2 or 3 bullets
 - add "no need to create another account" reassurance
 
@@ -129,13 +129,13 @@ Purpose:
 
 - confirm plan
 - explain what GMF is doing first
-- give dashboard link
+- give dashboard magic link
 - ask for only the current blockers
 
 Client sees:
 
 - "We received your Stay Found signup."
-- "Your client hub is here: [dashboard link]."
+- "Your client hub is here: [magic-link dashboard link]."
 - "We need Google Business Profile access."
 - "Upload or send your customer list when ready."
 - "You do not need to log in daily. We will only ask when something blocks setup."
@@ -496,7 +496,7 @@ Rule: GMF should communicate when it creates clarity, needs action, or proves va
 | Timing | Message | Owner | Send only if |
 |---|---|---|---|
 | Immediately | Stripe receipt/confirmation | Stripe/site | Always |
-| Same business day | Welcome and dashboard link | Client Success | Always after signup |
+| Same business day | Welcome and dashboard magic link | Client Success | Always after signup |
 | Day 1-2 | Access request | Client Success | Needed access exists |
 | Day 3-5 | Blocker reminder | Client Success | Client has not completed required action |
 | Day 7 | Setup status | Client Success | There is progress, proof, or blocker |
@@ -581,7 +581,7 @@ These are not cold prospecting emails. These are customer lifecycle messages.
 
 | Email | Trigger | Owner | Purpose |
 |---|---|---|---|
-| Welcome | signup/payment | Client Success | confirm plan and dashboard |
+| Welcome | signup/payment | Client Success | confirm plan and dashboard magic link |
 | Access needed | missing GBP/customer list | Client Success | unblock setup |
 | Setup status | day 7 or blocker | Client Success | reduce uncertainty |
 | Launch proof | first value delivered | Reporter/Client Success | prove work |
@@ -681,7 +681,7 @@ These sources shape the workflow:
 
 Recommended defaults:
 
-1. Every paid client gets a client hub.
+1. Every paid client gets a client hub with magic-link access.
 2. Every paid client gets a client ID and folder before delivery starts.
 3. Client Success owns all normal client correspondence after signup.
 4. Sales Manager owns upgrades, but only after Client Success/Reporter have proof.
@@ -696,8 +696,7 @@ Recommended defaults:
 2. Update old offer names in `docs/AGENT_OPERATING_MODEL.md` so Review Power/AI Ready Bundle align with current public offers.
 3. Build `/mike-mc/client-journey`.
 4. Add automatic Monday client onboarding item from Stripe checkout.
-5. Add automatic client hub creation path.
-6. Add welcome/access email templates.
+5. Add automatic client hub creation path with magic-link access.
+6. Add welcome/access email templates that include the dashboard magic link.
 7. Add upgrade readiness scoring for Always Ready.
 8. Add monthly report and client communication cadence into recurring runs.
-
