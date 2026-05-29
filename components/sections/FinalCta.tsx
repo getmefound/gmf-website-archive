@@ -29,8 +29,6 @@ export function FinalCta() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/checkout/get-found-refresh"
-              target="_blank"
-              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-(--color-accent) px-8 py-4 text-base font-semibold text-(--color-accent-text) transition-all hover:-translate-y-0.5 hover:bg-(--color-accent-hover) hover:shadow-2xl hover:shadow-(--color-accent)/30"
             >
               Get Found for $149
