@@ -198,7 +198,7 @@ Proof required:
 
 ### Business Improvement Audit
 
-Default owner: Sentinel (Business Improvement Auditor)
+Default owner: Agent Ness (Business Improvement Auditor)
 Support: Auditor, Systems Director, Sales Manager, Account Manager, Reporter, Scout, Coach
 Reviewer: Manager / Auditor
 
@@ -361,7 +361,7 @@ Do not ask Mike when:
 | Client recap | Client Success/Coach | Manager | No unless sensitive |
 | Partner application | Sales Manager | Auditor if unusual | Only flagged applications |
 | Security/access/billing | Systems Director | Auditor | Yes |
-| Business improvement audit | Sentinel (Business Improvement Auditor) | Manager / Auditor | No unless the report identifies a true owner-level decision |
+| Business improvement audit | Agent Ness (Business Improvement Auditor) | Manager / Auditor | No unless the report identifies a true owner-level decision |
 | Code/deploy | Codex/Website | Auditor if sensitive | Only pricing/security/public claims |
 
 ## Required Source Docs

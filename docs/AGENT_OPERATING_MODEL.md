@@ -234,7 +234,7 @@ Auditor verifies proof, blocks risky live actions, checks client-facing claims, 
 
 ### Business Improvement Auditor
 
-Display name: Sentinel.
+Display name: Agent Ness.
 
 Owns independent operating critique and improvement discovery.
 

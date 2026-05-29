@@ -62,7 +62,7 @@ When coverage is proven, the daily output includes:
 | Account Manager | Handles client/service/onboarding replies |
 | Sales Rep | Handles prospect/partner/sales replies |
 | Auditor | Reviews privacy, proof, escalation discipline, and missed-item patterns |
-| Sentinel | Uses triage results as one input to business improvement reporting |
+| Agent Ness | Uses triage results as one input to business improvement reporting |
 
 ## Hard Rules
 

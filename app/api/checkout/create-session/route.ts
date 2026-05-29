@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "Bad request." }, { status: 400 });
   }
 
-  const { slug } = body as { slug?: unknown };
+  const { slug, runId, source } = body as { slug?: unknown; runId?: unknown; source?: unknown };
   if (typeof slug !== "string") {
     return NextResponse.json({ ok: false, error: "Missing product slug." }, { status: 400 });
   }
@@ -26,31 +26,55 @@ export async function POST(req: NextRequest) {
 
   const stripe = new Stripe(stripeSecretKey);
   const origin = req.headers.get("origin") ?? "https://getmefound.ai";
+  const visibilityReportRunId = typeof runId === "string" ? cleanMetadataValue(runId, 160) : "";
+  const leadSource = typeof source === "string" ? cleanMetadataValue(source, 120) : "";
   const lineItems = [
     { price: product.stripePriceId, quantity: 1 },
     ...(product.setupPriceId ? [{ price: product.setupPriceId, quantity: 1 }] : []),
   ];
+  const metadata = {
+    product_slug: product.slug,
+    product_name: product.name,
+    ...(visibilityReportRunId ? { visibility_report_run_id: visibilityReportRunId } : {}),
+    ...(leadSource ? { lead_source: leadSource } : {}),
+  };
+  const successUrl =
+    `${origin}/checkout/success?product=${encodeURIComponent(product.slug)}` +
+    `&session_id={CHECKOUT_SESSION_ID}` +
+    (visibilityReportRunId ? `&runId=${encodeURIComponent(visibilityReportRunId)}` : "");
 
   const sessionParams: Stripe.Checkout.SessionCreateParams = {
     mode: product.stripeMode,
     line_items: lineItems,
-    success_url: `${origin}/checkout/success?product=${product.slug}&session_id={CHECKOUT_SESSION_ID}`,
+    success_url: successUrl,
     cancel_url: `${origin}/pricing`,
-    metadata: { product_slug: product.slug, product_name: product.name },
+    metadata,
     billing_address_collection: "required",
     allow_promotion_codes: false,
     customer_creation: product.stripeMode === "payment" ? "always" : undefined,
+    payment_method_types: ["card", "link", "us_bank_account"],
+    custom_text: {
+      submit: {
+        message:
+          "Delivered in 48 hours · No contract · If any fix isn't right, we fix it.",
+      },
+      terms_of_service_acceptance: undefined,
+    },
   };
 
   if (product.stripeMode === "subscription") {
     sessionParams.subscription_data = {
-      metadata: { product_slug: product.slug, product_name: product.name },
+      metadata,
     };
   }
 
   const session = await stripe.checkout.sessions.create(sessionParams);
 
   return NextResponse.json({ ok: true, url: session.url });
+}
+
+function cleanMetadataValue(value: string, max: number) {
+  return value.trim().replace(/[^\w .:@/-]/g, "").slice(0, max);
 }
 
 export async function saveSubscriptionToSupabase(subscription: Stripe.Subscription, customerEmail: string | null, customerName: string | null) {

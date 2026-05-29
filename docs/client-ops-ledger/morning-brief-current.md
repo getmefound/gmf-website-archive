@@ -7,7 +7,7 @@ Prepared by: Elon / Manager
 
 - GMF launch work is focused on Monday prospecting, owned presence, Southington test-client proof, and sender identity readiness.
 - Smartlead campaign `3379589` is paused; all three outreach inboxes are healthy, but no expanded send is approved.
-- Mike today: review the Smartlead five-niche packet. Casey send proof is verified; remaining Casey live-use checks are agent-owned.
+- Mike today: the old Smartlead five-niche/med-spa packet is superseded. Casey send proof is verified; remaining Casey live-use checks are agent-owned.
 
 ## Custom Layer
 
@@ -17,12 +17,11 @@ Prepared by: Elon / Manager
 
 ## Needs Mike Today
 
-- Smartlead Monday launch approval:
-  1. Open the five-niche targeting packet from the proof link.
-  2. Review the recommended Monday target profile: niche, geography, GMB weakness signals, income/ticket assumptions, and send cap.
-  3. Tell Elon one exact decision: `Approve med-spa-only`, `Choose [niche]`, `Approve split test [niches]`, or `Hold`.
-  4. If approving, include the max total sends and max sends per inbox for Monday.
-  Done when: Elon records the launch decision in Monday and Smartlead remains paused until the seed launch row also has send approval.
+- 6/1 prospecting launch requirements:
+  1. No owner action right now on verifier/address. Mike approved NeverBounce fallback and the Miami footer address was found in prior docs.
+  2. Wait for the rebuilt agent launch packet: new niches, candidate list, 4-email copy, suppression proof, Smartlead paused campaign, and Auditor recommendation.
+  3. After the packet is ready, give one exact live-send decision: `Approve [niche/geos/count/inboxes/window/follow-up status]` or `Hold because [reason]`.
+  Done when: Elon records the final send decision in Monday. Until then Smartlead remains paused.
 - No public profile edits, live prospect sends, client-facing messages, spend/cap changes, or credential actions proceed without the matching approval.
 
 ## Market Signal
@@ -37,22 +36,22 @@ Prepared by: Elon / Manager
 - Sales Manager: niche targeting, send cap, offer angle, and Monday prospecting recommendation.
 - Systems Director: Smartlead readiness, Casey mailbox proof gates, Slack/Monday source health, and key rotation smoke checks.
 - Scout: lead inventory, niche quality, and prospect targeting research.
-- Auditor / Sentinel: proof gates, process score, stuck work, and improvement queue.
+- Auditor / Agent Ness: proof gates, process score, stuck work, and improvement queue.
 
 ## Recommended Move
 
-Do not resume Smartlead yet. First review the five-niche plan, choose the Monday launch lane/cap, then finish Casey or approve the fallback reply path so replies are not lost.
+Do not resume Smartlead yet. Systems Director/Sales Manager are rebuilding the 6/1 prospecting packet around the new target niches. The only remaining Mike item is final live-send approval after the packet is ready.
 
 ## Source Status
 
 - Monday owner-needed rows: live.
 - Slack DM owner-needed messages: available when Slack token and DM channel are configured.
 - Smartlead readiness: current read-only proof says all three inboxes are healthy for a tiny seed-list test.
-- Sentinel report: current for 2026-05-29.
+- Agent Ness report: current for 2026-05-29.
 
 ## Proof Used
 
-- docs/client-ops-ledger/smartlead-five-niche-targeting-research-2026-05-28.md
+- docs/client-ops-ledger/gmf-2026-06-01-prospecting-agent-launch-plan.md
 - docs/client-ops-ledger/smartlead-monday-max-send-approval-packet.md
 - docs/client-ops-ledger/casey-mailbox-setup-current.md
 - docs/client-ops-ledger/business-improvement-audit-current.md

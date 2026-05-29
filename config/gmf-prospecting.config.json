@@ -1,0 +1,150 @@
+{
+  "brand": {
+    "company": "GetMeFound",
+    "positioning": "The Visibility Engine",
+    "baseUrl": "https://getmefound.ai",
+    "ctaPath": "/lp/get-found",
+    "offer": "Get Found for $149",
+    "followOnOffers": ["Stay Found $99/mo", "Always Ready $299/mo"],
+    "guarantee": "satisfaction guarantee",
+    "physicalAddress": "13727 SW 152nd St. #1236, Miami, FL 33177",
+    "fromName": "Casey Monroe",
+    "voiceRules": [
+      "Sell the click, not the $149 purchase.",
+      "Use The Visibility Engine positioning.",
+      "Create first-mover urgency without doom or guarantees.",
+      "Name Google AI, ChatGPT, Claude, and Gemini where useful.",
+      "Never use testimonials or customer proof until GMF has real approved customers.",
+      "Describe AI visibility as dozens of public signals that GMF engineers, not a one-click fix."
+    ]
+  },
+  "launch": {
+    "targetDate": "2026-06-01",
+    "timeZone": "America/New_York",
+    "preferredSendWindow": {
+      "start": "10:00",
+      "end": "12:00"
+    }
+  },
+  "geos": [
+    {
+      "id": "ct-shoreline-new-haven",
+      "label": "CT shoreline / Greater New Haven",
+      "query": "New Haven County CT",
+      "country": "US"
+    },
+    {
+      "id": "ct-greater-hartford",
+      "label": "Greater Hartford / central CT",
+      "query": "Hartford County CT",
+      "country": "US"
+    },
+    {
+      "id": "ct-fairfield-county",
+      "label": "Fairfield County CT",
+      "query": "Fairfield County CT",
+      "country": "US"
+    }
+  ],
+  "targeting": [
+    {
+      "tier": "tier_1",
+      "label": "Pet care",
+      "categories": ["dog grooming", "dog daycare", "dog boarding", "dog training", "mobile dog groomer", "pet sitting"]
+    },
+    {
+      "tier": "tier_2",
+      "label": "Specialty fitness and wellness studios",
+      "categories": ["yoga studio", "pilates studio", "barre studio", "martial arts school", "dance studio", "climbing gym", "personal training studio"]
+    },
+    {
+      "tier": "tier_3",
+      "label": "Beauty and personal care",
+      "categories": ["lash studio", "brow studio", "spray tan", "massage therapy", "esthetician", "esthetics"]
+    },
+    {
+      "tier": "test",
+      "label": "Test bucket",
+      "categories": ["tutoring center", "music school", "swim school", "auto detailing", "window tinting", "event vendor"]
+    }
+  ],
+  "exclusions": {
+    "categoryTerms": ["home service", "hvac", "plumber", "roof", "electrician", "landscaping", "lawn", "dentist", "dental", "lawyer", "attorney", "legal", "realtor", "real estate"],
+    "excludePermanentlyClosed": true,
+    "excludeCanada": true,
+    "excludeEu": true,
+    "allowedCountries": ["US"]
+  },
+  "outscraper": {
+    "endpoint": "google-maps-search",
+    "baseMapsOnly": true,
+    "allowBulkReviewsScraper": false,
+    "costPerThousandUsd": 3,
+    "maxSpendPerRunUsd": 3,
+    "maxRecordsPerRun": 120,
+    "limitPerQuery": 20,
+    "requireSpendApproval": true,
+    "requiredFields": ["name", "email", "website", "category", "review_count"],
+    "fields": ["name", "email", "phone", "website", "address", "category", "rating", "review_count", "photos_count", "hours_present", "latest_review_date", "business_status"]
+  },
+  "filters": {
+    "requireWebsite": true,
+    "requireValidEmail": true,
+    "maxReviewCount": 25,
+    "minCompetitorReviewGap": 25,
+    "veryFewReviewsMax": 9,
+    "minPhotosBeforeGap": 8,
+    "staleLatestReviewDays": 180
+  },
+  "verification": {
+    "provider": "neverbounce",
+    "envKeys": ["NOBOUNCE_API_KEY", "NEVERBOUNCE_API_KEY"],
+    "acceptedStatuses": ["valid"],
+    "suppressedStatuses": ["invalid", "disposable", "catchall", "unknown", "risky", "bad_syntax", "api_error"]
+  },
+  "smartlead": {
+    "useBrandDomainForColdEmail": false,
+    "forbiddenSenderDomains": ["getmefound.ai"],
+    "warmupSnapshot": "docs/client-ops-ledger/smartlead-warmup-current.csv",
+    "requireWarmupStatus": "ACTIVE",
+    "minReputation": 95,
+    "maxSpamCount": 0,
+    "minWarmupSent": 10,
+    "earlyLaunchMaxNewProspectsPerDay": 30,
+    "respectAccountMaxPerDay": true,
+    "rotateSenders": true,
+    "sendAsPlainText": true,
+    "forcePlainText": true,
+    "disableOpenTracking": true,
+    "disableClickTracking": true,
+    "oneLinkOnly": true,
+    "stopOnAnyReply": true,
+    "addUnsubscribeTag": true,
+    "suppressionRules": {
+      "ignoreGlobalBlockList": false,
+      "ignoreUnsubscribeList": false,
+      "ignoreDuplicateLeadsInOtherCampaign": false,
+      "ignoreCommunityBounceList": false
+    },
+    "autoPauseThresholds": {
+      "maxBounceRate": 0.03,
+      "maxSpamComplaintRate": 0.001,
+      "maxOptOutRate": 0.04,
+      "minReplyQualityRate": 0.005
+    }
+  },
+  "nurture": {
+    "postFormSequenceDays": [0, 2, 5, 9],
+    "postReportSequenceDays": [2, 7, 14],
+    "stopOn": ["purchase", "reply", "opt_out", "hard_bounce", "complaint", "no_fit"],
+    "upsellAfterGetFound": {
+      "trigger": "after_48h_before_after_delivered",
+      "offer": "Stay Found $99/mo"
+    }
+  },
+  "reporting": {
+    "outbox": "docs/client-ops-ledger/outbox",
+    "currentReport": "docs/client-ops-ledger/gmf-prospecting-engine-current.md",
+    "metrics": ["sends", "clicks", "replies", "form_fills", "purchases", "bounces", "spam_complaints", "opt_outs"]
+  }
+}

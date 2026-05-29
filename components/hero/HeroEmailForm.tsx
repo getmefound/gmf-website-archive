@@ -77,7 +77,7 @@ const variants: Record<Variant, VariantConfig> = {
       label:
         "Also run my full Marketing Audit — see how my reviews and listings stack up.",
       caption:
-        "Reviews are the fuel that powers search rankings. Businesses with more reviews get found more. See where you stand.",
+        "Review velocity is one of the key signals AI checks before recommending a business. See where yours stands.",
     },
   },
   default: {
@@ -86,7 +86,7 @@ const variants: Record<Variant, VariantConfig> = {
       { text: "your competitor.", speed: 130, className: ACCENT },
     ],
     subheadline:
-      "We handle your reviews, rankings, and online presence — so more customers find you, and choose you.",
+      "We engineer the signals AI checks before it recommends a local business — so it picks you.",
     priceLine: "Plans from $99/mo · cancel anytime",
     formHeadline: "Get your free Google visibility check.",
     formDescription: "We check your reviews, Google profile, website signals, and obvious local visibility gaps. Free, no card needed.",

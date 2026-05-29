@@ -470,7 +470,7 @@ What I need from Mike right now:
 - Casey mailbox: finish first-login/security/reply proof for \`casey@getmefound.ai\`, or approve a monitored fallback reply path for Monday.
 - Smartlead launch: review the five-niche packet and decide whether Monday is med-spa-only, another niche, split test, or hold.
 
-Latest Sentinel owner-needed rows:
+Latest Agent Ness owner-needed rows:
 
 ${decisionText}
 

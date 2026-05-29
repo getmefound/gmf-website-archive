@@ -30,6 +30,7 @@
     "smartlead:add-outreach-accounts": "node scripts/smartlead-add-outreach-accounts.mjs",
     "smartlead:check": "node scripts/smartlead-check.mjs",
     "smartlead:create-campaign-draft": "node scripts/smartlead-create-campaign-draft.mjs",
+    "smartlead:deliverability-audit": "node scripts/smartlead-deliverability-audit.mjs",
     "smartlead:readiness": "node scripts/smartlead-readiness.mjs",
     "smartlead:schedule-seed-launch": "node scripts/smartlead-schedule-seed-launch.mjs",
     "smartlead:warmup-report": "node scripts/smartlead-warmup-report.mjs",

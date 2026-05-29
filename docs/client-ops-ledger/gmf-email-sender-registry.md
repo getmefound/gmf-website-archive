@@ -16,6 +16,7 @@ Agents do not routinely send as Mike.
 - Role email: routine business communication.
 - Resend: app-generated and logged system/transactional mail.
 - Outreach mailboxes: prospecting only, never client service.
+- Smartlead cold campaigns must pass the deliverability audit before activation: outreach domains only, no open/click tracking by default, plain text, one CTA link max, no attachments/images/URL shorteners, stop on reply, opt-out language, physical mailing address, suppression honored.
 - Do not buy a separate paid Google Workspace seat for each role address unless Manager and Mike approve the cost and reason.
 - Do not create fake human proof around a sales mailbox. No fake biography, fake headshot, fake LinkedIn, fake employment history, or claim that a human personally performed automated work.
 
@@ -81,6 +82,9 @@ Research basis:
 | `RESEND_FROM_EMAIL` | Resend system | present in current env proof | Systems Director | App-generated emails | From address is environment-controlled |
 | `GMF_PARTNER_REPLY_TO_EMAIL` | Resend reply-to | optional env | Systems Director / Sales Manager | Partner application replies | Falls back to `GMF_SUPPORT_EMAIL` then `support@getmefound.ai` |
 | `GMF_OPS_ALERT_EMAIL` | Internal alert recipient | optional env | Systems Director / Manager | Internal notifications | Falls back to `AOH_OPS_ALERT_EMAIL`, then `mike@getmefound.ai` |
+| `mike@getmefoundnow.com` | Smartlead outreach | active warmup proof; deliverability audit PASS for sender settings | Sales Manager / Sender | Cold prospecting only | Do not use for client service; campaign copy still must pass audit |
+| `mike@trygetmefound.com` | Smartlead outreach | active warmup proof; deliverability audit PASS for sender settings | Sales Manager / Sender | Cold prospecting only | Do not use for client service; campaign copy still must pass audit |
+| `mike@getmefoundlocal.com` | Smartlead outreach | active warmup proof; deliverability audit PASS for sender settings | Sales Manager / Sender | Cold prospecting only | Do not use for client service; campaign copy still must pass audit |
 
 ## Verification Needed
 
@@ -96,3 +100,7 @@ Systems Director should verify for each role mailbox before live use:
 ## Latest Resend Proof
 
 2026-05-28: `npm run systems:stripe-resend-key-rotation-smoke` passed. Stripe account/prices and Resend domain health are active in the local runtime; production Resend health is green. The check did not send an email.
+
+## Latest Smartlead Deliverability Proof
+
+2026-05-29: `npm run smartlead:deliverability-audit -- --campaign-id 3379589` ran read-only. The campaign is paused and sender-level controls passed, including outreach domains, SMTP/IMAP, no custom tracking domain, no open/click tracking, plain text, stop on reply, and low daily cap. Aggregate result is HOLD because the old paused sequence lacks the physical mailing address and is superseded by the 2026-06-01 targeting plan.

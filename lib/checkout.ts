@@ -19,7 +19,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
     cadence: "one-time",
     setup: "No contract",
     summary:
-      "A one-time Google-facing setup for local businesses that need to look current, trustworthy, and easy for AI search to understand.",
+      "Get Found — complete AI-visibility foundation, delivered in 48 hours. We map, align, and amplify every signal Google AI, ChatGPT, and Claude check before recommending a business.",
     whatYouGet: [
       "We fix your Google listing — hours, services, photos, everything",
       "We make your website match your Google listing exactly",
@@ -36,7 +36,7 @@ export const CHECKOUT_PRODUCTS: CheckoutProduct[] = [
     cadence: "/month",
     setup: "$49 one-time setup fee",
     summary:
-      "Monthly visibility upkeep with review requests, AI reply drafts, and a monthly report so the business does not go stale after the first setup.",
+      "Stay Found — monthly Signal Stack maintenance. We keep your AI visibility signals fresh so you don't quietly fall out of Google AI, ChatGPT, and Gemini recommendations.",
     whatYouGet: [
       "Everything in Get Found - free",
       "Weekly client list upload path for review requests",

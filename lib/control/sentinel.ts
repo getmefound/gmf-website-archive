@@ -72,7 +72,7 @@ export function getSentinelReport(): SentinelReport {
   const ownerDecision = sectionFirstBullet(currentText, "Owner Decisions") || "No owner decision required right now.";
 
   return {
-    name: "Sentinel",
+    name: "Agent Ness",
     tagline: "Independent operating auditor for agents, process, prospecting, and retention.",
     date,
     generatedFrom: CURRENT_REPORT,
@@ -310,6 +310,6 @@ Date: unavailable
 
 ## Owner Decisions
 
-- Run npm run agent:business-audit to generate Sentinel's first report.
+- Run npm run agent:business-audit to generate Agent Ness's first report.
 `;
 }

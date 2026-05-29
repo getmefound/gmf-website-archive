@@ -24,6 +24,8 @@ Prospect or contact unsubscribes, complains, replies no, asks not to be contacte
 - Do not re-add suppressed contacts through a new list import.
 - Do not contact the same person through another channel to avoid the opt-out.
 - Complaints and legal threats escalate to Manager/Auditor.
+- Cold campaign imports must not bypass Smartlead global blocklists, unsubscribe lists, duplicate-lead protections, or community bounce lists.
+- Every commercial cold email must provide a simple opt-out path by reply or one-click/single-page mechanism, and opt-outs must be honored across all outreach domains.
 
 ## Procedure
 
@@ -33,6 +35,7 @@ Prospect or contact unsubscribes, complains, replies no, asks not to be contacte
 2. Suppress the contact.
    - Add email/domain/person/business to the appropriate suppression list/tool.
    - Apply across Smartlead and any GMF prospecting tracker.
+   - Confirm the contact cannot be re-imported through another Smartlead campaign or outreach domain.
 
 3. Stop active sequences.
    - Stop current campaign steps and follow-ups.
@@ -54,6 +57,7 @@ Prospect or contact unsubscribes, complains, replies no, asks not to be contacte
 - Sequence stopped or no active sequence
 - Source/request note
 - Tool/list updated
+- Cross-domain suppression confirmed when the contact came from cold outreach
 - Risk escalation if needed
 
 ## Failure Or Blocker Handling

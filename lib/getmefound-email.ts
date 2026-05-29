@@ -19,25 +19,31 @@ export async function sendGetMeFoundEmail(input: SendEmailInput): Promise<SendEm
     return { ok: false, status: 0, error: "Resend environment variables are missing." };
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${apiKey}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: Array.isArray(input.to) ? input.to : [input.to],
-      subject: input.subject,
-      text: input.text,
-      ...(input.html ? { html: input.html } : {}),
-      ...(input.replyTo ? { reply_to: input.replyTo } : {}),
-    }),
-    cache: "no-store",
-  }).catch((error) => {
-    const message = error instanceof Error ? error.message : "Unknown Resend error.";
-    return new Response(JSON.stringify({ message }), { status: 0 });
-  });
+  let response: Response;
+  try {
+    response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: Array.isArray(input.to) ? input.to : [input.to],
+        subject: input.subject,
+        text: input.text,
+        ...(input.html ? { html: input.html } : {}),
+        ...(input.replyTo ? { reply_to: input.replyTo } : {}),
+      }),
+      cache: "no-store",
+    });
+  } catch (error) {
+    return {
+      ok: false,
+      status: 0,
+      error: error instanceof Error ? error.message : "Unknown Resend error.",
+    };
+  }
 
   const data = (await response.json().catch(() => null)) as {
     id?: string;

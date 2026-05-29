@@ -1,6 +1,6 @@
 # Smartlead Monday Max-Safe Send Approval Packet
 
-Status: ready for owner review; final candidate QA pending
+Status: held - superseded by 2026-06-01 GMF prospecting launch revision
 Owner: Sales Manager
 Supporting agents: Systems Director / Scout / Coach
 Reviewer: Auditor
@@ -9,15 +9,24 @@ Requested by: Mike
 Target report to Mike: 2026-05-28 22:45 ET
 Send target: Monday 2026-06-01 mid-morning, only after Mike approval
 
-Owner review note: Mike asked to review this in full tomorrow morning before making the send/niche/volume decision. Campaign stays paused. No Monday send approval exists yet for the expanded campaign.
+Owner review note: Mike's 2026-05-29 instruction supersedes the older med-spa/dental/home-services targeting packet. Campaign stays paused. No Monday send approval exists yet for the rebuilt campaign.
 
 ## Current Hold
 
 Campaign `3379589` is paused. Nothing is approved to send until Mike reviews and approves the expanded launch packet.
 
-The prior 3-lead seed setup is superseded by Mike's corrected direction: use the most we can safely send from each warmed-up outreach account, but report the parameters, niche, list, and email content before sending.
+The prior 3-lead med-spa seed setup and this older five-niche packet are superseded by Mike's corrected 2026-05-29 direction:
 
-Sales Manager five-niche research packet: `docs/client-ops-ledger/smartlead-five-niche-targeting-research-2026-05-28.md`
+- do not target saturated home-services/dental/legal/realtor lanes
+- prioritize pet care, specialty fitness/wellness, beauty/personal care, and a small test bucket
+- use low-cost Outscraper base Google Maps data for the whole list
+- verify every email with the approved NeverBounce fallback for the 6/1 MVP
+- suppress any lead with blank/stale personalization fields
+- send a 4-email plain-text sequence through Smartlead only after approval
+
+New launch source of truth: `docs/client-ops-ledger/gmf-2026-06-01-prospecting-agent-launch-plan.md`
+
+Historical five-niche research packet: `docs/client-ops-ledger/smartlead-five-niche-targeting-research-2026-05-28.md`
 
 Read-only safety check after the five-niche packet:
 
@@ -41,9 +50,9 @@ Read-only safety check after the five-niche packet:
 
 | Inbox | Smartlead ID | Warmup Sent | Spam | Reputation | Max Email Per Day | Current Status |
 |---|---:|---:|---:|---:|---:|---|
-| `mike@getmefoundnow.com` | 18951375 | 38 | 0 | 100 | 20 | ready for tiny seed |
-| `mike@trygetmefound.com` | 18951374 | 36 | 0 | 100 | 20 | ready for tiny seed |
-| `mike@getmefoundlocal.com` | 18951373 | 38 | 0 | 100 | 20 | ready for tiny seed |
+| `mike@getmefoundnow.com` | 18951375 | 45 | 0 | 100 | 20 | ready for tiny seed |
+| `mike@trygetmefound.com` | 18951374 | 43 | 0 | 100 | 20 | ready for tiny seed |
+| `mike@getmefoundlocal.com` | 18951373 | 43 | 0 | 100 | 20 | ready for tiny seed |
 
 The accounts are healthy, but they were connected on 2026-05-23, so they are not yet at the 14+ day warmup maturity recommended by Smartlead for normal live campaigns.
 
@@ -66,43 +75,35 @@ Sales Manager's working recommendation is **30 total Monday sends**, spread 10 p
 
 ## Niche Direction
 
-Working niche: **medical spas / aesthetic clinics**.
+Working launch target is now GMF local-business visibility, not the older med-spa test.
 
-Reasoning:
+Priority order:
 
-- existing inventory already shows roughly 30 med-spa/spa candidates
-- strong fit with Google profile quality, review freshness, trust, and AI/local visibility
-- high customer lifetime value makes a small visibility fix believable
-- current sequence can be adapted without changing the offer
-
-Five researched niches:
-
-| Rank | Niche | Monday Fit | Decision |
+| Tier | Niche family | Examples | Monday use |
 |---:|---|---|---|
-| 1 | Medical spas / aesthetic clinics | Hot | Primary Monday recommendation |
-| 2 | Dentists / cosmetic and implant dental | Hot | Second test |
-| 3 | Pet grooming / boarding / daycare | Warm | Reply-friendly fallback |
-| 4 | Home services: HVAC / plumbing / roofing | Hot | Build fresh QA batch |
-| 5 | Assisted living / senior living | Warm | High value, but more sensitive copy/routing |
+| 1 | Pet care | dog grooming, dog daycare/boarding, dog training, mobile groomers, pet sitting | Primary list build |
+| 2 | Specialty fitness/wellness | yoga, pilates, barre, martial arts, dance, climbing, personal-training studios | Secondary list build |
+| 3 | Beauty/personal care | lash/brow, spray tan, massage therapy, esthetics | Third list build |
+| Test | Other local schools/vendors | tutoring, music, swim, detailing/tint, event vendors | Small test bucket only |
 
-Scout should expand and QA the med-spa pool first. If the med-spa list cannot support 20-30 clean sends, Sales Manager should either reduce the Monday cap or ask Mike to approve a second niche before mixing copy.
+Scout should build the candidate pool from the new config. Do not pad the list with dental, legal, realtor, home-services, or old med-spa rows unless Mike separately approves an exception.
 
 ## Copy Direction
 
 Email should stay plain text, short, no tracking links, no fake deep-audit claim, and no guarantee.
 
-Draft direction:
+Draft direction must be rewritten by segment. Example shape only:
 
 ```text
-Subject: quick visibility check for {{company_name}}
+Subject: quick Google visibility note for {{company_name}}
 
 Hi there,
 
-I was checking how local med spas show up when people ask Google and AI tools who to trust near {{city}}.
+I was checking how {{category}} businesses show up around {{city}}.
 
-{{company_name}} looks like the kind of business that should be easier to recommend, but I noticed a few visibility gaps I would fix first.
+{{company_name}} has {{review_count}} Google reviews, which is below the local trust threshold I would want before sending more traffic there.
 
-Want me to send over the quick audit?
+Want me to send over the quick visibility check?
 
 If this is not useful, reply stop and I will close the loop.
 
@@ -113,12 +114,16 @@ Coach/Auditor still need to review final copy before Mike approval.
 
 ## Required Before Mike Approval
 
-- final candidate list count and QA result
-- exact proposed cap: 30, 45, or hold
+- final candidate list count and QA result under the new target config
+- exact proposed cap based on Smartlead warmup/account capacity
 - sender assignment by inbox
 - Smartlead schedule window
-- final email copy
+- final 4-email sequence and subject variants
 - suppression/unsubscribe handling
+- NeverBounce verifier proof
+- CAN-SPAM physical postal address/footer proof using `13727 SW 152nd St. #1236, Miami, FL 33177`
+- Smartlead deliverability audit proof: `npm run smartlead:deliverability-audit -- --campaign-id <id>` must be PASS; WATCH requires Auditor approval; HOLD blocks launch
+- no open/click tracking unless explicitly approved, plain text, one CTA link max, no attachments/images/URL shorteners, stop on any reply
 - stop rules
 - monitoring owner and Monday first-window check time
 - Auditor recommendation: approve / approve with cap / hold / block
@@ -134,9 +139,10 @@ Pause immediately on:
 - wrong niche/list issue
 - unexpected extra sends
 - Smartlead sender/reputation warning
+- deliverability audit returns HOLD or campaign settings drift after approval
 
 ## Current Recommendation
 
-Get Mike the approval packet by **10:45 PM ET tonight** based on Mike's owner-stated Thursday 2026-05-28 planning clock.
+Rebuild the approval packet from `docs/client-ops-ledger/gmf-2026-06-01-prospecting-agent-launch-plan.md`.
 
 Do not send anything before Mike approves the final packet.

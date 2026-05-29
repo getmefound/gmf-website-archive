@@ -6,9 +6,13 @@ import { useEffect, useRef, useState } from "react";
 export function CheckoutAutoRedirect({
   slug,
   label,
+  runId,
+  source,
 }: {
   slug: string;
   label: string;
+  runId?: string;
+  source?: string;
 }) {
   const started = useRef(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +26,7 @@ export function CheckoutAutoRedirect({
         const res = await fetch("/api/checkout/create-session", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ slug }),
+          body: JSON.stringify({ slug, runId, source }),
         });
         const data = await res.json();
         if (data.ok && data.url) {
@@ -36,7 +40,7 @@ export function CheckoutAutoRedirect({
     }
 
     void startCheckout();
-  }, [slug]);
+  }, [slug, runId, source]);
 
   return (
     <div className="mx-auto max-w-xl rounded-2xl bg-[var(--color-bg-dark-card)] p-8 text-center text-[var(--color-hero-text)] ring-1 ring-[var(--color-hero-border)] md:p-10">

@@ -28,10 +28,13 @@ export async function generateMetadata({
 
 export default async function CheckoutPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ product: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { product } = await params;
+  const query = await searchParams;
   const p = getCheckoutProduct(product);
   if (!p) notFound();
 
@@ -53,9 +56,18 @@ export default async function CheckoutPage({
       />
       <PageBody>
         <PageSection>
-          <CheckoutAutoRedirect slug={p.slug} label={label} />
+          <CheckoutAutoRedirect
+            slug={p.slug}
+            label={label}
+            runId={singleQueryValue(query.runId)}
+            source={singleQueryValue(query.source)}
+          />
         </PageSection>
       </PageBody>
     </>
   );
+}
+
+function singleQueryValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }

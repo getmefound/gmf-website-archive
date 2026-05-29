@@ -18,8 +18,8 @@ const ITEMS = [
     a: "No contract, ever. Get Found is a one-time payment. Stay Found and Always Ready are month-to-month. Cancel any time, no notice required, no cancellation fee. We keep clients by getting results, not by trapping them.",
   },
   {
-    q: "How is this different from just doing it myself?",
-    a: "You can do most of this yourself. The problem is the time, the consistency, and knowing what actually matters. Most business owners start, get busy, and stop. Google and AI reward businesses that stay active consistently. We handle the signals every month so nothing drifts.",
+    q: "Why can't I just do this myself?",
+    a: "You can fix your Google listing. What's harder is engineering all 13+ interdependent signals AI cross-checks before it trusts you — entity consistency across dozens of directories, structured data crawlers can actually parse, review velocity patterns, website-to-profile fact alignment, and more. Most owners fix one or two things and stop. AI sees the inconsistency in the signals they didn't touch and uses it against them. We run all of them as a system, keep them current as AI silently refreshes its answers, and show you what changed. That's the work.",
   },
   {
     q: "How long before I see results?",

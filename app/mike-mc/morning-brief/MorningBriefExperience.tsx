@@ -87,8 +87,8 @@ export function MorningBriefExperience({
               <a href="/mike-mc/jobs" className="nav-chip">
                 Jobs
               </a>
-              <a href="/mike-mc/sentinel" className="nav-chip">
-                Sentinel
+              <a href="/mike-mc/agent-ness" className="nav-chip">
+                Agent Ness
               </a>
             </nav>
             <span className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600">
@@ -110,7 +110,7 @@ export function MorningBriefExperience({
               <ScoreTile label="Owner actions" value={ownerActions.length.toString()} tone={ownerActions.length ? "danger" : "accent"} />
               <ScoreTile label="Agents active" value={mondayOverview.totals.inProgress.toString()} tone="accent" />
               <ScoreTile label="Human-needed Monday" value={mondayOverview.totals.humanNeeded.toString()} tone={mondayOverview.totals.humanNeeded ? "warm" : "muted"} />
-              <ScoreTile label="Sentinel grade" value={brief.businessAudit.efficiencyScore} tone="warm" />
+              <ScoreTile label="Agent Ness grade" value={brief.businessAudit.efficiencyScore} tone="warm" />
             </div>
           </div>
         </div>
@@ -298,7 +298,7 @@ function AgentsView({
       </section>
 
       <section>
-        <SectionTitle label="Sentinel" title="Process improvement queue" />
+        <SectionTitle label="Agent Ness" title="Process improvement queue" />
         <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-5">
           {brief.businessAudit.processImprovements.map((item, index) => (
             <TextCard key={item} eyebrow={`Fix ${index + 1}`} text={item} />
@@ -375,7 +375,7 @@ function SourcesView({
         <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
           <LiveStateCard label="Monday" value={mondayOverview.ok ? "Live" : "Limited"} detail={mondayOverview.error || "Owner-needed rows and agent queue loaded."} tone={mondayOverview.ok ? "accent" : "danger"} />
           <LiveStateCard label="Slack DM" value={slackSignals.ok ? "Live" : "Limited"} detail={slackSignals.error || "Recent owner-needed DMs loaded."} tone={slackSignals.ok ? "accent" : "warm"} />
-          <LiveStateCard label="Sentinel" value={brief.businessAudit.date || "Loaded"} detail={brief.businessAudit.mainConstraint} tone="warm" />
+          <LiveStateCard label="Agent Ness" value={brief.businessAudit.date || "Loaded"} detail={brief.businessAudit.mainConstraint} tone="warm" />
           <LiveStateCard label="Weather" value={weather.ok ? "Live" : "Limited"} detail={weather.ok ? `${weather.location}; ${weather.condition}.` : weather.error || "Weather source unavailable."} tone={weather.ok ? "accent" : "warm"} />
         </div>
       </section>

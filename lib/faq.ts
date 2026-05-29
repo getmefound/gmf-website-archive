@@ -3,7 +3,7 @@ export type FaqItem = { q: string; a: string };
 export const FAQ_ITEMS: FaqItem[] = [
   {
     q: "How is GetMeFound different from other agencies?",
-    a: "No contract, cancel anytime. We keep the work practical: clean up the Google profile, improve the review path, keep the website and business facts current, and show owners what changed in plain English.",
+    a: "Most local marketing agencies work on SEO or ads. We specialize in AI visibility — the signals Google AI, ChatGPT, Claude, and Gemini cross-check before they recommend a local business. No contract, cancel anytime. We run your Signal Stack as a system, not a checklist, and show you exactly what changed in plain English.",
   },
   {
     q: "How does Stay Found roll out?",
@@ -30,8 +30,8 @@ export const FAQ_ITEMS: FaqItem[] = [
     a: "Email review requests can start quickly once setup is approved. Text review requests go live after phone-number approval. Most owners should judge review momentum over the first few weeks and Google visibility over a 60-90 day window.",
   },
   {
-    q: "Is AI Visibility just regular SEO with a new name?",
-    a: "Google is still the front door for local search, but AI assistants like ChatGPT and Claude also need clean facts to understand who you are, what you do, where you serve, and why customers trust you. AI Visibility keeps that business story consistent.",
+    q: "Is AI Visibility just SEO with a new name?",
+    a: "No. Traditional SEO optimizes for ten blue links. AI visibility — sometimes called GEO (Generative Engine Optimization) or AEO (Answer Engine Optimization) — engineers the signals AI systems check before they generate a recommendation. That means entity consistency across the web, structured data crawlers can parse, review velocity, NAP feeding Google's knowledge graph, and machine-readable business facts. Google AI, ChatGPT, Claude, and Gemini all pull from different signal sources. We cover all of them.",
   },
   {
     q: "Why do I need to keep paying monthly?",

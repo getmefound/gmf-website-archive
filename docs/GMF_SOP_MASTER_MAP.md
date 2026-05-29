@@ -1,4 +1,4 @@
-﻿# GMF SOP Master Map
+# GMF SOP Master Map
 
 Status: first-pass inventory
 Owner: Coach
@@ -284,7 +284,7 @@ Timed upgrade guardrail:
 | Agent-to-agent handoff and receive acknowledgment | P0 | Drafted | Manager | Work passes from one agent to another | Handoff packet, next-agent acknowledgment, due time, and missed-handoff rescue |
 | Stuck agent timeout and rescue | P0 | Drafted | Systems Director / Manager | Agent misses heartbeat, due time, or proof update | Stuck classification, rescue route, reassignment/training/repair, and proof |
 | Client information request cadence and escalation | P0 | Drafted | Account Manager | Client-provided item is required | Client ask, due date, reminder cadence, alternate path, and escalation decision |
-| Business Improvement Auditor daily report | P0 | Drafted | Sentinel (Business Improvement Auditor) | Daily morning or owner asks for improvement audit | Agent efficiency, bottlenecks, prospecting/retention improvements, and owner-needed decisions |
+| Business Improvement Auditor daily report | P0 | Drafted | Agent Ness (Business Improvement Auditor) | Daily morning or owner asks for improvement audit | Agent efficiency, bottlenecks, prospecting/retention improvements, and owner-needed decisions |
 
 ## 10. Systems, Tools, And Data
 

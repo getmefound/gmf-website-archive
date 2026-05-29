@@ -28,7 +28,7 @@ This SOP starts after SOP 031 reaches Day 14 final soft close or when a report i
 - `lead_status = final_soft_close` and no reply/payment.
 - Report older than 14 days with `report_sent_no_signup`.
 - Sales Manager requests a review of orphaned reports.
-- Manager or Sentinel flags orphaned reports as a conversion leak.
+- Manager or Agent Ness flags orphaned reports as a conversion leak.
 
 ## Roles
 

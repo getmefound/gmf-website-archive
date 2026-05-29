@@ -1,16 +1,25 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+
+const SHORT_QUOTE = "I've built and sold companies, and I kept watching great local businesses stay invisible while weaker competitors got picked. Getting picked by AI isn't one fix — it's dozens of signals it cross-checks before it trusts you.";
+const FULL_QUOTE = "I built GetMeFound to engineer all of them for you. Done for you, no contracts, no dashboards.";
 
 export function FounderNote() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <section
       aria-label="Why I built this"
       className="border-y border-[var(--color-border)] bg-[var(--color-bg-elevated)] py-10 md:py-12"
     >
       <div className="mx-auto max-w-4xl px-6">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-[auto_1fr] md:items-start">
+        {/* Mobile: photo centered top; Desktop: side-by-side */}
+        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-10">
           {/* Photo */}
-          <div className="flex flex-col items-center gap-2 md:items-start">
-            <div className="h-20 w-20 overflow-hidden rounded-full ring-2 ring-[var(--color-border)]">
+          <div className="flex shrink-0 flex-col items-center gap-2">
+            <div className="h-24 w-24 overflow-hidden rounded-full ring-2 ring-[var(--color-border)] md:h-20 md:w-20">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/team/mike.jpg"
@@ -18,50 +27,62 @@ export function FounderNote() {
                 className="h-full w-full object-cover object-top"
               />
             </div>
-            <div className="text-center md:text-left">
+            <div className="text-center">
               <p className="text-sm font-bold text-[var(--color-text-body)]">Mike Egidio</p>
               <p className="text-xs text-[var(--color-text-muted)]">Founder, GetMeFound</p>
             </div>
           </div>
 
-          {/* Note */}
-          <div>
+          {/* Quote */}
+          <div className="min-w-0 text-center md:text-left">
             <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Why I built this
             </p>
             <blockquote className="text-base leading-relaxed text-[var(--color-text-muted)] md:text-lg">
-              &ldquo;I&apos;ve built and sold companies. Every single time, I watched good local
-              businesses lose customers to competitors who just looked more credible online — not
-              because they were better, but because their Google profile was cleaner and their
-              reviews were newer. Google&apos;s AI makes that gap worse and faster.
-              I built GetMeFound to close it — done for you, no contracts, no dashboards.&rdquo;
+              &ldquo;{SHORT_QUOTE}
+              {expanded && (
+                <span> {FULL_QUOTE}</span>
+              )}
+              &rdquo;
             </blockquote>
 
-            <div className="mt-5 flex flex-wrap items-center gap-4">
-              <div className="flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              {!expanded && (
+                <button
+                  type="button"
+                  onClick={() => setExpanded(true)}
+                  className="text-sm font-semibold text-[var(--color-accent)] hover:underline underline-offset-4 transition-colors"
+                >
+                  Full story →
+                </button>
+              )}
+              {expanded && (
+                <Link
+                  href="/about"
+                  className="text-sm font-semibold text-[var(--color-accent)] hover:underline underline-offset-4 transition-colors"
+                >
+                  Full story →
+                </Link>
+              )}
+
+              <div className="flex gap-3">
                 {[
                   { stat: "15+ yrs", label: "building businesses" },
                   { stat: "1 sold", label: "EdTech company" },
                 ].map(({ stat, label }) => (
                   <div
                     key={stat}
-                    className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] px-4 py-2 text-center"
+                    className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-page)] px-3 py-1.5 text-center"
                   >
-                    <p className="text-sm font-bold text-[var(--color-text-body)]">{stat}</p>
-                    <p className="text-[11px] text-[var(--color-text-muted)]">{label}</p>
+                    <p className="text-xs font-bold text-[var(--color-text-body)]">{stat}</p>
+                    <p className="text-[10px] text-[var(--color-text-muted)]">{label}</p>
                   </div>
                 ))}
               </div>
-              <Link
-                href="/about"
-                className="text-sm font-semibold text-[var(--color-accent)] hover:underline underline-offset-4 transition-colors"
-              >
-                Full story →
-              </Link>
             </div>
 
-            <p className="mt-5 text-xs leading-relaxed text-[var(--color-text-muted)]/70">
-              Everything we do is based on{" "}
+            <p className="mt-4 text-xs leading-relaxed text-[var(--color-text-muted)]/70">
+              Everything we do follows{" "}
               <a
                 href="https://support.google.com/business/answer/7091"
                 target="_blank"
@@ -70,7 +91,7 @@ export function FounderNote() {
               >
                 Google&apos;s own published guidance
               </a>{" "}
-              for local business visibility — not guesswork. We only touch what Google says matters.
+              for local visibility — not guesswork. We only touch what Google and AI systems say matters.
             </p>
           </div>
         </div>

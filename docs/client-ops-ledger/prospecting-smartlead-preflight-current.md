@@ -1,6 +1,6 @@
 # Prospecting Smartlead Preflight
 
-Date: 2026-05-28
+Date: 2026-05-29
 Mode: read-only
 
 ## Summary
@@ -19,9 +19,9 @@ Human needed: no
 
 | Email | Status | Warmup Sent | Spam | Reputation | Blockers |
 |---|---|---:|---:|---:|---|
-| mike@getmefoundnow.com | ready | 38 | 0 | 100 | none |
-| mike@trygetmefound.com | ready | 36 | 0 | 100 | none |
-| mike@getmefoundlocal.com | ready | 38 | 0 | 100 | none |
+| mike@getmefoundnow.com | ready | 45 | 0 | 100 | none |
+| mike@trygetmefound.com | ready | 43 | 0 | 100 | none |
+| mike@getmefoundlocal.com | ready | 43 | 0 | 100 | none |
 
 ## Manager Contact Rule
 

@@ -7,6 +7,8 @@ import { ReportTransformation } from "@/components/sections/ReportTransformation
 import { VisibilityCheck } from "@/components/sections/VisibilityCheck";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { GetFoundCloseBlock } from "@/components/sections/GetFoundCloseBlock";
+import { VisibilityEngine } from "@/components/sections/VisibilityEngine";
+import { SignalStack } from "@/components/sections/SignalStack";
 import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
@@ -41,13 +43,13 @@ const GOOGLE_AI_CALLING_URL =
 const teaserCards: TeaserCard[] = [
   {
     name: "Get Found",
-    tagline: "AI can't recommend you if it can't find you. We fix that in 48 hours.",
+    tagline: "The complete AI-visibility foundation — run through our Visibility Engine in 48 hours.",
     price: "$149",
     cadence: "one-time",
     bullets: [
-      "Google and AI can find and recommend your business — done in 48 hours",
-      "Every search, every AI query, every directory shows the same business",
-      "Review requests go to past customers automatically. No follow-up needed.",
+      "Every signal Google AI, ChatGPT, and Claude check — mapped, aligned, and fixed",
+      "Profile, structured data, cross-web consistency, and first review-velocity path",
+      "Conflicts that make AI distrust you: resolved. Done in 48 hours.",
     ],
     href: "/checkout/get-found-refresh",
     cta: "Get Found for $149",
@@ -56,13 +58,13 @@ const teaserCards: TeaserCard[] = [
   },
   {
     name: "Stay Found",
-    tagline: "Google checks if you're still active. We make sure you are.",
+    tagline: "AI re-reads your business constantly. We keep your signals fresh every month.",
     price: "$99",
     cadence: "/month",
     bullets: [
-      "Everything in Get Found — included free.",
-      "Reviews keep coming every month. Every response drafted in your voice.",
-      "Monthly report shows where you stand and what to do next.",
+      "We monitor how Google AI, ChatGPT, and Gemini describe you — and re-sync the moment facts drift",
+      "Review velocity and entity consistency maintained monthly",
+      "Monthly report shows exactly where you stand across every AI channel",
     ],
     href: "/checkout/stay-found",
     cta: "Stay Found for $99/mo",
@@ -72,13 +74,13 @@ const teaserCards: TeaserCard[] = [
   },
   {
     name: "Always Ready",
-    tagline: "Reviews, content, and AI readiness — handled.",
+    tagline: "Google's AI will call your business. Make sure it reaches one that can answer.",
     price: "$299",
     cadence: "/month",
     bullets: [
-      "Everything in Stay Found",
-      "AI voice readiness for Google's calling feature",
-      "Monthly strategy call and AI answer visibility check",
+      "AI agent trained on your services, pricing, and hours — answers 24/7",
+      "Full content + entity management across Google, ChatGPT, Claude, and Gemini",
+      "Monthly AI-answer monitoring and visibility check",
     ],
     href: "/checkout/always-ready",
     cta: "Get Always Ready",
@@ -213,7 +215,11 @@ export default function Home() {
 
         <HowItWorks />
 
+        <VisibilityEngine />
+
         <VisibilityCheck />
+
+        <SignalStack />
 
         {/* Service tiers */}
         <section className="pt-10 pb-8 md:pt-14 md:pb-10 bg-[var(--color-hero-bg)] text-[var(--color-hero-text)]">

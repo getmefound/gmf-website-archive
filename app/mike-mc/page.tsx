@@ -40,7 +40,7 @@ const MC_BOOKMARKS = [
   { label: "Team", href: "/mike-mc/team" },
   { label: "Clients", href: "/mike-mc/clients" },
   { label: "Setup Jobs", href: "/mike-mc/setup-jobs" },
-  { label: "Sentinel", href: "/mike-mc/sentinel" },
+  { label: "Agent Ness", href: "/mike-mc/agent-ness" },
   { label: "Ops Index", href: "/mike-mc/ops" },
   { label: "Agent Jobs", href: "/mike-mc/jobs" },
   { label: "Morning Brief", href: "/mike-mc/morning-brief" },
@@ -54,8 +54,8 @@ const MC_BOOKMARKS = [
 
 const OVERSIGHT_LINKS = [
   {
-    label: "Sentinel",
-    href: "/mike-mc/sentinel",
+    label: "Agent Ness",
+    href: "/mike-mc/agent-ness",
     detail: "Independent daily audit of agent efficiency, stuck work, prospecting, retention, and next improvements.",
     tone: "hot" as const,
   },
@@ -207,7 +207,7 @@ const AGENTS: {
     ],
   },
   {
-    name: "Sentinel",
+    name: "Agent Ness",
     role: "Independent business improvement auditor",
     status: "live",
     cadence: "daily",

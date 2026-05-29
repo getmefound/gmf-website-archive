@@ -101,7 +101,7 @@ export function AuditRequestForm() {
           Your free visibility check is on its way.
         </p>
         <p className="mt-2 text-sm leading-relaxed text-white/55">
-          We received your request for <span className="font-semibold text-white/80">{businessName}</span>. Our team will send your personalized visibility report to <span className="font-semibold text-white/80">{email}</span> — usually within one business day.
+          We received your request for <span className="font-semibold text-white/80">{businessName}</span>. Your personalized visibility report is being sent to <span className="font-semibold text-white/80">{email}</span> now - usually within a few minutes.
         </p>
         <p className="mt-4 text-xs text-white/35">
           Check spam if you don&apos;t see it. Questions? Email{" "}
@@ -119,7 +119,7 @@ export function AuditRequestForm() {
         See where your business actually stands.
       </h2>
       <p className="mt-1.5 text-sm text-white/55">
-        Free. We&apos;ll email your personalized report within one business day.
+        Free. We&apos;ll email your personalized report in a few minutes.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
@@ -181,7 +181,7 @@ export function AuditRequestForm() {
           disabled={pending}
           className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] px-6 py-3.5 text-base font-semibold text-[var(--color-accent-text)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-[var(--color-accent)]/25 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
         >
-          {pending ? "Sending..." : <>Send my free visibility check <span aria-hidden="true">→</span></>}
+          {pending ? "Checking..." : <>Send my free visibility check <span aria-hidden="true">{"->"}</span></>}
         </button>
 
         {error && (

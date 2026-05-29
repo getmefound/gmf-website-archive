@@ -1,7 +1,7 @@
 # SOP 031 - Prospect Follow-Up Cadence
 
 Status: Drafted
-Version: 0.3
+Version: 0.4
 Owner: Sales Rep
 Reviewer: Coach/Auditor
 Approver: Sales Manager
@@ -50,17 +50,21 @@ Use these `lead_status` values for prospect report nurture:
 
 | Stage | Meaning | Owner | Next action |
 |---|---|---|---|
-| `free_check_requested` | Prospect requested report | Sales Rep | Confirm request and assign Scout/Reporter |
-| `report_building` | Scan/report in progress | Scout / Reporter | Build public report |
+| `free_check_queued` | Homepage request accepted and queued | Automation | Run fast verification/enrichment/send path |
+| `free_check_processing` | Automated report is being enriched/sent | Automation | Complete within five minutes or use safe fallback |
+| `free_check_requested` | Manual/warm report requested | Sales Rep | Confirm request and assign Scout/Reporter |
+| `report_building` | Manual scan/report in progress | Scout / Reporter | Build public report |
 | `report_ready_for_audit` | Report ready but not cleared | Auditor | Audit claims and CTA |
 | `approved_to_send` | Auditor approved delivery | Sales Rep | Send report |
-| `report_sent_no_signup` | Report sent, no payment/reply yet | Sales Rep | Start cadence |
+| `report_sent_nurture_enrolled` | Automated report sent, no payment/reply yet | Sales Rep / Automation | Start cadence |
+| `report_sent_no_signup` | Manual report sent, no payment/reply yet | Sales Rep | Start cadence |
 | `follow_up_day_2` | First helpful follow-up due/sent | Sales Rep | Ask if report made sense |
 | `follow_up_day_7` | Recommendation follow-up due/sent | Sales Rep | One next step |
 | `final_soft_close` | Final direct follow-up due/sent | Sales Rep | Close loop or nurture |
 | `nurture` | Low-frequency value-only follow-up | Sales Rep / Sales Manager | Monthly/quarterly useful note |
 | `call_requested` | Prospect asked for a call | Sales Rep / Manager | Route call decision |
 | `checkout_started` | Prospect started checkout | Systems Director / Sales Rep | Move to abandoned checkout SOP if incomplete |
+| `purchased_get_found` | Get Found checkout completed | Manager | Stop nurture and start paid onboarding |
 | `closed_won` | Payment/signed approval/manual start | Manager | Sales-to-client handoff |
 | `closed_lost` | Prospect declined | Sales Rep | Stop sales cadence |
 | `no_fit` | Not a fit | Sales Manager | Stop or no-fit nurture |
@@ -94,14 +98,14 @@ Timing is counted from the report delivery email unless stated otherwise.
 
 | Time | Stage | Email | Sender | Purpose |
 |---|---|---|---|---|
-| Immediately after request | `free_check_requested` | Request confirmation | System via Resend; reply-to Sales Rep lane | Confirm receipt and set expectation |
-| Same business day when possible; next business day if manual | `approved_to_send` -> `report_sent_no_signup` | Report delivery | Sales Rep via role/Resend lane | Send report and one clear recommended next step |
+| Immediately after homepage request | `free_check_queued` -> `free_check_processing` | Automated visibility report | System via Resend; reply-to Sales Rep lane | Deliver personalized report and one clear Get Found next step |
+| Same business day when possible; next business day if manual | `approved_to_send` -> `report_sent_no_signup` | Manual report delivery | Sales Rep via role/Resend lane | Send report and one clear recommended next step |
 | 2 business days after delivery | `follow_up_day_2` | Helpful check-in | Sales Rep | Ask whether the report made sense; no pressure |
 | 7 calendar days after delivery | `follow_up_day_7` | One fix to prioritize | Sales Rep | Restate one observed gap and Get Found next step |
 | 14 calendar days after delivery | `final_soft_close` | Close the loop | Sales Rep | Ask whether to close the file or help with the first step |
 | 30+ days after delivery | `nurture` | Low-frequency nurture | Sales Rep / Sales Manager | Useful tip, Google/profile change, seasonal reminder, or new proof |
 
-If the report is not ready within one business day, Sales Rep sends one short "still working on it" note only if needed.
+Homepage automation target is under five minutes. If enrichment is slow or unavailable, the system sends a safe fallback report rather than delaying. Manual reports use the same-business-day rule.
 
 ## Email Content Rules
 
@@ -117,27 +121,27 @@ If the report is not ready within one business day, Sales Rep sends one short "s
 
 ### Request Confirmation
 
-Trigger: `free_check_requested`.
+Trigger: `free_check_queued` or `free_check_requested`.
 
 Owner: Systems Director for automation; Sales Rep owns the prospect lane.
 
 Message goal:
 
 - confirm request
-- say the report is being prepared
-- set expectation for delivery
+- for homepage automation, the report email itself is the confirmation
+- for manual reports, say the report is being prepared and set expectation for delivery
 - invite a correction if business info is wrong
 
 ### Report Delivery
 
-Trigger: Auditor sets `report_status = approved_to_send`.
+Trigger: homepage automation completes, or Auditor sets `report_status = approved_to_send` for manual reports.
 
 Owner: Sales Rep.
 
 Required before send:
 
-- report link/artifact
-- Auditor approval
+- for homepage automation, approved template/guardrails and safe data fallback
+- for manual reports, report link/artifact and Auditor approval
 - suppression check
 - sender/reply-to verified
 - stage logged
@@ -215,7 +219,7 @@ Branching:
 
 | Event | New status | Owner |
 |---|---|---|
-| Payment complete | `closed_won` | Manager opens onboarding |
+| Payment complete | `purchased_get_found` or `closed_won` | Manager opens onboarding |
 | Checkout started, no payment | `checkout_started` | Systems Director / Sales Rep run abandoned checkout SOP |
 | Call requested | `call_requested` | Sales Rep routes to Manager |
 | Custom scope/pricing requested | hold current cadence | Sales Manager decides |
@@ -239,15 +243,20 @@ Branching:
 In `visibility_report_events`:
 
 - `requested`
+- `email_verified`
+- `automation_started`
+- `enrichment_succeeded` / `enrichment_fallback`
 - `report_building`
 - `ready_for_audit`
 - `approved_to_send`
 - `report_sent`
+- `email_click`
 - `follow_up_sent`
 - `reply_received`
 - `call_requested`
 - `checkout_started`
 - `closed_won`
+- `purchase`
 - `closed_lost`
 - `nurture_started`
 - `suppressed`
@@ -299,6 +308,7 @@ Ask Mike only for:
 | 0.1 | 2026-05-27 | Initial controlled scaffold from SOP master map | Coach |
 | 0.2 | 2026-05-27 | Expanded into first-pass role-specific controlled draft | Coach |
 | 0.3 | 2026-05-28 | Added requested visibility report nurture pipeline, timing cadence, sender rules, stop rules, and logging requirements | Manager / Sales Manager / Coach |
+| 0.4 | 2026-05-29 | Added automated homepage report statuses, five-minute target, fallback-send rule, click logging, and purchase stop-flow | Systems Director / Elon |
 
 ## Source Documents
 

@@ -50,8 +50,8 @@ Mike talks to Manager by Slack DM. Manager runs the business interface, assigns 
 | [ ] | Add real agent runtime/watchdog | Systems Director / Manager | Auditor | `npm run agent:watchdog` reports whether Agent Working rows are script-runnable, manual-audit, access-blocked, or unmapped | No, unless owner approval is needed for always-on scheduling |
 | [x] | Add Gmail as owner evidence source | Systems Director / Manager | Auditor | Gmail connector read/search verified; owner email access rule added to `AGENTS.md`, `docs/AGENT_OPERATING_MODEL.md`, and SOP 180 | No |
 | [x] | Accept `Elon` as Manager alias | Manager / Systems Director | Auditor | Slack and local command routing treat `Elon` as Manager | No |
-| [x] | Create independent Business Improvement Auditor | Sentinel (Business Improvement Auditor) | Manager / Auditor | `docs/GMF_BUSINESS_IMPROVEMENT_AUDITOR.md`, `scripts/business-improvement-audit.mjs`, and daily workflow created | No |
-| [ ] | Review first Business Improvement Auditor morning report | Sentinel (Business Improvement Auditor) | Manager / Auditor | Current report in `docs/client-ops-ledger/business-improvement-audit-current.md`; Monday item tracks first-run review | No |
+| [x] | Create independent Business Improvement Auditor | Agent Ness (Business Improvement Auditor) | Manager / Auditor | `docs/GMF_BUSINESS_IMPROVEMENT_AUDITOR.md`, `scripts/business-improvement-audit.mjs`, and daily workflow created | No |
+| [ ] | Review first Business Improvement Auditor morning report | Agent Ness (Business Improvement Auditor) | Manager / Auditor | Current report in `docs/client-ops-ledger/business-improvement-audit-current.md`; Monday item tracks first-run review | No |
 | [ ] | Set up GMF owned GBP/social presence | Manager / Profile Manager / Systems Director | Auditor | `docs/GMF_OWNED_PRESENCE_LAUNCH_PLAN.md`, `docs/client-ops-ledger/gmf-owned-presence-registry.md`, and GMF client ledger row created | Only for public phone/address, platform verification, spend, or final public publish approval |
 
 ## Active Agent Assignments
@@ -67,7 +67,7 @@ Mike talks to Manager by Slack DM. Manager runs the business interface, assigns 
 | Auditor | Proof gates, risky action blocks, public-edit guardrails | Evidence review before Done |
 | Coach | SOP structure, training, updates from live pilots | Skill-gap training protocol added and SOP 178 drafted |
 | Scout | Current Google/Search/commerce research | Research updates when platform rules change |
-| Sentinel (Business Improvement Auditor) | Independent review of agent efficiency, process failures, prospecting, retention, and business leverage | Daily report, improvement recommendations, and watchdog-informed operating critique |
+| Agent Ness (Business Improvement Auditor) | Independent review of agent efficiency, process failures, prospecting, retention, and business leverage | Daily report, improvement recommendations, and watchdog-informed operating critique |
 | Profile Manager / Systems Director | GMF owned presence setup | GBP eligibility, duplicate check, social handle/account registry, and approval packet |
 
 ## Monday Items Created
@@ -87,7 +87,7 @@ Mike talks to Manager by Slack DM. Manager runs the business interface, assigns 
 | GMF - GBP read-only verification path setup | Systems Director / Profile Manager | Auditor |
 | GMF - Agent runtime watchdog and dispatcher | Systems Director / Manager | Auditor |
 | GMF - Owner Gmail evidence access rule | Systems Director / Manager | Auditor |
-| GMF - Business Improvement Auditor morning report | Sentinel (Business Improvement Auditor) | Manager / Auditor |
+| GMF - Business Improvement Auditor morning report | Agent Ness (Business Improvement Auditor) | Manager / Auditor |
 | GMF - Owned presence inventory and account registry | Systems Director / Reporter | Auditor |
 | GMF - Google Business Profile eligibility and create/claim path | Profile Manager / Systems Director | Auditor |
 | GMF - Social profiles create/fill packet | Systems Director / Reporter / Studio | Auditor |
@@ -103,7 +103,7 @@ Mike talks to Manager by Slack DM. Manager runs the business interface, assigns 
 | Tools, credentials, systems | Manager by Slack DM | Systems Director | Exact access need or completed setup |
 | SOP/process gaps | Manager by Slack DM | Coach / Auditor | Updated SOP, trained agent, verified next run |
 | Agent cannot do task | Manager by Slack DM | Coach/Trainer | Training request, fix, rerun status |
-| Business improvement / agent efficiency | Manager or Elon by Slack DM | Sentinel (Business Improvement Auditor) / Council feeds | Daily improvement report, top constraint, prospecting/retention recommendations |
+| Business improvement / agent efficiency | Manager or Elon by Slack DM | Agent Ness (Business Improvement Auditor) / Council feeds | Daily improvement report, top constraint, prospecting/retention recommendations |
 
 ## Mike Involvement Rules
 

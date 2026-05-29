@@ -22,6 +22,7 @@ Campaign is drafted and the team wants live prospecting approval.
 - No launch packet, no live send.
 - First live Smartlead prospecting clearance requires Mike approval.
 - The packet must prove Smartlead readiness, sender readiness, list QA, suppression, copy approval, send cap, reply routing, and stop rules.
+- The packet must include Smartlead deliverability audit proof: `npm run smartlead:deliverability-audit -- --campaign-id <id>`.
 - Routine progress should stay in Monday/Mission Control unless a human decision is required.
 
 ## Procedure
@@ -36,12 +37,15 @@ Campaign is drafted and the team wants live prospecting approval.
    - Copy/claim audit pass.
    - Reply routing owner.
    - Unsubscribe handling owner.
+   - Deliverability audit PASS, or Auditor-signed WATCH exception.
 
 3. Check campaign copy.
    - Short, true, useful, no guarantees, no fake personalization, no misleading urgency.
+   - Plain text, one CTA link max, no attachments/images/URL shorteners.
+   - Clear opt-out language and physical mailing address.
 
 4. Confirm operational limits.
-   - Daily cap, seed/test send, stop-on-risk rules, monitoring cadence, and recheck date.
+   - Daily cap, seed/test send, stop-on-reply, stop-on-risk rules, monitoring cadence, and recheck date.
 
 5. Prepare approval recommendation.
    - `Approve`, `Approve with cap`, `Hold`, or `Block`.
@@ -58,6 +62,7 @@ Campaign is drafted and the team wants live prospecting approval.
 - Copy draft
 - Audience/list QA result
 - Suppression result
+- Deliverability audit result
 - Proposed cap
 - Approval decision
 
@@ -79,4 +84,3 @@ Campaign is drafted and the team wants live prospecting approval.
 - `AGENTS.md`
 - `docs/client-ops-ledger/prospecting-cold-email-operating-plan.md`
 - `docs/sops/SOP-001-smartlead-api-access-readiness.md`
-

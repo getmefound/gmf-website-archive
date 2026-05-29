@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { supabaseRest } from "@/lib/supabase-rest";
 import { postToSlack, GMF_MANAGER_CHANNEL } from "@/lib/slack";
 import { saveSubscriptionToSupabase } from "@/app/api/checkout/create-session/route";
+import { recordFreeVisibilityPurchase } from "@/lib/free-visibility-report";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -76,6 +77,7 @@ async function markEventProcessed(eventId: string, eventType: string): Promise<b
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const productSlug = session.metadata?.product_slug ?? "unknown";
   const productName = session.metadata?.product_name ?? "Unknown";
+  const visibilityReportRunId = session.metadata?.visibility_report_run_id ?? null;
   const customerEmail = session.customer_details?.email ?? null;
   const customerName = session.customer_details?.name ?? null;
   const amountTotal = session.amount_total ? session.amount_total / 100 : null;
@@ -88,6 +90,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   await Promise.allSettled([
+    recordFreeVisibilityPurchase({
+      runId: visibilityReportRunId,
+      email: customerEmail,
+      productSlug,
+      sessionId: session.id,
+    }),
     supabaseRest("stripe_orders", {
       method: "POST",
       prefer: "return=minimal",
@@ -181,7 +189,6 @@ Manager — reach out to the client to update their payment method. ${attemptCou
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const customerId = typeof subscription.customer === "string" ? subscription.customer : null;
-  const priceId = subscription.items.data[0]?.price?.id ?? null;
   const cancelAtPeriodEnd = subscription.cancel_at_period_end;
   const rawPeriodEnd = subscription.items.data[0]?.current_period_end;
   const periodEnd = rawPeriodEnd ? new Date(rawPeriodEnd * 1000).toISOString() : null;

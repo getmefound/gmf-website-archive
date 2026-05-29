@@ -44,6 +44,7 @@ These must pass before Monday launch.
 |---|---|---|---|---|
 | Website and Mission Control owner view | Systems Director / Reporter | Auditor | production pages reachable, current links, no stale GHL-primary positioning | No unless deploy/access fails |
 | Visibility-report lead path | Sales Manager / Systems Director | Auditor | request path, report delivery path, and reply routing tested | No unless live send approval or tool access is blocked |
+| 6/1 cold-email prospecting engine | Sales Manager / Systems Director / Scout / Sender / Coach | Auditor | new niche config, lead QA, copy, suppression, paused Smartlead packet, and final live-send approval | Yes for final send clearance |
 | Sender identity and reply routing | Systems Director / Sales Rep | Auditor | Casey or fallback mailbox can receive/reply; no dead reply-to | Yes only if Casey first-login security gate remains required |
 | Monday launch sprint board | Manager | Auditor | active job with owners, timers, proof, and escalation | No |
 | Public launch claims and offer copy | Coach / Reporter | Auditor | launch copy checked for unsupported claims and old AOH/GHL language | No unless Mike approval is required for final offer changes |
@@ -74,6 +75,12 @@ These improve the machine but should not block Monday unless they protect safety
 - deeper client dashboard refinements
 
 ## Go / No-Go Checks
+
+### Prospecting Revision For 2026-06-01
+
+Mike's 2026-05-29 prospecting instruction supersedes the older med-spa/dental/home-services approval packet.
+
+Cold outreach may go live Monday only if the rebuilt plan in `docs/client-ops-ledger/gmf-2026-06-01-prospecting-agent-launch-plan.md` clears. NeverBounce fallback and the Miami footer address are resolved. If suppression, copy, reply routing, and final live-send approval are not cleared, GMF can still launch the organic/requested-report path while cold outreach stays paused.
 
 ### Friday 2026-05-29
 

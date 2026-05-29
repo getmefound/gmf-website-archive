@@ -1,4 +1,4 @@
-﻿# GMF SOP Index
+# GMF SOP Index
 
 Status: generated index
 Owner: Coach
@@ -204,4 +204,4 @@ Generated from the master SOP map. Update the master map first, then refresh thi
 | 182 | Agent-to-agent handoff and receive acknowledgment | P0 | Drafted | Manager | [SOP-182-agent-to-agent-handoff-and-receive-acknowledgment.md](SOP-182-agent-to-agent-handoff-and-receive-acknowledgment.md) |
 | 183 | Stuck agent timeout and rescue | P0 | Drafted | Systems Director / Manager | [SOP-183-stuck-agent-timeout-and-rescue.md](SOP-183-stuck-agent-timeout-and-rescue.md) |
 | 184 | Client information request cadence and escalation | P0 | Drafted | Account Manager | [SOP-184-client-information-request-cadence-and-escalation.md](SOP-184-client-information-request-cadence-and-escalation.md) |
-| 185 | Business Improvement Auditor daily report | P0 | Drafted | Sentinel (Business Improvement Auditor) | [SOP-185-business-improvement-auditor-daily-report.md](SOP-185-business-improvement-auditor-daily-report.md) |
+| 185 | Business Improvement Auditor daily report | P0 | Drafted | Agent Ness (Business Improvement Auditor) | [SOP-185-business-improvement-auditor-daily-report.md](SOP-185-business-improvement-auditor-daily-report.md) |

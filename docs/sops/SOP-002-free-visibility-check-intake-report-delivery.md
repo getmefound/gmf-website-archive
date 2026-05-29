@@ -1,9 +1,9 @@
 # SOP 002 - Free Visibility Check Intake To Report Delivery
 
 Status: Drafted
-Version: 0.2
-Owner: Sales Rep
-Reviewer: Auditor
+Version: 0.3
+Owner: Systems Director
+Reviewer: Auditor / Sales Manager
 Approver: Manager
 Effective date: Set when Active
 Next review: Set when Active
@@ -11,7 +11,7 @@ Source of truth: `docs/sops/SOP-002-free-visibility-check-intake-report-delivery
 
 ## Purpose
 
-Turn a free visibility check request into a useful, claim-safe prospect report and sales follow-up without confusing the prospect with a paying client.
+Turn a homepage free visibility check request into an automated, claim-safe prospect report email that arrives within five minutes and routes the prospect to Get Found.
 
 ## Covered Master Map Rows
 
@@ -23,7 +23,7 @@ Turn a free visibility check request into a useful, claim-safe prospect report a
 
 ## Scope
 
-Covers prospect-facing free report intake, research, report build, audit, delivery, and handoff to follow-up.
+Covers prospect-facing homepage form intake, NeverBounce verification, dedupe, public GBP/Outscraper enrichment, safe fallback copy, report email delivery, click/opt-out logging, and handoff to nurture.
 
 Does not cover client onboarding, full client baseline reports, recurring monthly reports, or abandoned checkout recovery.
 
@@ -38,10 +38,12 @@ Does not cover client onboarding, full client baseline reports, recurring monthl
 
 | Role | Responsibility |
 |---|---|
-| Sales Rep | Owns prospect relationship, intake, delivery, and follow-up |
-| Scout | Performs public research and fit notes |
-| Reporter | Builds the prospect report |
-| Auditor | Checks claims, tone, proof, and recommendation before send |
+| Systems Director | Maintains endpoint, NeverBounce, Outscraper, Resend, Supabase logs, and failure recovery |
+| Automation | Verifies email, enriches public facts, sends report, logs events, and enrolls nurture |
+| Sales Rep | Owns replies, nurture, and buyer handoff after the automated report |
+| Scout | Performs manual public research only when automation cannot safely enrich |
+| Reporter | Builds manual prospect report artifacts only when requested outside the homepage fast path |
+| Auditor | Reviews templates, claim safety, proof logs, and failed/edge-case sends |
 | Sales Manager | Resolves offer-fit or custom-promise questions |
 
 ## Hard Rules
@@ -49,67 +51,71 @@ Does not cover client onboarding, full client baseline reports, recurring monthl
 - A free report is a sales asset, not a client deliverable.
 - Do not open onboarding from a free report alone.
 - Do not show the full client-only scoring rubric or full competitor audit.
-- Do not send a report until Auditor approves it.
+- Homepage free visibility reports are automated once the template and guardrails are approved.
+- Never email a blank, guessed, or low-confidence stat. Omit that line or use safe generic phrasing.
+- Verify the email with NeverBounce before storing/sending an accepted homepage request.
+- Dedupe repeat same-email/same-business requests.
+- Use Resend from the authenticated GMF sender domain with physical address and opt-out.
 - Do not promise rankings, reviews, revenue, Google placement, AI Overview inclusion, AI Mode visibility, or timelines.
-- Sales Rep sends prospect reports. Reporter does not send reports directly.
+- Sales Rep does not manually touch normal homepage report delivery.
 
 ## Procedure
 
-1. Intake the request.
-   - Capture name, business, website, location, email, source, and requested service if known.
-   - Create or update the prospect record/report job.
-   - If the request is spam, competitor snooping, or no-fit, hold and route to Sales Manager.
+1. Intake the homepage request.
+   - Capture business name and email.
+   - Apply honeypot, Turnstile if configured, IP rate limit, email rate limit, and same-email/same-business dedupe.
+   - Verify email with NeverBounce. If invalid/risky, do not send.
 
-2. Confirm report context.
+2. Store the accepted request.
    - Use `prospect_free_check` for website CTA reports.
-   - Use `prospect_campaign_reply` for outreach replies asking for a scan.
-   - Keep prospect report ownership in Sales Rep lane.
+   - Store in Supabase `visibility_reports` with `lead_status = free_check_queued`.
+   - Log `requested` and `email_verified` in `visibility_report_events`.
 
-3. Run public scan.
-   - Scout checks public website, GBP presence, basic business facts, review freshness, visible trust signals, and nearby competitor clues.
-   - Do not use private tools, client credentials, or paid deep audit steps for a free report unless Manager approves.
+3. Run fast automation.
+   - Route runs `processFreeVisibilityReport` through Next/Vercel `after()`.
+   - Set `report_status = building` and `lead_status = free_check_processing`.
+   - Do not create a manual agent task unless delivery fails.
 
-4. Build the short report.
-   - Reporter creates a one-page/short-screen prospect report.
-   - Include a simple visibility/AI-readiness score, 2-3 observed gaps, and one clear Get Found recommendation.
-   - Use locked or greyed sections only as a light sales cue, not as fake analysis.
+4. Enrich public GBP facts.
+   - Use Outscraper Google Maps Search only.
+   - Pull review count, rating, photos, hours, primary category, city/state, and a nearby competitor review count when confidence is high.
+   - If Outscraper is missing, slow, or ambiguous, send a safe generic report without guessed stats.
 
-5. Audit the report.
-   - Auditor checks that all claims are supported by visible proof.
-   - Auditor removes guarantees, overstatements, full-client detail, and unsupported AI/Search claims.
-   - If the report fails, return to Reporter with edits.
+5. Send report email.
+   - Send plain-text-leaning email from the authenticated GMF Resend sender.
+   - Include only safe facts, Get Found $149 CTA, 48 hours, no contract, satisfaction guarantee, physical mailing address, and opt-out link.
+   - CTA points to `/checkout/get-found-refresh` through click tracker `/api/report-click`.
 
-6. Deliver the report.
-   - Sales Rep sends the approved report link or attachment.
-   - Log sent date, report link, and follow-up date.
+6. Log and enroll nurture.
+   - Log enrichment result, email send, click, unsubscribe, and purchase events.
+   - Set `report_status = sent` and `lead_status = report_sent_nurture_enrolled`.
+   - Nurture stops on purchase, reply, bounce, or opt-out.
 
-7. Start follow-up cadence.
-   - Day 0: send report.
-   - Day 2: helpful check-in.
-   - Day 7: one clear next step.
-   - Day 14: final gentle follow-up or nurture.
-   - Stop if prospect buys, declines, unsubscribes, asks for a call, or becomes no-fit.
+7. Failure handling.
+   - Retry email send once.
+   - If sending still fails, create a high-priority Systems Director task.
+   - Do not ask Mike until Systems Director exhausts Resend, Supabase, env, and retry-path checks.
 
 ## Required Proof
 
-- Prospect/report record
-- Public scan notes
-- Report artifact link
-- Auditor approval
-- Delivery email/log
-- Follow-up status
+- `visibility_reports` row with run ID
+- `visibility_report_events`: requested, email_verified, automation_started, enrichment result, nurture_enrolled, click/unsubscribe/purchase when applicable
+- `email_events`: report send/skipped/failed and opt-out
+- Resend provider ID
+- Checkout link with run ID metadata
+- Failure task only if automation cannot complete
 
 ## Communication Rule
 
-Free report emails should be short, useful, and plain-English. Position Get Found as the next step only when the report shows a real visibility foundation gap.
+Free report emails should be short, useful, and plain-English. Position Get Found as the next step using authority, specificity, and the guarantee. Do not use testimonials until GMF has real customers and approved proof.
 
 ## Failure Or Blocker Handling
 
-- Missing business data: Sales Rep asks one clarifying question.
-- No public footprint: Reporter notes limited public data and recommends foundation cleanup.
-- Risky claim: Auditor blocks send.
+- Missing/ambiguous public data: Automation omits exact stats and sends safe generic phrasing.
+- No public footprint: Automation notes limited public data and recommends foundation cleanup.
+- Risky claim/template drift: Auditor blocks the template until corrected.
 - Prospect asks for custom scope/pricing: Sales Manager reviews before response.
-- Prospect pays: stop prospect lane and trigger sales-to-client handoff.
+- Prospect pays: Stripe webhook stops nurture and triggers sales-to-client handoff.
 
 ## Changelog
 
@@ -117,6 +123,7 @@ Free report emails should be short, useful, and plain-English. Position Get Foun
 |---|---|---|---|
 | 0.1 | 2026-05-27 | Initial controlled scaffold from SOP master map | Coach |
 | 0.2 | 2026-05-27 | Expanded intake-to-report-delivery workflow and prospect/client separation rules | Coach |
+| 0.3 | 2026-05-29 | Converted homepage free visibility check to automated NeverBounce, Outscraper, Resend, click/opt-out, and Stripe stop-flow path | Systems Director / Elon |
 
 ## Source Documents
 
@@ -124,4 +131,3 @@ Free report emails should be short, useful, and plain-English. Position Get Foun
 - `docs/GMF_AGENT_TRAINING_PACK.md`
 - `docs/GMF_WEBSITE_MESSAGING_CLIENT_HOME_BRIEF.md`
 - `docs/sops/SOP-000-sop-creation-testing-governance-review.md`
-

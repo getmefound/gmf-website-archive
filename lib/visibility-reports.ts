@@ -72,6 +72,7 @@ type VisibilityReportCreateInput = {
   auditUrl: string;
   heatmapUrl?: string;
   metadata?: Record<string, unknown>;
+  deliveryMode?: "manual_agent" | "automated";
 };
 
 const REPORTS_TABLE = "visibility_reports";
@@ -80,10 +81,13 @@ const EVENTS_TABLE = "visibility_report_events";
 export async function createVisibilityReportRequest(input: VisibilityReportCreateInput) {
   const audience = input.context.startsWith("client_") ? "client" : "prospect";
   const status = "requested" satisfies VisibilityReportStatus;
-  const ownerRole = audience === "client" ? "Account Manager" : "Sales Rep";
+  const automated = input.deliveryMode === "automated";
+  const ownerRole = automated ? "Automation" : audience === "client" ? "Account Manager" : "Sales Rep";
   const leadStatus =
     input.context === "prospect_free_check"
-      ? "free_check_requested"
+      ? automated
+        ? "free_check_queued"
+        : "free_check_requested"
       : input.context === "prospect_campaign_reply"
         ? "report_building"
         : "";
@@ -94,7 +98,9 @@ export async function createVisibilityReportRequest(input: VisibilityReportCreat
         ? "live_recurring"
         : "";
   const nextAction =
-    audience === "client"
+    automated
+      ? "Automated processor verifies email, enriches public GBP facts, sends the visibility report, and enrolls nurture."
+      : audience === "client"
       ? "Reporter builds onboarding baseline, Auditor checks it, Account Manager sends client-safe proof."
       : "Scout runs public scan, Reporter builds free visibility report, Auditor checks it, Sales Rep sends it.";
 
@@ -136,7 +142,7 @@ export async function createVisibilityReportRequest(input: VisibilityReportCreat
     console.error("Visibility report save failed", save.status, save.error);
   }
 
-  await Promise.allSettled([
+  const sideEffects: Array<Promise<unknown>> = [
     logVisibilityReportEvent({
       runId: input.runId,
       eventType: "requested",
@@ -144,7 +150,10 @@ export async function createVisibilityReportRequest(input: VisibilityReportCreat
       note: nextAction,
       payload: row,
     }),
-    createAgentTask({
+  ];
+
+  if (!automated) {
+    sideEffects.push(createAgentTask({
       title: `${audience === "client" ? "Build onboarding baseline" : "Build free visibility report"} - ${row.business_name}`,
       kind: "visibility_report",
       priority: audience === "client" ? "high" : "normal",
@@ -160,10 +169,76 @@ export async function createVisibilityReportRequest(input: VisibilityReportCreat
         auditUrl: row.audit_url,
         nextAction,
       },
-    }),
-  ]);
+    }));
+  }
+
+  await Promise.allSettled(sideEffects);
 
   return save;
+}
+
+export async function updateVisibilityReport(input: {
+  runId: string;
+  reportStatus?: VisibilityReportStatus;
+  leadStatus?: string;
+  nextAction?: string;
+  blocker?: string;
+  auditUrl?: string;
+  heatmapUrl?: string;
+  metadata?: Record<string, unknown>;
+}) {
+  if (!hasSupabaseConfig()) {
+    return { ok: false as const, status: 0, error: "Supabase environment variables are missing." };
+  }
+
+  const body: Record<string, unknown> = { updated_at: new Date().toISOString() };
+  if (input.reportStatus) body.report_status = input.reportStatus;
+  if (input.leadStatus !== undefined) body.lead_status = cleanText(input.leadStatus, 180);
+  if (input.nextAction !== undefined) body.next_action = cleanText(input.nextAction, 800);
+  if (input.blocker !== undefined) body.blocker = cleanText(input.blocker, 800);
+  if (input.auditUrl !== undefined) body.audit_url = cleanText(input.auditUrl, 500);
+  if (input.heatmapUrl !== undefined) body.heatmap_url = cleanText(input.heatmapUrl, 500);
+  if (input.metadata !== undefined) body.metadata = input.metadata;
+
+  const query = new URLSearchParams({ run_id: `eq.${input.runId}` });
+  return supabaseRest<VisibilityReportRow[]>(REPORTS_TABLE, {
+    method: "PATCH",
+    query: query.toString(),
+    prefer: "return=representation",
+    body,
+  });
+}
+
+export async function updateVisibilityReportsByEmail(input: {
+  email: string;
+  reportStatus?: VisibilityReportStatus;
+  leadStatus?: string;
+  nextAction?: string;
+  blocker?: string;
+  metadata?: Record<string, unknown>;
+}) {
+  if (!hasSupabaseConfig()) {
+    return { ok: false as const, status: 0, error: "Supabase environment variables are missing." };
+  }
+
+  const body: Record<string, unknown> = { updated_at: new Date().toISOString() };
+  if (input.reportStatus) body.report_status = input.reportStatus;
+  if (input.leadStatus !== undefined) body.lead_status = cleanText(input.leadStatus, 180);
+  if (input.nextAction !== undefined) body.next_action = cleanText(input.nextAction, 800);
+  if (input.blocker !== undefined) body.blocker = cleanText(input.blocker, 800);
+  if (input.metadata !== undefined) body.metadata = input.metadata;
+
+  const query = new URLSearchParams({
+    contact_email: `eq.${input.email.trim().toLowerCase()}`,
+    report_context: "eq.prospect_free_check",
+    order: "created_at.desc",
+  });
+  return supabaseRest<VisibilityReportRow[]>(REPORTS_TABLE, {
+    method: "PATCH",
+    query: query.toString(),
+    prefer: "return=representation",
+    body,
+  });
 }
 
 export async function logVisibilityReportEvent(input: {

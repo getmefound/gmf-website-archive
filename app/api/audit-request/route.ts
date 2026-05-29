@@ -1,7 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
-import { checkIpRate } from "@/lib/rate-limit";
-import { supabaseRest } from "@/lib/supabase-rest";
+import { processFreeVisibilityReport } from "@/lib/free-visibility-report";
+import { verifyEmailWithNeverBounce } from "@/lib/neverbounce";
+import { checkEmailRate, checkIpRate, checkReportDedupe } from "@/lib/rate-limit";
+import { createVisibilityReportRequest, logVisibilityReportEvent } from "@/lib/visibility-reports";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -19,6 +24,7 @@ async function verifyTurnstile(token: string, ip: string | null): Promise<boolea
       method: "POST",
       headers: { "content-type": "application/x-www-form-urlencoded" },
       body,
+      cache: "no-store",
     });
     const data = (await res.json()) as { success?: boolean };
     return Boolean(data.success);
@@ -40,7 +46,6 @@ export async function POST(req: NextRequest) {
     turnstileToken?: unknown;
   };
 
-  // Honeypot
   if (typeof website === "string" && website.trim().length > 0) {
     return NextResponse.json({ ok: true });
   }
@@ -55,12 +60,11 @@ export async function POST(req: NextRequest) {
   }
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
-
-  const rate = await checkIpRate(ip ?? "unknown", 5, 60 * 60);
-  if (!rate.ok) {
+  const ipRate = await checkIpRate(ip ?? "unknown", 5, 60 * 60);
+  if (!ipRate.ok) {
     return NextResponse.json(
       { ok: false, error: "Too many requests from your location. Try again later." },
-      { status: 429, headers: rate.retryAfterSec ? { "Retry-After": String(rate.retryAfterSec) } : undefined },
+      { status: 429, headers: ipRate.retryAfterSec ? { "Retry-After": String(ipRate.retryAfterSec) } : undefined },
     );
   }
 
@@ -76,22 +80,82 @@ export async function POST(req: NextRequest) {
   }
 
   const normalizedEmail = (email as string).trim().toLowerCase();
-  const normalizedName = businessName.trim();
+  const normalizedName = businessName.trim().replace(/\s+/g, " ");
 
-  // Save to Supabase — table: audit_requests (business_name, email, created_at, ip_address, status)
-  const saved = await supabaseRest<null>("audit_requests", {
-    method: "POST",
-    body: {
-      business_name: normalizedName,
-      email: normalizedEmail,
-      ip_address: ip,
-      status: "pending",
-    },
-    prefer: "return=minimal",
-  });
-  if (!saved.ok) {
-    console.error("audit_requests save failed", saved.status, saved.error);
+  const emailRate = await checkEmailRate(normalizedEmail, 3);
+  if (!emailRate.ok) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests for that email. Try again tomorrow." },
+      { status: 429, headers: emailRate.retryAfterSec ? { "Retry-After": String(emailRate.retryAfterSec) } : undefined },
+    );
   }
 
-  return NextResponse.json({ ok: true });
+  const dedupe = await checkReportDedupe(normalizedEmail, normalizedName);
+  if (!dedupe.ok) {
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
+
+  const verification = await verifyEmailWithNeverBounce(normalizedEmail);
+  if (!verification.ok) {
+    const transient =
+      verification.result === "not_configured" || verification.result === "api_error";
+    return NextResponse.json(
+      {
+        ok: false,
+        error: transient
+          ? "Email verification is temporarily unavailable. Try again in a few minutes."
+          : "We could not verify that email address. Use a different business email.",
+      },
+      { status: transient ? 503 : 400 },
+    );
+  }
+
+  const runId = crypto.randomUUID();
+  const origin = req.headers.get("origin") ?? "https://getmefound.ai";
+  const cleanOrigin = origin.replace(/\/+$/, "") || "https://getmefound.ai";
+  const submittedAt = new Date().toISOString();
+  const checkoutUrl = `${cleanOrigin}/checkout/get-found-refresh?runId=${encodeURIComponent(runId)}&source=free_visibility_report`;
+
+  const saved = await createVisibilityReportRequest({
+    runId,
+    context: "prospect_free_check",
+    businessName: normalizedName,
+    contactEmail: normalizedEmail,
+    reportType: "ai_visibility",
+    source: "homepage-free-visibility-check",
+    campaign: "organic",
+    auditUrl: checkoutUrl,
+    metadata: {
+      automation: "free_visibility_report",
+      ipHint: ip,
+      emailVerification: verification,
+      submittedAt,
+    },
+    deliveryMode: "automated",
+  });
+  if (!saved.ok) {
+    console.error("visibility report save failed", saved.status, saved.error);
+  }
+
+  await logVisibilityReportEvent({
+    runId,
+    eventType: "email_verified",
+    actorRole: "Automation",
+    note: "NeverBounce verified the address before report automation.",
+    payload: verification,
+  });
+
+  after(async () => {
+    await processFreeVisibilityReport({
+      runId,
+      businessName: normalizedName,
+      email: normalizedEmail,
+      origin: cleanOrigin,
+      submittedAt,
+      ip,
+      emailVerification: verification,
+    });
+  });
+
+  return NextResponse.json({ ok: true, runId, estimatedEmailMinutes: 5 });
 }

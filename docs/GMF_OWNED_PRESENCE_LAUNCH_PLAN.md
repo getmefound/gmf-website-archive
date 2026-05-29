@@ -61,7 +61,7 @@ Avoid `getmefound` unless GMF can prove ownership or recover it. Public X eviden
 | Studio / Reporter | Profile copy, banners, logo, profile images, first post pack | Copy/assets packet |
 | Scout | Public handle availability and competitor/presence scan | Handle inventory |
 | Auditor | Public profile edit approval, Google eligibility/suspension risk, claim checks | Pass/hold/block review |
-| Sentinel | Daily critique of progress and business leverage | Morning audit recommendation |
+| Agent Ness | Daily critique of progress and business leverage | Morning audit recommendation |
 
 ## Build Sequence
 
@@ -151,7 +151,7 @@ Reuse existing social-pack content only after GMF rebrand and claim review. Old 
 |---|---|---|
 | Weekly | Reporter / Studio | New post, broken links, profile completeness |
 | Monthly | Profile Manager / Auditor | GBP/social fact sync, category/services, NAP, review link |
-| Daily | Sentinel | Whether owned presence is improving acquisition/retention |
+| Daily | Agent Ness | Whether owned presence is improving acquisition/retention |
 | On platform change | Scout / Coach | Update SOPs and agent training |
 
 ## Public Copy Draft

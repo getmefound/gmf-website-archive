@@ -1,6 +1,6 @@
 # Prospecting Cold Email Operating Plan
 
-Status: active planning
+Status: active planning - 2026-06-01 launch revision active
 Owner: Manager
 Started: 2026-05-27
 
@@ -35,6 +35,26 @@ Refresh Smartlead API access so agents can run read-only warmup/readiness checks
 ```
 
 Current live Monday status: created on board `Agents Jobs`, board ID `18415045648`, item ID `12115656169`.
+
+## 2026-06-01 Launch Revision
+
+Mike's 2026-05-29 instruction supersedes the older med-spa/dental/home-services launch packet.
+
+Current launch source of truth:
+
+- `docs/client-ops-ledger/gmf-2026-06-01-prospecting-agent-launch-plan.md`
+- `docs/client-ops-ledger/prospecting-smartlead-preflight-current.md`
+- `docs/client-ops-ledger/smartlead-warmup-current.csv`
+- `docs/client-ops-ledger/smartlead-deliverability-audit-current.md`
+
+Do not launch the paused CT med-spa campaign as-is. The 6/1 target lanes are:
+
+- Tier 1: pet care
+- Tier 2: specialty fitness and wellness studios
+- Tier 3: beauty and personal care
+- Test bucket: tutoring/music/swim schools, specialty auto, event vendors
+
+Excluded for this launch: home services, dental, legal, realtors.
 
 ## First Campaign Goal
 
@@ -88,13 +108,56 @@ The first gate passes only when:
 - each inbox has at least 10 warmup sent
 - spam count is 0
 
-## Current First Blocker
+## Deliverability Gate
 
-As of 2026-05-27, local Smartlead API access is blocked by an invalid API key, and production Vercel does not have `SMARTLEAD_API_KEY` configured.
+Before any Smartlead campaign can be activated or restarted, Sender must run:
 
-Manager may contact Mike about this because it is a human account/API access blocker.
+```bash
+npm run smartlead:deliverability-audit -- --campaign-id <id>
+```
 
-No live prospect send should run until the key is refreshed and readiness is current.
+The launch profile is:
+
+- outreach domains only, never `getmefound.ai` for cold prospecting
+- no open tracking and no click tracking unless Manager/Auditor approve a tracked test
+- plain-text email, one CTA link max, no attachments, no images, no URL shorteners
+- stop on any reply, form fill, purchase, unsubscribe, complaint, hard bounce, or manual suppression
+- include opt-out language and `13727 SW 152nd St. #1236, Miami, FL 33177` in every commercial cold email
+- honor global suppression, unsubscribe, duplicate-lead, and community-bounce protections on import
+- keep early launch volume conservative and tied to Smartlead warmup/account capacity
+
+Audit status rules:
+
+- PASS: can move to Auditor launch review.
+- WATCH: Auditor must approve the exception before any send.
+- HOLD: do not activate or send.
+
+## Current First Blockers
+
+As of 2026-05-29, Smartlead access is no longer the blocker. Read-only checks pass and the campaign is paused:
+
+- `npm run smartlead:check`: pass
+- `npm run smartlead:warmup-report`: pass
+- `npm run prospecting:preflight`: pass
+- Active outreach inboxes: three
+- Warmup reputation: 100
+- Spam count: 0
+
+The remaining blockers are:
+
+1. The old launch packet/campaign is the wrong target plan for Mike's latest instruction.
+2. The old paused Smartlead sequence is HOLD for launch because it lacks the physical mailing address.
+3. Final list, copy, suppression, reply routing, deliverability audit, and live-send packet still need Auditor approval.
+
+Resolved on 2026-05-29:
+
+- Mike approved using the existing NeverBounce verifier for the 6/1 MVP.
+- NeverBounce account-info check passed with paid credits available.
+- Prior physical mailing address found in docs: `13727 SW 152nd St. #1236, Miami, FL 33177`.
+
+Manager may contact Mike only for final live-send clearance or material risk. All other build steps are agent-owned.
+
+No live prospect send should run until the 2026-06-01 launch packet is rebuilt under the new target plan and approved.
 
 ## Reporting
 

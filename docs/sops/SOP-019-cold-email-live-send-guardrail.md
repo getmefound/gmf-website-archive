@@ -24,6 +24,9 @@ Campaign launch request, scheduled send window, or paused campaign restart.
 - Do not send if copy was changed after approval without re-audit.
 - Do not send if reply routing and unsubscribe handling are not ready.
 - Do not send above the approved cap.
+- Do not send if the deliverability audit returns HOLD.
+- Do not send if campaign copy lacks opt-out language or the physical mailing address.
+- Do not send if open/click tracking, attachments, images, URL shorteners, or extra CTA links were added after approval.
 
 ## Procedure
 
@@ -33,13 +36,14 @@ Campaign launch request, scheduled send window, or paused campaign restart.
 2. Recheck readiness age.
    - Confirm Smartlead/sender/list/copy proof is still current.
    - If stale, rerun relevant preflight.
+   - Run `npm run smartlead:deliverability-audit -- --campaign-id <id>` and attach the current report.
 
 3. Confirm campaign state.
    - Campaign is draft/paused until final approval.
    - Audience count and sender inboxes match approval packet.
 
 4. Confirm stop rules.
-   - Stop on complaint, unsubscribe spike, bounce/reputation issue, wrong audience, broken links, or unexpected reply routing failure.
+   - Stop on any reply, complaint, unsubscribe issue, bounce/reputation issue, wrong audience, broken links, unexpected extra sends, or unexpected reply routing failure.
 
 5. Approve launch.
    - Manager records exact cap, date/time, campaign, and owner.
@@ -54,6 +58,7 @@ Campaign launch request, scheduled send window, or paused campaign restart.
 - Final go/no-go note
 - Approval packet link
 - Current readiness proof
+- Current deliverability audit proof
 - Campaign ID/name
 - Approved cap
 - First-window monitoring note
@@ -76,4 +81,3 @@ Campaign launch request, scheduled send window, or paused campaign restart.
 - `AGENTS.md`
 - `docs/sops/SOP-018-cold-email-launch-approval-packet.md`
 - `docs/sops/SOP-001-smartlead-api-access-readiness.md`
-

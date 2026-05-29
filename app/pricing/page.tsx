@@ -29,37 +29,38 @@ const products: ProductDetailData[] = [
     slug: "get-found-refresh",
     number: "01",
     name: "Get Found",
-    outcome: "Fix the Google-facing basics before AI search decides who to recommend.",
+    outcome: "The complete AI-visibility foundation, run through our Visibility Engine.",
     story:
-      "A one-time setup for local businesses that need to look current, accurate, and trustworthy to Google, AI assistants, and customers. Fix it once, see the difference in 48 hours.",
+      "We map every signal Google AI, ChatGPT, and Claude check before recommending a business — your profile, structured business data, cross-web consistency, and first review-velocity path — and fix the conflicts that make them distrust you. Done in 48 hours.",
     stats: [
       { label: "Type", value: "One-time" },
-      { label: "Typical turn", value: "72h" },
+      { label: "Typical turn", value: "48–72h" },
       { label: "Contract", value: "None" },
     ],
     whatYouGet: [
-      "We fix your Google listing — hours, services, photos, everything",
-      "We make your website match your Google listing exactly",
-      "Your first review requests go out to past customers automatically",
-      "Before/after snapshot showing how Google and AI see your business",
-      "30-minute onboarding call",
+      "Full Signal Stack audit — every data point AI reads about your business",
+      "Google listing corrected — hours, services, photos, category, attributes",
+      "Website ↔ profile fact alignment so AI sees one consistent story",
+      "Structured data and entity signals reviewed for AI-readiness",
+      "First review-velocity path built — requests sent to past customers automatically",
+      "Before/after visibility snapshot showing what changed",
     ],
     useThisIf: [
-      "Your Google profile is stale, thin, or inconsistent.",
-      "You want a low-cost first step before a monthly plan.",
-      "You need a clear visibility baseline before asking for more reviews.",
+      "You want AI to be able to find and recommend your business.",
+      "Your Google profile is stale, thin, or inconsistent with your website.",
+      "You want to know exactly where your Signal Stack is broken before spending on ads.",
     ],
     setupSteps: [
-      { title: "Intake", sub: "We collect the business basics and current profile link." },
-      { title: "Refresh", sub: "Profile, website, review path, and trust signals are reviewed." },
-      { title: "Report", sub: "You get the before/after summary and next move." },
+      { title: "Map", sub: "We read every signal AI checks — Google profile, structured data, directories, website, reviews." },
+      { title: "Align", sub: "Conflicts and inconsistencies in your Signal Stack are fixed. AI sees one clear, trusted story." },
+      { title: "Amplify", sub: "Review-velocity path launched. Before/after proof delivered. Your Visibility Engine is live." },
     ],
-    cadence: "One-time setup, usually completed within 72 hours after access and intake are ready.",
-    crossSell: { label: "Stay Found - monthly upkeep", href: "#stay-found" },
+    cadence: "One-time setup, usually completed within 48–72 hours after access and intake are ready.",
+    crossSell: { label: "Stay Found — keep signals current monthly", href: "#stay-found" },
     price: "$149",
     cadenceLabel: " one-time",
     setup: "No contract",
-    promoNote: "Fix the foundation first. Results in 48 hours, no subscription required.",
+    promoNote: "Build the foundation first. AI can't pick you until the signals are right.",
     ctaLabel: "Start Get Found",
     ctaHref: "/checkout/get-found-refresh",
     secondaryCtaHref: BOOKING_HREF,
@@ -70,30 +71,29 @@ const products: ProductDetailData[] = [
     slug: "stay-found",
     number: "02",
     name: "Stay Found",
-    outcome: "Keep your listing, reviews, and AI-ready business facts moving every month.",
+    outcome: "AI re-reads your business constantly. We keep your signals fresh.",
     story:
-      "Stay Found is the preferred monthly plan. Everything in Get Found is included free, then GetMeFound keeps the review request system, Google profile, and business facts current so Google, ChatGPT, Claude, and customers see the same clear story.",
+      "AI systems update their answers without telling you. Stay Found monitors how Google AI, ChatGPT, and Gemini describe your business, re-syncs your facts the moment they drift, and keeps your review velocity and entity consistency strong — so you don't quietly fall out of recommendations.",
     stats: [
       { label: "Setup", value: "$49 one-time setup fee" },
       { label: "Reviews", value: "Text + email" },
       { label: "Report", value: "Monthly" },
     ],
     whatYouGet: [
-      "Everything in Get Found - free",
-      "Weekly customer list upload for review requests",
-      "Text and email review request campaigns after phone-number approval",
-      "Text-message setup handled by our team — no extra tool needed",
-      "AI response drafts in your brand voice",
-      "Negative review alert and suggested response target within 4 business hours",
-      "One weekly Google Business Profile post",
-      "Review monitoring across platforms where available",
-      "Monthly report showing your reviews, directory listings, and visibility progress",
+      "Everything in Get Found — included free",
+      "Signal Stack re-synced monthly — we catch fact drift before AI does",
+      "Review velocity maintained: weekly customer list upload + text and email campaigns",
+      "Text-message setup handled by our team — no extra platform needed",
+      "AI response drafts in your brand voice — nothing auto-posts without approval",
+      "Negative review alert and suggested response within 4 business hours",
+      "Weekly Google Business Profile post keeping your activity signals fresh",
+      "Monthly report: how Google AI, ChatGPT, and Gemini describe you + what changed",
     ],
     useThisIf: [
-      "You want what Get Found fixed to stay fixed.",
-      "You have happy customers but do not ask consistently.",
-      "You want stronger review conversion from text plus email.",
-      "You want AI reply drafts without risky auto-posting.",
+      "You want Get Found's Signal Stack to stay current, not drift back to broken.",
+      "You have happy customers but don't ask for reviews consistently.",
+      "You want AI to keep seeing your business as active and trustworthy.",
+      "You want AI reply drafts without the risk of auto-posting.",
     ],
     setupSteps: [
       { title: "Baseline", sub: "We start from Get Found or a fresh profile review." },
@@ -141,13 +141,13 @@ const jobGroupCopy: Record<JobKey, { index: string; label: string; intro: string
     index: "Step 1 of 3",
     label: "Get found.",
     intro:
-      "Google replaced Search with AI. We fix the public details first so customers, Google, and AI assistants all see the same credible business.",
+      "Google AI now picks one or two local businesses instead of ten results. For the first time a small business can be the one it picks — but the window closes once a competitor locks in the spot. The Visibility Engine starts here.",
   },
   "stay-found": {
     index: "Step 2 of 3",
     label: "Stay found.",
     intro:
-      "Your profile, reviews, and AI signals keep moving every month — so when AI looks, it sees an active, credible business worth recommending.",
+      "AI re-reads your business constantly and updates its answers without telling you. Stay Found keeps your Signal Stack current — so you don't quietly fall out of recommendations while a competitor gets fresher signals.",
   },
 };
 
@@ -241,11 +241,11 @@ export default function PricingPage() {
                   Step 1 - Start here
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
-                  Most owners start with Get Found.
+                  Start with Get Found — build the foundation AI checks.
                 </h3>
 
                 <div className="mb-6 flex flex-wrap gap-2">
-                  {["$149 one-time", "72h typical turn", "no contract"].map((chip) => (
+                  {["$149 one-time", "48h typical turn", "no contract"].map((chip) => (
                     <span
                       key={chip}
                       className="inline-flex items-center rounded-full bg-transparent border border-green-400 px-3 py-1 text-xs font-semibold text-white"

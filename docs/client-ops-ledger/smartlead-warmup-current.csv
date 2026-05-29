@@ -1,4 +1,4 @@
 date,email,smartlead_id,smtp_ok,imap_ok,suspended,warmup_status,warmup_enabled,warmup_reputation,warmup_min_count,warmup_max_count,warmup_reply_rate,warmup_blocked,warmup_sent_count,warmup_inbox_count,warmup_spam_count,warmup_received_count,daily_sent_count,max_email_per_day,notes
-2026-05-28,mike@getmefoundnow.com,18951375,yes,yes,no,ACTIVE,yes,100,5,10,30,no,38,38,0,49,0,20,Read-only Smartlead warmup stats.
-2026-05-28,mike@trygetmefound.com,18951374,yes,yes,no,ACTIVE,yes,100,5,10,30,no,36,36,0,47,0,20,Read-only Smartlead warmup stats.
-2026-05-28,mike@getmefoundlocal.com,18951373,yes,yes,no,ACTIVE,yes,100,5,10,30,no,38,38,0,47,0,20,Read-only Smartlead warmup stats.
+2026-05-29,mike@getmefoundnow.com,18951375,yes,yes,no,ACTIVE,yes,100,5,10,30,no,45,45,0,59,0,20,Read-only Smartlead warmup stats.
+2026-05-29,mike@trygetmefound.com,18951374,yes,yes,no,ACTIVE,yes,100,5,10,30,no,43,43,0,56,0,20,Read-only Smartlead warmup stats.
+2026-05-29,mike@getmefoundlocal.com,18951373,yes,yes,no,ACTIVE,yes,100,5,10,30,no,43,43,0,56,0,20,Read-only Smartlead warmup stats.

@@ -18,7 +18,7 @@ Give Mike a daily independent read on whether the agent business is actually imp
 
 ## Owner
 
-Sentinel (Business Improvement Auditor)
+Agent Ness (Business Improvement Auditor)
 
 ## Reviewer
 

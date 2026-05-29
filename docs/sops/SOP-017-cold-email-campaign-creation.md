@@ -44,6 +44,7 @@ Campaign draft, sequence, audience, and risk notes
 - Do not guarantee rankings, reviews, revenue, Google outcomes, AI visibility, approval timelines, or deliverability results.
 - Stop and route risk before acting when billing, legal/privacy, reputation, access, deliverability, public claims, or live sends are involved.
 - No live send without current approval, suppression checks, proof preview, and a logged owner.
+- Cold email copy and campaign settings must follow the GMF deliverability profile: plain text, one CTA link max, no attachments/images/URL shorteners, no open/click tracking by default, clear opt-out, physical mailing address, and stop on reply.
 - Treat emerging AI/search/agentic commerce guidance as advisory unless Mike approves implementation or client-facing scope.
 
 ## Procedure
@@ -52,7 +53,8 @@ Campaign draft, sequence, audience, and risk notes
 2. Review source proof, current offer rules, client/prospect state, risk flags, and prior promises.
 3. Decide approve, revise, hold, decline, nurture, or escalate.
 4. Write the approved angle or decision note in client/prospect-safe language.
-5. Assign the next owner and log the decision with proof.
+5. Apply the deliverability profile before the campaign is handed to Sender.
+6. Assign the next owner and log the decision with proof.
 
 ## Required Proof
 
@@ -60,6 +62,7 @@ Campaign draft, sequence, audience, and risk notes
 - Work record or Monday item
 - Date/time, owner, and status
 - Suppression/approval proof, preview, send log, and failure list when relevant
+- Deliverability profile proof for cold email: no tracking by default, plain text, one CTA link max, opt-out, physical address, and stop-on-reply settings
 - Blocker/escalation note if not complete
 
 ## What To Log
