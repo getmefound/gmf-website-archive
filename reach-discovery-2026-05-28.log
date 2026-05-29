@@ -1,0 +1,8 @@
+
+> getmefound-website@0.1.0 reach:discover
+> node scripts/reach-discovery-first.mjs --lane reviews --limit 1 --max-spend 0 --crawl-limit 1 --plan-only
+
+
+Reviews discovery report: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-reviews-2026-05-28.md
+
+Discovery summary: /home/runner/work/website/website/docs/client-ops-ledger/outbox/reach-discovery-summary-2026-05-28.md
