@@ -12,7 +12,7 @@ The launch work is now backed in the agent-owned places we can safely control: G
 
 | Destination | Status | Proof |
 |---|---|---|
-| GitHub main | Backed | `origin/main` at commit `781be46be37908a109ac0f81b5ebdb5cbb352454` |
+| GitHub main | Backed | `origin/main` is pushed and includes the launch backup work plus this current backup-status report. Verify exact restore HEAD with `git rev-parse HEAD` after cloning/restoring. |
 | GitHub backup branch | Backed | `origin/backup/gmf-launch-20260530-080040` at commit `d4b1f1200cb85b07831c8eaba19e56306dd7bcac` |
 | Local portable backup | Backed | `C:\Users\micha\Documents\GMF Backups\2026-05-30-0800-aoh-website` |
 | Obsidian portable backup | Backed | `C:\Users\micha\Obsidian\Oracle\04 AI Outsource Hub\Operations\GMF Backups\2026-05-30-0800-aoh-website-portable` |
