@@ -107,6 +107,13 @@ export default async function JobsPage() {
 function JobIndexSection() {
   const links = [
     {
+      title: "Job progress",
+      label: "live",
+      tone: "hot" as const,
+      href: "/mike-mc/jobs/progress",
+      detail: "See every agent job, what has been done so far, proof, timers, and whether Mike is needed.",
+    },
+    {
       title: "Find new leads",
       label: "main job",
       tone: "accent" as const,

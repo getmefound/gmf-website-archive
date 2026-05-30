@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { validateEmail } from "@/lib/email-validation";
 import { createAgentTask } from "@/lib/ops-store";
 import { checkEmailRate } from "@/lib/rate-limit";
-import { supabaseRest } from "@/lib/supabase-rest";
+import { enrollAlwaysReadyWaitlistLead, normalizeAlwaysReadySource } from "@/lib/always-ready-nurture";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -14,11 +17,10 @@ export async function POST(req: NextRequest) {
     name?: unknown;
     email?: unknown;
     businessName?: unknown;
-    website?: unknown; // honeypot
+    website?: unknown;
     source?: unknown;
   };
 
-  // Honeypot
   if (typeof website === "string" && website.trim().length > 0) {
     return NextResponse.json({ ok: true });
   }
@@ -36,19 +38,18 @@ export async function POST(req: NextRequest) {
   const rate = await checkEmailRate(normalizedEmail, 2);
   if (!rate.ok) {
     return NextResponse.json(
-      { ok: false, error: "Already on the list — we'll be in touch." },
+      { ok: false, error: "Already on the list - we'll be in touch." },
       { status: 429 },
     );
   }
 
-  const resolvedSource =
+  const originalSource =
     typeof source === "string" && source.trim() ? source.trim() : "always-ready-waitlist";
-
+  const resolvedSource = normalizeAlwaysReadySource(originalSource);
   const submittedAt = new Date().toISOString();
 
-  // Save to agent_tasks so it shows up in the pipeline
   await createAgentTask({
-    title: `Waitlist: ${name.trim()} — ${resolvedSource}`,
+    title: `Waitlist: ${name.trim()} - ${resolvedSource}`,
     kind: "waitlist_signup",
     priority: "normal",
     source: "website_waitlist",
@@ -57,25 +58,23 @@ export async function POST(req: NextRequest) {
       email: normalizedEmail,
       businessName: typeof businessName === "string" ? businessName.trim() : "",
       source: resolvedSource,
+      originalSource,
       submittedAt,
     },
   });
 
-  // Also write a lightweight row directly for pipeline queries
-  await supabaseRest("waitlist_signups", {
-    method: "POST",
-    prefer: "return=minimal,resolution=merge-duplicates",
-    body: {
-      email: normalizedEmail,
-      name: name.trim(),
-      business_name: typeof businessName === "string" ? businessName.trim() : "",
-      source: resolvedSource,
-      status: "pending",
-      submitted_at: submittedAt,
-    },
-  }).catch(() => {
-    // Table may not exist yet — agent_task is the fallback, don't fail the request
-  });
+  const nurture = await enrollAlwaysReadyWaitlistLead({
+    name: name.trim(),
+    email: normalizedEmail,
+    businessName: typeof businessName === "string" ? businessName.trim() : "",
+    source: resolvedSource,
+    originalSource,
+    submittedAt,
+  }).catch((error) => ({
+    ok: false as const,
+    saved: false,
+    error: error instanceof Error ? error.message : "Always Ready nurture failed.",
+  }));
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, nurtureStarted: nurture.ok, nurture });
 }

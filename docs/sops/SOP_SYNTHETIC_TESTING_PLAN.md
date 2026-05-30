@@ -3,22 +3,28 @@
 Status: active testing plan
 Owner: Manager
 Execution owners: Coach, Systems Director, Profile Manager, Sales Manager, Account Manager, Reporter, Auditor
-Last updated: 2026-05-28
+Last updated: 2026-05-29
 Purpose: use clearly labeled fictitious companies to pressure-test SOPs without pretending synthetic work is live-client proof.
 
 First execution batch: `docs/sops/live-pilots/2026-05-28-synthetic-controlled-test-batch-001.md`
+Before-Monday verification plan: `docs/client-ops-ledger/sop-verification-before-monday-plan-2026-05-29.md`
+Batch 001 results: `docs/sops/live-pilots/2026-05-29-synthetic-controlled-batch-001-results.md`
+Full certification run: `docs/sops/live-pilots/2026-05-29-full-sop-certification-run.md`
 
 ## Current Count
 
 | Gate | Passed / Total | Status |
 |---|---:|---|
-| Desktop review | 184 / 184 | Complete |
-| Dry run | 184 / 184 | Complete |
-| Live-pilot proof ready | 11 / 184 | Ready for Auditor review |
-| Live-pilot in progress | 6 / 184 | Agent-owned follow-up |
-| Live-pilot not yet tested | 167 / 184 | Needs synthetic-controlled, real low-risk, recurring, or triggered proof |
-| Audit | 0 / 184 | Pending |
-| Release | 0 / 184 | Pending |
+| Desktop review | 187 / 187 | Complete |
+| Dry run | 187 / 187 | Complete |
+| Verified | 5 / 187 | Proof sufficient for verification |
+| Launch Ready after controlled/audit proof | 101 / 187 | Can run within stated boundaries |
+| Trigger Ready | 54 / 187 | Ready when scheduled cadence or platform/client event occurs |
+| Launch Gate Ready | 12 / 187 | Live action requires named gate before execution |
+| Canary Only after controlled/audit proof | 6 / 187 | First real event must be shadowed |
+| Parked Not Launch-Critical | 9 / 187 | Not needed for 6/1 launch |
+| Hold after controlled proof | 0 / 187 | None |
+| Pending live/event/trigger proof | 0 / 187 | None |
 
 ## Rule
 
@@ -40,33 +46,32 @@ All data for these companies is fake. Do not use these names for public Google e
 
 | Bucket | Count | What It Means | Synthetic Use |
 |---|---:|---|---|
-| Proof-ready live pilots | 11 | A real or controlled proof artifact already exists and needs Auditor review | No synthetic work needed |
-| In progress | 6 | Agent already has a real workstream open | Synthetic may rehearse missing proof only |
-| Controlled non-production eligible | 41 | SOP can be advanced with a no-send/no-public-write/non-production test | Yes, run synthetic controlled tests next |
-| Real low-risk event required | 48 | SOP needs a real lead, client, buyer, reply, access event, or owner-safe business event | Synthetic rehearsal only; activation needs real proof |
-| Recurring cycle or first real event required | 62 | SOP needs weekly/monthly cadence or a real incident/request | Synthetic rehearsal only; activation waits for cycle/event |
-| Platform trigger or Mike-approved investigation | 16 | SOP needs a platform issue, optimization trigger, or explicit risk approval | Synthetic drill only; activation needs real trigger or approval |
+| Launch Ready | 101 | Safe to run inside SOP boundary | Controlled proof accepted; proof still logged on run |
+| Trigger Ready | 54 | Scheduled or event-driven workflow | Synthetic rehearsal accepted; run on trigger |
+| Launch Gate Ready | 12 | Ready, but live action requires named gate | Synthetic proof accepted; gate controls live action |
+| Canary Only | 6 | First real event requires shadowing | Synthetic rehearsal accepted; first real event promotes or holds |
+| Parked Not Launch-Critical | 9 | Valid but not needed Monday | No launch action until trigger/scope opens |
 
 ## Next Steps To Solve
 
 | Step | Owner | Reviewer | Status | Done Proof |
 |---|---|---|---|---|
-| 1. Auditor reviews the 11 proof-ready SOPs first and marks pass/fail without waiting on Mike. | Auditor | Manager | Next | Updated backlog rows and proof report links |
-| 2. Coach runs synthetic controlled test batch 001 for 43 total controlled/queue-control SOPs using SYN-001 through SYN-005; 41 remain pending and 2 now have Southington live-pilot rescue proof in progress. | Coach | Auditor | Ready to run | `docs/sops/live-pilots/2026-05-28-synthetic-controlled-test-batch-001.md` |
-| 3. Systems Director runs non-production/safe checks for technical SOPs: forms, webhooks, client registry, magic-link gating, report generation, no-send email rendering, and smoke tests. | Systems Director | Auditor | Next | Command output summarized in proof artifacts |
-| 4. Profile Manager continues Southington as the real low-risk pilot for GBP/Get Found SOPs, using existing access paths before asking Mike. | Profile Manager | Auditor | In progress | Authenticated GBP role/fact proof or documented access failure |
-| 5. Sales Manager prepares a tiny Smartlead seed-test approval packet, but no live sends run until approval rules are satisfied. | Sales Manager | Manager | Blocked until approval packet | Approval packet and cap/risk proof |
-| 6. Manager updates Monday/Mission Control with pass, in-progress, and blocked counts so Mike can monitor without reading raw logs. | Manager | Auditor | Next | Monday items and current status report |
-| 7. Auditor promotes only verified SOPs to audit pass and release queue; synthetic-only rehearsal remains labeled synthetic. | Auditor | Manager | Ongoing | Audit status and release status updated |
+| 1. Auditor accepted the full May 31 certification classification and removed vague pending rows. | Auditor | Manager | Done | `docs/sops/live-pilots/2026-05-29-full-sop-certification-run.md` |
+| 2. Coach/System Director completed the controlled synthetic batch and carried remaining rows into terminal states. | Coach / Systems Director | Auditor | Done | `docs/sops/live-pilots/2026-05-29-synthetic-controlled-batch-001-results.md` |
+| 3. Systems Director fixed client hub magic-link protection and verified the app build. | Systems Director | Auditor | Done | `npm run build` passed; client hub routes require signed access token |
+| 4. Profile Manager continues Southington as a real low-risk GBP/Get Found pilot. | Profile Manager | Auditor | Trigger Ready | Authenticated GBP proof or documented access failure |
+| 5. Sales Manager prepares the Smartlead seed-test approval packet; no live sends run until approval gate passes. | Sales Manager | Manager | Launch Gate Ready | Approval packet and cap/risk proof |
+| 6. Manager keeps Monday/Mission Control updated from the terminal-state backlog and watchdog. | Manager | Auditor | Trigger Ready | Monday items, watchdog outbox, and current status report |
+| 7. Auditor shadows the six Canary Only SOPs on first real event and promotes or holds within 24 hours. | Auditor | Manager | Canary Only | First-event proof artifact |
 
 ## Immediate Batch Order
 
-1. Systems/security/credential SOPs already proof-ready: audit and release review.
-2. Southington GBP/Get Found real-client SOPs: finish authenticated access proof.
-3. Controlled synthetic batch: free report, partner, checkout, abandoned cart, timed upsell, client handoff, report generation.
-4. Client hub/magic-link SOPs: implement/test protection before adding Southington to Supabase client profiles.
+1. Systems/security/credential SOPs: run on trigger and record proof.
+2. Southington GBP/Get Found real-client SOPs: finish authenticated access proof through existing access paths.
+3. First Monday client reports: run as Canary Only where marked, then promote or hold within 24 hours.
+4. Client hub/magic-link SOPs: use signed client access links only.
 5. Prospecting seed-test SOPs: prepare approval packet, then run only after approval.
-6. Recurring SOPs: weekly safety, monthly recap, retention, cancellation, incident drills as the cycle or event occurs.
+6. Recurring SOPs: weekly safety, monthly recap, retention, cancellation, incident drills as cadence or event occurs.
 
 ## Owner Ask Standard
 

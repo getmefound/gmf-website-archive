@@ -16,7 +16,7 @@ const OPTIONAL_ENV = [
 const BUSINESS_MANAGE_SCOPE = "https://www.googleapis.com/auth/business.manage";
 const ACCOUNT_API = "https://mybusinessaccountmanagement.googleapis.com/v1";
 const BUSINESS_INFO_API = "https://mybusinessbusinessinformation.googleapis.com/v1";
-const TOKEN_URL = "https://oauth2.googleapis.com/token";
+const OAUTH_ENDPOINT = "https://oauth2.googleapis.com/token";
 const REPORT_DIR = "docs/client-ops-ledger/outbox";
 const CURRENT_REPORT = "docs/client-ops-ledger/gbp-access-verifier-current.md";
 const READ_MASK = [
@@ -190,7 +190,7 @@ async function runApiVerifier({ result, target }) {
 }
 
 async function fetchAccessToken() {
-  const response = await fetch(TOKEN_URL, {
+  const response = await fetch(OAUTH_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({

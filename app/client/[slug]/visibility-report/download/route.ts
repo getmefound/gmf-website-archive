@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getClientHubActivity } from "@/lib/client-hub-activity";
+import { verifyClientMagicLinkToken } from "@/lib/client-magic-link";
 import { getClientHubProfile } from "@/lib/client-profile-store";
 import {
   buildClientVisibilityReportArtifact,
@@ -18,9 +19,18 @@ export async function GET(request: Request, context: { params: Promise<{ slug: s
 
   if (!client) notFound();
 
+  const url = new URL(request.url);
+  const access = verifyClientMagicLinkToken(url.searchParams.get("access") ?? undefined, client.slug);
+  if (!access.ok) {
+    return new Response("Access link required.", {
+      status: 401,
+      headers: { "Cache-Control": "no-store" },
+    });
+  }
+
   const activity = await getClientHubActivity(client.slug);
   const report = buildClientVisibilityReportArtifact({ client, activity });
-  const sectionParam = new URL(request.url).searchParams.get("section");
+  const sectionParam = url.searchParams.get("section");
   const section = SECTION_IDS.has(sectionParam as ClientReportSectionId)
     ? (sectionParam as ClientReportSectionId)
     : "full";

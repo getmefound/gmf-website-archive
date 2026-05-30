@@ -34,6 +34,27 @@ Default behavior:
 - If an agent already has access to the needed system, that agent owns the verification before Mike is interrupted.
 - When Mike is needed, ask plainly and include the exact next step.
 
+## Manager Completion Accountability
+
+Status: active
+Owner: Manager / Elon
+Reviewer: Auditor
+Added: 2026-05-29
+
+Manager is accountable for jobs reaching a real endpoint, not merely appearing in Monday or Mission Control.
+
+Manager must:
+
+- routinely check the job progress view and watchdog output as operating work requires
+- keep every active job in one of the valid execution lanes: script/check proof, scheduled worker, systems build, manual audit, authenticated access path, or true owner-needed blocker
+- ensure every job has a next owner, reviewer, expected receive time, escalation time, unlock proof, and current proof target when it is not Done
+- reroute, train, repair, or escalate when a job misses its receive/escalation window
+- keep pressure on the assigned agent until the job is Done, held with proof, blocked with exhaustion proof, or legitimately owner-needed
+- not treat a prettier dashboard, status update, partial proof, or training artifact as completion unless the job's Done proof is satisfied
+- ask Mike only after the responsible agent has exhausted self-serve paths and Manager has proof that Mike is the only safe next step
+
+If jobs do not complete, Manager owns the recovery loop: diagnose the stall, update the job, assign the next agent, train the missing skill, rerun the worker/check, or send the exact owner-needed Slack DM after exhaustion.
+
 ## Universal Owner-Ask Exhaustion Gate
 
 This gate applies to every topic, client, workflow, tool, and future request.

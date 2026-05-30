@@ -1,4 +1,5 @@
 import { after, NextRequest } from "next/server";
+import { recordAlwaysReadyUnsubscribe } from "@/lib/always-ready-nurture";
 import { recordFreeVisibilityUnsubscribe } from "@/lib/free-visibility-report";
 
 export const dynamic = "force-dynamic";
@@ -7,10 +8,15 @@ export const runtime = "nodejs";
 export function GET(req: NextRequest) {
   const runId = req.nextUrl.searchParams.get("runId")?.trim() ?? "";
   const email = req.nextUrl.searchParams.get("email")?.trim().toLowerCase() ?? "";
+  const source = req.nextUrl.searchParams.get("source")?.trim() ?? "";
 
   if (runId || email) {
     after(async () => {
-      await recordFreeVisibilityUnsubscribe({ runId, email });
+      if (source === "always-ready-waitlist") {
+        await recordAlwaysReadyUnsubscribe({ email });
+      } else {
+        await recordFreeVisibilityUnsubscribe({ runId, email });
+      }
     });
   }
 

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ClientAccessRequired } from "@/components/client/ClientAccessRequired";
 import { ClientReportCenter } from "@/components/client/ClientReportCenter";
 import { getClientHubActivity } from "@/lib/client-hub-activity";
 import { getClientHubProfile, getClientIntegrationSettings } from "@/lib/client-profile-store";
+import { clientAccessTokenFromSearchParams, verifyClientMagicLinkToken, withClientAccessParam } from "@/lib/client-magic-link";
 import { summarizeIntegrationEventHealth } from "@/lib/review-integration-events";
 import { listReviewAutomationRecords } from "@/lib/review-automation-store";
 import { getReviewReplyDigest } from "@/lib/review-reply-digest";
@@ -21,36 +23,33 @@ export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export function generateStaticParams() {
   return CLIENT_HUBS.map((client) => ({ slug: client.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const client = await getClientHubProfile(slug);
-
-  if (!client) {
-    return {
-      title: "Client Hub",
-      robots: { index: false, follow: false },
-    };
-  }
-
+export function generateMetadata(): Metadata {
   return {
-    title: `${client.businessName} Client Hub`,
-    description: `GMF setup hub for ${client.businessName}.`,
+    title: "Client Hub",
+    description: "Secure GetMeFound client hub.",
     robots: { index: false, follow: false },
   };
 }
 
-export default async function ClientHubPage({ params }: PageProps) {
+export default async function ClientHubPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const client = await getClientHubProfile(slug);
 
   if (!client) notFound();
 
+  const accessToken = clientAccessTokenFromSearchParams((await searchParams) ?? {});
+  const access = verifyClientMagicLinkToken(accessToken, client.slug);
+  if (!access.ok) return <ClientAccessRequired />;
+
+  const customerUploadHref = withClientAccessParam(`/client/${client.slug}/customers`, accessToken);
+  const reportDownloadHref = withClientAccessParam(`/client/${client.slug}/visibility-report/download`, accessToken);
   const activity = await getClientHubActivity(client.slug);
   const integration = await getClientIntegrationSettings({ clientSlug: client.slug });
   const integrationRecords = await listReviewAutomationRecords({ clientSlug: client.slug, limit: 500 });
@@ -208,7 +207,7 @@ export default async function ClientHubPage({ params }: PageProps) {
               logoText: client.logoText,
             }}
             clientActionCount={clientNeeds.length}
-            downloadHref={`/client/${client.slug}/visibility-report/download`}
+            downloadHref={reportDownloadHref}
           />
         </div>
       </section>
@@ -263,7 +262,7 @@ export default async function ClientHubPage({ params }: PageProps) {
                 Auto-sync is available as a paid setup after we confirm the system has an export, webhook, Zapier, Make, or API path. We still hold duplicates, missing emails, and suppressed customers before any proof queue.
               </p>
               <Link
-                href={`/client/${client.slug}/customers`}
+                href={customerUploadHref}
                 className="mt-5 inline-flex rounded-lg bg-amber-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-amber-800"
               >
                 Upload customers
@@ -332,7 +331,7 @@ export default async function ClientHubPage({ params }: PageProps) {
             )}
             <div className="mt-3 flex flex-wrap gap-3">
               <Link
-                href={`/client/${client.slug}/customers`}
+                href={customerUploadHref}
                 className="rounded-lg bg-emerald-800 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
               >
                 Upload customers

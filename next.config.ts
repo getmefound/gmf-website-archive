@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
       "./tmp-reach-*.csv",
       "./tmp-reach-*-report.json",
     ],
+    "/mike-mc/jobs/progress": [
+      "./docs/client-ops-ledger/outbox/manager-agent-watchdog-*.md",
+    ],
   },
   async redirects() {
     return [

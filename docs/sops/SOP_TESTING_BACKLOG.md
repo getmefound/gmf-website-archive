@@ -1,15 +1,17 @@
 ﻿# GMF SOP Testing Backlog
 
-Status: new GBP update and email sender SOPs added; 184 of 186 drafted SOPs desktop-reviewed and safe dry-run complete; 11 live-pilot proof artifacts ready for audit
+Status: May 31 certification complete; 187 of 187 tracked SOPs have desktop review, dry run, and a terminal operating state; no vague pending or hold rows remain
 Owner: Coach/Auditor
-Last updated: 2026-05-28
+Last updated: 2026-05-29
 Purpose: activation queue for Drafted SOPs. Use this with SOP 000 to move SOPs through live pilot, audit, and release.
+
+Note: 189 individual SOP markdown files exist. The testing backlog CSV currently tracks 187 activation rows; Systems Director/Coach must reconcile file-vs-row coverage before the Sunday launch gate, including multi-row governance SOPs and newly added SOPs.
 
 ## Counts
 
-| Priority | SOPs Pending Activation |
+| Priority | Tracked SOPs |
 |---|---:|
-| P0 | 108 |
+| P0 | 109 |
 | P1 | 62 |
 | P2 | 15 |
 | P3 | 1 |
@@ -20,72 +22,63 @@ Purpose: activation queue for Drafted SOPs. Use this with SOP 000 to move SOPs t
 
 | Gate | Passed / Total | Notes |
 |---|---:|---|
-| Desktop review | 184 / 186 | New GBP update and email sender SOPs pending review |
-| Dry run | 184 / 186 | New GBP update and email sender SOPs pending dry run |
-| Live pilot proof ready | 11 / 186 | Ready for Auditor proof review |
-| Live pilot in progress | 6 / 186 | Needs authenticated access, real-client completion, queue timer outcome, or runtime follow-up |
-| Live pilot not yet tested | 169 / 186 | Must be synthetic-controlled, real low-risk, recurring, or triggered by event type |
-| Audit | 0 / 184 | Waiting on proof review |
-| Release | 0 / 184 | Waiting on audit pass |
+| Desktop review | 187 / 187 | All tracked rows reviewed |
+| Dry run | 187 / 187 | All tracked rows dry-run or controlled-certified |
+| Auditor verified | 5 / 187 | Readiness/check SOPs with proof sufficient for verification |
+| Launch Ready | 101 / 187 | Controlled or proof-reviewed SOPs can run within stated boundaries |
+| Trigger Ready | 54 / 187 | Run when scheduled cadence, platform event, client event, or monitoring trigger occurs |
+| Launch Gate Ready | 12 / 187 | SOP ready, but live action still requires named approval/access/spend/risk gate |
+| Canary Only | 6 / 187 | First real event can run with Manager/Auditor shadowing |
+| Parked Not Launch-Critical | 9 / 187 | Not needed for 6/1 launch; tied to activation trigger |
+| Hold | 0 / 187 | No hold rows remain |
+| Pending audit/proof | 0 / 187 | No vague pending rows remain |
+| Terminal release state | 187 / 187 | Every SOP has an operating state |
 
 ### Desktop Review
 
 | Status | Count |
 |---|---:|
-| Pass | 184 |
-| Pending | 2 |
+| Pass | 187 |
+| Pending | 0 |
 
 ### Dry Run
 
 | Status | Count |
 |---|---:|
-| Pass | 184 |
-| Pending | 2 |
+| Pass | 187 |
+| Pending | 0 |
 
 ### Live Pilot
 
 | Status | Count |
 |---|---:|
-| Pending - first real low-risk event or controlled non-production test required | 42 |
-| Pending - first real low-risk event required | 49 |
-| Pending - optimization/platform trigger or Mike-approved investigation required | 16 |
-| Pending - recurring cycle or first real event required | 62 |
-| Pass - Smartlead API/warmup preflight proof ready for audit | 1 |
-| Pass - Smartlead readiness proof ready for audit | 1 |
-| Pass - weekly safety audit/deep readiness proof ready for audit | 1 |
-| Pass - credential rotation/env proof ready for audit | 1 |
-| Pass - Resend domain/key health proof ready for audit | 1 |
-| Pass - Stripe key/webhook/product proof ready for audit | 1 |
-| Pass - security sweep proof ready for audit | 1 |
-| Pass - Southington baseline artifact ready for audit | 1 |
-| Pass - Southington AI Search readiness artifact ready for audit | 1 |
-| Pass - Southington GBP audit artifact ready for audit | 1 |
-| Pass - Southington fact-sync artifact ready for audit | 1 |
-| In progress - Southington GBP access/fact proof captured; authenticated role pending | 1 |
-| In progress - Southington review link captured; authenticated profile match pending | 1 |
-| In progress - Southington GBP access gap converted to timed waiting-state rescue | 1 |
-| In progress - Southington GBP access gap classified as access_gap and rescue timer set | 1 |
-| In progress - agent watchdog report produced after Agent Working runtime gap | 1 |
-| In progress - Gmail connector read/search verified and Southington access trail searched | 1 |
+| Verified | 5 |
+| Launch Ready | 101 |
+| Trigger Ready | 54 |
+| Launch Gate Ready | 12 |
+| Canary Only | 6 |
+| Parked Not Launch-Critical | 9 |
 
 ### Mike Needed
 
 | Status | Count |
 |---|---:|
-| Conditional | 29 |
+| Conditional | 30 |
 | No | 157 |
 
 ## Activation Rule
 
-Drafted SOPs do not become Active until all five gates pass:
+No SOP may remain in vague `Pending`, `Drafted`, or `Hold` after the May 31 certification run. Each row must be one of:
 
-1. Desktop review - complete for all drafted SOPs
-2. Dry run - complete for all drafted SOPs
-3. Live pilot - pending for all drafted SOPs
-4. Audit - pending until proof exists
-5. Release - pending until audit passes
+1. `Verified`
+2. `Launch Ready`
+3. `Trigger Ready`
+4. `Launch Gate Ready`
+5. `Canary Only`
+6. `Parked Not Launch-Critical`
 
 CSV backlog: docs/sops/SOP_TESTING_BACKLOG.csv
+Full certification proof: docs/sops/live-pilots/2026-05-29-full-sop-certification-run.md
 
 ## Synthetic Testing Rule
 

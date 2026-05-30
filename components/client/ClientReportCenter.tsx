@@ -41,7 +41,7 @@ export function ClientReportCenter({
     [report.signals, selectedSignalName],
   );
   const selectedReportDownloadHref = selectedReport
-    ? `${downloadHref}?section=${selectedReport.id}`
+    ? appendQueryParam(downloadHref, "section", selectedReport.id)
     : downloadHref;
 
   return (
@@ -188,6 +188,11 @@ export function ClientReportCenter({
       </section>
     </div>
   );
+}
+
+function appendQueryParam(href: string, key: string, value: string) {
+  const joiner = href.includes("?") ? "&" : "?";
+  return `${href}${joiner}${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
 }
 
 function ReportPreview({

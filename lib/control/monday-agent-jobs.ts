@@ -34,18 +34,23 @@ export type MondayAgentJobRow = {
   status: string;
   humanNeeded: string;
   agentOwner: string;
+  reviewer: string;
   nextOwner: string;
   waitingState: string;
   runtimeState: string;
   handoffAck: string;
+  ackAt: string;
   expectedReceive: string;
   escalateAt: string;
+  unlockProof: string;
   nextAction: string;
+  notes: string;
   proofText: string;
 };
 
 export type MondayAgentJobsOverview = {
   ok: boolean;
+  boardId?: string;
   boardName: string;
   boardUrl?: string;
   error?: string;
@@ -59,6 +64,7 @@ export type MondayAgentJobsOverview = {
     completed: number;
     needsRescue: number;
   };
+  allRows: MondayAgentJobRow[];
   activeRows: MondayAgentJobRow[];
   humanRows: MondayAgentJobRow[];
   reviewRows: MondayAgentJobRow[];
@@ -86,6 +92,7 @@ export async function getMondayAgentJobsOverview(): Promise<MondayAgentJobsOverv
 
     return {
       ok: true,
+      boardId: board.id,
       boardName: board.name,
       boardUrl: `https://monday.com/boards/${board.id}`,
       totals: {
@@ -98,6 +105,7 @@ export async function getMondayAgentJobsOverview(): Promise<MondayAgentJobsOverv
         completed: completedRows.length,
         needsRescue: rescueRows.length,
       },
+      allRows: rows,
       activeRows: activeRows.slice(0, 6),
       humanRows: humanRows.slice(0, 8),
       reviewRows: reviewRows.slice(0, 4),
@@ -177,13 +185,17 @@ function toJobRow(item: MondayItem, columns: MondayColumn[]): MondayAgentJobRow 
     status: value("Status"),
     humanNeeded: value("Human Needed"),
     agentOwner: value("Agent Owner"),
+    reviewer: value("Reviewer"),
     nextOwner: value("Next Owner"),
     waitingState: value("Waiting State"),
     runtimeState: value("Runtime State"),
     handoffAck: value("Handoff Ack"),
+    ackAt: value("Ack At"),
     expectedReceive: value("Expected Receive"),
     escalateAt: value("Escalate At"),
+    unlockProof: value("Unlock Proof"),
     nextAction: value("Next Action"),
+    notes: value("Notes"),
     proofText: value("Proof Link"),
   };
 }
@@ -241,6 +253,7 @@ function emptyOverview(error: string): MondayAgentJobsOverview {
       completed: 0,
       needsRescue: 0,
     },
+    allRows: [],
     activeRows: [],
     humanRows: [],
     reviewRows: [],

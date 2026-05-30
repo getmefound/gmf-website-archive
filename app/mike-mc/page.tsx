@@ -43,6 +43,7 @@ const MC_BOOKMARKS = [
   { label: "Agent Ness", href: "/mike-mc/agent-ness" },
   { label: "Ops Index", href: "/mike-mc/ops" },
   { label: "Agent Jobs", href: "/mike-mc/jobs" },
+  { label: "Job Progress", href: "/mike-mc/jobs/progress" },
   { label: "Morning Brief", href: "/mike-mc/morning-brief" },
   { label: "Visibility Reports", href: "/mike-mc/visibility-reports" },
   { label: "Review Proof", href: "/mike-mc/review-proof/ai-outsource-hub" },
@@ -57,6 +58,12 @@ const OVERSIGHT_LINKS = [
     label: "Agent Ness",
     href: "/mike-mc/agent-ness",
     detail: "Independent daily audit of agent efficiency, stuck work, prospecting, retention, and next improvements.",
+    tone: "hot" as const,
+  },
+  {
+    label: "Job Progress",
+    href: "/mike-mc/jobs/progress",
+    detail: "Merged Monday plus watchdog view of what each job has done, current step, proof, timers, and owner need.",
     tone: "hot" as const,
   },
   {

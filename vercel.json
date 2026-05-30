@@ -10,6 +10,10 @@
       "schedule": "*/15 * * * *"
     },
     {
+      "path": "/api/always-ready/nurture/cron",
+      "schedule": "*/30 * * * *"
+    },
+    {
       "path": "/api/review-automation/integration-health/cron",
       "schedule": "10 13 * * *"
     }
